@@ -37,6 +37,10 @@
   - [3.4. Mutating Lists](data/mutating_lists.md)
   - [3.5. Tail Recursion](data/tail_recursion.md)
   - [3.6. More List Syntax](data/more_list_syntax.md)
+  - [3.7. Unit Testing with OUnit](data/ounit.md)
+  - [3.8. An Example of OUnit](data/ounit_example.md)
+  - [3.9. Explanation of the OUnit Example](data/ounit_explanation.md)
+  - [3.10. OUnit and Files](data/ounit_files.md)
   - [3.X. Summary](data/summary.md)
   - [3.Y. Exercises](data/exercises.md)
   
