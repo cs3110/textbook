@@ -15,7 +15,7 @@
 ---
 
 * [2. The Basics of OCaml](basics/intro.md)
-  - [2.1. Learning a Language](basics/learning_languages.md)
+  - [2.1. Preface: Learning a Language](basics/learning_languages.md)
   - [2.2. Interacting with OCaml](basics/interacting.md)
   - [2.3. Expressions](basics/expressions.md)
   - [2.4. Operators](basics/operators.md)

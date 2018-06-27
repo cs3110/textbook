@@ -1,4 +1,4 @@
-# Learning a language
+# Preface: Learning a Language
 
 One of the secondary goals of this course is not just for you to learn
 a new programming language, but to improve your skills at learning

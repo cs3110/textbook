@@ -1,4 +1,4 @@
-## Operators
+# Operators
 
 Operators can be used to form expressions.
 OCaml has more or less all the usual operators you would expect in a language
