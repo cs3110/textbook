@@ -29,3 +29,14 @@
   - [2.12. Operators as Functions](basics/operators_functions.md)
   - [2.13. Summary](basics/summary.md)
   - [2.14. Exercises](basics/exercises.md)
+  
+* [3. Data in OCaml](data/intro.md)
+  - [3.1. Lists](data/lists.md)
+  - [3.2. Building Lists](data/building_lists.md)
+  - [3.3. Accessing Lists](data/accessing_lists.md)
+  - [3.4. Mutating Lists](data/mutating_lists.md)
+  - [3.5. Tail Recursion](data/tail_recursion.md)
+  - [3.6. More List Syntax](data/more_list_syntax.md)
+  - [3.X. Summary](data/summary.md)
+  - [3.Y. Exercises](data/exercises.md)
+  
