@@ -35,6 +35,7 @@
   - [3.2. Building Lists](data/building_lists.md)
   - [3.3. Accessing Lists](data/accessing_lists.md)
   - [3.4. Mutating Lists](data/mutating_lists.md)
+  - [3.5. Pattern Matching with Lists](data/pattern_matching_lists.md)
   - [3.5. Tail Recursion](data/tail_recursion.md)
   - [3.6. More List Syntax](data/more_list_syntax.md)
   - [3.7. Unit Testing with OUnit](data/ounit.md)
