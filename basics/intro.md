@@ -3,8 +3,6 @@
 Topics:
 
 * five essential components to learning a language
+* simple values and expressions
 * if expressions
-* function definitions
-* anonymous functions
-* function application
-* the pipeline operator
+* functions

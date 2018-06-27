@@ -1,4 +1,4 @@
-# Basics of OCaml
+# Interacting with OCaml
 
 The *toplevel* is like a calculator or command-line interface to
 OCaml. It's similar to DrJava, if you used that in CS 2110, or to the
