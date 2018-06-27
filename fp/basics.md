@@ -193,5 +193,64 @@ $ ocamlbuild -clean
 
 That removes the `_build` directory and `hello.byte` link, leaving just your source code.
 
+## Loading code in the toplevel
 
+In addition to allowing you to define functions, the toplevel will
+also accept *directives* that are not OCaml code but rather tell the
+toplevel itself to do something. All directives begin with the `#`
+character.  Perhaps the most common directive is `#use`, which loads
+all the code from a file into the toplevel, just as if you had typed
+the code from that file into the toplevel.
+
+For example, suppose you create a file named `mycode.ml`.  
+In that file put the following code:
+
+```
+let inc x = x + 1
+```
+
+Start the toplevel.  Try entering the following expression, 
+and observe the error:
+
+```
+# inc 3;;
+Error: Unbound value inc
+Hint: Did you mean incr?
+```
+
+The error is because the toplevel does not yet know anything about
+a function named `inc`.  Now issue the following directive to the toplevel:
+
+```
+# #use "mycode.ml";;
+```
+
+Note that the first `#` character above indicates the toplevel prompt to you.
+The second `#` character is one that you type to tell the toplevel that you
+are issuing a directive.  Without that character, the toplevel would think
+that you are trying to apply a function named `use`.
+
+Now try again:
+
+```
+# inc 3;;
+- : int = 4
+```
+
+## Workflow in the toplevel
+
+The best workflow when using the toplevel with code stored in files is:
+
+* Edit the code in the file.
+* Load the code in the toplevel with `#use`.
+* Interactively test the code.
+* Exit the toplevel.  **Warning:** do not skip this step.
+
+Suppose you wanted to fix a bug in your code:  it's tempting to not exit
+the toplevel, edit the file, and re-issue the `#use` directive into the
+same toplevel session. Resist that temptation.  The "stale code" that
+was loaded from an earlier `#use` directive in the same session can
+cause surprising things to happen&mdash;surprising when you're first
+learning the language, anyway. So **always exit the toplevel
+before re-using a file.**
 

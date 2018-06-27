@@ -18,7 +18,42 @@ nested inside them, and vice-versa.
 [definitions]: http://caml.inria.fr/pub/docs/manual-ocaml/modules.html
 
 For now, let's focus on one particular kind of definition, a *function definition*.
-Here's an example:
+Non-recursive functions are defined like this:
+
+	let f x = ...
+
+Recursive functions are defined like this:
+
+	let rec f x = ...
+
+The difference is just the `rec` keyword.  It's probably a bit surprising that
+you explicitly have to add a keyword to make a function recursive, because
+most languages assume by default that they are.  OCaml doesn't make that 
+assumption, though.
+
+One of the best known recursive functions is the factorial function.
+In OCaml it can be written as follows:
+
+```
+(* requires: n >= 0 *)
+(* returns: n! *)
+let rec fact n = 
+  if n=0 then 1 else n * fact (n-1)
+```
+
+We provided a specification comment above the function to document the
+precondition (`requires`) and postcondition (`returns`) of the function. 
+
+Note that, as in many languages, OCaml integers are not the
+"mathematical" integers but are limited to a fixed number of bits.  The
+[manual][man] specifies that integers are at least 30 bits but might be
+wider.  So if you test on large enough inputs, you might begin to see
+strange results.  The problem is machine arithmetic, not OCaml.  
+
+[man]: http://caml.inria.fr/pub/docs/manual-ocaml/values.html#sec76
+
+
+Here's another recursive function:
 ```
 (* requires: y>=0 *)
 (* returns: x to the power of y *)
@@ -26,12 +61,12 @@ let rec pow x y =
   if y=0 then 1 
   else x * pow x (y-1)
 ```
-We provided a specification comment above the function to document the
-precondition (`requires`) and postcondition (`returns`) of the function. 
-Note how we didn't have to write any types:  the OCaml compiler infers
-them for us automatically.  The compiler solves this *type inference*
-problem algorithmically, but we could do it ourselves, too.
-It's like a mystery that can be solved by our mental power of deduction:
+
+Note how we didn't have to write any types in either of our functions:
+the OCaml compiler infers them for us automatically.  The compiler
+solves this *type inference* problem algorithmically, but we could do
+it ourselves, too. It's like a mystery that can be solved by our
+mental power of deduction:
 
 * Since the if expression can return `1` in the `then`
   branch, we know by the typing rule for `if` that the entire if expression
@@ -132,3 +167,4 @@ function identifier `f` has a particular type, then checks to see whether
 the body of the function is well-typed under that assumption.  This is
 because `f` is in scope inside the function body itself (just like the arguments
 are in scope).
+
