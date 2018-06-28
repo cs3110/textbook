@@ -6,3 +6,5 @@ Topics:
 * simple values and expressions
 * if expressions
 * functions
+* let expressions
+* scope

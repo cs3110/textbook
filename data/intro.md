@@ -3,6 +3,10 @@
 Topics:
 
 * lists
-* recursive functions on lists
 * pattern matching
 * tail recursion
+* variants
+* records
+* tuples
+* options
+* association lists

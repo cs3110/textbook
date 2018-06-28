@@ -14,35 +14,56 @@ process really huge lists, you probably don't want linked lists at all,
 but instead a data structure that will do a better job of exploiting 
 memory locality.
 
+OCaml provides data types for variants (one-of types), tuples and
+products (each-of types), and options (maybe types). Pattern matching
+can be used to access values of each of those data types. And pattern
+matching can be used in let expressions and functions.
+
+Association lists combine lists and tuples to create a lightweight
+implementation of dictionaries.
 
 ## Terms and concepts
 
 * append
+* association list
 * binding
 * branch
 * cons
+* constructor
 * copying 
 * desugaring
+* each-of type
 * exhaustiveness
+* field
 * head
 * induction
 * list
+* maybe type
 * nil
+* one-of type
+* options
+* pair
 * pattern matching
 * prepend
+* product type
+* record
 * recursion
 * sharing
 * stack frame
+* sum type
 * syntactic sugar
 * tail
 * tail call
 * tail recursion
+* triple
+* tuple
 * type constructor
+* variant
 * wildcard
 
 ## Further reading
 
-* *Introduction to Objective Caml*, chapters 4, 5.3, 5.4
-* *OCaml from the Very Beginning*, chapters 3, 4, 5
-* *Real World OCaml*, chapter 3
+* *Introduction to Objective Caml*, chapters 4, 5.2, 5.3, 5.4, 8.1
+* *OCaml from the Very Beginning*, chapters 3, 4, 5, 8
+* *Real World OCaml*, chapter 3, 5
 

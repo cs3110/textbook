@@ -163,3 +163,100 @@ Suppose you already have `p`, such
 that `p = powerset s`. How could you use `p` to compute `powerset (x::s)`?
 
 &square; 
+
+##### Exercise: student [&#10029;&#10029;] 
+
+Assume the following type definition:
+
+```
+type student = { first_name : string ; last_name : string ; gpa : float }
+```
+Give OCaml expressions that have the following types:
+
+* `student`
+* `student -> string * string`  (a function that extracts the student's name)
+* `string -> string -> float -> student`  (a function that creates a student record)
+
+&square;
+
+Here is a variant that represents a few Pok&eacute;mon types:
+```
+type poketype = Normal | Fire | Water
+```
+
+##### Exercise: pokerecord [&#10029;&#10029;] 
+
+* Define the type `pokemon` to be a record with fields `name` (a string),
+  `hp` (an integer), and `ptype` (a `poketype`).
+
+* Create a record named `charizard` of type `pokemon` that represents
+a Pok&eacute;mon with 78 HP and Fire type.
+
+* Create a record named `metapod` of type `pokemon` that represents
+a Pok&eacute;mon with 50 HP and Normal type.
+
+&square;
+
+##### Exercise: safe hd and tl [&#10029;&#10029;] 
+
+Write a function `safe_hd : 'a list -> 'a option` that returns
+`Some x` if the head of the input list is `x`, and `None` if the input list is
+empty.
+
+Also write a function `safe_tl : 'a list -> 'a list option` that returns
+the tail of the list, or `None` if the list is empty.
+
+&square;
+
+##### Exercise: pokefun [&#10029;&#10029;&#10029;] 
+
+Write a function `max_hp : pokemon list -> pokemon option` that, given a list of
+`pokemon`, finds the Pok&eacute;mon with the highest HP.
+
+&square;
+
+##### Exercise: date before [&#10029;&#10029;] 
+
+Define a *date-like triple* to be a value of type `int*int*int`.
+Examples of date-like triples include `(2013, 2, 1)` and `(0,0,1000)`. A
+*date* is a date-like triple whose first part is a positive year (i.e.,
+a year in the common era), second part is a month between 1 and 12, and
+third part is a day between 1 and 31 (or 30, 29, or 28, depending on the
+month and year). `(2013, 2, 1)` is a date; `(0,0,1000)` is not.
+
+Write a function `is_before` that takes two dates as input and evaluates
+to `true` or `false`. It evaluates to `true` if the first argument is a
+date that comes before the second argument. (If the two dates are the
+same, the result is `false`.)
+
+Your function needs to work correctly only for dates, not for arbitrary
+date-like triples.  However, you will probably find it easier to write
+your solution if you think about making it work for arbitrary date-like
+triples. For example, it's easier to forget about whether the input is
+truly a date, and simply write a function that claims (for example) that
+January 100, 2013 comes before February 34, 2013&mdash;because any date
+in January comes before any date in February, but a function that says
+that January 100, 2013 comes after February 34, 2013 is also valid.  You
+may ignore leap years.
+
+&square;
+
+##### Exercise: earliest date [&#10029;&#10029;&#10029;] 
+
+Write a function `earliest : (int*int*int) list -> 
+(int*int*int) option`. It evaluates to
+`None` if the input list is empty, and to `Some d` if date `d` 
+is the earliest date in the list.  *Hint: use `is_before`.*
+
+As in the previous exercise, your function needs to work correctly 
+only for dates, not for arbitrary date-like triples.
+
+&square;
+
+##### Exercise: assoc list [&#10029;]
+
+Use the functions `insert` and `lookup` above to construct an 
+association list that maps the integer 1 to the string "one", 
+2 to "two", and 3 to "three".  Lookup the key 2.  Lookup the key 4.
+
+&square;
