@@ -368,18 +368,6 @@ that returns the maximum integer in a list, or raises
 
 &square;
 
-To catch an exception, use this syntax:
-```
-try e with
-| p1 -> e1
-| ...
-| pn -> en
-```
-The expression `e` is what might raise an exception.  If it does not, the entire
-`try` expression evaluates to whatever `e` does.  If `e` does raise an exception value
-`v`, that value `v` is that matched against the provide patterns, exactly like
-`match` expression.
-
 ##### Exercise: list max exn string [&#10029;&#10029;]  
 
 Write a function `list_max_string : int list -> string`
@@ -425,7 +413,3 @@ val quadrant : int * int -> [> `I | `II | `III | `IV ] option
 
 &square;
 
-There are other, more compelling uses for polymorphic variants that we'll 
-see later in the course.  They are particularly useful in libraries.
-For now, we generally will steer you away from extensive use of polymorphic
-variants, because their types can become difficult to manage.

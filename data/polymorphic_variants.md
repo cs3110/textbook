@@ -70,3 +70,7 @@ It's perfectly fine for the pattern match to include constructors other
 than `` `Finite`` or `` `Infinity``, because `f` is guaranteed never to
 return any constructors other than those.
 
+There are other, more compelling uses for polymorphic variants that we'll 
+see later in the course.  They are particularly useful in libraries.
+For now, we generally will steer you away from extensive use of polymorphic
+variants, because their types can become difficult to manage.

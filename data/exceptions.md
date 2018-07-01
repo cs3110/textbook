@@ -29,6 +29,18 @@ There is a convenient function `failwith : string -> 'a` in the standard library
 that raises `Failure`.  That is, `failwith s` is equivalent to `raise (Failure s)`.
 (Often we use this function in the assignment release code we ship to you.)
 
+To catch an exception, use this syntax:
+```
+try e with
+| p1 -> e1
+| ...
+| pn -> en
+```
+The expression `e` is what might raise an exception.  If it does not, the entire
+`try` expression evaluates to whatever `e` does.  If `e` does raise an exception value
+`v`, that value `v` is that matched against the provide patterns, exactly like
+`match` expression.
+
 ## Exceptions are Extensible Variants
 
 All exception values have type `exn`, which is a variant 
