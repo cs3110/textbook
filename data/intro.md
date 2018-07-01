@@ -10,3 +10,7 @@ Topics:
 * tuples
 * options
 * association lists
+* type synonyms
+* variants
+* exceptions
+* trees

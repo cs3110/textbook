@@ -11,6 +11,7 @@ Here are some addition pattern forms that are useful:
   string literals, and booleans.
 * `'ch1'..'ch2'`:  here, `ch` means a character literal.  For example,
   `'A'..'Z'` matches any uppercase letter.
+* `p when e`:  matches `p` but only if `e` evaluates to `true`.
 
 You can read about [all the pattern forms][patterns] in the manual.
 

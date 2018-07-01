@@ -260,3 +260,172 @@ association list that maps the integer 1 to the string "one",
 2 to "two", and 3 to "three".  Lookup the key 2.  Lookup the key 4.
 
 &square;
+
+##### Exercise: cards [&#10029;&#10029;]  
+
+* Define a variant type `suit` that represents the four suits, &clubs;
+&diams; &hearts; &spades;, in a [standard 52-card deck][cards].  All the
+constructors of your type should be constant.
+
+* Define a type `rank` that represents the possible ranks of a card:  2,
+3, ..., 10, Jack, Queen, King, or Ace.  There are many possible
+solutions; you are free to choose whatever works for you. One is to make
+`rank` be a synonym of `int`, and to assume that Jack=11, Queen=12,
+King=13, and Ace=1 or 14. Another is to use variants.
+
+* Define a type `card` that represents the suit and rank of a single
+card.  Make it a record with two fields.
+
+* Define a few values of type `card`:  the Ace of Clubs, the Queen of Hearts,
+the Two of Diamonds, the Seven of Spades.
+
+[cards]: https://en.wikipedia.org/wiki/Standard_52-card_deck
+
+&square;
+
+##### Exercise: matching [&#10029;]  
+
+For each pattern in the list below, give a value of type
+`int option list` that does *not* match the pattern and is
+not the empty list, or explain why that's impossible.
+
+ - `(Some x)::tl`
+ - `[Some 3110; None]`
+ - `[Some x; _]`
+ - `h1::h2::tl`
+ - `h :: tl`
+ 
+&square;
+
+##### Exercise: quadrant [&#10029;&#10029;]  
+
+<image style="float: right;"
+       src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Cartesian_coordinates_2D.svg/300px-Cartesian_coordinates_2D.svg.png"
+       alt="Quadrant 1: x, and y both positive.  Quadrant 2: x negative, y positive.  Quadrant 3: both x and y negative.  Quadrant 4: x positive, y negative."
+       />
+
+Complete the `quadrant` function below, which should return the quadrant
+of the given `x, y` point according to the diagram on the right (borrowed from [Wikipedia](https://en.wikipedia.org/wiki/File:Cartesian_coordinates_2D.svg)).
+Points that lie on an axis do not belong to any quandrant. *Hints: (a) define a helper function
+for the sign of an integer, (b) match against a pair.* 
+
+```
+type quad = I | II | III | IV
+type sign = Neg | Zero | Pos
+
+let sign (x:int) : sign = 
+  ...
+
+let quadrant : int*int -> quad option = fun (x,y) ->
+  match ... with
+    | ... -> Some I
+    | ... -> Some II
+    | ... -> Some III
+    | ... -> Some IV
+    | ... -> None
+```
+
+&square;
+
+##### Exercise: quadrant when [&#10029;&#10029;]  
+
+Rewrite the quadrant function to use the `when` syntax.  You won't need
+your helper function from before.
+
+```
+let quadrant_when : int*int -> quad option = function
+    | ... when ... -> Some I
+    | ... when ... -> Some II
+    | ... when ... -> Some III
+    | ... when ... -> Some IV
+    | ... -> None
+```
+
+##### Exercise: depth [&#10029;&#10029;]  
+
+Write a function `depth : 'a tree -> int` that returns the number of
+nodes in any longest path from the root to a leaf.  For example, the
+depth of an empty tree (simply `Leaf`) is `0`, and the depth of tree `t`
+above is `3`. *Hint: there is a library function `max : 'a -> 'a -> 'a`
+that returns the maximum of any two values of the same type.*
+
+&square;
+
+##### Exercise: shape [&#10029;&#10029;&#10029;]  
+
+Write a function `same_shape : 'a tree -> 'b tree -> bool` that determines whether
+two trees have the same shape, regardless of whether the values they carry at each node
+are the same. *Hint: use a pattern match with three branches, where the expression
+being matched is a pair of trees.*
+
+&square;
+
+##### Exercise: list max exn [&#10029;&#10029;]  
+
+Write a function `list_max : int list -> int`
+that returns the maximum integer in a list, or raises 
+`Failure "list_max"` if the list is empty.
+
+&square;
+
+To catch an exception, use this syntax:
+```
+try e with
+| p1 -> e1
+| ...
+| pn -> en
+```
+The expression `e` is what might raise an exception.  If it does not, the entire
+`try` expression evaluates to whatever `e` does.  If `e` does raise an exception value
+`v`, that value `v` is that matched against the provide patterns, exactly like
+`match` expression.
+
+##### Exercise: list max exn string [&#10029;&#10029;]  
+
+Write a function `list_max_string : int list -> string`
+that returns a string containing the maximum integer in a list, or 
+the string `"empty"` (note, not the exception `Failure "empty"` but 
+just the string `"empty"`) if the list is empty.  *Hint: `string_of_int` in
+the standard library will do what its name suggests.*  
+
+&square;
+
+##### Exercise: list max exn ounit [&#10029;]  
+
+Write two OUnit tests to determine whether your solution to **list max exn**, above,
+correctly raises an exception when its input is the empty list, and whether it
+correctly returns the max value of the input list when that list is nonempty.
+
+&square;
+
+##### Exercise: is_bst [&#10029;&#10029;&#10029;&#10029;]  
+
+Write a function `is_bst : ('a*'b) tree -> bool` that returns `true` if
+and only if the given tree satisfies the binary search tree invariant. 
+An efficient version of this function that visits each node at most once
+is somewhat tricky to write.
+*Hint: write a recursive helper function that takes a tree and either
+gives you (i) the minimum and maximum value in the tree, or (ii) tells
+you that the tree is empty, or (iii) tells you that the tree does not
+satisfy the invariant. Your `is_bst` function will not be recursive, but
+will call your helper function and pattern match on the result.  You
+will need to define a new variant type for the return type of your helper
+function.*
+
+&square;
+
+##### Exercise: quadrant poly [&#10029;&#10029;]  
+
+Modify your definition of quadrant to use polymorphic variants.  The
+types of your functions should become these:
+```
+val sign : int -> [> `Neg | `Pos | `Zero ]
+val quadrant : int * int -> [> `I | `II | `III | `IV ] option
+```
+
+&square;
+
+There are other, more compelling uses for polymorphic variants that we'll 
+see later in the course.  They are particularly useful in libraries.
+For now, we generally will steer you away from extensive use of polymorphic
+variants, because their types can become difficult to manage.
