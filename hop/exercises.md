@@ -15,7 +15,7 @@ Explain how it can be that `quad` is not syntactically written as a
 function that takes an argument, and yet its type shows that it is in
 fact a function.  
 
-&square;
+
 
 ##### Exercise: mystery operator 1 [&#10029;&#10029;] 
 
@@ -26,7 +26,7 @@ let ($) f x = f x
 
 *Hint: investigate `square $ 2 + 2` vs. `square 2 + 2`.*
 
-&square;
+
 
 ##### Exercise: mystery operator 2 [&#10029;&#10029;] 
 
@@ -37,7 +37,7 @@ let (@@) f g x = x |> g |> f
 
 *Hint: investigate `String.length @@ string_of_int` applied to `1`, `10`, `100`, etc.*
 
-&square;
+
 
 ##### Exercise: repeat [&#10029;&#10029;]  
 
@@ -50,18 +50,7 @@ applies `f` to `x` a total of `n` times.  That is,
 * `repeat f 3 x` yields `f (f (f x))`
 * ...
 
-&square;
 
-## Map, fold, and filter
-
-Review the [OCaml List library][listdoc] documentation of `map`, `fold_left`,
-`fold_right`, and `filter`.  Recall that 
-
-* `map` applies a function to each element of a list individually
-* the `fold_X` functions combine all the elements of a list with a function
-* `filter` removes elements of a list that do not satisfy a function
-
-[listdoc]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
 
 ##### Exercise: product [&#10029;] 
 
@@ -72,7 +61,24 @@ recall how we implemented `sum` in just one line of code in lecture.*
 Use `fold_right` to write a function `product_right` that computes the product
 of a list of floats.  *Same hint applies.*
 
-&square;
+
+
+##### Exercise: clip [&#10029;&#10029;] 
+
+Given the following function `clip`, write a function `cliplist` that
+clips every integer in its input list.
+  
+```
+let clip n = 
+if n < 0 then 0 
+else if n > 10 then 10
+else n
+```
+  
+Write two version of `cliplist`:  one that uses `map`,
+and another that is a direct recursive implementation.
+
+
 
 ##### Exercise: sum_cube_odd [&#10029;&#10029;] 
 
@@ -81,7 +87,7 @@ the odd numbers between `0` and `n` inclusive.  Do not write any new recursive
 functions.  Instead, use the functionals map, fold, and filter, and the `(--)` 
 operator defined in the lecture notes.
 
-&square;
+
 
 ##### Exercise: sum_cube_odd pipeline [&#10029;&#10029;] 
 
@@ -89,7 +95,7 @@ Rewrite the function `sum_cube_odd` to use the pipeline operator `|>`
 as shown in the lecture notes for this lab in the section
 titled "Pipelining".
 
-&square;
+
 
 ##### Exercise: exists [&#10029;&#10029;] 
 
@@ -108,10 +114,16 @@ Write three solutions to this problem, as we did above:
 * `exists_lib`, which uses any combination of `List` module functions other 
    than `fold_left` or `fold_right`, and does not use the `rec` keyword.
 
-Also write a test suite similar to the one above.  Make sure your implementations
-pass your test suite.
 
-&square;
+
+##### Exercise: budget [&#10029;&#10029;&#10029;]
+
+Write a function which, given a list of numbers representing expenses,
+removes them from a budget, and finally returns the remaining amount in the
+budget. Write three versions:  `fold_left`, `fold_right`, and 
+a direct recursive implementation.
+
+
 
 ##### Exercise: library uncurried [&#10029;&#10029;] 
 
@@ -127,7 +139,7 @@ In a similar way, write uncurried versions of these library functions:
   - `Char.compare`
   - `Pervasives.max`
   
-&square;
+
 
 When many functions share a common pattern, you can often write a single
 higher-order function to capture the common structure.
@@ -154,7 +166,7 @@ let uncurried_compare = uncurry Char.compare
 let uncurried_max     = uncurry max
 ```
 
-&square;
+
 
 ##### Exercise: curry [&#10029;&#10029;]  
 
@@ -164,7 +176,7 @@ Write the inverse function `curry`.  It should have the following type:
 val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c
 ```
 
-&square;
+
 
 ##### Exercise: terse product [&#10029;&#10029;, advanced] 
 
@@ -174,14 +186,14 @@ the `fun` keyword.  For `fold_left`, your function definition does not even need
 to explicitly take a list argument.  If you use `ListLabels`, the same
 is true for `fold_right`.*
 
-&square;
+
 
 ##### Exercise: map composition [&#10029;&#10029;&#10029;] 
 
 Show how to replace any expression of the form `List.map f (List.map g lst)`
 with an equivalent expression that calls `List.map` only once.
 
-&square;
+
 
 ##### Exercise: more list fun [&#10029;&#10029;&#10029;] 
 
@@ -197,7 +209,7 @@ combining, transforming, or filtering elements.
   given inputs `["hi";"bye"]` and `","`, produce `"hi,bye"`, being sure not
   to produce an extra comma either at the beginning or end of the result string.
 
-&square;
+
 
 ##### Exercise: tree map [&#10029;&#10029;&#10029;]  
 
@@ -214,7 +226,7 @@ a function to every element of a list.
 Use your `tree_map` function to implement a function `add1 : int tree ->
 int tree` that increments every node in an `int tree`.
 
-&square;
+
 
 ##### Exercise: association list keys  [&#10029;&#10029;&#10029;]  
 
@@ -231,7 +243,7 @@ solution? We know of one solution that (i) would fit in a single line of code,
 anonymous functions, (iii) requires sub-linear stack space, and (iv) requires
 sub-quadratic time.  *Hint: merge sort.*
 
-&square;
+
 
 ##### Exercise: valid matrix [&#10029;&#10029;&#10029;] 
 
@@ -254,7 +266,7 @@ and in which every column has the same number of rows.  There are many values of
 Implement a function `is_valid_matrix: int list list -> bool` that returns whether the 
 input matrix is valid.  Unit test the function.
 
-&square;
+
 
 ##### Exercise: row vector add [&#10029;&#10029;&#10029;] 
 
@@ -266,7 +278,7 @@ of entries, the behavior of your function is *unspecified*&mdash;that is,
 it may do whatever you like.  *Hint: there is an elegant one-line solution
 using `List.map2`.*  Unit test the function.
 
-&square;
+
 
 ##### Exercise: matrix add [&#10029;&#10029;&#10029;, advanced] 
 
@@ -278,7 +290,7 @@ Unit test the function.
 
 [matadd]: http://mathworld.wolfram.com/MatrixAddition.html
 
-&square;
+
 
 ##### Exercise: matrix multiply [&#10029;&#10029;&#10029;&#10029;, advanced] 
 
@@ -290,4 +302,3 @@ matrix transposition and row vector dot product.*
 
 [matmult]: http://mathworld.wolfram.com/MatrixMultiplication.html
 
-&square;

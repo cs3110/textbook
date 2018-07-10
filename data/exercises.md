@@ -11,7 +11,7 @@
 * Construct the same list again.  This time, the following expression must appear
   in your answer:  `[2;3;4]`.  Use the `@` operator, and do not use `::`.
 
-&square;
+
 
 ##### Exercise: product [&#10029;&#10029;] 
 
@@ -20,7 +20,7 @@ product of all the elements of an empty list is `1`.  *Hint: recall the `sum`
 function we defined in lecture.*  Put your code in a file named `lab03.ml`.
 Use the toplevel to test your code.
 
-&square;
+
 
 ##### Exercise: concat [&#10029;&#10029;, optional]
 
@@ -30,7 +30,7 @@ The concatenation of all the strings in an empty list is the empty string `""`.
 Put your code in a file named `lab03.ml`.
 Use the toplevel to test your code.
 
-&square;
+
 
 
 ##### Exercise: bad add [&#10029;&#10029;] 
@@ -47,13 +47,13 @@ Now create a file named `add_test.ml`.  Create and run an OUnit test suite for
 `add` in that file.  Make sure to write some test cases that will pass 
 (e.g., `add 1 2`) and some test cases that will fail (e.g., `add 7 1`).
 
-&square;
+
 
 ##### Exercise: product test [&#10029;&#10029;, optional] 
 
 Unit test the function `product` that you wrote in an exercise above.
 
-&square;
+
 
 ##### Exercise: patterns [&#10029;&#10029;&#10029;] 
 
@@ -65,7 +65,7 @@ has the property and `false` otherwise.
 * the list has exactly two or four elements; do not use the `length` function
 * the first two elements of the list are equal
 
-&square;
+
 
 ##### Exercise: library [&#10029;&#10029;&#10029;] 
 
@@ -80,14 +80,14 @@ Consult the [`List` standard library][listdoc] to solve these exercises:
 
 [listdoc]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
 
-&square;
+
 
 ##### Exercise: library test [&#10029;&#10029;&#10029;, optional] 
 
 Write a couple OUnit unit tests for each of the functions you wrote in the 
 previous exercise.
 
-&square;
+
 
 ##### Exercise: library puzzle [&#10029;&#10029;&#10029;] 
 
@@ -101,7 +101,7 @@ and do not write any pattern matching code of your own.*
 
 Your solutions will be only one or two lines of code each.
 
-&square;
+
 
 ##### Exercise: take drop [&#10029;&#10029;&#10029;] 
 
@@ -113,7 +113,7 @@ of them.
 returns all but the first `n` elements of `lst`.  If `lst` has fewer than `n` elements,
 return the empty list.
 
-&square;
+
 
 ##### Exercise: take drop tail [&#10029;&#10029;&#10029;&#10029;, recommended] 
 
@@ -140,7 +140,7 @@ let longlist = 0 -- 1_000_000
 It would be worthwhile to study the definition of `--` to convince yourself
 that you understand (i) how it works and (ii) why it is tail recursive.
 
-&square; 
+ 
 
 ##### Exercise: unimodal [&#10029;&#10029;&#10029;] 
 
@@ -150,7 +150,7 @@ monotonically increases to some maximum value then monotonically decreases
 after that value. Either or both segments (increasing or decreasing) may be empty.
 A constant list is unimodal, as is the empty list.
 
-&square; 
+ 
 
 ##### Exercise: powerset [&#10029;&#10029;&#10029;]
 
@@ -162,7 +162,7 @@ of subsets in the powerset and the order of elements in the subsets do not matte
 Suppose you already have `p`, such
 that `p = powerset s`. How could you use `p` to compute `powerset (x::s)`?
 
-&square; 
+ 
 
 ##### Exercise: student [&#10029;&#10029;] 
 
@@ -177,7 +177,7 @@ Give OCaml expressions that have the following types:
 * `student -> string * string`  (a function that extracts the student's name)
 * `string -> string -> float -> student`  (a function that creates a student record)
 
-&square;
+
 
 Here is a variant that represents a few Pok&eacute;mon types:
 ```
@@ -195,7 +195,7 @@ a Pok&eacute;mon with 78 HP and Fire type.
 * Create a record named `metapod` of type `pokemon` that represents
 a Pok&eacute;mon with 50 HP and Normal type.
 
-&square;
+
 
 ##### Exercise: safe hd and tl [&#10029;&#10029;] 
 
@@ -206,14 +206,14 @@ empty.
 Also write a function `safe_tl : 'a list -> 'a list option` that returns
 the tail of the list, or `None` if the list is empty.
 
-&square;
+
 
 ##### Exercise: pokefun [&#10029;&#10029;&#10029;] 
 
 Write a function `max_hp : pokemon list -> pokemon option` that, given a list of
 `pokemon`, finds the Pok&eacute;mon with the highest HP.
 
-&square;
+
 
 ##### Exercise: date before [&#10029;&#10029;] 
 
@@ -239,7 +239,7 @@ in January comes before any date in February, but a function that says
 that January 100, 2013 comes after February 34, 2013 is also valid.  You
 may ignore leap years.
 
-&square;
+
 
 ##### Exercise: earliest date [&#10029;&#10029;&#10029;] 
 
@@ -251,7 +251,7 @@ is the earliest date in the list.  *Hint: use `is_before`.*
 As in the previous exercise, your function needs to work correctly 
 only for dates, not for arbitrary date-like triples.
 
-&square;
+
 
 ##### Exercise: assoc list [&#10029;]
 
@@ -259,7 +259,7 @@ Use the functions `insert` and `lookup` above to construct an
 association list that maps the integer 1 to the string "one", 
 2 to "two", and 3 to "three".  Lookup the key 2.  Lookup the key 4.
 
-&square;
+
 
 ##### Exercise: cards [&#10029;&#10029;]  
 
@@ -281,7 +281,7 @@ the Two of Diamonds, the Seven of Spades.
 
 [cards]: https://en.wikipedia.org/wiki/Standard_52-card_deck
 
-&square;
+
 
 ##### Exercise: matching [&#10029;]  
 
@@ -295,7 +295,7 @@ not the empty list, or explain why that's impossible.
  - `h1::h2::tl`
  - `h :: tl`
  
-&square;
+
 
 ##### Exercise: quadrant [&#10029;&#10029;]  
 
@@ -325,7 +325,7 @@ let quadrant : int*int -> quad option = fun (x,y) ->
     | ... -> None
 ```
 
-&square;
+
 
 ##### Exercise: quadrant when [&#10029;&#10029;]  
 
@@ -349,7 +349,7 @@ depth of an empty tree (simply `Leaf`) is `0`, and the depth of tree `t`
 above is `3`. *Hint: there is a library function `max : 'a -> 'a -> 'a`
 that returns the maximum of any two values of the same type.*
 
-&square;
+
 
 ##### Exercise: shape [&#10029;&#10029;&#10029;]  
 
@@ -358,7 +358,7 @@ two trees have the same shape, regardless of whether the values they carry at ea
 are the same. *Hint: use a pattern match with three branches, where the expression
 being matched is a pair of trees.*
 
-&square;
+
 
 ##### Exercise: list max exn [&#10029;&#10029;]  
 
@@ -366,7 +366,7 @@ Write a function `list_max : int list -> int`
 that returns the maximum integer in a list, or raises 
 `Failure "list_max"` if the list is empty.
 
-&square;
+
 
 ##### Exercise: list max exn string [&#10029;&#10029;]  
 
@@ -376,7 +376,7 @@ the string `"empty"` (note, not the exception `Failure "empty"` but
 just the string `"empty"`) if the list is empty.  *Hint: `string_of_int` in
 the standard library will do what its name suggests.*  
 
-&square;
+
 
 ##### Exercise: list max exn ounit [&#10029;]  
 
@@ -384,7 +384,7 @@ Write two OUnit tests to determine whether your solution to **list max exn**, ab
 correctly raises an exception when its input is the empty list, and whether it
 correctly returns the max value of the input list when that list is nonempty.
 
-&square;
+
 
 ##### Exercise: is_bst [&#10029;&#10029;&#10029;&#10029;]  
 
@@ -400,7 +400,7 @@ will call your helper function and pattern match on the result.  You
 will need to define a new variant type for the return type of your helper
 function.*
 
-&square;
+
 
 ##### Exercise: quadrant poly [&#10029;&#10029;]  
 
@@ -411,5 +411,5 @@ val sign : int -> [> `Neg | `Pos | `Zero ]
 val quadrant : int * int -> [> `I | `II | `III | `IV ] option
 ```
 
-&square;
+
 
