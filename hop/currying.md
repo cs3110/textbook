@@ -39,6 +39,4 @@ with programming languages named after both their first and last names).
 Sometimes you will come across libraries that offer an uncurried version
 of a function, but you want a curried version of it to use in your own
 code; or vice versa.  So it is useful to know how to convert between
-the two kinds of functions.  The next couple exercises explore how to do that.
-They are also good exercises for improving your understanding of the types
-of higher-order functions.
+the two kinds of functions.
