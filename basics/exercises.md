@@ -217,3 +217,51 @@ floating-point numbers.  For example,
 * `1.0 +/. 2.0 = 1.5`
 * `0. +/. 0. = 0.`
 
+
+##### Exercise: hello world [&#10029;] 
+
+Type the following in utop:
+```
+# print_endline "Hello world!";;
+# print_string "Hello world!";;
+```
+
+Notice the difference in output from each.
+
+&square;
+
+##### Exercise: print int list rec [&#10029;&#10029;] 
+
+Write a function `print_int_list : int list -> unit` that
+prints its input list, one number per line.  For example,
+`print_int_list [1;2;3]` should result in this output:
+```
+1
+2
+3
+```
+Here is some code to get you started:
+```
+let rec print_int_list = function 
+| [] -> () 
+| h::t -> (* fill in here *); 
+          print_int_list t
+```
+
+&square;
+
+##### Exercise: print int list iter [&#10029;&#10029;] 
+
+Write a function `print_int_list' : int list -> unit` whose
+specification is the same as `print_int_list`.  Do not
+use the keyword `rec` in your solution, but instead to use
+the [List module][list] function `List.iter`.
+Here is some code to get you started:
+```
+let print_int_list' lst = 
+  List.iter (fun x -> (* fill in here *)) lst
+```
+
+[list]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
+
+&square;
