@@ -54,12 +54,48 @@ require the study of *amortized analysis*, which we will not cover here.)*
 ##### Exercise: binary search tree dictionary [&#10029;&#10029;&#10029;] 
 
 Write a module `BstDict` that implements the `Dictionary`
-module type using the `tree` type and `lookup` and `insert` 
-functions that you defined in the lab on variants.
+module type using the `tree` type.
 
 &square;
 
-##### Exercise: fraction [&#10029;&#10029;&#10029;&#10029;] 
+##### Exercise: complex synonym [&#10029;]
+
+Here is a signature and a structure for complex numbers, which
+have a real and imaginary component:
+```
+module type ComplexSig = sig
+  val zero : float*float
+  val add : float*float -> float*float -> float*float
+end
+
+module Complex = struct
+  let zero = 0., 0.
+  let add (r1,i1) (r2,i2) = r1 +. r2, i1 +. i2
+end
+
+```
+  
+Improve that code by adding `type t = float*float` to **both** the structure
+and signature.  Show how the signature can be written more tersely because
+of the type synonym.
+
+##### Exercise: complex encapsulation [&#10029;&#10029;]
+  
+Change the first line of the `Complex` module above 
+to be 
+```
+module Complex : ComplexSig = struct
+  ...
+```
+Investigate what happens if you make the following changes (each
+independently) to the code, and explain why any errors arise:
+
+- remove `zero` from the structure
+- remove `add` from the signature
+- change `zero` in the structure to `let zero = 0, 0`
+    
+
+##### Exercise: fraction [&#10029;&#10029;&#10029;] 
 
 Write a module that implements the `Fraction` module type below:
 ```
@@ -80,8 +116,11 @@ module type Fraction = sig
 end
 ```
 
-Your module should ensure these invariants for every value `v` of type `t` 
-that it returns from `make`, `add`, and `mul`:
+##### Exercise: fraction reduced [&#10029;&#10029;&#10029;] 
+
+Modify your implementation of `Fraction` to ensure these invariants 
+hold of every value `v` of type `t` that is returned from `make`, `add`, 
+and `mul`:
 
 1. `v` is in *[reduced form][irreducible]*
 
