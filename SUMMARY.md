@@ -30,6 +30,7 @@
   - [2.13. Let Expressions](basics/let_expressions.md)
   - [2.14. Scope](basics/scope.md)
   - [2.15. Printing](basics/printing.md)
+  - [2.16. What about Main?](basics/main.md)
   - [2.15. Summary](basics/summary.md)
   - [2.16. Exercises](basics/exercises.md)
   
