@@ -11,3 +11,6 @@ Topics:
 * functional data structures
 * sharing constraints
 * compilation units
+* code reuse
+* includes
+* functors
