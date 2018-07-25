@@ -11,6 +11,7 @@
   - [1.4. Mutability](intro/mutability.md)
   - [1.5. Summary](intro/summary.md)
   - [1.6. Exercises](intro/exercises.md)
+  - [1.7. A Brief History of CS 3110](intro/3110.md)
 
 ---
 
