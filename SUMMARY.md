@@ -32,8 +32,10 @@
   - [2.14. Scope](basics/scope.md)
   - [2.15. Printing](basics/printing.md)
   - [2.16. What about Main?](basics/main.md)
-  - [2.15. Summary](basics/summary.md)
-  - [2.16. Exercises](basics/exercises.md)
+  - [2.17. Debugging](basics/debugging.md)
+  - [2.18. Documentation](basics/documentation.md)
+  - [2.19. Summary](basics/summary.md)
+  - [2.20. Exercises](basics/exercises.md)
   
 * [3. Data in OCaml](data/intro.md)
   - [3.1. Lists](data/lists.md)
