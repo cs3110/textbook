@@ -3,7 +3,7 @@
 BLUE=\033[0;34m
 NOCOLOR=\033[0m
 
-BOOK_URL=https://www.cs.cornell.edu/~clarkson/3110-2018fa/textbook
+BOOK_URL=https://www.cs.cornell.edu/courses/cs3110/2018fa/textbook
 
 help:
 	@echo "Please use 'make <target>' where <target> is one of:"
