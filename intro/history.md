@@ -26,12 +26,12 @@ Programming.  A syllabus from [Fall 2002][cs312-2002fa] is the earliest
 example online.  It covered a large subset of the material from the
 union of CS 212 and CS 410.  But to cover nearly two courses worth of
 material in the same number of lectures is not possible.  CS 312 appears
-to have attempted to solve that problem by introducing recitations,
-effectively doubling the number of class meetings.  The language was
-Standard ML (SML), which Greg Morrisett had introduced
-at least by [Spring 2001][cs312-2001sp].
+to have solved that problem by introducing recitations, effectively
+doubling the number of class meetings.  The language was Standard ML
+(SML), which Greg Morrisett had introduced at least by [Spring
+2001][cs312-2001sp].
 
-In [Fall 2002] Andrew Myers started teaching CS 312.  He began to
+In [Fall 2002][cs312-2002fa] Andrew Myers started teaching CS 312.  He began to
 gradually incorporate material on modular programming from another MIT
 textbook, *Program Development in Java: Abstraction, Specification, and
 Object-Oriented Design* by Barbara Liskov and John Guttag.
