@@ -1,10 +1,6 @@
 # Functional Programming in OCaml<br/><small>A Principled Approach</small>
 
-**By [Michael R. Clarkson][mrc]**
-
-[mrc]: http://www.cs.cornell.edu/~clarkson/
-
-Based on course notes by Robert L. Constable, Nate Foster, Michael D. George, Dan
+By Michael R. Clarkson, Robert L. Constable, Nate Foster, Michael D. George, Dan
 Grossman, Daniel P. Huttenlocher, Tibor Janosi, Christoph Koch, Dexter Kozen,
 Greg Morrisett, Andrew C. Myers, Keshav Pingali, Radu Rugina, Benjamin
 Ylvisaker, and Ramin Zabih.
