@@ -27,7 +27,7 @@ line, instead of many.
 
 ## Merlin file
 
-If you are using Merlin (e.g., your editor is Atom or Emacs), you will notice
+If you are using Merlin (e.g., your editor is VS Code or Emacs), you will notice
 two things that aren't quite optimal at this point.  First, Merlin doesn't 
 understand the OUnit code.  Second, Merlin doesn't understand the code located
 in `sum.ml` while you are editing `sum_test.ml`.  To fix both of those problems,
