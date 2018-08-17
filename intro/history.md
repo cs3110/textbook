@@ -63,7 +63,7 @@ software engineering began, including an open-ended software development
 project.
 
 In [Fall 2018][cs3110-2018fa] the development of this textbook began.
-It synthesizes the work of two decades of programming instruction at
+It synthesizes the work of two decades of functional programming instruction at
 Cornell.  In the words of the Cornell [Evening Song][eveningsong],
 
 >'Tis an echo from the walls<br/>
