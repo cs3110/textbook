@@ -1,46 +1,64 @@
 # A Brief History of CS 3110
 
-This course originated at MIT as 6.001 *Structure and Interpretation of
-Computer Programs* (SICP), which was the name of the course as well as
-the name of its textbook.  It's possible that Tim Teitelbaum was the
-first to bring that course to Cornell.  
+Once upon a time, there was a course at MIT known as 6.001 *Structure
+and Interpretation of Computer Programs* (SICP).  It had a
+[textbook][sicp] by the same name, and it used Scheme, a functional
+programming language.  Ramin Zabih took that course as a first-year
+student at MIT.  Dan Huttenlocher was one of the TAs.
 
-The earliest digital record at Cornell seems to be [CS 212 Fall
-1999][cs212-1999fa], which was taught by Ramin Zabih in Scheme and
-mostly followed the SICP material.  The SICP textbook itself wasn't
-required; CS 212 already had its own lecture notes.  As CS 3110 still
-does, CS 212 covered functional programming, the substitution and
-environment models, some data structures and algorithms, and programming
-language implementation.
+[sicp]: http://web.mit.edu/alexmv/6.037/sicp.pdf
 
-In the late 1990s and early 2000s, there was an upper level course known
-as CS 410 Data Structures.  A copy of the syllabus from [Spring
-1998][cs410-1998sp] is still online.  It covered many data structures
-and algorithms not covered by CS 212, including balanced trees and
-graphs.  CS 410 used C as the programming language. CS 410 was
-eliminated from the curriculum and its contents merged with CS 212. 
-(Alas, C remains in the curriculum today.)
+**CS 212.** By Spring 1994, Huttenlocher and Zabih had both become
+faculty at Cornell. Zabih inaugurated CS 212 Structure and
+Interpretation of Computer Programs.  It was very loosely based on MIT's
+SICP.  The first two times it was taught in an object-oriented version
+of Scheme that one of Huttenlocher's TAs had built. Dexter Kozen
+(Cornell PhD 1977) first taught the course in Spring 1996; he used
+Dylan, another object-oriented Scheme dialect. The earliest surviving
+online record of the course seems to be [Spring 1998][cs212-1998sp],
+which was taught by Greg Morrisett in Dylan.
 
-The resulting course was known as CS 312 Data Structures and Functional
-Programming.  A syllabus from [Fall 2002][cs312-2002fa] is the earliest
-example online.  It covered a large subset of the material from the
-union of CS 212 and CS 410.  But to cover nearly two courses worth of
-material in the same number of lectures is not possible.  CS 312 appears
-to have solved that problem by introducing recitations, effectively
-doubling the number of class meetings.  The language was Standard ML
-(SML), which Greg Morrisett had introduced at least by [Spring
-2001][cs312-2001sp].
+In [Fall 1999][cs212-1999fa], the language changed to Scheme. The SICP
+textbook itself wasn't required; CS 212 had its own lecture notes.  As
+CS 3110 still does, that instance of CS 212 covered functional
+programming, the substitution and environment models, some data
+structures and algorithms, and programming language implementation.
 
-In [Fall 2002][cs312-2002fa] Andrew Myers started teaching CS 312.  He began to
-gradually incorporate material on modular programming from another MIT
-textbook, *Program Development in Java: Abstraction, Specification, and
-Object-Oriented Design* by Barbara Liskov and John Guttag.
+**CS 312.** At that time, the CS curriculum had two introductory
+programming courses, CS 211 Computers and Programming, and CS 212.
+Students took one or the other, similar to how students today take
+either CS 2110 or CS 2112.  Then they took CS 410 Data Structures. The
+earliest surviving online record of CS 410 seems to be from [Spring
+1998][cs410-1998sp]. It covered many data structures and algorithms not
+covered by CS 212, including balanced trees and graphs, and it used Java
+as the programming language. 
 
-In [Fall 2008][cs3110-2008fa] two big changes came.  First, the
-university switched to four-digit course numbers, and CS 312 became 
-CS 3110.  The syllabus shows the same lecture and recitation structure,
-with new material incorporated on modular programming and formal
-methods. Second, the language switched to OCaml.  
+Depending on which course they took, CS 211 or 212, students were
+entering upper-level courses with different skill sets.  After extensive
+discussions, the faculty chose to make CS 211 required, to rename CS 212
+into CS 312 Data Structures and Functional Programming, and to make CS 211
+a prerequisite for CS 312. At the same time, CS 410 was eliminated from
+the curriculum and its contents parceled out to CS 312 and CS 482
+Introduction to Analysis of Algorithms. Dexter Kozen taught the final
+offering of CS 410 in [Fall 1999][cs410-1999fa].  
+
+The earliest surviving online record of the new CS 312 is from [Spring
+2001][cs312-2001sp], taught by Greg Morrisett using Standard ML.  Kozen
+first taught it in Fall 2001.  In [Fall 2002][cs312-2002fa] Andrew Myers
+first taught CS 312.  He began to incorporate material on modular
+programming from another MIT textbook, *Program Development in Java:
+Abstraction, Specification, and Object-Oriented Design* by Barbara
+Liskov and John Guttag.  Huttenlocher first taught the course in Spring
+2006.
+
+**CS 3110.**
+In [Fall 2008][cs3110-2008fa] two big changes came: the language
+switched to OCaml, and the university switched to four-digit course
+numbers. CS 312 became CS 3110.  Myers, Huttenlocher, Kozen, and
+Zabih first taught the revised course in Fall 2008, Spring 2009, 
+Fall 2009, and Fall 2010, respectively.  Nate Foster first
+taught the course in Spring 2012; and Bob Constable and Michael George
+co-taught for the first time in Fall 2013.
 
 Michael Clarkson (Cornell PhD 2010) first taught the course in [Fall
 2014][cs3110-2014fa], after having first TA'd the course as a PhD
@@ -55,25 +73,23 @@ Programming Languages at the University of Washington and in his popular
 In Spring 2008 the course had two recitation sections, a dozen course
 staff, and about 60 students. As of Fall 2018, a decade later, the
 course has thirteen recitation sections, about 50 course staff, and
-about 330 students.  The material covered in the course continues to
-evolve.  In [Fall 2015][cs3110-2015fa] the "recitations as second
-lectures" model was eliminated, causing the course to focus on a smaller
-number of core topics.  At the same time an increased emphasis on
-software engineering began, including an open-ended software development
-project.
+about 330 students.
 
-In [Fall 2018][cs3110-2018fa] the development of this textbook began.
-It synthesizes the work of two decades of functional programming instruction at
-Cornell.  In the words of the Cornell [Evening Song][eveningsong],
+In [Fall 2018][cs3110-2018fa] the compilation of this textbook began. It
+synthesizes the work of over two decades of functional programming
+instruction at Cornell.  In the words of the Cornell [Evening
+Song][eveningsong],
 
 >'Tis an echo from the walls<br/>
 >Of our own, our fair Cornell.
 
 
+[cs212-1998sp]: http://www.cs.cornell.edu/courses/cs212/1998sp/Outline.html
 [cs212-1999fa]: http://www.cs.cornell.edu/courses/cs212/1999FA/Materials.html
 [cs410-1998sp]: http://www.cs.cornell.edu/courses/cs410/1998sp/schedule.html
+[cs410-1999fa]: http://www.cs.cornell.edu/courses/cs410/1999fa/
 [cs312-2002fa]: http://www.cs.cornell.edu/courses/cs312/2002fa/lectures.htm
-[cs312-2001sp]: http://www.cs.cornell.edu/courses/cs312/2001sp/overview.html
+[cs312-2001sp]: http://www.cs.cornell.edu/courses/cs312/2001SP/notes.html
 [cs312-2008sp]: http://www.cs.cornell.edu/courses/cs312/2008sp/overview.html
 [cs3110-2008fa]: http://www.cs.cornell.edu/courses/cs3110/2008fa/schedule.html
 [cs3110-2014fa]: http://www.cs.cornell.edu/courses/cs3110/2014fa/course_info.php
