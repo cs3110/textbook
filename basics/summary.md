@@ -15,10 +15,14 @@ binding is in scope only in the body of the let expression.
 ## Terms and concepts
 
 * anonymous functions
+* assertions
 * binding
 * binding expression
 * body expression
+* debugging
+* defensive programming
 * definitions
+* documentation
 * dynamic semantics
 * evaluation
 * expressions
@@ -34,6 +38,9 @@ binding is in scope only in the body of the let expression.
 * metavariables
 * mutual recursion
 * pipeline operator
+* postcondition
+* precondition
+* printing
 * recursion
 * semantics
 * static semantics
