@@ -70,11 +70,6 @@ and static semantics.  Grossman uses that approach in CSE 341
 Programming Languages at the University of Washington and in his popular
 [Programming Languages MOOC][pl-mooc].
 
-In Spring 2008 the course had two recitation sections, a dozen course
-staff, and about 60 students. As of Fall 2018, a decade later, the
-course has thirteen recitation sections, about 50 course staff, and
-about 330 students.
-
 In [Fall 2018][cs3110-2018fa] the compilation of this textbook began. It
 synthesizes the work of over two decades of functional programming
 instruction at Cornell.  In the words of the Cornell [Evening
