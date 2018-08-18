@@ -12,11 +12,11 @@ student at MIT.  Dan Huttenlocher was one of the TAs.
 faculty at Cornell. Zabih inaugurated CS 212 Structure and
 Interpretation of Computer Programs.  It was very loosely based on MIT's
 SICP.  The first two times it was taught in an object-oriented version
-of Scheme that one of Huttenlocher's TAs had built. Dexter Kozen
-(Cornell PhD 1977) first taught the course in Spring 1996; he used
-Dylan, another object-oriented Scheme dialect. The earliest surviving
-online record of the course seems to be [Spring 1998][cs212-1998sp],
-which was taught by Greg Morrisett in Dylan.
+of Scheme that one of Huttenlocher's TAs had built, and later offerings
+used Dylan, another object-oriented Scheme dialect. Dexter Kozen
+(Cornell PhD 1977) first taught the course in Spring 1996. The earliest
+surviving online record of the course seems to be [Spring
+1998][cs212-1998sp], which was taught by Greg Morrisett in Dylan.
 
 In [Fall 1999][cs212-1999fa], the language changed to Scheme. The SICP
 textbook itself wasn't required; CS 212 had its own lecture notes.  As
