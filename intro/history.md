@@ -42,10 +42,10 @@ the curriculum and its contents parceled out to CS 312 and CS 482
 Introduction to Analysis of Algorithms. Dexter Kozen taught the final
 offering of CS 410 in [Fall 1999][cs410-1999fa].  
 
-The earliest surviving online record of the new CS 312 is from [Spring
-2001][cs312-2001sp], taught by Greg Morrisett using Standard ML.  Kozen
-first taught it in Fall 2001.  In [Fall 2002][cs312-2002fa] Andrew Myers
-first taught CS 312.  He began to incorporate material on modular
+Greg Morrisett inaugurated the new CS 312 in [Spring
+2001][cs312-2001sp].  He switched from Scheme to Standard ML.  Kozen
+first taught it in Fall 2001, and Andrew Myers in [Fall
+2002][cs312-2002fa]. Myers began to incorporate material on modular
 programming from another MIT textbook, *Program Development in Java:
 Abstraction, Specification, and Object-Oriented Design* by Barbara
 Liskov and John Guttag.  Huttenlocher first taught the course in Spring
