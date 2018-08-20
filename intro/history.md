@@ -12,8 +12,7 @@ Scheme.
 **CS 212.**  Dan Huttenlocher had been a TA for 6.001 at MIT; he later
 became faculty at Cornell. In Fall 1989, he inaugurated CS 212 Modes of
 Algorithm Expression.  Basing the course on SICP, he infused a more
-rigorous approach to the material.  The language used was Dylan, an
-object-oriented Scheme dialect. Huttenlocher continued to develop CS 212
+rigorous approach to the material.  Huttenlocher continued to develop CS 212
 through the mid 1990s, using various homegrown dialects of Scheme.  
 
 Other faculty began teaching the course regularly. Ramin Zabih had taken
