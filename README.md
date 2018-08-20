@@ -1,10 +1,10 @@
 # Functional Programming in OCaml<br/><small>A Principled Approach</small>
 
-By Michael R. Clarkson, Nate Foster, Michael D. George, Dexter Kozen,
-Greg Morrisett, Andrew C. Myers, and Ramin Zabih.
+By Michael R. Clarkson, Nate Foster, Michael D. George, Daniel P.
+Huttenlocher, Dexter Kozen, Greg Morrisett, Andrew C. Myers, and Ramin
+Zabih.
 
-With Robert L. Constable, Dan Grossman, Daniel P. Huttenlocher, and Radu
-Rugina.
+With Robert L. Constable, Dan Grossman, and Radu Rugina.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
 <img alt="Creative Commons License" style="border-width:0" 

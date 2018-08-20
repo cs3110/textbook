@@ -3,23 +3,28 @@
 Once upon a time, there was a course at MIT known as 6.001 *Structure
 and Interpretation of Computer Programs* (SICP).  It had a
 [textbook][sicp] by the same name, and it used Scheme, a functional
-programming language.  Ramin Zabih took that course as a first-year
-student at MIT.  Dan Huttenlocher was one of the TAs.
+programming language.  Tim Teitelbaum taught a version of the course at
+Cornell in Fall 1988, following the book rather closely and using
+Scheme.
 
 [sicp]: http://web.mit.edu/alexmv/6.037/sicp.pdf
 
-**CS 212.** By Spring 1994, Huttenlocher and Zabih had both become
-faculty at Cornell. Zabih inaugurated CS 212 Structure and
-Interpretation of Computer Programs.  It was very loosely based on MIT's
-SICP.  The first two times it was taught in an object-oriented version
-of Scheme that one of Huttenlocher's TAs had built, and later offerings
-used Dylan, another object-oriented Scheme dialect. Dexter Kozen
-(Cornell PhD 1977) first taught the course in Spring 1996. The earliest
-surviving online record of the course seems to be [Spring
-1998][cs212-1998sp], which was taught by Greg Morrisett in Dylan.
+**CS 212.**  Dan Huttenlocher had been a TA for 6.001 at MIT; he later
+became faculty at Cornell. In Fall 1989, he inaugurated CS 212 Modes of
+Algorithm Expression.  Basing the course on SICP, he infused a more
+rigorous approach to the material.  The language used was Dylan, an
+object-oriented Scheme dialect. Huttenlocher continued to develop CS 212
+through the mid 1990s, using various homegrown dialects of Scheme.  
 
-In [Fall 1999][cs212-1999fa], the language changed to Scheme. The SICP
-textbook itself wasn't required; CS 212 had its own lecture notes.  As
+Other faculty began teaching the course regularly. Ramin Zabih had taken
+6.001 as a first-year student at MIT. In Spring 1994, having become
+faculty at Cornell, he taught CS 212. Dexter Kozen (Cornell PhD 1977)
+first taught the course in Spring 1996. The earliest surviving online
+record of the course seems to be [Spring 1998][cs212-1998sp], which was
+taught by Greg Morrisett in Dylan; the name of the course had become
+Structure and Interpretation of Computer Programs.
+
+By [Fall 1999][cs212-1999fa], CS 212 had its own lecture notes.  As
 CS 3110 still does, that instance of CS 212 covered functional
 programming, the substitution and environment models, some data
 structures and algorithms, and programming language implementation.
@@ -51,14 +56,13 @@ Abstraction, Specification, and Object-Oriented Design* by Barbara
 Liskov and John Guttag.  Huttenlocher first taught the course in Spring
 2006.
 
-**CS 3110.**
-In [Fall 2008][cs3110-2008fa] two big changes came: the language
-switched to OCaml, and the university switched to four-digit course
-numbers. CS 312 became CS 3110.  Myers, Huttenlocher, Kozen, and
-Zabih first taught the revised course in Fall 2008, Spring 2009, 
-Fall 2009, and Fall 2010, respectively.  Nate Foster first
-taught the course in Spring 2012; and Bob Constable and Michael George
-co-taught for the first time in Fall 2013.
+**CS 3110.** In [Fall 2008][cs3110-2008fa] two big changes came: the
+language switched to OCaml, and the university switched to four-digit
+course numbers. CS 312 became CS 3110.  Myers, Huttenlocher, Kozen, and
+Zabih first taught the revised course in Fall 2008, Spring 2009, Fall
+2009, and Fall 2010, respectively.  Nate Foster first taught the course
+in Spring 2012; and Bob Constable and Michael George co-taught for the
+first time in Fall 2013.
 
 Michael Clarkson (Cornell PhD 2010) first taught the course in [Fall
 2014][cs3110-2014fa], after having first TA'd the course as a PhD
