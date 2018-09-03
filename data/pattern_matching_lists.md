@@ -3,6 +3,8 @@
 We saw above how to access lists using pattern matching.  Let's 
 look more carefully at this feature.
 
+## Syntax and Semantics
+
 **Syntax.**
 ```
 match e with
@@ -141,6 +143,8 @@ OCaml compiler infers the types of any pattern variables as well as all
 occurrences of the wildcard pattern.  As for the list patterns, they
 have the same type-checking rules as list expressions.
 
+## Additional Static Checking
+
 In addition to that type-checking rule, there are two other checks
 the compiler does for each match expression:
 
@@ -230,4 +234,20 @@ the compiler does for each match expression:
   let length_is lst n =
 	length lst = n
   ``` 
+  
+## Deep Pattern Matching
+
+Patterns can be nested.  Doing so can allow your code to look deeply into the 
+structure of a list.  For example:
+ 
+* `_::[]` matches all lists with exactly one element
+
+* `_::_` matches all lists with at least one element
+
+* `_::_::[]` matches all lists with exactly two elements
+
+* `_::_::_::_` matches all lists with at least three elements
+
+
+
  
