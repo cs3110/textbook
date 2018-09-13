@@ -25,7 +25,7 @@ let get_hp m =
 
 (* better *)
 let get_hp m =
-  match t with
+  match m with
   | {name; hp; ptype} -> hp
 
 (* better *)
