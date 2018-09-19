@@ -122,3 +122,14 @@
   - [5.25. Example: Standard Library Map](modules/stdlib_map.md)
   - [5.26. Summary](modules/summary.md)
   - [5.27. Exercises](modules/exercises.md)
+  
+* [6. Abstraction and Specification](abstract/intro.md)
+  - [6.1. Specification](abstract/specification.md)
+  - [6.2. Abstraction by Specification](abstract/abstraction.md)
+  - [6.3. Specification of Functions](abstract/function_specs.md)
+  - [6.4. The Specification Game](abstract/game.md)
+  - [6.5. Comments](abstract/comments.md)
+  - [6.X. Summary](abstract/summary.md)
+  - [6.Y. Exercises](abstract/exercises.md)
+  
+* [7. Testing](test/intro.md)
