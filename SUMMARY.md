@@ -134,7 +134,18 @@
   - [6.8. Commutative Diagrams](abstract/commutative.md)
   - [6.9. Representation Invariants](abstract/ri.md)
   - [6.10. Implementing the Representation Invariant](abstract/impl_ri.md)
-  - [6.X. Summary](abstract/summary.md)
-  - [6.Y. Exercises](abstract/exercises.md)
+  - [6.11. Summary](abstract/summary.md)
+  - [6.12. Exercises](abstract/exercises.md)
   
-* [7. Testing](test/intro.md)
+* [7. Testing](testing/intro.md)
+  - [7.1. Validation](testing/validation.md)
+  - [7.2. Test Coverage](testing/coverage.md)
+  - [7.3. Black-box Testing](testing/blackbox.md)
+  - [7.4. Glass-box Testing](testing/glassbox.md)
+  - [7.5. Testing Data Abstractions](testing/data_abstractions.md)
+  - [7.6. Randomized Testing](testing/randomized.md)
+  - [7.7. Faults](testing/faults.md)
+  - [7.X. Summary](testing/summary.md)
+  - [7.Y. Exercises](testing/exercises.md)
+
+

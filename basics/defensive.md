@@ -63,6 +63,14 @@ the implementer of the function might prefer not to check
 the precondition, or only to check some inexpensive approximation
 to it.
 
+Sometimes programmers worry unnecessarily that defensive programming
+will be too expensive&mdash;either in terms of the time it costs
+them to implement the checks initially, or in the run-time costs that
+will be paid in checking assertions.  These concerns are far too often
+misplaced.  The time and money it costs society to repair faults in
+software suggests that we could all afford to have programs that
+run a little more slowly.
+
 Finally, the implementer might even choose to eliminate the precondition
 and restate it as a postcondition:
 ```
