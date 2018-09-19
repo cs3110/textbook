@@ -129,6 +129,11 @@
   - [6.3. Specification of Functions](abstract/function_specs.md)
   - [6.4. The Specification Game](abstract/game.md)
   - [6.5. Comments](abstract/comments.md)
+  - [6.6. Specification of Modules](abstract/module_specs.md)
+  - [6.7. Abstraction Functions](abstract/af.md)
+  - [6.8. Commutative Diagrams](abstract/commutative.md)
+  - [6.9. Representation Invariants](abstract/ri.md)
+  - [6.10. Implementing the Representation Invariant](abstract/impl_ri.md)
   - [6.X. Summary](abstract/summary.md)
   - [6.Y. Exercises](abstract/exercises.md)
   
