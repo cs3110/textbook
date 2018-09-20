@@ -12,6 +12,9 @@ you could use:
  - `sort : 'a list -> 'a list`
  - `max : 'a list -> 'a`
  - `is_prime : int -> bool`
+ - `is_palindrome : string -> bool`
+ - `second_largest : int list -> int`
+ - `depth : 'a tree -> int`
  
 &square;
 
