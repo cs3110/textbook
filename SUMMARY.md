@@ -142,10 +142,14 @@
   - [7.2. Test Coverage](testing/coverage.md)
   - [7.3. Black-box Testing](testing/blackbox.md)
   - [7.4. Glass-box Testing](testing/glassbox.md)
-  - [7.5. Testing Data Abstractions](testing/data_abstractions.md)
-  - [7.6. Randomized Testing](testing/randomized.md)
+  - [7.5. Bisect](testing/bisect.md)
+  - [7.6. Testing Data Abstractions](testing/data_abstractions.md)
   - [7.7. Faults](testing/faults.md)
-  - [7.X. Summary](testing/summary.md)
-  - [7.Y. Exercises](testing/exercises.md)
+  - [7.8. Randomized Testing](testing/randomized.md)
+  - [7.9. Random Number Generation](testing/random.md)
+  - [7.10. \*QCheck](testing/qcheck.md)
+  - [7.11. Summary](testing/summary.md)
+  - [7.12. Exercises](testing/exercises.md)
+
 
 

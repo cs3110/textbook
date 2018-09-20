@@ -54,9 +54,3 @@ let max3 x y z =
 ```
 The test `max 2 1 1` is path complete, but doesn't reveal the error.
 
-Glass-box testing can be aided by *code-coverage tools* that assess
-how much of the code has been exercised by a test suite.  The 
-[bisect][] tool for OCaml can tell you which expressions in your
-program have been tested, and which have not.
-
-[bisect]: http://bisect.x9c.fr/

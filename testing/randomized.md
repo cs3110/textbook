@@ -23,5 +23,6 @@ of the output could be checked.  For example,
 Randomized testing is an incredibly powerful technique.  It is often
 used in testing programs for security vulnerabilities.  The 
 [`qcheck` package][qcheck] for OCaml supports randomized testing.
+We'll look at it, next, after we discuss random number generation.
 
 [qcheck]: https://github.com/c-cube/qcheck
