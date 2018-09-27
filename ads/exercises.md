@@ -120,10 +120,9 @@ containing all the prime numbers starting with 2.
 The exponential function \\(e^x\\) can be computed by the following
 infinite sum:
 
-\\[ 
-e^x = \\frac{x^0}{0!} + \\frac{x^1}{1!} + \\frac{x^2}{2!} 
-    + \\frac{x^3}{3!} + \\cdots + \\frac{x^k}{k!} + \\cdots 
-\\]
+\\(
+e^x = \\frac{x^0}{0!} + \\frac{x^1}{1!} + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots + \\frac{x^k}{k!} + \\cdots 
+\\)
 
 Define a function `e_terms : float -> float stream`.  Element `k` of
 the stream should be term `k` from the infinite sum.  For
