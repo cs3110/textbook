@@ -156,6 +156,8 @@
   - [8.2. Streams](ads/streams.md)
   - [8.3. Programming with Streams](ads/stream_progs.md)
   - [8.4. Laziness](ads/lazy.md)
+  - [8.5. Binary Search Trees](ads/bst.md)
+  - [8.6. Red-Black Trees](ads/rb.md)
   - [8.X. Summary](ads/summary.md)
   - [8.Y. Exercises](ads/exercises.md)
 
