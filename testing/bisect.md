@@ -82,3 +82,22 @@ green, and the uncovered lines are red.
 If you add more tests to the OUnit test suite, and repeat the above
 process of testing with Bisect, you'll discover that more and more
 lines have been covered.  How close to 100% coverage can you get?
+
+## Ignoring Code
+
+Sometimes you will want to exclude code from Bisect analysis.  The usual
+reason for that is the code can't be unit tested.  For example,
+maybe it's code that defensively checks that the `rep_ok` holds
+of an input, but unit tests will never be able to construct an input 
+that violates `rep_ok`.  Or maybe it's code that is only meaningful
+in a GUI or in utop, such as custom utop printers for abstract types.
+
+To ignore code, you can insert special comments that cause Bisect to
+omit one or more lines from analysis:
+
+* `(*BISECT-IGNORE*)` will ignore the line on which the comment occurs.
+
+* `(*BISECT-IGNORE-BEGIN*)` and `(*BISECT-IGNORE-END*)` will ignore all
+  the code between the two comments.
+  
+Note that there may not be spaces inside those special comments.
