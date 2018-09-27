@@ -151,5 +151,12 @@
   - [7.11. Summary](testing/summary.md)
   - [7.12. Exercises](testing/exercises.md)
 
+* [8. Advanced Data Structures](ads/intro.md)
+  - [8.1. Infinite Data Structures](ads/infinite.md)
+  - [8.2. Streams](ads/streams.md)
+  - [8.3. Programming with Streams](ads/stream_progs.md)
+  - [8.4. Laziness](ads/lazy.md)
+  - [8.X. Summary](ads/summary.md)
+  - [8.Y. Exercises](ads/exercises.md)
 
 
