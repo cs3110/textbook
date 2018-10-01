@@ -90,29 +90,92 @@ let fib29 = take 29 fibs |> List.rev |> List.hd
 What we really want is to change the representation of streams itself
 to make use of lazy values.
 
-## Lazy Lists
+## Lazy Streams
 
 Here's a representation for infinite lists using lazy values:
 ```
-type 'a lazylist =
-  Cons of 'a * 'a lazylist Lazy.t
+type 'a lazystream =
+  Cons of 'a * 'a lazystream Lazy.t
 ```
 We've gotten rid of the thunk, and instead are using a lazy value
-as the tail of the lazy list.  If we ever want that tail to be computed,
+as the tail of the lazy stream.  If we ever want that tail to be computed,
 we force it.
 
-Now, assuming appropriate definitions for `hd`, `tl`, `sum`, and `take`
-(left as an exercise for the reader),
-we can define the Fibonacci sequence as a lazy list:
-```
-let rec fibs =
-  Cons(1, lazy (
-    Cons(1, lazy (
-      sum (tl fibs) fibs))))
+## Streams vs. Lazy Streams
 
-(* both fast *)
-let fib30lazyfast = take 30 fibs
-let fib29lazyfast = take 29 fibs
+The following two modules implement the Fibonacci sequence with
+streams, then with lazy streams.  Try computing the 30th Fibonacci
+number with both modules, and you'll see that the lazy streams
+implementation is much faster than the standard streams.
+
+```
+module StreamFibs = struct
+  type 'a stream =
+    | Cons of 'a * (unit -> 'a stream)
+
+  let hd : 'a stream -> 'a = 
+    fun (Cons (h, _)) -> h
+
+  let tl : 'a stream -> 'a stream =
+    fun (Cons (_, t)) -> t ()
+
+  let rec take_aux n (Cons (h, t)) lst =
+    if n = 0 then lst 
+    else take_aux (n-1) (t ()) (h::lst)
+
+  let take : int -> 'a stream -> 'a list = 
+    fun n s -> List.rev (take_aux n s [])
+
+  let nth : int -> 'a stream -> 'a =
+    fun n s -> List.hd (take_aux (n+1) s [])
+
+  let rec sum : int stream -> int stream -> int stream = 
+    fun (Cons (h_a, t_a)) (Cons (h_b, t_b)) ->
+      Cons (h_a + h_b, fun () -> sum (t_a ()) (t_b ()))
+
+  let rec fibs = 
+    Cons(1, fun () -> 
+        Cons(1, fun () -> 
+            sum (tl fibs) fibs))
+
+  let nth_fib n =
+    nth n fibs
+
+end
+
+module LazyFibs = struct
+
+  type 'a lazystream = 
+    | Cons of 'a * 'a lazystream Lazy.t
+
+  let hd : 'a lazystream -> 'a =
+    fun (Cons (h, _)) -> h
+
+  let tl : 'a lazystream -> 'a lazystream = 
+    fun (Cons (_, t)) -> Lazy.force t
+
+  let rec take_aux n (Cons (h, t)) lst = 
+    if n = 0 then lst 
+    else take_aux (n-1) (Lazy.force t) (h::lst) 
+
+  let take : int -> 'a lazystream -> 'a list =
+    fun n s -> List.rev (take_aux n s [])
+
+  let nth : int -> 'a lazystream -> 'a =
+    fun n s -> List.hd (take_aux (n+1) s [])
+
+  let rec sum : int lazystream -> int lazystream -> int lazystream =
+    fun (Cons (h_a, t_a)) (Cons (h_b, t_b)) ->
+      Cons (h_a + h_b, lazy (sum (Lazy.force t_a) (Lazy.force t_b)))
+
+  let rec fibs = 
+    Cons(1, lazy (
+        Cons(1, lazy (
+            sum (tl fibs) fibs))))
+
+  let nth_fib n =
+    nth n fibs
+end
 ```
 
 ## Lazy vs. Eager 
