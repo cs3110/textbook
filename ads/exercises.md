@@ -192,14 +192,6 @@ original representation.
 
 &square;
   
-##### Exercise: infinite tree [&#10029;&#10029;&#10029;&#10029;] 
-  
-How could you represent an infinite binary tree?  What functions
-would be reasonable to define on it?  What interesting infinite
-trees could you construct?
-
-&square;
-
 ## Laziness
 
 ##### Exercise: lazy hello [&#10029;] 
@@ -221,31 +213,10 @@ force `lb2` and return its value.
 
 &square;
 
-##### Exercise: lazy list [&#10029;&#10029;&#10029;] 
+##### Exercise: lazy stream [&#10029;&#10029;&#10029;] 
 
-Implement an infinite list data abstraction using `Lazy.t`
-instead of a thunk for the representation.  Your structure
-should match the following signature:
-```
-type 'a lazylist 
-val hd : 'a lazylist -> 'a
-val tl : 'a lazylist -> 'a lazylist
-val take : int -> 'a lazylist -> 'a list
-val from : int -> int lazylist
-val map : ('a -> 'b) -> 'a lazylist -> 'b lazylist
-val filter : ('a -> bool) -> 'a lazylist -> 'a lazylist
-```
-The specifications of these functions were already provided
-in lecture or in this lab.
-
-*Hint: use the following representation type.  Don't forget
-to document an AF and RI.*
-```
-type 'a lazylist = Cons of 'a * 'a lazylist Lazy.t
-```
-
-Use your lazy lists to compute the Fibonacci sequence.  
-How does the speed compare to the stream implementation?
+Implement `map` and `filter` for the `'a lazystream` type
+provided in the section on laziness.
 
 &square;
 
