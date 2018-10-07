@@ -32,7 +32,7 @@ module type Queue = sig
   (* Whether a queue is empty. *)
   val is_empty : 'a queue -> bool
   
-  (* [enqueue x q] is the queue [q] with [x] added to the front. *)
+  (* [enqueue x q] is the queue [q] with [x] added to the end. *)
   val enqueue : 'a -> 'a queue -> 'a queue
   
   (* [peek q] is [Some x], where [x] is the element at the front of the queue,
