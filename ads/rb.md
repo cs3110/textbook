@@ -24,9 +24,8 @@ If a tree satisfies these two conditions, it must also be the case that
 every subtree of the tree also satisfies the conditions. If a subtree
 violated either of the conditions, the whole tree would also.
 
-Additionally, we require that the root of the tree be colored black.
-This can always be enforced by simply setting its color to black; doing
-this does not cause any other invariants to be violated.
+Additionally, by convention the root of the tree is colored black.
+This does not violate the invariants, but it also is not required by them.
 
 With these invariants, the longest possible path from the root to an
 empty node would alternately contain red and black nodes; therefore it
