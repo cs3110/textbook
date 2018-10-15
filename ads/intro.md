@@ -6,3 +6,7 @@ Topics:
 * streams
 * thunks
 * lazy evaluation
+* refs
+* mutable fields
+* arrays
+* mutable data structures
