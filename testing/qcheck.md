@@ -47,7 +47,7 @@ end
 ```
 You can [read the documentation][qcheck.gen] of those and many others.
 
-[qcheck.gen]: http://cedeela.fr/~simon/software/qcheck/QCheck.Gen.html
+[qcheck.gen]: http://c-cube.github.io/qcheck/0.9/qcheck-core/QCheck/Gen/index.html
 
 ## Properties and Arbitraries
 
@@ -100,7 +100,7 @@ QCheck.make QCheck.Gen.int
 
 You can [read the documentation][qcheck] of `QCheck` and its arbitraries.
 
-[qcheck]: http://cedeela.fr/~simon/software/qcheck/QCheck.html
+[qcheck]: http://c-cube.github.io/qcheck/0.9/qcheck-core/QCheck/index.html
 
 ## Testing Properties with QCheck
 
