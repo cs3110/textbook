@@ -168,6 +168,7 @@
   - [8.14. Mutable Fields](ads/mutable_fields.md)
   - [8.15. Example: Mutable Stack](ads/ex_mutable_stack.md)
   - [8.16. Arrays and Loops](ads/arrays.md)
+  - [8.17. Concurrency](ads/concurrency.md)
   - [8.X. Summary](ads/summary.md)
   - [8.Y. Exercises](ads/exercises.md)
 
