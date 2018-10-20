@@ -137,6 +137,8 @@ Weak type variables tend to appear
 once mutability is involved, and they are important for the type
 system to prevent certain kinds of errors, but we won't discuss
 them further.  If you would like to learn more, read Section 2 of
-[*Relaxing the value restriction*][relaxing] by Jacques Garrigue.
+[*Relaxing the value restriction*][relaxing] by Jacques Garrigue,
+or [this section][weak] of the OCaml manual.
 
 [relaxing]: https://caml.inria.fr/pub/papers/garrigue-value_restriction-fiwflp04.pdf
+[weak]: https://caml.inria.fr/pub/docs/manual-ocaml/polymorphism.html
