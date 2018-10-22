@@ -171,6 +171,7 @@
   - [8.17. Concurrency](ads/concurrency.md)
   - [8.18. Promises](ads/promises.md)
   - [8.19. Asynchronous I/O](ads/asynch_io.md)
+  - [8.20. Callbacks](ads/callbacks.md)
   - [8.X. Summary](ads/summary.md)
   - [8.Y. Exercises](ads/exercises.md)
 
