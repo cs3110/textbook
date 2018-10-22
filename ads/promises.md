@@ -17,11 +17,11 @@ reads and writes from files, there will need to be a division
 of responsibilities:
 
 * The client code that wants to make use of concurrency will need
-  to access promises, query whether they are resolved or pending,
-  and make use of the resolved values, etc.
+  to *access** promises: query whether they are resolved or pending,
+  and make use of the resolved values.
 
 * The library and OS code that implements concurrency will need
-  to mutate the promise&mdash;that is, to actually resolve or reject it.
+  to *mutate** the promise&mdash;that is, to actually resolve or reject it.
   Client code does not need that ability.
   
 We therefore will introduce one additional abstraction called
@@ -137,8 +137,8 @@ let reject r x = write_once (Rejected x)
 The types and names used in Lwt are a bit more obscure than those we
 used above.  Lwt uses analogical terminology that comes from
 threads&mdash;but since Lwt does not actually implement threads, that
-terminology is not necessarily helpful. We don't mean to demean Lwt!
-It is a library that has been developing and changing over time.
+terminology is not necessarily helpful. (We don't mean to demean Lwt!
+It is a library that has been developing and changing over time.)
 
 The Lwt interface includes the following declarations, which
 we have annotated with comments to compare them to the interface

@@ -169,6 +169,8 @@
   - [8.15. Example: Mutable Stack](ads/ex_mutable_stack.md)
   - [8.16. Arrays and Loops](ads/arrays.md)
   - [8.17. Concurrency](ads/concurrency.md)
+  - [8.18. Promises](ads/promises.md)
+  - [8.19. Asynchronous I/O](ads/asynch_io.md)
   - [8.X. Summary](ads/summary.md)
   - [8.Y. Exercises](ads/exercises.md)
 
