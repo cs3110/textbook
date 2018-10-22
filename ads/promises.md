@@ -43,11 +43,11 @@ implement that operation as follows:
 * Return the promise (but not resolver) to the client.  The OS
   meanwhile continues to work on reading the string.
   
-You might think of the resolver as being a "private" entity
-used primarily by the library and the promise as being a "public"
-entity used primarily by the client.
+You might think of the resolver as being a "private and writeable" value
+used primarily by the library and the promise as being a "public and
+read-only" value used primarily by the client.
 
-## Our Own Promises
+## Making Our Own Promises
 
 Here is an interface for our own Lwt-style promises.  The names have
 been changed to make the interface clearer.
