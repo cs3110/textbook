@@ -1,11 +1,4 @@
-# Monad Examples
-
-Let's look at several different examples of code in which monads can
-be discovered.  Because monads are a design pattern, they aren't
-always obvious; it can take some study to tease out where the monad
-operations are being used.
-
-# Making Partial Functions Be Total
+# Example: The Maybe Monad
 
 As we've seen before, sometimes functions are partial:  there is no
 good output they can produce for some inputs.  For example,
