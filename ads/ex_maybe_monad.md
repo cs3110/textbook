@@ -238,10 +238,14 @@ let ( / ) = upgrade_binary div
 
 ## The Maybe Monad
 
-The monad we just discovered goes by several names:  the maybe monad (as in,
-"maybe there's a value, maybe not"), the error monad (as in, "either there's a value
-or an error", and error is represented by `None`), and the option monad
-(which is obvious).  Here's an implementation of the monad signature for it:
+The monad we just discovered goes by several names:  the *maybe monad* (as in,
+"maybe there's a value, maybe not"), the *error monad* (as in, "either there's a value
+or an error", and error is represented by `None`&mdash;though some authors
+would want an error monad to be able to represent multiple kinds of errors
+rather than just collapse them all to `None`), and the *option monad*
+(which is obvious).  
+
+Here's an implementation of the monad signature for the maybe monad:
 
 ```
 module Maybe : Monad = struct
