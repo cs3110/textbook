@@ -128,8 +128,8 @@ The remaining functions in the interface are trivial to implement:
 ```
 let return x = ref (Resolved x)
 let state p = !p
-let resolve r x = write_once (Resolved x)
-let reject r x = write_once (Rejected x)  
+let resolve r x = write_once r (Resolved x)
+let reject r x = write_once r (Rejected x)  
 ```
 
 ## Lwt Promises
