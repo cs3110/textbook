@@ -531,7 +531,7 @@ Make sure to use Lwt's I/O functions (e.g., `Lwt_io.printf`).
 
 &square;
 
-##### Exercise: timing challenge 1 [&#10029;&#10029;&#10029;] 
+##### Exercise: timing challenge 1 [&#10029;&#10029;] 
 
 Here is a function that produces a time delay.  We can use it
 to simulate an I/O call that takes a long time to complete.
