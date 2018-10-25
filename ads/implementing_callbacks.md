@@ -104,14 +104,14 @@ But if the promise is being resolved, we need to mutate the list
 to be empty, then invoke each of the callbacks on the newly
 resolved contents of the promise:
 ```
-  let run_callbacks callbacks = 
+  let run_callbacks callbacks x = 
     List.iter (fun f -> f x) callbacks
       
   let resolve r x =  
     write_once r (Resolved x);
-    let callbacks = p.callbacks in
-    p.callbacks <- [];
-    run_callbacks callbacks
+    let callbacks = r.callbacks in
+    r.callbacks <- [];
+    run_callbacks callbacks x
 ```
 
 Finally, the implementation of `>>=` is the trickiest part.

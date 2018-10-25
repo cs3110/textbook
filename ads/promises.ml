@@ -64,14 +64,14 @@ module Promise : Promise = struct
     write_once r (Rejected x);
     r.callbacks <- []
 
-  let run_callbacks callbacks = 
+  let run_callbacks callbacks x = 
     List.iter (fun f -> f x) callbacks
 
   let resolve r x =  
     write_once r (Resolved x);
-    let callbacks = p.callbacks in
-    p.callbacks <- [];
-    run_callbacks callbacks
+    let callbacks = r.callbacks in
+    r.callbacks <- [];
+    run_callbacks callbacks x
 
   let (>>=) (p : 'a promise) (c : 'a -> 'b promise) : 'b promise = 
     match p.state with

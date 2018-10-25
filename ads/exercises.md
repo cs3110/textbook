@@ -503,25 +503,168 @@ easier if you draw a picture.*
 
 &square;
 
-## Promises
+## Promises and Lwt
 
-Ideas:
-- implement bind for our promises
-- timing challenges
-- Repeatedly prompt for input, read the input, wait for three seconds, and print the 
-  input. If the end of the file is reached, then the program instead prints "done" 
-  and exits. Note: type Control+D at the terminal to send the EOF character.
-- Old montor file exercise
-- Chat client?
-- Web server?
+##### Exercise: promise and resolve [&#10029;&#10029;] 
 
-##### Exercise: callbacks
+Download the [completed implementation of `Promise`](promises.ml).
+Use it to do the following:  create a integer promise and resolver,
+bind a function on the promise to print the contents of the promise,
+then resolve the promise.  Only after the promise is resolved should
+the printing occur.
 
+&square;
 
+##### Exercise: promise and resolve lwt [&#10029;&#10029;] 
 
+Repeat the **promise and resolve** exercise, but
+use the Lwt library instead of our own Promise library.
+Make sure to use Lwt's I/O functions (e.g., `Lwt_io.printf`).
+
+&square;
+
+##### Exercise: promise and resolve lwt [&#10029;&#10029;] 
+
+Repeat the **promise and resolve** exercise, but
+use the Lwt library instead of our own Promise library.
+Make sure to use Lwt's I/O functions (e.g., `Lwt_io.printf`).
+
+&square;
+
+##### Exercise: timing challenge 1 [&#10029;&#10029;&#10029;] 
+
+Here is a function that produces a time delay.  We can use it
+to simulate an I/O call that takes a long time to complete.
+```
+(** [delay s] is a promise that resolves after about [s] seconds. *)
+let delay (sec : float) : unit Lwt.t =
+  Lwt_unix.sleep sec
+```
+
+Write a function `delay_then_print : unit -> unit Lwt.t` 
+that delays for three seconds then prints `"done"`.
+
+&square;
+
+##### Exercise: timing challenge 2 [&#10029;&#10029;&#10029;] 
+
+What happens when `timing2 ()` is run? How long does it take to run?
+Make a prediction, then run the code to find out.
+
+```
+open Lwt.Infix
+
+let timing2 () =
+  let _t1 = delay 1. >>= fun () -> Lwt_io.printl "1" in
+  let _t2 = delay 10. >>= fun () -> Lwt_io.printl "2" in
+  let _t3 = delay 20. >>= fun () -> Lwt_io.printl "3" in
+  Lwt_io.printl "all done"
+```
+
+&square;
+
+##### Exercise: timing challenge 3 [&#10029;&#10029;&#10029;] 
+
+What happens when `timing3 ()` is run? How long does it take to run?
+Make a prediction, then run the code to find out.
+
+```
+open Lwt.Infix
+
+let timing3 () =
+  delay 1. >>= fun () -> 
+  Lwt_io.printl "1" >>= fun () ->
+  delay 10. >>= fun () -> 
+  Lwt_io.printl "2" >>= fun () ->
+  delay 20. >>= fun () -> 
+  Lwt_io.printl "3" >>= fun () ->
+  Lwt_io.printl "all done"
+```
+
+&square;
+
+##### Exercise: timing challenge 4 [&#10029;&#10029;&#10029;] 
+
+What happens when `timing4 ()` is run? How long does it take to run?
+Make a prediction, then run the code to find out.
+
+```
+open Lwt.Infix
+
+let timing4 () =
+  let t1 = delay 1. >>= fun () -> Lwt_io.printl "1" in
+  let t2 = delay 10. >>= fun () -> Lwt_io.printl "2" in
+  let t3 = delay 20. >>= fun () -> Lwt_io.printl "3" in
+  Lwt.join [t1; t2; t3] >>= fun () ->
+  Lwt_io.printl "all done"
+```
+
+&square;
+
+##### Exercise: file monitor [&#10029;&#10029;&#10029;&#10029;] 
+
+Write an Lwt program that monitors the contents of a file named "log".
+Specifically, your program should open the file, continually
+read a line from the file, and as each line becomes available,
+print the line to stdout.  When you reach the end of the file (EOF),
+your program should terminate cleanly without any exceptions.
+
+Here is starter code:
+```
+open Lwt.Infix
+open Lwt_io
+open Lwt_unix
+
+(** [log ()] is a promise for an [input_channel] that reads from
+    the file named "log". *)
+let log () : input_channel Lwt.t = 
+  openfile "log" [O_RDONLY] 0 >>= fun fd ->
+  Lwt.return (of_fd input fd)
+
+(** [loop ic] reads one line from [ic], prints it to stdout,
+    then calls itself recursively. It is an infinite loop. *)
+let rec loop (ic : input_channel) = 
+  failwith "TODO"
+  (* hint: use [Lwt_io.read_line] and [Lwt_io.printlf] *)
+
+(** [monitor ()] monitors the file named "log". *)
+let monitor () : unit Lwt.t = 
+  log () >>= loop
+
+(** [handler] is a helper function for [main]. If its input is
+    [End_of_file], it handles cleanly exiting the program by 
+    returning the unit promise. Any other input is re-raised 
+    with [Lwt.fail]. *)
+let handler : exn -> unit Lwt.t = 
+  failwith "TODO"
+
+let main () : unit Lwt.t = 
+  Lwt.catch monitor handler
+
+let _ = Lwt_main.run (main ())
+```
+
+Complete `loop` and `handler`.  You might find the [Lwt manual](https://ocsigen.org/lwt/)
+to be useful.
+
+To compile your code, put it in a file named `monitor.ml` and run
+```
+$ ocamlbuild -use-ocamlfind -pkg lwt.unix -tag thread monitor.byte
+```
+
+To simulate a file to which lines are being added over time,
+open a new terminal window and enter the following commands:
+```
+$ mkfifo log
+$ cat >log
+```
+Now anything you type into the terminal window (after pressing return)
+will be added to the file named `log`.  That will enable you to interactively
+test your program.
+
+&square;
 
 
 ## Monads
 
-
-
+TODO
