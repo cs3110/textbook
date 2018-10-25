@@ -65,23 +65,32 @@ run the callback on the resolved promise, so the type the promise contains
 needs to be the same as the type the callback expects as input.  
 
 After being invoked on a promise and callback, e.g., `bind p c`, the
-`bind` function immediately returns.  It does not wait for the promise
-to be resolved, nor for the callback to be run.  Rather, `bind` just
-registers the callback to eventually be run when (or if) the promise is
-resolved. Therefore the `bind` function returns a new promise.  That
-promise will become resolved when (or if) the callback completes
-running, sometime in the future. Its contents will be whatever contents
-are contained within the promise that the callback itself returns.  
+`bind` function does one of three things, depending on the state of `p`:
 
-In other words, we have one promise of type `'a Lwt.t` and two 
-promises of type `'b Lwt.t`:
+* If `p` is already resolved, then `c` might immediately run on the
+  contents of `p`, or it might be registered to run later.  The promise 
+  that is returned might or might not be pending, depending on what `c` does.
+  
+* If `p` is already rejected, then `c` does not run.  The promise
+  that is returned is also rejected, with the same exception as `p`.
+  
+* If `p` is pending, then `bind` does not wait for `p`
+  to be resolved, nor for `c` to be run.  Rather, `bind` just
+  registers the callback to eventually be run when (or if) the promise is
+  resolved. Therefore the `bind` function returns a new promise.  That
+  promise will become resolved when (or if) the callback completes
+  running, sometime in the future. Its contents will be whatever contents
+  are contained within the promise that the callback itself returns.  
+
+Let's consider that final case in more detail. We have one promise of
+type `'a Lwt.t` and two promises of type `'b Lwt.t`:
 
 * The promise of type `'a Lwt.t`, call it promise X, is an 
-  input to `bind`.  It may still be pending when `bind` is
+  input to `bind`.  It was pending when `bind` was
   called, and when `bind` returns.
   
 * The first promise of type `'b Lwt.t`, call it promise Y, is created by 
-  `bind` and immediately returned to the user.  It is pending at that point.
+  `bind` and returned to the user.  It is pending at that point.
   
 * The second promise of type `'b Lwt.t`, call it promise Z, has not yet 
   been created.  It will be created later, when promise X has been
@@ -240,31 +249,3 @@ as a set.  For example,
   some computation that needs just one of a set of promises to be finished,
   but doesn't care which one.
   
-## Callback Resolution
-
-When a callback is registered with `bind` or one of the other syntaxes,
-it is added to a list of callbacks that is stored with the promise.
-Eventually, when the promise has been resolved, the Lwt *resolution
-loop* runs the callbacks registered for the promise.  There is no
-guarantee about the execution order of callbacks for a promise.  In
-other words, the execution order is nondeterministic. If the order
-matters, the programmer needs to use the composition operators (such as
-`bind` and `join`) to enforce an ordering.  If the promise never becomes
-resolved (or is rejected), none of its callbacks will ever be run.
-
-Once again, it's important to keep track of where the concurrency really
-comes from: the OS.  There might be many asynchronous I/O operations
-occurring at the OS level.  But at the OCaml level, the resolution loop
-is sequential, meaning that only one callback can ever be running
-at a time.  
-
-Finally, the resolution loop never attempts to interrupt a callback.
-So if the callback goes into an infinite loop, no other callback will
-ever get to run.  That makes Lwt a cooperative concurrency mechanism,
-rather than preemptive.
-
-
-
-
-
-
