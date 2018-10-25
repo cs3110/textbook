@@ -503,3 +503,25 @@ easier if you draw a picture.*
 
 &square;
 
+## Promises
+
+Ideas:
+- implement bind for our promises
+- timing challenges
+- Repeatedly prompt for input, read the input, wait for three seconds, and print the 
+  input. If the end of the file is reached, then the program instead prints "done" 
+  and exits. Note: type Control+D at the terminal to send the EOF character.
+- Old montor file exercise
+- Chat client?
+- Web server?
+
+##### Exercise: callbacks
+
+
+
+
+
+## Monads
+
+
+
