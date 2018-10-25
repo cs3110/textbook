@@ -12,7 +12,7 @@ the mathematical theory and concentrate on code.
 
 Monads became popular in the programming world through their use in
 Haskell, a functional programming language that is even more pure than
-OCaml*mdash;that is, Haskell avoids side effects and imperative features
+OCaml&mdash;that is, Haskell avoids side effects and imperative features
 even more than OCaml.  But no practical language can do without side
 effects.  After all, printing to the screen is a side effect.  So
 Haskell set out to control the use of side effects through the monad
