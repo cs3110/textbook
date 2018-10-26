@@ -664,7 +664,166 @@ test your program.
 
 &square;
 
-
 ## Monads
 
-TODO
+##### Exercise: add opt [&#10029;&#10029;] 
+
+Here are the definitions for the maybe monad:
+```
+module type Monad = sig
+  type 'a t
+  val return : 'a -> 'a t
+  val (>>=) : 'a t -> ('a -> 'b t) -> 'b t
+end
+
+module Maybe : Monad = 
+struct
+  type 'a t = 'a option
+
+  let return x = Some x 
+
+  let (>>=) m f = 
+    match m with 
+    | Some x -> f x 
+    | None -> None
+
+end
+
+let add : int Maybe.t -> int Maybe.t -> int Maybe.t = 
+  failwith "TODO"
+```
+
+Implement `add`. If either of the inputs is `None`, then the output
+should be `None`. Otherwise, if the inputs are `Some a` and `Some b`
+then the output should be `Some (a+b)`. The definition of `add`
+must be located outside of `Maybe`, as shown above, which means
+that your solution may not use the constructors `None` or `Some`
+in its code.
+
+&square;
+
+##### Exercise: fmap and join [&#10029;&#10029;] 
+
+Here is an extended signature for monads that adds two new operations:
+```
+module type Monad = sig
+  type 'a t
+  val return : 'a -> 'a t
+  val (>>=) : 'a t -> ('a -> 'b t) -> 'b t
+  val (>>|) : 'a t -> ('a -> 'b) -> 'b t
+  val join : 'a t t -> 'a t
+end
+```
+
+Just as the infix operator `>>=` is known as `bind`, the infix
+operator `>>|` is known as `fmap`.  The two operators differ only in the
+return type of their function argument.
+
+Using the box metaphor, `>>|` takes a boxed value, and a function that only
+knows how to work on unboxed values, extracts the value from the box,
+runs the function on it, and boxes up that output as its own return value.
+
+Also using the box metaphor, `join` takes a value that is wrapped in two boxes and
+removes one of the boxes.
+
+It's possible to implement `>>|` and `join` directly with pattern matching
+(as we already implemented `>>=`).  It's also possible to implement them
+without pattern matching.
+
+For this exercise, do the former: implement `>>|` and `join` as part of the
+`Maybe` monad, and do not use `>>=` or `return` in the body of `>>|` or `join`.
+
+&square;
+
+##### Exercise: fmap and join again [&#10029;&#10029;] 
+
+Solve the previous exercise again.  This time, you must use `>>=` and `return`
+to implement `>>|` and `join`, and you may not use `Some` or `None` in the body
+of `>>|` and `join`.
+
+&square;
+
+##### Exercise: bind from fmap+join [&#10029;&#10029;&#10029;] 
+
+The previous exercise demonstrates that `>>|` and `join` can be implemented
+entirely in terms of `>>=` (and `return`), without needing to know anything
+about the representation type `'a t` of the monad.
+
+It's actually possible to go the other direction.  That is, `>>=`
+can be implemented using just `>>|` and `join`, without needing to know
+anything about the representation type `'a t`.
+
+Prove that this is so by completing the following code:
+
+```
+module type FmapJoinMonad = sig
+  type 'a t
+  val (>>|) : 'a t -> ('a -> 'b) -> 'b t
+  val join : 'a t t -> 'a t
+  val return : 'a -> 'a t
+end
+
+module type BindMonad = sig
+  type 'a t
+  val return : 'a -> 'a t
+  val (>>=) : 'a t -> ('a -> 'b t) -> 'b t
+end
+
+module MakeMonad (M : FmapJoinMonad) : BindMonad = struct
+  (* TODO *)
+end
+```
+
+*Hint: let the types be your guide.*
+
+&square;
+
+## The List Monad
+
+We've seen three examples of monads already; let's examine a fourth, the *list monad*.
+Its purpose is to represent *nondeterministic* computations.  Recall that
+a the output of a nondeterministic function is not completely determined
+by its input.  For example, you might have a function that simulates
+randomly rolling an n-sided die:
+```
+val roll : int -> int
+```
+Calling `roll 4` might produce `1` as output, but calling it again might produce
+`4` as output.  Thus the `roll` function is nondeterministic.
+
+The list monad uses lists, as the name suggests, to represent nondeterministic
+computations.
+
+The list monad makes it convenient to work with non-deterministic functions 
+by treating this list as a monadic value. `return` trivially makes a singleton
+list from its argument, while `bind` can be thought of as performing a
+non-deterministic computation on each element of its input set. 
+
+As an example: 
+
+```
+# let l1 = roll() in (*[1; 2; 3; 4]*)
+# let l2 = roll() in (*[1; 2; 3; 4]*)
+# l1 >>= fun x -> 
+  l2 >>= fun y ->
+  return (x + y);;
+- : int list [2; 3; 4; 5; 3; 4; 5; 6; 4; 5; 6; 7; 5; 6; 7; 8]
+```
+
+This computes the result of adding two 4-sided dice rolls. Note that the
+list representation of the sample space has duplicates, something that
+its set counterpart does not. 
+
+##### Exercise: list [&#10029;&#10029;&#10029;] 
+
+Implement `return` and `bind` for the List monad.  
+*Hint: List.map and List.concat might be helpful.*
+
+&square;
+
+##### Exercise: list again [&#10029;&#10029;] 
+
+Implement `fmap` and `join` for the List monad. Do not use `return` nor `bind`
+that you implemented in the previous exercise.
+
+&square;
