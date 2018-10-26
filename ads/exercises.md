@@ -706,7 +706,7 @@ in its code.
 
 Here is an extended signature for monads that adds two new operations:
 ```
-module type Monad = sig
+module type ExtMonad = sig
   type 'a t
   val return : 'a -> 'a t
   val (>>=) : 'a t -> ('a -> 'b t) -> 'b t
@@ -780,50 +780,72 @@ end
 
 ## The List Monad
 
-We've seen three examples of monads already; let's examine a fourth, the *list monad*.
-Its purpose is to represent *nondeterministic* computations.  Recall that
-a the output of a nondeterministic function is not completely determined
-by its input.  For example, you might have a function that simulates
-randomly rolling an n-sided die:
+We've seen three examples of monads already; let's examine a fourth, the
+*list monad*. The "something more" that it does is to upgrade functions
+to work on lists instead of just single values.  (Note, there is no
+notion of concurrency intended here.  It's not that the list monad runs
+functions concurrently on every element of a list.  The Lwt monad does,
+however, provide that kind of functionality.)
+
+For example, suppose you have these functions:
 ```
-val roll : int -> int
+let inc x = x + 1
+let pm x = [x; -x]
 ```
-Calling `roll 4` might produce `1` as output, but calling it again might produce
-`4` as output.  Thus the `roll` function is nondeterministic.
+Then the list monad could be used to apply those functions to every
+element of a list and return the result as a list. For example,
 
-The list monad uses lists, as the name suggests, to represent nondeterministic
-computations.
+* `[1; 2; 3] >>| inc` is `[2; 3; 4]`.
+* `[1; 2; 3] >>= pm` is `[1; -1; 2; -2; 3; -3]`.
+* `[1; 2; 3] >>= pm >>| inc` is `[2; 0; 3; -1; 4; -2]`.
 
-The list monad makes it convenient to work with non-deterministic functions 
-by treating this list as a monadic value. `return` trivially makes a singleton
-list from its argument, while `bind` can be thought of as performing a
-non-deterministic computation on each element of its input set. 
+One way to think about this is that the list monad operators take a list
+of inputs to a function, run the function on all those inputs, and give
+you back the combined list of outputs.  
 
-As an example: 
+##### Exercise: list monad [&#10029;&#10029;&#10029;] 
 
+Complete the following definition of the list monad:
 ```
-# let l1 = roll() in (*[1; 2; 3; 4]*)
-# let l2 = roll() in (*[1; 2; 3; 4]*)
-# l1 >>= fun x -> 
-  l2 >>= fun y ->
-  return (x + y);;
-- : int list [2; 3; 4; 5; 3; 4; 5; 6; 4; 5; 6; 7; 5; 6; 7; 8]
+module type ExtMonad = sig
+  type 'a t
+  val return : 'a -> 'a t
+  val (>>=) : 'a t -> ('a -> 'b t) -> 'b t
+  val (>>|) : 'a t -> ('a -> 'b) -> 'b t
+  val join : 'a t t -> 'a t
+end
+
+module ListMonad : ExtMonad = struct
+  type 'a t = 'a list
+
+  (* TODO *)
+end
 ```
 
-This computes the result of adding two 4-sided dice rolls. Note that the
-list representation of the sample space has duplicates, something that
-its set counterpart does not. 
-
-##### Exercise: list [&#10029;&#10029;&#10029;] 
-
-Implement `return` and `bind` for the List monad.  
-*Hint: List.map and List.concat might be helpful.*
+*Hints:* Leave `>>=` for last.  Let the types be your guide.  There are
+two very useful list library functions that can help you.
 
 &square;
 
-##### Exercise: list again [&#10029;&#10029;] 
+## Monad Laws
 
-Implement `fmap` and `join` for the List monad. Do not use `return` nor `bind`
-that you implemented in the previous exercise.
+##### Exercise: trivial monad laws [&#10029;&#10029;&#10029;] 
 
-&square;
+Here is the world's most trivial monad.  All it does is wrap
+a value inside of a constructor.
+
+```
+module Trivial : Monad = struct
+  type 'a t = Wrap of 'a
+  let return x = Wrap x
+  let (>>=) (Wrap x) f = f x
+end
+```
+
+Prove that the three monad laws, as formulated using `>>=`
+and `return`, hold for the trivial monad.
+
+##### Exercise: list monad laws [&#10029;&#10029;&#10029;] 
+
+Prove that the three monad laws, as formulated using `>>=`
+and `return`, hold for the list monad you implemented above.

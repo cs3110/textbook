@@ -96,6 +96,10 @@ The three monad laws are as follows:
 
 * **Law 3:** `(m >>= f) >>= g` behaves the same as `m >>= (fun x -> f x >>= g)`.
 
+Here, "behaves the same as" means that the two expressions will 
+both evaluate to the same value, or they will both go into an 
+infinite loop, or they will both raise the same exception.
+
 These laws are mathematically saying the same things as the laws for
 `skip`, semicolon, and braces that we saw above:  `return` is a left and
 right identity of `>>=`, and `>>=` is associative.  
