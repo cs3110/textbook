@@ -17,11 +17,11 @@ reads and writes from files, there will need to be a division
 of responsibilities:
 
 * The client code that wants to make use of concurrency will need
-  to *access** promises: query whether they are resolved or pending,
+  to *access* promises: query whether they are resolved or pending,
   and make use of the resolved values.
 
 * The library and OS code that implements concurrency will need
-  to *mutate** the promise&mdash;that is, to actually resolve or reject it.
+  to *mutate* the promise&mdash;that is, to actually resolve or reject it.
   Client code does not need that ability.
   
 We therefore will introduce one additional abstraction called
