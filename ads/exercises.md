@@ -845,7 +845,3 @@ end
 Prove that the three monad laws, as formulated using `>>=`
 and `return`, hold for the trivial monad.
 
-##### Exercise: list monad laws [&#10029;&#10029;&#10029;] 
-
-Prove that the three monad laws, as formulated using `>>=`
-and `return`, hold for the list monad you implemented above.
