@@ -86,14 +86,14 @@ language.
 
 ## Further reading
 
-* *Introduction to Objective Caml*, chapters 7 and 8
+* *Introduction to Objective Caml*, chapters 7 and 8.
 
-* *More OCaml: Algorithms, Methods, and Diversions*, chapter 2, by
+* *OCaml from the Very Beginning*, chapter 13.
+
+* *More OCaml: Algorithms, Methods, and Diversions*, chapters 2 and 11, by
   John Whitington.  This book is a sequel to *OCaml from the Very Beginning*.
 
-* *OCaml from the Very Beginning*, chapter 13
-
-* *Real World OCaml*, chapter 8
+* *Real World OCaml*, chapters 8, 13, and 18.
 
 * *Purely Functional Data Structures*, by Chris Okasaki.  Cambridge
   University Press, 1999.
