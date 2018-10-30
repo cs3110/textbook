@@ -181,4 +181,7 @@
   - [8.27. Summary](ads/summary.md)
   - [8.28. Exercises](ads/exercises.md)
 
-
+* [9. Interpreters](interp/intro.md)
+  - [9.1. Compilation](interp/compile.md)
+  - [9.X. Summary](interp/summary.md)
+  - [9.Y. Exercises](interp/exercises.md)
