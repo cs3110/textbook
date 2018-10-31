@@ -23,7 +23,7 @@ i ::= <integers>
  
 b ::= true | false      
 
-v ::= fun x -> e | i | b | (v1, v2) | Left v | Right v
+v ::= fun (x : t) -> e | i | b | (v1, v2) | Left v | Right v
 ```
 
 To keep tuples simple in this core model, we represent them with only
