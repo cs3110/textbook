@@ -23,7 +23,7 @@ Let's assume that code is in a file named `ast.ml`.
 ## Parsing with Menhir
 
 Let's start with parsing, then return to lexing later.  We'll assume
-all the Menhir code we write below is in a file named `parser.mly`.  
+all the Menhir code we write below is in a file named `parser.mly`.
 You can [download the completed file here](simpl/parser.mly).
 
 The
