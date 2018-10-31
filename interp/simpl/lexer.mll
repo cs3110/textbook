@@ -11,9 +11,9 @@ let id = letter+
 rule read = 
   parse
   | white { read lexbuf }
-  | "true" { TRUE }  (* NEW *)
-  | "false" { FALSE }  (* NEW *)
-  | "<=" { LEQ }  (* NEW *)
+  | "true" { TRUE }
+  | "false" { FALSE }
+  | "<=" { LEQ }
   | "*" { TIMES }
   | "+" { PLUS }
   | "(" { LPAREN }
@@ -21,9 +21,9 @@ rule read =
   | "let" { LET }
   | "=" { EQUALS }
   | "in" { IN }
-  | "if" { IF }  (* NEW *)
-  | "then" { THEN }  (* NEW *)
-  | "else" { ELSE }  (* NEW *)
+  | "if" { IF }
+  | "then" { THEN }
+  | "else" { ELSE }
   | id { ID (Lexing.lexeme lexbuf) }
   | int { INT (int_of_string (Lexing.lexeme lexbuf)) }
   | eof { EOF }
