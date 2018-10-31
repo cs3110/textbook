@@ -1,4 +1,4 @@
-# Compilation
+# Compilation and Interpretation
 
 A skilled artisan must understand the tools with which they work.
 A carpenter needs to understand saws and planes.  A chef needs
