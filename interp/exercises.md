@@ -3,7 +3,6 @@
 ## SimPL
 
 Download the completed [SimPL interpreter](simpl.zip) to do these exercises.
-TODO: create that file.
 
 ##### Exercise: parse [&#10029;] 
 
@@ -59,7 +58,6 @@ than `PLUS`, and as being left associative.  Let's experiment with other choices
   the AST change?  Before moving on, restore the original declaration order.
   
 &square;
-
 
 ##### Exercise: pair parsing [&#10029;&#10029;&#10029;] 
 
