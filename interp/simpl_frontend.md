@@ -23,7 +23,10 @@ Let's assume that code is in a file named `ast.ml`.
 ## Parsing with Menhir
 
 Let's start with parsing, then return to lexing later.  We'll assume
-all the Menhir code we write below is in a file named `parser.mly`.  The
+all the Menhir code we write below is in a file named `parser.mly`.  
+You can [download the completed file here](simpl/parser.mly).
+
+The
 `.mly` extension indicates that this file is intended as input
 to Menhir.  (The 'y' alludes to yacc.)  This file contains
 the *grammar definition* for the language we want to parse.
@@ -221,7 +224,10 @@ Now let's see how the lexer generator is used.  A lot of it will feel
 familiar from our discussion of the parser generator.
 
 We'll assume all the ocamllex code we write below is in a file named
-`lexer.mll`.  The `.mll` extension indicates that this file is intended
+`lexer.mll`.
+You can [download the completed file here](simpl/lexer.mll).
+
+The `.mll` extension indicates that this file is intended
 as input to ocamllex.  (The 'l' alludes to lexing.)  This file contains
 the *lexer definition* for the language we want to lex.
 
@@ -337,12 +343,53 @@ as variable names rather than the `TRUE` and `IF` tokens.
 
 ## Generating the Parser and Lexer
 
+Now that we have completed parser and lexer definitions in `parser.mly`
+and `lexer.mll`, we can run Menhir and ocamllex to generate the
+parser and lexer from them.  Ocamlbuild already knows how to run those
+tools.  For example:
+```
+$ ocamlbuild lexer.ml
+```
+will generate `_build/lexer.ml` from `lexer.mll`, and
+```
+$ ocamlbuild -use-menhir parser.ml
+```
+will generate `_build/parser.ml` from `parser.mly`.
+
+The flag `-use-menhir` alerts ocamlbuild to use Menhir instead of ocamlyacc 
+for files with the `.mly` extension.  You can instead put that into your `_tags` file:
+```
+true: use_menhir
+```
+
 ## The Driver
 
+Finally, we can pull together the lexer and parser to transform a string into
+an AST.  Put this code into a file, e.g., `main.ml`:
 ```
-(* Parse a string into an ast *)
-let parse s =
+open Ast 
+
+let parse (s : string) : expr =
   let lexbuf = Lexing.from_string s in
   let ast = Parser.prog Lexer.read lexbuf in
   ast
 ```
+
+This function takes a string `s` and uses the standard library's
+`Lexing` module to create a *lexer buffer* from it. Think of that buffer
+as the token stream. The function then lexes and parses the string into
+an AST, using `Lexer.read` and `Parser.prog`. The function `Lexer.read`
+corresponds to the rule named `read` in our lexer definition, and the
+function `Parser.prog` to the rule named `prog` in our parser
+definition.
+
+Note how this code runs the lexer on a string; there is a corresponding 
+function `from_channel` to read from a file.  
+
+We could now use `parse` interactively to parse some strings.  For example:
+```
+# parse "let x = 3110 in x + x";;
+- : expr = Let ("x", Int 3110, Binop (Add, Var "x", Var "x"))
+```
+
+That completes lexing and parsing for SimPL!
