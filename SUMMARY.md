@@ -184,6 +184,7 @@
 * [9. Interpreters](interp/intro.md)
   - [9.1. Compilation and Interpretation](interp/compile.md)
   - [9.2. Syntax](interp/syntax.md)
+  - [9.3. SimPL](interp/simpl.md)
   - [9.3. Core OCaml](interp/core_ocaml.md)
   - [9.X. Summary](interp/summary.md)
   - [9.Y. Exercises](interp/exercises.md)
