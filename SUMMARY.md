@@ -187,6 +187,5 @@
   - [9.3. Example: SimPL](interp/simpl.md)
   - [9.4. Lexing and Parsing](interp/lex_parse.md)
   - [9.5. Example: A Front-End for SimPL](interp/simpl_frontend.md)
-  - [9.W. Core OCaml](interp/core_ocaml.md)
   - [9.X. Summary](interp/summary.md)
   - [9.Y. Exercises](interp/exercises.md)
