@@ -63,8 +63,8 @@ Now we can implement the typing relation `|-`.  We'll do that
 by writing a function `typeof : Context.t -> expr -> typ`,
 such that `typeof ctx e = t` if and only if `ctx |- e : t`.
 Note that the `typeof` function produces the type as output,
-so the function is actually not checking the type, but inferring 
-it!  That inference is easy for SimPL; it would be considerably harder 
+so the function is actually inferring the type!
+That inference is easy for SimPL; it would be considerably harder 
 for larger languages.
 
 Let's start with the base cases:
