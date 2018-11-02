@@ -32,17 +32,15 @@ a context that contains all the bindings of `ctx`, and also binds
 `x` to `t`.  If `x` was already bound in `ctx`, then that old binding
 is replaced by the new binding to `t` in `ctx[x -> t]`.
 
-With all that machinery, we can at least define what it means to
-be well typed:
-An expression `e` is **well typed** if there exists a type `t` for
-which `{} |- e : t`.
-The goal of a type checker is thus to find such a type `t`.
+With all that machinery, we can at least define what it means to be well
+typed: An expression `e` is **well typed** in context `ctx` if there
+exists a type `t` for which `ctx |- e : t`. The goal of a type checker
+is thus to find such a type `t`, starting from some initial context.
 
-In practice, it's rare that a language truly uses the empty context
-to determine whether a program is well typed.
-In OCaml, for example, there are many built-in identifiers that
-are always in scope, such as everything in the `Pervasives` module.
-We won't worry about that detail in our presentation here.
-
+It's convenient to pretend that the initial context is empty. But in
+practice, it's rare that a language truly uses the empty context to
+determine whether a program is well typed. In OCaml, for example, there
+are many built-in identifiers that are always in scope, such as
+everything in the `Pervasives` module. 
 
 
