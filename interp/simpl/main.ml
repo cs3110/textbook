@@ -12,7 +12,7 @@ type typ =
   | TBool
 
 (** The error message produced if a variable is unbound. *)
-let unbound_var_err = "unbound_var_error"
+let unbound_var_err = "unbound variable"
 
 (** The error message produced if binary operators and their
     operands do not have the correct types. *)

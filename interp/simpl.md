@@ -16,8 +16,6 @@ x ::= <identifiers>
 i ::= <integers>
  
 b ::= true | false      
-
-v ::= i | b
 ```
 
 Obviously there's a lot missing from this language, especially functions.
