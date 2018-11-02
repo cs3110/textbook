@@ -63,6 +63,8 @@ There are two other major styles, known as *denotational semantics*
 and *axiomatic semantics*, but we won't cover those here.  Take
 CS 4110 if you want to learn more!
 
+## Small Steps vs. Big Steps
+
 We can further divide operational semantics into two separate sub-styles
 of defining evaluation: *small step* vs. *big step* semantics. The first
 relation, `-->`, is in the small-step style, because it represents
@@ -84,13 +86,32 @@ it just forgets about all the intermediate steps.
 
 Why have two different styles, big and small?  Each is a little
 easier to use than the other in certain circumstances, so it
-helps to have both in our mathematical toolkit.  As we'll see
-in the next few sections, the small-step semantics is a great
-mental model for OCaml evaluation, but the big-step semantics
-is closer to how OCaml actually is implemented.
+helps to have both in our toolkit.  The small-step semantics
+tends to be easier to work with when it comes to modeling
+complicated language features, but the big-step semantics
+tends to be more similar to how an interpreter would actually
+be implemented.
+
+## Variables
+
+There's another choice we have to make, and it's orthogonal
+to the choice of small vs. big step.  There are two different
+ways to think about the implementation of variables:
+
+* We could eagerly *substitute* the value of a variable for its name
+  throughout the scope of that name, as soon as we finding a binding 
+  of the variable.
+  
+* We could lazily record the substitution in a dictionary, which
+  is usually called an *environment* when used for this purpose,
+  and we could look up the variable's value in that environment whenever
+  we find its name mentioned in a scope.
+  
+Those ideas lead to the *substitution model* of evaluation and
+the *environment model* of evaluation.  As with small step
+vs. big step, the substitution model tends to be nicer to work
+with mathematically, whereas the environment model tends
+to be more similar to how an interpreter is implemented.
 
 Some examples will help to make sense of all this.  Let's
 look, next, at how to define the relations for SimPL.
-
-
-
