@@ -6,7 +6,8 @@ analysis, and the primary task of semantic analysis is type checking.
 A *type system* is a mathematical description of how to determine
 whether an expression is *ill typed* or *well typed*, and in the
 latter case, what the type of the expression is.  A *type checker*
-is a program that implements a type system.
+is a program that implements a type system, i.e., that implements
+the static semantics of the language.
 
 Commonly, a type system is formulated as a ternary relation 
 \\(\\mathit{HasType}(\\Gamma, e, t)\\), which means that expression
@@ -42,5 +43,3 @@ practice, it's rare that a language truly uses the empty context to
 determine whether a program is well typed. In OCaml, for example, there
 are many built-in identifiers that are always in scope, such as
 everything in the `Pervasives` module. 
-
-

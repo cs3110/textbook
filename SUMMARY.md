@@ -190,6 +190,7 @@
   - [9.6. Type Checking](interp/typecheck.md)
   - [9.7. Example: A Type System for SimPL](interp/simpl_typesystem.md)
   - [9.8. Example: A Type Checker for SimPL](interp/simpl_typecheck.md)
+  - [9.9. Evaluation](interp/evaluation.md)
   - [9.W. Type Safety](interp/typesafety.md)
   - [9.X. Summary](interp/summary.md)
   - [9.Y. Exercises](interp/exercises.md)
