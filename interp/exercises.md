@@ -213,7 +213,7 @@ Implement type checking of pairs.  Follow this strategy:
 
 &square;
 
-##### Exercise: pair type checking [&#10029;&#10029;&#10029;] 
+##### Exercise: pair evaluation [&#10029;&#10029;&#10029;] 
 
 Implement evaluation of pairs.  Follow this strategy:
 
