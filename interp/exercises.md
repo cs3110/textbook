@@ -99,6 +99,57 @@ Use the SimPL type system to show that
 
 &square;
 
+## The Substitution Model
+
+##### Exercise: substitution [&#10029;&#10029;] 
+
+What is the result of the following substitutions?
+
+  - `(x+1){2/x}` 
+  - `(x+y){2/x}{3/y}`
+  - `(x+y){1/z}`
+  - `(let x=1 in x+1){2/x}`
+  - `(x + (let x=1 in x+1)){2/x}`
+  - `((let x=1 in x+1) + x){2/x}`
+  - `(let x=y in x+1){2/y}`
+  - `(let x=x in x+1){2/x}`
+  
+&square;
+
+##### Exercise: step expressions [&#10029;] 
+
+Here is an example of evaluating an expression:
+```
+  7+5*2
+-->  (step * operation)
+  7+10
+-->  (step + operation)
+  17
+```
+There are two steps in that example, and we've annotated each
+step with a parenthetical comment to hint at which evaluation
+rule we've used.  We stopped evaluating when we reached a value.
+
+Evaluate the following expressions using the small-step substitution model.
+Use the "long form" of evaluation that we demonstrated above, in which
+you provide a hint as to which rule is applied at each step.
+
+ - `(3 + 5) * 2` (2 steps)
+ - `if 2 + 3 <= 4 then 1 + 1 else 2 + 2` (4 steps)
+ 
+&square;
+
+##### Exercise: step let expressions [&#10029;&#10029;] 
+
+Evaluate these expressions, again using the "long form" from the
+previous exercise.  
+
+ - `let x = 2 + 2 in x + x` (3 steps)
+ - `let x = 5 in ((let x = 6 in x) + x)` (3 steps)
+ - `let x = 1 in (let x = x + x in x + x)` (4 steps)
+
+&square;
+
 ## Pairs
 
 Add pairs (i.e., tuples with exactly two components) to SimPL.
