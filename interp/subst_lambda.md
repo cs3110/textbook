@@ -37,10 +37,11 @@ e1 e2 ==> v
 ```
 With call by name, `e2` does not have to be reduced to a value;
 that can lead to greater efficiency if the value of `e2` is never
-needed.  But for now, let's proceed with call by value.
+needed.  
 
 Now we need to define the substitution operation for the lambda
-calculus.  Inspired by our definition for SimPL, here's
+calculus.  We'd like a definition that works for either call by
+name or call by value.  Inspired by our definition for SimPL, here's
 the beginning of a definition:
 ```
 x{e/x} = e
@@ -120,10 +121,48 @@ occurring, because `z` is in `FV(z)`.
 Unfortunately, because of the side-condition `y is not in FV(e)`,
 the substitution operation is now *partial*:  there are times,
 like the example we just gave, where it cannot be applied.
+
 That problem can be solved by changing the names of variables:
 if we detect that a partiality has been encountered, we can
 change the name of the function's argument.  For example, when
 `(fun z -> x){z/x}` is encountered, the function's argument
-could be changed to a new name `w` that doesn't occur anywhere else,
-yielding `(fun w -> x){z/x}`, then the substitution may proceed
-and correctly produce `fun w -> z`.
+could be replaced with a new name `w` that doesn't occur anywhere else,
+yielding `(fun w -> x){z/x}`.  (And if `z` occurred anywhere in the body,
+it would be replaced by `w`, too.)  This is *replacement*, not substitution:
+absolutely anywhere we see `z`, we replace it with `w`.  Then the 
+substitution may proceed and correctly produce `fun w -> z`.
+
+The tricky part of that is how to pick a new name that doesn't occur anywhere else,
+that is, how to pick a *fresh* name.  Here are three strategies:
+
+1. Pick a new variable name, check whether is fresh or not,
+  and if not, try again, until that succeeds.  For example, if trying to replace 
+  `z`, you might first try `z'`, then `z''`, etc.
+  
+1. Augment the evaluation relation to maintain a stream (i.e., infinite list)
+   of unused variable names.  Each time you need a new one, take the head of the
+   stream.  But you have to be careful to use the tail of the stream anytime after
+   that.  To guarantee that they are unused, reserve some variable names for use
+   by the interpreter alone, and make them illegal as variable names chosen
+   by the programmer.  For example, you might decide that programmer variable
+   names may never start with the character `$`, then have a stream 
+   `<$x1, $x2, $x3, ...>` of fresh names.
+   
+1. Use an imperative counter to simulate the stream from the previous strategy.
+   For example, the following function is guaranteed to return a fresh
+   variable name each time it is called:
+   ```
+   let gensym =
+     let counter = ref 0 in
+     fun () -> incr counter; "$x" ^ string_of_int !counter
+   ```
+   The name `gensym` is traditional for this kind of function.  It comes from LISP,
+   and shows up throughout compiler implementations.
+   It means <u>gen</u>erate a fresh <u>sym</u>bol.  
+   
+## An Implementation
+
+There is a complete implementation of an interpreter for the call-by-name
+lambda calculus, including capture-avoiding substitution, that you
+can [download here](lambda.zip).  It uses the `gensym` strategy from
+above the generate fresh names, as you can see in [this file](lambda/main.ml).
