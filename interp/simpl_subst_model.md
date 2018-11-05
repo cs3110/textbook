@@ -1,4 +1,4 @@
-# Example:  Evaluating SimPL in the Substitution Model
+# Evaluating SimPL in the Substitution Model
 
 Let's begin by defining a small-step substitution-model semantics
 for SimPL.  That is, we're going to define a relation `-->` that
@@ -155,12 +155,10 @@ substituting `42` for `x` in `x+1` yields `42+1`.
 
 Of course, the right hand side of that rule isn't really an expression. 
 It's just giving an intuition for the expression that we really want. 
-We need to formally define what "substitute" means.  Perhaps
-surprisingly, that turns out to be a definition that has vexed
-mathematicians for centuries.
-
-So for now, let's assume a new notation:  `e{e'/x}`, which means,
-"the expression `e` with `e'` substituted for `x`."  We'll come
+We need to formally define what "substitute" means.  It turns out
+to be rather tricky.  So, rather then getting side-tracked by
+it right now, let's assume a new notation:  `e'{e/x}`, which means,
+"the expression `e'` with `e` substituted for `x`."  We'll come
 back to that notation in the next section and give it a careful 
 definition.
 
@@ -191,7 +189,62 @@ never reach the point of attempting to step a variable name.
 As with constants, we therefore don't need to add any rules
 for variables.  But, for clarity, we could state that `x -/->`.
 
-## Defining the Multistep Relation
+## Implementing the Single-Step Relation
+
+It's easy to turn the above definitions of `-->` into 
+an OCaml function that pattern matches against AST nodes.
+In the code below, recall that we have yet finished
+defining substitution (i.e., `subst`); we'll return to that
+in the next section.
+
+```
+(** [is_value e] is whether [e] is a value. *)
+let is_value : expr -> bool = function
+  | Int _ | Bool _ -> true
+  | Var _ | Let _ | Binop _ | If _ -> false
+
+(** [subst e v x] is [e{v/x}]. *)  
+let subst e v x = 
+  failwith "See next section"
+  
+(** [step] is the [-->] relation, that is, a single step of 
+    evaluation. *)
+let rec step : expr -> expr = function
+  | Int _ | Bool _ -> failwith "Does not step"
+  | Var _ -> failwith "Unbound variable"
+  | Binop (bop, e1, e2) when is_value e1 && is_value e2 -> 
+    step_bop bop e1 e2
+  | Binop (bop, e1, e2) when is_value e1 ->
+    Binop (bop, e1, step e2)
+  | Binop (bop, e1, e2) -> Binop (bop, step e1, e2)
+  | Let (x, e1, e2) when is_value e1 -> subst e2 e1 x
+  | Let (x, e1, e2) -> Let (x, step e1, e2)
+  | If (Bool true, e2, _) -> e2
+  | If (Bool false, _, e3) -> e3
+  | If (Int _, _, _) -> failwith "Guard of if must have type bool"
+  | If (e1, e2, e3) -> If (step e1, e2, e3)
+
+(** [step_bop bop v1 v2] implements the primitive operation
+    [v1 bop v2].  Requires: [v1] and [v2] are both values. *)
+and step_bop bop e1 e2 = match bop, e1, e2 with
+  | Add, Int a, Int b -> Int (a + b)
+  | Mult, Int a, Int b -> Int (a * b)
+  | Leq, Int a, Int b -> Bool (a <= b)
+  | _ -> failwith "Operator and operand type mismatch"
+```
+
+The only new thing we had to deal with in that implementation was the
+two places where a run-time type error is discovered, namely, 
+in the evaluation of `If (Int _, _, _)` and in the very last line, 
+in which we discover that a binary operator is being applied
+to arguments of the wrong type.  Type checking will guarantee that an
+exception never gets raised here, but OCaml's exhaustiveness analysis of
+pattern matching forces us to write a branch nonetheless.  Moreover, if
+it ever turned out that we had a bug in our type checker that caused
+ill-typed binary operator applications to be evaluated, this exception
+would help us discover what was going wrong.
+
+## The Multistep Relation
 
 Now that we've defined `-->`, there's really nothing left to do
 to define `-->*`.  It's just the reflexive transitive closure
@@ -204,6 +257,23 @@ e -->* e
 e -->* e''
   if e --> e' and e' -->* e''
 ```
+
+Of course, in implementing an interpreter, what we really want
+is to take multiple steps until the expression reaches a value.
+That is, we want to take as many steps as possible.  So, we're
+interested in the sub-relation `e -->* v` in which the right-hand
+side is a value.  That's easy to implement:
+
+```
+(** [eval_small e] is the [e -->* v] relation.  That is,
+    keep applying [step] until a value is produced.  *)
+let rec eval_small (e : expr) : expr = 
+  if is_value e then e
+  else e |> step |> eval_small
+```
+
+You can [view the completed small-step evaluator in this 
+file](simpl/main.ml).
 
 ## Defining the Big-Step Relation
 
@@ -253,3 +323,42 @@ a variable name:
 ```
 x =/=>
 ```
+
+## Implementing the Big-Step Relation
+
+The big-step evaluation relation is, if anything, even easier
+to implement than the small-step relation.  It just recurses
+over the tree, evaluating subexpressions as required by the
+definition of `==>`:
+
+```
+(** [eval_big e] is the [e ==> v] relation. *)
+let rec eval_big (e : expr) : expr = match e with
+  | Int _ | Bool _ -> e
+  | Var _ -> failwith "Unbound variable"
+  | Binop (bop, e1, e2) -> eval_bop bop e1 e2
+  | Let (x, e1, e2) -> subst e2 (eval_big e1) x |> eval_big
+  | If (e1, e2, e3) -> eval_if e1 e2 e3
+
+(** [eval_bop bop e1 e2] is the [e] such that [e1 bop e2 ==> e]. *)
+and eval_bop bop e1 e2 = match bop, eval_big e1, eval_big e2 with
+  | Add, Int a, Int b -> Int (a + b)
+  | Mult, Int a, Int b -> Int (a * b)
+  | Leq, Int a, Int b -> Bool (a <= b)
+  | _ -> failwith "Operator and operand type mismatch"
+
+(** [eval_if e1 e2 e3] is the [e] such that [if e1 then e2 else e3 ==> e]. *)
+and eval_if e1 e2 e3 = match eval_big e1 with
+  | Bool true -> eval_big e2
+  | Bool false -> eval_big e3
+  | _ -> failwith "Guard of if must have type bool"
+```
+
+It's good engineering practice to factor out functions for each
+of the pieces of syntax, as we did above, unless the implementation
+can fit on just a single line in the main pattern match inside
+`eval_big`.
+
+You can [view the completed big-step evaluator 
+in this file](simpl/main.ml).
+

@@ -1,4 +1,4 @@
-# Example: A Front-End for SimPL
+# A Front-End for SimPL
 
 As a demonstration of lexing and parsing, we'll now develop a front end
 for SimPL using ocamllex and menhir.
@@ -26,8 +26,7 @@ Let's start with parsing, then return to lexing later.  We'll assume
 all the Menhir code we write below is in a file named `parser.mly`.
 You can [download the completed file here](simpl/parser.mly).
 
-The
-`.mly` extension indicates that this file is intended as input
+The `.mly` extension indicates that this file is intended as input
 to Menhir.  (The 'y' alludes to yacc.)  This file contains
 the *grammar definition* for the language we want to parse.
 The syntax of grammar definitions is described by example below.

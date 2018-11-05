@@ -1,4 +1,4 @@
-# Example: A Type System for SimPL
+# A Type System for SimPL
 
 Recall the syntax of SimPL:
 ```

@@ -1,4 +1,4 @@
-# Example: A Type Checker for SimPL
+# A Type Checker for SimPL
 
 Let's implement a type checker for SimPL, based on
 the type system we defined in the previous section.
@@ -50,7 +50,7 @@ module Context : Context = struct
 
   let lookup ctx x =
     try List.assoc x ctx
-    with Not_found -> failwith "unbound variable"
+    with Not_found -> failwith "Unbound variable"
 
   let extend ctx x ty =
     (x, ty) :: ctx
@@ -121,16 +121,16 @@ and typeof_bop ctx bop e1 e2 =
   | Add, TInt, TInt 
   | Mult, TInt, TInt -> TInt
   | Leq, TInt, TInt -> TBool
-  | _ -> failwith "operator and operand type mismatch"
+  | _ -> failwith "Operator and operand type mismatch"
 
 and typeof_if ctx e1 e2 e3 =
   if typeof ctx e1 = TBool 
   then begin
     let t2 = typeof ctx e2 in
     if t2 = typeof ctx e3 then t2
-    else failwith "branches of if must have same type"
+    else failwith "Branches of if must have same type"
   end
-  else failwith "guard of if must have type bool"
+  else failwith "Guard of if must have type bool"
 ```
   
 Note how the recursive calls in the implementation of `typeof` occur
