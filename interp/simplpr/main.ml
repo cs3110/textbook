@@ -111,8 +111,9 @@ let typecheck e =
   ignore (typeof empty e)
 
 (** [is_value e] is whether [e] is a value. *)
-let is_value : expr -> bool = function
+let rec is_value : expr -> bool = function
   | Int _ | Bool _ -> true
+  | Pair (e1, e2) -> is_value e1 && is_value e2
   | Var _ | Let _ | Binop _ | If _ -> false
 
 (** [subst e v x] is [e] with [v] substituted for [x], that
@@ -122,6 +123,7 @@ let rec subst e v x = match e with
   | Bool _ -> e
   | Int _ -> e
   | Binop (bop, e1, e2) -> Binop (bop, subst e1 v x, subst e2 v x)
+  | Pair (e1, e2) -> Pair (subst e1 v x, subst e2 v x)
   | Let (y, e1, e2) ->
     let e1' = subst e1 v x in
     if x = y
@@ -146,6 +148,9 @@ let rec step : expr -> expr = function
   | If (Bool false, _, e3) -> e3
   | If (Int _, _, _) -> failwith if_guard_err
   | If (e1, e2, e3) -> If (step e1, e2, e3)
+  | Pair (e1, e2) when is_value e1 ->
+    Pair (e1, step e2)
+  | Pair (e1, e2) -> Pair (step e1, e2)
 
 (** [step_bop bop v1 v2] implements the primitive operation
     [v1 bop v2].  Requires: [v1] and [v2] are both values. *)
@@ -175,6 +180,7 @@ let rec eval_big (e : expr) : expr = match e with
   | Binop (bop, e1, e2) -> eval_bop bop e1 e2
   | Let (x, e1, e2) -> subst e2 (eval_big e1) x |> eval_big
   | If (e1, e2, e3) -> eval_if e1 e2 e3
+  | Pair (e1, e2) -> Pair (eval_big e1, eval_big e2)
 
 (** [eval_bop bop e1 e2] is the [e] such that [e1 bop e2 ==> e]. *)
 and eval_bop bop e1 e2 = match bop, eval_big e1, eval_big e2 with

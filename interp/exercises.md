@@ -102,14 +102,13 @@ Use the SimPL type system to show that
 ## Pairs
 
 Add pairs (i.e., tuples with exactly two components) to SimPL.
+Start with the [base SimPL interpreter](simpl.zip).
 
 ##### Exercise: pair parsing [&#10029;&#10029;&#10029;] 
 
 Implement lexing and parsing of pairs. Assume that the parentheses
 around the pair are required (not optional, as they sometimes are in
-OCaml).
-
-Follow this strategy:
+OCaml).  Follow this strategy:
 
 * Add a constructor for pairs to the `expr` type.
 * Add a comma token to the parser.
@@ -125,10 +124,34 @@ function.
 
 ##### Exercise: pair type checking [&#10029;&#10029;&#10029;] 
 
-Follow this strategy:
+Implement type checking of pairs.  Follow this strategy:
 
 * Write down a new typing rule before implementing any code.
 * Add a new constructor for pairs to the `typ` type.
 * Add a new branch to `typeof`.
+
+&square;
+
+##### Exercise: pair type checking [&#10029;&#10029;&#10029;] 
+
+Implement evaluation of pairs.  Follow this strategy:
+
+* Implement `is_value` for pairs.  A pair of values (e.g., `(0,1)`)
+  is itself a value, so the function will need to become recursive.
+* Implement `subst` for pairs:  `(e1, e2){v/x} = (e1{v/x}, e2{v/x})`.
+* Implement small-step and big-step evaluation of pairs, using these 
+  rules:
+
+```
+(e1, e2) --> (e1', e2)
+  if e1 --> e1'
+
+(v1, e2) --> (v1, e2')
+  if e2 --> e2'
+  
+(e1, e2) ==> (v1, v2)
+  if e1 ==> v1
+  and e2 ==> v2
+```
 
 &square;
