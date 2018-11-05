@@ -194,6 +194,8 @@
   - [9.10. Evaluating SimPL in the Substitution Model](interp/simpl_subst_model.md)
   - [9.11. Substitution in SimPL](interp/subst_simpl.md)
   - [9.12. Capture-Avoiding Substitution](interp/subst_lambda.md)
+  - [9.13. Core OCaml](interp/core_ocaml.md)
+  - [9.14. Evaluating Core OCaml in the Substitution Model](interp/core_ocaml_subst_model.md)
 <!--  - [9.W. Type Safety](interp/typesafety.md)-->
   - [9.X. Summary](interp/summary.md)
   - [9.Y. Exercises](interp/exercises.md)

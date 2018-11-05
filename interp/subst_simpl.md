@@ -97,6 +97,41 @@ result:
   = 5
 ```
 
+## Examples
+
+**Example 1:**
+
+```
+let x=2 in x+1
+--> (x+1){2/x}   
+  = 2+1
+--> 3
+```
+
+**Example 2:**
+
+```
+    let x = 0 in (let x = 1 in x)
+--> (let x = 1 in x){0/x}  
+  = (let x = 1{0/x} in x) 
+  = (let x = 1 in x)
+--> x{1/x}  
+  = 1
+```
+
+**Example 3:**
+
+```
+    let x = 0 in x + (let x = 1 in x)
+--> (x + (let x = 1 in x)){0/x}  
+  = x{0/x} + (let x = 1 in x){0/x}
+  = 0 + (let x = 1{0/x} in x)  
+  = 0 + (let x = 1 in x)  
+--> 0 + x{1/x}  
+  = 0 + 1
+--> 1
+```
+
 ## Implementing Substitution
 
 The definitions above are easy to turn into OCaml code.

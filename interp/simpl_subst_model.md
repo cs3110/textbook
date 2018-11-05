@@ -114,6 +114,18 @@ For SimPL, let's delegate all primitive operations to OCaml.
 That is, the SimPL `+` operator will be the same as the OCaml
 `+` operator, as will `*` and `<=`.
 
+Here's an example of using the binary operator rule:
+
+```
+    (3*1000) + ((1*100) + ((1*10) + 0))
+--> 3000 + ((1*100) + ((1*10) + 0))
+--> 3000 + (100 + ((1*10) + 0))
+--> 3000 + (100 + (10 + 0))
+--> 3000 + (100 + 10)
+--> 3000 + 110
+--> 3110
+```
+
 **If expressions.**  As with binary operators, there are many choices
 of how to evaluate the subexpressions of an if expression.  Nonetheless,
 most programmers would expect the guard to be evaluated first,

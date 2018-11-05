@@ -150,6 +150,36 @@ previous exercise.
 
 &square;
 
+##### Exercise: variants [&#10029;] 
+
+Evaluate these Core OCaml expressions using the small-step 
+substitution model:
+
+ - `Left (1+2)` (1 step)
+ - `match Left 42 with Left x -> x+1 | Right y -> y-1` (2 steps)
+   
+&square;
+
+
+##### Exercise: application [&#10029;&#10029;] 
+
+Evaluate these Core OCaml expressions using the small-step 
+substitution model:
+
+ - `(fun x -> 3 + x) 2` (2 steps)
+ - `let f = (fun x -> x + x) in (f 3) + (f 3)` (6 steps)
+ - `let f = fun x -> x + x in let x = 1 in let g = fun y -> x + f y in g 3` (7 steps)
+ - `let f = (fun x -> fun y -> x + y) in let g = f 3 in (g 1) + (f 2 3)` (9 steps)
+
+&square;
+
+##### Exercise: omega [&#10029;&#10029;&#10029;] 
+
+Try evaluating `(fun x -> x x) (fun x -> x x)`.  This expression,
+which is usually called \\(\Omega\\),
+doesn't type check in real OCaml, but we can still use the Core OCaml
+small-step semantics on it.
+
 ## Pairs
 
 Add pairs (i.e., tuples with exactly two components) to SimPL.
@@ -206,3 +236,229 @@ Implement evaluation of pairs.  Follow this strategy:
 ```
 
 &square;
+
+## Lists
+
+Suppose we treat list expressions like syntactic sugar in the 
+following way:
+
+* `[]` is syntactic sugar for `Left 0`.
+* `e1 :: e2` is syntactic sugar for `Right (e1, e2)`.
+
+##### Exercise: desugar list [&#10029;] 
+
+What is the core OCaml expression to which `[1;2;3]` desugars?
+
+&square;
+
+##### Exercise: list not empty [&#10029;&#10029;] 
+
+Write a core OCaml function `not_empty` that returns `1` if a list
+is non-empty and `0` if the list is empty.  Use the substitution 
+model to check that your function behaves properly on these 
+test cases:
+
+ - `not_empty []`
+ - `not_empty [1]`
+
+&square;
+
+## Pattern Matching [&#10029;&#10029;&#10029;&#10029;] 
+
+In core OCaml, there are only two patterns: `Left x` and `Right x`,
+where `x` is a variable name.  But in full OCaml, patterns are far more
+general. Let's see how far we can generalize patterns in core OCaml.
+
+**Step 1:** Here is a BNF grammar for patterns, and slightly revised 
+BNF grammar for expressions:
+
+```
+p ::= i | (p1, p2) | Left p | Right p | x | _
+
+e ::= ... 
+    | match e with | p1 -> e1 | p2 -> e2 | ... | pn -> en
+```
+
+In the revised syntax for `match`, only the very first `|` on the line,
+immediately before the keyword `match`, is meta-syntax.  The remaining
+four `|` on the line are syntax.  Note that we require `|` before the
+first pattern.
+
+**Step 2:** A value `v` matches a pattern `p` if by substituting any
+variables or wildcards in `p` with values, we can obtain exactly `v`. 
+For example:
+
+* `2` matches `x` because `x{2/x}` is `2`.
+* `Right(0,Left 0)` matches `Right(x,_)` because 
+  `Right(x,_){0/x}{Left 0/_}` is `Right(0,Left 0)`.
+  
+Let's define a new ternary relation called `matches`, guided by those 
+examples:
+```
+v =~ p // s
+```
+Pronounce this relation as "`v` matches `p` producing substitutions `s`."
+
+Here, `s` is a sequence of substitutions, such as 
+`{0/x}{Left 3/y}{(1,2)/z}`. There is just a single rule for this 
+relation:
+```
+v =~ p // s
+  if v = p s
+```
+
+For example, 
+```
+2 =~ x // {2/x}
+  because 2 = x{2/x}
+```
+
+**Step 3:** To evaluate a match expression:
+
+* Evaluate the expression being matched to a value.
+* If that expression matches the first pattern, evaluate the expression 
+  corresponding to that pattern.
+* Otherwise, match against the second pattern, the third, etc.
+* If none of the patterns matches, evaluation is *stuck*: it cannot 
+  take any more steps.
+  
+Using those insights, complete the following evaluation rules
+by filling in the places marked with `???`:
+
+```
+(* This rule should implement evaluation of e. *)
+match e with | p1 -> e1 | p2 -> e2 | ... | pn -> en 
+--> ???
+  if ???
+
+(* This rule implements moving past p1 to the next pattern. *)
+match v with | p1 -> e1 | p2 -> e2 | ... | pn -> en 
+--> match v with | p2 -> e2 | ... | pn -> en 
+  if there does not exist an s such that ???
+  
+(* This rule implements matching v with p1 then proceeding to evaluate e1. *)
+match v with | p1 -> e1 | p2 -> e2 | ... | pn -> en 
+--> ??? (* something involving e1 *)
+  if ???
+```
+
+Note that we don't need to write the following rule explicitly:
+```
+match v with |  -/->
+```
+Evaluation will get stuck at that point because none of the three other
+rules above will apply.
+
+**Step 4:** Double check your rules by evaluating the following 
+expression:
+`match (1 + 2, 3) with | (1,0) -> 4 | (1,x) -> x | (x,y) -> x + y`
+
+## Recursion
+
+One of the evaluation rules for `let` is
+```
+let x = v in e --> e{v/x}
+```
+
+We could try adapting that to `let rec`:
+```
+let rec x = v in e --> e{v/x}   (* broken *)
+```
+But that rule doesn't work properly, as we see in the following example:
+```
+  let rec fact = fun x ->
+	if x <= 1 then 1 else x * (fact (x - 1)) in
+  fact 3
+
+-->
+
+  (fun x -> if x <= 1 then 1 else x * (fact (x - 1)) 3
+
+-->
+
+  if 3 <= 1 then 1 else 3 * (fact (3 - 1))
+
+--> 
+
+  3 * (fact (3 - 1))
+
+-->
+
+  3 * (fact 2)
+
+-/->
+```
+We're now stuck, because we need to evaluate `fact`, but it doesn't step.
+In essence, the semantic rule we used "forgot" the function value that should
+have been associated with `fact`.
+
+A good way to fix this problem is to introduce a new language construct
+for recursion called simply `rec`.  (Note that OCaml does not have any 
+construct that corresponds directly to `rec`.)  Formally, we extend the 
+syntax for expressions as follows:
+```
+e ::= ...
+    | rec f -> e
+```
+
+and add the following evaluation rule:
+
+```
+rec f -> e  -->  e{(rec f -> e)/f}
+```
+
+The intuitive reading of this rule is that when evaluating
+`rec f -> e`, we "unfold" `f` in the body of `e`.  For example,
+here is an infinite loop coded with `rec`:
+```
+  rec f -> f
+
+-->  (* step rec *)
+
+  f{(rec f -> f)/f}
+  
+= (* substitute *)
+
+  rec f -> f
+  
+--> (* step rec *)
+
+  f{(rec f -> f)/f}
+
+...
+```
+
+Now we can use `rec` to implement `let rec`.  Anywhere 
+`let rec` appears in a program:
+```
+let rec f = e1 in e2
+```
+we *desugar* (i.e., rewrite) it to
+```
+let f = rec f -> e1 in e2
+```
+Note that the second occurrence of `f` (inside the `rec`) shadows the
+first one. Going back to the `fact` example, its desugared version is
+
+```
+let fact = rec fact -> fun x ->
+  if x <= 1 then 1 else x * (fact (x - 1)) in
+fact 3
+```
+
+##### Exercise: let rec [&#10029;&#10029;&#10029;&#10029;] 
+
+Evaluate the following expression (17 steps, we think,
+though it does get pretty tedious).
+You may want to simplify your life by writing "F" in place of
+`(rec fact -> fun x -> if x <= 1 then 1 else x * (fact (x-1)))`
+
+```
+let rec fact = fun x ->
+  if x <= 1 then 1 else x * (fact (x - 1)) in
+fact 3
+```
+
+&square;
+
+
