@@ -197,5 +197,8 @@
   - [9.13. Core OCaml](interp/core_ocaml.md)
   - [9.14. Evaluating Core OCaml in the Substitution Model](interp/core_ocaml_subst_model.md)
   - [9.15. Type Safety](interp/typesafety.md)
+  - [9.16. The Environment Model](interp/env_model.md)
+  - [9.17. Evaluating the Lambda Calculus in the Environment Model](interp/lambda_env_model.md)
+  - [9.18. Evaluating Core OCaml in the Environment Model](interp/core_ocaml_env_model.md)
   - [9.X. Summary](interp/summary.md)
   - [9.Y. Exercises](interp/exercises.md)
