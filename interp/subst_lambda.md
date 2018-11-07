@@ -164,5 +164,5 @@ that is, how to pick a *fresh* name.  Here are three strategies:
 
 There is a complete implementation of an interpreter for the call-by-name
 lambda calculus, including capture-avoiding substitution, that you
-can [download here](lambda.zip).  It uses the `gensym` strategy from
-above the generate fresh names, as you can see in [this file](lambda/main.ml).
+can [download here](lambda-subst.zip).  It uses the `gensym` strategy from
+above the generate fresh names, as you can see in [this file](lambda-subst/main.ml).
