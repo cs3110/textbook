@@ -53,7 +53,7 @@ let unbound_var_err = "Unbound variable"
 let apply_non_fn_err = "Cannot apply non-function"
 
 type eval_strategy = CBV | CBN
-let strategy = CBN
+let strategy = CBV
 
 (** [eval e] is the [e ==> v] relation. *)
 let rec eval (e : expr) : expr = match e with

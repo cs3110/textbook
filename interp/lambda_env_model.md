@@ -181,7 +181,7 @@ and there's no way to destruct the pair into its components
 in OCaml source code.  The pair is entirely hidden from you
 by the language implementation.
 
-Let's notate as closure as `(| fun x -> e, env |)`.  The delimiters
+Let's notate a closure as `(| fun x -> e, env |)`.  The delimiters
 `(| ... |)` are meant to evoke an OCaml pair, but of course they
 are not legal OCaml syntax.
 
@@ -216,4 +216,9 @@ That's because the defining environment for the body `e2`
 is the same as the current environment `env` when the let
 expression is being evaluated.
   
+## An Implementation
 
+You can [download](lambda-env.zip) a complete implementation
+of the two semantics above.  In the [main.ml](lambda-env/main.ml)
+file, there is a definition named `scope` that you can use to switch 
+between lexical and dynamic scope.
