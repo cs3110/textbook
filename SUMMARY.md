@@ -200,5 +200,5 @@
   - [9.16. The Environment Model](interp/env_model.md)
   - [9.17. Evaluating the Lambda Calculus in the Environment Model](interp/lambda_env_model.md)
   - [9.18. Evaluating Core OCaml in the Environment Model](interp/core_ocaml_env_model.md)
-  - [9.X. Summary](interp/summary.md)
-  - [9.Y. Exercises](interp/exercises.md)
+  - [9.19. Summary](interp/summary.md)
+  - [9.20. Exercises](interp/exercises.md)

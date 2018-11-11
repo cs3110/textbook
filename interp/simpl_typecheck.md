@@ -149,4 +149,5 @@ let typecheck e =
   ignore (typeof empty e)
 ```
 
-You can [view the completed type checker in this file](simpl/main.ml).
+You can <a href="/interp/simpl/main.ml" target="_blank">
+view the completed type checker in this file</a>.

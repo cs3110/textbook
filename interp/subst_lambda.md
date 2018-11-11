@@ -162,9 +162,10 @@ that is, how to pick a *fresh* name.  Here are three strategies:
    
 ## An Implementation
 
-There is a complete implementation of an interpreter for the
-lambda calculus, including capture-avoiding substitution, that you
-can [download here](lambda-subst.zip).  It uses the `gensym` strategy from
-above the generate fresh names, as you can see in [this file](lambda-subst/main.ml).
-There is a definition named `strategy` that you can use to switch between call-by-value
-and call-by-name.
+There is a complete implementation of an interpreter for the lambda
+calculus, including capture-avoiding substitution, that you can <a
+href="/interp/lambda-subst.zip" download target="_blank">download
+here</a>.  It uses the `gensym` strategy from above the generate fresh
+names, as you can see in <a href="/interp/lambda-subst/main.ml"
+target="_blank">this file</a>. There is a definition named `strategy`
+that you can use to switch between call-by-value and call-by-name.

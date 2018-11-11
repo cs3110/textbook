@@ -24,7 +24,8 @@ Let's assume that code is in a file named `ast.ml`.
 
 Let's start with parsing, then return to lexing later.  We'll assume
 all the Menhir code we write below is in a file named `parser.mly`.
-You can [download the completed file here](simpl/parser.mly).
+You can <a href="/interp/simpl/parser.mly" target="_blank">
+view the completed file here</a>.
 
 The `.mly` extension indicates that this file is intended as input
 to Menhir.  (The 'y' alludes to yacc.)  This file contains
@@ -224,7 +225,8 @@ familiar from our discussion of the parser generator.
 
 We'll assume all the ocamllex code we write below is in a file named
 `lexer.mll`.
-You can [download the completed file here](simpl/lexer.mll).
+You can <a href="/interp/simpl/lexer.mll" target="_blank">
+view the completed file here</a>.
 
 The `.mll` extension indicates that this file is intended
 as input to ocamllex.  (The 'l' alludes to lexing.)  This file contains

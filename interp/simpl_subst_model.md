@@ -284,8 +284,9 @@ let rec eval_small (e : expr) : expr =
   else e |> step |> eval_small
 ```
 
-You can [view the completed small-step evaluator in this 
-file](simpl/main.ml).
+You can <a href="/interp/simpl/main.ml" target="_blank">
+view the completed small-step evaluator in this 
+file</a>.
 
 ## Defining the Big-Step Relation
 
@@ -371,6 +372,7 @@ of the pieces of syntax, as we did above, unless the implementation
 can fit on just a single line in the main pattern match inside
 `eval_big`.
 
-You can [view the completed big-step evaluator 
-in this file](simpl/main.ml).
+You can <a href="/interp/simpl/main.ml" target="_blank">
+view the completed big-step evaluator 
+in this file</a>.
 

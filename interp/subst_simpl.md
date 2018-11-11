@@ -160,6 +160,7 @@ let rec subst e v x = match e with
 ## The SimPL Interpreter is Done
 
 We've completed developing our SimPL interpreter!
-[The finished interpreter can be downloaded here.](simpl.zip)
+The <a href="/interp/simpl.zip" download target="_blank">
+finished interpreter can be downloaded here</a>.
 It includes some rudimentary test cases, as well as 
 makefile targets that you will find helpful.

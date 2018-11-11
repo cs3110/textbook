@@ -218,7 +218,9 @@ expression is being evaluated.
   
 ## An Implementation
 
-You can [download](lambda-env.zip) a complete implementation
-of the two semantics above.  In the [main.ml](lambda-env/main.ml)
-file, there is a definition named `scope` that you can use to switch 
-between lexical and dynamic scope.
+You can <a href="/interp/lambda-env.zip" download 
+target="_blank">download</a> a complete implementation
+of the two semantics above.  In the 
+<a href="/interp/lambda-env/main.ml" target="_blank">
+main.ml</a> file, there is a definition named `scope` 
+that you can use to switch between lexical and dynamic scope.

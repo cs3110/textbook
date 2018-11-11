@@ -1,7 +1,8 @@
 # Exercises
 
-Many of these exercises rely on the [completed SimPL interpreter](simpl.zip) 
-as starter code.
+Many of these exercises rely on the 
+<a href="/interp/simpl.zip" download target="_blank">
+completed SimPL interpreter</a> as starter code.
 
 ## Parsing 
 
@@ -183,7 +184,8 @@ small-step semantics on it.
 ## Pairs
 
 Add pairs (i.e., tuples with exactly two components) to SimPL.
-Start with the [base SimPL interpreter](simpl.zip).
+Start with the <a href="/interp/simpl.zip" download target="_blank">
+base SimPL interpreter</a>
 
 ##### Exercise: pair parsing [&#10029;&#10029;&#10029;] 
 

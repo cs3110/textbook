@@ -24,8 +24,9 @@ of interpreters without getting too distracted by lots of language
 features.  Later, we will consider a larger fragment of OCaml.
 
 As we go through this chapter, we're going to develop a complete
-interpreter for SimPL.  You can [download the finished interpreter
-here](simpl.zip), or just follow along as we build each piece of it.
+interpreter for SimPL.  You can <a href="/interp/simpl.zip" download
+target="_blank"> download the finished interpreter
+here</a>, or just follow along as we build each piece of it.
 
 ## The AST
 
