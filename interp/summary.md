@@ -15,6 +15,7 @@
 - closure
 - compiler
 - concrete syntax
+- constraint
 - context-free grammar
 - context-free language
 - desugaring
@@ -24,9 +25,12 @@
 - evaluation
 - fresh
 - front end
+- Hindley&ndash;Milner (HM) type inference algorithm
+- implicit typing
 - intermediate representation
 - interpreter
 - lambda calculus
+- let polymorphism
 - lexer
 - machine configuration
 - metavariable
@@ -35,6 +39,7 @@
 - optimizing compiler
 - parser
 - precedence
+- preliminary type variable
 - preservation
 - primitive operatiohn
 - progress
@@ -47,24 +52,31 @@
 - small step
 - source program
 - static scope
+- static typing
 - stuck
+- substitution
 - substitution model
 - symbol
 - symbol table
 - target program
 - terminal
 - token
+- type annotation
 - type checking
+- type inference
+- type reconstruction
 - type safety
 - type system
 - typing context
+- unification
+- unifier
 - value
 - virtual machine
 - well typed
 
 ## Further reading
 
-* *Types and Programming Languages* by Benjamin C. Pierce, chapters 1-14.
+* *Types and Programming Languages* by Benjamin C. Pierce, chapters 1-14, 22.
 * *Modern Compiler Implementation* (in Java or ML) by Andrew W. Appel,
   chapters 1-5.
 * *Automata and Computability* by Dexter C. Kozen, chapters 1-27.

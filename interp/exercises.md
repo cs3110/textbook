@@ -584,3 +584,139 @@ f 2
 
 &square;
 
+## Type inference
+
+##### Exercise: infer [&#10029;&#10029;] 
+
+Using the HM type inference algorithm, infer the type
+of the following definition:
+```
+let apply f x = f x
+```
+
+Remember to go through these steps:
+
+* desugar the definition entirely (i.e., construct an AST)
+* assign preliminary type variables (i.e., annotate the AST)
+* collect constraints
+* solve the constraints
+
+For solving the constraints, go ahead and solve by hand rather than
+using the unification algorithm in the notes.
+
+When you're done solving, you will be left with some preliminary 
+type variables that have no concrete types (e.g., `int`) associated
+with them.  Those can be renamed to OCaml type variables
+such as `'a` and `'b`.
+
+&square;
+
+##### Exercise: infer s [&#10029;&#10029;] 
+
+Using the HM type inference algorithm, infer the type
+of the following definition:
+```
+let s x y z = (x z) (y z)
+```
+
+&square;
+
+##### Exercise: infer if [&#10029;&#10029;] 
+
+In lecture we gave the constraint collection rules for several
+but not all of OCaml's expression forms.  How should constraints
+be collected from an expression of the form `if e1 then e2 else e3`?
+Your answer should be a completion of the following:
+
+```
+U(e1) = ...
+U(e2) = ...
+U(e3) = ...
+and all constraints collected from e1, e2, and e3
+```
+
+*Hint: recall the type checking rule for if expressions.*
+
+Using your answer, infer the type of this expression:
+```
+if true then 3110 else 0
+```
+
+&square;
+
+##### Exercise: unify [&#10029;&#10029;] 
+
+Use the unification algorithm to solve the following system of
+constraints.  Your answer should be a *substitution*, in the sense that
+the unification algorithm defines that term.
+
+```
+X = int
+Y = X -> X
+```
+
+&square;
+
+##### Exercise: infer double [&#10029;&#10029;] 
+
+Using the HM type inference algorithm, infer the type
+of the following definition:
+```
+let double f x = f (f x)
+```
+
+&square;
+
+To infer the type of a match expression, we need to collect
+constraints from patterns.  A variable pattern is a defining 
+occurrence of a variable, so there aren't any constraints
+to collect from the pattern.  For example, in this pattern:
+```
+match e with
+| x -> e'
+```
+the variable `x` is defined by the pattern and could be used
+in expression `e'`.
+
+Other forms of patterns do generate constraints.  For example:
+```
+U(n) = int      (where n is an integer constant pattern)
+U(s) = string   (where s is a string constant pattern)
+U((p1,p2)) = U(p1) * U(p2)
+```
+
+##### Exercise: infer match [&#10029;&#10029;&#10029;] 
+
+How should constraints be collected from an expression of the 
+form `match e with p1 -> e1 | ... | pn -> en`?
+Your answer should be a completion of the following:
+
+```
+U(ei) = ...
+U(pi) = ...
+and all constraints collected from e, and all pi, ei
+```
+
+*Hint: recall the type checking rule for match expressions.*
+
+Using your answer, infer the type of this expression:
+```
+match 3110 with x -> x+1
+```
+
+&square;
+
+##### Exercise: unify more [&#10029;&#10029;&#10029;] 
+
+Use the unification algorithm to solve the following system of
+constraints.  Your answer should be a *substitution*, in the sense that
+the unification algorithm defines that term.
+
+```
+X -> Y = Y -> Z
+     Z = U -> W
+```
+
+&square;
+
+
