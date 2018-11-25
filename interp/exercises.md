@@ -667,10 +667,11 @@ let double f x = f (f x)
 
 &square;
 
+##### Exercise: infer match [&#10029;&#10029;&#10029;] 
+
 To infer the type of a match expression, we need to collect
 constraints from patterns.  A variable pattern is a defining 
-occurrence of a variable, so there aren't any constraints
-to collect from the pattern.  For example, in this pattern:
+occurrence of a variable.  For example, in this pattern:
 ```
 match e with
 | x -> e'
@@ -678,14 +679,12 @@ match e with
 the variable `x` is defined by the pattern and could be used
 in expression `e'`.
 
-Other forms of patterns do generate constraints.  For example:
+Other forms of patterns generate constraints.  For example:
 ```
 U(n) = int      (where n is an integer constant pattern)
 U(s) = string   (where s is a string constant pattern)
 U((p1,p2)) = U(p1) * U(p2)
 ```
-
-##### Exercise: infer match [&#10029;&#10029;&#10029;] 
 
 How should constraints be collected from an expression of the 
 form `match e with p1 -> e1 | ... | pn -> en`?
