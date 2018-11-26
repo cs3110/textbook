@@ -80,5 +80,5 @@
 * *Modern Compiler Implementation* (in Java or ML) by Andrew W. Appel,
   chapters 1-5.
 * *Automata and Computability* by Dexter C. Kozen, chapters 1-27.
-
-
+* This [webpage](http://okmij.org/ftp/ML/generalization.html) documents how some of
+  the internals of the OCaml type checker and inferencer.
