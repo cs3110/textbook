@@ -7,7 +7,7 @@ something similar to `int list`:
 type intlist = Nil | Cons of int * intlist
 
 let lst3 = Cons (3, Nil)  (* similar to 3::[] or [3]*)
-let lst123 = Cons(1, Cons(2, l3)) (* similar to [1;2;3] *)
+let lst123 = Cons(1, Cons(2, lst3)) (* similar to [1;2;3] *)
 
 let rec sum (l:intlist) : int=
   match l with
