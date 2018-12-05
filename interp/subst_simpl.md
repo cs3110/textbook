@@ -61,7 +61,7 @@ Finally, **let expression** also have two cases, depending on the name
 of the bound variable:
 ```
 (let x = e1 in e2){e/x}  =  let x = e1{e/x} in e2
-(let y = e1 in e2){e/x}  =  let x = e1{e/x} in e2{e/x}
+(let y = e1 in e2){e/x}  =  let y = e1{e/x} in e2{e/x}
 ```
 
 Both of those cases substitute `e` for `x` inside the binding
