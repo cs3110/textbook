@@ -67,9 +67,9 @@ needs to be the same as the type the callback expects as input.
 After being invoked on a promise and callback, e.g., `bind p c`, the
 `bind` function does one of three things, depending on the state of `p`:
 
-* If `p` is already resolved, then `c` might immediately run on the
-  contents of `p`, or it might be registered to run later.  The promise 
-  that is returned might or might not be pending, depending on what `c` does.
+* If `p` is already resolved, then `c` is run immediately on the
+  contents of `p`. The promise that is returned might or might not be pending, 
+  depending on what `c` does.
   
 * If `p` is already rejected, then `c` does not run.  The promise
   that is returned is also rejected, with the same exception as `p`.
@@ -81,6 +81,12 @@ After being invoked on a promise and callback, e.g., `bind p c`, the
   promise will become resolved when (or if) the callback completes
   running, sometime in the future. Its contents will be whatever contents
   are contained within the promise that the callback itself returns.  
+
+(For the first case above: The Lwt source code claims that this behavior
+might change in a later version:  under high load, `c` might be 
+registered to run later.  But as of v4.1.0 that behavior has not
+yet been activated.  So, don't worry about it&mdash;this paragraph
+is just here to future-proof this discussion.)
 
 Let's consider that final case in more detail. We have one promise of
 type `'a Lwt.t` and two promises of type `'b Lwt.t`:

@@ -109,11 +109,7 @@ Let's look at each law in more detail.
 is the same as just calling the function on the value.  Consider the maybe monad:
 `return x` would be `Some x`, and `>>= f` would extract `x` and apply `f` to it.
 Or consider the Lwt monad:  `return x` would be a promise that is already resolved
-with `x`, and `>>= f` would register `f` as a callback to run on `x`.  You might wonder,
-though, whether the law really holds for Lwt.  After all, it seems like
-`return x >>= f` might not immediately run the callback on `x`, but `f x` does 
-immediately run.  As it turns out, Lwt *does* immediately run a callback on an
-already resolved promise when the callback is registered.
+with `x`, and `>>= f` would register `f` as a callback to run on `x`.
 
 *Law 2* says that binding on the trivial effect is the same as just not having
 the effect.  Consider the maybe monad:  `m >>= return` would depend upon
