@@ -157,8 +157,8 @@ we create a new promise and resolver called `output_promise` and
 `output_resolver`.  That promise is what `bind` returns.  Before
 returning it, we use a helper function `handler_of_callback` (described
 below) to transform the callback into a handler, and enqueue that
-handler on the promise so that it will be run when the promised
-later becomes resolved or rejected:
+handler on the promise.  That ensures the handler will be run
+when the promise later becomes resolved or rejected:
 ```
     | Pending -> 
       let output_promise, output_resolver = make () in
@@ -180,9 +180,9 @@ causes the promise returned by bind to also be rejected.
       | Rejected exc -> reject resolver exc
 ```
 But if the state is resolved, then the callback provided by the user to bind
-can at last be run on the contents of the resolved promise.  Running the callback
-produces a new promise.  It might already be rejected or resolved, in which
-case that state again propagates.  
+can&mdash;at last!&mdash;be run on the contents of the resolved promise.  
+Running the callback produces a new promise.  It might already be
+rejected or resolved, in which case that state again propagates.  
 ```      
       | Resolved x ->
         let promise = callback x in
