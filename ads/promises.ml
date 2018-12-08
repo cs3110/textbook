@@ -35,11 +35,20 @@ end
 module Promise : Promise = struct
   type 'a state = Pending | Resolved of 'a | Rejected of exn
 
-  (* RI: if [state <> Pending] then [callbacks = []]. *)
+  (** RI: the input may not be [Pending] *)
+  type 'a handler = 'a state -> unit
+
+  (** RI: if [state <> Pending] then [handlers = []]. *)
   type 'a promise = {
     mutable state : 'a state;
-    mutable callbacks : ('a -> unit) list
+    mutable handlers : 'a handler list
   }
+
+  let enqueue 
+      (handler : 'a state -> unit) 
+      (promise : 'a promise) : unit 
+    =
+    promise.handlers <- handler :: promise.handlers
 
   type 'a resolver = 'a promise
 
@@ -52,40 +61,56 @@ module Promise : Promise = struct
     else invalid_arg "cannot write twice"
 
   let make () = 
-    let p = {state = Pending; callbacks = []} in
+    let p = {state = Pending; handlers = []} in
     p, p
 
   let return x = 
-    {state = Resolved x; callbacks = []}
+    {state = Resolved x; handlers = []}
 
   let state p = p.state
 
-  let reject r x = 
-    write_once r (Rejected x);
-    r.callbacks <- []
+  (** requires: [st] may not be [Pending] *)
+  let resolve_or_reject (r : 'a resolver) (st : 'a state) = 
+    assert (st <> Pending);
+    let handlers = r.handlers in
+    r.handlers <- [];
+    write_once r st;
+    List.iter (fun f -> f st) handlers
 
-  let run_callbacks callbacks x = 
-    List.iter (fun f -> f x) callbacks
+  let reject r x = 
+    resolve_or_reject r (Rejected x)
 
   let resolve r x =  
-    write_once r (Resolved x);
-    let callbacks = r.callbacks in
-    r.callbacks <- [];
-    run_callbacks callbacks x
+    resolve_or_reject r (Resolved x)
 
-  let (>>=) (p : 'a promise) (c : 'a -> 'b promise) : 'b promise = 
-    match p.state with
-    | Resolved x -> c x
-    | Rejected x -> {state = Rejected x; callbacks = []}
+  let handler (resolver : 'a resolver) : 'a handler
+    = function
+      | Pending -> failwith "handler RI violated"
+      | Rejected exc -> reject resolver exc
+      | Resolved x -> resolve resolver x
+
+  let handler_of_callback 
+      (callback : 'a -> 'b promise) 
+      (resolver : 'b resolver) : 'a handler 
+    = function
+      | Pending -> failwith "handler RI violated"
+      | Rejected exc -> reject resolver exc
+      | Resolved x ->
+        let promise = callback x in
+        match promise.state with
+        | Resolved y -> resolve resolver y
+        | Rejected exc -> reject resolver exc
+        | Pending -> enqueue (handler resolver) promise      
+
+  let (>>=) 
+      (input_promise : 'a promise) 
+      (callback : 'a -> 'b promise) : 'b promise 
+    = 
+    match input_promise.state with
+    | Resolved x -> callback x
+    | Rejected exc -> {state = Rejected exc; handlers = []}
     | Pending -> 
-      let bind_promise, bind_resolver = make () in
-      let f x : unit = 
-        let callback_promise = c x in
-        match callback_promise.state with
-        | Resolved x -> resolve bind_resolver x
-        | Rejected x -> reject bind_resolver x
-        | Pending -> failwith "impossible"
-      in
-      p.callbacks <- f :: p.callbacks;
-      bind_promise
+      let output_promise, output_resolver = make () in
+      enqueue (handler_of_callback callback output_resolver) input_promise;
+      output_promise
 end
