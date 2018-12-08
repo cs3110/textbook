@@ -180,7 +180,7 @@ causes the promise returned by bind to also be rejected.
       | Rejected exc -> reject resolver exc
 ```
 But if the state is resolved, then the callback provided by the user to bind
-can&mdash;at last!&mdash;be run on the contents of the resolved promise.  
+can&mdash;at last!&mdash;be run on the contents of the resolved promise.
 Running the callback produces a new promise.  It might already be
 rejected or resolved, in which case that state again propagates.  
 ```      
