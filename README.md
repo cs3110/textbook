@@ -1,10 +1,19 @@
-# Functional Programming in OCaml<br/><small>A Principled Approach</small>
+# Functional Programming in OCaml<br/>
 
-By Michael R. Clarkson, Nate Foster, Michael D. George, Daniel P.
-Huttenlocher, Dexter Kozen, Greg Morrisett, Andrew C. Myers, and Ramin
+**Fall 2018 Edition**
+
+Based on courses taught by Michael R. Clarkson, Robert L. Constable,
+Nate Foster, Michael D. George, Dan Grossman, Daniel P. Huttenlocher,
+Dexter Kozen, Greg Morrisett, Andrew C. Myers, Radu Rugina, and Ramin
 Zabih.
 
-With Robert L. Constable, Dan Grossman, and Radu Rugina.
+This work is based on 20 years worth of course notes and intellectual
+contribution by the authors named above; teasing out who contributed
+what is, by now, not an easy task. The primary compiler and author of
+this work in its form as a unified textbook is Michael R. Clarkson.  
+
+For the most recent version of this work, see the most recent
+[CS 3110 course website](https://www.cs.cornell.edu/courses/cs3110).  
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
 <img alt="Creative Commons License" style="border-width:0" 
