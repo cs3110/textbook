@@ -178,8 +178,9 @@
   - [8.24. Example: The Writer Monad](ads/ex_writer_monad.md)
   - [8.25. Example: The Lwt Monad](ads/ex_lwt_monad.md)
   - [8.26. Monad Laws](ads/monad_laws.md)
-  - [8.27. Summary](ads/summary.md)
-  - [8.28. Exercises](ads/exercises.md)
+  - [8.27. Memoization](ads/memoization.md)
+  - [8.28. Summary](ads/summary.md)
+  - [8.29. Exercises](ads/exercises.md)
 
 * [9. Interpreters](interp/intro.md)
   - [9.1. Compilation and Interpretation](interp/compile.md)

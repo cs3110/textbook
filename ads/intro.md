@@ -10,3 +10,4 @@ Topics:
 * mutable fields
 * arrays
 * mutable data structures
+* memoization
