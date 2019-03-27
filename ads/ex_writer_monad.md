@@ -51,7 +51,7 @@ We could code up an upgraded version of `dec_log` that is able to
 take a pair as input:
 ```
 let dec_log_upgraded (x, s) =
-  x - 1, Printf.sprintf "Called dec on %i; " x
+  x - 1, Printf.sprintf "Called dec on %i; " s
   
 let id x = x |> inc_log |> dec_log_upgraded
 ```

@@ -14,20 +14,18 @@ especially in a functional language.
 As an example, consider the problem of computing the nth Fibonacci
 number, defined as `f(n) = f(n−1) + f(n−2)`. We can translate this
 directly into code:
-
 ```
 let f(n) = if n<2 then 1 else f(n-1) + f(n-2)
 ```
-
-Unfortunately, this code takes exponential time: $$Θ(φn)$$, where $$φ$$ is the
-golden ratio, $$(1 + √5)/2$$.
+Unfortunately, this code takes exponential time: $$Θ(φ^{n})$$, where $$φ$$ is the golden ratio, $$(1 + √5)/2$$.
 
 The key observation is that the recursive implementation is
 inefficient because it recomputes the same Fibonacci numbers over and
 over again. If we record Fibonacci numbers as they are computed, we
 can avoid this redundant work. The idea is that whenever we compute
-`f(n)`, we store it in a table indexed by n. In this case the indexing
-keys are integers, so we can use implement this table using an array:
+`f(n)`, we store it in a table indexed by `n`. In this case the
+indexing keys are integers, so we can use implement this table using
+an array:
 
 ```
 let fibm(n) =
@@ -232,10 +230,11 @@ example
 The TeX formatting program does a good job of keeping line widths
 similar by finding the formatting that minimizes the sum of the cube
 of the leftover space in each line (except for the last). However, for
-n words, there are $$Ω(2n)$$ possible formattings, so the algorithm
-can't possibly check them all for large text inputs. Remarkably, we
-can use memoization to find the optimal formatting efficiently. In
-fact, memoization is useful for many optimization problems.
+$$n$$ words, there are $$\Omega(2n)$$ possible formattings, so the
+algorithm can't possibly check them all for large text inputs.
+Remarkably, we can use memoization to find the optimal formatting
+efficiently. In fact, memoization is useful for many optimization
+problems.
 
 We start by writing a simple recursive algorithm to walk down the list
 and try either inserting a line break after each word, or not
