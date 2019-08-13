@@ -115,7 +115,8 @@ OCaml.
     	  x+1
 
     The [Pervasives](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html)
-    module contains many other printing statements you can use.
+    module contains many other printing statements you can use. We cover some
+    of them in the next section.
 
 -   **Function traces.** Suppose you want to see the *trace* of
     recursive calls and returns for a function. Use the `#trace`

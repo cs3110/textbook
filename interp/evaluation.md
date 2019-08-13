@@ -1,15 +1,19 @@
 # Evaluation
 
-After type checking (and other semantic analysis), the next phase
-of compilation is to rewrite the AST into an intermediate representation
-(IR), in preparation for translating the program into machine code.
+After lexing and parsing, the next phase is type checking (and other
+semantic analysis). We will skip that phase for now and return to it at
+the end of this chapter.
 
-An interpreter might also rewrite the AST into an IR, or it might
-directly begin evaluating the AST.  One reason to rewrite the AST
-would be to simplify it:  sometimes, certain language features
-can be implemented in terms of others, and it makes sense to reduce
-the language to a small core to keep the interpreter implementation
-shorter.  Syntactic sugar is a great example of that idea.
+Instead, let's turn our attention to evaluation.  In a compiler, the
+next phase after semantic analysis would be rewriting the AST into an
+intermediate representation (IR), in preparation for translating the
+program into machine code. An interpreter might also rewrite the AST
+into an IR, or it might directly begin evaluating the AST.  One reason
+to rewrite the AST would be to simplify it:  sometimes, certain language
+features can be implemented in terms of others, and it makes sense to
+reduce the language to a small core to keep the interpreter
+implementation shorter.  Syntactic sugar is a great example of that
+idea.
 
 ## Desugaring
 

@@ -25,6 +25,10 @@ search engines. Some of these exercises have been used as homework and
 exam problems in the past, and some of them may again be used in the
 future.
 
+A repository of solutions is available to current students in the course.
+Instructions for how to access it will be provided elsewhere.  Instructors
+from other universities may also request access.
+
 The exercises are a good source of exam questions.
 A good way to study for an exam is to finish any
 exercises you haven't already completed, as well as to rework previously

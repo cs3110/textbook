@@ -1,4 +1,4 @@
-# Syntax
+# Backus-Naur Form
 
 The standard way to describe the syntax of a language is with a
 mathematical notation called *Backus-Naur form* (BNF), named for its

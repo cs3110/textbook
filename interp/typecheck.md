@@ -1,7 +1,9 @@
 # Type Checking
 
-After lexing and parsing, the next phase of compilation is semantic
-analysis, and the primary task of semantic analysis is type checking.
+Earlier, we skipped over the type checking phase.  Let's come back to
+that now. After lexing and parsing, the next phase of compilation is
+semantic analysis, and the primary task of semantic analysis is type
+checking.
 
 A *type system* is a mathematical description of how to determine
 whether an expression is *ill typed* or *well typed*, and in the

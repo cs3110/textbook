@@ -9,9 +9,6 @@ The semantics of function application is the very heart of OCaml and of
 functional programming, and it's something we will come back to several
 times throughout the course to deepen our understanding.
 
-Let expressions can be used to provide local scope for variables: the
-binding is in scope only in the body of the let expression.  
-
 ## Terms and concepts
 
 * anonymous functions

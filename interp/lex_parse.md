@@ -65,7 +65,8 @@ The symbols occurring in those rules are \\(S\\), (, and ).  The
 language being described.  \\(S\\) is a nonterminal in the example
 above, and ( and ) are terminals.
 
-BNF thus is notation for context-free grammars, and the input to a
+In the next section we'll study *Backus-Naur Form* (BNF), which is a
+standard notation for context-free grammars.  The input to a
 parser generator is typically a BNF description of the language's
 syntax.  The output of the parser generator is a program that recognizes
 the language of the grammar.  As input, that program expects the output

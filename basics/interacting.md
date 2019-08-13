@@ -193,6 +193,13 @@ $ ocamlbuild -clean
 
 That removes the `_build` directory and `hello.byte` link, leaving just your source code.
 
+## What about Main?
+
+Unlike C or Java, OCaml programs do not need to have a special function
+named `main` that is invoked to start the program. The usual idiom is
+just to have the very last definition in a file serve as the main
+function that kicks off whatever computation is to be done.
+
 ## Loading code in the toplevel
 
 In addition to allowing you to define functions, the toplevel will

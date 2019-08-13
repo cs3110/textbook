@@ -1,6 +1,6 @@
 # Function Application
 
-Today we cover a somewhat simplified syntax of function application
+Here we cover a somewhat simplified syntax of function application
 compared to what OCaml actually allows.
 
 **Syntax.** 
@@ -34,6 +34,13 @@ To evaluate `e0 e1 ... en`:
    body `e` of the function.  That results in a new expression `e'`.
    
 3. Evaluate `e'` to a value `v`, which is the result of evaluating `e0 e1 ... en`.
+
+If you compare these evaluation rules to the rules for let expressions,
+you will notice they both involve substitution.  This is not an accident.
+In fact, anywhere `let x = e1 in e2` appears in a program, we could replace
+it with `(fun x -> e2) e1`.  They are syntactically different but semantically
+equivalent.  In essence, let expressions are just syntactic
+sugar for anonymous function application. 
 
 ## Pipeline
 

@@ -3,9 +3,9 @@
 As we discussed earlier in the section on debugging, one
 defense against bugs is to make any bugs (or errors) 
 immediately visible.  That idea connects with idea
-of preconditions, which we just discussed.
+of preconditions.
 
-Consider `random_int` again:
+Consider this specification of `random_int`:
 ```
 (** [random_int bound] is a random integer between 0 (inclusive)
     and [bound] (exclusive).  Requires: [bound] is greater than 0 

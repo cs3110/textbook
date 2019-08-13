@@ -1,4 +1,4 @@
-# Function Definitions
+# Functions
 
 The following code
 ```

@@ -87,13 +87,6 @@ Here's an example:
       (result of evaluation is v2)
 ```
 
-If you compare these evaluation rules to the rules for function application,
-you will notice they both involve substitution.  This is not an accident.
-In fact, anywhere `let x = e1 in e2` appears in a program, we could replace
-it with `(fun x -> e2) e1`.  They are syntactically different but semantically
-equivalent.  So let expressions are really syntactic
-sugar for anonymous function application. 
-
 **Static semantics.**
 
 * If `e1:t1` and if under the assumption that `x:t1` it holds that `e2:t2`,
