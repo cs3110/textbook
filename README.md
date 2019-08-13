@@ -1,14 +1,14 @@
-# Functional Programming in OCaml<br/>
+# Functional Programming in OCaml
 
-**Spring 2019 Edition**
+**Fall 2019 Edition**
 
 Based on courses taught by Michael R. Clarkson, Robert L. Constable,
 Nate Foster, Michael D. George, Dan Grossman, Daniel P. Huttenlocher,
 Dexter Kozen, Greg Morrisett, Andrew C. Myers, Radu Rugina, and Ramin
 Zabih.
 
-This work is based on 20 years worth of course notes and intellectual
-contribution by the authors named above; teasing out who contributed
+This work is based on over 20 years worth of course notes and intellectual
+contributions by the authors named above; teasing out who contributed
 what is, by now, not an easy task. The primary compiler and author of
 this work in its form as a unified textbook is Michael R. Clarkson.  
 

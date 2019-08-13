@@ -1,8 +1,6 @@
 #!/bin/bash
 
-rsync -rlhcv --delete _book/ cslinux:/courses/cs3110/2019sp/textbook
-
-#cslinux:/people/mrc26/3110-2018fa/textbook
+rsync -rlhcv --delete _book/ cslinux:/courses/cs3110/2019fa/textbook
 
 if [[ `git status --porcelain` ]]; then 
   cat <<EOF
