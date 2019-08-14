@@ -13,7 +13,3 @@ built-in, but are actually definable with algebraic data types.
 We'll also examine how to define data types for trees and maps using
 various combinations of the above features.
 
-Finally, we'll take brief detours into unit testing (for which we
-first need to know about lists) and exceptions (for which we
-first need to know about algebraic data types and pattern matching).
-

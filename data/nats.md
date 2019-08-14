@@ -1,4 +1,4 @@
-# Natural Numbers
+# Example: Natural Numbers
 
 We can define a recursive variant that acts like numbers, demonstrating
 that we don't really have to have numbers built into OCaml!  (For sake

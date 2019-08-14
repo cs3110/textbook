@@ -1,4 +1,4 @@
-# Trees
+# Example: Trees
 
 Trees are a very useful data structure.  Unlike lists, they are
 not built into OCaml. A *binary tree*, as you'll recall from CS 2110, is
