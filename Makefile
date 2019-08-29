@@ -3,8 +3,6 @@
 BLUE=\033[0;34m
 NOCOLOR=\033[0m
 
-BOOK_URL=https://www.cs.cornell.edu/courses/cs3110/2018fa/textbook
-
 help:
 	@echo "Please use 'make <target>' where <target> is one of:"
 	@echo "  install       to install the plugins needed to build the book."
@@ -33,4 +31,4 @@ deploy:
 	@echo "${BLUE}=================================${NOCOLOR}"
 	./deploy.sh
 	@echo ""
-	@echo "${BLUE}    Done, see book at ${BOOK_URL}.${NOCOLOR}"
+	@echo "${BLUE}    Done."
