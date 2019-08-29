@@ -100,12 +100,16 @@ Americans developed Standard ML.  The two dialects are quite similar.
 Microsoft introduced its own variant of OCaml called F# in 2005.
 
 Milner received the Turing Award in 1991 in large part for his work on ML.
-The award citation includes this praise:  "ML was way ahead of its time.
-It is built on clean and well-articulated mathematical ideas, teased apart
-so that they can be studied independently and relatively easily remixed and
-reused. ML has influenced many practical languages, including Java, Scala,
-and Microsoft's F#. Indeed, no serious language designer should ignore
-this example of good design."
+The [ACM website for his award][turing-milner] includes this praise:
+
+> ML was way ahead of its time. It is built on clean and well-articulated
+> mathematical ideas, teased apart so that they can be studied
+> independently and relatively easily remixed and reused. ML has
+> influenced many practical languages, including Java, Scala, and
+> Microsoft's F#. Indeed, no serious language designer should ignore this
+> example of good design.
+
+[turing-milner]: https://amturing.acm.org/award_winners/milner_1569367.cfm
 
 ## Industry
 
