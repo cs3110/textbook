@@ -1,5 +1,8 @@
 # Bisect
 
+*This section of the textbook needs to be rewritten for Fall 2019
+to use bisect-ppx instead of bisect.*
+
 Glass-box testing can be aided by *code-coverage tools* that assess
 how much of the code has been exercised by a test suite.  The 
 [bisect][] tool for OCaml can tell you which expressions in your
