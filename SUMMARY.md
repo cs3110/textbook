@@ -54,7 +54,7 @@
 	  * [3.1.3.5. Test-driven Development](data/tdd.md)
 	+ [3.1.4. Records](data/records.md)
 	+ [3.1.5. Tuples](data/tuples.md)
-	+ [3.1.6. One+of vs. Each+of](data/oneof_eachof.md)
+	+ [3.1.6. One-of vs. Each-of](data/oneof_eachof.md)
 	+ [3.1.7. Advanced Pattern Matching](data/pattern_matching_advanced.md)
 	  * [3.1.7.1. Pattern Matching with Let](data/pattern_matching_let.md)
 	  * [3.1.7.2. Pattern Matching with Functions](data/pattern_matching_functions.md)
@@ -172,7 +172,7 @@
 
 * [10. Interpreters](interp/intro.md)
   - [10.1. Lexing and Parsing](interp/lex_parse.md)
-    - [10.1.1. Backus-Naur Form](interp/syntax.md)
+    - [10.1.1. Backus-Naur Form](interp/bnf.md)
 	- [10.1.2. Example: SimPL](interp/simpl.md)
 	- [10.1.3. A Front-End for SimPL](interp/simpl_frontend.md)
   - [10.2. Evaluation: The Substitution Model](interp/evaluation.md)
