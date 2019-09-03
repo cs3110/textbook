@@ -86,7 +86,7 @@ module ListSet : Set = struct
 
   let empty = []
 
-  let uniq s = List.sort_uniq Pervasives.compare s
+  let uniq s = List.sort_uniq Stdlib.compare s
 
   let size s = List.length (uniq s) - 1
 

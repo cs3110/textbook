@@ -61,14 +61,14 @@ that `exception E` is syntactic sugar for `type exn += E`, which is to say
 that it extends the type `exn`, which is an extensible variant, with
 a new constructor `E`.)
 
-**Pervasives.** 
-There is a [special module called `Pervasives`][pervasives] that is
+**Stdlib.** 
+There is a [special module called `Stdlib`][stdlib] that is
 automatically opened in every OCaml program.  It contains the "built-in"
 functions and operators, as we've seen before.  You therefore never need
-to prefix any of the names it defines with `Pervasives.`, though you
+to prefix any of the names it defines with `Stdlib.`, though you
 could do so if you ever needed to unambiguously identify a name from it.
  
-[pervasives]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html
+[stdlib]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html
 
 ## Opening a module in a limited scope
 

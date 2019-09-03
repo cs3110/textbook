@@ -44,4 +44,4 @@ It's convenient to pretend that the initial context is empty. But in
 practice, it's rare that a language truly uses the empty context to
 determine whether a program is well typed. In OCaml, for example, there
 are many built-in identifiers that are always in scope, such as
-everything in the `Pervasives` module. 
+everything in the `Stdlib` module. 

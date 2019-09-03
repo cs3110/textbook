@@ -114,7 +114,7 @@ OCaml.
           let () = print_int(x) in
     	  x+1
 
-    The [Pervasives](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html)
+    The [Stdlib](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html)
     module contains many other printing statements you can use. We cover some
     of them in the next section.
 

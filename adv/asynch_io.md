@@ -14,12 +14,12 @@ your code does not get to execute again until the I/O code is done.
 "Blocking" refers to the fact that your code has to 
 wait&mdash;it is blocked&mdash;until the I/O completes.
 
-For example, the `Pervasives.input_line : in_channel -> string` function
+For example, the `Stdlib.input_line : in_channel -> string` function
 reads characters from an *input channel* until it reaches a newline
 character, then returns the characters it read.  The type `in_channel`
 is abstract; it represents a source of data that can be read, such 
 as a file, or the network, or the keyboard.  The value
-`Pervasives.stdin : in_channel` represents the *standard input* channel,
+`Stdlib.stdin : in_channel` represents the *standard input* channel,
 which is the channel which usually, by default, provides keyboard input.
 
 If you run the following code, you will observe the blocking behavior:
@@ -52,7 +52,7 @@ come back to make use of the completed operation.
 The Lwt library provides its own I/O functions in the `Lwt_io` module,
 which is in the `lwt.unix` package.
 The function `Lwt_io.read_line : Lwt_io.input_channel -> string Lwt.t` 
-is the asynchronous equivalent of `Pervasives.input_line`.  Similarly, 
+is the asynchronous equivalent of `Stdlib.input_line`.  Similarly, 
 `Lwt_io.input_channel` is the equivalent of the OCaml standard
 library's `in_channel`, and `Lwt_io.stdin` represents the standard
 input channel.
@@ -68,7 +68,7 @@ done
 ```
 
 The string `"done"` is printed immediately by `Lwt_io.printl`, which is
-Lwt's equivalent of `Pervasives.print_endline`, before you even type.
+Lwt's equivalent of `Stdlib.print_endline`, before you even type.
 Note that it's best to use just one library's I/O functions, rather than mix
 them together.
 
@@ -155,7 +155,7 @@ You can see the behavior change in the following code:
 If you reenable this "auto run" feature, and directly
 try to evaluate the promise returned by `read_line`,
 you'll see that it behaves exactly like synchronous I/O, i.e.,
-`Pervasives.input_line`:
+`Stdlib.input_line`:
 ```
 # UTop.set_auto_run_lwt true;;
 - : unit = ()

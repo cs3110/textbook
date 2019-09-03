@@ -34,7 +34,7 @@ we've implemented ourselves so far, which have always been
 *deterministic*: for a given input, they always produced the same output.
 On the other hand, we've seen some library functions that
 are *nondeterministic*, for example, functions in the `Random` module,
-and `Pervasives.read_line`.  It's no coincidence that those happen to be 
+and `Stdlib.read_line`.  It's no coincidence that those happen to be 
 implemented using mutable features.
 
 We could improve our counter in a couple ways.  First, there is a 

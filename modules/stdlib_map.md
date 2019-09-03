@@ -28,7 +28,7 @@ specification:
  * [f e1 e2] is strictly negative if [e1] is smaller than [e2],
  * and [f e1 e2] is strictly positive if [e1] is greater than [e2].
  * Example: a suitable ordering function is the generic structural
- * comparison function [Pervasives.compare]. *)
+ * comparison function [Stdlib.compare]. *)
 val compare : t -> t -> int
 ```
 Arguably this specification is a missed opportunity for good design:  the library
@@ -109,7 +109,7 @@ To create a map, we have to pass a structure into `Map.Make`, and that structure
 has to define a type `t` and `compare` function.  The simplest way to do 
 that is to pass an anonymous structure into the functor:
 ```
-# module IntMap = Map.Make(struct type t = int let compare = Pervasives.compare end);;
+# module IntMap = Map.Make(struct type t = int let compare = Stdlib.compare end);;
 module IntMap : 
   sig
     type key = int                                                              
@@ -151,7 +151,7 @@ Here are some things to note about the utop transcript above:
   be useful to use the double semicolon between definitions to enhance readability:
   
   ```
-  # module IntMap = Map.Make(struct type t = int;; let compare = Pervasives.compare end);;
+  # module IntMap = Map.Make(struct type t = int;; let compare = Stdlib.compare end);;
   ```
   
   This is an exception to the general style rule of avoiding double semicolon inside 
@@ -163,7 +163,7 @@ Here are some things to note about the utop transcript above:
   ```
   module Int = struct
     type t = int
-    let compare = Pervasives.compare
+    let compare = Stdlib.compare
   end
   module IntMap = Map.Make(Int)
   ```
@@ -231,8 +231,8 @@ module Name = struct
   type t = name
   let compare {first=first1;last=last1}
               {first=first2;last=last2} =
-    match Pervasives.compare last1 last2 with
-    | 0 -> Pervasives.compare first1 first2
+    match Stdlib.compare last1 last2 with
+    | 0 -> Stdlib.compare first1 first2
     | c -> c
 end
 ```
@@ -278,7 +278,7 @@ to solve:  balanced binary search trees require a way to compare keys, but
 the implementor can't know in advance all the different types of keys
 that a client of the data structure will want to use.  And each type of
 key might need its own comparison function.  Although the standard library's
-`Pervasives.compare` *can* be used to compare any two values of the same
+`Stdlib.compare` *can* be used to compare any two values of the same
 type, the result it returns isn't necessarily what a client will want.  For 
 example, it's not guaranteed to sort names in the way we wanted above.
 

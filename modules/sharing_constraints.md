@@ -25,9 +25,9 @@ module Ints = struct
   type t    = int
   let zero  = 0
   let one   = 1
-  let (+)   = Pervasives.(+)
-  let ( * ) = Pervasives.( * )
-  let (~-)  = Pervasives.(~-)
+  let (+)   = Stdlib.(+)
+  let ( * ) = Stdlib.( * )
+  let (~-)  = Stdlib.(~-)
 end
 
 module IntsAbstracted : Arith = Ints

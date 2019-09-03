@@ -41,7 +41,7 @@ The syntax and semantics of `<-` is similar to `:=` but complicated by fields:
 ## Refs and Mutable Fields
 
 It turns out that refs are actually implemented as mutable fields.  In 
-[`Pervasives`][pervasives] we find the following declaration:
+[`Stdlib`][stdlib] we find the following declaration:
 ```
 type 'a ref = { mutable contents : 'a; }
 ```
@@ -67,3 +67,5 @@ The reason we say "equivalent" is that those functions are actually
 implemented not in OCaml but in the OCaml run-time, which is implemented
 mostly in C. But the functions do behave the same as the OCaml source
 given above in comments.
+
+[stdlib]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html

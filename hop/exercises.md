@@ -137,7 +137,7 @@ In a similar way, write uncurried versions of these library functions:
 
   - `List.append`
   - `Char.compare`
-  - `Pervasives.max`
+  - `Stdlib.max`
   
 
 

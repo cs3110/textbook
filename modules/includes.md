@@ -15,7 +15,7 @@ module ListSetDups : Set = struct
   let empty   = []
   let mem     = List.mem
   let add x s = x::s
-  let elts s  = List.sort_uniq Pervasives.compare s
+  let elts s  = List.sort_uniq Stdlib.compare s
 end
 ```
 

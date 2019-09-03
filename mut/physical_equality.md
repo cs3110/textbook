@@ -1,7 +1,7 @@
 # Physical Equality
 
 OCaml has two equality operators, physical equality and structural 
-equality.  The [documentation][pervasives] of `Pervasives.(==)` explains physical equality:
+equality.  The [documentation][stdlib] of `Stdlib.(==)` explains physical equality:
 
 > `e1 == e2` tests for physical equality of `e1` and `e2`. On mutable types such as 
 > references, arrays, byte sequences, records with mutable fields and objects with 
@@ -10,13 +10,13 @@ equality.  The [documentation][pervasives] of `Pervasives.(==)` explains physica
 > implementation-dependent; however, it is guaranteed that `e1 == e2` implies 
 > `compare e1 e2 = 0`.
 
-[pervasives]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html
+[stdlib]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html
 
 One interpretation could be that `==` should be used only when comparing refs
 (and other mutable data types) to see whether they point to the same location in 
 memory.  Otherwise, don't use `==`.
 
-Structural equality is also explained in the documentation of `Pervasives.(=)`:
+Structural equality is also explained in the documentation of `Stdlib.(=)`:
 
 > `e1 = e2` tests for structural equality of `e1` and `e2`. Mutable structures 
 > (e.g. references and arrays) are equal if and only if their current contents 

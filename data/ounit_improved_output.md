@@ -64,8 +64,8 @@ produced by `sum` was for that test case.  To find out,
 we need to pass an additional argument to `assert_equal`.
 That argument, whose label is `printer`, should be a function
 that can transform the outputs to strings.  In this case, the
-outputs are integers, so `string_of_int` from the Pervasives
-modules will suffice.  We modify the test suite as follows:
+outputs are integers, so `string_of_int` from the Stdlib
+module will suffice.  We modify the test suite as follows:
 
 ```
 let tests = "test suite for sum" >::: [

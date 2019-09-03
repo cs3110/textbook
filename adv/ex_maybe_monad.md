@@ -49,21 +49,21 @@ accept `int option` as input.  For example,
 let plus_opt (x:int option) (y:int option) : int option =
   match x,y with
   | None, _ | _, None -> None
-  | Some a, Some b -> Some (Pervasives.( + ) a b)
+  | Some a, Some b -> Some (Stdlib.( + ) a b)
   
 let ( + ) = plus_opt
 
 let minus_opt (x:int option) (y:int option) : int option =
   match x,y with
   | None, _ | _, None -> None
-  | Some a, Some b -> Some (Pervasives.( - ) a b)
+  | Some a, Some b -> Some (Stdlib.( - ) a b)
 
 let ( - ) = minus_opt
 
 let mult_opt (x:int option) (y:int option) : int option =
   match x,y with
   | None, _ | _, None -> None
-  | Some a, Some b -> Some (Pervasives.( * ) a b)
+  | Some a, Some b -> Some (Stdlib.( * ) a b)
 
 let ( * ) = mult_opt
 
@@ -71,7 +71,7 @@ let div_opt (x:int option) (y:int option) : int option =
   match x,y with
   | None, _ | _, None -> None
   | Some a, Some b -> 
-    if b=0 then None else Some (Pervasives.( / ) a b)
+    if b=0 then None else Some (Stdlib.( / ) a b)
 
 let ( / ) = div_opt
 
@@ -90,13 +90,13 @@ let propagate_none (op : int -> int -> int) (x : int option) (y : int option) =
   | None, _ | _, None -> None
   | Some a, Some b -> Some (op a b)
 
-let ( + ) = propagate_none Pervasives.( + )
-let ( - ) = propagate_none Pervasives.( - )
-let ( * ) = propagate_none Pervasives.( * )
+let ( + ) = propagate_none Stdlib.( + )
+let ( - ) = propagate_none Stdlib.( - )
+let ( * ) = propagate_none Stdlib.( * )
 ```
 
 Unfortunately, division is harder to deduplicate.  We can't just
-pass `Pervasives.( / )` to `propagate_none`, because neither of those
+pass `Stdlib.( / )` to `propagate_none`, because neither of those
 functions will check to see whether the divisor is zero.
 It would be nice if we could pass our function `div : int -> int -> int option` 
 to `propagate_none`, but the return type of `div` makes that impossible.
@@ -123,16 +123,16 @@ return value with `Some`:
 let wrap_output (op : int -> int -> int) (x : int) (y : int) : int option =
   Some (op x y)
   
-let ( + ) = propagate_none (wrap_output Pervasives.( + ))
-let ( - ) = propagate_none (wrap_output Pervasives.( - ))
-let ( * ) = propagate_none (wrap_output Pervasives.( * ))
+let ( + ) = propagate_none (wrap_output Stdlib.( + ))
+let ( - ) = propagate_none (wrap_output Stdlib.( - ))
+let ( * ) = propagate_none (wrap_output Stdlib.( * ))
 ```
 
 Finally, we could re-implement `div` to use `wrap_output`:
 ```
 let div (x:int) (y:int) : int option =
   if y = 0 then None
-  else wrap_output Pervasives.( / ) x y
+  else wrap_output Stdlib.( / ) x y
 
 let ( / ) = propagate_none div
 ```
@@ -193,22 +193,22 @@ and division:
 let ( + ) (x : int option) (y : int option) : int option = 
   x >>= fun a ->
   y >>= fun b ->
-  return (Pervasives.( + ) a b)
+  return (Stdlib.( + ) a b)
 
 let ( - ) (x : int option) (y : int option) : int option = 
   x >>= fun a ->
   y >>= fun b ->
-  return (Pervasives.( - ) a b)  
+  return (Stdlib.( - ) a b)  
 
 let ( * ) (x : int option) (y : int option) : int option = 
   x >>= fun a ->
   y >>= fun b ->
-  return (Pervasives.( * ) a b)    
+  return (Stdlib.( * ) a b)    
   
 let ( / ) (x : int option) (y : int option) : int option = 
   x >>= fun a ->
   y >>= fun b ->
-  if b = 0 then None else return (Pervasives.( / ) a b)  
+  if b = 0 then None else return (Stdlib.( / ) a b)  
 ```
 
 Recall, from our discussion of the bind operator in Lwt, that
@@ -230,9 +230,9 @@ let upgrade_binary op x y =
 let return_binary op x y = 
   return (op x y)
 
-let ( + ) = upgrade_binary (return_binary Pervasives.( + ))
-let ( - ) = upgrade_binary (return_binary Pervasives.( - ))
-let ( * ) = upgrade_binary (return_binary Pervasives.( * ))
+let ( + ) = upgrade_binary (return_binary Stdlib.( + ))
+let ( - ) = upgrade_binary (return_binary Stdlib.( - ))
+let ( * ) = upgrade_binary (return_binary Stdlib.( * ))
 let ( / ) = upgrade_binary div
 ```
 

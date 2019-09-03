@@ -561,7 +561,7 @@ all the duplicated code.  Here's some advice to guide you toward a good solution
 * You need only three *direct definitions* of the algebraic operations
   and numbers (plus, minus, times, divide, zero, one):  once for `int`,
   once for `float`, and once for ratios.  For example, `IntField.(+)`
-  should not be directly defined as `Pervasives.(+)`; rather, it should be
+  should not be directly defined as `Stdlib.(+)`; rather, it should be
   reused from elsewhere. By "directly defined" we mean a definition of the
   form `let name = ...`.  An indirect definition would be one that results
   from an `include` or a functor application.

@@ -21,7 +21,6 @@ type 'a option = None | Some of 'a
 ```
 So `option` is really just a type constructor, with (value) constructors
 `None` and `Some`.
-You can see both `list` and `option` defined in the [Pervasives module][pervasives]
-of the standard library.
+You can see both `list` and `option` defined in the [core OCaml library][core].
 
-[pervasives]: http://caml.inria.fr/pub/docs/manual-ocaml/core.html
+[core]: http://caml.inria.fr/pub/docs/manual-ocaml/core.html

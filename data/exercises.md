@@ -76,7 +76,7 @@ Consult the [`List` standard library][listdoc] to solve these exercises:
   `List.nth`.*
   
 * Write a function that takes an `int list` and returns the list sorted in descending order.
-  *Hint: `List.sort` with `Pervasives.compare` as its first argument, and `List.rev`.*
+  *Hint: `List.sort` with `Stdlib.compare` as its first argument, and `List.rev`.*
 
 [listdoc]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
 

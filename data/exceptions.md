@@ -44,13 +44,14 @@ The expression `e` is what might raise an exception.  If it does not, the entire
 ## Exceptions are Extensible Variants
 
 All exception values have type `exn`, which is a variant 
-defined in the [Pervasives module][pervasives].  It's an unusual
+defined in the [core][core].  It's an unusual
 kind of variant, though, called an *extensible* variant, which allows
 new constructors of the variant to be defined after the variant type
 itself is defined.  See the OCaml manual for more information about
 [extensible variants][extvar] if you're interested.
 
-[extvar]: http://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec251
+[core]: http://caml.inria.fr/pub/docs/manual-ocaml/core.html
+[extvar]: http://caml.inria.fr/pub/docs/manual-ocaml/extn.html
 
 ## Exception Semantics
 
