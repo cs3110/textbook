@@ -81,7 +81,7 @@ the base types of the language like `int` and `bool`).
 
 [types]: http://caml.inria.fr/pub/docs/manual-ocaml/types.html
 
-We're going to be write "has type" a lot, so let's introduce a more compact
+We're going to be writing "has type" a lot, so let's introduce a more compact
 notation for it.  Whenever we would write "`e` has type `t`", let's instead
 write `e : t`.  The colon is pronounced "has type".  This usage of colon
 is consistent with how the toplevel responds after it evaluates an expression
