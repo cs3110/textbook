@@ -76,6 +76,11 @@ do with comprehensions can be done with more primitive language
 features.  Moreover, we won't be using comprehensions in this course, so
 it's safe for you to ignore the rest of this subsection.
 
+*The following instructions are currently not working as of Fall 2019;
+the `ppx_monadic` package (and its dependencies) haven't yet been updated
+to work with OCaml 4.08.x.  We'll leave this here for future reference,
+hoping that support is restored someday.*
+
 It is possible to get support for them with the `ppx_monadic` package.
 Install it with this command:
 ```
