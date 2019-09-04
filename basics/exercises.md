@@ -14,7 +14,8 @@ Note:  `^` is not exponentiation.*
 
 ##### Exercise: operators [&#10029;&#10029;]
 
-Examine the [table of all operators in the OCaml manual][ops].
+Examine the [table of all operators in the OCaml manual][ops] (you will have to
+scroll down to find it on that page).
 
 * Write an expression that multiplies `42` by `10`.
 * Write an expression that divides `3.14` by `2.0`.  *Hint: integer and floating-point
@@ -26,7 +27,7 @@ Examine the [table of all operators in the OCaml manual][ops].
 
 
 
-[ops]: http://caml.inria.fr/pub/docs/manual-ocaml/expr.html#sec139
+[ops]: http://caml.inria.fr/pub/docs/manual-ocaml/expr.html
 
 ##### Exercise: equality [&#10029;]
 
