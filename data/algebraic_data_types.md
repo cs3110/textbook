@@ -109,8 +109,8 @@ To define a variant type:
 ```
 type t = C1 [of t1] | ... | Cn [of tn]
 ```
-The square brackets above denote the the `of ti` is optional.  Every
-constructor may individually either carry no data or carry date.
+The square brackets above denote the type `of ti` is optional.  Every
+constructor may individually either carry no data or carry data.
 We call constructors that carry no data *constant*; and those that
 carry data, *non-constant*.
 
