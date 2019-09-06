@@ -231,8 +231,8 @@ type poketype = Normal | Fire | Water
 * Create a record named `charizard` of type `pokemon` that represents
 a Pok&eacute;mon with 78 HP and Fire type.
 
-* Create a record named `metapod` of type `pokemon` that represents
-a Pok&eacute;mon with 50 HP and Normal type.
+* Create a record named `squirtle` of type `pokemon` that represents
+a Pok&eacute;mon with 44 HP and Water type.
 
 
 
