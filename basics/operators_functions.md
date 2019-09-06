@@ -1,7 +1,7 @@
 # Operators as Functions
 
 The addition operator `+` has type `int->int->int`. It is normally
-written *infix*, e.g., `3+4`. By putting parentheses around it, we can
+written *infix*, e.g., `3 + 4`. By putting parentheses around it, we can
 make it a *prefix* operator: 
 
 ```
@@ -19,7 +19,7 @@ make it a *prefix* operator:
 ```
 
 The same technique works for any built-in operator. But be careful of
-multiplication, which must be written `( * )` as infix, because `(*)`
+multiplication, which must be written `( * )` as prefix, because `(*)`
 would be parsed as beginning a comment.
 
 We can even define our own new infix operators, for example:

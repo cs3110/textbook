@@ -25,7 +25,7 @@ To evaluate `e0 e1 ... en`:
    to values `v1` through `vn`.
 
    For `e0`, the result might be an anonymous function `fun x1 ... xn ->
-   e`.  Or it might a name `f`, and we have to find the definition of
+   e`.  Or it might be a name `f`, and we have to find the definition of
    `f`, in which case let's assume that definition is `let rec f x1 ...
    xn = e`.  Either way, we now know the argument names `x1` through
    `xn` and the body `e`.

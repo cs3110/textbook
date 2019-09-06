@@ -13,7 +13,7 @@ Consider this specification of `random_int`:
 ```
 
 If the client of `random_int` passes a value of `bound` that violates
-the "Raises" clause, such as `-1`, the implementation of `random_int` is
+the "Requires" clause, such as `-1`, the implementation of `random_int` is
 free to do anything whatsoever.  All bets are off when the client
 violates the precondition.
 

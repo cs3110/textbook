@@ -23,7 +23,7 @@ meant to suggest "head" and "tail" and is a common idiom, but we could
 use other names if we wanted.  Another common idiom is:
 ```
 let rec sum xs = 
-  match lst with
+  match xs with
   | [] -> 0
   | x::xs' -> x + sum xs'
 ```
