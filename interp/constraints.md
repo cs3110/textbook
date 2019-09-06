@@ -167,7 +167,7 @@ Subexpression     Preliminary type
 **2. Collect constraints.**
 
 - `S = int -> R`
-- `(U -> V) -> (U -> V) = (int -> int) -> S
+- `(U -> V) -> (U -> V) = (int -> int) -> S`
 
 **3. Solve constraints.**
 
