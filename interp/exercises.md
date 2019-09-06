@@ -93,13 +93,6 @@ Use the SimPL type system to show that
 
 &square;
 
-##### Exercise: typing [&#10029;&#10029;] 
-
-Use the SimPL type system to show that
-`{} |- let x = 0 in if x <= 1 then 22 else 42 : int`.
-
-&square;
-
 ## The Substitution Model
 
 ##### Exercise: substitution [&#10029;&#10029;] 
