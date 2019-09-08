@@ -120,7 +120,7 @@ code to produce a long list:
  *   [i] to [j], inclusive, followed by the list [l].
  * example:  [from 1 3 [0] = [1;2;3;0]] *)
 let rec from i j l =
-  if i>j then l
+  if i > j then l
   else from i (j-1) (j::l)
 
 (* returns:  [i -- j] is the list containing the integers from
@@ -212,12 +212,12 @@ Give OCaml expressions that have the following types:
 
 
 
+##### Exercise: pokerecord [&#10029;&#10029;] 
+
 Here is a variant that represents a few Pok&eacute;mon types:
 ```
 type poketype = Normal | Fire | Water
 ```
-
-##### Exercise: pokerecord [&#10029;&#10029;] 
 
 * Define the type `pokemon` to be a record with fields `name` (a string),
   `hp` (an integer), and `ptype` (a `poketype`).
