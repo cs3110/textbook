@@ -17,9 +17,7 @@
 
 Write a function that returns the product of all the elements in a list.  The 
 product of all the elements of an empty list is `1`.  *Hint: recall the `sum`
-function we defined in lecture.*  Put your code in a file named `lab03.ml`.
-Use the toplevel to test your code.
-
+function we defined in lecture.*  
 
 
 ##### Exercise: concat [&#10029;&#10029;, optional]
@@ -27,10 +25,6 @@ Use the toplevel to test your code.
 Write a function that concatenates all the strings in a list.
 The concatenation of all the strings in an empty list is the empty string `""`.
 *Hint: this function is really not much different than `sum` or `product`.*
-Put your code in a file named `lab03.ml`.
-Use the toplevel to test your code.
-
-
 
 
 ##### Exercise: bad add [&#10029;&#10029;] 
