@@ -27,21 +27,6 @@ The concatenation of all the strings in an empty list is the empty string `""`.
 *Hint: this function is really not much different than `sum` or `product`.*
 
 
-##### Exercise: bad add [&#10029;&#10029;] 
-
-Create a file named `add.ml`, and in it put the following buggy version of an
-addition function:
-```
-let add x y = 
-  if x mod 7 = 0 then 0   (* bug *)
-  else x+y
-```
-
-Now create a file named `add_test.ml`.  Create and run an OUnit test suite for
-`add` in that file.  Make sure to write some test cases that will pass 
-(e.g., `add 1 2`) and some test cases that will fail (e.g., `add 7 1`).
-
-
 
 ##### Exercise: product test [&#10029;&#10029;, optional] 
 
@@ -121,7 +106,7 @@ code to produce a long list:
  * example:  [from 1 3 [0] = [1;2;3;0]] *)
 let rec from i j l =
   if i > j then l
-  else from i (j-1) (j::l)
+  else from i (j - 1) (j :: l)
 
 (* returns:  [i -- j] is the list containing the integers from
  *   [i] to [j], inclusive.
