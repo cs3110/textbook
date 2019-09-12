@@ -85,7 +85,7 @@ and another that is a direct recursive implementation.
 Write a function `sum_cube_odd n` that computes the sum of the cubes of all
 the odd numbers between `0` and `n` inclusive.  Do not write any new recursive
 functions.  Instead, use the functionals map, fold, and filter, and the `(--)` 
-operator defined in the lecture notes.
+operator (defined in the discussion of fold left vs. fold right).
 
 
 

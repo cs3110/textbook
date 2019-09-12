@@ -32,8 +32,8 @@ Stack overflow during evaluation (looping recursion?)
 ```
 Of course we could have written `fun x y -> x - y` as `(-)` in the code above,
 but we didn't in this one case just so you could see how the argument order has to change.
-Recall that `(--)` is an operator we defined in the recitation on lists; `x--y` tail-recursively
-computes the list containing all the integers from `x` to `y` inclusive:
+Recall that `x--y` tail-recursively computes the list containing all the
+integers from `x` to `y` inclusive:
 ```
 let (--) i j =
   let rec from i j l =
