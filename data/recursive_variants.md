@@ -26,12 +26,6 @@ Notice that in the definition of `intlist`, we define the `Cons`
 constructor to carry a value that contains an `intlist`.  This makes
 the type `intlist` be *recursive*: it is defined in terms of itself.
 
-Record types may also be recursive, but plain old type synonyms may not be:
-```
-type node = {value:int; next:node}  (* OK *)
-type t = t*t  (* Error: The type abbreviation t is cyclic *)
-```
-
 Types may be mutually recursive if you use the `and` keyword:
 ```
 type node = {value:int; next:mylist}
@@ -43,3 +37,14 @@ that the recursion "goes through".  For example:
 type t = u and u = t  (* Error: The type abbreviation t is cyclic *)
 type t = U of u and u = T of t  (* OK *)
 ```
+
+Record types may also be recursive, but plain old type synonyms may not be:
+```
+type node = {value:int; next:node}  (* OK *)
+type t = t*t  (* Error: The type abbreviation t is cyclic *)
+```
+Although `node` is a legal type definition, there is no way to construct a value
+of that type because of the circularity involved:  to construct the very first
+`node` value in existence, you would already need a value of type `node` to exist.
+Later, when we cover imperative features, we'll see a similar idea used (successfully)
+for linked lists.
