@@ -1,5 +1,37 @@
 # Exercises
 
+##### Exercise: complex synonym [&#10029;]
+
+Here is a signature and a structure for complex numbers, which
+have a real and imaginary component:
+```
+module type ComplexSig = sig
+  val zero : float * float
+  val add : float * float -> float * float -> float * float
+end
+
+module Complex : ComplexSig = struct
+  let zero = (0., 0.)
+  let add (r1,i1) (r2,i2) = r1 +. r2, i1 +. i2
+end
+
+```
+  
+Improve that code by adding `type t = float * float` to the signature.
+(Why do you have to add it to both? Because if the signature requires
+it, the structure must provide it.) Show how the signature can be
+written more tersely because of the type synonym.
+
+##### Exercise: complex encapsulation [&#10029;&#10029;]
+  
+Investigate what happens if you make the following changes (each
+independently) to the code for the Complex module in the previous
+exercise, and explain why any errors arise:
+
+- remove `zero` from the structure
+- remove `add` from the signature
+- change `zero` in the structure to `let zero = 0, 0`
+
 ##### Exercise: big list queue [&#10029;&#10029;] 
 
 Use the following code to create `ListQueue`'s of exponentially
@@ -60,43 +92,6 @@ module type using the `tree` type.
 
 &square;
 
-##### Exercise: complex synonym [&#10029;]
-
-Here is a signature and a structure for complex numbers, which
-have a real and imaginary component:
-```
-module type ComplexSig = sig
-  val zero : float*float
-  val add : float*float -> float*float -> float*float
-end
-
-module Complex = struct
-  let zero = 0., 0.
-  let add (r1,i1) (r2,i2) = r1 +. r2, i1 +. i2
-end
-
-```
-  
-Improve that code by adding `type t = float*float` to **both** the structure
-and signature.  Show how the signature can be written more tersely because
-of the type synonym.
-
-##### Exercise: complex encapsulation [&#10029;&#10029;]
-  
-Change the first line of the `Complex` module above 
-to be 
-```
-module Complex : ComplexSig = struct
-  ...
-```
-Investigate what happens if you make the following changes (each
-independently) to the code, and explain why any errors arise:
-
-- remove `zero` from the structure
-- remove `add` from the signature
-- change `zero` in the structure to `let zero = 0, 0`
-    
-
 ##### Exercise: fraction [&#10029;&#10029;&#10029;] 
 
 Write a module that implements the `Fraction` module type below:
@@ -108,10 +103,10 @@ module type Fraction = sig
   (* [make n d] is n/d. Requires d != 0. *)
   val make : int -> int -> t
   
-  val numerator   : t -> int
+  val numerator : t -> int
   val denominator : t -> int
-  val toString    : t -> string
-  val toReal      : t -> float
+  val to_string : t -> string
+  val to_float : t -> float
   
   val add : t -> t -> t
   val mul : t -> t -> t
