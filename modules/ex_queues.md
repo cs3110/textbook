@@ -80,15 +80,10 @@ element at the end.
 ## Queue Implemented with Two Lists
 
 Here is a second, more efficient implementation of the Queue interface, 
-using two lists to represent a single queue. This representation seems
-to have been invented independently by (1) Hood and Melville, and by 
-(2) our very own Prof. David Gries.
-
-1. Robert Hood and Robert Melville. Real-time queue operations
-   in pure LISP.  *Information Processing Letters*, 13(2):50-53, 
-   November 1981. 
-2. David Gries.  *The Science of Programming*, p. 55.  Springer-Verlag,
-   New York, 1981.
+using two lists to represent a single queue. This representation was invented
+by Robert Melville as part of his PhD dissertation at Cornell (*Asymptotic
+Complexity of Iterative Computations*, Jan 1981), which was advised by
+Prof. David Gries.
 
 ```
 module TwoListQueue : Queue = struct
