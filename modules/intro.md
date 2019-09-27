@@ -33,7 +33,7 @@ implemented.
 
 Modules are abstracted by giving *specifications* of what they are
 supposed to do. A good module specification is clear, understandable,
-and give just enough information about what the module does for clients
+and gives just enough information about what the module does for clients
 to successfully use it. This abstraction makes the programmer's job much
 easier; it is helpful even when there is only one programmer working on
 a moderately large program, and it is crucial when there is more than

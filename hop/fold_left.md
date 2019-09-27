@@ -6,8 +6,8 @@ function is called `List.fold_left` in the OCaml library.  Here is its
 implementation:
 ```
 let rec fold_left op acc = function
-    | []   -> acc
-    | h::t -> fold_left op (op acc h) t
+  | []   -> acc
+  | h :: t -> fold_left op (op acc h) t
 ```
 The idea is that `fold_left (+) 0 [a;b;c]` results in evaluation of
 `((0+a)+b)+c`.  The parentheses associate from the left-most
@@ -38,7 +38,7 @@ stored in the accumulator.
 ```
 let rec sum' acc = function
   | []   -> acc
-  | h::t -> sum' (acc+x) xs
+  | h :: t -> sum' (acc + h) t
 
 let sum = sum' 0
 ```
@@ -48,7 +48,7 @@ in the `sum'`.
 Using `fold_left`, we can rewrite `sum` and `concat` as follows:
 
 ```
-let sum    = List.fold_left (+) 0  
+let sum = List.fold_left (+) 0  
 let concat = List.fold_left (^) "" 
 ```
 We have once more succeeded in applying the Abstraction Principle.

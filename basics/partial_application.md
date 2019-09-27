@@ -85,7 +85,7 @@ And the type of such a function
 
 really means the same as
 
-	t1 -> (t2 -> (t3 -> t4)))
+	t1 -> (t2 -> (t3 -> t4))
 
 That is, function types are *right associative*: there are implicit
 parentheses around function types, from right to left. The intuition

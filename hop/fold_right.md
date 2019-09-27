@@ -12,7 +12,7 @@ let rec sum = function
   | [] -> 0
   | h::t -> h + sum t
   
-let concat = function
+let rec concat = function
   | [] -> ""
   | h::t -> h ^ concat t
 ```

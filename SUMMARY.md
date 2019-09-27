@@ -25,7 +25,7 @@
     + [2.3.1. Anonymous Functions](basics/anonymous_functions.md)
     + [2.3.2. Function Application](basics/function_application.md)
     + [2.3.3. Polymorphic Functions](basics/polymorphic_functions.md)
-    + [2.3.4. Labelled and Optional Arguments](basics/arguments.md)
+    + [2.3.4. Labeled and Optional Arguments](basics/arguments.md)
     + [2.3.5. Partial Application](basics/partial_application.md)
     + [2.3.6. Operators as Functions](basics/operators_functions.md)
     + [2.3.7. Documentation](basics/documentation.md)
