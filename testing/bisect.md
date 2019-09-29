@@ -1,19 +1,16 @@
 # Bisect
 
-*This section of the textbook needs to be rewritten for Fall 2019
-to use bisect-ppx instead of bisect.*
-
 Glass-box testing can be aided by *code-coverage tools* that assess
 how much of the code has been exercised by a test suite.  The 
-[bisect][] tool for OCaml can tell you which expressions in your
+[bisect_ppx][] tool for OCaml can tell you which expressions in your
 program have been tested, and which have not.
 Here's how it works:
 
-[bisect]: http://bisect.x9c.fr/
+[bisect_ppx]: https://github.com/aantron/bisect_ppx
 
-- You compile your code using Bisect as part of the compilation process.
-  It *instruments* your code, mainly by inserting additional 
-  expressions to be evaluated.
+- You compile your code using Bisect\_ppx (henceforth, just Bisect for short)
+  as part of the compilation process. It *instruments* your code, mainly by
+  inserting additional expressions to be evaluated.
   
 - You run your code.  The instrumentation that Bisect inserted causes
   your program to do something in addition to whatever functionality
@@ -24,7 +21,7 @@ Here's how it works:
   A new output file will be created at each invocation, the first
   being `bisect0001.out`, the second being `bisect0002.out`, etc.
   
-- You run a tool called `bisect-report` on that output file.  It
+- You run a tool called `bisect-ppx-report` on that output file.  It
   produces HTML showing you which parts of your code got executed,
   and which did not.
   
@@ -43,18 +40,34 @@ did get executed.
 Download the file [`sorts.ml`](sorts.ml).  You will
 find an implementation of insertion sort and merge sort.
 
-Create a `_tags` file that includes the following:
+Create a file in the same directory as `sorts.ml` called
+`myocamlbuild.ml`.  That file name is actually mandatory,
+despite the customary use of "my" in CS demos to indicate
+a name that you could choose.  Put this code in it:
 ```
-true: package(oUnit), package(bisect), syntax(camlp4o), syntax(bisect_pp)
+open Ocamlbuild_plugin
+let () = dispatch Bisect_ppx_plugin.dispatch
 ```
-The latter three tags are what enable compilation with Bisect.
+
+Create a `_tags` file in the same directory, and put the following
+in it:
+```
+<sorts.ml>: coverage
+<test_sorts.{byte,native}>: coverage
+true: package(oUnit)
+```
 
 Download the file [`test_sorts.ml`](test_sorts.ml).  It has the skeleton
-for a test suite.
+for an OUnit test suite.  Create a `.merlin` file in the same directory containing
+the usual instructions:
+```
+B _build
+PKG oUnit
+```
 
 Run 
 ```
-$ ocamlbuild -use-ocamlfind test_sorts.byte
+$ BISECT_COVERAGE=YES ocamlbuild -use-ocamlfind -plugin-tag 'package(bisect_ppx-ocamlbuild)' test_sorts.byte
 ``` 
 to build the test suite, and 
 ```
@@ -63,44 +76,41 @@ $ ./test_sorts.byte -runner sequential
 to run it. Note the additional flag `-runner sequential` that we don't normally
 have to supply when running the test suite.  It causes OUnit to run all the
 tests sequentially, instead of trying to run many of them in parallel.  The latter
-is good for speeding up large test suites, but it turns out Bisect isn't designed
-to handle that kind of parallelism.
+is good for speeding up large test suites, but it seems (at least as of 
+Fall 2018) Bisect isn't designed to handle that kind of parallelism.
 
 Running the suite will cause `bisect0001.out` (assuming it's your first
 run of the suite) to be produced.  
 Next run 
 ```
-$ bisect-report -I _build -html report bisect0001.out
+$ bisect-ppx-report -I _build -html report bisect0001.out
 ``` 
 to generate the Bisect report from your test suite
 execution.  
 
 Open the file `report/index.html` in a web browser.  Look at the
-per-file coverage; you'll see we've managed to test only 4% of
+per-file coverage; you'll see we've managed to test only 10% of
 `sorts.ml` with our test suite so far. Click on the link in that report
-for `sorts.ml`. You'll see that we've managed to cover one line of the
+for `sorts.ml`. You'll see that we've managed to cover a couple lines of the
 source code so far with our test suite.  The covered lines are colored
 green, and the uncovered lines are red.
 
-If you add more tests to the OUnit test suite, and repeat the above
-process of testing with Bisect, you'll discover that more and more
-lines have been covered.  How close to 100% coverage can you get?
+There are some additional tests in the test file.  Try uncommenting those,
+as documented in the test file, and increasing your code coverage.  Between
+each run, you will need to delete the `bisect0001.out` report file, recompile,
+rerun OUnit, and rerun the Bisect report tool.  (Obviously, a Makefile would
+be a good thing to construct.)
 
-## Ignoring Code
+By the time you're done uncommenting the provided tests, you should be at 30%
+coverage, including all of the insertion sort implementation.  For fun, try
+adding more tests to get 100% coverage of merge sort.
 
-Sometimes you will want to exclude code from Bisect analysis.  The usual
-reason for that is the code can't be unit tested.  For example,
+## Uncoverable Code
+
+Sometime code can't be covered by unit tests. For example,
 maybe it's code that defensively checks that the `rep_ok` holds
 of an input, but unit tests will never be able to construct an input 
 that violates `rep_ok`.  Or maybe it's code that is only meaningful
 in a GUI or in utop, such as custom utop printers for abstract types.
+In that case, you won't be able to reach 100% coverage.
 
-To ignore code, you can insert special comments that cause Bisect to
-omit one or more lines from analysis:
-
-* `(*BISECT-IGNORE*)` will ignore the line on which the comment occurs.
-
-* `(*BISECT-IGNORE-BEGIN*)` and `(*BISECT-IGNORE-END*)` will ignore all
-  the code between the two comments.
-  
-Note that there may not be spaces inside those special comments.
