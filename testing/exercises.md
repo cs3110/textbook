@@ -12,11 +12,9 @@ to the end of the file where that signature is implemented
 as `ListSet`.
 
 Based on the specification comments of `Set`, write an OUnit test suite
-for `ListSet` that does black-box testing of `size` and `insert`.  We've
-already got you started in the provided file `test_sets.ml`.  Write
-enough tests to detect at least one bug in both `size` and `insert`
-without ever reading their implementations.  *Hint: `empty` and
-`to_list` are both correctly implemented, so you can rely on those.*
+for `ListSet` that does black-box testing of `size` and `choose`.  Write
+enough tests to detect at least one bug in both `size` and `choose`
+without ever reading their implementations.
 
 &square;
 
@@ -38,7 +36,7 @@ suite pass.
 
 ##### Exercise: set glass box [&#10029;&#10029;&#10029;, optional] 
 
-Achieve as close to 100% code coverage as you can for `ListSet`.
+Achieve as close to 100% code coverage with Bisect as you can for `ListSet`.
 
 &square;
 
