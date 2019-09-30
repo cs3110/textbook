@@ -1,5 +1,9 @@
 # Exercises
 
+*Note: if the links to code do not seem to work in your
+browser, try opening them in a new tab or downloading them,
+instead of only clicking on them.*
+
 ##### Exercise: black box test [&#10029;&#10029;] 
 
 Download [`sets.ml`](sets.ml)  It implements sets with a list.
