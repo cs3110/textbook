@@ -40,10 +40,19 @@ did get executed.
 Download the file [`sorts.ml`](sorts.ml).  You will
 find an implementation of insertion sort and merge sort.
 
-Create a file in the same directory as `sorts.ml` called
+If you're using VS Code, create a `.merlin` file in the same directory
+containing these instructions:
+```
+B _build
+PKG oUnit
+PKG ocamlbuild
+PKG bisect_ppx-ocamlbuild
+```
+
+Create a file in the same directory called
 `myocamlbuild.ml`.  That file name is actually mandatory,
 despite the customary use of "my" in CS demos to indicate
-a name that you could choose.  Put this code in it:
+a name that you could choose yourself.  Put this code in it:
 ```
 open Ocamlbuild_plugin
 let () = dispatch Bisect_ppx_plugin.dispatch
@@ -58,12 +67,7 @@ true: package(oUnit)
 ```
 
 Download the file [`test_sorts.ml`](test_sorts.ml).  It has the skeleton
-for an OUnit test suite.  Create a `.merlin` file in the same directory containing
-the usual instructions:
-```
-B _build
-PKG oUnit
-```
+for an OUnit test suite.  
 
 Run 
 ```
