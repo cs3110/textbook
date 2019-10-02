@@ -112,8 +112,8 @@ module ListStack : Stack = struct
 end
 ```
 For more information, see the [toplevel manual][toplevel] (search for `#install_printer`),
-and the [Format module][format], as well as this [patch in the OCaml Bug Tracker][patch].
+and the [Format module][format], as well as this [OCaml Github issue][poly-printer].
 
 [toplevel]: http://caml.inria.fr/pub/docs/manual-ocaml/toplevel.html
 [format]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Format.html
-[patch]: http://caml.inria.fr/mantis/print_bug_page.php?bug_id=5958
+[poly-printer]: https://github.com/ocaml/ocaml/issues/5958
