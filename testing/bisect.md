@@ -109,12 +109,23 @@ By the time you're done uncommenting the provided tests, you should be at 30%
 coverage, including all of the insertion sort implementation.  For fun, try
 adding more tests to get 100% coverage of merge sort.
 
-## Uncoverable Code
+## Ignoring uncoverable code
 
-Sometime code can't be covered by unit tests. For example,
+Sometimes you will want to exclude code from Bisect analysis.  The usual
+reason for that is the code can't be unit tested.  For example,
 maybe it's code that defensively checks that the `rep_ok` holds
 of an input, but unit tests will never be able to construct an input 
 that violates `rep_ok`.  Or maybe it's code that is only meaningful
 in a GUI or in utop, such as custom utop printers for abstract types.
-In that case, you won't be able to reach 100% coverage.
+
+To ignore code, you can insert special comments that cause Bisect to
+omit one or more lines from analysis:
+
+* `(*BISECT-IGNORE*)` will ignore the line on which the comment occurs.
+
+* `(*BISECT-IGNORE-BEGIN*)` and `(*BISECT-IGNORE-END*)` will ignore all
+  the code between the two comments.
+  
+Note that there may not be spaces inside those special comments.
+
 
