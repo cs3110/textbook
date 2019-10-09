@@ -59,7 +59,7 @@ For the following exercises, consult the [documentation of
 
 Create a hash table `tab` with `Hashtbl.create` whose initial size is 16.
 (You can safely ignore the optional argument to that function
-for this lab.) Add 31 bindings to it with `Hashtbl.add`.
+for now.) Add 31 bindings to it with `Hashtbl.add`.
 For example, you could add the numbers 1..31 as keys and
 the strings "1".."31" as their values.  Use `Hashtbl.find`
 to look for keys that are in `tab`, as well as keys
