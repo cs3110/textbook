@@ -162,8 +162,8 @@
   - [8.11. Exercises](mut/exercises.md)
 
 - [9. Efficiency](eff/intro.md)
-  - [9.1. Hash Tables](eff/hash.md)
-  - [9.2. Big-Oh Notation](eff/bigoh.md)
+  - [9.1. Big-Oh Notation](eff/bigoh.md)
+  - [9.2. Hash Tables](eff/hash.md)
   - [9.3. Amortized Analysis](eff/amortized.md)
   - [9.4. Binary Search Trees](eff/bst.md)
   - [9.5. Red-Black Trees](eff/rb.md)  
