@@ -186,7 +186,9 @@ Consider this representation of streams:
 type 'a stream = Cons of (unit -> 'a * 'a stream)
 ```
 
-How would you code up `hd`, `tl`, `nats`, and `map` for it?
+How would you code up `hd : 'a stream -> 'a`, 
+`tl : 'a stream -> 'a stream`, `nats : int stream`, 
+and `map : ('a -> 'b) -> 'a stream -> 'b stream` for it?
 Explain how this representation is even lazier than our
 original representation.
 
