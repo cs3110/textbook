@@ -242,14 +242,6 @@ Make sure to use Lwt's I/O functions (e.g., `Lwt_io.printf`).
 
 &square;
 
-##### Exercise: promise and resolve lwt [&#10029;&#10029;] 
-
-Repeat the **promise and resolve** exercise, but
-use the Lwt library instead of our own Promise library.
-Make sure to use Lwt's I/O functions (e.g., `Lwt_io.printf`).
-
-&square;
-
 ##### Exercise: timing challenge 1 [&#10029;&#10029;] 
 
 Here is a function that produces a time delay.  We can use it
