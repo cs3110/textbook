@@ -34,7 +34,7 @@ that `x` is a variable whose type is `int ref`.  We have a new type
 constructor here.  Much like `list` and `option` are type constructors,
 so is `ref`.  A `t ref`, for any type `t`, is a reference to a memory
 location that is guaranteed to contain a value of type `t`.  As usual
-we should read should a type from right to left:  `t ref` means a
+we should read a type from right to left:  `t ref` means a
 reference to a `t`.
 The second part of the response shows us the contents of the memory
 location.  Indeed, the contents have been initialized to `0`.

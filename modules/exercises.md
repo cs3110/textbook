@@ -2,31 +2,30 @@
 
 ##### Exercise: complex synonym [&#10029;]
 
-Here is a signature and a structure for complex numbers, which
-have a real and imaginary component:
+Here is a signature for complex numbers, which have a real and imaginary
+component:
 ```
 module type ComplexSig = sig
   val zero : float * float
   val add : float * float -> float * float -> float * float
 end
-
-module Complex : ComplexSig = struct
-  let zero = (0., 0.)
-  let add (r1,i1) (r2,i2) = r1 +. r2, i1 +. i2
-end
-
 ```
-  
-Improve that code by adding `type t = float * float` to the signature.
-(Why do you have to add it to both? Because if the signature requires
-it, the structure must provide it.) Show how the signature can be
-written more tersely because of the type synonym.
+
+Improve that code by adding `type t = float * float` to the signature. Show how
+the signature can be written more tersely because of the type synonym.
 
 ##### Exercise: complex encapsulation [&#10029;&#10029;]
   
+Here is a structure that matches the signature from the previous exercise:
+```
+module Complex : ComplexSig = struct
+  type t = float * float
+  let zero = (0., 0.)
+  let add (r1,i1) (r2,i2) = r1 +. r2, i1 +. i2
+end
+```
 Investigate what happens if you make the following changes (each
-independently) to the code for the Complex module in the previous
-exercise, and explain why any errors arise:
+independently), and explain why any errors arise:
 
 - remove `zero` from the structure
 - remove `add` from the signature

@@ -9,7 +9,7 @@ implementer, but not to the client. To the client, they all represent the
 abstract set {1, 3} and cannot be distinguished by any of the operations
 of the `Set` signature. From the point of view of the client, the abstract
 data type describes a set of abstract values and associated operations.
-The implementers knows that these abstract values are represented by
+The implementer knows that these abstract values are represented by
 concrete values that may contain additional information invisible from
 the client's view. This loss of information is described by the
 *abstraction function*, which is a mapping from the space of concrete

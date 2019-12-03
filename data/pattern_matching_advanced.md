@@ -1,6 +1,6 @@
 # Advanced Patterns
 
-Here are some addition pattern forms that are useful:
+Here are some additional pattern forms that are useful:
 
 * `p1 | ... | pn`:  an "or" pattern; matching against it succeeds if
   a match succeeds against any of the individual patterns `pi`, which
