@@ -25,18 +25,36 @@ price, the final operation in the sequence would have been "pre-paid" by
 the extra price we paid for earlier inserts. And all of them would be
 constant-time, since four times a constant is still a constant.
 
-Generalizing from the example above, let's suppose that the load factor
-of a table is currently 1.  Suppose a series of insert operations
-occurs, and that the length of the series triggers a resize.  Then the
-length of the series must be equal to the number of buckets.  Let's
-assume the number of buckets is \\(2^n\\).  Then there have been
-\\(2^n-1\\) inserts before the resize was triggered, followed by another
-\\(2^n + 2^n = 2^{n+1}\\) inserts for the resize and final insert.
-That's a total of \\(2^{n+1} + 2^n - 1\\) inserts, which we could
-grossly round up to \\(2^{n+2}\\).  Over a series of \\(2^n\\)
-operations, that's an average cost of (the equivalent of) 4 inserts per
-operation.  So if we just pretend each insert costs four times its
-normal price, every operation in the sequence is amortized constant time.
+Generalizing from the example above, let's suppose that the the number of
+buckets currently in a hash table is \\(2^n\\), and that the load factor is
+currently 1.  Therefore, there are currently \\(2^n\\) bindings in the table.
+Next:
+
+- A series of \\(2^n - 1\\) inserts occurs.  There are now \\(2^n + 2^n - 1\\)
+  bindings in the table.
+
+- One more insert occurs.  That would bring the number of bindings up to
+  \\(2^n + 2^n\\), which is \\(2^{n+1}\\), which would make the load factor
+  become 2.  So a resize is necessary before the insert can happen.
+
+- The resize occurs.  That doubles the number of buckets.  All existing \\(2^n +
+  2^n - 1\\) bindings have to be reinserted.
+
+- The last insert can now occur.
+
+So in total we did:
+
+- \\(2^n - 1\\) inserts before the resize
+
+- \\(2^n + 2^n - 1\\) inserts during the resize
+
+- 1 insert after the resize
+
+That's a total of \\(2^{n+1} + 2^n\\) inserts. which we could grossly round up
+to \\(2^{n+2}\\).  Over a series of \\(2^n\\) operations, that's an average cost
+of (the equivalent of) 4 inserts per operation.  So if we just pretend each
+insert costs four times its normal price, every operation in the sequence is
+amortized constant time.
 
 Notice that it is crucial that the array size grows geometrically
 (i.e., by doubling). It may be tempting to grow the array by a fixed increment
