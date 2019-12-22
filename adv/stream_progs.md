@@ -11,8 +11,8 @@ Here are functions to square a stream, and to sum two streams:
 let rec square (Cons (h, tf)) =
   Cons (h*h, fun () -> square (tf ()))
 
-(* [sum <a1;b1;c1;...> <a2;b2;c2;...>] is
- * [<a1+b1;a2+b2;a3+b3;...>] *)
+(* [sum <a1; a2; a3; ...> <b1; b2; b3; ...>] is
+ * [<a1+b1; a2+b2; a3+b3; ...>] *)
 let rec sum (Cons (h1, tf1)) (Cons (h2, tf2)) =
   Cons (h1+h2, fun () -> sum (tf1 ()) (tf2 ()))
 ```
