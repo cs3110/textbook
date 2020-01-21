@@ -1,6 +1,6 @@
 # Functional Programming in OCaml
 
-**Fall 2019 Edition**
+**Spring 2020 Edition**
 
 Based on courses taught by Michael R. Clarkson, Robert L. Constable,
 Nate Foster, Michael D. George, Dan Grossman, Daniel P. Huttenlocher,
