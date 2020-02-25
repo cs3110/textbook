@@ -1,4 +1,4 @@
-# Contraint Collection
+# Constraint Collection
 
 We now present an algorithm that generates constraints. This algorithm
 is a precise description of how constraint gathering works in the
