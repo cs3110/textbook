@@ -44,8 +44,8 @@ let center = function
   | Point p -> p
   | Circle (p,_) -> p
   | Rect ((x1,y1),(x2,y2)) ->
-      ((x2 -. x1) /. 2.0, 
-       (y2 -. y1) /. 2.0)
+      ((x2 +. x1) /. 2.0,
+       (y2 +. y1) /. 2.0)
 ```
 
 The `shape` variant type is the same as those we've seen before in that
