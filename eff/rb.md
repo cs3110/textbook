@@ -2,7 +2,7 @@
 
 Red-black trees are relatively simple balanced binary tree data
 structure. The idea is to strengthen the representation invariant so a
-tree has height logarithmic in the number of nodes \\(n\\). To help
+tree has height logarithmic in the number of nodes $$n$$. To help
 enforce the invariant, we color each node of the tree either *red* or
 *black*. Where it matters, we consider the color of an empty tree to be
 black.
@@ -32,7 +32,7 @@ empty node would alternately contain red and black nodes; therefore it
 is at most twice as long as the shortest possible path, which only
 contains black nodes. The longest path cannot have a length greater than
 twice the length of the paths in a perfect binary tree, which is
-\\(O(\log n\\). Therefore, the tree has height \\(O(\log n\\) and the
+$$O(\log n$$. Therefore, the tree has height $$O(\log n$$ and the
 operations are all asymptotically logarithmic in the number of nodes.
 
 How do we check for membership in red-black trees? Exactly the same way
@@ -100,7 +100,7 @@ in the tree, but it can be restored again at that level in the same way,
 and so on up the tree. In the worst case, the process cascades all the
 way up to the root, resulting in two adjacent red nodes, one of them the
 root. But if this happens, we can just recolor the root black, which
-increases the BH by one. The amount of work is \\(O(\log n)\\). The
+increases the BH by one. The amount of work is $$O(\log n)$$. The
 `insert` code using `balance` is as follows:
 
 ```

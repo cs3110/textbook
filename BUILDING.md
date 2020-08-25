@@ -22,3 +22,11 @@ To build the textbook and push changes to the world:
   Check that everything looks right.
 * Run `make deploy` to push it to the world.  Check the public website to make
   sure everything looks right.
+
+To make the ebook version:
+
+- Install [Calibre](https://calibre-ebook.com/).
+- Make the command line tool available on your path with, e.g.,
+  `ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert ~/bin`.
+- Install `ebook-convert` with `sudo npm install -g ebook-convert` and `gitbook update`.
+- Generate the ebook with `gitbook pdf`, `gitbook epub`, or `gitbook mobi`.

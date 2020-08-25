@@ -27,8 +27,8 @@ Start a new session of utop and enter the following:
 # Random.int 100;;
 # Random.int 100;;
 ```
-Write down the responses that you get.  Each is a pseudorandom integer \\(i\\) such that
-\\(0 \leq i \lt 100\\).
+Write down the responses that you get.  Each is a pseudorandom integer $$i$$ such that
+$$0 \leq i \lt 100$$.
 
 Now quit utop and start another new session.  Enter the same phrases as above again.
 You will get the same responses as last time.  Unless your OCaml installation is

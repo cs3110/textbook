@@ -33,8 +33,8 @@ follow from those below:
 
   3. Match `v1` against pattern `p`.  If it doesn't match, raise
 	the exception `Match_failure`.  Otherwise, if it does match,
-	it produces a set \\(b\\) of bindings.  
+	it produces a set $$b$$ of bindings.  
 
-  4. Substitute those bindings \\(b\\) in `e`, yielding a new expression `e'`.
+  4. Substitute those bindings $$b$$ in `e`, yielding a new expression `e'`.
    
   5. Evaluate `e'` to a value `v`, which is the result of evaluating `e0 e1`.

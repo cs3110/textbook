@@ -1,4 +1,4 @@
-#Memoization
+# \*Memoization
 
 Even when programming in a functional style, abstractions like arrays
 and hash tables can be extremely useful. The ["Hashtbl" module][hash]
@@ -230,7 +230,7 @@ example
 The TeX formatting program does a good job of keeping line widths
 similar by finding the formatting that minimizes the sum of the cube
 of the leftover space in each line (except for the last). However, for
-$$n$$ words, there are $$\Omega(2n)$$ possible formattings, so the
+n words, there are Omega(2n) possible formattings, so the
 algorithm can't possibly check them all for large text inputs.
 Remarkably, we can use memoization to find the optimal formatting
 efficiently. In fact, memoization is useful for many optimization
@@ -382,7 +382,7 @@ let fib_memo =
     if n<2 then 1 else self(n-1) + self(n-2)
   in
     memo_rec fib
-``
+```
 
 # Conclusion
 
@@ -390,7 +390,7 @@ Memoization is a powerful technique for asymptotically speeding up
 simple recursive algorithms, without having to change the way the
 algorithm works. Memoization can be seen as an instance of the
 extremely useful algorithmic technique called dynamic programming,
-which you will see in CS4820.
+which you will see in CS 4820.
 
 [hash]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Hashtbl.html
 

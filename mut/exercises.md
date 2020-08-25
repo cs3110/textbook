@@ -87,8 +87,8 @@ type vector = float array
 
 ##### Exercise: norm [&#10029;&#10029;] 
 
-The [Euclidean norm][norm] of an \\(n\\)-dimensional vector 
-\\(x = (x_1, \ldots, x_n)\\) is written \\(|x|\\) and is defined to be
+The [Euclidean norm][norm] of an $$n$$-dimensional vector 
+$$x = (x_1, \ldots, x_n)$$ is written $$|x|$$ and is defined to be
 
 $$\sqrt{x_1^2 + \cdots + x_n^2}.$$
 
@@ -103,9 +103,11 @@ and `Array.fold_left` or `Array.fold_right`.*
 &square;
 
 Every vector can be *normalized* by dividing each component by
-\\(|x|\\); this yields a vector with norm 1:
+$$|x|$$; this yields a vector with norm 1:
 
-\\[\left(\frac{x_1}{|x|}, \ldots, \frac{x_n}{|x|}\right)\\]
+$$
+\left(\frac{x_1}{|x|}, \ldots, \frac{x_n}{|x|}\right)
+$$
 
 ##### Exercise: normalize [&#10029;&#10029;] 
 

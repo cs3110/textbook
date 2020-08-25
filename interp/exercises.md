@@ -170,7 +170,7 @@ substitution model:
 ##### Exercise: omega [&#10029;&#10029;&#10029;] 
 
 Try evaluating `(fun x -> x x) (fun x -> x x)`.  This expression,
-which is usually called \\(\Omega\\),
+which is usually called $$\Omega$$,
 doesn't type check in real OCaml, but we can still use the Core OCaml
 small-step semantics on it.
 

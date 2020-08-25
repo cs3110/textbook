@@ -21,9 +21,9 @@ To evaluate `let p = e1 in e2`:
 
 2. Match `v1` against pattern `p`.  If it doesn't match, raise
   the exception `Match_failure`.  Otherwise, if it does match,
-  it produces a set \\(b\\) of bindings.  
+  it produces a set $$b$$ of bindings.  
 
-3. Substitute those bindings \\(b\\) in `e2`, yielding a new expression `e2'`.
+3. Substitute those bindings $$b$$ in `e2`, yielding a new expression `e2'`.
 
 4. Evaluate `e2'` to a value `v2`.
 

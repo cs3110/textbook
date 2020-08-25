@@ -54,7 +54,7 @@ can sometimes be as efficient as a while loop in imperative languages
 (such loops don't make the call-stack bigger.) The "sometimes" is
 exactly when calls are tail calls&mdash;something both you and the compiler
 can (often) figure out. With tail-call optimization, the space
-performance of a recursive algorithm can be reduced from \\(O(n)\\) to \\(O(1)\\),
+performance of a recursive algorithm can be reduced from $$O(n)$$ to $$O(1)$$,
 that is, from one stack frame per call to a single stack frame for all
 calls.
 

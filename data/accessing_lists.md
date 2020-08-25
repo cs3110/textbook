@@ -78,8 +78,8 @@ let empty lst =
 
 Note how all the recursive functions above are similar to doing proofs
 by induction on the natural numbers:  every natural number is either 0
-or is 1 greater than some other natural number \\(n\\), and so a proof
-by induction has a base case for 0 and an inductive case for \\(n+1\\).
+or is 1 greater than some other natural number $$n$$, and so a proof
+by induction has a base case for 0 and an inductive case for $$n+1$$.
 Likewise all our functions have a base case for the empty list and a
 recursive case for the list that has one more element than another list.
 This similarity is no accident. There is a deep relationship between

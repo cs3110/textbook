@@ -13,10 +13,10 @@ The **reality of mutability** is that whereas machines are good at
 complicated manipulation of state, humans are not good at understanding
 it. The essence of why that's true is that mutability breaks
 *referential transparency*: the ability to replace expression with its
-value without affecting the result of a computation. In math, if \\(f(x)=y\\),
-then you can substitute \\(y\\) anywhere you see \\(f(x)\\). In imperative
-languages, you cannot:  \\(f\\) might have side effects, so computing \\(f(x)\\) at
-time \\(t\\) might result in different value than at time \\(t'\\).
+value without affecting the result of a computation. In math, if $$f(x)=y$$,
+then you can substitute $$y$$ anywhere you see $$f(x)$$. In imperative
+languages, you cannot:  $$f$$ might have side effects, so computing $$f(x)$$ at
+time $$t$$ might result in different value than at time $$t'$$.
 
 It's tempting to believe that there's a single state that the machine
 manipulates, and that the machine does one thing at a time. Computer

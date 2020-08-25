@@ -64,9 +64,9 @@ And we extend the definition of when a pattern matches a value and produces
 a binding as follows:
 
 * If for all `i` in `1..n`, it holds that `pi` matches `vi` and produces
-  bindings \\(b_i\\), then the tuple pattern `(p1, ..., pn)` matches the 
+  bindings $$b_i$$, then the tuple pattern `(p1, ..., pn)` matches the 
   tuple value `(v1, ..., vn)` and produces the set 
-  \\(\bigcup_i b_i\\) of bindings.
+  $$\bigcup_i b_i$$ of bindings.
   Note that the tuple value must have exactly the same number
   of components as the tuple pattern does.
   

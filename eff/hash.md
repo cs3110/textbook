@@ -5,9 +5,9 @@
 A *map* binds keys to values.  This abstraction is so useful that it
 goes by many other names, among them *associative array*, *dictionary*,
 and *symbol table*.  We'll write maps abstractly (i.e, mathematically; 
-not actually OCaml syntax) as \\(\\{k_1 : v_1, k_2
-: v_2, \ldots, k_n : v_n\\}\\). Each \\(k : v\\) is a *binding* of key
-\\(k\\) to value \\(v\\).  Here are a couple examples:
+not actually OCaml syntax) as { $$k_1 : v_1, k_2: v_2, \ldots, k_n : v_n$$ }.
+Each $$k : v$$ is a *binding* of key $$k$$ to value $$v$$.  Here are a couple
+of examples:
 
 * A map binding a course number to something about it: {3110 : "Fun", 2110 : "OO"}.
 
@@ -96,13 +96,13 @@ end
 What is the efficiency of insert, find and remove?
 
 * `insert` is just a cons onto the front of the list, 
-   which is constant time&mdash;that is, \\(O(1)\\).
+   which is constant time&mdash;that is, $$O(1)$$.
 
 * `find` potentially requires examining all elements of the list,
-  which is linear time&mdash;that is, \\(O(n)\\), where
-  \\(n\\) is the number of bindings in the map.
+  which is linear time&mdash;that is, $$O(n)$$, where
+  $$n$$ is the number of bindings in the map.
   
-* `remove` is the same complexity as `find`, \\(O(n)\\).
+* `remove` is the same complexity as `find`, $$O(n)$$.
 
 <!--
 ## Maps as balanced trees
@@ -135,8 +135,8 @@ implementation we already saw when we studied red-black sets.
 
 What is the efficiency of insert, find and remove?  All three
 might require traversing the tree from root to a leaf.  Since
-balanced trees have a height that is \\(O(\log n)\\), where
-\\(n\\) is the number of nodes in the tree (which is the number
+balanced trees have a height that is $$O(\log n)$$, where
+$$n$$ is the number of nodes in the tree (which is the number
 of bindings in the map), all three operations are logarithmic time.
 -->
 
@@ -300,13 +300,13 @@ by how well the hash function distributes keys across all the buckets.
 A terrible hash function, such as the constant function  `fun k -> 42`,
 would put all keys into same bucket.  Then every operation
 would be linear in the number of bindings in the map&mdash;that is,
-\\(O(n)\\).  We definitely don't want that.
+$$O(n)$$.  We definitely don't want that.
 
 Instead, we want hash functions that distribute keys more or less
 randomly across the buckets.  Then the expected length of every bucket
 will be about the same.  If we could arrange that, on average, the
-bucket length were a constant \\(L\\), then insert, find, 
-and remove would all in expectation run in time \\(O(L)\\).
+bucket length were a constant $$L$$, then insert, find, 
+and remove would all in expectation run in time $$O(L)$$.
 
 ## Load factor and resizing
 
@@ -317,7 +317,7 @@ of the table to be (# bindings) / (# buckets).  So a table with
 20 bindings and 10 buckets has a load factor of 2, and a table
 with 10 bindings and 20 buckets has a load factor of 0.5.  The
 load factor is therefore the average number of bindings in a bucket.
-So if we could keep the load factor constant, we could keep \\(L\\)
+So if we could keep the load factor constant, we could keep $$L$$
 constant, thereby keeping the performance to (expected) constant time.
 
 Toward that end, note that the number of bindings is not under the

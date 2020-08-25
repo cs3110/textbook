@@ -141,5 +141,5 @@ We add the following new pattern form to the list of legal patterns:
 And we extend the definition of when a pattern matches a value and produces
 a binding as follows:
 
-* If `p` matches `v` and produces bindings \\(b\\), then 
-  `C p` matches `C v` and produces bindings \\(b\\).
+* If `p` matches `v` and produces bindings $$b$$, then 
+  `C p` matches `C v` and produces bindings $$b$$.

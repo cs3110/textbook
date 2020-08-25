@@ -1,4 +1,4 @@
-# Type Inference
+# \*Type Inference
 
 Java and OCaml are *statically typed* languages, meaning every binding has
 a type that is determined at *compile time*&mdash;that is, before any part of

@@ -17,11 +17,11 @@ as *product types*.  Those names come from set theory.  Variants are
 like [disjoint union][disjun], because each value of a variant comes
 from one of many underlying sets (and thus far each of those sets is
 just a single constructor hence has cardinality one).  And disjoint
-union is sometimes written with a summation operator \\(\Sigma\\).
+union is sometimes written with a summation operator $$\Sigma$$.
 Tuples/records are like [Cartesian product][cartprod], because each
 value of a tuple/record contains a value from each of many underlying
 sets.  And Cartesian product is usually written with a product operator
-\\(\times\\).
+$$\times$$.
 
 [disjun]: https://en.wikipedia.org/wiki/Disjoint_union
 [cartprod]: https://en.wikipedia.org/wiki/Cartesian_product

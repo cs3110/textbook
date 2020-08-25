@@ -5,10 +5,10 @@ though not necessarily with a precise or consistent meaning in all
 cases.  
 
 In logic, *first-order quantification* refers to the kind of universal
-and existential (\\(\forall\\) and \\(\exists\\)) quantifiers that you
+and existential ($$\forall$$ and $$\exists$$) quantifiers that you
 see in CS 2800.  These let you quantify over some *domain* of interest,
 such as the natural numbers.  But for any given quantification, say
-\\(\forall x\\), the variable being quantified represents an individual
+$$\forall x$$, the variable being quantified represents an individual
 element of that domain, say the natural number 42.
 
 *Second-order quantification* lets you do something strictly more

@@ -22,7 +22,12 @@ you could use:
 
 Let's create a *data abstraction* (a module that represents some kind
 of data) for single-variable integer polynomials of the form 
-\\[c_n x^n + \ldots + c_1 x + c_0.\\]  Let's assume that the polynomials
+
+$$
+c_n x^n + \ldots + c_1 x + c_0.
+$$
+
+Let's assume that the polynomials
 are *dense*, meaning that they contain very few coefficients that are zero.
 Here is an incomplete interface for polynomials:
 ```

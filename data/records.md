@@ -117,9 +117,9 @@ And we extend the definition of when a pattern matches a value and produces
 a binding as follows:
 
 * If for all `i` in `1..n`, it holds that `pi` matches `vi` and produces
-  bindings \\(b_i\\), then the record pattern `{f1=p1; ...; fn=pn}` matches the 
+  bindings $$b_i$$, then the record pattern `{f1=p1; ...; fn=pn}` matches the 
   record value `{f1=v1; ...; fn=vn; ...}` and produces the set 
-  \\(\bigcup_i b_i\\) of bindings.
+  $$\bigcup_i b_i$$ of bindings.
   Note that the record value may have more fields than the record pattern does.
 
 As a syntactic sugar, another form of record pattern is provided:  `{f1; ...; fn}`.

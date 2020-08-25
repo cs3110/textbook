@@ -111,7 +111,7 @@ we elide here.) The test will generate some number of arbitraries (by
 default, 100) and check whether the property holds of each of them. For
 example, the following code creates a QCheck test that checks whether an
 arbitrary integer is even; the probability that this test will pass
-is only \\(2^{-100}\\):
+is only $$2^{-100}$$:
 ```
 let t = QCheck.Test.make (QCheck.make QCheck.Gen.int) is_even
 ```

@@ -21,9 +21,9 @@ val plus : rational -> rational -> rational
 
 What would it take to exhaustively test just this one function? We'd
 want to try all possible rationals as both the `r1` and `r2` arguments.
-A rational is formed from two ints, and there are \\(2^{63}\\) ints on a
+A rational is formed from two ints, and there are $$2^{63}$$ ints on a
 modern OCaml implementation. Therefore there are approximately
-\\((2^{63})^4 = 2^{252}\\) possible inputs to the `plus` function. Even
+$$(2^{63})^4 = 2^{252}$$ possible inputs to the `plus` function. Even
 if we test one addition every nanosecond, it will take about 10^59 years
 to finish testing this one function.
 
@@ -40,7 +40,7 @@ possible inputs as a large square:
 
 ![](create_inputs.gif)
 
-There are about \\(2^{126}\\) points in this square, so we can't afford
+There are about $$2^{126}$$ points in this square, so we can't afford
 to test them all. And testing them all is going to mostly be a waste of
 time&mdash;most of the possible inputs provide nothing new. We need a
 way to find a set of points in this space to test that are interesting

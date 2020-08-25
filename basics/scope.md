@@ -44,12 +44,17 @@ it's what you would guess But, **why?**
 The answer is something we'll call the *Principle of Name Irrelevance*:  the
 name of a variable shouldn't intrinsically matter.  You're used to this from
 math.  For example, the following two functions are the same:
-\\[
-f(x) = x^2 \\\\
+
+$$
+f(x) = x^2
+$$
+
+$$
 f(y) = y^2
-\\]
+$$
+
 It doesn't intrinsically matter whether we call the argument to the function
-\\(x\\) or \\(y\\); either way, it's still the squaring function.
+$$x$$ or $$y$$; either way, it's still the squaring function.
 Therefore, in programs, these two functions should be identical:
 ```
 let f x = x*x

@@ -1,10 +1,12 @@
 # Pipelining
 
-Suppose we wanted to compute the sum of squares of the numbers from 0 up to `n`.
+Suppose we wanted to compute the sum of squares of the numbers from 0 up to $$n$$.
 How might we go about it?  Of course (math being the best form of optimization),
 the most efficient way would be a closed-form formula: 
 
-\\[\frac{n (n+1) (2n+1)}{6}\\]
+$$
+\frac{n (n+1) (2n+1)}{6}
+$$
 
 But let's imagine you've forgotten that formula.
 In an imperative language you might use a for loop:

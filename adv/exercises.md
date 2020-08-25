@@ -38,32 +38,15 @@ For example, `nth pow2 0 = 1`, and `nth pow2 4 = 16`.
 
 ##### Exercise: hd tl [&#10029;&#10029;] 
 
-Recall these definitions:
-```	
-(** [from n] is the stream [<n; n+1; n+2; ...>]. *)
-let rec from n = 
-  Cons (n, fun () -> from (n+1))
+Explain how each of the following stream expressions is evaluated:
   
-(** [nats] is the stream [<0; 1; 2; ...>]. *)
-let nats = from 0
-  
-(** [hd s] is the head of [s] *)  
-let hd (Cons (h, _)) = h
-
-(** [tl s] is the tail of [s] *)
-let tl (Cons (_, tf)) = tf ()
-```  
-  
-Explain how each of the following is evaluated:
-  
-  - `hd nats`
-  - `tl nats`
-  - `hd (tl nats)`
-  - `tl (tl nats)`
-  - `hd (tl (tl nats))`
+- `hd nats`
+- `tl nats`
+- `hd (tl nats)`
+- `tl (tl nats)`
+- `hd (tl (tl nats))`
 
 &square;
-
 
 ##### Exercise: filter [&#10029;&#10029;&#10029;] 
 
@@ -117,18 +100,18 @@ containing all the prime numbers starting with 2.
 
 ##### Exercise: approximately e [&#10029;&#10029;&#10029;&#10029;] 
 
-The exponential function \\(e^x\\) can be computed by the following
+The exponential function $$e^x$$ can be computed by the following
 infinite sum:
 
-\\(
-e^x = \\frac{x^0}{0!} + \\frac{x^1}{1!} + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots + \\frac{x^k}{k!} + \\cdots 
-\\)
+$$
+e^x = \frac{x^0}{0!} + \frac{x^1}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^k}{k!} + \cdots 
+$$
 
 Define a function `e_terms : float -> float stream`.  Element `k` of
 the stream should be term `k` from the infinite sum.  For
 example, `e_terms 1.0` is the stream 
 `<1.0; 1.0; 0.5; 0.1666...; 0.041666...; ...>`.  The easy way to 
-compute that involves a function that computes \\(f(k) = \\frac{x^k}{k!}\\).
+compute that involves a function that computes $$f(k) = \frac{x^k}{k!}$$.
 
 Define a function `total : float stream -> float stream`, such that
 `total <a; b; c; ...>` is a running total of the input elements, i.e.,
@@ -144,7 +127,7 @@ For example, `within 0.1 <1.0; 2.0; 2.5; 2.75; 2.875; 2.9375; 2.96875; ...>`
 is `2.9375`. 
 
 Finally, define a function `e : float -> float -> float` such that
-`e x eps` is \\(e^x\\) computed to within a tolerance of `eps`,
+`e x eps` is $$e^x$$ computed to within a tolerance of `eps`,
 which must be strictly positive.  Note that there is an interesting
 boundary case where `x=1.0` for the first two terms of the sum; you
 could choose to drop the first term (which is always `1.0`) from the
@@ -154,26 +137,23 @@ stream before using `within`.
 
 ##### Exercise: better e [&#10029;&#10029;&#10029;&#10029;, advanced] 
 
-Although the idea for computing \\(e^x\\) above through the summation of
+Although the idea for computing $$e^x$$ above through the summation of
 an infinite series is good, the exact algorithm suggested above could be
 improved. For example, computing the 20th term in the sequence leads to
-a very large numerator and denominator if \\(x\\) is large.  Investigate
+a very large numerator and denominator if $$x$$ is large.  Investigate
 that behavior, comparing it to the built-in function `exp : float ->
 float`. Find a better way to structure the computation to improve the
-approximations you obtain.  *Hint: what if when computing term \\(k\\)
-you already had term \\(k-1\\)?  Then you could just do a single 
+approximations you obtain.  *Hint: what if when computing term $$k$$
+you already had term $$k-1$$?  Then you could just do a single 
 multiplication and division.*
 
 Also, you could improve the test that `within` uses to determine
 whether two values are close.  A good one for determining whether
-\\(a\\) and \\(b\\) are close might be:
+$$a$$ and $$b$$ are close might be:
 
-\\[
-\\frac{|a - b|}
-{\\frac{|a| + |b|}{2} + 1}
-<
-\epsilon.
-\\]
+$$
+\frac{|a - b|}{\frac{|a| + |b|}{2} + 1} < \epsilon.
+$$
 
 &square;
 

@@ -12,17 +12,18 @@ is a program that implements a type system, i.e., that implements
 the static semantics of the language.
 
 Commonly, a type system is formulated as a ternary relation 
-\\(\\mathit{HasType}(\\Gamma, e, t)\\), which means that expression
-\\(e\\) has type \\(t\\) in typing context \\(\\Gamma\\).
+$$\mathit{HasType}(\Gamma, e, t)$$, which means that expression
+$$e$$ has type $$t$$ in typing context $$\Gamma$$.
 A *typing context*, aka *typing environment*, is a map from
 identifiers to types.  The context is used to record what variables
 are in scope, and what their types are.  The use of the Greek letter
-\\(\\Gamma\\) for contexts is traditional.
+$$\Gamma$$ for contexts is traditional.
 
-That ternary relation is typically written with infix notation, though,
-as \\(\\Gamma \\vdash e : t\\).  You can read the turnstile symbol
-\\(\\vdash\\) as "proves" or "shows", i.e., the context \\(\\Gamma\\)
-shows that \\(e\\) has type \\(t\\).
+That ternary relation $$\mathit{HasType}$$ is typically written
+with infix notation, though,
+as $$\Gamma \vdash e : t$$.  You can read the turnstile symbol
+$$\vdash$$ as "proves" or "shows", i.e., the context $$\Gamma$$
+shows that $$e$$ has type $$t$$.
 
 Let's make that notation a little friendlier by eliminating the Greek
 and the math typesetting.  We'll just write `ctx |- e : t` to mean
@@ -35,7 +36,7 @@ a context that contains all the bindings of `ctx`, and also binds
 `x` to `t`.  If `x` was already bound in `ctx`, then that old binding
 is replaced by the new binding to `t` in `ctx[x -> t]`.
 
-With all that machinery, we can at least define what it means to be well
+With all that machinery, we can at last define what it means to be well
 typed: An expression `e` is **well typed** in context `ctx` if there
 exists a type `t` for which `ctx |- e : t`. The goal of a type checker
 is thus to find such a type `t`, starting from some initial context.

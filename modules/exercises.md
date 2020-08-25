@@ -69,14 +69,14 @@ Now how big of a queue can you create before there's a delay of at least 10 seco
 Compare the implementations of `enqueue` in `ListQueue` vs.
 `TwoListQueue`. Explain in your own words why the efficiency of
 `ListQueue.enqueue` is linear time in the length of the queue. *Hint:
-consider the `@` operator.*  Then explain why adding \\(n\\) elements to
-the queue takes time that is quadratic in \\(n\\).
+consider the `@` operator.*  Then explain why adding $$n$$ elements to
+the queue takes time that is quadratic in $$n$$.
 
 Now consider `TwoListQueue.enqueue`.  Suppose that the queue is in a
 state where it has never had any elements dequeued.  Explain in your own
 words why `TwoListQueue.enqueue` is constant time. Then explain why
-adding \\(n\\) elements to the queue takes time that is linear in
-\\(n\\).
+adding $$n$$ elements to the queue takes time that is linear in
+$$n$$.
 
 *(Note: the enqueue and dequeue operations for `TwoListQueue` remain
 constant time even after interleaving them, but showing why that is so
@@ -141,8 +141,8 @@ let rec gcd (x:int) (y:int) : int =
 The next few exercises explore the [Map module][map] in the OCaml
 standard library.  It is an implementation of a dictionary data
 structure. Recall that dictionaries map *keys* to *values*. If a key
-\\(k\\) maps to a value \\(v\\), we say that \\(v\\) is *bound* to
-\\(k\\).
+$$k$$ maps to a value $$v$$, we say that $$v$$ is *bound* to
+$$k$$.
 
 [map]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.html
 
@@ -271,10 +271,10 @@ in the [`Map.S` signature][map.s].*
 ##### Exercise: is for [&#10029;&#10029;&#10029;] 
 
 Write a function `is_for : string CharMap.t -> string CharMap.t`
-that given an input map with bindings from \\(k_1\\) to \\(v_1\\),
-..., \\(k_n\\) to \\(v_n\\), produces an output map with the same
-keys, but where each key \\(k_i\\) is now bound to the string
-"\\(k_i\\) is for \\(v_i\\)".  For example, if `m` maps
+that given an input map with bindings from $$k_1$$ to $$v_1$$,
+..., $$k_n$$ to $$v_n$$, produces an output map with the same
+keys, but where each key $$k_i$$ is now bound to the string
+"$$k_i$$ is for $$v_i$$".  For example, if `m` maps
 `'a'` to `"apple"`, then `is_for m` would map `'a'` to `"a is for apple"`.
 *Hint: there is a one-line solution that uses a function from 
 the `Map.S` signature.  To convert a character to a string,

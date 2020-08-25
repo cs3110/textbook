@@ -12,7 +12,7 @@ of the output could be checked.  For example,
 
 * "not crashing" is a property of interest in user interfaces;
 
-* adding \\(n\\) elements to a data collection
+* adding $$n$$ elements to a data collection
   then removing those elements, and ending up with an empty collection,
   is a property of interest in data structures; and
   

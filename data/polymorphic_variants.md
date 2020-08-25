@@ -16,7 +16,7 @@ type 'a mylist = Nil | Cons of 'a * 'a mylist
 
 Occasionally, you might need a variant type only for the return value of a single
 function.  For example, here's a function `f` that can either return 
-an `int` or \\(\infty\\); you are forced to define a variant type to represent
+an `int` or $$\infty$$; you are forced to define a variant type to represent
 that result:
 ```
 type fin_or_inf = Finite of int | Infinity

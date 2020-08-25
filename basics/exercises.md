@@ -93,7 +93,7 @@ let avg3 x y z =
 ##### Exercise: RMS [&#10029;&#10029;]
 
 Define a function that computes the root-mean-square of two numbers&mdash;i.e., 
-\\(\\sqrt{(x^2 + y^2) / 2}\\).  Test your function with `assert`.
+$$\sqrt{(x^2 + y^2) / 2}$$.  Test your function with `assert`.
 
 
 

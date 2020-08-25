@@ -32,7 +32,7 @@ Anonymous functions are also called *lambda expressions*, a term that
 comes out of the *lambda calculus*, which is a mathematical model
 of computation in the same sense that Turing machines are a model
 of computation.  In the lambda calculus, `fun x -> e` would
-be written \\(\lambda x . e\\).  The \\(\lambda\\) denotes
+be written $$\lambda x . e$$.  The $$\lambda$$ denotes
 an anonymous function.
 
 It might seem a little mysterious right now why we would want functions

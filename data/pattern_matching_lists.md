@@ -66,20 +66,20 @@ and the bindings that match produces:
 
 * The pattern `[]` matches the value `[]` and produces no bindings.
 
-* If `p1` matches `v1` and produces a set \\(b_1\\) of bindings,
-  and if `p2` matches `v2` and produces a set \\(b_2\\) of bindings,
-  then `p1::p2` matches `v1::v2` and produces the set \\(b_1 \cup b_2\\)
+* If `p1` matches `v1` and produces a set $$b_1$$ of bindings,
+  and if `p2` matches `v2` and produces a set $$b_2$$ of bindings,
+  then `p1::p2` matches `v1::v2` and produces the set $$b_1 \cup b_2$$
   of bindings. Note that `v2` must be a list (since it's on the
   right-hand side of `::`) and could have any length:  0 elements, 1
-  element, or many elements. Note that the union \\(b_1 \cup b_2\\) of
+  element, or many elements. Note that the union $$b_1 \cup b_2$$ of
   bindings will never have a problem where the same variable is bound
-  separately in both \\(b_1\\) and \\(b_2\\) because of the syntactic
+  separately in both $$b_1$$ and $$b_2$$ because of the syntactic
   restriction that no variable name may appear more than once in a
   pattern.
 
 * If for all `i` in `1..n`, it holds that `pi` matches `vi` and produces 
-  the set \\(b_i\\) of bindings, then `[p1; ...; pn]` matches `[v1; ...;
-  vn]` and produces the set \\(\bigcup_i b_i\\) of bindings. Note that
+  the set $$b_i$$ of bindings, then `[p1; ...; pn]` matches `[v1; ...;
+  vn]` and produces the set $$\bigcup_i b_i$$ of bindings. Note that
   this pattern specifies the exact length the list must be.
 
 Now we can can say how to evaluate `match e with p1 -> e1 | ... | pn -> en`:
@@ -96,7 +96,7 @@ Now we can can say how to evaluate `match e with p1 -> e1 | ... | pn -> en`:
   after we've covered some of the other built-in data structures in OCaml.
 
 * Otherwise, stop trying to match at the first time a match succeeds
-  against a pattern.  Let `pi` be that pattern and let \\(b\\) be the
+  against a pattern.  Let `pi` be that pattern and let $$b$$ be the
   variable bindings produced by matching `v` against `pi`.
   
 * Substitute those bindings inside `ei`, producing a new expression `e'`.
@@ -117,13 +117,13 @@ match 1::[] with
 * `[]` does not match ``1::[]``
 
 * `h::t` does match `1::[]` and produces variable bindings 
-   \\(\\{\\)`h->1`,`t->[]`\\(\\}\\), because:
+   {`h->1`,`t->[]`}, because:
   
   - `h` matches `1` and produces the variable binding `h->1`
   
   - `t` matches `[]` and produces the variable binding `t=[]`
   
-* substituting \\(\\{\\)`h->1`,`t->[]`\\(\\}\\) inside `(h=1) && (t=[])`
+* substituting {`h->1`,`t->[]`} inside `(h=1) && (t=[])`
   produces a new expression `(1=1) && ([]=[])`
   
 * evaluating `(1=1) && ([]=[])` yields the value `true` 
