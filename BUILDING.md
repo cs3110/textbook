@@ -29,4 +29,4 @@ To make the ebook version:
 - Make the command line tool available on your path with, e.g.,
   `ln -s /Applications/calibre.app/Contents/MacOS/ebook-convert ~/bin`.
 - Install `ebook-convert` with `sudo npm install -g ebook-convert` and `gitbook update`.
-- Generate the ebook with `gitbook pdf`, `gitbook epub`, or `gitbook mobi`.
+- Generate the ebooks with `make ebook`.

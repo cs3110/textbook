@@ -19,6 +19,17 @@ install:
 
 build:
 	gitbook build
+	
+ebook: pdf epub mobi
+
+pdf:
+	gitbook pdf . 3110.pdf
+	
+epub:
+	gitbook epub . 3110.epub
+	
+mobi:
+	gitbook pdf . 3110.pdf
 
 serve:
 	sleep 10 && open http://127.0.0.1:4000/ &
