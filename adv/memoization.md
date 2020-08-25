@@ -17,7 +17,7 @@ directly into code:
 ```
 let f(n) = if n<2 then 1 else f(n-1) + f(n-2)
 ```
-Unfortunately, this code takes exponential time: $$Θ(φ^{n})$$, where $$φ$$ is the golden ratio, $$(1 + √5)/2$$.
+Unfortunately, this code takes exponential time: $$\Theta(\phi^{n})$$, where $$\phi$$ is the golden ratio, $$(1 + \sqrt{5})/2$$.
 
 The key observation is that the recursive implementation is
 inefficient because it recomputes the same Fibonacci numbers over and
