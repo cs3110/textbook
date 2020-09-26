@@ -45,9 +45,9 @@ module QCheck : sig
   ...
 end
 ```
-You can [read the documentation][qcheck.gen] of those and many others.
+You can [read the documentation][qcheckdoc] of those and many others.
 
-[qcheck.gen]: http://c-cube.github.io/qcheck/0.9/qcheck-core/QCheck/Gen/index.html
+[qcheckdoc]: https://c-cube.github.io/qcheck/
 
 ## Properties and Arbitraries
 
@@ -98,20 +98,14 @@ represents an arbitrary integer:
 QCheck.make QCheck.Gen.int
 ```
 
-You can [read the documentation][qcheck] of `QCheck` and its arbitraries.
-
-[qcheck]: http://c-cube.github.io/qcheck/0.9/qcheck-core/QCheck/index.html
-
 ## Testing Properties with QCheck
 
-To construct a QCheck test, we create an arbitrary and a property, and
-pass them to `QCheck.Test.make : 'a QCheck.arbitrary -> ('a -> bool) ->
-QCheck.Test.t`. (That function also takes some optional arguments that
-we elide here.) The test will generate some number of arbitraries (by
-default, 100) and check whether the property holds of each of them. For
-example, the following code creates a QCheck test that checks whether an
-arbitrary integer is even; the probability that this test will pass
-is only $$2^{-100}$$:
+To construct a QCheck test, we create an arbitrary and a property, and pass them
+to `QCheck.Test.make : 'a QCheck.arbitrary -> ('a -> bool) -> QCheck.Test.t`.
+(That function also takes some optional arguments that we elide here.) The test
+will generate some number of arbitraries and check whether the property holds of
+each of them. For example, the following code creates a QCheck test that checks
+whether an arbitrary integer is even:
 ```
 let t = QCheck.Test.make (QCheck.make QCheck.Gen.int) is_even
 ```

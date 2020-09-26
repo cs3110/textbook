@@ -17,9 +17,7 @@ Here's how it works:
   you programmed yourself:  the program will now record which
   expressions from the source code actually get executed at run time,
   and which do not.  Also, the program will now produce an output
-  file named `bisectNNNN.out` that contains that information.
-  A new output file will be created at each invocation, the first
-  being `bisect0001.out`, the second being `bisect0002.out`, etc.
+  file that contains that information.
   
 - You run a tool called `bisect-ppx-report` on that output file.  It
   produces HTML showing you which parts of your code got executed,
@@ -40,15 +38,6 @@ did get executed.
 Download the file [`sorts.ml`](sorts.ml).  You will
 find an implementation of insertion sort and merge sort.
 
-If you're using VS Code, create a `.merlin` file in the same directory
-containing these instructions:
-```
-B _build
-PKG oUnit
-PKG ocamlbuild
-PKG bisect_ppx-ocamlbuild
-```
-
 Create a file in the same directory called
 `myocamlbuild.ml`.  That file name is actually mandatory,
 despite the customary use of "my" in CS demos to indicate
@@ -63,7 +52,7 @@ in it:
 ```
 <sorts.ml>: coverage
 <test_sorts.{byte,native}>: coverage
-true: package(oUnit)
+true: package(ounit2), package(bisect_ppx)
 ```
 
 Download the file [`test_sorts.ml`](test_sorts.ml).  It has the skeleton
@@ -83,49 +72,25 @@ tests sequentially, instead of trying to run many of them in parallel.  The latt
 is good for speeding up large test suites, but it seems (at least as of 
 Fall 2018) Bisect isn't designed to handle that kind of parallelism.
 
-Running the suite will cause `bisect0001.out` (assuming it's your first
-run of the suite) to be produced.  
+Running the suite will cause a file named `bisectNNNN.coverage` to be produced.  
 Next run 
 ```
-$ bisect-ppx-report -I _build -html report bisect0001.out
+$ bisect-ppx-report html
 ``` 
-to generate the Bisect report from your test suite
-execution.  
+to generate the Bisect report from your test suite execution.  
 
-Open the file `report/index.html` in a web browser.  Look at the
+Open the file `_coverage/index.html` in a web browser.  Look at the
 per-file coverage; you'll see we've managed to test only 10% of
 `sorts.ml` with our test suite so far. Click on the link in that report
 for `sorts.ml`. You'll see that we've managed to cover a couple lines of the
-source code so far with our test suite.  The covered lines are colored
-green, and the uncovered lines are red.
+source code so far with our test suite.
 
-There are some additional tests in the test file.  Try uncommenting those,
-as documented in the test file, and increasing your code coverage.  Between
-each run, you will need to delete the `bisect0001.out` report file, recompile,
-rerun OUnit, and rerun the Bisect report tool.  (Obviously, a Makefile would
-be a good thing to construct.)
+There are some additional tests in the test file. Try uncommenting those, as
+documented in the test file, and increasing your code coverage. Between each
+run, you will need to delete the report file, recompile, rerun OUnit, and rerun
+the Bisect report tool. (Obviously, a Makefile would be a good thing to
+construct.)
 
 By the time you're done uncommenting the provided tests, you should be at 30%
 coverage, including all of the insertion sort implementation.  For fun, try
 adding more tests to get 100% coverage of merge sort.
-
-## Ignoring uncoverable code
-
-Sometimes you will want to exclude code from Bisect analysis.  The usual
-reason for that is the code can't be unit tested.  For example,
-maybe it's code that defensively checks that the `rep_ok` holds
-of an input, but unit tests will never be able to construct an input 
-that violates `rep_ok`.  Or maybe it's code that is only meaningful
-in a GUI or in utop, such as custom utop printers for abstract types.
-
-To ignore code, you can insert special comments that cause Bisect to
-omit one or more lines from analysis:
-
-* `(*BISECT-IGNORE*)` will ignore the line on which the comment occurs.
-
-* `(*BISECT-IGNORE-BEGIN*)` and `(*BISECT-IGNORE-END*)` will ignore all
-  the code between the two comments.
-  
-Note that there may not be spaces inside those special comments.
-
-
