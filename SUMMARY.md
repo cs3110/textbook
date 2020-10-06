@@ -162,7 +162,11 @@
   - [8.11. Exercises](mut/exercises.md)
 
 - [9. Efficiency](eff/intro.md)
-  - [9.1. Big-Oh Notation](eff/bigoh.md)
+  - [9.1. Defining Efficiency](eff/defining.md)
+     - [9.1.1 Algorithms and Efficiency, Attempt 1](eff/eff1.md)
+     - [9.1.2 Algorithms and Efficiency, Attempt 2](eff/eff2.md)       
+     - [9.1.3 Big-Oh Notation](eff/bigoh.md)
+     - [9.1.4 Algorithms and Efficiency, Attempt 3](eff/eff3.md)       
   - [9.2. Hash Tables](eff/hash.md)
   - [9.3. Amortized Analysis](eff/amortized.md)
   - [9.4. Binary Search Trees](eff/bst.md)
