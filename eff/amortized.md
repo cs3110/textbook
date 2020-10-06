@@ -1,29 +1,85 @@
 # Amortized Analysis
 
-*Under development.*
+Our analysis of the efficiency of hash table operations concluded that `find`
+runs in expected constant time, where the modifier "expected" is needed to
+express the fact the performance is on average and depends on the hash function
+satisfying certain properties.
 
-The *amortized complexity* or *amortized running time* of a sequence
-of operations that each have cost $$T_1, T_2, \ldots, T_n$$, 
-is the average cost of each operation: 
+We also concluded that `insert` would usually run in expected constant time,
+but that in the worst case it would require linear time because of needing
+to rehash the entire table.  That kind of defeats the goal of a hash table,
+which is to offer constant-time performance, or at least as close to it
+as we can get.
+
+It turns out there is another way of looking at this analysis that allows us to
+conclude that `insert` does have "amortized" expected constant time
+performance&mdash;that is, for excusing the occasional worst-case linear
+performance. Right away, we have to acknowledge this technique is just a change
+in perspective. We're not going to change the underlying algorithms. The
+`insert` algorithm will still have worst-case linear performance. That's a fact.
+
+But the change in perspective we now understake is to recognize that if it's
+very rare for `insert` to require linear time, then maybe we can "spread out"
+that cost over all the other calls to `insert`. It's a creative accounting
+trick!
+
+**Sushi vs. Ramen.**
+Let's amuse ourselves with a real-world example for a moment.  Suppose that
+you have $20 to spend on lunches for the week.  You like to eat sushi, but you
+can't afford to have sushi every day.  So instead you eat as follows:
+
+- Monday: $1 ramen 
+- Tuesday: $1 ramen
+- Wednesday: $1 ramen
+- Thursday: $1 ramen
+- Friday: $16 sushi
+
+Most of the time, your lunch was cheap.  On a rare occasion, it was expensive.
+So you could look at it in one of two ways:
+
+- My worst-case lunch cost was $16.
+- My average lunch cost was $4.
+
+Both are true statements, but maybe the latter is more helpful in understanding
+your spending habits.
+
+**Back to Hash Tables.**
+It's the same with hash tables.  Even though `insert` is occasionally expensive,
+it's so rarely expensive that the average cost of an operation is actually
+constant time!  But, we need to do more complicated math (or more complicated
+than our lunch budgeting anyway) to actually demonstrate that's true.
+
+## Amortized Complexity
+
+"Amortization" is a financial term.  One of its meanings is to pay off a debt
+over time.  In algorithmic analysis, we use it to refer to paying off the cost
+of an expensive operation by inflating the cost of inexpensive operations.
+In effect, we pre-pay the cost of a later expensive operation by adding some
+additional cost to earlier cheap operations.
+
+The *amortized complexity* or *amortized running time* of a sequence of
+operations that each have cost $$T_1, T_2, \ldots, T_n$$, is just the average
+cost of each operation:
+
 $$
 \frac{T_1 + T_2 + ... + T_n}{n}.
 $$
-Thus, even if one operation is especially expensive, we could average
-that out over a bunch of inexpensive operations.
+
+Thus, even if one operation is especially expensive, we could average that out
+over a bunch of inexpensive operations.
 
 Applying that idea to a hash table, suppose the table has 8 bindings and 8
-buckets.  Then 8 more inserts are made. The first 7 are (on average)
-constant-time, but the 8th insert is linear time:  it increases the
-load factor to 2, causing a resize, thus causing rehashing of all
-previous 15 bindings. The total cost over that series of operations is
-therefore the cost of 7+16 inserts. For simplicity, we could grossly
-round that up to 16+16 = 32 inserts. So the average cost of each operation 
-in the sequence is 32/8 = 4 inserts.
+buckets. Then 8 more inserts are made. The first 7 are (expected) constant-time,
+but the 8th insert is linear time: it increases the load factor to 2, causing a
+resize, thus causing rehashing of all 16 bindings into a new table. The total
+cost over that series of operations is therefore the cost of 8+16 inserts. For
+simplicity of calculation, we could grossly round that up to 16+16 = 32 inserts.
+So the average cost of each operation in the sequence is 32/8 = 4 inserts.
 
 In other words, if we just pretended each insert cost four times its normal
-price, the final operation in the sequence would have been "pre-paid" by
-the extra price we paid for earlier inserts. And all of them would be
-constant-time, since four times a constant is still a constant.
+price, the final operation in the sequence would have been "pre-paid" by the
+extra price we paid for earlier inserts. And all of them would be constant-time,
+since four times a constant is still a constant.
 
 Generalizing from the example above, let's suppose that the the number of
 buckets currently in a hash table is $$2^n$$, and that the load factor is
@@ -33,31 +89,77 @@ Next:
 - A series of $$2^n - 1$$ inserts occurs.  There are now $$2^n + 2^n - 1$$
   bindings in the table.
 
-- One more insert occurs.  That would bring the number of bindings up to
-  $$2^n + 2^n$$, which is $$2^{n+1}$$, which would make the load factor
-  become 2.  So a resize is necessary before the insert can happen.
+- One more insert occurs.  That brings the number of bindings up to
+  $$2^n + 2^n$$, which is $$2^{n+1}$$.  But the number of buckets is $$2^n$$,
+  so the the load factor just reached 2.  A resize is necessary.
 
-- The resize occurs.  That doubles the number of buckets.  All existing $$2^n +
-  2^n - 1$$ bindings have to be reinserted.
+- The resize occurs.  That doubles the number of buckets.  All
+  $$2^{n+1}$$ bindings have to be reinserted into the new table, which
+  is of size $$2^{n+1}$$.  The load factor is back down to 1.
 
-- The last insert can now occur.
+So in total we did $$2^n + 2^{n+1}$$ inserts. which we could grossly round up to
+$$2^{n+2}$$. Over a series of $$2^n$$ insert operations, that's an average cost
+of $$\frac{2^{n+2}}{2^n}$$, which equals 4. So if we just pretend each insert
+costs four times its normal price, every operation in the sequence is amortized
+(and expected) constant time.
 
-So in total we did:
+## Doubling vs. Constant-size Increasing
 
-- $$2^n - 1$$ inserts before the resize
+Notice that it is crucial that the array size grows by doubling (or at least
+geometrically). A bad mistake would be to instead grow the array by a fixed
+increment&mdash;for example, 100 buckets at time. Then we'd be in real trouble
+as the number of bindings continued to grow:
 
-- $$2^n + 2^n - 1$$ inserts during the resize
+- Start with 100 buckets and 100 bindings.  The load factor is 1.
+- **Round 1.**
+  Insert 100 bindings.  There are now 200 bindings and 100 buckets.  The
+  load factor is 2.
+- Increase the number of buckets by 100 and rehash. That's 200 more insertions.
+  The load factor is back down to 1.
+- The average cost of each insert is so far just 3x the cost of an actual
+  insert (100+200 insertions / 100 bindings inserted).
+  So far so good.
+- **Round 2.**
+  Insert 200 more bindings.  There are now 400 bindings and 200 buckets.
+  The load factor is 2.
+- Increase the number of buckets **by 100** and rehash.  That's 400 more
+  insertions.  There are now 400 bindings and 300 buckets.
+  The load factor is 400/300 = 4/3, not 1.
+- The average cost of each insert is now 100+200+200+400 / 300 = 3.
+  That's still okay.
+- **Round 3.**
+  Insert 200 more bindings.  There are now 600 bindings and 300 buckets.
+  The load factor is 2.
+- Increase the number of buckets **by 100** and rehash.  That's 600 more
+  insertions.  There are now 600 bindings and 400 buckets.
+  The load factor is 3/2, not 1.
+- The average cost of each insert is now 100+200+200+400+200+600 / 500 = 3.2.
+  It's going up.
+- **Round 4.**
+  Insert 200 more bindings.  There are now 800 bindings and 400 buckets.
+  The load factor is 2.
+- Increase the number of buckets **by 100** and rehash. That's 800 more
+  insertions.  There are now 800 bindings and 500 buckets.
+  The load factor is 8/5, not 1.
+- The average cost of each insert is now 100+200+200+400+200+600+200+800 / 700
+  = 3.7.  It's continuing to go up, not staying constant.
 
-- 1 insert after the resize
+After $$k$$ rounds we have $$200k$$ bindings and $$100k$$ buckets. 
+We have called `insert` to insert $$100+200k$$ bindings, but all the rehashing has
+caused us to do $$100+200(k-1)+\sum_{i=1}^{k} 200i$$ actual insertions.
+That last term is the real problem.  It's quadratic:  
 
-That's a total of $$2^{n+1} + 2^n$$ inserts. which we could grossly round up
-to $$2^{n+2}$$.  Over a series of $$2^n$$ operations, that's an average cost
-of (the equivalent of) 4 inserts per operation.  So if we just pretend each
-insert costs four times its normal price, every operation in the sequence is
-amortized constant time.
+$$
+\sum_{i=1}^{k} 200i \quad = \quad \frac{200k (200 (k+1))}{2} \quad = \quad 20,000 (k^2 + k)
+$$
 
-Notice that it is crucial that the array size grows geometrically
-(i.e., by doubling). It may be tempting to grow the array by a fixed increment
-(e.g., 100 elements at time), but this causes n elements to be rehashed
-$$O(n)$$ times on average, resulting in $$O(n^2)$$ total insertion time, or
-amortized complexity of $$O(n)$$.
+So over a series of $$n$$ calls to `insert`, we do $$O(n^2)$$ actual inserts.
+That makes the amortized cost of `insert` be $$O(n)$$, which is linear! Not
+constant.
+
+That's why it's so important to double the size of the array at each rehash.
+It's what gives us the amoritzed constant time performance.
+
+## Amortized Analysis of Two-List Queues
+
+TODO

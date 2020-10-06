@@ -1,5 +1,9 @@
 # Hash Tables
 
+As an example of analyzing the efficiency, and of the tradeoffs between
+functional and imperative data structures, let's analyze the efficiency
+of hash tables.  Hash tables are an implementation of the map ADT.
+
 ## Maps
 
 A *map* binds keys to values.  This abstraction is so useful that it
@@ -183,7 +187,7 @@ module ArrayMap = struct
 end
 ```
 
-This kind of map is called a *direct address table* Its efficiency is
+This kind of map is called a *direct address table*. Its efficiency is
 great!  Every operation is constant time.  But that comes at the expense
 of forcing keys to be integers.  Moreover, they need to be small
 integers (or at least integers from a small range), otherwise the arrays
