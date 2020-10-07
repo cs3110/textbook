@@ -5,24 +5,39 @@
 * amortized analysis
 * association list
 * associative array
+* asymptotic bound
+* banker's method
+* big ell
+* big oh
 * binding
+* brute force
 * bucket
 * chaining
 * collision
+* complexity
+* credits
 * dictionary
 * diffusion
 * direct address table
+* efficiency
+* execution steps
+* exponential time
 * hash function
 * injective
+* input size
 * key
 * load factor
 * map
 * mutable map
+* physicist's method
+* polynomial time
+* potential energy
 * probing
 * red-black map
 * resizing
 * serialization
 * set
+* worst case performance
 
 ## Further reading
 

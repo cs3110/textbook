@@ -32,7 +32,7 @@ empty node would alternately contain red and black nodes; therefore it
 is at most twice as long as the shortest possible path, which only
 contains black nodes. The longest path cannot have a length greater than
 twice the length of the paths in a perfect binary tree, which is
-$$O(\log n$$. Therefore, the tree has height $$O(\log n$$ and the
+$$O(\log n)$$. Therefore, the tree has height $$O(\log n)$$ and the
 operations are all asymptotically logarithmic in the number of nodes.
 
 How do we check for membership in red-black trees? Exactly the same way
