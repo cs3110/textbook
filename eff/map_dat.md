@@ -95,7 +95,7 @@ module ArrayMap : DirectAddressMap = struct
   let of_list c lst =
     let a = create c in (* O(c) *)
     List.iter (fun (k, v) -> insert k v a) lst;
-    (* O(n) * O(1) = O(n) *)
+    (* O(c) * O(1) = O(c) *)
     a
 
   (** Efficiency: O(c) *)
