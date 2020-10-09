@@ -132,3 +132,39 @@ then eliminate the doubly-black node by propagating the "blackness" up
 until a red node can be converted to a black node, or until the root is
 reached and it can be changed from doubly-black to black without
 breaking the invariant.
+
+<!--
+## Maps as balanced trees
+
+OCaml's own `Map` module is implemented as a balanced tree (specifically,
+a variant of the AVL tree data structure).  It's straightforward
+to adapt the red-black trees that we previously studied to represent
+maps instead of sets.  All we have to do is store both a key and a value
+at each node.  The key is what we compare on and has to satisfy the
+binary search tree invariants.  Here is the representation type:
+
+```
+  (* AF:  [Leaf] represents the empty map.  [Node (_, l, (k,v), r)] represents
+   *   the map ${k:v} \union AF(l) \union AF(r)$, where the union of two
+   *   maps (with distinct keys) means the map that contains the bindings
+   *   from both. *)
+  (* RI:
+   * 1. for every [Node (l, (k,v), r)], all the keys in [l] are strictly
+   *    less than [k], and all the keys in [r] are strictly greater
+   *    than [k].
+   * 2. no Red Node has a Red child.
+   * 3. every path from the root to a leaf has the same number of
+        Blk nodes. *)
+  type ('k,'v) t = Leaf | Node of (color * ('k,'v) t * ('k * 'v) * ('k,'v) t)
+```
+
+You can find the rest of the implementation in the code accompanying
+this lecture.  It does not change in any interesting way from the
+implementation we already saw when we studied red-black sets.
+
+What is the efficiency of insert, find and remove?  All three
+might require traversing the tree from root to a leaf.  Since
+balanced trees have a height that is $$O(\log n)$$, where
+$$n$$ is the number of nodes in the tree (which is the number
+of bindings in the map), all three operations are logarithmic time.
+-->
