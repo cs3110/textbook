@@ -100,13 +100,14 @@ module ArrayMap : DirectAddressMap = struct
 
   (** Efficiency: O(c) *)
   let bindings a =
-    let b = ref [] in
-    for k = 0 to Array.length a do (* c iterations *)
-      match a.(k) with
+    let bs = ref [] in
+    let add_binding k v = (* O(1) *)
+      match v with
       | None -> ()
-      | Some v -> b := (k, v) :: !b
-    done;  (* O(c) *)
-    !b
+      | Some v -> bs := (k, v) :: !bs
+    in
+    Array.iteri add_binding a; (* O(c) *)
+    !bs
 end
 ```
 
