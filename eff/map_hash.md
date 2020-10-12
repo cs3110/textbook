@@ -235,7 +235,7 @@ module HashMap : TableMap = struct
       array of size [new_capacity], and re-inserts all the bindings of [tab]
       into the new array.  The keys are re-hashed, so the bindings will
       likely land in different buckets. 
-      Efficiency: expected O(n), where n is the number of bindings. *)
+      Efficiency: O(n), where n is the number of bindings. *)
   let rehash tab new_capacity =
     (* insert (k, v) into tab *)
     let rehash_binding (k, v) =
