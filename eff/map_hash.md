@@ -229,7 +229,7 @@ module HashMap : TableMap = struct
     tab.buckets.(b) <- (k,v) :: List.remove_assoc k old_bucket; (* O(L) *)
     if not (List.mem_assoc k old_bucket) then
       tab.size <- tab.size + 1;
-    () 
+    ()
 
   (** [rehash tab new_capacity] replaces the buckets array of [tab] with a new
       array of size [new_capacity], and re-inserts all the bindings of [tab]
@@ -304,6 +304,14 @@ module HashMap : TableMap = struct
     m
 end
 ```
+
+An optimization of `rehash` is possible. When it calls `insert_no_resize` to
+re-insert a binding, extra work is being done: there's no need for that
+insertion to call `remove_assoc` or `mem_assoc`, because we are guaranteed the
+binding does not contain a duplicate key. We could omit that work. If the hash
+function is good, it's only a constant amount of work that we save. But if the
+hash function is bad and doesn't distribute keys uniformly, that could be
+an important optimization.
 
 ## Hash functions
 
