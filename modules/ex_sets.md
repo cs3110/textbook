@@ -52,4 +52,4 @@ module ListSetDups : Set = struct
 end
 ```
 In that implementation, the `add` operation is now constant time, and
-the `elts` operation is logarithmic time.
+the `elts` operation is linearithmic time.
