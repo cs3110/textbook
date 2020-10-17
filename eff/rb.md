@@ -41,8 +41,10 @@ as for general binary trees.
 ```
 let rec mem x = function
   | Leaf -> false
-  | Node (_, y, left, right) ->
-	  x = y || (x < y && mem x left) || (x > y && mem x right)
+  | Node (_, y, l, r) ->
+    if x < y then mem x l
+    else if x > y then mem x r
+    else true
 ```
 
 More interesting is the `insert` operation. As with standard binary
