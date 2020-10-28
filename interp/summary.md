@@ -80,5 +80,8 @@
 * *Modern Compiler Implementation* (in Java or ML) by Andrew W. Appel,
   chapters 1-5.
 * *Automata and Computability* by Dexter C. Kozen, chapters 1-27.
+* *Real World OCaml* has a [chapter on the OCaml frontend](https://dev.realworldocaml.org/compiler-frontend.html).
 * This [webpage](http://okmij.org/ftp/ML/generalization.html) documents how some of
   the internals of the OCaml type checker and inferencer.
+* The OCaml VM aka the Zinc Machine is described in these papers:
+  [1](http://cadmium.x9c.fr/distrib/caml-instructions.pdf), [2](https://hal.inria.fr/inria-00070049/document).
