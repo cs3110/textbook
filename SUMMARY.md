@@ -201,10 +201,10 @@
 	  - [10.4.1. A Type System for SimPL](interp/simpl_typesystem.md)
 	  - [10.4.2. A Type Checker for SimPL](interp/simpl_typecheck.md)
 	  - [10.4.3. Type Safety](interp/typesafety.md)
-  - [10.5. \*Type Inference](interp/inference.md)
+  - [10.5. Type Inference](interp/inference.md)
 	  - [10.5.1. Type Constraints](interp/constraints.md)
-	  - [10.5.2. Constraint Collection](interp/collection.md)
-	  - [10.5.3. Unification](interp/unification.md)
+	  - [10.5.2. Unification](interp/unification.md)
+    - [10.5.3. Let Polymorphism](interp/letpoly.md)
   - [10.6. Summary](interp/summary.md)
   - [10.7. Exercises](interp/exercises.md)
   

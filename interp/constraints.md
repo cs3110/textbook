@@ -1,192 +1,245 @@
 # Type Constraints
 
-To gather the constraints for a definition, HM does the following:
-
--   Assign a preliminary type to every subexpression in the definition.
-    For known operations and constants, such as `+` and `3`, use the
-    type that is already known for it. For anything else, use a new type
-    variable that hasn't been used anywhere else.
-
--   Use the "shape" of the expressions to generate constraints. For
-    example, if an expression involves applying a function to an
-    argument, then generate a constraint requiring the type of the
-    argument to be the same as the function's input type.
-    
-We'll give some examples of this first, then we'll give the algorithms
-for doing it.
-
-#### Example 1. 
-
-Here's an example utop interaction:
-```
-# let g x = 5 + x;;
-val g : int -> int = <fun>
-```
-How did OCaml infer the type of `g` here?  Let's work it out.
-
-First, let's rewrite `g` syntactically to make our work a little easier:
-```
-let g = fun x -> ((+) 5) x
-```
-We've made the anonymous function explicit, and we've made the
-binary infix operator a prefix function application.
-
-**1. Assign preliminary types.**
-
-For each subexpression of `fun x -> (+) 5 x`, including the entire
-expression itself, we assign a preliminary type. We already know the
-types of `(+)` and `5`, because those are baked into the language
-itself, but for everything else we "play dumb" and just invent a new
-type variable for it. For now we will use uppercase letters to represent
-those type variables, rather than the OCaml syntax for type variables
-(e.g., `'a`).
-```
-Subexpression         Preliminary type
-------------------    --------------------
-fun x -> ((+) 5) x    R
-    x                 U
-         ((+) 5) x    S
-         ((+) 5)      T
-          (+)         int -> (int -> int)
-              5       int
-                 x    V
-```
-
-**2. Collect constraints.**
-
-Here are some observations we could make about the "shape" of subexpressions
-and some relationships among them:
-
-* Since function argument `x` has type `U` and function body `((+) 5) x` 
-  has type `S`, it must be the case that `R`, the type of the anonymous
-  function expression, satisfies the constraint `R = U -> S`.
-  That is, *the type of the anonymous function* is *the type of its argument*
-  arrow *the type of its body*.
-  
-* Since function `((+) 5)` has type `T` and function
-  application `((+) 5) x` has type `S`, and since the argument `x` has
-  type `V`, it must be the case that `T = V -> S`.  That is,
-  *the type of the function being applied* is *the type of the argument it's
-  being applied to* arrow *the type of the function application expression*.
-    
-* Since function `(+)` has type `int -> (int -> int)` and function
-  application `(+) 5` has type `T`, and since the argument `5` 
-  has type `int`, it must be the case that `int -> (int->int) = int -> T`.
-  Once again,
-  *the type of the function being applied* is *the type of the argument it's
-  being applied to* arrow *the type of the function application expression*.
-  
-* Since `x` occurs with both type `U` and `V`, it must be the case that `U = V`.
-
-The set of constraints thus generated is:
-```
-                  U = V
-                  R = U -> S
-                  T = V -> S
-int -> (int -> int) = int -> T
-```
-
-**3. Solve constraints.**
-
-You can solve that system of equations easily. Starting from the last
-constraint, we know `T` must be `int -> int`. Substituting that into the
-second constraint, we get that `int -> int` must equal `V -> S`, hence
-`V = S = int`. Since `U=V`, `U` must also be `int`. Substituting for `S`
-and `U` in the first constraint, we get that `R = int -> int`. So the
-inferred type of `g` is `int -> int`.
-
-#### Example 2. 
+SimPL, without `let`, with lambda calculus.  We'll add `let` back in later after
+we solve other problems.
 
 ```
-# let apply f x = f x;;
-val apply : ('a -> 'b) -> 'a -> 'b = <fun>
+e ::= x | i | b | e1 bop e2                
+    | if e1 then e2 else e3
+    | fun x -> e
+    | e1 e2
+
+bop ::= + | * | <=
+
+t ::= int | bool | t1 -> t2
 ```
 
-Again we rewrite:
-```
-let apply = fun f -> (fun x -> f x)
-```
+Anonymous functions without type annotations `fun x -> e` mean we have to infer
+the type of `x` to infer the type of the function. For example,
 
-**1. Assign preliminary types.**
+- `fun x -> x + 1` means `x` has type `int` hence the function has type
+  `int -> int`.
 
-```
-Subexpression              Preliminary type
------------------------    ------------------
-fun f -> (fun x -> f x)    R
-    f                      S 
-         (fun x -> f x)    T 
-              x            U 
-                   f x     V 
-                   f       S
-                     x     U
-```
+- `fun x -> if x then 1 else 0` means `x` has type `bool` hence the function has
+  type `bool -> int`.
 
-**2. Collect constraints.**
+- `fun x -> if x then x else 0` is untypeable, because it would require `x`
+  to have type `int` and `bool`, which isn't allowed.
 
-- `R = S -> T`, because of the anonymous function expression.
-- `T = U -> V`, because of the nested anonymous function expression.
-- `S = U -> V`, because of the function application.
+## A syntactic simplification
 
-**3. Solve constraints.**
-
-Using the third constraint, and substituting for `S` in the first
-constraint, we have that `R = (U -> V) -> T`.  Using the second
-constraint, and substituting for `T` in the first constraint,
-we have that `R = (U -> V) -> (U -> V)`.  There are no further
-substitutions that can be made, so we're done solving the constraints.
-If we now replace the preliminary type variables with actual OCaml
-type variables, specifically `U` with `'a` and `V` with `'b`, we get that
-the type of `apply` is `('a -> 'b) -> ('a -> 'b)`, which is the same as 
-`('a -> 'b) -> 'a -> 'b`.
-
-#### Example 3. 
+Since we've added functions to SimPL in this little language, we can treat
+`e1 bop e2` as syntactic sugar for `( bop ) e1 e2`. That is, treat infix binary
+operators as prefix function application. Introduce new syntactic class `n`
+for name. Cuts down syntax to:
 
 ```
-# apply g 3;;
-- : int = 8
+e ::= n | i | b
+    | if e1 then e2 else e3
+    | fun x -> e
+    | e1 e2
+
+n ::= x | bop
+
+bop ::= ( + ) | ( * ) | ( <= )
+
+t ::= int | bool | t1 -> t2
 ```
 
-We rewrite that as `(apply g) 3`.
-
-**1. Assign preliminary types.**
-
-In this running example, the inference for `g` and `apply` has already
-been done, so we can fill in their types as known, much like the type
-of `+` is already known.
+We know the types of those built-in operators:
 
 ```
-Subexpression     Preliminary type
--------------     ------------------------------------------
-(apply g) 3       R 
-(apply g)         S  
- apply            (U -> V) -> (U -> V)
-       g          int -> int
-          3       int
+( + ) : int -> int -> int
+( * ) : int -> int -> int
+( <= ) : int -> int -> bool
 ```
 
-**2. Collect constraints.**
+Those types are part of the initial static environment when type checking an
+expresssion. In OCaml they could even be shadowed by values with different
+types, but here we don't have to worry about that because we don't yet have
+`let`.
 
-- `S = int -> R`
-- `(U -> V) -> (U -> V) = (int -> int) -> S`
+## Constraint-based inference
 
-**3. Solve constraints.**
+How do you mentally infer the type of `fun x -> 1 + x`, or rather,
+`fun x -> ( + ) 1 x`? It's automatic by now, but we could break it down into
+pieces:
 
-Breaking down the last constraint, we have that `U = V = int`, and
-that `S = U -> V`, hence `S = int -> int`.  Substituting that into
-the first constraint, we have that `int -> int = int -> R`.  Therefore
-`R = int`, so the type of `apply g 3` is `int`.
+- Start with `x` having some unknown type `t`.
+- Note that `( + )` is known to have type `int -> (int -> int)`.
+- So its first argument must have type `int`.  Which `1` does.
+- And its second argument must have type `int`, too. So `t` must be `int`. That
+  is a _constraint_ on `t`.
+- Finally the body of the function must also have type `int`, since that's the
+  return type of `( + )`.
+- Therefore the type of the entire function must be `t -> int`.
+- Since `t = int`, that type is `int -> int`.
 
-#### Example 4. 
+The type inference algorithm follows the same idea of generating unknown types,
+collecting constraints on them, and using the constraints to solve for the type
+of the expression.
+
+New 4-ary relation `env |- e : t -| C` means that in environment `env`,
+expression `e` is inferred to have type `t` and generates constraint set `C`. A
+constraint is an equation of the form `t1 = t2` for any types `t1` and `t2`.
+
+The colon in the middle separates input from output when thought of as
+a type-inference function.  That function takes as input `env` and `e`:
+we want to know what the type of `e` is in environment `env`.  The function
+returns as output a type `t` and constraints `C`.
+
+The turnstiles around the outside show the parts of type inference that utop
+does not. The `e : t` in the middle is approximately what you see in the
+toplevel: you enter an expression, it tells you the type. But around that is an
+environment and contraint set `env |- ... -| C` that is invisible to you.
+
+## Inference of constants and names
+
+The easiest parts of inference are constants:
+```
+env |- i : int -| {}
+
+env |- b : bool -| {}
+```
+Any integer constant `i`, such as `42`, is known to have type `int`, and there
+are no contraints generated.  Likewise for Boolean constants.
+
+Inferring the type of a name requires looking it up in the environment:
+```
+env |- n : t -| {}
+  if env(n) = t
+```
+If the name is not bound in the environment, the expression cannot be typed.
+It's an unbound name error.  No constraints are generated.
+
+## Inference of if expressions
+
+The remaining rules are at their core the same as the type-checking rules we saw
+previously, but they each generate a _type variable_ and possibly some
+constraints on that type variable.
+
+Here's the `if` rule.  We'll explain it below.
+```
+env |- if e1 then e2 else e3 : 't -| C1, C2, C3, t1 = bool, 't = t2, 't = t3
+  if fresh 't
+  and env |- e1 : t1 -| C1
+  and env |- e2 : t2 -| C2
+  and env |- e3 : t3 -| C3
+```
+
+Let's look at the first premiss:  "fresh `'t`".
+
+When we encounter an `if`, we know that the type of the guard must be `bool`,
+but we don't what the type of the branches will be. That must be inferred. So,
+we invent a type variable `'t` to stand for that type.
+
+We should therefore add type variables to the syntax of types:
+```
+t ::= 'x | int | bool | t -> t
+```
+Example type variables: `'a`, `'foobar`, `'t`. In the last, `t` is an
+identifier, not a meta-variable.
+
+A type variable is _fresh_ if it has never been used elsewhere during type
+inference. So, picking a fresh type variable just means picking a new name that
+can't possibly be confused with any other names in the program.
+
+So when we say "fresh `'t`" in the `if` rule, we mean that we are picking a
+brand new type variable that hasn't been used before.
+
+The remaining premisses are exactly the same as in type checking an `if`,
+except that they might generate their own constraint sets `C1`, `C2`, and `C3`.
+
+The conclusion of the rule is that the `if` expression has type `'t`.  Which
+is of course what it must have, since the type of an `if` is the type
+of its branches.
+
+The constraints generated by this inference are all the constraints from
+the presmisses, and along with those, two new constraints: `'t = t2` and
+`'t = t3`.  That is, whatever type `t2` is inferred for `e2` must be
+equal to `'t`.  And the same for `t3` and `e3`.
+
+**Example.**
 
 ```
-# apply not false;;
-- : bool = true
+{} |- if true then 1 else 0 : 't -| 't = int
+  {} |- true : bool -| {}
+  {} |- 1 : int -| {}
+  {} |- 0 : int -| {}
 ```
 
-By essentially the same reasoning as in example 3, HM can infer that the
-type of this expression is `bool`. This illustrates the polymorphism of
-`apply`: because the type `(U -> V) -> (U -> V)` of
-`apply` contains type variables, the function can be applied to any
-arguments, so long as those arguments' types can be consistently
-substituted for the type variables.
+The full constraint set generated is `{}, {}, {}, 't = int, 't = int`, but of
+course that simplifies to just `'t = int`. From that constraint set we can see
+that the type of `if true then 1 else 0` must be `int`.
 
+## Inference of functions and applications
+
+Like `if` expressions, type inference for anonymous functions and function
+application are essentially the same as type checking, but with the added step
+of generating a fresh type variable for the unknown type involved.
+
+**Anonymous functions.**
+The unknown type is the type of the parameter `x`:
+```
+env |- fun x -> e : 't1 -> t2 -| C
+  if fresh 't1
+  and env, x : 't1 |- e : t2 -| C
+```
+So we introduce a fresh type variable `'t1` to stand for the type of `x`, and
+infer the type of body `e` under the environment in which `x : 't1`. Wherever
+`x` is used in `e`, that can cause constraints to be generated involving `'t1`.
+Those constraints will become part of `C`.
+
+**Example.**
+
+Here's a function where we can immediately see that `x : bool`, but let's work
+through the inference:
+```
+{} |- fun x -> if x then 1 else 0 : 't1 -> 't -| 't1 = bool, 't = int
+  {}, x : 't1 |- if x then 1 else 0 : 't -| 't1 = bool, 't = int
+    {}, x : 't1 |- x : 't1 -| {}
+    {}, x : 't1 |- 1 : int -| {}
+    {}, x : 't1 |- 0 : int -| {}
+```
+The inferred type of the function is `'t1 -> 't`, where `'t1 = bool` and
+`'t = int`. Simplifying that, the function's type is `bool -> int`.
+
+**Function application.**
+The unknown type is the type of the entire application, because we don't 
+yet know anything about the types of either subexpression:
+```
+env |- e1 e2 : 't -| C1, C2, t1 = t2 -> 't
+  if fresh 't
+  and env |- e1 : t1 -| C1
+  and env |- e2 : t2 -| C2
+```
+So we introduce a fresh type variable `'t` for the type of the application. We
+use inference to determine the types of the subexpressions and any constraints
+they happen to generate. We add one new constraint, `t1 = t2 -> 't`, which
+expresses that the type of the left-hand side `e1` must be a function that takes
+in an argument of type `t2` and returns a value of type `'t`.
+
+**Example.**
+Let `I` be the _initial environment_ that binds the boolean operators.
+Let's infer the type of a partial application of `( + )`:
+```
+I |- ( + ) 1 : 't -| int -> int -> int = int -> 't
+  I |- ( + ) : int -> int -> int -| {}
+  I |- 1 : int -| {}
+```
+From the resulting constraint, we see that
+```
+int -> int -> int
+=
+int -> 't
+```
+Hence `'t = int -> int`, which is the correct type for a partial application
+of `( + )`.
+
+## Solving constraint sets
+
+We've now given an algorithm for generating types and constraint sets in the
+form of the inductive relation `env |- e : t -| C`. But we've been waving our
+hands about how to solve the constraint set. The examples we've seen so far have
+been easy to eyeball because they were small. For a large program, that won't be
+true. So let's turn our attention to that problem, next.
