@@ -1,4 +1,4 @@
-# \*Type Inference
+# Type Inference
 
 Java and OCaml are *statically typed* languages, meaning every binding has a
 type that is determined at *compile time*&mdash;that is, before any part of the
@@ -46,11 +46,11 @@ parts of the language can sometimes make type annotations either necessary or at
 least helpful (see RWO chapter 22, "Type inference", for examples). But for most
 code you write, type annotations really are completely optional.
 
-Since it would be verbose to keep writing "the OCaml type reconstruction
-algorithm," we'll call the algorithm HM. That name is used throughout the
-programming languages literature, because the algorithm was independently
-invented by Roger <u>H</u>indley and Robin <u>M</u>ilner. In the next few
-sections, we'll see how HM works.
+Since it would be verbose to keep writing "the type reconstruction algorithm
+used by OCaml and other functional languages," we'll call the algorithm HM. That
+name is used throughout the programming languages literature, because the
+algorithm was independently invented by Roger <u>H</u>indley and Robin
+<u>M</u>ilner. In the next few sections, we'll see how HM works.
 
 ## The history of HM
 
@@ -70,10 +70,10 @@ on this history, Hindley wrote,
 
 Although we haven't seen the HM algorithm yet, you probably won't be surprised
 to learn that it's usually very efficient&mdash;you've probably never had to
-wait for the REPL to print the inferred types of your programs. In practice, it
-runs in approximately linear time. But in theory, there are some very strange
+wait for the toplevel to print the inferred types of your programs. In practice,
+it runs in approximately linear time. But in theory, there are some very strange
 programs that can cause its running-time to blow up. (Technically, it's
-DEXPTIME-complete.) For fun, try typing the following code in utop:
+exponential time.) For fun, try typing the following code in utop:
 
 ```
 # let b = true;;
