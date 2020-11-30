@@ -63,13 +63,17 @@ than `PLUS`, and as being left associative.  Let's experiment with other choices
 
 ## Type Checking
 
-##### Exercise: infer [&#10029;] 
+##### Exercise: infer [&#10029;&#10029;] 
+
+Type inference for SimPL can be done in a much simpler way than for the larger
+language (with anonymous functions and let expression) that we considered in the
+section on type inference.
 
 Run `make` in the SimPL interpreter implementation.  It will compile the
 interpreter and launch utop.  Now, define a function `infer : string -> typ`
 such that `infer s` parses `s` into an expression and infers the type of
 `s` in the empty context.  Your solution will make use of the `typeof`
-function.
+function.  You don't need constraint collection or unification.
 
 Try out your `infer` function on these test cases:
 
@@ -579,60 +583,14 @@ f 2
 
 ## Type inference
 
-##### Exercise: infer [&#10029;&#10029;] 
+##### Exercise: constraints [&#10029;&#10029;] 
 
-Using the HM type inference algorithm, infer the type
-of the following definition:
-```
-let apply f x = f x
-```
-
-Remember to go through these steps:
-
-* desugar the definition entirely (i.e., construct an AST)
-* assign preliminary type variables (i.e., annotate the AST)
-* collect constraints
-* solve the constraints
-
-For solving the constraints, go ahead and solve by hand rather than
-using the unification algorithm in the notes.
-
-When you're done solving, you will be left with some preliminary 
-type variables that have no concrete types (e.g., `int`) associated
-with them.  Those can be renamed to OCaml type variables
-such as `'a` and `'b`.
-
-&square;
-
-##### Exercise: infer s [&#10029;&#10029;] 
-
-Using the HM type inference algorithm, infer the type
-of the following definition:
-```
-let s x y z = (x z) (y z)
-```
-
-&square;
-
-##### Exercise: infer if [&#10029;&#10029;] 
-
-In lecture we gave the constraint collection rules for several
-but not all of OCaml's expression forms.  How should constraints
-be collected from an expression of the form `if e1 then e2 else e3`?
-Your answer should be a completion of the following:
+Show the derivation of the `env |- e : t -| C` relation for these expressions:
 
 ```
-U(e1) = ...
-U(e2) = ...
-U(e3) = ...
-and all constraints collected from e1, e2, and e3
-```
-
-*Hint: recall the type checking rule for if expressions.*
-
-Using your answer, infer the type of this expression:
-```
-if true then 3110 else 0
+1. fun x -> ( + ) 1 x
+2. fun b -> if b then false else true
+3. fun x -> fun y -> if x <= y then y else x
 ```
 
 &square;
@@ -650,54 +608,6 @@ Y = X -> X
 
 &square;
 
-##### Exercise: infer double [&#10029;&#10029;] 
-
-Using the HM type inference algorithm, infer the type
-of the following definition:
-```
-let double f x = f (f x)
-```
-
-&square;
-
-##### Exercise: infer match [&#10029;&#10029;&#10029;] 
-
-To infer the type of a match expression, we need to collect
-constraints from patterns.  A variable pattern is a defining 
-occurrence of a variable.  For example, in this pattern:
-```
-match e with
-| x -> e'
-```
-the variable `x` is defined by the pattern and could be used
-in expression `e'`.
-
-Other forms of patterns generate constraints.  For example:
-```
-U(n) = int      (where n is an integer constant pattern)
-U(s) = string   (where s is a string constant pattern)
-U((p1,p2)) = U(p1) * U(p2)
-```
-
-How should constraints be collected from an expression of the 
-form `match e with p1 -> e1 | ... | pn -> en`?
-Your answer should be a completion of the following:
-
-```
-U(ei) = ...
-U(pi) = ...
-and all constraints collected from e, and all pi, ei
-```
-
-*Hint: recall the type checking rule for match expressions.*
-
-Using your answer, infer the type of this expression:
-```
-match 3110 with x -> x+1
-```
-
-&square;
-
 ##### Exercise: unify more [&#10029;&#10029;&#10029;] 
 
 Use the unification algorithm to solve the following system of
@@ -710,5 +620,43 @@ X -> Y = Y -> Z
 ```
 
 &square;
+
+
+##### Exercise: infer apply [&#10029;&#10029;&#10029;] 
+
+Using the HM type inference algorithm, infer the type
+of the following definition:
+```
+let apply f x = f x
+```
+
+Remember to go through these steps:
+
+* desugar the definition entirely (i.e., construct an AST)
+* collect constraints
+* solve the constraints with unification
+
+&square;
+
+##### Exercise: infer double [&#10029;&#10029;&#10029;] 
+
+Using the HM type inference algorithm, infer the type
+of the following definition:
+```
+let double f x = f (f x)
+```
+
+&square;
+
+##### Exercise: infer S [&#10029;&#10029;&#10029;&#10029;] 
+
+Using the HM type inference algorithm, infer the type
+of the following definition:
+```
+let s x y z = (x z) (y z)
+```
+
+&square;
+
 
 

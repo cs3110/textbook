@@ -284,3 +284,17 @@ expression:
 Except that OCaml uses a different type variable identifier. OCaml is nice to us
 and "lowers" the type variables down to smaller letters of the alphabet. We
 could do that too with a little extra work.
+
+## Type errors
+
+In reality there is yet another piece to type inference. If unification fails,
+the compiler or interpreter needs to produce a helpful error message. That's an
+important engineering challenge that we won't address here. It requires keeping
+track of more than just constraints: we need to know why a constraint was
+introduced, and the ramification of its violationg. We also need to track the
+constraint back to the lexical piece of code that produced it, so that
+programmers can see where the problem occurs. And since it's possible that
+constraints can be processed in many different orders, there are many possible
+error messages that could be produced. Figuring out which one will lead the
+programmer to the root cause of an error, instead of some downstream consequence
+of it, is an area of ongoing research.

@@ -203,7 +203,7 @@
 	  - [10.4.3. Type Safety](interp/typesafety.md)
   - [10.5. Type Inference](interp/inference.md)
     - [10.5.1. Type Constraints](interp/constraints.md)
-    - [10.5.2. Unification](interp/unification.md)
+    - [10.5.2. Solving Constraints](interp/unification.md)
     - [10.5.3. Finishing Type Inference](interp/reconstruction.md)
     - [10.5.4. Let Polymorphism](interp/letpoly.md)
   - [10.6. Summary](interp/summary.md)

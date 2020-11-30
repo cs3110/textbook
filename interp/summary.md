@@ -1,5 +1,8 @@
 # Summary
 
+Our treatment of type inference, based on constraints collected by the
+inference algorithm, is based on Pierce (cited below).
+
 ## Terms and concepts
 
 - abstract syntax
@@ -25,8 +28,10 @@
 - evaluation
 - fresh
 - front end
+- generalization
 - Hindley&ndash;Milner (HM) type inference algorithm
 - implicit typing
+- instantiation
 - intermediate representation
 - interpreter
 - lambda calculus
@@ -66,12 +71,16 @@
 - type inference
 - type reconstruction
 - type safety
+- type scheme
 - type system
+- type variable
 - typing context
 - unification
 - unifier
 - value
+- value restriction
 - virtual machine
+- weak type variable
 - well typed
 
 ## Further reading
