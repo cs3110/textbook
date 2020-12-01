@@ -65,8 +65,8 @@ Finally a substitution can be applied to a set `C` of constraints; the result
 
 ## Unification
 
-A substitution *unifies* a constraint `t_1 = t_2` if `S t_1` results in the same
-type as `S t_2`. For example, substitution `S = {int -> int / 'y}; {int / 'x}`
+A substitution *unifies* a constraint `t_1 = t_2` if `t_1 S` results in the same
+type as `t_2 S`. For example, substitution `S = {int -> int / 'y}; {int / 'x}`
 unifies constraint `'x -> ('x -> int) = int -> 'y`, because
 ```
 ('x -> ('x -> int)) S

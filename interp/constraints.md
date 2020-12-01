@@ -110,11 +110,12 @@ are no contraints generated.  Likewise for Boolean constants.
 
 Inferring the type of a name requires looking it up in the environment:
 ```
-env |- n : t -| {}
-  if env(n) = t
+env |- n : env(n) -| {}
 ```
+No constraints are generated.
+
 If the name is not bound in the environment, the expression cannot be typed.
-It's an unbound name error.  No constraints are generated.
+It's an unbound name error.
 
 ## Inference of if expressions
 
@@ -156,14 +157,14 @@ is an identifier, not a meta-variable.
 **Example.**
 
 ```
-{} |- if true then 1 else 0 : 't -| 't = int
+{} |- if true then 1 else 0 : 't -| bool = bool, 't = int
   {} |- true : bool -| {}
   {} |- 1 : int -| {}
   {} |- 0 : int -| {}
 ```
 
-The full constraint set generated is `{}, {}, {}, 't = int, 't = int`, but of
-course that simplifies to just `'t = int`. From that constraint set we can see
+The full constraint set generated is `{}, {}, {}, bool = bool, 't = int, 't = int`, but of
+course that simplifies to just `bool = bool, 't = int`. From that constraint set we can see
 that the type of `if true then 1 else 0` must be `int`.
 
 ## Inference of functions and applications

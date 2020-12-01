@@ -27,9 +27,9 @@ To finish type inference and reconstruct the type of `e`, we just compute `t S`.
 That is, we apply the solution to the contraints to the type `t` produced
 by constraint generation.
 
-Let `tp` be that type. That is, `tp = t S`. It's possible to prove `tp` is the
+Let `p` be that type. That is, `p = t S`. It's possible to prove `p` is the
 *principal* type for the expression, meaning that if `e` also has type `t` for
-any other `t`, then there exists a substitution `S` such that `t = tp S`. 
+any other `t`, then there exists a substitution `S` such that `t = p S`. 
 
 For example, the principal type of the identity function `fun x -> x` would be
 `'a -> 'a`. But you could also give that function the less helpful type

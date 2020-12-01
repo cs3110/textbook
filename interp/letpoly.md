@@ -129,8 +129,7 @@ into a type scheme like `'a . 'a -> 'a` in an environment `env` against
 constraints `C1`. Let's come back to how it works in a minute. Before that,
 there's one other rule that needs to change, which is the name rule:
 ```
-env |- n : instantiate(t) -| {}
-  if env(n) = t
+env |- n : instantiate(env(t)) -| {}
 ```
 The only thing that changes there is that use of `instantiate`. Its job is to
 take a type scheme like `'a . 'a -> 'a` and _instantiate_ it into a new type
