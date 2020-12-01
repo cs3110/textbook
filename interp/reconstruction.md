@@ -21,11 +21,7 @@ in the form of a relation `env |- e : t -| C`.
 
 Next, we introduced the unification algorithm for solving constraint sets. That
 algorithm produces as output a sequence `S` of substitutions, or it fails. If it
-fails, then `e` is not typeable. The type inferencer then needs to construct an
-error message based on the set of constraints. Creating a good, understandable,
-helpful error message isn't easy! The order in which constraints and
-subexpressions were processed can make messages unnecessarily hard to
-understand. We won't delve deeper here.
+fails, then `e` is not typeable.
 
 To finish type inference and reconstruct the type of `e`, we just compute `t S`.
 That is, we apply the solution to the contraints to the type `t` produced

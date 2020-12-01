@@ -5,8 +5,9 @@ type that is determined at *compile time*&mdash;that is, before any part of the
 program is executed. The type-checker is a compile-time procedure that either
 accepts or rejects a program. By contrast, JavaScript and Ruby are
 dynamically-typed languages; the type of a binding is not determined ahead of
-time and computations like binding 42 to `x` and then treating `x` as a string
-result in run-time errors.
+time.  Computations like binding 42 to `x` and then treating `x` as a string
+therefore either result in run-time errors, or run-time conversion between
+types.
 
 Unlike Java, OCaml is *implicitly typed*, meaning programmers rarely need to
 write down the types of bindings. This is often convenient, especially with
@@ -43,8 +44,9 @@ The OCaml type reconstruction algorithm attempts to never reject a program that
 could type check, if the programmer had written down types. It also attempts
 never to accept a program that cannot possibly type check. Some more obscure
 parts of the language can sometimes make type annotations either necessary or at
-least helpful (see RWO chapter 22, "Type inference", for examples). But for most
-code you write, type annotations really are completely optional.
+least helpful (see *Real World OCaml* chapter 22, "Type inference", for
+examples). But for most code you write, type annotations really are completely
+optional.
 
 Since it would be verbose to keep writing "the type reconstruction algorithm
 used by OCaml and other functional languages," we'll call the algorithm HM. That

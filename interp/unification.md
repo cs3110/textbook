@@ -96,7 +96,7 @@ To find a substitution that unifies constraint set `C`, we use an algorithm
 
 - If `C` is the empty set, then `unify(C)` is the empty substitution.
 
-- IIf `C` contains at least one constraint `t1 = t2` and possibly some other
+- If `C` contains at least one constraint `t1 = t2` and possibly some other
   constraints `C'`, then `unify(C)` is defined as follows:
 
     - If `t1` and `t2` are both the same type variable, e.g. `'x`, 

@@ -64,10 +64,9 @@ during unification, leaving an unsatisfiable constraint `int = bool`. At that
 point unification will fail, declaring the program to be ill typed.
 
 The problem is that the `'a` type variable in the inferred type of `id` stands
-for an unknown but **fixed** type. We intended for it to stand for **variable**
-types. Another way of thinking about that is: at each application of `id`, we
-want to let `'a` become a different type, instead of forcing it to always be the
-same type.
+for an unknown but **fixed** type. At each application of `id`, we want to let
+`'a` become a **different** type, instead of forcing it to always be the same
+type.
 
 ## Type schemes
 
@@ -309,8 +308,7 @@ Error: This expression has type bool but an expression was expected of type int
 ```
 Since `r : (int -> int) ref`, we cannot apply `!r` to a `bool`.
 
-We won't cover implementation of weak type variables or the value restriction
-here; that's going beyond our scope.  
+We won't cover implementation of weak type variables here.
 
 ## Polymorphism and mutability
 
@@ -346,12 +344,12 @@ Exception java.lang.ArrayStoreException
 ```
 
 The problem is that mutating the first array element to be a rabbit would leave
-us with an array in which one element is an rabbit and another is an elephant.
-(Ouch! An elephant would sit on a rabbit. Poor bun bun.) But in Java, the
-dynamic type of every object of an array is a property of the array as a whole,
-and it is an invariant they all must have the same dynamic type. So Java
-prevents the assignment above by detecting the error at run time and raising an
-exception.
+us with a `Rabbit` array in which one element is a `Elephant`. (Ouch! An
+elephant would sit on a rabbit. Poor bun bun.) But in Java, the type of every
+object of an array is supposed to be a property of the array as a whole. Every
+element of the array created by `new Rabbit[2]` therefore must be a `Rabbit`. So
+Java prevents the assignment above by detecting the error at run time and
+raising an exception.
 
 This is really the value restriction in another guise! The type of a value
 stored in a mutable location may not change, according to the value restriction.
