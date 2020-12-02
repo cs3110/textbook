@@ -99,9 +99,10 @@ To find a substitution that unifies constraint set `C`, we use an algorithm
 - If `C` contains at least one constraint `t1 = t2` and possibly some other
   constraints `C'`, then `unify(C)` is defined as follows:
 
-    - If `t1` and `t2` are both the same type variable, e.g. `'x`, 
-      then return `unify(C')`.  *In this case, the constraint contained
-      no useful information, so we're tossing it out and continuing.*
+    - If `t1` and `t2` are both the same simple type&mdash;i.e. both the same
+      type variable `'x`, or both `int` or both `bool`&mdash; then return
+      `unify(C')`. *In this case, the constraint contained no useful
+      information, so we're tossing it out and continuing.*
 
     - If `t1` is a type variable `'x` and `'x` does not occur in `t2`, 
       then let `S = {t2 / 'x}`, and return `S; unify(C' S)`.  *In this case,
