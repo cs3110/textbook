@@ -141,7 +141,7 @@ Here's how those two revised rules work together to get our earlier example
 with the identify function right:
 ```
 {} |- let id = fun x -> x in (let a = id 0 in id true)
-  {} |- fun x -> x : 'a -| {}
+  {} |- fun x -> x : 'a -> 'a -| {}
     x : 'a |- x : 'a -| {}
   id : 'a . 'a -> 'a |- let a = id 0 in id true   <--- POINT 1
 ```
@@ -151,7 +151,7 @@ a type to a type scheme. That records the fact that each application of `id`
 should get to use its own value for `'a`.  Going on:
 ```
 {} |- let id = fun x -> x in (let a = id 0 in id true)
-  {} |- fun x -> x : 'a -| {}
+  {} |- fun x -> x : 'a -> 'a -| {}
     x : 'a |- x : 'a -| {}
   id : 'a . 'a -> 'a |- let a = id 0 in id true   <--- POINT 1
     id : 'a . 'a -> 'a |- id 0
@@ -161,7 +161,7 @@ Pausing here at Point 3, when `id` is applied to `0`, we instantiate
 its type variable `'a` with a fresh type variable `'b`.  Let's finish:
 ```
 {} |- let id = fun x -> x in (let a = id 0 in id true) : 'e -| 'b -> 'b = int -> 'c, 'd -> 'd = bool -> 'e
-  {} |- fun x -> x : 'a -| {}
+  {} |- fun x -> x : 'a -> 'a -| {}
     x : 'a |- x : 'a -| {}
   id : 'a . 'a -> 'a |- let a = id 0 in id true : 'e -| 'b -> 'b = int -> 'c, 'd -> 'd = bool -> 'e   <--- POINT 1
     id : 'a . 'a -> 'a |- id 0 : 'c -| 'b -> 'b = int -> 'c
