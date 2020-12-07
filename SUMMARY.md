@@ -245,7 +245,8 @@
 	- [12.3.2. Example: The Writer Monad](adv/ex_writer_monad.md)
 	- [12.3.3. Example: The Lwt Monad](adv/ex_lwt_monad.md)
 	- [12.3.4. Monad Laws](adv/monad_laws.md)
-  - [12.4. \*Memoization](adv/memoization.md)
-  - [12.5. Summary](adv/summary.md)
-  - [12.6. Exercises](adv/exercises.md)  
+  - [12.4. The Curry-Howard Correspondence](adv/curry-howard.md)
+  - [12.5. \*Memoization](adv/memoization.md)
+  - [12.6. Summary](adv/summary.md)
+  - [12.7. Exercises](adv/exercises.md)  
 
