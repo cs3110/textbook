@@ -24,9 +24,9 @@ in place of where an expression is expected:
 # (let x = 42) + 1
 Error: Syntax error: operator expected. 
 ```
-Syntactically, a let definition is not permitted on the left-hand side
+Syntactically, a `let` definition is not permitted on the left-hand side
 of the `+` operator, because a value is needed there, and definitions
-do not evaluate to values.  On the other hand, a let expression
+do not evaluate to values.  On the other hand, a `let` expression
 would work fine:
 ```
 # (let x = 42 in x) + 1
@@ -59,7 +59,7 @@ can be bound inside a given block of code.
 let x = e1 in e2
 ```
 
-As usual `x` is an identifier.  We call `e1` the *binding expression*, because
+As usual, `x` is an identifier.  We call `e1` the *binding expression*, because
 it's what's being bound to `x`; and we call `e2` the *body expression*,
 because that's the body of code in which the binding will be in scope.
 

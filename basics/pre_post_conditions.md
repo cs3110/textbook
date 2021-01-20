@@ -35,8 +35,8 @@ by the function.
 
 The "Raises" clause in the documentation of `index` is another kind of
 postcondition.  It guarantees that the function raises an exception.  
-Note that the clause is not a precondition, even though it does
-state a condition in terms of an input.
+Note that the clause is not a precondition, even though it states a condition in
+terms of an input.
 
 Note that none of these examples has a "Requires" clause that says
 something about the type of an input.  If you're coming from a

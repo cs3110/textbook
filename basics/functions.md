@@ -4,21 +4,19 @@ The following code
 ```
 let x = 42
 ```
-has an expression in it (`42`) 
-but is not itself an expression.  Rather, it is a *definition*. 
-Definitions bind values to names, in this case the value `42` being
-bound to the name `x`.  The OCaml manual has definition of
-[all definitions][definitions] 
-(see the third major grouping titled "*definition*" on that page), but again
-that manual page is primarily for reference not for study.
-Definitions are not expressions, nor are expressions definitions&mdash;
-they are distinct syntactic classes.  But definitions can have expressions
-nested inside them, and vice-versa.
+has an expression in it (`42`) but is not itself an expression. Rather, it is a
+*definition*. Definitions bind values to names, in this case the value `42`
+being bound to the name `x`. The OCaml manual describes
+[definitions][definitions] (see the third major grouping titled "*definition*"
+on that page), but that manual page is again primarily for reference not for
+study. Definitions are not expressions, nor are expressions
+definitions&mdash;they are distinct syntactic classes. But definitions can have
+expressions nested inside them, and vice-versa.
 
 [definitions]: http://caml.inria.fr/pub/docs/manual-ocaml/modules.html
 
-For now, let's focus on one particular kind of definition, a *function definition*.
-Non-recursive functions are defined like this:
+For now, let's focus on one particular kind of definition, a *function
+definition*. Non-recursive functions are defined like this:
 
 	let f x = ...
 
@@ -32,7 +30,7 @@ most languages assume by default that they are.  OCaml doesn't make that
 assumption, though.
 
 One of the best known recursive functions is the factorial function.
-In OCaml it can be written as follows:
+In OCaml, it can be written as follows:
 
 ```
 (* requires: n >= 0 *)
@@ -44,11 +42,16 @@ let rec fact n =
 We provided a specification comment above the function to document the
 precondition (`requires`) and postcondition (`returns`) of the function. 
 
-Note that, as in many languages, OCaml integers are not the
-"mathematical" integers but are limited to a fixed number of bits.  The
-[manual][man] specifies that integers are at least 30 bits but might be
-wider.  So if you test on large enough inputs, you might begin to see
-strange results.  The problem is machine arithmetic, not OCaml.  
+Note that, as in many languages, OCaml integers are not the "mathematical"
+integers but are limited to a fixed number of bits. The [manual][man] specifies
+that (signed) integers are at least 31 bits, but they could be wider. As
+architectures have grown, so has that size. In current implementations, OCaml
+integers are 63 bits. So if you test on large enough inputs, you might begin to
+see strange results. The problem is machine arithmetic, not OCaml. (For
+interested readers: why 31 or 63 instead of 32 or 64? The OCaml garbage
+collector needs to distinguish between integers and pointers. The runtime
+representation of these therefore steals one bit to flag whether a word is an
+integer or a pointer.)
 
 [man]: http://caml.inria.fr/pub/docs/manual-ocaml/values.html#sec76
 
@@ -68,11 +71,11 @@ solves this *type inference* problem algorithmically, but we could do
 it ourselves, too. It's like a mystery that can be solved by our
 mental power of deduction:
 
-* Since the if expression can return `1` in the `then`
-  branch, we know by the typing rule for `if` that the entire if expression
+* Since the `if` expression can return `1` in the `then`
+  branch, we know by the typing rule for `if` that the entire `if` expression
   has type `int`.  
   
-* Since the if expression has type `int`, the function's return type must
+* Since the `if` expression has type `int`, the function's return type must
   be `int`.
   
 * Since `y` is compared to `0` with the equality operator, `y` must be an `int`.
@@ -80,7 +83,7 @@ mental power of deduction:
 * Since `x` is multiplied with another expression using the `*` operator,
   `x` must be an `int`.
   
-If we did want to write down the types for some reason, we could do that:
+If we wanted to write down the types for some reason, we could do that:
 ```
 (* requires: y>=0 *)
 (* returns: x to the power of y *)
@@ -88,12 +91,12 @@ let rec pow (x:int) (y:int) : int =
   if y=0 then 1 
   else x * pow x (y-1)
 ```
-When we write the *type annotations* for `x` and `y` the parentheses are
-mandatory.  We will generally leave out these annotations, because
-it's simpler to let the compiler infer them.  There are other times when you'll
-want to explicitly write down types though.  One particularly useful time
-is when you get a type error from the compiler that doesn't make sense.
-Explicitly annotating the types can help with debugging such an error message.
+The parentheses are mandatory when we write the *type annotations* for `x` and
+`y`. We will generally leave out these annotations, because it's simpler to let
+the compiler infer them. There are other times when you'll want to explicitly
+write down types. One particularly useful time is when you get a type error from
+the compiler that you don't understand. Explicitly annotating the types can help
+with debugging such an error message.
 
 **Syntax.**
 The syntax for function definitions:

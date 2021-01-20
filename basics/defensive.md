@@ -22,7 +22,7 @@ expose the fact that the precondition was violated.  After all, chances
 are that the client didn't *mean* to violate it.
 
 So the implementor of `random_int` would do well to check whether the
-precondition is violated, and if so, to raise an exception.  Here are
+precondition is violated, and if so, raise an exception.  Here are
 three possibilities of that kind of *defensive programming:* 
 
 ```
@@ -44,10 +44,10 @@ let random_int bound =
   (* proceed with the implementation of the function *)
 ```
 
-The second possibility is probably the most informative to the client,
-because it uses the built-in function `invalid_arg` to raise the 
-well-named exception `Invalid_argument`.  (And in fact that's exactly
-what the standard library implementation of this function does.)
+The second possibility is probably the most informative to the client, because
+it uses the built-in function `invalid_arg` to raise the well-named exception
+`Invalid_argument`. In fact, that's exactly what the standard library
+implementation of this function does.
 
 The first possibility is probably most useful when you are trying to
 debug your own code, rather than choosing to expose a failed assertion
@@ -82,7 +82,7 @@ Now instead of being free to do whatever when `bound` is too big
 or too small, `random_int` must raise an exception.  For
 this function, that's probably the best choice.
 
-In this course we're not going to force you to program defensively.
-But if you're savvy, you'll start (or continue) doing it anyway. The
-small amount of time you spend coding up such defenses will save you
-hours of time in debugging, making you a more productive programmer.  
+In this course, we're not going to force you to program defensively. But if
+you're savvy, you'll start (or continue) doing it anyway. The small amount of
+time you spend coding up such defenses will save you hours of time in debugging,
+making you a more productive programmer.  

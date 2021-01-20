@@ -12,11 +12,11 @@ machine does this, then this, etc.
 The **reality of mutability** is that whereas machines are good at
 complicated manipulation of state, humans are not good at understanding
 it. The essence of why that's true is that mutability breaks
-*referential transparency*: the ability to replace expression with its
+*referential transparency*: the ability to replace an expression with its
 value without affecting the result of a computation. In math, if $$f(x)=y$$,
 then you can substitute $$y$$ anywhere you see $$f(x)$$. In imperative
 languages, you cannot:  $$f$$ might have side effects, so computing $$f(x)$$ at
-time $$t$$ might result in different value than at time $$t'$$.
+time $$t$$ might result in a different value than at time $$t'$$.
 
 It's tempting to believe that there's a single state that the machine
 manipulates, and that the machine does one thing at a time. Computer
@@ -26,7 +26,7 @@ across threads, cores, processors, and networked computers.  And the
 machine does many things concurrently.  Mutability makes reasoning about
 distributed state and concurrent execution immensely difficult.
 
-*Immutability*, however, frees the progammer from these concerns.  It provides
+*Immutability*, however, frees the programmer from these concerns.  It provides
 powerful ways to build correct and concurrent programs.  OCaml is primarily
 an immutable language, like most functional languages.  It does support
 imperative programming with mutable state, but we won't use those features

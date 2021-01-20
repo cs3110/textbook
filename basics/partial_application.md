@@ -8,8 +8,8 @@ Here's a rather similar function:
 
 	let addx x = fun y -> x + y
 
-Function `addx` takes an integer `x` as input, and returns a *function*
-of type `int -> int` that will add `x` to whatever is passed to it.
+Function `addx` takes an integer `x` as input and returns a *function* of type
+`int -> int` that will add `x` to whatever is passed to it.
 
 The type of `addx` is `int -> int -> int`.  The type of `add` is
 also `int -> int -> int`.  So from the perspective of their types,
@@ -34,12 +34,11 @@ add5 : int -> int = <fun>
 - : int = 7
 ```
 
-What you just did is called *partial application*:
-we partially applied the function `add` to one argument, even though
-you normally would think of it as a multi-argument function.  Why does
-this work? It's because the following three functions are
-*syntactically different* but *semantically equivalent*.  That is,
-they are different ways of expressing the same computation:
+What you just did is called *partial application*: we partially applied the
+function `add` to one argument, even though you would normally think of it as a
+multi-argument function. This works because the following three functions are
+*syntactically different* but *semantically equivalent*. That is, they are
+different ways of expressing the same computation:
 
 ```
 let add x y = x+y
@@ -75,11 +74,10 @@ let f =
           (fun xn -> e)...))
 ```
 
-So even though you think of `f` as a function that takes `n` arguments,
-in reality it is a function that takes 1 argument, and returns
-a function.
+So even though you think of `f` as a function that takes `n` arguments, in
+reality it is a function that takes 1 argument and returns a function.
 
-And the type of such a function
+The type of such a function
 
 	t1 -> t2 -> t3 -> t4
 

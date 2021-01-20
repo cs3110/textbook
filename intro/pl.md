@@ -3,17 +3,17 @@
 A great general-purpose programming language...
 
 - lets you say things concisely and understandably at the right level
-  of abstraction
+  of abstraction;
 
 - lets you extend the language with new features that are specific to
-  a domain but blend in well with the rest of the language.
+  a domain but blend in well with the rest of the language;
 
-- makes it easy to write *correct* code, with good performance
+- makes it easy to write *correct* code, with good performance;
 
 - makes it easy to change the code when you find out the specification
-  has changed
+  has changed;
 
-- makes it easy to re-use code
+- makes it easy to re-use code; and
 
 - is easy to learn.
 

@@ -84,7 +84,7 @@ module type TableMap = sig
       *)
   val bindings : ('k, 'v) t -> ('k * 'v) list
 
-  (** [of_list hash lst] creates a map with the same bindings as [m], using
+  (** [of_list hash lst] creates a map with the same bindings as [lst], using
       [hash] as the hash function.
       Requires: [lst] does not contain any duplicate keys. *)
   val of_list : ('k -> int) -> ('k * 'v) list -> ('k, 'v) t  

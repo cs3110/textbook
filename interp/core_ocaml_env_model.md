@@ -28,7 +28,7 @@ fragment of Core OCaml:
 <env, e1 e2> ==> v
   if  <env, e1> ==> (| fun x -> e, defenv |)
   and <env, e2> ==> v2
-  and <defenv[x -> v], e> ==> v
+  and <defenv[x -> v2], e> ==> v
 
 <env, fun x -> e> ==> (|fun x -> e, env|)
 ```

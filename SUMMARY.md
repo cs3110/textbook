@@ -170,7 +170,7 @@
   - [9.2. Efficient Maps](eff/eff_maps.md)
     - [9.2.1. Association Lists](eff/map_assoclist.md)
     - [9.2.2. Direct Address Tables](eff/map_dat.md)
-    - [9.3.3. Hash Tables](eff/map_hash.md)
+    - [9.2.3. Hash Tables](eff/map_hash.md)
   - [9.3. Amortized Analysis](eff/amortized.md)
     - [9.3.1. Amortized Analysis of Hash Tables](eff/amortized_hash.md)
     - [9.3.2. Amortized Analysis of Two-List Queues](eff/amortized_queue.md)

@@ -25,46 +25,43 @@ To evaluate `e0 e1 ... en`:
    to values `v1` through `vn`.
 
    For `e0`, the result might be an anonymous function `fun x1 ... xn ->
-   e`.  Or it might be a name `f`, and we have to find the definition of
-   `f`, in which case let's assume that definition is `let rec f x1 ...
-   xn = e`.  Either way, we now know the argument names `x1` through
-   `xn` and the body `e`.
+   e` or a name `f`. In the latter case, we need to find the definition of `f`,
+   which we can assume to be of the form `let rec f x1 ... xn =
+   e`.  Either way, we now know the argument names `x1` through `xn` and the
+   body `e`.
 
 2. Substitute each value `vi` for the corresponding argument name `xi` in the
-   body `e` of the function.  That results in a new expression `e'`.
+   body `e` of the function. That substitution results in a new expression `e'`.
    
 3. Evaluate `e'` to a value `v`, which is the result of evaluating `e0 e1 ... en`.
 
-If you compare these evaluation rules to the rules for let expressions,
+If you compare these evaluation rules to the rules for `let` expressions,
 you will notice they both involve substitution.  This is not an accident.
 In fact, anywhere `let x = e1 in e2` appears in a program, we could replace
 it with `(fun x -> e2) e1`.  They are syntactically different but semantically
-equivalent.  In essence, let expressions are just syntactic
+equivalent.  In essence, `let` expressions are just syntactic
 sugar for anonymous function application. 
 
 ## Pipeline
 
-There is a built-in infix operator in OCaml for function application that 
-is written `|>`.  Imagine that as depicting a triangle pointing to the 
-right.  It's called the *pipeline* operator, and the metaphor is that 
-values are sent through the pipeline from left to right.  For example,
-suppose we have the increment function `inc` from above as well as
-a function `square` that squares its input.  Here are two equivalent 
-ways of writing the same computation:
+There is a built-in infix operator in OCaml for function application called the
+*pipeline* operator, written `|>`. Imagine that as depicting a triangle pointing
+to the right. The metaphor is that values are sent through the pipeline from
+left to right. For example, suppose we have the increment function `inc` from
+above as well as a function `square` that squares its input. Here are two
+equivalent ways of writing the same computation:
 ```
 square (inc 5)
 5 |> inc |> square
 (* both yield 36 *)
 ```
-The latter way of writing the computation uses the pipeline operator to
-send `5` through the `inc` function, then send the result of that
-through the `square` function.  This is a nice, idiomatic way of
-expressing the computation in OCaml.  The former way is ok but arguably
-not as elegant, because it involves writing extra parentheses and
-requires the reader's eyes to jump around, rather than move linearly
-from left to right.  The latter way scales up nicely when the number
-of functions being applied grows, where as the former way requires
-more and more parentheses:
+The latter uses the pipeline operator to send `5` through the `inc` function,
+then send the result of that through the `square` function. This is a nice,
+idiomatic way of expressing the computation in OCaml. The former way is arguably
+not as elegant: it involves writing extra parentheses and requires the reader's
+eyes to jump around, rather than move linearly from left to right. The latter
+way scales up nicely when the number of functions being applied grows, where as
+the former way requires more and more parentheses:
 ```
 5 |> inc |> square |> inc |> inc |> square  
 square (inc (inc (square (inc 5))))

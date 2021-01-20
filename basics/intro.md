@@ -26,32 +26,33 @@ entirely of spaces, tabs, and newlines.)  You need to understand
 syntax just to be able to speak to the computer at all.
 
 ## Semantics
-By *semantics*, we mean the rules that define the behavior of programs.
-In other words, semantics is about the meaning of a program&mdash;what
-computation a particular piece of syntax represents. There are two
-pieces to semantics, the *dynamic* semantics of a language and the
-*static* semantics of a language.  The dynamic semantics define the
-run-time behavior of a program as it is executed or evaluated. The
-static semantics define the compile-time checking that is done to ensure
-that a program is legal, beyond any syntactic requirements. The most
-important kind of static semantics is probably *type checking*: the
-rules that define whether a program is well typed or not.  Learning
-the semantics of a new language is usually the real challenge, even though
-the syntax might be the first hurdle you have to overcome.  You need
-to understand semantics to say what you mean to the computer, and you
-need to say what you mean so that your program performs the right computation.
+By *semantics*, we mean the rules that define the behavior of programs. In other
+words, semantics is about the meaning of a program&mdash;what computation a
+particular piece of syntax represents. Note that although "semantics" is plural
+in form, we use it as singular. That's similar to "mathematics" or "physics".
+
+There are two pieces to semantics, the *dynamic* semantics of a language and the
+*static* semantics of a language. The dynamic semantics define the run-time
+behavior of a program as it is executed or evaluated. The static semantics
+define the compile-time checking that is done to ensure that a program is legal,
+beyond any syntactic requirements. The most important kind of static semantics
+is probably *type checking*: the rules that define whether a program is well
+typed or not. Learning the semantics of a new language is usually the real
+challenge, even though the syntax might be the first hurdle you have to
+overcome. You need to understand semantics to say what you mean to the computer,
+and you need to say what you mean so that your program performs the right
+computation.
 
 ## Idioms
-By *idioms*, we mean the common approaches to using language features to
-express computations.  Given that you might express one computation in
-many ways inside a language, which one do you choose?  Some will be more
-natural than others.  Programmers who are fluent in the language will
-prefer certain modes of expression over others. We could think of this
-in terms of using the dominant paradigms, whether they are imperative,
-functional, object oriented, etc., in the language effectively. You need
-to understand idioms to say what you mean not just to the computer, but
-to other programmers. When you write code idiomatically, other
-programmers will understand your code better.
+By *idioms*, we mean the common approaches to using language features to express
+computations. Given that you might express one computation in many ways inside a
+language, which one do you choose? Some will be more natural than others.
+Programmers who are fluent in the language will prefer certain modes of
+expression over others. We could think of this in terms of using the dominant
+paradigms in the language effectively, whether they are imperative, functional,
+object oriented, etc. You need to understand idioms to say what you mean not
+just to the computer, but to other programmers. When you write code
+idiomatically, other programmers will understand your code better.
 
 ## Libraries 
 *Libraries* are bundles of code that have already been written for you
@@ -85,5 +86,5 @@ of course, but it's not the interesting part of our studies.  We'll
 get some exposure to the OCaml standard library and a couple other
 libraries, notably OUnit (a unit testing framework similar to 
 JUnit, HUnit, etc.).  Besides the OCaml compiler and build system,
-the main tool we'll use is the toplevel, which provides the ability
+the main tool we'll use is the toplevel, which provides the ability to
 interactively experiment with code.  

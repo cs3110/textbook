@@ -1,6 +1,6 @@
 # Scope
 
-Let bindings are in effect only in the block of code in which they occur.
+`Let` bindings are in effect only in the block of code in which they occur.
 This is exactly what you're used to from nearly any modern programming
 language.  For example:
 ```
@@ -60,9 +60,9 @@ Therefore, in programs, these two functions should be identical:
 let f x = x*x
 let f y = y*y
 ```
-This principle is more commonly known as *alpha equivalence*:  the two functions
-are equivalent up to renaming of variables, which is also called *alpha conversion*,
-for historical reasons that are unimportant here. 
+This principle is more commonly known as *alpha equivalence*: the two functions
+are equivalent up to renaming of variables, which is also called *alpha
+conversion* for historical reasons that are unimportant here.
 
 According to the Principle of Name Irrelevance, these two expressions should
 be identical:
@@ -70,22 +70,22 @@ be identical:
 let x = 6 in x
 let y = 6 in y
 ```
-Therefore the following two expressions, which have the above expressions 
+Therefore, the following two expressions, which have the above expressions 
 embedded in them, should also be identical:
 ```
 let x = 5 in (let x = 6 in x) + x
 let x = 5 in (let y = 6 in y) + x
 ```
-But for those to be identical, we **must** choose possibility 1 from the
-three possibilities above.  It is the only one that makes the name of 
-the variable be irrelevant.
+But for those to be identical, we **must** choose the first of the three
+possibilities above. It is the only one that makes the name of the variable be
+irrelevant.
 
-There is term commonly used for this phenomenon:  a new binding of a 
+There is a term commonly used for this phenomenon:  a new binding of a 
 variable *shadows* any old binding of the variable name.  Metaphorically,
 it's as if the new binding temporarily casts a shadow over the old binding.
 But eventually the old binding could reappear as the shadow recedes.
 
-Shadowing is not mutable assignment.  For example, both the following
+Shadowing is not mutable assignment.  For example, both of the following
 expressions evaluate to 11:
 ```
 let x = 5 in ((let x = 6 in x) + x)
@@ -99,7 +99,7 @@ val x : int = 42
 # let x = 22;;
 val x : int = 22
 ```
-Recall that every let definition in the toplevel is effectively a nested let
+Recall that every `let` definition in the toplevel is effectively a nested `let`
 expression.  So the above is effectively the following:
 ```
 let x = 42 in
@@ -123,9 +123,9 @@ val x : int = 22
 - : int = 42  (* x did not mutate! *)
 ```
 
-To summarize, each let definition binds an entirely new variable.
-If that new variable happens to have the same name as an old variable, 
-the new variable temporarily shadows the old.  But the old variable is 
-still around, and its value is immutable: it never, ever changes.
-So even though let expressions might superficially look like assignment 
-statements from imperative languages, they are actually quite different.
+To summarize, each let definition binds an entirely new variable. If that new
+variable happens to have the same name as an old variable, the new variable
+temporarily shadows the old one. But the old variable is still around, and its
+value is immutable: it never, ever changes. So even though `let` expressions
+might superficially look like assignment statements from imperative languages,
+they are actually quite different.

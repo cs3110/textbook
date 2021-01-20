@@ -3,7 +3,7 @@
 OCaml has built-in printing functions for several of the built-in
 primitive types: `print_char`, `print_int`, `print_string`, and
 `print_float`. There's also a `print_endline` function, which is like
-`print_string` but also outputs a newline.
+`print_string`, but also outputs a newline.
 
 Let's look at the type of a couple of those functions:
 ```

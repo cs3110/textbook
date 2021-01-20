@@ -225,7 +225,7 @@ Error: Unbound value inc
 Hint: Did you mean incr?
 ```
 
-The error is because the toplevel does not yet know anything about
+The error occurs because the toplevel does not yet know anything about
 a function named `inc`.  Now issue the following directive to the toplevel:
 
 ```

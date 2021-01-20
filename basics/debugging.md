@@ -54,7 +54,7 @@ there are four defenses against bugs:
 
     How can you know whether a piece of code has a particular bug? Write
     tests that would expose the bug, then confirm that your code doesn't
-    fail those tests. *Unit test* for a relatively small piece of code,
+    fail those tests. *Unit tests* for a relatively small piece of code,
     such as an individual function or module, are especially important
     to write at the same time as you develop that code. Running of those
     tests should be automated, so that if you ever break the code, you
@@ -69,7 +69,7 @@ So you've discovered a bug. What next?
 
 1.  **Distill the bug into a small test case.** Debugging is hard work,
     but the smaller the test case, the more likely you are to focus your
-    attention of the piece of code where the bug lurks. Time spent on
+    attention on the piece of code where the bug lurks. Time spent on
     this distillation can therefore be time saved, because you won't
     have to re-read lots of code. Don't continue debugging until you
     have a small test case!
@@ -86,7 +86,7 @@ So you've discovered a bug. What next?
 3.  **Fix the bug.** The fix might be a simple correction of a typo. Or
     it might reveal a design flaw that causes you to make major changes.
     Consider whether you might need to apply the fix to other locations
-    in your code based—for example, was it a copy and paste error? If
+    in your code base—for example, was it a copy and paste error? If
     so, do you need to refactor your code?
     
 4.  **Permanently add the small test case to your test suite.** You
@@ -136,8 +136,8 @@ OCaml.
 
     To stop tracing, use the `#untrace` directive.
 
--   **Debugger.** OCaml does have a debugging tool `ocamldebug`.
-    You can find a [tutorial](https://ocaml.org/learn/tutorials/debug.html#The-OCaml-debugger)
-    on the OCaml website.  Unless you are using Emacs as your editor,
-    you will probably find this tool to be harder to use than just
-    inserting print statements.
+-   **Debugger.** OCaml has a debugging tool `ocamldebug`. You can find a
+    [tutorial](https://ocaml.org/learn/tutorials/debug.html#The-OCaml-debugger)
+    on the OCaml website. Unless you are using Emacs as your editor, you will
+    probably find this tool to be harder to use than just inserting print
+    statements.
