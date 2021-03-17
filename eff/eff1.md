@@ -78,6 +78,6 @@ work.  What's less than exponential (e.g., $$2^n$$)?  One possibility
 is polynomial (e.g., $$n^2$$).
 
 An immediate objection might be that polynomials come in all sizes. For example,
-$$n^100$$ is way bigger than $$n^2$$. And some non-polynomials, such as 
-$$n^{1 +.02 (\log n)}$$}, might do an adequate job of beating exponentials.
+$$n^{100}$$ is way bigger than $$n^2$$. And some non-polynomials, such as 
+$$n^{1 +.02 (\log n)}$$, might do an adequate job of beating exponentials.
 But in practice, polynomials do seem to work fine.
