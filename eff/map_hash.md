@@ -371,8 +371,9 @@ steps.
     randomly. There is a tradeoff in performance versus randomness (and
     security) here.
     
-3.  Compute the hash bucket index as *x* mod *m*. This is particularly cheap if
-    *m* is a power of two.
+3.  Compression: Reduce that large integer to be within the range of the 
+    buckets. For example, compute the hash bucket index as *x* mod *m*. This
+    is particularly cheap if *m* is a power of two.
 
 Unfortunately, hash table implementations are rarely forthcoming about what they
 assume of client hash functions. So it can be hard to know, as a client, how to
