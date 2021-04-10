@@ -221,7 +221,7 @@
     - [11.7.2. Induction on Lists](fm/induction_lists.md)
     - [11.7.3. A Theorem about Folding](fm/theorem_fold.md)    
     - [11.7.4. Induction on Trees](fm/induction_trees.md)  
-    - [11.7.5. \*Induction Principles for All Variants](fm/induction_general.md)
+    - [11.7.5. Induction Principles for All Variants](fm/induction_general.md)
   - [11.8. Algebraic Specification](fm/alg_spec.md)
     - [11.8.1. Example: Stacks](fm/alg_spec_stack.md)
     - [11.8.2. Example: Queues](fm/alg_spec_queue.md)
@@ -246,7 +246,7 @@
 	- [12.3.3. Example: The Lwt Monad](adv/ex_lwt_monad.md)
 	- [12.3.4. Monad Laws](adv/monad_laws.md)
   - [12.4. The Curry-Howard Correspondence](adv/curry-howard.md)
-  - [12.5. \*Memoization](adv/memoization.md)
+  - [12.5. Memoization](adv/memoization.md)
   - [12.6. Summary](adv/summary.md)
   - [12.7. Exercises](adv/exercises.md)  
 
