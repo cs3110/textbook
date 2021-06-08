@@ -6,7 +6,7 @@ be parameterized on the details of the module to which it was being
 added.  It's that kind of parameterization that is enabled by
 an OCaml language feature called *functors*.
 
-The name is perhaps a bit itimidating, but **a functor is simply a
+The name is perhaps a bit intimidating, but **a functor is simply a
 "function" from structures to structures.**  The word "function" is in
 quotation marks in that sentence only because it's a kind of function
 that's not interchangeable with the rest of the functions we've already

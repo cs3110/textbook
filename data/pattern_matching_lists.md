@@ -82,7 +82,7 @@ and the bindings that match produces:
   vn]` and produces the set $$\bigcup_i b_i$$ of bindings. Note that
   this pattern specifies the exact length the list must be.
 
-Now we can can say how to evaluate `match e with p1 -> e1 | ... | pn -> en`:
+Now we can say how to evaluate `match e with p1 -> e1 | ... | pn -> en`:
 
 * Evaluate `e` to a value `v`.
 
@@ -121,7 +121,7 @@ match 1::[] with
   
   - `h` matches `1` and produces the variable binding `h->1`
   
-  - `t` matches `[]` and produces the variable binding `t=[]`
+  - `t` matches `[]` and produces the variable binding `t->[]`
   
 * substituting {`h->1`,`t->[]`} inside `(h=1) && (t=[])`
   produces a new expression `(1=1) && ([]=[])`

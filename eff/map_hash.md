@@ -49,7 +49,7 @@ to search for or add an element grows rapidly as the hash table fills up.
 Chaining is usually preferred over probing in software implementations, because
 it's easier to implement the linked lists in software. Hardware implementations
 have often used probing, when the size of the table is fixed by circuitry. But
-ssome modern software implementations are rexamining the benefits of probing.
+some modern software implementations are rexamining the benefits of probing.
 
 ## Hash table interface
 

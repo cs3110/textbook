@@ -20,7 +20,7 @@ make it a *prefix* operator:
 
 The same technique works for any built-in operator. 
 
-Normally the parentheses are unnecessary. We could write `(+)` or `( + )`, but
+Normally the spaces are unnecessary. We could write `(+)` or `( + )`, but
 it is idiomatic to include them. Beware of multiplication, which *must* be
 written as `( * )`, because `(*)` would be parsed as beginning a comment.
 

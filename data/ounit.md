@@ -10,10 +10,9 @@ Larger programs need *test suites* that contain many *unit tests* and can be re-
 every time we update our code base.  A unit test is a test of one small piece
 of functionality in a program, such as an individual function.
 
-We've now learned enough features of OCaml to see how to do unit testing with
-a library called OUnit.  It is a popular testing framework (#1 in downloads on
-[OCaml Forge][ocamlforge]) similar to JUnit in Java, HUnit in Haskell, etc.
-The basic workflow for using OUnit is as follows:
+We've now learned enough features of OCaml to see how to do unit testing with a
+library called OUnit. It is a unit testing framework similar to JUnit in Java,
+HUnit in Haskell, etc. The basic workflow for using OUnit is as follows:
 
 * Write a function in a file `f.ml`.  There could be many other functions in that file too.
 * Write unit tests for that function in a separate file `f_test.ml`.  That exact name, 
@@ -21,7 +20,6 @@ The basic workflow for using OUnit is as follows:
   often follow in 3110.
 * Build and run `f_test.byte` to execute the unit tests.
 
-The [OUnit documentation][ounitdoc] is available should you wish to peruse it.
+The [OUnit documentation][ounitdoc] is available on Github.
 
-[ocamlforge]: https://forge.ocamlcore.org/
-[ounitdoc]: http://ounit.forge.ocamlcore.org/api-ounit/index.html
+[ounitdoc]: https://gildor478.github.io/ounit/ounit2/index.html

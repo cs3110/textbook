@@ -29,8 +29,8 @@ of beauty.
   chapters 1 and 2, a freely available textbook that is recommended for this course
 * [OCaml from the Very Beginning](http://ocaml-book.com/), chapter 1, a relatively
   inexpensive PDF textbook that is very gentle and recommended for this course
-* [A guided tour [of OCaml]](https://realworldocaml.org/v1/en/html/a-guided-tour.html):
-  chapter 1 of *Real World OCaml*, a more agressive book written by some Cornellians
+* [A guided tour [of OCaml]](https://dev.realworldocaml.org/guided-tour.html):
+  chapter 1 of *Real World OCaml*, a book written by some Cornellians
   that some students might enjoy reading
 * [The history of Standard ML](http://sml-family.org/history/): though it focuses
   on the SML variant of the ML language, it's relevant to OCaml

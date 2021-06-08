@@ -35,7 +35,7 @@ let lowercase_ascii = String.lowercase_ascii
 
 [string]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/String.html
 
-If there types, exceptions, or modules defined in a module, those also are
+If there are types, exceptions, or modules defined in a module, those also are
 brought into scope with `open`.  For example, if we're given this module:
 ```
 module M = struct

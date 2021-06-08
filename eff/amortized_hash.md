@@ -46,11 +46,12 @@ Next:
   $$2^{n+1}$$ bindings have to be reinserted into the new table, which
   is of size $$2^{n+1}$$.  The load factor is back down to 1.
 
-So in total we did $$2^n + 2^{n+1}$$ inserts. which we could grossly round up to
-$$2^{n+2}$$. Over a series of $$2^n$$ insert operations, that's an average cost
-of $$\frac{2^{n+2}}{2^n}$$, which equals 4. So if we just pretend each insert
-costs four times its normal price, every operation in the sequence is amortized
-(and expected) constant time.
+So in total we did $$2^n + 2^{n+1}$$ inserts, which included $$2^n$$ inserts of
+bindings and $$2^{n+1}$$ reinsertions after the resize. We could grossly round
+that quantity up to $$2^{n+2}$$. Over a series of $$2^n$$ insert operations,
+that's an average cost of $$\frac{2^{n+2}}{2^n}$$, which equals 4. So if we just
+pretend each insert costs four times its normal price, every operation in the
+sequence is amortized (and expected) constant time.
 
 ## Doubling vs. Constant-size Increasing
 

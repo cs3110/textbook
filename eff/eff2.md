@@ -24,7 +24,7 @@ hearts go out to the poor grad student who had to work out that one!
 
 Precise execution bounds like that are exhausting to find and somewhat
 meaningless. If it takes 25 steps in Java pseudocode, but compiled down to
-RISC-V would take 250 ssteps, is the precision useful?
+RISC-V would take 250 steps, is the precision useful?
 
 In some cases, yes. If you're building code that flies an airplane or controls a
 nuclear reactor, you might actually care about precise, real-time guarantees.

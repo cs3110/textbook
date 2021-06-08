@@ -37,8 +37,8 @@ Finally, the specifier settles on a third spec:
 
 ```
 (** [reverse lst] returns a list [m] satisfying the following conditions:
-    - [length l = length m]
-    - for all [i], [nth m i = nth l (n - i - 1)], 
+    - [length lst = length m]
+    - for all [i], [nth m i = nth lst (n - i - 1)], 
       where [n] is the length of [lst] *)
 val reverse : 'a list -> 'a list
 ```

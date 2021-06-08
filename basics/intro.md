@@ -77,7 +77,7 @@ for example, it might not be apparent that Eclipse is an IDE that
 works with many languages, and that Java can be used without Eclipse.
 
 [tryapl]: http://tryapl.org/
-[whitespace]: http://compsoc.dur.ac.uk/whitespace/tutorial.html
+[whitespace]: https://web.archive.org/web/20151108084710/http://compsoc.dur.ac.uk/whitespace/tutorial.html
 [lazy]: http://threevirtues.com/
 
 When it comes to learning OCaml in this class, our focus is primarily

@@ -2,9 +2,9 @@
 
 Recall the syntax of SimPL:
 ```
-e ::= x | i | b | e1 bop e2                
+e ::= x | i | b | e1 bop e2
     | if e1 then e2 else e3
-    | let x = e1 in e2     
+    | let x = e1 in e2
 
 bop ::= + | * | <=
 ```
@@ -45,7 +45,7 @@ ctx |- let x = e1 in e2 : t2
   if ctx |- e1 : t1
   and ctx[x -> t1] |- e2 : t2
 ```
-The rule says that `let x = e1 in e2` has type `t` in context `ctx`, but
+The rule says that `let x = e1 in e2` has type `t2` in context `ctx`, but
 only if certain conditions hold.  The first condition is that
 `e1` has type `t1` in `ctx`.  The second is that `e2` has type `t2`
 in a new context, which is `ctx` extended to bind `x` to `t1`.
