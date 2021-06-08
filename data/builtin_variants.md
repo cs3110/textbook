@@ -8,10 +8,6 @@ type 'a list = [] | :: of 'a * 'a list
 ```
 So `list` is really just a type constructor, with (value) constructors
 `[]` (which we pronounce "nil") and `::` (which we pronounce "cons").
-The only reason you can't write that definition yourself in your own
-code is that the compiler restricts you to constructor names that begin
-with initial capital letters and that don't contain any punctuation
-(other than `_` and `'`).
 
 ## Options
 OCaml's built-in option data type is really a parameterized
