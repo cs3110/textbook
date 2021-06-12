@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.2. The Present of OCaml &#8212; OCaml Programming &lt;br/&gt; &lt;span style=&#34;font-size:75%;&#34;&gt;Correct + Efficient + Beautiful&lt;/span&gt;</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.3. Look to Your Future" href="future.html" />
+    <link rel="prev" title="1.1. The Past of OCaml" href="past.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming <br/> <span style="font-size:75%;">Correct + Efficient + Beautiful</span></h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/intro/present.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/intro/present.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/intro/present.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-features-of-ocaml">
+   1.2.1. The Features of OCaml
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ocaml-in-industry">
+   1.2.2. OCaml in Industry
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="the-present-of-ocaml">
+<h1><span class="section-number">1.2. </span>The Present of OCaml<a class="headerlink" href="#the-present-of-ocaml" title="Permalink to this headline">¶</a></h1>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/JTEwC3HihFc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p>OCaml is a functional programming language. The key linguistic abstraction of
+functional languages is the mathematical function. A function maps an input to
+an output; for the same input, it always produces the same output. That is,
+mathematical functions are <em>stateless</em>: they do not maintain any extra
+information or <em>state</em> that persists between usages of the function. Functions
+are <em>first-class</em>: you can use them as input to other functions, and produce
+functions as output. Expressing everything in terms of functions enables a
+uniform and simple programming model that is easier to reason about than the
+procedures and methods found in other families of languages.</p>
+<p><em>Imperative</em> programming languages such as C and Java involve <em>mutable</em> state
+that changes throughout execution. <em>Commands</em> specify how to compute by
+destructively changing that state. Procedures (or methods) can have <em>side
+effects</em> that update state in addition to producing a return value.</p>
+<p>The <strong>fantasy of mutability</strong> is that it’s easy to reason about: the machine
+does this, then this, etc.</p>
+<p>The <strong>reality of mutability</strong> is that whereas machines are good at complicated
+manipulation of state, humans are not good at understanding it. The essence of
+why that’s true is that mutability breaks <em>referential transparency</em>: the
+ability to replace an expression with its value without affecting the result of
+a computation. In math, if <span class="math notranslate nohighlight">\(f(x)=y\)</span>, then you can substitute <span class="math notranslate nohighlight">\(y\)</span> anywhere
+you see <span class="math notranslate nohighlight">\(f(x)\)</span>. In imperative languages, you cannot: <span class="math notranslate nohighlight">\(f\)</span> might have side
+effects, so computing <span class="math notranslate nohighlight">\(f(x)\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> might result in a different value
+than at time <span class="math notranslate nohighlight">\(t'\)</span>.</p>
+<p>It’s tempting to believe that there’s a single state that the machine
+manipulates, and that the machine does one thing at a time. Computer systems go
+to great lengths in attempting to provide that illusion. But it’s just that: an
+illusion. In reality, there are many states, spread across threads, cores,
+processors, and networked computers. And the machine does many things
+concurrently. Mutability makes reasoning about distributed state and concurrent
+execution immensely difficult.</p>
+<p><em>Immutability</em>, however, frees the programmer from these concerns. It provides
+powerful ways to build correct and concurrent programs. OCaml is primarily an
+immutable language, like most functional languages. It does support imperative
+programming with mutable state, but we won’t use those features until many
+chapters into the book—in part because we simply won’t need them, and in
+part to get you to quit “cold turkey” from a dependence you might not have known
+that you had. This freedom from mutability is one of the biggest changes in
+perspective that OCaml can give you.</p>
+<div class="section" id="the-features-of-ocaml">
+<h2><span class="section-number">1.2.1. </span>The Features of OCaml<a class="headerlink" href="#the-features-of-ocaml" title="Permalink to this headline">¶</a></h2>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/SKr3ItChPSI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/eNLm5Xbgmd0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/T-DIW1dhYzo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p>OCaml is a <em>statically-typed</em> and <em>type-safe</em> programming language. A
+statically-typed language detects type errors at compile time, so that programs
+with type errors cannot be executed. A type-safe language limits which kinds of
+operations can be performed on which kinds of data. In practice, this prevents a
+lot of silly errors (e.g., treating an integer as a function) and also prevents
+a lot of security problems: over half of the reported break-ins at the Computer
+Emergency Response Team (CERT, a US government agency tasked with cybersecurity)
+were due to buffer overflows, something that’s impossible in a type-safe
+language.</p>
+<p>Some functional languages, like Python and Racket, are type-safe but
+<em>dynamically typed</em>. That is, type errors are caught only at run time. Other
+languages, like C and C++, are statically typed but not type safe. There’s no
+guarantee that a type error won’t occur an run time. And still other languages,
+like Java, use a combination of static and dynamic typing to achieve type
+safety.</p>
+<p>OCaml supports a number of advanced features, some of which you will have
+encountered before, and some of which are likely to be new:</p>
+<ul class="simple">
+<li><p><strong>Algebraic datatypes:</strong> You can build sophisticated data structures in
+OCaml easily, without fussing with pointers and memory management. <em>Pattern
+matching</em>—a feature we’ll soon learn about that enables examining the shape
+of a data structure—makes them even more convenient.</p></li>
+<li><p><strong>Type inference:</strong> You do not have to write type information down
+everywhere. The compiler automatically figures out most types. This can make
+the code easier to read and maintain.</p></li>
+<li><p><strong>Parametric polymorphism:</strong> Functions and data structures can be
+parameterized over types. This is crucial for being able to re-use code.</p></li>
+<li><p><strong>Garbage collection:</strong> Automatic memory management relieves you from the
+burden of memory allocation and deallocation, a common source of bugs in
+languages such as C.</p></li>
+<li><p><strong>Modules:</strong> OCaml makes it easy to structure large systems through the use
+of modules. Modules are used to encapsulate implementations behind
+interfaces. OCaml goes well beyond the functionality of most languages with
+modules by providing functions (called <em>functors</em>) that manipulate modules.</p></li>
+</ul>
+</div>
+<div class="section" id="ocaml-in-industry">
+<h2><span class="section-number">1.2.2. </span>OCaml in Industry<a class="headerlink" href="#ocaml-in-industry" title="Permalink to this headline">¶</a></h2>
+<p>OCaml and other functional languages are nowhere near as popular as Python, C,
+or Java. OCaml’s real strength lies in language manipulation (i.e., compilers,
+analyzers, verifiers, provers, etc.). This is not surprising, because OCaml
+evolved from the domain of theorem proving.</p>
+<p>That’s not to say that functional languages aren’t used in industry. There are
+many <a class="reference external" href="https://ocaml.org/learn/companies.html">industry projects using OCaml</a> and
+<a class="reference external" href="https://wiki.haskell.org/Haskell_in_industry">Haskell</a>, among other languages. Yaron Minsky (Cornell PhD
+‘02) even wrote a paper about <a class="reference external" href="http://dx.doi.org/10.1017/S095679680800676X">using OCaml in the financial industry</a>.
+It explains how the features of OCaml make it a good choice for quickly building
+complex software that works.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/intro"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="past.html" title="previous page"><span class="section-number">1.1. </span>The Past of OCaml</a>
+    <a class='right-next' id="next-link" href="future.html" title="next page"><span class="section-number">1.3. </span>Look to Your Future</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
