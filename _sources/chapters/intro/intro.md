@@ -5,9 +5,9 @@ Good. This book is for you. It's time to learn how to program better. It's time
 to learn a functional language, OCaml.
 
 ```{Note}
-This textbook has about 200 videos embedded in it. The first one is below. The
-videos usually provide an introduction to material, upon which the textbook then
-expands.
+The HTML version of this textbook has about 200 videos embedded in it. The first
+one is below. The videos usually provide an introduction to material, upon which
+the textbook then expands.
 
 These videos were produced during pandemic when the Cornell course that uses
 this textbook had to be asynchronous. The student response to them was
