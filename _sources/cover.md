@@ -21,10 +21,13 @@ For the most recent version of this work, see the most recent
 <!-- The link in the next paragraph apparently needs to be in a raw block.
 Otherwise, Sphinx notices that the target doesn't actually exist at
 build time, and issues an error about a bad cross-reference.-->
+
 ```{raw} html
+<p>
 An experimental <a href="ocaml_programming.pdf">PDF version of this book</a> is
 available. It does not contain the embedded videos that the HTML version has. It
 might also have typesetting errors.
+</p>
 ```
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
