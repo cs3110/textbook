@@ -1,0 +1,656 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.6. Debugging &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.7. Summary" href="summary.html" />
+    <link rel="prev" title="2.5. Documentation" href="documentation.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.6. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     2.7. Summary
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/basics/debugging.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/basics/debugging.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/basics/debugging.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/basics/debugging.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/basics/debugging.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defenses-against-bugs">
+   2.6.1. Defenses against Bugs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-debug">
+   2.6.2. How to Debug
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#debugging-in-ocaml">
+   2.6.3. Debugging in OCaml
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#printing">
+   2.6.4. Printing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defensive-programming">
+   2.6.5. Defensive Programming
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="debugging">
+<h1><span class="section-number">2.6. </span>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
+<p>Debugging is a last resort when everything else has failed. Let’s take a
+step back and think about everything that comes <em>before</em> debugging.</p>
+<div class="section" id="defenses-against-bugs">
+<h2><span class="section-number">2.6.1. </span>Defenses against Bugs<a class="headerlink" href="#defenses-against-bugs" title="Permalink to this headline">¶</a></h2>
+<p>According to
+<a class="reference external" href="https://stellar.mit.edu/S/course/6/fa08/6.005/courseMaterial/topics/topic3/lectureNotes/Debugging/Debugging.pdf">Rob Miller</a>,
+there are four defenses against bugs:</p>
+<ol>
+<li><p><strong>The first defense against bugs is to make them impossible.</strong></p>
+<p>Entire classes of bugs can be eradicated by choosing to program in languages
+that guarantee <em><a class="reference external" href="http://www.pl-enthusiast.net/2014/07/21/memory-safety/">memory
+safety</a></em> (that no
+part of memory can be accessed except through a <em>pointer</em> (or reference)
+that is valid for that region of memory) and <em><a class="reference external" href="http://www.pl-enthusiast.net/2014/08/05/type-safety/">type
+safety</a></em> (that no
+value can be used in a way inconsistent with its type). The OCaml type
+system, for example, prevents programs from buffer overflows and meaningless
+operations (like adding a boolean to a float), whereas the C type system
+does not.</p>
+</li>
+<li><p><strong>The second defense against bugs is to use tools that find them.</strong></p>
+<p>There are automated source-code analysis tools, like
+<a class="reference external" href="http://findbugs.sourceforge.net/">FindBugs</a>, which can find many common
+kinds of bugs in Java programs, and
+<a class="reference external" href="http://research.microsoft.com/en-us/projects/slam/">SLAM</a>, which is used to
+find bugs in device drivers. The subfield of CS known as <em>formal methods</em>
+studies how to use mathematics to specify and verify programs, that is, how
+to prove that programs have no bugs. We’ll study verification later in this
+course.</p>
+<p><em>Social methods</em> such as code reviews and pair programming are also useful
+tools for finding bugs. Studies at IBM in the 1970s-1990s suggested that
+code reviews can be remarkably effective. In one study (Jones, 1991), code
+inspection found 65% of the known coding errors and 25% of the known
+documentation errors, whereas testing found only 20% of the coding errors
+and none of the documentation errors.</p>
+</li>
+<li><p><strong>The third defense against bugs is to make them immediately visible.</strong></p>
+<p>The earlier a bug appears, the easier it is to diagnose and fix. If
+computation instead proceeds past the point of the bug, then that further
+computation might obscure where the failure really occurred. <em>Assertions</em> in
+the source code make programs “fail fast” and “fail loudly”, so that bugs
+appear immediately, and the programmer knows exactly where in the source
+code to look.</p>
+</li>
+<li><p><strong>The fourth defense against bugs is extensive testing.</strong></p>
+<p>How can you know whether a piece of code has a particular bug? Write tests
+that would expose the bug, then confirm that your code doesn’t fail those
+tests. <em>Unit tests</em> for a relatively small piece of code, such as an
+individual function or module, are especially important to write at the same
+time as you develop that code. Running of those tests should be automated,
+so that if you ever break the code, you find out as soon as possible.
+(That’s really Defense 3 again.)</p>
+</li>
+</ol>
+<p>After all those defenses have failed, a programmer is forced to resort to
+debugging.</p>
+</div>
+<div class="section" id="how-to-debug">
+<h2><span class="section-number">2.6.2. </span>How to Debug<a class="headerlink" href="#how-to-debug" title="Permalink to this headline">¶</a></h2>
+<p>So you’ve discovered a bug. What next?</p>
+<ol class="simple">
+<li><p><strong>Distill the bug into a small test case.</strong> Debugging is hard work, but the
+smaller the test case, the more likely you are to focus your attention on
+the piece of code where the bug lurks. Time spent on this distillation can
+therefore be time saved, because you won’t have to re-read lots of code.
+Don’t continue debugging until you have a small test case!</p></li>
+<li><p><strong>Employ the scientific method.</strong> Formulate a hypothesis as to why the bug
+is occurring. You might even write down that hypothesis in a notebook, as if
+you were in a Chemistry lab, to clarify it in your own mind and keep track
+of what hypotheses you’ve already considered. Next, design an experiment to
+affirm or deny that hypothesis. Run your experiment and record the result.
+Based on what you’ve learned, reformulate your hypothesis. Continue until
+you have rationally, scientifically determined the cause of the bug.</p></li>
+<li><p><strong>Fix the bug.</strong> The fix might be a simple correction of a typo. Or it might
+reveal a design flaw that causes you to make major changes. Consider whether
+you might need to apply the fix to other locations in your code base—for
+example, was it a copy and paste error? If so, do you need to refactor your
+code?</p></li>
+<li><p><strong>Permanently add the small test case to your test suite.</strong> You wouldn’t
+want the bug to creep back into your code base. So keep track of that small
+test case by keeping it as part of your unit tests. That way, any time you
+make future changes, you will automatically be guarding against that same
+bug. Repeatedly running tests distilled from previous bugs is called
+<em>regression testing</em>.</p></li>
+</ol>
+</div>
+<div class="section" id="debugging-in-ocaml">
+<h2><span class="section-number">2.6.3. </span>Debugging in OCaml<a class="headerlink" href="#debugging-in-ocaml" title="Permalink to this headline">¶</a></h2>
+<p>Here are a couple tips on how to debug—if you are forced into it—in
+OCaml.</p>
+<ul>
+<li><p><strong>Print statements.</strong> Insert a print statement to ascertain the value of a
+variable. Suppose you want to know what the value of <code class="docutils literal notranslate"><span class="pre">x</span></code> is in the following
+function:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Just add the line below to print that value:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">print_int</span> <span class="n">x</span> <span class="k">in</span>
+  <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html">Stdlib</a>
+module contains many other printing statements you can use. We cover some of
+them in the next section.</p>
+</li>
+<li><p><strong>Function traces.</strong> Suppose you want to see the <em>trace</em> of recursive calls
+and returns for a function. Use the <code class="docutils literal notranslate"><span class="pre">#trace</span></code> directive:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">let</span> <span class="k">rec</span> <span class="n">fib</span> <span class="n">x</span> <span class="o">=</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">fib</span> <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">fib</span> <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="o">);;</span>
+<span class="o">#</span> <span class="o">#</span><span class="n">trace</span> <span class="n">fib</span><span class="o">;;</span>
+</pre></div>
+</div>
+<p>If you evaluate <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">2</span></code>, you will now see the following output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fib &lt;-- 2
+fib &lt;-- 0
+fib --&gt; 1
+fib &lt;-- 1
+fib --&gt; 1
+fib --&gt; 2
+</pre></div>
+</div>
+<p>To stop tracing, use the <code class="docutils literal notranslate"><span class="pre">#untrace</span></code> directive.</p>
+</li>
+<li><p><strong>Debugger.</strong> OCaml has a debugging tool <code class="docutils literal notranslate"><span class="pre">ocamldebug</span></code>. You can find a
+<a class="reference external" href="https://ocaml.org/learn/tutorials/debug.html#The-OCaml-debugger">tutorial</a> on
+the OCaml website. Unless you are using Emacs as your editor, you will
+probably find this tool to be harder to use than just inserting print
+statements.</p></li>
+</ul>
+</div>
+<div class="section" id="printing">
+<h2><span class="section-number">2.6.4. </span>Printing<a class="headerlink" href="#printing" title="Permalink to this headline">¶</a></h2>
+<p>OCaml has built-in printing functions for several of the built-in primitive
+types: <code class="docutils literal notranslate"><span class="pre">print_char</span></code>, <code class="docutils literal notranslate"><span class="pre">print_int</span></code>, <code class="docutils literal notranslate"><span class="pre">print_string</span></code>, and <code class="docutils literal notranslate"><span class="pre">print_float</span></code>. There’s
+also a <code class="docutils literal notranslate"><span class="pre">print_endline</span></code> function, which is like <code class="docutils literal notranslate"><span class="pre">print_string</span></code>, but also outputs
+a newline.</p>
+<p>Let’s look at the types of a couple of those functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_string</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>They both take a string as input and return a value of type <code class="docutils literal notranslate"><span class="pre">unit</span></code>, which we
+haven’t seen before. There is only one value of this type, which is written <code class="docutils literal notranslate"><span class="pre">()</span></code>
+and is also pronounced “unit”. So <code class="docutils literal notranslate"><span class="pre">unit</span></code> is like <code class="docutils literal notranslate"><span class="pre">bool</span></code>, except there is one
+fewer value of type <code class="docutils literal notranslate"><span class="pre">unit</span></code> than there is of <code class="docutils literal notranslate"><span class="pre">bool</span></code>. Unit is therefore used when
+you need to take an argument or return a value, but there’s no interesting value
+to pass or return. Unit is often used when you’re writing or using code that has
+side effects. Printing is an example of a side effect: it changes the world and
+can’t be undone.</p>
+<p>If you want to print one thing after another, you could sequence some print
+functions using nested let expressions:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;THIS&quot;</span> <span class="k">in</span>
+<span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;IS&quot;</span> <span class="k">in</span>
+<span class="n">print_endline</span> <span class="s2">&quot;3110&quot;</span>
+</pre></div>
+</div>
+<p>But the boilerplate of all the <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">...</span> <span class="pre">in</span></code> above is annoying to have to
+write! We don’t really care about giving names to the unit values returned by
+those printing functions. So there’s a special syntax that can be used to chain
+together multiple functions who return unit. The expression <code class="docutils literal notranslate"><span class="pre">e1;</span> <span class="pre">e2</span></code> first
+evaluates <code class="docutils literal notranslate"><span class="pre">e1</span></code>, which should evaluate to <code class="docutils literal notranslate"><span class="pre">()</span></code>, then discards that value, and
+evaluates <code class="docutils literal notranslate"><span class="pre">e2</span></code>. So we could rewrite the above code as:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span> <span class="s2">&quot;THIS&quot;</span><span class="o">;</span>
+<span class="n">print_endline</span> <span class="s2">&quot;IS&quot;</span><span class="o">;</span>
+<span class="n">print_endline</span> <span class="s2">&quot;3110&quot;</span>
+</pre></div>
+</div>
+<p>And that is far more idiomatic code.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">e1</span></code> does not have type <code class="docutils literal notranslate"><span class="pre">unit</span></code>, then <code class="docutils literal notranslate"><span class="pre">e1;</span> <span class="pre">e2</span></code> will give a warning, because
+you are discarding useful values. If that is truly your intent, you can call the
+built-in function <code class="docutils literal notranslate"><span class="pre">ignore</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code> to convert any value to <code class="docutils literal notranslate"><span class="pre">()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="n">ignore</span> <span class="mi">3</span><span class="o">);</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 5
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="defensive-programming">
+<h2><span class="section-number">2.6.5. </span>Defensive Programming<a class="headerlink" href="#defensive-programming" title="Permalink to this headline">¶</a></h2>
+<p>As we discussed earlier in the section on debugging, one defense against bugs is
+to make any bugs (or errors) immediately visible. That idea connects with idea
+of preconditions.</p>
+<p>Consider this specification of <code class="docutils literal notranslate"><span class="pre">random_int</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [random_int bound] is a random integer between 0 (inclusive)</span>
+<span class="c">    and [bound] (exclusive).  Requires: [bound] is greater than 0</span>
+<span class="c">    and less than 2^30. *)</span>
+</pre></div>
+</div>
+<p>If the client of <code class="docutils literal notranslate"><span class="pre">random_int</span></code> passes a value of <code class="docutils literal notranslate"><span class="pre">bound</span></code> that violates the
+“Requires” clause, such as <code class="docutils literal notranslate"><span class="pre">-1</span></code>, the implementation of <code class="docutils literal notranslate"><span class="pre">random_int</span></code> is free to
+do anything whatsoever. All bets are off when the client violates the
+precondition.</p>
+<p>But the most helpful thing for <code class="docutils literal notranslate"><span class="pre">random_int</span></code> to do is to immediately expose the
+fact that the precondition was violated. After all, chances are that the client
+didn’t <em>mean</em> to violate it.</p>
+<p>So the implementor of <code class="docutils literal notranslate"><span class="pre">random_int</span></code> would do well to check whether the
+precondition is violated, and if so, raise an exception. Here are three
+possibilities of that kind of <em>defensive programming:</em></p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* possibility 1 *)</span>
+<span class="k">let</span> <span class="n">random_int</span> <span class="n">bound</span> <span class="o">=</span>
+  <span class="k">assert</span> <span class="o">(</span><span class="n">bound</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">bound</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">lsl</span> <span class="mi">30</span><span class="o">);</span>
+  <span class="c">(* proceed with the implementation of the function *)</span>
+
+<span class="c">(* possibility 2 *)</span>
+<span class="k">let</span> <span class="n">random_int</span> <span class="n">bound</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">not</span> <span class="o">(</span><span class="n">bound</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">bound</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">lsl</span> <span class="mi">30</span><span class="o">)</span>
+  <span class="k">then</span> <span class="n">invalid_arg</span> <span class="s2">&quot;bound&quot;</span><span class="o">;</span>
+  <span class="c">(* proceed with the implementation of the function *)</span>
+
+<span class="c">(* possibility 3 *)</span>
+<span class="k">let</span> <span class="n">random_int</span> <span class="n">bound</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">not</span> <span class="o">(</span><span class="n">bound</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">bound</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">lsl</span> <span class="mi">30</span><span class="o">)</span>
+  <span class="k">then</span> <span class="n">failwith</span> <span class="s2">&quot;bound&quot;</span><span class="o">;</span>
+  <span class="c">(* proceed with the implementation of the function *)</span>
+</pre></div>
+</div>
+<p>The second possibility is probably the most informative to the client, because
+it uses the built-in function <code class="docutils literal notranslate"><span class="pre">invalid_arg</span></code> to raise the well-named exception
+<code class="docutils literal notranslate"><span class="pre">Invalid_argument</span></code>. In fact, that’s exactly what the standard library
+implementation of this function does.</p>
+<p>The first possibility is probably most useful when you are trying to debug your
+own code, rather than choosing to expose a failed assertion to a client.</p>
+<p>The third possibility differs from the second only in the name (<code class="docutils literal notranslate"><span class="pre">Failure</span></code>) of
+the exception that is raised. It might be useful in situations where the
+precondition involves more than just a single invalid argument.</p>
+<p>In this example, checking the precondition is computationally cheap. In other
+cases, it might require a lot of computation, so the implementer of the function
+might prefer not to check the precondition, or only to check some inexpensive
+approximation to it.</p>
+<p>Sometimes programmers worry unnecessarily that defensive programming will be too
+expensive—either in terms of the time it costs them to implement the
+checks initially, or in the run-time costs that will be paid in checking
+assertions. These concerns are far too often misplaced. The time and money it
+costs society to repair faults in software suggests that we could all afford to
+have programs that run a little more slowly.</p>
+<p>Finally, the implementer might even choose to eliminate the precondition and
+restate it as a postcondition:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [random_int bound] is a random integer between 0 (inclusive)</span>
+<span class="c">    and [bound] (exclusive).  Raises: [Invalid_argument &quot;bound&quot;]</span>
+<span class="c">    unless [bound] is greater than 0 and less than 2^30. *)</span>
+</pre></div>
+</div>
+<p>Now instead of being free to do whatever when <code class="docutils literal notranslate"><span class="pre">bound</span></code> is too big or too small,
+<code class="docutils literal notranslate"><span class="pre">random_int</span></code> must raise an exception. For this function, that’s probably the
+best choice.</p>
+<p>In this course, we’re not going to force you to program defensively. But if
+you’re savvy, you’ll start (or continue) doing it anyway. The small amount of
+time you spend coding up such defenses will save you hours of time in debugging,
+making you a more productive programmer.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/basics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="documentation.html" title="previous page"><span class="section-number">2.5. </span>Documentation</a>
+    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">2.7. </span>Summary</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
