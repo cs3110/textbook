@@ -18,6 +18,10 @@ this work in its form as a unified textbook is Michael R. Clarkson.
 For the most recent version of this work, see the most recent
 [CS 3110 course website](https://www.cs.cornell.edu/courses/cs3110).
 
+Solutions to the exercises at the end of each chapter are available. Cornell
+students will have access to them as part of the course. Instructors at other
+institutions are welcome to contact Michael Clarkson for access.
+
 <!-- The link in the next paragraph apparently needs to be in a raw block.
 Otherwise, Sphinx notices that the target doesn't actually exist at
 build time, and issues an error about a bad cross-reference.-->
