@@ -13,7 +13,7 @@ These videos were produced during pandemic when the Cornell course that uses
 this textbook had to be asynchronous. The student response to them was
 overwhelmingly positive, so they are now being made public as part of the
 textbook. But just so you know, they were not produced by a professional A/V
-team&mdash;just a guy in his basement who was learning as he went. 😀
+team&mdash;just a guy in his basement who was learning as he went.
 
 The videos mostly use the versions of OCaml and its ecosystem that were current
 in Fall 2020. Current versions you are using are likely to look different from
@@ -21,6 +21,11 @@ the videos, but don't be alarmed: the underlying ideas are the same. The most
 visible difference is likely to be the VS Code plugin for OCaml. In Fall 2020
 the badly-aging "OCaml and Reason IDE" plugin was still being used. It has since
 been superceded by the "OCaml Platform" plugin.
+
+The order that the textbook covers topics sometimes differs from the order that
+the videos cover the topics, simply because the videos originate from lectures.
+The videos are placed in the textbook nearest to the topic they cover, but that
+does mean sometimes the videos are not in chronological order.
 ```
 
 {{ video_embed | replace("%%VID%%", "MUcka_SvhLw")}}

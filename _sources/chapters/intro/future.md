@@ -1,5 +1,7 @@
 # Look to Your Future
 
+{{ video_embed | replace("%%VID%%", "SKr3ItChPSI")}}
+
 General-purpose languages come and go. In your life you'll likely learn a
 handful. Today, it's Python and Java. Yesterday, it was Pascal and Cobol. Before
 that, it was Fortran and Lisp. Who knows what it will be tomorrow? In this

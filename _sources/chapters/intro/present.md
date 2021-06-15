@@ -48,10 +48,6 @@ perspective that OCaml can give you.
 
 ## The Features of OCaml
 
-{{ video_embed | replace("%%VID%%", "SKr3ItChPSI")}}
-
-{{ video_embed | replace("%%VID%%", "eNLm5Xbgmd0")}}
-
 {{ video_embed | replace("%%VID%%", "T-DIW1dhYzo")}}
 
 OCaml is a *statically-typed* and *type-safe* programming language. A
@@ -96,6 +92,8 @@ encountered before, and some of which are likely to be new:
     modules by providing functions (called *functors*) that manipulate modules.
 
 ## OCaml in Industry
+
+{{ video_embed | replace("%%VID%%", "eNLm5Xbgmd0")}}
 
 OCaml and other functional languages are nowhere near as popular as Python, C,
 or Java. OCaml's real strength lies in language manipulation (i.e., compilers,

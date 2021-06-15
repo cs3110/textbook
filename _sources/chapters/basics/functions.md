@@ -20,6 +20,8 @@ Let's get started.
 
 ## Function Definitions
 
+{{ video_embed | replace("%%VID%%", "vCxIlagS7kA")}}
+
 The following code
 ```ocaml
 let x = 42
@@ -41,6 +43,8 @@ definition*. Non-recursive functions are defined like this:
 ```ocaml
 let f x = ...
 ```
+
+{{ video_embed | replace("%%VID%%", "_x82qitu2R8")}}
 
 Recursive functions are defined like this:
 
@@ -151,6 +155,8 @@ and odd n =
   n <> 0 && even (n - 1);;
 ```
 
+{{ video_embed | replace("%%VID%%", "W0rO84YXIXo")}}
+
 The syntax for function types is:
 ```ocaml
 t -> u
@@ -184,6 +190,8 @@ in scope inside the function body itself (just like the arguments are in scope).
 
 ## Anonymous Functions
 
+{{ video_embed | replace("%%VID%%", "JwoIIrj0bcM")}}
+
 We already know that we can have values that are not bound to names.
 The integer `42`, for example, can be entered at the toplevel without
 giving it a name:
@@ -211,6 +219,8 @@ They are syntactically different but semantically equivalent. That is, even
 though they involve different keywords and put some identifiers in different
 places, they mean the same thing.
 
+{{ video_embed | replace("%%VID%%", "zHHCD7MOjmw")}}
+
 Anonymous functions are also called *lambda expressions*, a term that comes from
 the *lambda calculus*, which is a mathematical model of computation in the same
 sense that Turing machines are a model of computation. In the lambda calculus,
@@ -237,6 +247,8 @@ fun x1 ... xn -> e
 computation to be performed.
 
 ## Function Application
+
+{{ video_embed | replace("%%VID%%", "fgCTDhXAYnQ")}}
 
 Here we cover a somewhat simplified syntax of function application compared to
 what OCaml actually allows.
@@ -283,6 +295,8 @@ function application.
 
 ## Pipeline
 
+{{ video_embed | replace("%%VID%%", "arS9kEqCFEU")}}
+
 There is a built-in infix operator in OCaml for function application called the
 *pipeline* operator, written `|>`. Imagine that as depicting a triangle pointing
 to the right. The metaphor is that values are sent through the pipeline from
@@ -316,6 +330,8 @@ programs are another example of expressions that are syntactically different but
 semantically equivalent.
 
 ## Polymorphic Functions
+
+{{ video_embed | replace("%%VID%%", "UWmxYBEKzN8")}}
 
 The *identity* function is the function that simply returns its input:
 ```{code-cell}
@@ -409,6 +425,8 @@ f 7
 ```
 
 ## Partial Application
+
+{{ video_embed | replace("%%VID%%", "85xVK0wmDTw")}}
 
 We could define an addition function as follows:
 
@@ -525,6 +543,8 @@ The intuition here is that the left-most expression grabs the next
 expression to its right as its single argument.
 
 ## Operators as Functions
+
+{{ video_embed | replace("%%VID%%", "OVKOx8UiwxM")}}
 
 The addition operator `+` has type `int -> int -> int`. It is normally written
 *infix*, e.g., `3 + 4`. By putting parentheses around it, we can make it a
