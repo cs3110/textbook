@@ -9,7 +9,7 @@ The semantics of function application is the very heart of OCaml and of
 functional programming, and it's something we will come back to several times
 throughout the course to deepen our understanding.
 
-## Terms and concepts
+## Terms and Concepts
 
 * anonymous functions
 * assertions
@@ -48,7 +48,7 @@ throughout the course to deepen our understanding.
 * type inference
 * values
 
-## Further reading
+## Further Reading
 
 * *Introduction to Objective Caml*, chapter 3
 * *OCaml from the Very Beginning*, chapter 2

@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.4. Records and Tuples &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.5. Advanced Pattern Matching" href="pattern_matching_advanced.html" />
+    <link rel="prev" title="3.3. Unit Testing with OUnit" href="ounit.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.6. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.7. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.8. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   3. Data
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/data/records_tuples.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/data/records_tuples.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/data/records_tuples.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/data/records_tuples.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#records">
+   3.4.1. Records
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tuples">
+   3.4.2. Tuples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variants-vs-tuples-and-records">
+   3.4.3. Variants vs. Tuples and Records
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="records-and-tuples">
+<h1><span class="section-number">3.4. </span>Records and Tuples<a class="headerlink" href="#records-and-tuples" title="Permalink to this headline">¶</a></h1>
+<p>Singly-linked lists are a great data structure, but what if you want a fixed
+number of elements, instead of an unbounded number? Or what if you want the
+elements to have distinct types? Or what if you want to access the elements by
+name instead of by number? Lists don’t make any of those possibilities easy.
+Instead, OCaml programmers use records and tuples.</p>
+<div class="section" id="records">
+<h2><span class="section-number">3.4.1. </span>Records<a class="headerlink" href="#records" title="Permalink to this headline">¶</a></h2>
+<p>A <em>record</em> is a composite of other types of data, each of which is named. OCaml
+records are much like structs in C. Here’s an example of a record type
+definition <code class="docutils literal notranslate"><span class="pre">mon</span></code> for a Poké<u>mon</u>, re-using the <code class="docutils literal notranslate"><span class="pre">ptype</span></code> definition
+from the <a class="reference internal" href="variants.html"><span class="doc std std-doc">variants</span></a> section:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">ptype</span> <span class="o">=</span> <span class="nc">TNormal</span> <span class="o">|</span> <span class="nc">TFire</span> <span class="o">|</span> <span class="nc">TWater</span>
+<span class="k">type</span> <span class="n">mon</span> <span class="o">=</span> <span class="o">{</span><span class="n">name</span> <span class="o">:</span> <span class="kt">string</span><span class="o">;</span> <span class="n">hp</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span> <span class="n">ptype</span> <span class="o">:</span> <span class="n">ptype</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type ptype = TNormal | TFire | TWater
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type mon = { name : string; hp : int; ptype : ptype; }
+</pre></div>
+</div>
+</div>
+</div>
+<p>This type defines a record with three <em>fields</em> named <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">hp</span></code> (hit points),
+and <code class="docutils literal notranslate"><span class="pre">ptype</span></code>. The type of each of those fields is also given. Note that <code class="docutils literal notranslate"><span class="pre">ptype</span></code>
+can be used as both a type name and a field name; the <em>namespace</em> for those is
+distinct in OCaml.</p>
+<p>To build a value of a record type, we write a record expression, which looks
+like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">{</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Charmander&quot;</span><span class="o">;</span> <span class="n">hp</span> <span class="o">=</span> <span class="mi">39</span><span class="o">;</span> <span class="n">ptype</span> <span class="o">=</span> <span class="nc">TFire</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : mon = {name = &quot;Charmander&quot;; hp = 39; ptype = TFire}
+</pre></div>
+</div>
+</div>
+</div>
+<p>So in a type definition we write a colon between the name and the type of a
+field, but in an expression we write an equals sign.</p>
+<p>To access a record and get a field from it, we use the dot notation that you
+would expect from many other languages. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="o">{</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Charmander&quot;</span><span class="o">;</span> <span class="n">hp</span> <span class="o">=</span> <span class="mi">39</span><span class="o">;</span> <span class="n">ptype</span> <span class="o">=</span> <span class="nc">TFire</span><span class="o">};;</span>
+<span class="n">c</span><span class="o">.</span><span class="n">hp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val c : mon = {name = &quot;Charmander&quot;; hp = 39; ptype = TFire}
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 39
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s also possible to use pattern matching to access record fields:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">c</span> <span class="k">with</span> <span class="o">{</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span> <span class="n">hp</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span> <span class="n">ptype</span> <span class="o">=</span> <span class="n">t</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 39
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">h</span></code>, and <code class="docutils literal notranslate"><span class="pre">t</span></code> here are pattern variables. There is a syntactic sugar
+provided if you want to use the same name for both the field and a pattern
+variable:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">c</span> <span class="k">with</span> <span class="o">{</span><span class="n">name</span><span class="o">;</span> <span class="n">hp</span><span class="o">;</span> <span class="n">ptype</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="n">hp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 39
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, the pattern <code class="docutils literal notranslate"><span class="pre">{name;</span> <span class="pre">hp;</span> <span class="pre">ptype}</span></code> is sugar for
+<code class="docutils literal notranslate"><span class="pre">{name</span> <span class="pre">=</span> <span class="pre">name;</span> <span class="pre">hp</span> <span class="pre">=</span> <span class="pre">hp;</span> <span class="pre">ptype</span> <span class="pre">=</span> <span class="pre">ptype}</span></code>. In each of those subexpressions, the
+identifier appearing on the left-hand side of the equals is a field name, and
+the identifier appearing on the right-hand side is a pattern variable.</p>
+<p><strong>Syntax.</strong></p>
+<p>A record expression is written:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">{</span><span class="n">f1</span> <span class="o">=</span> <span class="n">e1</span><span class="o">;</span> <span class="o">...;</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">en</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>The order of the <code class="docutils literal notranslate"><span class="pre">fi=ei</span></code> inside a record expression is irrelevant.
+For example, <code class="docutils literal notranslate"><span class="pre">{f</span> <span class="pre">=</span> <span class="pre">e1;</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">e2}</span></code> is entirely equivalent to <code class="docutils literal notranslate"><span class="pre">{g</span> <span class="pre">=</span> <span class="pre">e2;</span> <span class="pre">f</span> <span class="pre">=</span> <span class="pre">e1}</span></code>.</p>
+<p>A field access is written:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">f</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">f</span></code> must be an identifier of a field name, not an expression. That
+restriction is the same as in any other language with similar
+features——for example, Java field names. If you really do want to
+<em>compute</em> which identifier to access, then actually you want a different data
+structure: a <em>map</em> (also known by many other names: a <em>dictionary</em> or
+<em>association list</em> or <em>hash table</em> etc., though there are subtle differences
+implied by each of those terms.)</p>
+<p><strong>Dynamic semantics.</strong></p>
+<ul class="simple">
+<li><p>If for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code>, it holds that <code class="docutils literal notranslate"><span class="pre">ei</span> <span class="pre">==&gt;</span> <span class="pre">vi</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">{f1</span> <span class="pre">=</span> <span class="pre">e1;</span> <span class="pre">...;</span> <span class="pre">fn</span> <span class="pre">=</span> <span class="pre">en}</span> <span class="pre">==&gt;</span> <span class="pre">{f1</span> <span class="pre">=</span> <span class="pre">v1;</span> <span class="pre">...;</span> <span class="pre">fn</span> <span class="pre">=</span> <span class="pre">vn}</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">==&gt;</span> <span class="pre">{...;</span> <span class="pre">f</span> <span class="pre">=</span> <span class="pre">v;</span> <span class="pre">...}</span></code> then <code class="docutils literal notranslate"><span class="pre">e.f</span> <span class="pre">==&gt;</span> <span class="pre">v</span></code>.</p></li>
+</ul>
+<p><strong>Static semantics.</strong></p>
+<p>A record type is written:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">{</span><span class="n">f1</span> <span class="o">:</span> <span class="n">t1</span><span class="o">;</span> <span class="o">...;</span> <span class="n">fn</span> <span class="o">:</span> <span class="n">tn</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>The order of the <code class="docutils literal notranslate"><span class="pre">fi:ti</span></code> inside a record type is irrelevant. For example,
+<code class="docutils literal notranslate"><span class="pre">{f</span> <span class="pre">:</span> <span class="pre">t1;</span> <span class="pre">g</span> <span class="pre">:</span> <span class="pre">t2}</span></code> is entirely equivalent to <code class="docutils literal notranslate"><span class="pre">{g:t2;f:t1}</span></code>.</p>
+<p>Note that record types must be defined before they can be used.  This
+enables OCaml to do better type inference than would be possible if
+record types could be used without definition.</p>
+<p>The type checking rules are:</p>
+<ul class="simple">
+<li><p>If for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code>, it holds that <code class="docutils literal notranslate"><span class="pre">ei</span> <span class="pre">:</span> <span class="pre">ti</span></code>, and if <code class="docutils literal notranslate"><span class="pre">t</span></code> is defined to be
+<code class="docutils literal notranslate"><span class="pre">{f1</span> <span class="pre">:</span> <span class="pre">t1;</span> <span class="pre">...;</span> <span class="pre">fn</span> <span class="pre">:</span> <span class="pre">tn}</span></code>, then <code class="docutils literal notranslate"><span class="pre">{f1</span> <span class="pre">=</span> <span class="pre">e1;</span> <span class="pre">...;</span> <span class="pre">fn</span> <span class="pre">=</span> <span class="pre">en}</span> <span class="pre">:</span> <span class="pre">t</span></code>. Note that the
+set of fields provided in a record expression must be the full set of fields
+defined as part of the record’s type (but see below regarding <em>record copy</em>).</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">:</span> <span class="pre">t1</span></code> and if <code class="docutils literal notranslate"><span class="pre">t1</span></code> is defined to be <code class="docutils literal notranslate"><span class="pre">{...;</span> <span class="pre">f</span> <span class="pre">:</span> <span class="pre">t2;</span> <span class="pre">...}</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">e.f</span> <span class="pre">:</span> <span class="pre">t2</span></code>.</p></li>
+</ul>
+<p><strong>Record copy.</strong></p>
+<p>Another syntax is also provided to construct a new record out of an old record:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">{</span><span class="n">e</span> <span class="k">with</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">e1</span><span class="o">;</span> <span class="o">...;</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">en</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>This doesn’t mutate the old record. Rather, it constructs a new record with new
+values. The set of fields provided after the <code class="docutils literal notranslate"><span class="pre">with</span></code> does not have to be the full
+set of fields defined as part of the record’s type. In the newly-copied record,
+any field not provided as part of the <code class="docutils literal notranslate"><span class="pre">with</span></code> is copied from the old record.</p>
+<p>The dynamic and static semantics of this are what you might expect, though they
+are tedious to write down mathematically.</p>
+<p><strong>Pattern matching.</strong></p>
+<p>We add the following new pattern form to the list of legal patterns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{f1</span> <span class="pre">=</span> <span class="pre">p1;</span> <span class="pre">...;</span> <span class="pre">fn</span> <span class="pre">=</span> <span class="pre">pn}</span></code></p></li>
+</ul>
+<p>And we extend the definition of when a pattern matches a value and produces a
+binding as follows:</p>
+<ul class="simple">
+<li><p>If for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code>, it holds that <code class="docutils literal notranslate"><span class="pre">pi</span></code> matches <code class="docutils literal notranslate"><span class="pre">vi</span></code> and produces
+bindings <span class="math notranslate nohighlight">\(b_i\)</span>, then the record pattern <code class="docutils literal notranslate"><span class="pre">{f1</span> <span class="pre">=</span> <span class="pre">p1;</span> <span class="pre">...;</span> <span class="pre">fn</span> <span class="pre">=</span> <span class="pre">pn}</span></code> matches the
+record value <code class="docutils literal notranslate"><span class="pre">{f1</span> <span class="pre">=</span> <span class="pre">v1;</span> <span class="pre">...;</span> <span class="pre">fn</span> <span class="pre">=</span> <span class="pre">vn;</span> <span class="pre">...}</span></code> and produces the set <span class="math notranslate nohighlight">\(\bigcup_i
+b_i\)</span> of bindings. Note that the record value may have more fields than the
+record pattern does.</p></li>
+</ul>
+<p>As a syntactic sugar, another form of record pattern is provided:
+<code class="docutils literal notranslate"><span class="pre">{f1;</span> <span class="pre">...;</span> <span class="pre">fn}</span></code>. It is desugared to <code class="docutils literal notranslate"><span class="pre">{f1</span> <span class="pre">=</span> <span class="pre">f1;</span> <span class="pre">...;</span> <span class="pre">fn</span> <span class="pre">=</span> <span class="pre">fn}</span></code>.</p>
+</div>
+<div class="section" id="tuples">
+<h2><span class="section-number">3.4.2. </span>Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">¶</a></h2>
+<p>Like records, <em>tuples</em> are a composite of other types of data. But instead of
+naming the <em>components</em>, they are identified by position. Here are some examples
+of tuples:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+<span class="o">(</span><span class="bp">true</span><span class="o">,</span> <span class="s2">&quot;Hello&quot;</span><span class="o">)</span>
+<span class="o">([</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">],</span> <span class="o">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="o">,</span> <span class="sc">&#39;X&#39;</span><span class="o">))</span>
+</pre></div>
+</div>
+<p>A tuple with two components is called a <em>pair</em>. A tuple with three components is
+called a <em>triple</em>. Beyond that, we usually just use the word <em>tuple</em> instead of
+continuing a naming scheme based on numbers.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Beyond about three components, it’s arguably better to use records instead of
+tuples, because it becomes hard for a programmer to remember which component was
+supposed to represent what information.</p>
+</div>
+<p>Building of tuples is easy: just write the tuple, as above. Accessing again
+involves pattern matching, for example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="k">with</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 6
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Syntax.</strong></p>
+<p>A tuple is written</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">,</span> <span class="o">...,</span> <span class="n">en</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>The parentheses are not entirely mandatory —often your code can
+successfully parse without them— but they are usually considered to be
+good style to include.</p>
+<p><strong>Dynamic semantics.</strong></p>
+<ul class="simple">
+<li><p>If for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code> it holds that <code class="docutils literal notranslate"><span class="pre">ei</span> <span class="pre">==&gt;</span> <span class="pre">vi</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">(e1,</span> <span class="pre">...,</span> <span class="pre">en)</span> <span class="pre">==&gt;</span> <span class="pre">(v1,</span> <span class="pre">...,</span> <span class="pre">vn)</span></code>.</p></li>
+</ul>
+<p><strong>Static semantics.</strong></p>
+<p>Tuple types are written using a new type constructor <code class="docutils literal notranslate"><span class="pre">*</span></code>, which is different
+than the multiplication operator. The type <code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">*</span> <span class="pre">...</span> <span class="pre">*</span> <span class="pre">tn</span></code> is the type of tuples
+whose first component has type <code class="docutils literal notranslate"><span class="pre">t1</span></code>, …, and nth component has type <code class="docutils literal notranslate"><span class="pre">tn</span></code>.</p>
+<ul class="simple">
+<li><p>If for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code> it holds that <code class="docutils literal notranslate"><span class="pre">ei</span> <span class="pre">:</span> <span class="pre">ti</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">(e1,</span> <span class="pre">...,</span> <span class="pre">en)</span> <span class="pre">:</span> <span class="pre">t1</span> <span class="pre">*</span> <span class="pre">...</span> <span class="pre">*</span> <span class="pre">tn</span></code>.</p></li>
+</ul>
+<p><strong>Pattern matching.</strong></p>
+<p>We add the following new pattern form to the list of legal patterns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(p1,</span> <span class="pre">...,</span> <span class="pre">pn)</span></code></p></li>
+</ul>
+<p>The parentheses are again not entirely mandatory but usually are idimoatic to
+include.</p>
+<p>And we extend the definition of when a pattern matches a value and produces a
+binding as follows:</p>
+<ul class="simple">
+<li><p>If for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code>, it holds that <code class="docutils literal notranslate"><span class="pre">pi</span></code> matches <code class="docutils literal notranslate"><span class="pre">vi</span></code> and produces
+bindings <span class="math notranslate nohighlight">\(b_i\)</span>, then the tuple pattern <code class="docutils literal notranslate"><span class="pre">(p1,</span> <span class="pre">...,</span> <span class="pre">pn)</span></code> matches the tuple value
+<code class="docutils literal notranslate"><span class="pre">(v1,</span> <span class="pre">...,</span> <span class="pre">vn)</span></code> and produces the set <span class="math notranslate nohighlight">\(\bigcup_i b_i\)</span> of bindings. Note that
+the tuple value must have exactly the same number of components as the tuple
+pattern does.</p></li>
+</ul>
+</div>
+<div class="section" id="variants-vs-tuples-and-records">
+<h2><span class="section-number">3.4.3. </span>Variants vs. Tuples and Records<a class="headerlink" href="#variants-vs-tuples-and-records" title="Permalink to this headline">¶</a></h2>
+<p>The big difference between variants and the types we just learned (records and
+tuples) is that a value of a variant type is <em>one of</em> a set of possibilities,
+whereas a value of a tuple or record type provides <em>each of</em> a set of
+possibilities. Going back to our examples, a value of type <code class="docutils literal notranslate"><span class="pre">day</span></code> is <strong>one of</strong>
+<code class="docutils literal notranslate"><span class="pre">Sun</span></code> or <code class="docutils literal notranslate"><span class="pre">Mon</span></code> or etc. But a value of type <code class="docutils literal notranslate"><span class="pre">mon</span></code> provides <strong>each of</strong> a <code class="docutils literal notranslate"><span class="pre">string</span></code>
+and an <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">ptype</span></code>. Note how, in those previous two sentences, the word
+“or” is associated with variant types, and the word “and” is associated with
+tuple and record types. That’s a good clue if you’re ever trying to decide
+whether you want to use a variant, or a tuple or record: if you need one piece
+of data <em>or</em> another, you want a variant; if you need one piece of data <em>and</em>
+another, you want a tuple or record.</p>
+<p>One-of types are more commonly known as <em>sum types</em>, and each-of types as
+<em>product types</em>. Those names come from set theory. Variants are like
+<a class="reference external" href="https://en.wikipedia.org/wiki/Disjoint_union">disjoint union</a>, because each value of a variant comes from one of many
+underlying sets (and thus far each of those sets is just a single constructor
+hence has cardinality one). Disjoint union is indeed sometimes written with a
+summation operator <span class="math notranslate nohighlight">\(\Sigma\)</span>. Tuples/records are like
+<a class="reference external" href="https://en.wikipedia.org/wiki/Cartesian_product">Cartesian product</a>, because each value of a tuple or record contains
+a value from each of many underlying sets. Cartesian product is usually written
+with a product operator, <span class="math notranslate nohighlight">\(\times\)</span> or <span class="math notranslate nohighlight">\(\Pi\)</span>.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="ounit.html" title="previous page"><span class="section-number">3.3. </span>Unit Testing with OUnit</a>
+    <a class='right-next' id="next-link" href="pattern_matching_advanced.html" title="next page"><span class="section-number">3.5. </span>Advanced Pattern Matching</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

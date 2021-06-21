@@ -1,0 +1,1268 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.1. Lists &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.2. Variants" href="variants.html" />
+    <link rel="prev" title="3. Data" href="intro.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.6. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.7. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.8. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   3. Data
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/data/lists.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/data/lists.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/data/lists.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/data/lists.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-lists">
+   3.1.1. Building Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accessing-lists">
+   3.1.2. Accessing Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#not-mutating-lists">
+   3.1.3. (Not) Mutating Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pattern-matching-with-lists">
+   3.1.4. Pattern Matching with Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deep-pattern-matching">
+   3.1.5. Deep Pattern Matching
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#immediate-matches">
+   3.1.6. Immediate Matches
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ocamldoc-and-list-syntax">
+   3.1.7. OCamldoc and List Syntax
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#list-comprehensions">
+   3.1.8. List Comprehensions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tail-recursion">
+   3.1.9. Tail Recursion
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="lists">
+<h1><span class="section-number">3.1. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h1>
+<p>An OCaml list is a sequence of values all of which have the same type.
+They are implemented as singly-linked lists.  These lists enjoy a
+first-class status in the language:  there is special support for easily
+creating and working with lists.  That’s a characteristic that OCaml
+shares with many other functional languages.  Mainstream imperative
+languages, like Python, have such support these days too.  Maybe that’s
+because programmers find it so pleasant to work directly with lists as a
+first-class part of the language, rather than having to go through a
+library (as in C and Java).</p>
+<div class="section" id="building-lists">
+<h2><span class="section-number">3.1.1. </span>Building Lists<a class="headerlink" href="#building-lists" title="Permalink to this headline">¶</a></h2>
+<p><strong>Syntax.</strong>  There are three syntactic forms for building lists:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="bp">[]</span>
+<span class="n">e1</span> <span class="o">::</span> <span class="n">e2</span>
+<span class="o">[</span><span class="n">e1</span><span class="o">;</span> <span class="n">e2</span><span class="o">;</span> <span class="o">...;</span> <span class="n">en</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>The empty list is written <code class="docutils literal notranslate"><span class="pre">[]</span></code> and is pronounced “nil”, a name that comes from
+Lisp. Given a list <code class="docutils literal notranslate"><span class="pre">lst</span></code> and element <code class="docutils literal notranslate"><span class="pre">elt</span></code>, we can prepend <code class="docutils literal notranslate"><span class="pre">elt</span></code> to <code class="docutils literal notranslate"><span class="pre">lst</span></code> by
+writing <code class="docutils literal notranslate"><span class="pre">elt</span> <span class="pre">::</span> <span class="pre">lst</span></code>. The double-colon operator is pronounced “cons”, a name that
+comes from an operator in Lisp that <u>cons</u>tructs objects in memory. “Cons”
+can also be used as a verb, as in “I will cons an element onto the list.” The
+first element of a list is usually called its <em>head</em> and the rest of the
+elements (if any) are called its <em>tail</em>.</p>
+<p>The square bracket syntax is convenient but unnecessary. Any list
+<code class="docutils literal notranslate"><span class="pre">[e1;</span> <span class="pre">e2;</span> <span class="pre">...;</span> <span class="pre">en]</span></code> could instead be written with the more primitive nil and
+cons syntax: <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">::</span> <span class="pre">e2</span> <span class="pre">::</span> <span class="pre">...</span> <span class="pre">::</span> <span class="pre">en</span> <span class="pre">::</span> <span class="pre">[]</span></code>. When a pleasant syntax can be
+defined in terms of a more primitive syntax within the language, we call the
+pleasant syntax <em>syntactic sugar</em>: it makes the language “sweeter”. Transforming
+the sweet syntax into the more primitive syntax is called <em>desugaring</em>.</p>
+<p>Because the elements of the list can be arbitrary expressions, lists can be
+nested as deeply as we like, e.g., <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">[[]];</span> <span class="pre">[[1;</span> <span class="pre">2;</span> <span class="pre">3]]]</span></code>.</p>
+<p><strong>Dynamic semantics.</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code> is already a value.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e1</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">v1</span></code>, and if <code class="docutils literal notranslate"><span class="pre">e2</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">v2</span></code>, then <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">::</span> <span class="pre">e2</span></code>
+evaluates to <code class="docutils literal notranslate"><span class="pre">v1</span> <span class="pre">::</span> <span class="pre">v2</span></code>.</p></li>
+</ul>
+<p>As a consequence of those rules and how to desugar the square-bracket notation
+for lists, we have the following derived rule:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">ei</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">vi</span></code> for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code>, then <code class="docutils literal notranslate"><span class="pre">[e1;</span> <span class="pre">...;</span> <span class="pre">en]</span></code>
+evaluates to <code class="docutils literal notranslate"><span class="pre">[v1;</span> <span class="pre">...;</span> <span class="pre">vn]</span></code>.</p></li>
+</ul>
+<p>It’s starting to get tedious to write “evaluates to” in all our evaluation
+rules. So let’s introduce a shorter notation for it. We’ll write <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">==&gt;</span> <span class="pre">v</span></code> to
+mean that <code class="docutils literal notranslate"><span class="pre">e</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">v</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code> is not a piece of OCaml syntax.
+Rather, it’s a notation we use in our description of the language, kind of like
+metavariables. Using that notation, we can rewrite the latter two rules above:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">==&gt;</span> <span class="pre">v1</span></code>, and if <code class="docutils literal notranslate"><span class="pre">e2</span> <span class="pre">==&gt;</span> <span class="pre">v2</span></code>, then <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">::</span> <span class="pre">e2</span> <span class="pre">==&gt;</span> <span class="pre">v1</span> <span class="pre">::</span> <span class="pre">v2</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">ei</span> <span class="pre">==&gt;</span> <span class="pre">vi</span></code> for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code>, then <code class="docutils literal notranslate"><span class="pre">[e1;</span> <span class="pre">...;</span> <span class="pre">en]</span> <span class="pre">==&gt;</span> <span class="pre">[v1;</span> <span class="pre">...;</span> <span class="pre">vn]</span></code>.</p></li>
+</ul>
+<p><strong>Static semantics.</strong></p>
+<p>All the elements of a list must have the same type. If that element type is <code class="docutils literal notranslate"><span class="pre">t</span></code>,
+then the type of the list is <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">list</span></code>. You should read such types from right to
+left: <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">list</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">t</span></code>’s, <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">list</span> <span class="pre">list</span></code> is a list of list of <code class="docutils literal notranslate"><span class="pre">t</span></code>’s,
+etc. The word <code class="docutils literal notranslate"><span class="pre">list</span></code> itself here is not a type: there is no way to build an
+OCaml value that has type simply <code class="docutils literal notranslate"><span class="pre">list</span></code>. Rather, <code class="docutils literal notranslate"><span class="pre">list</span></code> is a <em>type constructor</em>:
+given a type, it produces a new type. For example, given <code class="docutils literal notranslate"><span class="pre">int</span></code>, it produces the
+type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">list</span></code>. You could think of type constructors as being like functions
+that operate on types, instead of functions that operate on values.</p>
+<p>The type-checking rules:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[]</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">list</span></code></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">:</span> <span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">list</span></code> then <code class="docutils literal notranslate"><span class="pre">e1::e2</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">list</span></code>.</p></li>
+</ul>
+<p>In the rule for <code class="docutils literal notranslate"><span class="pre">[]</span></code>, recall that <code class="docutils literal notranslate"><span class="pre">'a</span></code> is a type variable: it stands for an
+unknown type. So the empty list is a list whose elements have an unknown type.
+If we cons an <code class="docutils literal notranslate"><span class="pre">int</span></code> onto it, say <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">::</span> <span class="pre">[]</span></code>, then the compiler infers that for that
+particular list, <code class="docutils literal notranslate"><span class="pre">'a</span></code> must be <code class="docutils literal notranslate"><span class="pre">int</span></code>. But if in another place we cons a <code class="docutils literal notranslate"><span class="pre">bool</span></code>
+onto it, say <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">::</span> <span class="pre">[]</span></code>, then the compiler infers that for that particular
+list, <code class="docutils literal notranslate"><span class="pre">'a</span></code> must be <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
+</div>
+<div class="section" id="accessing-lists">
+<h2><span class="section-number">3.1.2. </span>Accessing Lists<a class="headerlink" href="#accessing-lists" title="Permalink to this headline">¶</a></h2>
+<p>There are really only two ways to build a list, with nil and cons. So if we want
+to take apart a list into its component pieces, we have to say what to do with
+the list if it’s empty, and what to do if it’s non-empty (that is, a cons of one
+element onto some other list). We do that with a language feature called
+<em>pattern matching</em>.</p>
+<p>Here’s an example of using pattern matching to compute the sum of a list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function says to take the input <code class="docutils literal notranslate"><span class="pre">lst</span></code> and see whether it has the same shape
+as the empty list. If so, return 0. Otherwise, if it has the same shape as the
+list <code class="docutils literal notranslate"><span class="pre">h::t</span></code>, then let <code class="docutils literal notranslate"><span class="pre">h</span></code> be the first element of <code class="docutils literal notranslate"><span class="pre">lst</span></code>, and let <code class="docutils literal notranslate"><span class="pre">t</span></code> be the rest
+of the elements of <code class="docutils literal notranslate"><span class="pre">lst</span></code>, and return <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">+</span> <span class="pre">sum</span> <span class="pre">t</span></code>. The choice of variable names
+here is meant to suggest “head” and “tail” and is a common idiom, but we could
+use other names if we wanted. Another common idiom is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="n">xs</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">xs</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs&#39;</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">xs&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>That is, the input list is a list of xs (pronounced EX-uhs), the head element is
+an x, and the tail is xs’ (pronounced EX-uhs prime).</p>
+<p>Syntactically it isn’t necessary to use so many lines to define <code class="docutils literal notranslate"><span class="pre">sum</span></code>. We
+could do it all on one line:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="n">xs</span> <span class="o">=</span> <span class="k">match</span> <span class="n">xs</span> <span class="k">with</span> <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs&#39;</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">xs&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or, noting that the first <code class="docutils literal notranslate"><span class="pre">|</span></code> after <code class="docutils literal notranslate"><span class="pre">with</span></code> is optional regardless of how many
+lines we use, we could also write:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="n">xs</span> <span class="o">=</span> <span class="k">match</span> <span class="n">xs</span> <span class="k">with</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs&#39;</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">xs&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The multi-line format is what we’ll usually use in this book, because it helps
+the human eye understand the syntax a bit better. OCaml code formatting tools,
+though, are moving toward the single-line format whenever the code is short
+enough to fit on just one line.</p>
+<p>Here’s another example of using pattern matching to compute the length of a
+list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">length</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">length</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length : &#39;a list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how we didn’t actually need the variable <code class="docutils literal notranslate"><span class="pre">h</span></code> in the right-hand side of the
+pattern match. When we want to indicate the presence of some value in a pattern
+without actually giving it a name, we can write <code class="docutils literal notranslate"><span class="pre">_</span></code> (the underscore character):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">length</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">length</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length : &#39;a list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>That function is actually built-in as part of the OCaml standard library <code class="docutils literal notranslate"><span class="pre">List</span></code>
+module. Its name there is <code class="docutils literal notranslate"><span class="pre">List.length</span></code>. That “dot” notation indicates the
+function named <code class="docutils literal notranslate"><span class="pre">length</span></code> inside the module named <code class="docutils literal notranslate"><span class="pre">Length</span></code>, much like the dot
+notation used in many other languages.</p>
+<p>And here’s a third example that appends one list onto the beginning of
+another list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">append</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst1</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">lst2</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">::</span> <span class="n">append</span> <span class="n">t</span> <span class="n">lst2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val append : &#39;a list -&gt; &#39;a list -&gt; &#39;a list = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">append</span> <span class="pre">[1;</span> <span class="pre">2]</span> <span class="pre">[3;</span> <span class="pre">4]</span></code> is <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3;</span> <span class="pre">4]</span></code>. That function is actually
+available as a built-in operator <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, so we could instead write
+<code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2]</span> <span class="pre">&#64;</span> <span class="pre">[3;</span> <span class="pre">4]</span></code>.</p>
+<p>As a final example, we could write a function to determine whether
+a list is empty:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">empty</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val empty : &#39;a list -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But there a much better way to write the same function without pattern matching:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">empty</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="n">lst</span> <span class="o">=</span> <span class="bp">[]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val empty : &#39;a list -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how all the recursive functions above are similar to doing proofs by
+induction on the natural numbers: every natural number is either 0 or is 1
+greater than some other natural number <span class="math notranslate nohighlight">\(n\)</span>, and so a proof by induction has a
+base case for 0 and an inductive case for <span class="math notranslate nohighlight">\(n + 1\)</span>. Likewise all our functions
+have a base case for the empty list and a recursive case for the list that has
+one more element than another list. This similarity is no accident. There is a
+deep relationship between induction and recursion; we’ll explore that
+relationship in more detail later in the book.</p>
+<p>By the way, there are two library functions <code class="docutils literal notranslate"><span class="pre">List.hd</span></code> and <code class="docutils literal notranslate"><span class="pre">List.tl</span></code> that return
+the head and tail of a list. It is not good, idiomatic OCaml to apply these
+directly to a list. The problem is that they will raise an exception when
+applied to the empty list, and you will have to remember to handle that
+exception. Instead, you should use pattern matching: you’ll then be forced to
+match against both the empty list and the non-empty list (at least), which will
+prevent exceptions from being raised, thus making your program more robust.</p>
+</div>
+<div class="section" id="not-mutating-lists">
+<h2><span class="section-number">3.1.3. </span>(Not) Mutating Lists<a class="headerlink" href="#not-mutating-lists" title="Permalink to this headline">¶</a></h2>
+<p>Lists are immutable. There’s no way to change an element of a list from one
+value to another. Instead, OCaml programmers create new lists out of old lists.
+For example, suppose we wanted to write a function that returned the same list
+as its input list, but with the first element (if there is one) incremented by
+one. We could do that:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc_first</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">::</span> <span class="n">t</span>
+</pre></div>
+</div>
+<p>Now you might be concerned about whether we’re being wasteful of space. After
+all, there are at least two ways the compiler could implement the above code:</p>
+<ol class="simple">
+<li><p>Copy the entire tail list <code class="docutils literal notranslate"><span class="pre">t</span></code> when the new list is created in the pattern
+match with cons, such that the amount of memory in use just increased by an
+amount proportionate to the length of <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p></li>
+<li><p>Share the tail list <code class="docutils literal notranslate"><span class="pre">t</span></code> between the old list and the new list, such that the
+amount of memory in use does not increase—beyond the one extra piece of
+memory needed to store <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p></li>
+</ol>
+<p>In fact, the compiler does the latter. So there’s no need for concern. The
+reason that it’s quite safe for the compiler to implement sharing is exactly
+that list elements are immutable. If they were instead mutable, then we’d start
+having to worry about whether the list I have is shared with the list you have,
+and whether changes I make will be visible in your list. So immutability makes
+it easier to reason about the code, and makes it safe for the compiler to
+perform an optimization.</p>
+</div>
+<div class="section" id="pattern-matching-with-lists">
+<h2><span class="section-number">3.1.4. </span>Pattern Matching with Lists<a class="headerlink" href="#pattern-matching-with-lists" title="Permalink to this headline">¶</a></h2>
+<p>We saw above how to access lists using pattern matching. Let’s look more
+carefully at this feature.</p>
+<p><strong>Syntax.</strong></p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">e</span> <span class="k">with</span>
+<span class="o">|</span> <span class="n">p1</span> <span class="o">-&gt;</span> <span class="n">e1</span>
+<span class="o">|</span> <span class="n">p2</span> <span class="o">-&gt;</span> <span class="n">e2</span>
+<span class="o">|</span> <span class="o">...</span>
+<span class="o">|</span> <span class="n">pn</span> <span class="o">-&gt;</span> <span class="n">en</span>
+</pre></div>
+</div>
+<p>Each of the clauses <code class="docutils literal notranslate"><span class="pre">pi</span> <span class="pre">-&gt;</span> <span class="pre">ei</span></code> is called a <em>branch</em> or a <em>case</em> of the pattern
+match. The first vertical bar in the entire pattern match is optional.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">p</span></code>’s here are a new syntactic form called a <em>pattern</em>. For now, a pattern
+may be:</p>
+<ul class="simple">
+<li><p>a variable name, e.g. <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p>the underscore character <code class="docutils literal notranslate"><span class="pre">_</span></code>, which is called the <em>wildcard</em></p></li>
+<li><p>the empty list <code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p1</span> <span class="pre">::</span> <span class="pre">p2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[p1;</span> <span class="pre">...;</span> <span class="pre">pn]</span></code></p></li>
+</ul>
+<p>No variable name may appear more than once in a pattern. For example, the
+pattern <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">::</span> <span class="pre">x</span></code> is illegal. The wildcard may occur any number of times.</p>
+<p>As we learn more of data structures available in OCaml, we’ll expand
+the possibilities for what a pattern may be.</p>
+<p><strong>Dynamic semantics.</strong></p>
+<p>Pattern matching involves two inter-related tasks: determining whether a pattern
+matches a value, and determining what parts of the value should be associated
+with which variable names in the pattern. The former task is intuitively about
+determining whether a pattern and a value have the same <em>shape</em>. The latter task
+is about determining the <em>variable bindings</em> introduced by the pattern. For
+example, consider the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="mi">1</span> <span class="o">::</span> <span class="bp">[]</span> <span class="k">with</span>
+<span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+<span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : bool = true
+</pre></div>
+</div>
+</div>
+</div>
+<p>When evaluating the right-hand side of the second branch, <code class="docutils literal notranslate"><span class="pre">h</span></code> is bound to <code class="docutils literal notranslate"><span class="pre">1</span></code>
+and <code class="docutils literal notranslate"><span class="pre">t</span></code> is bound to <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Let’s write <code class="docutils literal notranslate"><span class="pre">h-&gt;1</span></code> to mean the variable binding saying
+that <code class="docutils literal notranslate"><span class="pre">h</span></code> has value <code class="docutils literal notranslate"><span class="pre">1</span></code>; this is not a piece of OCaml syntax, but rather a
+notation we use to reason about the language. So the variable bindings produced
+by the second branch would be <code class="docutils literal notranslate"><span class="pre">h-&gt;1,</span> <span class="pre">t-&gt;[]</span></code>.</p>
+<p>Using that notation, here is a definition of when a pattern matches a value and
+the bindings that match produces:</p>
+<ul class="simple">
+<li><p>The pattern <code class="docutils literal notranslate"><span class="pre">x</span></code> matches any value <code class="docutils literal notranslate"><span class="pre">v</span></code> and produces the variable binding
+<code class="docutils literal notranslate"><span class="pre">x-&gt;v</span></code>.</p></li>
+<li><p>The pattern <code class="docutils literal notranslate"><span class="pre">_</span></code> matches any value and produces no bindings.</p></li>
+<li><p>The pattern <code class="docutils literal notranslate"><span class="pre">[]</span></code> matches the value <code class="docutils literal notranslate"><span class="pre">[]</span></code> and produces no bindings.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">p1</span></code> matches <code class="docutils literal notranslate"><span class="pre">v1</span></code> and produces a set <span class="math notranslate nohighlight">\(b_1\)</span> of bindings, and if <code class="docutils literal notranslate"><span class="pre">p2</span></code> matches
+<code class="docutils literal notranslate"><span class="pre">v2</span></code> and produces a set <span class="math notranslate nohighlight">\(b_2\)</span> of bindings, then <code class="docutils literal notranslate"><span class="pre">p1</span> <span class="pre">::</span> <span class="pre">p2</span></code> matches <code class="docutils literal notranslate"><span class="pre">v1</span> <span class="pre">::</span> <span class="pre">v2</span></code>
+and produces the set <span class="math notranslate nohighlight">\(b_1 \cup b_2\)</span> of bindings. Note that <code class="docutils literal notranslate"><span class="pre">v2</span></code> must be a list
+(since it’s on the right-hand side of <code class="docutils literal notranslate"><span class="pre">::</span></code>) and could have any length: 0
+elements, 1 element, or many elements. Note that the union <span class="math notranslate nohighlight">\(b_1 \cup b_2\)</span> of
+bindings will never have a problem where the same variable is bound separately
+in both <span class="math notranslate nohighlight">\(b_1\)</span> and <span class="math notranslate nohighlight">\(b_2\)</span> because of the syntactic restriction that no variable
+name may appear more than once in a pattern.</p></li>
+<li><p>If for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code>, it holds that <code class="docutils literal notranslate"><span class="pre">pi</span></code> matches <code class="docutils literal notranslate"><span class="pre">vi</span></code> and produces the set
+<span class="math notranslate nohighlight">\(b_i\)</span> of bindings, then <code class="docutils literal notranslate"><span class="pre">[p1;</span> <span class="pre">...;</span> <span class="pre">pn]</span></code> matches <code class="docutils literal notranslate"><span class="pre">[v1;</span> <span class="pre">...;</span> <span class="pre">vn]</span></code> and produces
+the set <span class="math notranslate nohighlight">\(\bigcup_i b_i\)</span> of bindings. Note that this pattern specifies the
+exact length the list must be.</p></li>
+</ul>
+<p>Now we can say how to evaluate <code class="docutils literal notranslate"><span class="pre">match</span> <span class="pre">e</span> <span class="pre">with</span> <span class="pre">p1</span> <span class="pre">-&gt;</span> <span class="pre">e1</span> <span class="pre">|</span> <span class="pre">...</span> <span class="pre">|</span> <span class="pre">pn</span> <span class="pre">-&gt;</span> <span class="pre">en</span></code>:</p>
+<ul class="simple">
+<li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">e</span></code> to a value <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
+<li><p>Match <code class="docutils literal notranslate"><span class="pre">v</span></code> against <code class="docutils literal notranslate"><span class="pre">p1</span></code>, then against <code class="docutils literal notranslate"><span class="pre">p2</span></code>, and so on, in the order they appear
+in the match expression.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">v</span></code> does not match against any of the patterns, then evaluation of the
+match expression raises a <code class="docutils literal notranslate"><span class="pre">Match_failure</span></code> exception. We haven’t yet discussed
+exceptions in OCaml, but you’re surely familiar with them from other
+languages. We’ll come back to exceptions near the end of this chapter, after
+we’ve covered some of the other built-in data structures in OCaml.</p></li>
+<li><p>Otherwise, stop trying to match at the first time a match succeeds against a
+pattern. Let <code class="docutils literal notranslate"><span class="pre">pi</span></code> be that pattern and let <span class="math notranslate nohighlight">\(b\)</span> be the variable bindings
+produced by matching <code class="docutils literal notranslate"><span class="pre">v</span></code> against <code class="docutils literal notranslate"><span class="pre">pi</span></code>.</p></li>
+<li><p>Substitute those bindings inside <code class="docutils literal notranslate"><span class="pre">ei</span></code>, producing a new expression <code class="docutils literal notranslate"><span class="pre">e'</span></code>.</p></li>
+<li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">e'</span></code> to a value <code class="docutils literal notranslate"><span class="pre">v'</span></code>.</p></li>
+<li><p>The result of the entire match expression is <code class="docutils literal notranslate"><span class="pre">v'</span></code>.</p></li>
+</ul>
+<p>For example, here’s how this match expression would be evaluated:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="mi">1</span> <span class="o">::</span> <span class="bp">[]</span> <span class="k">with</span>
+<span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+<span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="o">=</span> <span class="bp">[]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : bool = true
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">::</span> <span class="pre">[]</span></code> is already a value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code> does not match <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">::</span> <span class="pre">[]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">::</span> <span class="pre">t</span></code> does match <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">::</span> <span class="pre">[]</span></code> and produces variable bindings
+{<code class="docutils literal notranslate"><span class="pre">h-&gt;1</span></code>,<code class="docutils literal notranslate"><span class="pre">t-&gt;[]</span></code>}, because:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code> matches <code class="docutils literal notranslate"><span class="pre">1</span></code> and produces the variable binding <code class="docutils literal notranslate"><span class="pre">h-&gt;1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">t</span></code> matches <code class="docutils literal notranslate"><span class="pre">[]</span></code> and produces the variable binding <code class="docutils literal notranslate"><span class="pre">t-&gt;[]</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Substituting {<code class="docutils literal notranslate"><span class="pre">h-&gt;1</span></code>,<code class="docutils literal notranslate"><span class="pre">t-&gt;[]</span></code>} inside <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">&amp;&amp;</span> <span class="pre">t</span> <span class="pre">=</span> <span class="pre">[]</span></code>
+produces a new expression <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">&amp;&amp;</span> <span class="pre">[]</span> <span class="pre">=</span> <span class="pre">[]</span></code>.</p></li>
+<li><p>Evaluating <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">&amp;&amp;</span> <span class="pre">[]</span> <span class="pre">=</span> <span class="pre">[]</span></code> yields the value <code class="docutils literal notranslate"><span class="pre">true</span></code>. We omit the
+justification for that fact here, but it follows from other evaluation rules
+for built-in operators and function application.</p></li>
+<li><p>So the result of the entire match expression is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+</ul>
+<p><strong>Static semantics.</strong></p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">:</span> <span class="pre">ta</span></code> and for all <code class="docutils literal notranslate"><span class="pre">i</span></code>, it holds that <code class="docutils literal notranslate"><span class="pre">pi</span> <span class="pre">:</span> <span class="pre">ta</span></code> and <code class="docutils literal notranslate"><span class="pre">ei</span> <span class="pre">:</span> <span class="pre">tb</span></code>,
+then <code class="docutils literal notranslate"><span class="pre">(match</span> <span class="pre">e</span> <span class="pre">with</span> <span class="pre">p1</span> <span class="pre">-&gt;</span> <span class="pre">e1</span> <span class="pre">|</span> <span class="pre">...</span> <span class="pre">|</span> <span class="pre">pn</span> <span class="pre">-&gt;</span> <span class="pre">en)</span> <span class="pre">:</span> <span class="pre">tb</span></code>.</p></li>
+</ul>
+<p>That rule relies on being able to judge whether a pattern has a particular type.
+As usual, type inference comes into play here. The OCaml compiler infers the
+types of any pattern variables as well as all occurrences of the wildcard
+pattern. As for the list patterns, they have the same type-checking rules as
+list expressions.</p>
+<p><strong>Additional Static Checking.</strong></p>
+<p>In addition to that type-checking rule, there are two other checks
+the compiler does for each match expression.</p>
+<p>First, <strong>exhaustiveness:</strong> the compiler checks to make sure that there are
+enough patterns to guarantee that at least one of them matches the expression
+<code class="docutils literal notranslate"><span class="pre">e</span></code>, no matter what the value of that expression is at run time. This ensures
+that the programmer did not forget any branches. For example, the function below
+will cause the compiler to emit a warning:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">head</span> <span class="n">lst</span> <span class="o">=</span> <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span> <span class="n">h</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File &quot;[12]&quot;, line 1, characters 15-41:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 | let head lst = match lst with h :: _ -&gt; h
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning 8: this pattern-matching is not exhaustive.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Here is an example of a case that is not matched:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val head : &#39;a list -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>By presenting that warning to the programmer, the compiler is helping the
+programmer to defend against the possibility of <code class="docutils literal notranslate"><span class="pre">Match_failure</span></code> exceptions at
+runtime.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sorry about how the output from the cell above gets split into many lines in the
+HTML. That is currently an <a class="reference external" href="https://github.com/executablebooks/jupyter-book/issues/973">open issue with JupyterBook</a>, the framework
+used to build this book.</p>
+</div>
+<p>Second, <strong>unused branches:</strong> the compiler checks to see whether any of the
+branches could never be matched against because one of the previous branches is
+guaranteed to succeed. For example, the function below will cause the compiler
+to emit a warning:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>
+  <span class="o">|</span> <span class="o">[</span> <span class="n">h</span> <span class="o">]</span> <span class="o">-&gt;</span> <span class="n">h</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File &quot;[13]&quot;, line 4, characters 4-9:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 |   | [ h ] -&gt; h
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        ^^^^^
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning 11: this match case is unused.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second branch is unused because the first branch will match anything the
+second branch matches.</p>
+<p>Unused match cases are usually a sign that the programmer wrote something other
+than what they intended. So by presenting that warning, the compiler is helping
+the programmer to detect latent bugs in their code.</p>
+<p>Here’s an example of one of the most common bugs that causes an unused match
+case warning. Understanding it is also a good way to check your understanding of
+the dynamic semantics of match expressions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">length_is</span> <span class="n">lst</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+  <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File &quot;[14]&quot;, line 4, characters 4-5:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 |   | _ -&gt; false
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        ^
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning 11: this match case is unused.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length_is : &#39;a list -&gt; &#39;b -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The programmer was thinking that if the length of <code class="docutils literal notranslate"><span class="pre">lst</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">n</span></code>, then
+this function will return <code class="docutils literal notranslate"><span class="pre">true</span></code>, and otherwise will return <code class="docutils literal notranslate"><span class="pre">false</span></code>. But in fact
+this function <em>always</em> returns <code class="docutils literal notranslate"><span class="pre">true</span></code>. Why? Because the pattern variable <code class="docutils literal notranslate"><span class="pre">n</span></code> is
+distinct from the function argument <code class="docutils literal notranslate"><span class="pre">n</span></code>. Suppose that the length of <code class="docutils literal notranslate"><span class="pre">lst</span></code> is 5.
+Then the pattern match becomes: <code class="docutils literal notranslate"><span class="pre">match</span> <span class="pre">5</span> <span class="pre">with</span> <span class="pre">n</span> <span class="pre">-&gt;</span> <span class="pre">true</span> <span class="pre">|</span> <span class="pre">_</span> <span class="pre">-&gt;</span> <span class="pre">false</span></code>. Does <code class="docutils literal notranslate"><span class="pre">n</span></code>
+match 5? Yes, according to the rules above: a variable pattern matches any value
+and here produces the binding <code class="docutils literal notranslate"><span class="pre">n-&gt;5</span></code>. Then evaluation applies that binding to
+<code class="docutils literal notranslate"><span class="pre">true</span></code>, substituting all occurrences of <code class="docutils literal notranslate"><span class="pre">n</span></code> inside of <code class="docutils literal notranslate"><span class="pre">true</span></code> with 5. Well, there
+are no such occurrences. So we’re done, and the result of evaluation is just
+<code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>What the programmer really meant to write was:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">length_is</span> <span class="n">lst</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">m</span> <span class="o">-&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length_is : &#39;a list -&gt; int -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>or better yet:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">length_is</span> <span class="n">lst</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="nn">List</span><span class="p">.</span><span class="n">length</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length_is : &#39;a list -&gt; int -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="deep-pattern-matching">
+<h2><span class="section-number">3.1.5. </span>Deep Pattern Matching<a class="headerlink" href="#deep-pattern-matching" title="Permalink to this headline">¶</a></h2>
+<p>Patterns can be nested.  Doing so can allow your code to look deeply into the
+structure of a list.  For example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_</span> <span class="pre">::</span> <span class="pre">[]</span></code> matches all lists with exactly one element</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_</span> <span class="pre">::</span> <span class="pre">_</span></code> matches all lists with at least one element</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_</span> <span class="pre">::</span> <span class="pre">_</span> <span class="pre">::</span> <span class="pre">[]</span></code> matches all lists with exactly two elements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_</span> <span class="pre">::</span> <span class="pre">_</span> <span class="pre">::</span> <span class="pre">_</span> <span class="pre">::</span> <span class="pre">_</span></code> matches all lists with at least three elements</p></li>
+</ul>
+</div>
+<div class="section" id="immediate-matches">
+<h2><span class="section-number">3.1.6. </span>Immediate Matches<a class="headerlink" href="#immediate-matches" title="Permalink to this headline">¶</a></h2>
+<p>When you have a function that immediately pattern-matches against
+its final argument, there’s a nice piece of syntactic sugar
+you can use to avoid writing extra code.  Here’s an example:
+instead of</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>you can write</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The word <code class="docutils literal notranslate"><span class="pre">function</span></code> is a keyword. Notice that we’re able to leave out the line
+containing <code class="docutils literal notranslate"><span class="pre">match</span></code> as well as the name of the argument, which was never used
+anywhere else but that line. In such cases, though, it’s especially important in
+the specification comment for the function to document what that argument is
+supposed to be, since the code no longer gives it a descriptive name.</p>
+</div>
+<div class="section" id="ocamldoc-and-list-syntax">
+<h2><span class="section-number">3.1.7. </span>OCamldoc and List Syntax<a class="headerlink" href="#ocamldoc-and-list-syntax" title="Permalink to this headline">¶</a></h2>
+<p>OCamldoc is a documentation generator similar to Javadoc. It extracts comments
+from source code and produces HTML (as well as other output formats). The
+<a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html">standard library web documentation</a> for the List module is generated
+by OCamldoc from the <a class="reference external" href="https://github.com/ocaml/ocaml/blob/trunk/stdlib/list.mli">standard library source code</a> for that module,
+for example.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>There is a syntactic convention with square brackets in OCamldoc that can be
+confusing with respect to lists.</p>
+<p>In an OCamldoc comment, source code is surrounded by square brackets. That code
+will be rendered in typewriter face and syntax-highlighted in the output HTML.
+The square brackets in this case do not indicate a list.</p>
+</div>
+<p>For example, here is the comment for <code class="docutils literal notranslate"><span class="pre">List.hd</span></code> in the standard library source
+code:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Return the first element of the given list. Raise</span>
+<span class="c">   [Failure &quot;hd&quot;] if the list is empty. *)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">[Failure</span> <span class="pre">&quot;hd&quot;]</span></code> does not mean a list containing the exception
+<code class="docutils literal notranslate"><span class="pre">Failure</span> <span class="pre">&quot;hd&quot;</span></code>. Rather it means to typeset the expression <code class="docutils literal notranslate"><span class="pre">Failure</span> <span class="pre">&quot;hd&quot;</span></code> as
+source code, as you can see <a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html">here</a>.</p>
+<p>This can get especially confusing when you want to talk about lists as part of
+the documentation. For example, here is a way we could rewrite that comment:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [hd lst] returns the first element of [lst].</span>
+<span class="c">    Raises [Failure &quot;hd&quot;] if [lst = []]. *)</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">[lst</span> <span class="pre">=</span> <span class="pre">[]]</span></code>, the outer square brackets indicate source code as part of a
+comment, whereas the inner square brackets indicate the empty list.</p>
+</div>
+<div class="section" id="list-comprehensions">
+<h2><span class="section-number">3.1.8. </span>List Comprehensions<a class="headerlink" href="#list-comprehensions" title="Permalink to this headline">¶</a></h2>
+<p>Some languages, including Python and Haskell, have a syntax called
+<em>comprehension</em> that allows lists to be written somewhat like set comprehensions
+from mathematics. The earliest example of comprehensions seems to be the
+functional language NPL, which was designed in 1977.</p>
+<p>OCaml doesn’t have built-in syntactic support for comprehensions. Though some
+extensions were developed, none seem to be supported any longer. The primary
+tasks accomplished by comprehensions (filtering out some elements, and
+transforming others) are actually well-supported already by <em>higher-order
+programming</em>, which we’ll study in a later chapter, and the pipeline operator,
+which we’ve already learned. So an additional syntax for comprehensions was
+never really needed.</p>
+</div>
+<div class="section" id="tail-recursion">
+<h2><span class="section-number">3.1.9. </span>Tail Recursion<a class="headerlink" href="#tail-recursion" title="Permalink to this headline">¶</a></h2>
+<p>A function is <em>tail recursive</em> if it calls itself recursively but does not
+perform any computation after the recursive call returns, and immediately
+returns to its caller the value of its recursive call. Consider these two
+implementations, <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">sum_tr</span></code> of summing a list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="kt">int</span> <span class="kt">list</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">l</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="o">(</span><span class="n">sum</span> <span class="n">xs</span><span class="o">)</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">sum_plus_acc</span> <span class="o">(</span><span class="n">acc</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="kt">int</span> <span class="kt">list</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">l</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="n">sum_plus_acc</span> <span class="o">(</span><span class="n">acc</span> <span class="o">+</span> <span class="n">x</span><span class="o">)</span> <span class="n">xs</span>
+
+<span class="k">let</span> <span class="n">sum_tr</span> <span class="o">:</span> <span class="kt">int</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span>
+  <span class="n">sum_plus_acc</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_plus_acc : int -&gt; int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_tr : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Observe the following difference between the <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">sum_tr</span></code> functions above:
+In the <code class="docutils literal notranslate"><span class="pre">sum</span></code> function, which is not tail recursive, after the recursive call
+returned its value, we add <code class="docutils literal notranslate"><span class="pre">x</span></code> to it. In the tail recursive <code class="docutils literal notranslate"><span class="pre">sum_tr</span></code>, or rather
+in <code class="docutils literal notranslate"><span class="pre">sum_plus_acc</span></code>, after the recursive call returns, we immediately return the
+value without further computation.</p>
+<p>Why do we care about tail recursion? Actually, sometimes functional programmers
+fixate a bit too much upon it. If all you care about is writing the first draft
+of a function, you probably don’t need to worry about it.</p>
+<p>But if you’re going to write functions on really long lists, tail recursion
+becomes important for performance. Recall that there is a <em>call stack</em>, which
+is a stack (the data structure with push and pop operations) with one element
+for each function call that has been started but has not yet completed. Each
+element stores things like the value of local variables and what part of the
+function has not been evaluated yet. When the evaluation of one function body
+calls another function, a new element is pushed on the call stack and it is
+popped off when the called function completes.</p>
+<p>When a function makes a recursive call to itself and there is nothing more for
+the caller to do after the callee returns (except return the callee’s result),
+this situation is called a tail call. Functional languages like OCaml (and even
+imperative languages like C++) typically include an hugely useful optimization:
+when a call is a tail call, the caller’s stack-frame is popped before the
+call—the callee’s stack-frame just replaces the caller’s. This makes
+sense: the caller was just going to return the callee’s result anyway. With this
+optimization, recursion can sometimes be as efficient as a while loop in
+imperative languages (such loops don’t make the call-stack bigger.) The
+“sometimes” is exactly when calls are tail calls—something both you and
+the compiler can (often) figure out. With tail-call optimization, the space
+performance of a recursive algorithm can be reduced from <span class="math notranslate nohighlight">\(O(n)\)</span> to <span class="math notranslate nohighlight">\(O(1)\)</span>,
+that is, from one stack frame per call to a single stack frame for all calls.</p>
+<p>So when you have a choice between using a tail-recursive vs. non-tail-recursive
+function, you are likely better off using the tail-recursive function on really
+long lists to achieve space efficiency. For that reason, the List module
+documents which functions are tail recursive and which are not.</p>
+<p>But that doesn’t mean that a tail-recursive implementation is strictly better.
+For example, the tail-recursive function might be harder to read. (Consider
+<code class="docutils literal notranslate"><span class="pre">sum_plus_acc</span></code>.) Also, there are cases where implementing a tail-recursive
+function entails having to do a pre- or post-processing pass to reverse the
+list. On small to medium sized lists, the overhead of reversing the list (both
+in time and in allocating memory for the reversed list) can make the
+tail-recursive version less time efficient. What constitutes “small” vs. “big”
+here? That’s hard to say, but maybe 10,000 is a good estimate, according to the
+<a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html">standard library documentation of the <code class="docutils literal notranslate"><span class="pre">List</span></code> module</a>.</p>
+<p>Here is a useful tail-recursive function to produce a long list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [from i j l] is the list containing the integers from [i] to [j],</span>
+<span class="c">    inclusive, followed by the list [l].</span>
+<span class="c">    Example:  [from 1 3 [0] = [1;2;3;0]] *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">from</span> <span class="n">i</span> <span class="n">j</span> <span class="n">l</span> <span class="o">=</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span> <span class="k">then</span> <span class="n">l</span> <span class="k">else</span> <span class="n">from</span> <span class="n">i</span> <span class="o">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">j</span> <span class="o">::</span> <span class="n">l</span><span class="o">)</span>
+
+<span class="c">(** [i -- j] is the list containing the integers from [i] to [j], inclusive. *)</span>
+<span class="k">let</span> <span class="o">(</span> <span class="o">--</span> <span class="o">)</span> <span class="n">i</span> <span class="n">j</span> <span class="o">=</span> <span class="n">from</span> <span class="n">i</span> <span class="n">j</span> <span class="bp">[]</span>
+
+<span class="k">let</span> <span class="n">longlist</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">--</span> <span class="mi">1_000_000</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val from : int -&gt; int -&gt; int list -&gt; int list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( -- ) : int -&gt; int -&gt; int list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val longlist : int list =
+  [0; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 13; 14; 15; 16; 17; 18; 19; 20;
+   21; 22; 23; 24; 25; 26; 27; 28; 29; 30; 31; 32; 33; 34; 35; 36; 37; 38;
+   39; 40; 41; 42; 43; 44; 45; 46; 47; 48; 49; 50; 51; 52; 53; 54; 55; 56;
+   57; 58; 59; 60; 61; 62; 63; 64; 65; 66; 67; 68; 69; 70; 71; 72; 73; 74;
+   75; 76; 77; 78; 79; 80; 81; 82; 83; 84; 85; 86; 87; 88; 89; 90; 91; 92;
+   93; 94; 95; 96; 97; 98; 99; 100; 101; 102; 103; 104; 105; 106; 107; 108;
+   109; 110; 111; 112; 113; 114; 115; 116; 117; 118; 119; 120; 121; 122; 123;
+   124; 125; 126; 127; 128; 129; 130; 131; 132; 133; 134; 135; 136; 137; 138;
+   139; 140; 141; 142; 143; 144; 145; 146; 147; 148; 149; 150; 151; 152; 153;
+   154; 155; 156; 157; 158; 159; 160; 161; 162; 163; 164; 165; 166; 167; 168;
+   169; 170; 171; 172; 173; 174; 175; 176; 177; 178; 179; 180; 181; 182; 183;
+   184; 185; 186; 187; 188; 189; 190; 191; 192; 193; 194; 195; 196; 197; 198;
+   199; 200; 201; 202; 203; 204; 205; 206; 207; 208; 209; 210; 211; 212; 213;
+   214; 215; 216; 217; 218; 219; 220; 221; 222; 223; 224; 225; 226; 227; 228;
+   229; 230; 231; 232; 233; 234; 235; 236; 237; 238; 239; 240; 241; 242; 243;
+   244; 245; 246; 247; 248; 249; 250; 251; 252; 253; 254; 255; 256; 257; 258;
+   259; 260; 261; 262; 263; 264; 265; 266; 267; 268; 269; 270; 271; 272; 273;
+   274; 275; 276; 277; 278; 279; 280; 281; 282; 283; 284; 285; 286; 287; 288;
+   289; 290; 291; 292; 293; 294; 295; 296; 297; 298; ...]
+</pre></div>
+</div>
+</div>
+</div>
+<p>It would be worthwhile to study the definition of <code class="docutils literal notranslate"><span class="pre">--</span></code> to convince yourself
+that you understand (i) how it works and (ii) why it is tail recursive.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page"><span class="section-number">3. </span>Data</a>
+    <a class='right-next' id="next-link" href="variants.html" title="next page"><span class="section-number">3.2. </span>Variants</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

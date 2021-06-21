@@ -1,0 +1,866 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.3. Unit Testing with OUnit &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.4. Records and Tuples" href="records_tuples.html" />
+    <link rel="prev" title="3.2. Variants" href="variants.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.6. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.7. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.8. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   3. Data
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/data/ounit.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/data/ounit.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/data/ounit.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-example-of-ounit">
+   3.3.1. An Example of OUnit
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explanation-of-the-ounit-example">
+   3.3.2. Explanation of the OUnit Example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#improving-ounit-output">
+   3.3.3. Improving OUnit Output
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stack-traces">
+     3.3.3.1. Stack Traces
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output-values">
+     3.3.3.2. Output Values
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-for-exceptions">
+   3.3.4. Testing for Exceptions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-driven-development">
+   3.3.5. Test-Driven Development
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="unit-testing-with-ounit">
+<h1><span class="section-number">3.3. </span>Unit Testing with OUnit<a class="headerlink" href="#unit-testing-with-ounit" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section is a bit of a detour from our study of data types, but it’s a good
+place to take the detour: we now know just enough to understand how unit testing
+can be done in OCaml, and there’s no good reason to wait any longer to learn
+about it.</p>
+</div>
+<p>Using the toplevel to test functions will only work for very small programs.
+Larger programs need <em>test suites</em> that contain many <em>unit tests</em> and can be
+re-run every time we update our code base. A unit test is a test of one small
+piece of functionality in a program, such as an individual function.</p>
+<p>We’ve now learned enough features of OCaml to see how to do unit testing with a
+library called OUnit. It is a unit testing framework similar to JUnit in Java,
+HUnit in Haskell, etc. The basic workflow for using OUnit is as follows:</p>
+<ul class="simple">
+<li><p>Write a function in a file <code class="docutils literal notranslate"><span class="pre">f.ml</span></code>. There could be many other functions in that
+file too.</p></li>
+<li><p>Write unit tests for that function in a separate file <code class="docutils literal notranslate"><span class="pre">f_test.ml</span></code>. That exact
+name, with an underscore and “test” is not actually essential, but is a
+convention we’ll often follow.</p></li>
+<li><p>Build and run <code class="docutils literal notranslate"><span class="pre">f_test</span></code> to execute the unit tests.</p></li>
+</ul>
+<p>The <a class="reference external" href="https://gildor478.github.io/ounit/ounit2/index.html">OUnit documentation</a> is available on Github.</p>
+<div class="section" id="an-example-of-ounit">
+<h2><span class="section-number">3.3.1. </span>An Example of OUnit<a class="headerlink" href="#an-example-of-ounit" title="Permalink to this headline">¶</a></h2>
+<p>The following example shows you how to create an OUnit test suite. There are
+some things in the example that might at first seem mysterious; they are
+discussed in the next section.</p>
+<p>Create a file named <code class="docutils literal notranslate"><span class="pre">sum.ml</span></code>, and put the following code into it:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">xs</span>
+</pre></div>
+</div>
+<p>Now create a second file named <code class="docutils literal notranslate"><span class="pre">sum_test.ml</span></code>, and put this code into it:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">OUnit2</span>
+<span class="k">open</span> <span class="nc">Sum</span>
+
+<span class="k">let</span> <span class="n">tests</span> <span class="o">=</span> <span class="s2">&quot;test suite for sum&quot;</span> <span class="o">&gt;:::</span> <span class="o">[</span>
+  <span class="s2">&quot;empty&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">0</span> <span class="o">(</span><span class="n">sum</span> <span class="bp">[]</span><span class="o">));</span>
+  <span class="s2">&quot;singleton&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">1</span> <span class="o">(</span><span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
+  <span class="s2">&quot;two_elements&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">3</span> <span class="o">(</span><span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">]));</span>
+<span class="o">]</span>
+
+<span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">run_test_tt_main</span> <span class="n">tests</span>
+</pre></div>
+</div>
+<p>Depending on your editor and its configuration, you probably now see some
+“Unbound module” errors about OUnit2 and Sum. Your code is actually correct, but
+your editor doesn’t know how to understand it yet. To fix that, create a file in
+the same directory and name it <code class="docutils literal notranslate"><span class="pre">.merlin</span></code>. (Note the leading dot in that
+filename.) In that file put the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="n">_build</span>
+<span class="n">PKG</span> <span class="n">ounit2</span>
+</pre></div>
+</div>
+<p>The first line tells Merlin to look for compiled code from other source files
+inside the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory, which is where OCamlbuild places compiled code.
+The second line tells Merlin to look for the OUnit2 package.</p>
+<p>After you save the <code class="docutils literal notranslate"><span class="pre">.merlin</span></code> file, the error about <code class="docutils literal notranslate"><span class="pre">OUnit2</span></code> should be gone,
+though you might need to cause your editor to re-check the <code class="docutils literal notranslate"><span class="pre">sum_test.ml</span></code> file to
+get rid of it. You can close and re-open the window, or make a trivial change in
+the file (e.g., add then delete a space) to make that tappen.</p>
+<p>But the error about <code class="docutils literal notranslate"><span class="pre">Sum</span></code> will still be there, because you haven’t yet compiled
+that file. To do that, run this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild -pkgs ounit2 sum_test.byte
+</pre></div>
+</div>
+<p>Now the error about <code class="docutils literal notranslate"><span class="pre">Sum</span></code> should be gone, though again you might need to
+convince your editor to re-check the file.</p>
+<p>Finally, you can run the test suite:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./sum_test.byte
+</pre></div>
+</div>
+<p>You will get a response something like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>...
+Ran: 3 tests in: 0.12 seconds.
+OK
+</pre></div>
+</div>
+<p>Now suppose we modify <code class="docutils literal notranslate"><span class="pre">sum.ml</span></code> to introduce a bug by changing the code
+in it to the following:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="c">(* bug *)</span>
+  <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">xs</span>
+</pre></div>
+</div>
+<p>If rebuild and re-execute <code class="docutils literal notranslate"><span class="pre">sum_test.byte</span></code>, all test cases now fail. The output
+tells us the names of the failing cases. Here’s the beginning of the output, in
+which we’ve replaced some strings that will be dependent on your own local
+computer with <code class="docutils literal notranslate"><span class="pre">...</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FFF</span>
+<span class="o">==============================================================================</span>
+<span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span><span class="o">.</span>
+
+<span class="n">File</span> <span class="s2">&quot;.../_build/oUnit-test suite for sum-...#01.log&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">log</span><span class="p">)</span><span class="o">.</span>
+
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">unknown</span> <span class="n">location</span>
+
+<span class="ow">not</span> <span class="n">equal</span>
+<span class="o">------------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>The first line of that output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FFF</span>
+</pre></div>
+</div>
+<p>tells us that OUnit ran three test cases and all three <u>f</u>ailed.</p>
+<p>The next interesting line</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>tells us that in the test suite named <code class="docutils literal notranslate"><span class="pre">test</span> <span class="pre">suite</span> <span class="pre">for</span> <span class="pre">sum</span></code> the test case at
+index 2 named <code class="docutils literal notranslate"><span class="pre">two_elements</span></code> failed. The rest of the output for that test case
+is not particularly interesting; let’s ignore it for now.</p>
+</div>
+<div class="section" id="explanation-of-the-ounit-example">
+<h2><span class="section-number">3.3.2. </span>Explanation of the OUnit Example<a class="headerlink" href="#explanation-of-the-ounit-example" title="Permalink to this headline">¶</a></h2>
+<p>Let’s study more carefully what we just did in the previous section. In the test
+file, <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">OUnit2</span></code> brings into scope the many definitions in OUnit2, which is
+version 2 of the OUnit framework. And <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">Sum</span></code> brings into scope the
+definitions from <code class="docutils literal notranslate"><span class="pre">sum.ml</span></code>. We’ll learn more about scope and the <code class="docutils literal notranslate"><span class="pre">open</span></code> keyword
+later in a later chapter.</p>
+<p>Then we created a list of test cases:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>
+  <span class="s2">&quot;empty&quot;</span>  <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">0</span> <span class="o">(</span><span class="n">sum</span> <span class="bp">[]</span><span class="o">));</span>
+  <span class="s2">&quot;one&quot;</span>    <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">1</span> <span class="o">(</span><span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
+  <span class="s2">&quot;onetwo&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">3</span> <span class="o">(</span><span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">]));</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>Each line of code is a separate test case.  A test case has a string giving it a
+descriptive name, and a function to run as the test case.  In between the name
+and the function we write <code class="docutils literal notranslate"><span class="pre">&gt;::</span></code>, which is a custom operator defined by the OUnit
+framework.  Let’s look at the first function from above:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fun</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">0</span> <span class="p">(</span><span class="nb">sum</span> <span class="p">[])</span>
+</pre></div>
+</div>
+<p>Every test case function receives as input a parameter that OUnit calls a <em>test context</em>.
+Here (and in many of the test cases we write) we don’t actually need to worry about
+the context, so we use the underscore to indicate that the function ignores its input.
+The function then calls <code class="docutils literal notranslate"><span class="pre">assert_equal</span></code>, which is a function provided by OUnit that
+checks to see whether its two arguments are equal.  If so the test case succeeds.
+If not, the test case fails.</p>
+<p>Then we created a test suite:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">tests</span> <span class="o">=</span> <span class="s2">&quot;test suite for sum&quot;</span> <span class="o">&gt;:::</span> <span class="o">[</span>
+  <span class="s2">&quot;empty&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">0</span> <span class="o">(</span><span class="n">sum</span> <span class="bp">[]</span><span class="o">));</span>
+  <span class="s2">&quot;singleton&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">1</span> <span class="o">(</span><span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
+  <span class="s2">&quot;two_elements&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">3</span> <span class="o">(</span><span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">]));</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&gt;:::</span></code> operator is another custom OUnit operator. It goes between the name
+of the test suite and the list of test cases in that suite.</p>
+<p>Then we ran the test suite:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">run_test_tt_main</span> <span class="n">tests</span>
+</pre></div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">run_test_tt_main</span></code> is provided by OUnit. It runs a test suite and
+prints the results of which test cases passed vs. which failed to standard
+output. The use of <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">_</span> <span class="pre">=</span> </code> here indicates that we don’t care what value the
+function returns; it just gets discarded.</p>
+<p>Finally, when we compiled the test file, we linked in the OUnit2 package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ocamlbuild -pkgs ounit2 sum_test.byte
+</pre></div>
+</div>
+<p>If you get tired of typing the <code class="docutils literal notranslate"><span class="pre">pkgs</span> <span class="pre">ounit2</span></code> part of that, you can instead
+create a file named <code class="docutils literal notranslate"><span class="pre">_tags</span></code> (note the underscore) in the same directory and put
+the following into it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">true</span><span class="p">:</span> <span class="n">package</span><span class="p">(</span><span class="n">ounit2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now Ocamlbuild will automatically link in OUnit2 everytime you compile in this
+directory, without you having to give the <code class="docutils literal notranslate"><span class="pre">pkgs</span></code> flag. The tradeoff is that you
+now have to pass a different flag to Ocamlbuild:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ocamlbuild -use-ocamlfind sum_test.byte
+</pre></div>
+</div>
+<p>And you will continue having to pass that flag as long as the <code class="docutils literal notranslate"><span class="pre">_tags</span></code> file
+exists. Why is this any better? If there are many packages you want to link,
+with the tags file you end up having to pass only one option on the command
+line, instead of many.</p>
+</div>
+<div class="section" id="improving-ounit-output">
+<h2><span class="section-number">3.3.3. </span>Improving OUnit Output<a class="headerlink" href="#improving-ounit-output" title="Permalink to this headline">¶</a></h2>
+<p>In our example with the buggy implementation of <code class="docutils literal notranslate"><span class="pre">sum</span></code>, we got the following
+output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==============================================================================</span>
+<span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span><span class="o">.</span>
+
+<span class="n">File</span> <span class="s2">&quot;.../_build/oUnit-test suite for sum-...#01.log&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">log</span><span class="p">)</span><span class="o">.</span>
+
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">unknown</span> <span class="n">location</span>
+
+<span class="ow">not</span> <span class="n">equal</span>
+<span class="o">------------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>Let’s see how to improve that output to be a little more informative.</p>
+<div class="section" id="stack-traces">
+<h3><span class="section-number">3.3.3.1. </span>Stack Traces<a class="headerlink" href="#stack-traces" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Called</span> <span class="pre">from</span> <span class="pre">an</span> <span class="pre">unknown</span> <span class="pre">location</span></code> indicates OCaml was unable to provide a
+stack trace. That happened because, by default, stack traces are disabled. We
+can enable them by compiling the code with the debug tag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ocamlbuild -pkgs ounit2 -tag debug sum_test.byte
+$ ./sum_test.byte
+
+==============================================================================
+Error: test suite for sum:2:two_elements.
+
+File &quot;/Users/clarkson/tmp/sum/_build/oUnit-test suite for sum-...#01.log&quot;, line 9, characters 1-1:
+Error: test suite for sum:2:two_elements (in the log).
+
+Raised at file &quot;src/oUnitAssert.ml&quot;, line 45, characters 8-27
+Called from file &quot;src/oUnitRunner.ml&quot;, line 46, characters 13-26
+
+not equal
+------------------------------------------------------------------------------
+</pre></div>
+</div>
+<p>Now we see the stack trace that resulted from <code class="docutils literal notranslate"><span class="pre">assert_equal</span></code> raising an
+exception. You’ll probably agree that stack trace isn’t very informative though:
+what matters is which test case fails, not which files in the implementation of
+OUnit were involved in raising the exception. And we could already identify the
+failing test case from the first line of output. (It’s the test case named
+<code class="docutils literal notranslate"><span class="pre">two_elements</span></code>, which at position 2 in the test suite named
+<code class="docutils literal notranslate"><span class="pre">test</span> <span class="pre">suite</span> <span class="pre">for</span> <span class="pre">sum</span></code>.)</p>
+<p>So we don’t usually bother enabling stack traces for OUnit test suites.
+Nonetheless, it could occasionally be useful if your <em>own</em> code is raising
+exceptions that you want to track down.</p>
+</div>
+<div class="section" id="output-values">
+<h3><span class="section-number">3.3.3.2. </span>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">equal</span></code> in the OUnit output means that <code class="docutils literal notranslate"><span class="pre">assert_equal</span></code> discovered the two
+values passed to it in that test case were not equal. That’s not so informative:
+we’d like to know <em>why</em> they’re not equal. In particular, we’d like to know what
+the actual output produced by <code class="docutils literal notranslate"><span class="pre">sum</span></code> was for that test case. To find out, we need
+to pass an additional argument to <code class="docutils literal notranslate"><span class="pre">assert_equal</span></code>. That argument, whose label is
+<code class="docutils literal notranslate"><span class="pre">printer</span></code>, should be a function that can transform the outputs to strings. In
+this case, the outputs are integers, so <code class="docutils literal notranslate"><span class="pre">string_of_int</span></code> from the Stdlib module
+will suffice. We modify the test suite as follows:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">tests</span> <span class="o">=</span> <span class="s2">&quot;test suite for sum&quot;</span> <span class="o">&gt;:::</span> <span class="o">[</span>
+  <span class="s2">&quot;empty&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">0</span> <span class="o">(</span><span class="n">sum</span> <span class="bp">[]</span><span class="o">)</span> <span class="o">~</span><span class="n">printer</span><span class="o">:</span><span class="n">string_of_int</span><span class="o">);</span>
+  <span class="s2">&quot;singleton&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">1</span> <span class="o">(</span><span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">])</span> <span class="o">~</span><span class="n">printer</span><span class="o">:</span><span class="n">string_of_int</span><span class="o">);</span>
+  <span class="s2">&quot;two_elements&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">3</span> <span class="o">(</span><span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">])</span> <span class="o">~</span><span class="n">printer</span><span class="o">:</span><span class="n">string_of_int</span><span class="o">);</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>And now we get more informative output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==============================================================================</span>
+<span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span><span class="o">.</span>
+
+<span class="n">File</span> <span class="s2">&quot;/Users/clarkson/tmp/sum/_build/oUnit-test suite for sum-sauternes#01.log&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">log</span><span class="p">)</span><span class="o">.</span>
+
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">unknown</span> <span class="n">location</span>
+
+<span class="n">expected</span><span class="p">:</span> <span class="mi">3</span> <span class="n">but</span> <span class="n">got</span><span class="p">:</span> <span class="mi">4</span>
+<span class="o">------------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>That output means that the test named <code class="docutils literal notranslate"><span class="pre">two_elements</span></code> asserted the equality of
+<code class="docutils literal notranslate"><span class="pre">3</span></code> and <code class="docutils literal notranslate"><span class="pre">4</span></code>. The expected output was <code class="docutils literal notranslate"><span class="pre">3</span></code> because that was the first input to
+<code class="docutils literal notranslate"><span class="pre">assert_equal</span></code>, and that function’s specification says that in
+<code class="docutils literal notranslate"><span class="pre">assert_equal</span> <span class="pre">x</span> <span class="pre">y</span></code>, the output you (as the tester) are expecting to get should
+be <code class="docutils literal notranslate"><span class="pre">x</span></code>, and the output the function being tested actually produces should be
+<code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>Notice how our test suite is accumulating a lot of redundant code. In
+particular, we had to add the <code class="docutils literal notranslate"><span class="pre">printer</span></code> argument to several lines. Let’s improve
+that code by factoring out a function that constructs test cases:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">make_sum_test</span> <span class="n">name</span> <span class="n">expected_output</span> <span class="n">input</span> <span class="o">=</span>
+  <span class="n">name</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="n">expected_output</span> <span class="o">(</span><span class="n">sum</span> <span class="n">input</span><span class="o">)</span> <span class="o">~</span><span class="n">printer</span><span class="o">:</span><span class="n">string_of_int</span><span class="o">)</span>
+
+<span class="k">let</span> <span class="n">tests</span> <span class="o">=</span> <span class="s2">&quot;test suite for sum&quot;</span> <span class="o">&gt;:::</span> <span class="o">[</span>
+  <span class="n">make_sum_test</span> <span class="s2">&quot;empty&quot;</span> <span class="mi">0</span> <span class="bp">[]</span><span class="o">;</span>
+  <span class="n">make_sum_test</span> <span class="s2">&quot;singleton&quot;</span> <span class="mi">1</span> <span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+  <span class="n">make_sum_test</span> <span class="s2">&quot;two_elements&quot;</span> <span class="mi">3</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">];</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>For output types that are more complicated than integers, you will end up
+needing to write your own functions to pass to <code class="docutils literal notranslate"><span class="pre">printer</span></code>. This is similar to
+writing <code class="docutils literal notranslate"><span class="pre">toString()</span></code> methods in Java: for complicated types you invent yourself,
+the language doesn’t know how to render them as strings. You have to provide the
+code that does it.</p>
+</div>
+</div>
+<div class="section" id="testing-for-exceptions">
+<h2><span class="section-number">3.3.4. </span>Testing for Exceptions<a class="headerlink" href="#testing-for-exceptions" title="Permalink to this headline">¶</a></h2>
+<p>We have a little more of OCaml to learn before we can see how to test for
+exceptions. You can peek ahead to <a class="reference internal" href="exceptions.html"><span class="doc std std-doc">the section on exceptions</span></a> if you
+want to know now.</p>
+</div>
+<div class="section" id="test-driven-development">
+<h2><span class="section-number">3.3.5. </span>Test-Driven Development<a class="headerlink" href="#test-driven-development" title="Permalink to this headline">¶</a></h2>
+<p>Testing doesn’t have to happen strictly after you write code. In <em>test-driven
+development</em> (TDD), testing comes first! It emphasizes <em>incremental</em> development
+of code: there is always something that can be tested. Testing is not something
+that happens after implementation; instead, <em>continuous testing</em> is used to
+catch errors early. Thus, it is important to develop unit tests immediately when
+the code is written. Automating test suites is crucial so that continuous
+testing requires essentially no effort.</p>
+<p>Here’s an example of TDD. We deliberately choose an exceedingly simple function
+to implement, so that the process is clear. Suppose we are working with a
+datatype for days:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">day</span> <span class="o">=</span> <span class="nc">Sunday</span> <span class="o">|</span> <span class="nc">Monday</span> <span class="o">|</span> <span class="nc">Tuesday</span> <span class="o">|</span> <span class="nc">Wednesday</span> <span class="o">|</span> <span class="nc">Thursday</span> <span class="o">|</span> <span class="nc">Friday</span> <span class="o">|</span> <span class="nc">Saturday</span>
+</pre></div>
+</div>
+<p>And we want to write a function <code class="docutils literal notranslate"><span class="pre">next_weekday</span> <span class="pre">:</span> <span class="pre">day</span> <span class="pre">-&gt;</span> <span class="pre">day</span></code> that returns
+the next weekday after a given day. We start by writing the most basic,
+broken version of that function we can:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">next_weekday</span> <span class="n">d</span> <span class="o">=</span> <span class="n">failwith</span> <span class="s2">&quot;Unimplemented&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The built-in function <code class="docutils literal notranslate"><span class="pre">failwith</span></code> raises an exception along with the error
+message passed to the function.</p>
+</div>
+<p>Then we write the simplest unit test we can imagine. For example, we know that
+the next weekday after Monday is Tuesday. So we add a test:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">tests</span> <span class="o">=</span> <span class="s2">&quot;test suite for next_weekday&quot;</span> <span class="o">&gt;:::</span> <span class="o">[</span>
+  <span class="s2">&quot;tue_after_mon&quot;</span>  <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="o">(</span><span class="n">next_weekday</span> <span class="nc">Monday</span><span class="o">)</span> <span class="nc">Tuesday</span><span class="o">);</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>Then we run the OUnit test suite. It fails, as expected. That’s good! Now we
+have a concrete goal, to make that unit test pass. We revise <code class="docutils literal notranslate"><span class="pre">next_weekday</span></code> to
+make that happen:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">next_weekday</span> <span class="n">d</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">d</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Monday</span> <span class="o">-&gt;</span> <span class="nc">Tuesday</span>
+  <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;Unimplemented&quot;</span>
+</pre></div>
+</div>
+<p>We compile and run the test; it passes. Time to add some more tests. The
+simplest remaining possibilities are tests involving just weekdays, rather than
+weekends. So let’s add tests for weekdays.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">tests</span> <span class="o">=</span> <span class="s2">&quot;test suite for next_weekday&quot;</span> <span class="o">&gt;:::</span> <span class="o">[</span>
+  <span class="s2">&quot;tue_after_mon&quot;</span>  <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="o">(</span><span class="n">next_weekday</span> <span class="nc">Monday</span><span class="o">)</span> <span class="nc">Tuesday</span><span class="o">);</span>
+  <span class="s2">&quot;wed_after_tue&quot;</span>  <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="o">(</span><span class="n">next_weekday</span> <span class="nc">Tuesday</span><span class="o">)</span> <span class="nc">Wednesday</span><span class="o">);</span>
+  <span class="s2">&quot;thu_after_wed&quot;</span>  <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="o">(</span><span class="n">next_weekday</span> <span class="nc">Wednesday</span><span class="o">)</span> <span class="nc">Thursday</span><span class="o">);</span>
+  <span class="s2">&quot;fri_after_thu&quot;</span>  <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="o">(</span><span class="n">next_weekday</span> <span class="nc">Thursday</span><span class="o">)</span> <span class="nc">Friday</span><span class="o">);</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>We compile and run the tests; many fail. That’s good! We add new
+functionality:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">next_weekday</span> <span class="n">d</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">d</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Monday</span> <span class="o">-&gt;</span> <span class="nc">Tuesday</span>
+    <span class="o">|</span> <span class="nc">Tuesday</span> <span class="o">-&gt;</span> <span class="nc">Wednesday</span>
+    <span class="o">|</span> <span class="nc">Wednesday</span> <span class="o">-&gt;</span> <span class="nc">Thursday</span>
+    <span class="o">|</span> <span class="nc">Thursday</span> <span class="o">-&gt;</span> <span class="nc">Friday</span>
+    <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;Unimplemented&quot;</span>
+</pre></div>
+</div>
+<p>We compile and run the tests; they pass. At this point we could move on to
+handling weekends, but we should first notice something about the tests we’ve
+written: they involve repeating a lot of code. In fact, we probably wrote them
+by copying-and-pasting the first test, then modifying it for the next three.
+That’s a sign that we should <em>refactor</em> the code. (As we did before with the
+<code class="docutils literal notranslate"><span class="pre">sum</span></code> function we were testing.)</p>
+<p>Let’s abstract a function that creates test cases for <code class="docutils literal notranslate"><span class="pre">next_weekday</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">make_next_weekday_test</span> <span class="n">name</span> <span class="n">expected_output</span> <span class="n">input</span><span class="o">=</span>
+  <span class="n">name</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="n">expected_output</span> <span class="o">(</span><span class="n">next_weekday</span> <span class="n">input</span><span class="o">))</span>
+
+<span class="k">let</span> <span class="n">tests</span> <span class="o">=</span> <span class="s2">&quot;test suite for next_weekday&quot;</span> <span class="o">&gt;:::</span> <span class="o">[</span>
+  <span class="n">make_next_weekday_test</span> <span class="s2">&quot;tue_after_mon&quot;</span> <span class="nc">Tuesday</span> <span class="nc">Monday</span><span class="o">;</span>
+  <span class="n">make_next_weekday_test</span> <span class="s2">&quot;wed_after_tue&quot;</span> <span class="nc">Wednesday</span> <span class="nc">Tuesday</span><span class="o">;</span>
+  <span class="n">make_next_weekday_test</span> <span class="s2">&quot;thu_after_wed&quot;</span> <span class="nc">Thursday</span> <span class="nc">Wednesday</span><span class="o">;</span>
+  <span class="n">make_next_weekday_test</span> <span class="s2">&quot;fri_after_thu&quot;</span> <span class="nc">Friday</span> <span class="nc">Thursday</span><span class="o">;</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+<p>Now we finish the testing and implementation by handling weekends. First we add
+some test cases:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="o">...</span>
+  <span class="n">make_next_weekday_test</span> <span class="s2">&quot;mon_after_fri&quot;</span> <span class="nc">Monday</span> <span class="nc">Friday</span><span class="o">;</span>
+  <span class="n">make_next_weekday_test</span> <span class="s2">&quot;mon_after_sat&quot;</span> <span class="nc">Monday</span> <span class="nc">Saturday</span><span class="o">;</span>
+  <span class="n">make_next_weekday_test</span> <span class="s2">&quot;mon_after_sun&quot;</span> <span class="nc">Monday</span> <span class="nc">Sunday</span><span class="o">;</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>Then we finish the function:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">next_weekday</span> <span class="n">d</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">d</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Monday</span> <span class="o">-&gt;</span> <span class="nc">Tuesday</span>
+  <span class="o">|</span> <span class="nc">Tuesday</span> <span class="o">-&gt;</span> <span class="nc">Wednesday</span>
+  <span class="o">|</span> <span class="nc">Wednesday</span> <span class="o">-&gt;</span> <span class="nc">Thursday</span>
+  <span class="o">|</span> <span class="nc">Thursday</span> <span class="o">-&gt;</span> <span class="nc">Friday</span>
+  <span class="o">|</span> <span class="nc">Friday</span> <span class="o">-&gt;</span> <span class="nc">Monday</span>
+  <span class="o">|</span> <span class="nc">Saturday</span> <span class="o">-&gt;</span> <span class="nc">Monday</span>
+  <span class="o">|</span> <span class="nc">Sunday</span> <span class="o">-&gt;</span> <span class="nc">Monday</span>
+</pre></div>
+</div>
+<p>Of course, most people could write that function without errors even if they
+didn’t use TDD. But rarely do we implement functions that are so simple.</p>
+<p><strong>Process.</strong> Let’s review the process of TDD:</p>
+<ul class="simple">
+<li><p>Write a failing unit test case. Run the test suite to prove that the test case
+fails.</p></li>
+<li><p>Implement just enough functionality to make the test case pass. Run the test
+suite to prove that the test case passes.</p></li>
+<li><p>Improve code as needed. In the example above we refactored the test suite, but
+often we’ll need to refactor the functionality being implemented.</p></li>
+<li><p>Repeat until you are satisfied that the test suite provides evidence that your
+implementation is correct.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="variants.html" title="previous page"><span class="section-number">3.2. </span>Variants</a>
+    <a class='right-next' id="next-link" href="records_tuples.html" title="next page"><span class="section-number">3.4. </span>Records and Tuples</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

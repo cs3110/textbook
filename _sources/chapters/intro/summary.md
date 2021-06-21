@@ -8,7 +8,7 @@ programming transcends programming in any particular language or family
 of languages, an exposure to advanced language features, and an appreciation
 of beauty.
 
-## Terms and concepts
+## Terms and Concepts
 
 * dynamic typing
 * first-class functions
@@ -23,7 +23,7 @@ of beauty.
 * static typing
 * type safety
 
-## Further reading
+## Further Reading
 
 * [Introduction to Objective Caml](http://courses.cms.caltech.edu/cs134/cs134b/book.pdf),
   chapters 1 and 2, a freely available textbook that is recommended for this course
@@ -40,7 +40,6 @@ of beauty.
 * [The perils of JavaSchools](https://www.joelonsoftware.com/2005/12/29/the-perils-of-javaschools-2/):
   an essay by the CEO of Stack Overflow on why (my words here) CS 2110 is not enough,
   and why you need both CS 3110 and CS 3410.
-* [Teach yourself programming in 10 years](http://norvig.com/21-days.html): 
+* [Teach yourself programming in 10 years](http://norvig.com/21-days.html):
   an essay by a Director of Research at Google that puts the
   time required to become an educated programmer into perspective
-  

@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.5. Advanced Pattern Matching &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.6. Type Synonyms" href="type_synonym.html" />
+    <link rel="prev" title="3.4. Records and Tuples" href="records_tuples.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.6. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.7. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.8. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   3. Data
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/data/pattern_matching_advanced.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/data/pattern_matching_advanced.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/data/pattern_matching_advanced.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/data/pattern_matching_advanced.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pattern-matching-with-let">
+   3.5.1. Pattern Matching with Let
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pattern-matching-with-functions">
+   3.5.2. Pattern Matching with Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pattern-matching-examples">
+   3.5.3. Pattern Matching Examples
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="advanced-pattern-matching">
+<h1><span class="section-number">3.5. </span>Advanced Pattern Matching<a class="headerlink" href="#advanced-pattern-matching" title="Permalink to this headline">¶</a></h1>
+<p>Here are some additional pattern forms that are useful:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">p1</span> <span class="pre">|</span> <span class="pre">...</span> <span class="pre">|</span> <span class="pre">pn</span></code>: an “or” pattern; matching against it succeeds if a match
+succeeds against any of the individual patterns <code class="docutils literal notranslate"><span class="pre">pi</span></code>, which are tried in order
+from left to right. All the patterns must bind the same variables.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(p</span> <span class="pre">:</span> <span class="pre">t)</span></code>: a pattern with an explicit type annotation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>: here, <code class="docutils literal notranslate"><span class="pre">c</span></code> means any constant, such as integer literals, string literals,
+and booleans.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'ch1'..'ch2'</span></code>: here, <code class="docutils literal notranslate"><span class="pre">ch</span></code> means a character literal. For example, <code class="docutils literal notranslate"><span class="pre">'A'..'Z'</span></code>
+matches any uppercase letter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">when</span> <span class="pre">e</span></code>: matches <code class="docutils literal notranslate"><span class="pre">p</span></code> but only if <code class="docutils literal notranslate"><span class="pre">e</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+</ul>
+<p>You can read about <a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/patterns.html">all the pattern forms</a> in the manual.</p>
+<div class="section" id="pattern-matching-with-let">
+<h2><span class="section-number">3.5.1. </span>Pattern Matching with Let<a class="headerlink" href="#pattern-matching-with-let" title="Permalink to this headline">¶</a></h2>
+<p>The syntax we’ve been using so far for let expressions is, in fact, a special
+case of the full syntax that OCaml permits. That syntax is:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">e1</span> <span class="k">in</span> <span class="n">e2</span>
+</pre></div>
+</div>
+<p>That is, the left-hand side of the binding may in fact be a pattern, not just an
+identifier. Of course, variable identifiers are on our list of valid patterns,
+so that’s why the syntax we’ve studied so far is just a special case.</p>
+<p>Given this syntax, we revisit the semantics of let expressions.</p>
+<p><strong>Dynamic semantics.</strong></p>
+<p>To evaluate <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">p</span> <span class="pre">=</span> <span class="pre">e1</span> <span class="pre">in</span> <span class="pre">e2</span></code>:</p>
+<ol class="simple">
+<li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">e1</span></code> to a value <code class="docutils literal notranslate"><span class="pre">v1</span></code>.</p></li>
+<li><p>Match <code class="docutils literal notranslate"><span class="pre">v1</span></code> against pattern <code class="docutils literal notranslate"><span class="pre">p</span></code>. If it doesn’t match, raise the exception
+<code class="docutils literal notranslate"><span class="pre">Match_failure</span></code>. Otherwise, if it does match, it produces a set <span class="math notranslate nohighlight">\(b\)</span> of
+bindings.</p></li>
+<li><p>Substitute those bindings <span class="math notranslate nohighlight">\(b\)</span> in <code class="docutils literal notranslate"><span class="pre">e2</span></code>, yielding a new expression <code class="docutils literal notranslate"><span class="pre">e2'</span></code>.</p></li>
+<li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">e2'</span></code> to a value <code class="docutils literal notranslate"><span class="pre">v2</span></code>.</p></li>
+<li><p>The result of evaluating the let expression is <code class="docutils literal notranslate"><span class="pre">v2</span></code>.</p></li>
+</ol>
+<p><strong>Static semantics.</strong></p>
+<ul class="simple">
+<li><p>If all the following hold then <code class="docutils literal notranslate"><span class="pre">(let</span> <span class="pre">p</span> <span class="pre">=</span> <span class="pre">e1</span> <span class="pre">in</span> <span class="pre">e2)</span> <span class="pre">:</span> <span class="pre">t2</span></code>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">:</span> <span class="pre">t1</span></code></p></li>
+<li><p>the pattern variables in <code class="docutils literal notranslate"><span class="pre">p</span></code> are <code class="docutils literal notranslate"><span class="pre">x1..xn</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e2</span> <span class="pre">:</span> <span class="pre">t2</span></code> under the assumption that for all <code class="docutils literal notranslate"><span class="pre">i</span></code> in <code class="docutils literal notranslate"><span class="pre">1..n</span></code> it holds that
+<code class="docutils literal notranslate"><span class="pre">xi</span> <span class="pre">:</span> <span class="pre">ti</span></code>,</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Let definitions.</strong></p>
+<p>As before, a let definition can be understood as a let expression whose body has
+not yet been given. So their syntax can be generalized to</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">e</span>
+</pre></div>
+</div>
+<p>and their semantics follow from the semantics of let expressions, as before.</p>
+</div>
+<div class="section" id="pattern-matching-with-functions">
+<h2><span class="section-number">3.5.2. </span>Pattern Matching with Functions<a class="headerlink" href="#pattern-matching-with-functions" title="Permalink to this headline">¶</a></h2>
+<p>The syntax we’ve been using so far for functions is also a special case of the
+full syntax that OCaml permits. That syntax is:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f</span> <span class="n">p1</span> <span class="o">...</span> <span class="n">pn</span> <span class="o">=</span> <span class="n">e1</span> <span class="k">in</span> <span class="n">e2</span>   <span class="c">(* function as part of let expression *)</span>
+<span class="k">let</span> <span class="n">f</span> <span class="n">p1</span> <span class="o">...</span> <span class="n">pn</span> <span class="o">=</span> <span class="n">e</span>          <span class="c">(* function definition at toplevel *)</span>
+<span class="k">fun</span> <span class="n">p1</span> <span class="o">...</span> <span class="n">pn</span> <span class="o">-&gt;</span> <span class="n">e</span>           <span class="c">(* anonymous function *)</span>
+</pre></div>
+</div>
+<p>The truly primitive syntactic form we need to care about is <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">p</span> <span class="pre">-&gt;</span> <span class="pre">e</span></code>. Let’s
+revisit the semantics of anonymous functions and their application with that
+form; the changes to the other forms follow from those below:</p>
+<p><strong>Static semantics.</strong></p>
+<ul class="simple">
+<li><p>Let <code class="docutils literal notranslate"><span class="pre">x1..xn</span></code> be the pattern variables appearing in <code class="docutils literal notranslate"><span class="pre">p</span></code>. If by assuming that
+<code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">:</span> <span class="pre">t1</span></code> and <code class="docutils literal notranslate"><span class="pre">x2</span> <span class="pre">:</span> <span class="pre">t2</span></code> and … and <code class="docutils literal notranslate"><span class="pre">xn</span> <span class="pre">:</span> <span class="pre">tn</span></code>, we can conclude that <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">:</span> <span class="pre">t</span></code>
+and <code class="docutils literal notranslate"> <span class="pre">e</span> <span class="pre">:u</span></code>, then <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">p</span> <span class="pre">-&gt;</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">-&gt;</span> <span class="pre">u</span></code>.</p></li>
+<li><p>The type checking rule for application is unchanged.</p></li>
+</ul>
+<p><strong>Dynamic semantics.</strong></p>
+<ul class="simple">
+<li><p>The evaluation rule for anonymous functions is unchanged.</p></li>
+<li><p>To evaluate <code class="docutils literal notranslate"><span class="pre">e0</span> <span class="pre">e1</span></code>:</p>
+<ol class="simple">
+<li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">e0</span></code> to an anonymous function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">p</span> <span class="pre">-&gt;</span> <span class="pre">e</span></code>, and
+evaluate <code class="docutils literal notranslate"><span class="pre">e1</span></code> to value <code class="docutils literal notranslate"><span class="pre">v1</span></code>.</p></li>
+<li><p>Match <code class="docutils literal notranslate"><span class="pre">v1</span></code> against pattern <code class="docutils literal notranslate"><span class="pre">p</span></code>. If it doesn’t match, raise the exception
+<code class="docutils literal notranslate"><span class="pre">Match_failure</span></code>. Otherwise, if it does match, it produces a set <span class="math notranslate nohighlight">\(b\)</span> of
+bindings.</p></li>
+<li><p>Substitute those bindings <span class="math notranslate nohighlight">\(b\)</span> in <code class="docutils literal notranslate"><span class="pre">e</span></code>, yielding a new expression <code class="docutils literal notranslate"><span class="pre">e'</span></code>.</p></li>
+<li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">e'</span></code> to a value <code class="docutils literal notranslate"><span class="pre">v</span></code>, which is the result of evaluating <code class="docutils literal notranslate"><span class="pre">e0</span> <span class="pre">e1</span></code>.</p></li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="pattern-matching-examples">
+<h2><span class="section-number">3.5.3. </span>Pattern Matching Examples<a class="headerlink" href="#pattern-matching-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here are several ways to get a Pokemon’s hit points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* Pokemon types *)</span>
+<span class="k">type</span> <span class="n">ptype</span> <span class="o">=</span> <span class="nc">TNormal</span> <span class="o">|</span> <span class="nc">TFire</span> <span class="o">|</span> <span class="nc">TWater</span>
+
+<span class="c">(* A record to represent Pokemon *)</span>
+<span class="k">type</span> <span class="n">mon</span> <span class="o">=</span> <span class="o">{</span> <span class="n">name</span> <span class="o">:</span> <span class="kt">string</span><span class="o">;</span> <span class="n">hp</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span> <span class="n">ptype</span> <span class="o">:</span> <span class="n">ptype</span> <span class="o">}</span>
+
+<span class="c">(* OK *)</span>
+<span class="k">let</span> <span class="n">get_hp</span> <span class="n">m</span> <span class="o">=</span> <span class="k">match</span> <span class="n">m</span> <span class="k">with</span> <span class="o">{</span> <span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span> <span class="n">hp</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span> <span class="n">ptype</span> <span class="o">=</span> <span class="n">t</span> <span class="o">}</span> <span class="o">-&gt;</span> <span class="n">h</span>
+
+<span class="c">(* better *)</span>
+<span class="k">let</span> <span class="n">get_hp</span> <span class="n">m</span> <span class="o">=</span> <span class="k">match</span> <span class="n">m</span> <span class="k">with</span> <span class="o">{</span> <span class="n">name</span> <span class="o">=</span> <span class="o">_;</span> <span class="n">hp</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span> <span class="n">ptype</span> <span class="o">=</span> <span class="o">_</span> <span class="o">}</span> <span class="o">-&gt;</span> <span class="n">h</span>
+
+<span class="c">(* better *)</span>
+<span class="k">let</span> <span class="n">get_hp</span> <span class="n">m</span> <span class="o">=</span> <span class="k">match</span> <span class="n">m</span> <span class="k">with</span> <span class="o">{</span> <span class="n">name</span><span class="o">;</span> <span class="n">hp</span><span class="o">;</span> <span class="n">ptype</span> <span class="o">}</span> <span class="o">-&gt;</span> <span class="n">hp</span>
+
+<span class="c">(* better *)</span>
+<span class="k">let</span> <span class="n">get_hp</span> <span class="n">m</span> <span class="o">=</span> <span class="k">match</span> <span class="n">m</span> <span class="k">with</span> <span class="o">{</span> <span class="n">hp</span> <span class="o">}</span> <span class="o">-&gt;</span> <span class="n">hp</span>
+
+<span class="c">(* best *)</span>
+<span class="k">let</span> <span class="n">get_hp</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">hp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type ptype = TNormal | TFire | TWater
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type mon = { name : string; hp : int; ptype : ptype; }
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val get_hp : mon -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val get_hp : mon -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val get_hp : mon -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val get_hp : mon -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val get_hp : mon -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s how to get the first and second components of a pair:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fst</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="o">_)</span> <span class="o">=</span> <span class="n">x</span>
+
+<span class="k">let</span> <span class="n">snd</span> <span class="o">(_,</span> <span class="n">y</span><span class="o">)</span> <span class="o">=</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fst : &#39;a * &#39;b -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val snd : &#39;a * &#39;b -&gt; &#39;b = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both <code class="docutils literal notranslate"><span class="pre">fst</span></code> and <code class="docutils literal notranslate"><span class="pre">snd</span></code> are actually already defined for you in the standard
+library.</p>
+<p>Finally, here are several ways to get the 3rd component of a triple:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* OK *)</span>
+<span class="k">let</span> <span class="n">thrd</span> <span class="n">t</span> <span class="o">=</span> <span class="k">match</span> <span class="n">t</span> <span class="k">with</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span> <span class="o">-&gt;</span> <span class="n">z</span>
+
+<span class="c">(* good *)</span>
+<span class="k">let</span> <span class="n">thrd</span> <span class="n">t</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">t</span> <span class="k">in</span>
+  <span class="n">z</span>
+
+<span class="c">(* better *)</span>
+<span class="k">let</span> <span class="n">thrd</span> <span class="n">t</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="o">_,</span> <span class="o">_,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">t</span> <span class="k">in</span>
+  <span class="n">z</span>
+
+<span class="c">(* best *)</span>
+<span class="k">let</span> <span class="n">thrd</span> <span class="o">(_,</span> <span class="o">_,</span> <span class="n">z</span><span class="o">)</span> <span class="o">=</span> <span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val thrd : &#39;a * &#39;b * &#39;c -&gt; &#39;c = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val thrd : &#39;a * &#39;b * &#39;c -&gt; &#39;c = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val thrd : &#39;a * &#39;b * &#39;c -&gt; &#39;c = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val thrd : &#39;a * &#39;b * &#39;c -&gt; &#39;c = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The standard library does not define any functions for triples, quadruples, etc.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="records_tuples.html" title="previous page"><span class="section-number">3.4. </span>Records and Tuples</a>
+    <a class='right-next' id="next-link" href="type_synonym.html" title="next page"><span class="section-number">3.6. </span>Type Synonyms</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

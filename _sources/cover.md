@@ -34,6 +34,8 @@ might also have typesetting errors.
 </p>
 ```
 
+The title of this book was previously "Functional Programming in OCaml".
+
 Copyright 2021 Michael R. Clarkson.
 Released under the <a rel="license"
 href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons

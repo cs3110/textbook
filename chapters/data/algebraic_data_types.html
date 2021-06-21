@@ -1,0 +1,1150 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.9. Algebraic Data Types &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.10. Exceptions" href="exceptions.html" />
+    <link rel="prev" title="3.8. Association Lists" href="assoc_list.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.6. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.7. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.8. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   3. Data
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/data/algebraic_data_types.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/data/algebraic_data_types.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/data/algebraic_data_types.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/data/algebraic_data_types.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variants-that-carry-data">
+   3.9.1. Variants that Carry Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#syntax-and-semantics">
+   3.9.2. Syntax and Semantics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#catch-all-cases">
+   3.9.3. Catch-all Cases
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursive-variants">
+   3.9.4. Recursive Variants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameterized-variants">
+   3.9.5. Parameterized Variants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polymorphic-variants">
+   3.9.6. Polymorphic Variants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#built-in-variants">
+   3.9.7. Built-in Variants
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="algebraic-data-types">
+<h1><span class="section-number">3.9. </span>Algebraic Data Types<a class="headerlink" href="#algebraic-data-types" title="Permalink to this headline">¶</a></h1>
+<p>Thus far, we have seen variants simply as enumerating a set of constant values,
+such as:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">day</span> <span class="o">=</span> <span class="nc">Sun</span> <span class="o">|</span> <span class="nc">Mon</span> <span class="o">|</span> <span class="nc">Tue</span> <span class="o">|</span> <span class="nc">Wed</span> <span class="o">|</span> <span class="nc">Thu</span> <span class="o">|</span> <span class="nc">Fri</span> <span class="o">|</span> <span class="nc">Sat</span>
+
+<span class="k">type</span> <span class="n">ptype</span> <span class="o">=</span> <span class="nc">TNormal</span> <span class="o">|</span> <span class="nc">TFire</span> <span class="o">|</span> <span class="nc">TWater</span>
+
+<span class="k">type</span> <span class="n">peff</span> <span class="o">=</span> <span class="nc">ENormal</span> <span class="o">|</span> <span class="nc">ENotVery</span> <span class="o">|</span> <span class="nc">Esuper</span>
+</pre></div>
+</div>
+<p>But variants are far more powerful that this.</p>
+<div class="section" id="variants-that-carry-data">
+<h2><span class="section-number">3.9.1. </span>Variants that Carry Data<a class="headerlink" href="#variants-that-carry-data" title="Permalink to this headline">¶</a></h2>
+<p>As a running example, here is a variant type <code class="docutils literal notranslate"><span class="pre">shape</span></code> that does more than just
+enumerate values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">point</span> <span class="o">=</span> <span class="kt">float</span> <span class="o">*</span> <span class="kt">float</span>
+<span class="k">type</span> <span class="n">shape</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">Point</span> <span class="k">of</span> <span class="n">point</span>
+  <span class="o">|</span> <span class="nc">Circle</span> <span class="k">of</span> <span class="n">point</span> <span class="o">*</span> <span class="kt">float</span> <span class="c">(* center and radius *)</span>
+  <span class="o">|</span> <span class="nc">Rect</span> <span class="k">of</span> <span class="n">point</span> <span class="o">*</span> <span class="n">point</span> <span class="c">(* lower-left and upper-right corners *)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type point = float * float
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type shape = Point of point | Circle of point * float | Rect of point * point
+</pre></div>
+</div>
+</div>
+</div>
+<p>This type, <code class="docutils literal notranslate"><span class="pre">shape</span></code>, represents a shape that is either a point, a circle, or a
+rectangle. A point is represented by a constructor <code class="docutils literal notranslate"><span class="pre">Point</span></code> that <em>carries</em> some
+additional data, which is a value of type <code class="docutils literal notranslate"><span class="pre">point</span></code>. A circle is represented by a
+constructor <code class="docutils literal notranslate"><span class="pre">Circle</span></code> that carries a pair of type <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">*</span> <span class="pre">float</span></code>, which
+according to the comment represents the center of the circle and its radius. A
+rectangle is represented by a constructor <code class="docutils literal notranslate"><span class="pre">Rect</span></code> that carries a pair of type
+<code class="docutils literal notranslate"><span class="pre">point*point</span></code>.</p>
+<p>Here are a couple functions that use the <code class="docutils literal notranslate"><span class="pre">shape</span></code> type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">area</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Point</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span>
+  <span class="o">|</span> <span class="nc">Circle</span> <span class="o">(_,</span> <span class="n">r</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nn">Float</span><span class="p">.</span><span class="n">pi</span> <span class="o">*.</span> <span class="o">(</span><span class="n">r</span> <span class="o">**</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Rect</span> <span class="o">((</span><span class="n">x1</span><span class="o">,</span> <span class="n">y1</span><span class="o">),</span> <span class="o">(</span><span class="n">x2</span><span class="o">,</span> <span class="n">y2</span><span class="o">))</span> <span class="o">-&gt;</span>
+      <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-.</span> <span class="n">x1</span> <span class="k">in</span>
+      <span class="k">let</span> <span class="n">h</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-.</span> <span class="n">y1</span> <span class="k">in</span>
+      <span class="n">w</span> <span class="o">*.</span> <span class="n">h</span>
+
+<span class="k">let</span> <span class="n">center</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Point</span> <span class="n">p</span> <span class="o">-&gt;</span> <span class="n">p</span>
+  <span class="o">|</span> <span class="nc">Circle</span> <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="n">p</span>
+  <span class="o">|</span> <span class="nc">Rect</span> <span class="o">((</span><span class="n">x1</span><span class="o">,</span> <span class="n">y1</span><span class="o">),</span> <span class="o">(</span><span class="n">x2</span><span class="o">,</span> <span class="n">y2</span><span class="o">))</span> <span class="o">-&gt;</span> <span class="o">((</span><span class="n">x2</span> <span class="o">+.</span> <span class="n">x1</span><span class="o">)</span> <span class="o">/.</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="o">(</span><span class="n">y2</span> <span class="o">+.</span> <span class="n">y1</span><span class="o">)</span> <span class="o">/.</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val area : shape -&gt; float = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val center : shape -&gt; point = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">shape</span></code> variant type is the same as those we’ve seen before in that it is
+defined in terms of a collection of constructors. What’s different than before
+is that those constructors carry additional data along with them. Every value of
+type <code class="docutils literal notranslate"><span class="pre">shape</span></code> is formed from exactly one of those constructors. Sometimes we call
+the constructor a <em>tag</em>, because it tags the data it carries as being from that
+particular constructor.</p>
+<p>Variant types are sometimes called <em>tagged unions</em>. Every value of the type is
+from the set of values that is the union of all values from the underlying types
+that the constructor carries. For the <code class="docutils literal notranslate"><span class="pre">shape</span></code> type, every value is tagged with
+either <code class="docutils literal notranslate"><span class="pre">Point</span></code> or <code class="docutils literal notranslate"><span class="pre">Circle</span></code> or <code class="docutils literal notranslate"><span class="pre">Rect</span></code> and carries a value from the set of all
+<code class="docutils literal notranslate"><span class="pre">point</span></code> valued unioned with the set of all <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">*</span> <span class="pre">float</span></code> values unioned with
+the set of all <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">*</span> <span class="pre">point</span></code> values.</p>
+<p>Another name for these variant types is an <em>algebraic data type</em>. “Algebra” here
+refers to the fact that variant types contain both sum and product types, as
+defined in the previous lecture. The sum types come from the fact that a value
+of a variant is formed by <em>one of</em> the constructors. The product types come from
+that fact that a constructor can carry tuples or records, whose values have a
+sub-value from <em>each of</em> their component types.</p>
+<p>Using variants, we can express a type that represents the union of several other
+types, but in a type-safe way. Here, for example, is a type that represents
+either a <code class="docutils literal notranslate"><span class="pre">string</span></code> or an <code class="docutils literal notranslate"><span class="pre">int</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">string_or_int</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">String</span> <span class="k">of</span> <span class="kt">string</span>
+  <span class="o">|</span> <span class="nc">Int</span> <span class="k">of</span> <span class="kt">int</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type string_or_int = String of string | Int of int
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we wanted to, we could use this type to code up lists (e.g.) that contain
+either strings or ints:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">string_or_int_list</span> <span class="o">=</span> <span class="n">string_or_int</span> <span class="kt">list</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">:</span> <span class="n">string_or_int</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="nc">String</span> <span class="n">s</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">int_of_string</span> <span class="n">s</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>
+  <span class="o">|</span> <span class="nc">Int</span> <span class="n">i</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">i</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">lst_sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">[</span><span class="nc">String</span> <span class="s2">&quot;1&quot;</span><span class="o">;</span> <span class="nc">Int</span> <span class="mi">2</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type string_or_int_list = string_or_int list
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : string_or_int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst_sum : int = 3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Variants thus provide a type-safe way of doing something that might before have
+seemed impossible.</p>
+<p>Variants also make it possible to discriminate which tag a value was constructed
+with, even if multiple constructors carry the same type. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nc">Left</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">|</span> <span class="nc">Right</span> <span class="k">of</span> <span class="kt">int</span>
+<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Left</span> <span class="mi">1</span>
+<span class="k">let</span> <span class="n">double_right</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Left</span> <span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span>
+  <span class="o">|</span> <span class="nc">Right</span> <span class="n">i</span> <span class="o">-&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type t = Left of int | Right of int
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val x : t = Left 1
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val double_right : t -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="syntax-and-semantics">
+<h2><span class="section-number">3.9.2. </span>Syntax and Semantics<a class="headerlink" href="#syntax-and-semantics" title="Permalink to this headline">¶</a></h2>
+<p><strong>Syntax.</strong></p>
+<p>To define a variant type:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nc">C1</span> <span class="o">[</span><span class="k">of</span> <span class="n">t1</span><span class="o">]</span> <span class="o">|</span> <span class="o">...</span> <span class="o">|</span> <span class="nc">Cn</span> <span class="o">[</span><span class="k">of</span> <span class="n">tn</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>The square brackets above denote that <code class="docutils literal notranslate"><span class="pre">of</span> <span class="pre">ti</span></code> is optional. Every constructor may
+individually either carry no data or carry data. We call constructors that carry
+no data <em>constant</em>; and those that carry data, <em>non-constant</em>.</p>
+<p>To write an expression that is a variant:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="nc">C</span> <span class="n">e</span>
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="nc">C</span>
+</pre></div>
+</div>
+<p>depending on whether the constructor name <code class="docutils literal notranslate"><span class="pre">C</span></code> is non-constant or constant.</p>
+<p><strong>Dynamic semantics.</strong></p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e==&gt;v</span></code> then <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">e</span> <span class="pre">==&gt;</span> <span class="pre">C</span> <span class="pre">v</span></code>, assuming <code class="docutils literal notranslate"><span class="pre">C</span></code> is non-constant.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> is already a value, assuming <code class="docutils literal notranslate"><span class="pre">C</span></code> is constant.</p></li>
+</ul>
+<p><strong>Static semantics.</strong></p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">...</span> <span class="pre">|</span> <span class="pre">C</span> <span class="pre">|</span> <span class="pre">...</span></code> then <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">:</span> <span class="pre">t</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">...</span> <span class="pre">|</span> <span class="pre">C</span> <span class="pre">of</span> <span class="pre">t'</span> <span class="pre">|</span> <span class="pre">...</span></code> and if <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">:</span> <span class="pre">t'</span></code> then <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">t</span></code>.</p></li>
+</ul>
+<p><strong>Pattern matching.</strong></p>
+<p>We add the following new pattern form to the list of legal patterns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">p</span></code></p></li>
+</ul>
+<p>And we extend the definition of when a pattern matches a value and produces
+a binding as follows:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> matches <code class="docutils literal notranslate"><span class="pre">v</span></code> and produces bindings <span class="math notranslate nohighlight">\(b\)</span>, then <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">p</span></code> matches <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">v</span></code> and
+produces bindings <span class="math notranslate nohighlight">\(b\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="catch-all-cases">
+<h2><span class="section-number">3.9.3. </span>Catch-all Cases<a class="headerlink" href="#catch-all-cases" title="Permalink to this headline">¶</a></h2>
+<p>One thing to beware of when pattern matching against variants is what <em>Real
+World OCaml</em> calls “catch-all cases”. Here’s a simple example of what can go
+wrong. Let’s suppose you write this variant and function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">color</span> <span class="o">=</span> <span class="nc">Blue</span> <span class="o">|</span> <span class="nc">Red</span>
+
+<span class="c">(* a thousand lines of code in between *)</span>
+
+<span class="k">let</span> <span class="n">string_of_color</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Blue</span> <span class="o">-&gt;</span> <span class="s2">&quot;blue&quot;</span>
+  <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s2">&quot;red&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type color = Blue | Red
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val string_of_color : color -&gt; string = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Seems fine, right?  But then one day you realize there are more colors
+in the world.  You need to represent green.  So you go back and add green
+to your variant:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">color</span> <span class="o">=</span> <span class="nc">Blue</span> <span class="o">|</span> <span class="nc">Red</span> <span class="o">|</span> <span class="nc">Green</span>
+
+<span class="c">(* a thousand lines of code in between *)</span>
+
+<span class="k">let</span> <span class="n">string_of_color</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Blue</span> <span class="o">-&gt;</span> <span class="s2">&quot;blue&quot;</span>
+  <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s2">&quot;red&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type color = Blue | Red | Green
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val string_of_color : color -&gt; string = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But because of the thousand lines of code in between, you forget that
+<code class="docutils literal notranslate"><span class="pre">string_of_color</span></code> needs updating.  And now, all the sudden, you are
+red-green color blind:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">string_of_color</span> <span class="nc">Green</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;red&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The problem is the <em>catch-all</em> case in the pattern match inside
+<code class="docutils literal notranslate"><span class="pre">string_of_color</span></code>: the final case that uses the wildcard pattern to match
+anything. Such code is not robust against future changes to the variant type.</p>
+<p>If, instead, you had originally coded the function as follows, life would be
+better:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">string_of_color</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Blue</span> <span class="o">-&gt;</span> <span class="s2">&quot;blue&quot;</span>
+  <span class="o">|</span> <span class="nc">Red</span>  <span class="o">-&gt;</span> <span class="s2">&quot;red&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File &quot;[9]&quot;, lines 1-3, characters 22-17:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 | ......................function
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 |   | Blue -&gt; &quot;blue&quot;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 |   | Red  -&gt; &quot;red&quot;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning 8: this pattern-matching is not exhaustive.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Here is an example of a case that is not matched:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Green
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val string_of_color : color -&gt; string = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The OCaml type checker now alerts you that you haven’t yet updated
+<code class="docutils literal notranslate"><span class="pre">string_of_color</span></code> to account for the new constructor.</p>
+<p>The moral of the story is: catch-all cases lead to buggy code. Avoid using them.</p>
+</div>
+<div class="section" id="recursive-variants">
+<h2><span class="section-number">3.9.4. </span>Recursive Variants<a class="headerlink" href="#recursive-variants" title="Permalink to this headline">¶</a></h2>
+<p>Variant types may mention their own name inside their own body. For example,
+here is a variant type that could be used to represent something similar to
+<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">list</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">intlist</span> <span class="o">=</span> <span class="nc">Nil</span> <span class="o">|</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">intlist</span>
+
+<span class="k">let</span> <span class="n">lst3</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span>  <span class="c">(* similar to 3 :: [] or [3]*)</span>
+<span class="k">let</span> <span class="n">lst123</span> <span class="o">=</span> <span class="nc">Cons</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">Cons</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">lst3</span><span class="o">))</span> <span class="c">(* similar to [1; 2; 3] *)</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">intlist</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span><span class="o">=</span>
+  <span class="k">match</span> <span class="n">l</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Nil</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">length</span> <span class="o">:</span> <span class="n">intlist</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Nil</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="nc">Cons</span> <span class="o">(_,</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">length</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">empty</span> <span class="o">:</span> <span class="n">intlist</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Nil</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+  <span class="o">|</span> <span class="nc">Cons</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type intlist = Nil | Cons of int * intlist
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst3 : intlist = Cons (3, Nil)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst123 : intlist = Cons (1, Cons (2, Cons (3, Nil)))
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : intlist -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length : intlist -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val empty : intlist -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that in the definition of <code class="docutils literal notranslate"><span class="pre">intlist</span></code>, we define the <code class="docutils literal notranslate"><span class="pre">Cons</span></code> constructor to
+carry a value that contains an <code class="docutils literal notranslate"><span class="pre">intlist</span></code>. This makes the type <code class="docutils literal notranslate"><span class="pre">intlist</span></code> be
+<em>recursive</em>: it is defined in terms of itself.</p>
+<p>Types may be mutually recursive if you use the <code class="docutils literal notranslate"><span class="pre">and</span></code> keyword:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">node</span> <span class="o">=</span> <span class="o">{</span><span class="k">value</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span> <span class="n">next</span> <span class="o">:</span> <span class="n">mylist</span><span class="o">}</span>
+<span class="ow">and</span> <span class="n">mylist</span> <span class="o">=</span> <span class="nc">Nil</span> <span class="o">|</span> <span class="nc">Node</span> <span class="k">of</span> <span class="n">node</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type node = { value : int; next : mylist; }
+and mylist = Nil | Node of node
+</pre></div>
+</div>
+</div>
+</div>
+<p>Any such mutual recursion must involve at least one variant or record type
+that the recursion “goes through”.  For example, the following is not allowed:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">u</span> <span class="ow">and</span> <span class="n">u</span> <span class="o">=</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[12]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">u</span> <span class="ow">and</span> <span class="n">u</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="o">^^^^^^^^^^</span>
+<span class="ne">Error</span>: The definition of t contains a cycle:
+       <span class="n">u</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But this is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nc">U</span> <span class="k">of</span> <span class="n">u</span> <span class="ow">and</span> <span class="n">u</span> <span class="o">=</span> <span class="nc">T</span> <span class="k">of</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type t = U of u
+and u = T of t
+</pre></div>
+</div>
+</div>
+</div>
+<p>Record types may also be recursive:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">node</span> <span class="o">=</span> <span class="o">{</span><span class="k">value</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span> <span class="n">next</span> <span class="o">:</span> <span class="n">node</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type node = { value : int; next : node; }
+</pre></div>
+</div>
+</div>
+</div>
+<p>But plain old type synonyms may not be:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[15]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">14</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span>
+    <span class="o">^^^^^^^^^^^^^^</span>
+<span class="ne">Error</span>: The type abbreviation t is cyclic
+</pre></div>
+</div>
+</div>
+</div>
+<p>Although <code class="docutils literal notranslate"><span class="pre">node</span></code> is a legal type definition, there is no way to construct a value
+of that type because of the circularity involved: to construct the very first
+<code class="docutils literal notranslate"><span class="pre">node</span></code> value in existence, you would already need a value of type <code class="docutils literal notranslate"><span class="pre">node</span></code> to
+exist. Later, when we cover imperative features, we’ll see a similar idea used
+(but successfully) for mutable linked lists.</p>
+</div>
+<div class="section" id="parameterized-variants">
+<h2><span class="section-number">3.9.5. </span>Parameterized Variants<a class="headerlink" href="#parameterized-variants" title="Permalink to this headline">¶</a></h2>
+<p>Variant types may be <em>parameterized</em> on other types.  For example,
+the <code class="docutils literal notranslate"><span class="pre">intlist</span></code> type above could be generalized to provide lists (coded
+up ourselves) over any type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mylist</span> <span class="o">=</span> <span class="nc">Nil</span> <span class="o">|</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mylist</span>
+
+<span class="k">let</span> <span class="n">lst3</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span>  <span class="c">(* similar to [3] *)</span>
+<span class="k">let</span> <span class="n">lst_hi</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="o">(</span><span class="s2">&quot;hi&quot;</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span>  <span class="c">(* similar to [&quot;hi&quot;] *)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a mylist = Nil | Cons of &#39;a * &#39;a mylist
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst3 : int mylist = Cons (3, Nil)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst_hi : string mylist = Cons (&quot;hi&quot;, Nil)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">mylist</span></code> is a <em>type constructor</em> but not a type: there is no way to write
+a value of type <code class="docutils literal notranslate"><span class="pre">mylist</span></code>. But we can write value of type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">mylist</span></code> (e.g.,
+<code class="docutils literal notranslate"><span class="pre">lst3</span></code>) and <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">mylist</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">lst_hi</span></code>). Think of a type constructor as
+being like a function, but one that maps types to types, rather than values to
+value.</p>
+<p>Here are some functions over <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">mylist</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">length</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mylist</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Nil</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="nc">Cons</span> <span class="o">(_,</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">length</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mylist</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Nil</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+  <span class="o">|</span> <span class="nc">Cons</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length : &#39;a mylist -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val empty : &#39;a mylist -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that the body of each function is unchanged from its previous definition
+for <code class="docutils literal notranslate"><span class="pre">intlist</span></code>. All that we changed was the type annotation. And that could even
+be omitted safely:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">length</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Nil</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="nc">Cons</span> <span class="o">(_,</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">length</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Nil</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+  <span class="o">|</span> <span class="nc">Cons</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length : &#39;a mylist -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val empty : &#39;a mylist -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The functions we just wrote are an example of a language feature called
+<strong>parametric polymorphism</strong>. The functions don’t care what the <code class="docutils literal notranslate"><span class="pre">'a</span></code> is in
+<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">mylist</span></code>, hence they are perfectly happy to work on <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">mylist</span></code> or
+<code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">mylist</span></code> or any other <code class="docutils literal notranslate"><span class="pre">(whatever)</span> <span class="pre">mylist</span></code>. The word “polymorphism” is
+based on the Greek roots “poly” (many) and “morph” (form). A value of type
+<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">mylist</span></code> could have many forms, depending on the actual type <code class="docutils literal notranslate"><span class="pre">'a</span></code>.</p>
+<p>As soon, though, as you place a constraint on what the type <code class="docutils literal notranslate"><span class="pre">'a</span></code> might be, you
+give up some polymorphism. For example,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Nil</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int mylist -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fact that we use the <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span></code> operator with the head of the list constrains
+that head element to be an <code class="docutils literal notranslate"><span class="pre">int</span></code>, hence all elements must be <code class="docutils literal notranslate"><span class="pre">int</span></code>. That means
+<code class="docutils literal notranslate"><span class="pre">sum</span></code> must take in an <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">mylist</span></code>, not any other kind of <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">mylist</span></code>.</p>
+<p>It is also possible to have multiple type parameters for a parameterized type,
+in which case parentheses are needed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="n">pair</span> <span class="o">=</span> <span class="o">{</span><span class="n">first</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span> <span class="n">second</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">}</span>
+<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="o">{</span><span class="n">first</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">second</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type (&#39;a, &#39;b) pair = { first : &#39;a; second : &#39;b; }
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val x : (int, string) pair = {first = 2; second = &quot;hello&quot;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="polymorphic-variants">
+<h2><span class="section-number">3.9.6. </span>Polymorphic Variants<a class="headerlink" href="#polymorphic-variants" title="Permalink to this headline">¶</a></h2>
+<p>Thus far, whenever you’ve wanted to define a variant type, you have had to give
+it a name, such as <code class="docutils literal notranslate"><span class="pre">day</span></code>, <code class="docutils literal notranslate"><span class="pre">shape</span></code>, or <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">mylist</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">day</span> <span class="o">=</span> <span class="nc">Sun</span> <span class="o">|</span> <span class="nc">Mon</span> <span class="o">|</span> <span class="nc">Tue</span> <span class="o">|</span> <span class="nc">Wed</span> <span class="o">|</span> <span class="nc">Thu</span> <span class="o">|</span> <span class="nc">Fri</span> <span class="o">|</span> <span class="nc">Sat</span>
+
+<span class="k">type</span> <span class="n">shape</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">Point</span> <span class="k">of</span> <span class="n">point</span>
+  <span class="o">|</span> <span class="nc">Circle</span> <span class="k">of</span> <span class="n">point</span> <span class="o">*</span> <span class="kt">float</span>
+  <span class="o">|</span> <span class="nc">Rect</span> <span class="k">of</span> <span class="n">point</span> <span class="o">*</span> <span class="n">point</span>
+
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mylist</span> <span class="o">=</span> <span class="nc">Nil</span> <span class="o">|</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mylist</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type day = Sun | Mon | Tue | Wed | Thu | Fri | Sat
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type shape = Point of point | Circle of point * float | Rect of point * point
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a mylist = Nil | Cons of &#39;a * &#39;a mylist
+</pre></div>
+</div>
+</div>
+</div>
+<p>Occasionally, you might need a variant type only for the return value of a
+single function. For example, here’s a function <code class="docutils literal notranslate"><span class="pre">f</span></code> that can either return an
+<code class="docutils literal notranslate"><span class="pre">int</span></code> or <span class="math notranslate nohighlight">\(\infty\)</span>; you are forced to define a variant type to represent that
+result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">fin_or_inf</span> <span class="o">=</span> <span class="nc">Finite</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">|</span> <span class="nc">Infinity</span>
+
+<span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="nc">Infinity</span>
+  <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="nc">Finite</span> <span class="mi">1</span>
+  <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="nc">Finite</span> <span class="o">(-</span><span class="n">n</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type fin_or_inf = Finite of int | Infinity
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val f : int -&gt; fin_or_inf = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The downside of this definition is that you were forced to defined
+<code class="docutils literal notranslate"><span class="pre">fin_or_inf</span></code> even though it won’t be used throughout much of your program.</p>
+<p>There’s another kind of variant in OCaml that supports this kind of programming:
+<em>polymorphic variants</em>. Polymorphic variants are just like variants, except:</p>
+<ol class="simple">
+<li><p>You don’t have declare their type or constructors before using them.</p></li>
+<li><p>There is no name for a polymorphic variant type. (So another name for this
+feature could have been “anonymous variants”.)</p></li>
+<li><p>The constructors of a polymorphic variant start with a backquote character.</p></li>
+</ol>
+<p>Using polymorphic variants, we can rewrite <code class="docutils literal notranslate"><span class="pre">f</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="o">`</span><span class="nc">Infinity</span>
+  <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="o">`</span><span class="nc">Finite</span> <span class="mi">1</span>
+  <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="o">`</span><span class="nc">Finite</span> <span class="o">(-</span><span class="n">n</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val f : int -&gt; [&gt; `Finite of int | `Infinity ] = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This type says that <code class="docutils literal notranslate"><span class="pre">f</span></code> either returns <code class="docutils literal notranslate"> <span class="pre">`Finite</span> <span class="pre">n</span></code> for some <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">:</span> <span class="pre">int</span></code> or
+<code class="docutils literal notranslate"> <span class="pre">`Infinity</span></code>. The square brackets do not denote a list, but rather a set of
+possible constructors. The <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> sign means that any code that pattern matches
+against a value of that type must <em>at least</em> handle the constructors
+<code class="docutils literal notranslate"> <span class="pre">`Finite</span></code> and <code class="docutils literal notranslate"> <span class="pre">`Infinity</span></code>, and possibly more. For example, we could write:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">f</span> <span class="mi">3</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="o">`</span><span class="nc">NegInfinity</span> <span class="o">-&gt;</span> <span class="s2">&quot;negative infinity&quot;</span>
+  <span class="o">|</span> <span class="o">`</span><span class="nc">Finite</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="s2">&quot;finite&quot;</span>
+  <span class="o">|</span> <span class="o">`</span><span class="nc">Infinity</span> <span class="o">-&gt;</span> <span class="s2">&quot;infinite&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;finite&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s perfectly fine for the pattern match to include constructors other than
+<code class="docutils literal notranslate"> <span class="pre">`Finite</span></code> or <code class="docutils literal notranslate"> <span class="pre">`Infinity</span></code>, because <code class="docutils literal notranslate"><span class="pre">f</span></code> is guaranteed never to return any
+constructors other than those.</p>
+<p>There are other, more compelling uses for polymorphic variants that we’ll see
+later in the course. They are particularly useful in libraries. For now, we
+generally will steer you away from extensive use of polymorphic variants,
+because their types can become difficult to manage.</p>
+</div>
+<div class="section" id="built-in-variants">
+<h2><span class="section-number">3.9.7. </span>Built-in Variants<a class="headerlink" href="#built-in-variants" title="Permalink to this headline">¶</a></h2>
+<p>OCaml’s built-in list data type is really a recursive, parameterized variant. It
+is defined as follows:</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">=</span> <span class="bp">[]</span> <span class="o">|</span> <span class="o">(</span> <span class="o">::</span> <span class="o">)</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So <code class="docutils literal notranslate"><span class="pre">list</span></code> is really just a type constructor, with (value) constructors
+<code class="docutils literal notranslate"><span class="pre">[]</span></code> (which we pronounce “nil”) and <code class="docutils literal notranslate"><span class="pre">::</span></code> (which we pronounce “cons”).</p>
+<p>OCaml’s built-in option data type is also really a parameterized variant. It’s
+defined as follows:</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">option</span> <span class="o">=</span> <span class="nc">None</span> <span class="o">|</span> <span class="nc">Some</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So <code class="docutils literal notranslate"><span class="pre">option</span></code> is really just a type constructor, with (value) constructors
+<code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">Some</span></code>.</p>
+<p>You can see both <code class="docutils literal notranslate"><span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">option</span></code> defined in the <a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/core.html">core OCaml library</a>.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="assoc_list.html" title="previous page"><span class="section-number">3.8. </span>Association Lists</a>
+    <a class='right-next' id="next-link" href="exceptions.html" title="next page"><span class="section-number">3.10. </span>Exceptions</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

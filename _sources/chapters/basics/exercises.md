@@ -1,8 +1,6 @@
 # Exercises
 
-Solutions to exercises are available to students in Cornell's CS 3110.
-Instructors at other institutions are welcome to contact Michael Clarkson for
-access.
+{{ solutions }}
 
 <!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "values")}}
