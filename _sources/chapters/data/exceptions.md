@@ -15,6 +15,8 @@ kernelspec:
 
 # Exceptions
 
+{{ video_embed | replace("%%VID%%", "0zZNEJvcZqg")}}
+
 OCaml has an exception mechanism similar to many other programming languages. A
 new type of OCaml exception is defined with this syntax:
 ```ocaml
@@ -50,6 +52,8 @@ raise e
 There is a convenient function `failwith : string -> 'a` in the standard library
 that raises `Failure`. That is, `failwith s` is equivalent to
 `raise (Failure s)`.
+
+{{ video_embed | replace("%%VID%%", "XTdT1zdF2IY")}}
 
 To catch an exception, use this syntax:
 ```ocaml

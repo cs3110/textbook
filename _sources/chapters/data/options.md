@@ -15,6 +15,8 @@ kernelspec:
 
 # Options
 
+{{ video_embed | replace("%%VID%%", "lByoIw5wpao")}}
+
 Suppose you want to write a function that *usually* returns a value of type `t`,
 but *sometimes* returns nothing. For example, you might want to define a
 function `list_max` that returns the maximum value in a list, but there's not a

@@ -15,6 +15,8 @@ kernelspec:
 
 # Records and Tuples
 
+{{ video_embed | replace("%%VID%%", "E3d1IFMU558")}}
+
 Singly-linked lists are a great data structure, but what if you want a fixed
 number of elements, instead of an unbounded number? Or what if you want the
 elements to have distinct types? Or what if you want to access the elements by
@@ -65,6 +67,8 @@ Here, the pattern `{name; hp; ptype}` is sugar for
 `{name = name; hp = hp; ptype = ptype}`. In each of those subexpressions, the
 identifier appearing on the left-hand side of the equals is a field name, and
 the identifier appearing on the right-hand side is a pattern variable.
+
+{{ video_embed | replace("%%VID%%", "gXlWHvEoIvg")}}
 
 **Syntax.**
 
@@ -175,6 +179,8 @@ involves pattern matching, for example:
 match (1, 2, 3) with (x, y, z) -> x + y + z
 ```
 
+{{ video_embed | replace("%%VID%%", "4QNzC2KZ5I4")}}
+
 **Syntax.**
 
 A tuple is written
@@ -218,6 +224,15 @@ binding as follows:
   pattern does.
 
 ## Variants vs. Tuples and Records
+
+{{ video_embed | replace("%%VID%%", "9kyOH1kpmjk")}}
+
+{{ video_embed | replace("%%VID%%", "oMOO-cWrHuw")}}
+
+```{note}
+The second video above uses more advanced examples of variants that will be
+studied in a [later section](algebraic_data_types).
+```
 
 The big difference between variants and the types we just learned (records and
 tuples) is that a value of a variant type is *one of* a set of possibilities,

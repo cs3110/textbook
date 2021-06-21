@@ -15,6 +15,8 @@ kernelspec:
 
 # Example: Trees
 
+{{ video_embed | replace("%%VID%%", "WV9DGpRTAE0")}}
+
 Trees are a very useful data structure. A *binary tree*, as you'll recall from
 CS 2110, is a node containing a value and two children that are trees. A binary
 tree can also be an empty tree, which we also use to represent the absence of a

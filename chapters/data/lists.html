@@ -408,17 +408,18 @@
                 
   <div class="section" id="lists">
 <h1><span class="section-number">3.1. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h1>
-<p>An OCaml list is a sequence of values all of which have the same type.
-They are implemented as singly-linked lists.  These lists enjoy a
-first-class status in the language:  there is special support for easily
-creating and working with lists.  That’s a characteristic that OCaml
-shares with many other functional languages.  Mainstream imperative
-languages, like Python, have such support these days too.  Maybe that’s
-because programmers find it so pleasant to work directly with lists as a
-first-class part of the language, rather than having to go through a
-library (as in C and Java).</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/x8oLIEtSRBs" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>An OCaml list is a sequence of values all of which have the same type. They are
+implemented as singly-linked lists. These lists enjoy a first-class status in
+the language: there is special support for easily creating and working with
+lists. That’s a characteristic that OCaml shares with many other functional
+languages. Mainstream imperative languages, like Python, have such support these
+days too. Maybe that’s because programmers find it so pleasant to work directly
+with lists as a first-class part of the language, rather than having to go
+through a library (as in C and Java).</p>
 <div class="section" id="building-lists">
 <h2><span class="section-number">3.1.1. </span>Building Lists<a class="headerlink" href="#building-lists" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/I9u4kFPM7YI" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p><strong>Syntax.</strong>  There are three syntactic forms for building lists:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="bp">[]</span>
 <span class="n">e1</span> <span class="o">::</span> <span class="n">e2</span>
@@ -427,10 +428,10 @@ library (as in C and Java).</p>
 </div>
 <p>The empty list is written <code class="docutils literal notranslate"><span class="pre">[]</span></code> and is pronounced “nil”, a name that comes from
 Lisp. Given a list <code class="docutils literal notranslate"><span class="pre">lst</span></code> and element <code class="docutils literal notranslate"><span class="pre">elt</span></code>, we can prepend <code class="docutils literal notranslate"><span class="pre">elt</span></code> to <code class="docutils literal notranslate"><span class="pre">lst</span></code> by
-writing <code class="docutils literal notranslate"><span class="pre">elt</span> <span class="pre">::</span> <span class="pre">lst</span></code>. The double-colon operator is pronounced “cons”, a name that
-comes from an operator in Lisp that <u>cons</u>tructs objects in memory. “Cons”
-can also be used as a verb, as in “I will cons an element onto the list.” The
-first element of a list is usually called its <em>head</em> and the rest of the
+writing <code class="docutils literal notranslate"><span class="pre">elt</span> <span class="pre">::</span> <span class="pre">lst</span></code>. The double-colon operator is pronounced “cons”, a name
+that comes from an operator in Lisp that <u>cons</u>tructs objects in memory.
+“Cons” can also be used as a verb, as in “I will cons an element onto the list.”
+The first element of a list is usually called its <em>head</em> and the rest of the
 elements (if any) are called its <em>tail</em>.</p>
 <p>The square bracket syntax is convenient but unnecessary. Any list
 <code class="docutils literal notranslate"><span class="pre">[e1;</span> <span class="pre">e2;</span> <span class="pre">...;</span> <span class="pre">en]</span></code> could instead be written with the more primitive nil and
@@ -439,7 +440,7 @@ defined in terms of a more primitive syntax within the language, we call the
 pleasant syntax <em>syntactic sugar</em>: it makes the language “sweeter”. Transforming
 the sweet syntax into the more primitive syntax is called <em>desugaring</em>.</p>
 <p>Because the elements of the list can be arbitrary expressions, lists can be
-nested as deeply as we like, e.g., <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">[[]];</span> <span class="pre">[[1;</span> <span class="pre">2;</span> <span class="pre">3]]]</span></code>.</p>
+nested as deeply as we like, e.g., <code class="docutils literal notranslate"><span class="pre">[[[]];</span> <span class="pre">[[1;</span> <span class="pre">2;</span> <span class="pre">3]]]</span></code>.</p>
 <p><strong>Dynamic semantics.</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code> is already a value.</p></li>
@@ -473,17 +474,24 @@ that operate on types, instead of functions that operate on values.</p>
 <p>The type-checking rules:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">[]</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">list</span></code></p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">:</span> <span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">list</span></code> then <code class="docutils literal notranslate"><span class="pre">e1::e2</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">list</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">:</span> <span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">list</span></code> then <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">::</span> <span class="pre">e2</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">list</span></code>. In case the colons
+and their precedence is confusing, the latter means <code class="docutils literal notranslate"><span class="pre">(e1</span> <span class="pre">::</span> <span class="pre">e2)</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">list</span></code>.</p></li>
 </ul>
 <p>In the rule for <code class="docutils literal notranslate"><span class="pre">[]</span></code>, recall that <code class="docutils literal notranslate"><span class="pre">'a</span></code> is a type variable: it stands for an
 unknown type. So the empty list is a list whose elements have an unknown type.
-If we cons an <code class="docutils literal notranslate"><span class="pre">int</span></code> onto it, say <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">::</span> <span class="pre">[]</span></code>, then the compiler infers that for that
-particular list, <code class="docutils literal notranslate"><span class="pre">'a</span></code> must be <code class="docutils literal notranslate"><span class="pre">int</span></code>. But if in another place we cons a <code class="docutils literal notranslate"><span class="pre">bool</span></code>
-onto it, say <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">::</span> <span class="pre">[]</span></code>, then the compiler infers that for that particular
-list, <code class="docutils literal notranslate"><span class="pre">'a</span></code> must be <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
+If we cons an <code class="docutils literal notranslate"><span class="pre">int</span></code> onto it, say <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">::</span> <span class="pre">[]</span></code>, then the compiler infers that for
+that particular list, <code class="docutils literal notranslate"><span class="pre">'a</span></code> must be <code class="docutils literal notranslate"><span class="pre">int</span></code>. But if in another place we cons a
+<code class="docutils literal notranslate"><span class="pre">bool</span></code> onto it, say <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">::</span> <span class="pre">[]</span></code>, then the compiler infers that for that
+particular list, <code class="docutils literal notranslate"><span class="pre">'a</span></code> must be <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
 </div>
 <div class="section" id="accessing-lists">
 <h2><span class="section-number">3.1.2. </span>Accessing Lists<a class="headerlink" href="#accessing-lists" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/AkrlDpHN_zE" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The video linked above also uses records and tuples as examples. Those are
+covered in the <a class="reference internal" href="records_tuples.html"><span class="doc std std-doc">next section</span></a> of this book.</p>
+</div>
 <p>There are really only two ways to build a list, with nil and cons. So if we want
 to take apart a list into its component pieces, we have to say what to do with
 the list if it’s empty, and what to do if it’s non-empty (that is, a cons of one
@@ -507,10 +515,10 @@ element onto some other list). We do that with a language feature called
 </div>
 <p>This function says to take the input <code class="docutils literal notranslate"><span class="pre">lst</span></code> and see whether it has the same shape
 as the empty list. If so, return 0. Otherwise, if it has the same shape as the
-list <code class="docutils literal notranslate"><span class="pre">h::t</span></code>, then let <code class="docutils literal notranslate"><span class="pre">h</span></code> be the first element of <code class="docutils literal notranslate"><span class="pre">lst</span></code>, and let <code class="docutils literal notranslate"><span class="pre">t</span></code> be the rest
-of the elements of <code class="docutils literal notranslate"><span class="pre">lst</span></code>, and return <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">+</span> <span class="pre">sum</span> <span class="pre">t</span></code>. The choice of variable names
-here is meant to suggest “head” and “tail” and is a common idiom, but we could
-use other names if we wanted. Another common idiom is:</p>
+list <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">::</span> <span class="pre">t</span></code>, then let <code class="docutils literal notranslate"><span class="pre">h</span></code> be the first element of <code class="docutils literal notranslate"><span class="pre">lst</span></code>, and let <code class="docutils literal notranslate"><span class="pre">t</span></code> be the
+rest of the elements of <code class="docutils literal notranslate"><span class="pre">lst</span></code>, and return <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">+</span> <span class="pre">sum</span> <span class="pre">t</span></code>. The choice of variable
+names here is meant to suggest “head” and “tail” and is a common idiom, but we
+could use other names if we wanted. Another common idiom is:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="n">xs</span> <span class="o">=</span>
@@ -528,8 +536,8 @@ use other names if we wanted. Another common idiom is:</p>
 </div>
 <p>That is, the input list is a list of xs (pronounced EX-uhs), the head element is
 an x, and the tail is xs’ (pronounced EX-uhs prime).</p>
-<p>Syntactically it isn’t necessary to use so many lines to define <code class="docutils literal notranslate"><span class="pre">sum</span></code>. We
-could do it all on one line:</p>
+<p>Syntactically it isn’t necessary to use so many lines to define <code class="docutils literal notranslate"><span class="pre">sum</span></code>. We could
+do it all on one line:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="n">xs</span> <span class="o">=</span> <span class="k">match</span> <span class="n">xs</span> <span class="k">with</span> <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs&#39;</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">xs&#39;</span>
@@ -619,6 +627,7 @@ another list:</p>
 <p>For example, <code class="docutils literal notranslate"><span class="pre">append</span> <span class="pre">[1;</span> <span class="pre">2]</span> <span class="pre">[3;</span> <span class="pre">4]</span></code> is <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3;</span> <span class="pre">4]</span></code>. That function is actually
 available as a built-in operator <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, so we could instead write
 <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2]</span> <span class="pre">&#64;</span> <span class="pre">[3;</span> <span class="pre">4]</span></code>.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/VDRTatjSl0E" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>As a final example, we could write a function to determine whether
 a list is empty:</p>
 <div class="cell docutils container">
@@ -699,6 +708,7 @@ perform an optimization.</p>
 </div>
 <div class="section" id="pattern-matching-with-lists">
 <h2><span class="section-number">3.1.4. </span>Pattern Matching with Lists<a class="headerlink" href="#pattern-matching-with-lists" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/sO9wxUxajS4" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We saw above how to access lists using pattern matching. Let’s look more
 carefully at this feature.</p>
 <p><strong>Syntax.</strong></p>
@@ -725,6 +735,7 @@ pattern <code class="docutils literal notranslate"><span class="pre">x</span> <s
 <p>As we learn more of data structures available in OCaml, we’ll expand
 the possibilities for what a pattern may be.</p>
 <p><strong>Dynamic semantics.</strong></p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/sz72NP4u4DQ" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Pattern matching involves two inter-related tasks: determining whether a pattern
 matches a value, and determining what parts of the value should be associated
 with which variable names in the pattern. The former task is intuitively about
@@ -830,8 +841,9 @@ types of any pattern variables as well as all occurrences of the wildcard
 pattern. As for the list patterns, they have the same type-checking rules as
 list expressions.</p>
 <p><strong>Additional Static Checking.</strong></p>
-<p>In addition to that type-checking rule, there are two other checks
-the compiler does for each match expression.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/aLQJpk9vXD4" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>In addition to that type-checking rule, there are two other checks the compiler
+does for each match expression.</p>
 <p>First, <strong>exhaustiveness:</strong> the compiler checks to make sure that there are
 enough patterns to guarantee that at least one of them matches the expression
 <code class="docutils literal notranslate"><span class="pre">e</span></code>, no matter what the value of that expression is at run time. This ensures
@@ -996,10 +1008,10 @@ structure of a list.  For example:</p>
 </div>
 <div class="section" id="immediate-matches">
 <h2><span class="section-number">3.1.6. </span>Immediate Matches<a class="headerlink" href="#immediate-matches" title="Permalink to this headline">¶</a></h2>
-<p>When you have a function that immediately pattern-matches against
-its final argument, there’s a nice piece of syntactic sugar
-you can use to avoid writing extra code.  Here’s an example:
-instead of</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/VgVP8Tin6yY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>When you have a function that immediately pattern-matches against its final
+argument, there’s a nice piece of syntactic sugar you can use to avoid writing
+extra code. Here’s an example: instead of</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="n">lst</span> <span class="o">=</span>

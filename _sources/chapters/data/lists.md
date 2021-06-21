@@ -15,17 +15,20 @@ kernelspec:
 
 # Lists
 
-An OCaml list is a sequence of values all of which have the same type.
-They are implemented as singly-linked lists.  These lists enjoy a
-first-class status in the language:  there is special support for easily
-creating and working with lists.  That's a characteristic that OCaml
-shares with many other functional languages.  Mainstream imperative
-languages, like Python, have such support these days too.  Maybe that's
-because programmers find it so pleasant to work directly with lists as a
-first-class part of the language, rather than having to go through a
-library (as in C and Java).
+{{ video_embed | replace("%%VID%%", "x8oLIEtSRBs")}}
+
+An OCaml list is a sequence of values all of which have the same type. They are
+implemented as singly-linked lists. These lists enjoy a first-class status in
+the language: there is special support for easily creating and working with
+lists. That's a characteristic that OCaml shares with many other functional
+languages. Mainstream imperative languages, like Python, have such support these
+days too. Maybe that's because programmers find it so pleasant to work directly
+with lists as a first-class part of the language, rather than having to go
+through a library (as in C and Java).
 
 ## Building Lists
+
+{{ video_embed | replace("%%VID%%", "I9u4kFPM7YI")}}
 
 **Syntax.**  There are three syntactic forms for building lists:
 ```ocaml
@@ -35,10 +38,10 @@ e1 :: e2
 ```
 The empty list is written `[]` and is pronounced "nil", a name that comes from
 Lisp. Given a list `lst` and element `elt`, we can prepend `elt` to `lst` by
-writing `elt :: lst`. The double-colon operator is pronounced "cons", a name that
-comes from an operator in Lisp that <u>cons</u>tructs objects in memory. "Cons"
-can also be used as a verb, as in "I will cons an element onto the list." The
-first element of a list is usually called its *head* and the rest of the
+writing `elt :: lst`. The double-colon operator is pronounced "cons", a name
+that comes from an operator in Lisp that <u>cons</u>tructs objects in memory.
+"Cons" can also be used as a verb, as in "I will cons an element onto the list."
+The first element of a list is usually called its *head* and the rest of the
 elements (if any) are called its *tail*.
 
 The square bracket syntax is convenient but unnecessary. Any list
@@ -49,7 +52,7 @@ pleasant syntax *syntactic sugar*: it makes the language "sweeter". Transforming
 the sweet syntax into the more primitive syntax is called *desugaring*.
 
 Because the elements of the list can be arbitrary expressions, lists can be
-nested as deeply as we like, e.g., `[ [[]]; [[1; 2; 3]]]`.
+nested as deeply as we like, e.g., `[[[]]; [[1; 2; 3]]]`.
 
 **Dynamic semantics.**
 
@@ -86,16 +89,24 @@ that operate on types, instead of functions that operate on values.
 The type-checking rules:
 
 * `[] : 'a list`
- * If `e1 : t` and `e2 : t list` then `e1::e2 : t list`.
+* If `e1 : t` and `e2 : t list` then `e1 :: e2 : t list`. In case the colons
+  and their precedence is confusing, the latter means `(e1 :: e2) : t list`.
 
 In the rule for `[]`, recall that `'a` is a type variable: it stands for an
 unknown type. So the empty list is a list whose elements have an unknown type.
-If we cons an `int` onto it, say `2 :: []`, then the compiler infers that for that
-particular list, `'a` must be `int`. But if in another place we cons a `bool`
-onto it, say `true :: []`, then the compiler infers that for that particular
-list, `'a` must be `bool`.
+If we cons an `int` onto it, say `2 :: []`, then the compiler infers that for
+that particular list, `'a` must be `int`. But if in another place we cons a
+`bool` onto it, say `true :: []`, then the compiler infers that for that
+particular list, `'a` must be `bool`.
 
 ## Accessing Lists
+
+{{ video_embed | replace("%%VID%%", "AkrlDpHN_zE")}}
+
+```{note}
+The video linked above also uses records and tuples as examples. Those are
+covered in the [next section](records_tuples) of this book.
+```
 
 There are really only two ways to build a list, with nil and cons. So if we want
 to take apart a list into its component pieces, we have to say what to do with
@@ -113,10 +124,10 @@ let rec sum lst =
 
 This function says to take the input `lst` and see whether it has the same shape
 as the empty list. If so, return 0. Otherwise, if it has the same shape as the
-list `h::t`, then let `h` be the first element of `lst`, and let `t` be the rest
-of the elements of `lst`, and return `h + sum t`. The choice of variable names
-here is meant to suggest "head" and "tail" and is a common idiom, but we could
-use other names if we wanted. Another common idiom is:
+list `h :: t`, then let `h` be the first element of `lst`, and let `t` be the
+rest of the elements of `lst`, and return `h + sum t`. The choice of variable
+names here is meant to suggest "head" and "tail" and is a common idiom, but we
+could use other names if we wanted. Another common idiom is:
 ```{code-cell} ocaml
 let rec sum xs =
   match xs with
@@ -126,8 +137,8 @@ let rec sum xs =
 That is, the input list is a list of xs (pronounced EX-uhs), the head element is
 an x, and the tail is xs' (pronounced EX-uhs prime).
 
-Syntactically it isn't necessary to use so many lines to define `sum`. We
-could do it all on one line:
+Syntactically it isn't necessary to use so many lines to define `sum`. We could
+do it all on one line:
 ```{code-cell} ocaml
 let rec sum xs = match xs with | [] -> 0 | x :: xs' -> x + sum xs'
 ```
@@ -174,6 +185,8 @@ let rec append lst1 lst2 =
 For example, `append [1; 2] [3; 4]` is `[1; 2; 3; 4]`. That function is actually
 available as a built-in operator `@`, so we could instead write
 `[1; 2] @ [3; 4]`.
+
+{{ video_embed | replace("%%VID%%", "VDRTatjSl0E")}}
 
 As a final example, we could write a function to determine whether
 a list is empty:
@@ -241,6 +254,8 @@ perform an optimization.
 
 ## Pattern Matching with Lists
 
+{{ video_embed | replace("%%VID%%", "sO9wxUxajS4")}}
+
 We saw above how to access lists using pattern matching. Let's look more
 carefully at this feature.
 
@@ -272,6 +287,8 @@ As we learn more of data structures available in OCaml, we'll expand
 the possibilities for what a pattern may be.
 
 **Dynamic semantics.**
+
+{{ video_embed | replace("%%VID%%", "sz72NP4u4DQ")}}
 
 Pattern matching involves two inter-related tasks: determining whether a pattern
 matches a value, and determining what parts of the value should be associated
@@ -377,8 +394,10 @@ list expressions.
 
 **Additional Static Checking.**
 
-In addition to that type-checking rule, there are two other checks
-the compiler does for each match expression.
+{{ video_embed | replace("%%VID%%", "aLQJpk9vXD4")}}
+
+In addition to that type-checking rule, there are two other checks the compiler
+does for each match expression.
 
 First, **exhaustiveness:** the compiler checks to make sure that there are
 enough patterns to guarantee that at least one of them matches the expression
@@ -473,10 +492,11 @@ structure of a list.  For example:
 
 ## Immediate Matches
 
-When you have a function that immediately pattern-matches against
-its final argument, there's a nice piece of syntactic sugar
-you can use to avoid writing extra code.  Here's an example:
-instead of
+{{ video_embed | replace("%%VID%%", "VgVP8Tin6yY")}}
+
+When you have a function that immediately pattern-matches against its final
+argument, there's a nice piece of syntactic sugar you can use to avoid writing
+extra code. Here's an example: instead of
 ```{code-cell} ocaml
 let rec sum lst =
   match lst with

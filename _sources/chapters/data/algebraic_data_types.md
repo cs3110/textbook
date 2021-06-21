@@ -28,6 +28,8 @@ But variants are far more powerful that this.
 
 ## Variants that Carry Data
 
+{{ video_embed | replace("%%VID%%", "u6P5XdRta04")}}
+
 As a running example, here is a variant type `shape` that does more than just
 enumerate values:
 ```{code-cell} ocaml
@@ -44,6 +46,9 @@ constructor `Circle` that carries a pair of type `point * float`, which
 according to the comment represents the center of the circle and its radius. A
 rectangle is represented by a constructor `Rect` that carries a pair of type
 `point*point`.
+
+{{ video_embed | replace("%%VID%%", "K_eA-8LhlVY")}}
+{{ video_embed | replace("%%VID%%", "SpuQfO_597E")}}
 
 Here are a couple functions that use the `shape` type:
 ```{code-cell} ocaml
@@ -116,6 +121,8 @@ let double_right = function
 ```
 
 ## Syntax and Semantics
+
+{{ video_embed | replace("%%VID%%", "3A_PNz5njt0")}}
 
 **Syntax.**
 
@@ -208,6 +215,8 @@ The OCaml type checker now alerts you that you haven't yet updated
 The moral of the story is: catch-all cases lead to buggy code. Avoid using them.
 
 ## Recursive Variants
+
+{{ video_embed | replace("%%VID%%", "gDh217oAfnY")}}
 
 Variant types may mention their own name inside their own body. For example,
 here is a variant type that could be used to represent something similar to
