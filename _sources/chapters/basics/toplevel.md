@@ -1,5 +1,7 @@
 # The OCaml Toplevel
 
+{{ video_embed | replace("%%VID%%", "3fzrFY-2ZQ8")}}
+
 The *toplevel* is like a calculator or command-line interface to OCaml. It's
 similar to JShell for Java, or the interactive Python interpreter. The toplevel
 is handy for trying out small pieces of code without going to the trouble of

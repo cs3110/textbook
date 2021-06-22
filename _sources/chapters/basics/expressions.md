@@ -82,6 +82,8 @@ equality operator.
 
 ## If Expressions
 
+{{ video_embed | replace("%%VID%%", "XJ6QPtlPD7s")}}
+
 The expression `if e1 then e2 else e3` evaluates to `e2` if `e1` evaluates to
 `true`, and to `e3` otherwise. We call `e1` the *guard* of the `if` expression.
 
@@ -134,10 +136,10 @@ distinguish the three different occurrences of it.
 
 **Dynamic semantics.** The dynamic semantics of an `if` expression:
 
-* if `e1` evaluates to `true`, and if `e2` evaluates to a value `v`, then
+* If `e1` evaluates to `true`, and if `e2` evaluates to a value `v`, then
   `if e1 then e2 else e3` evaluates to `v`
 
-* if `e1` evaluates to `false`, and if `e3` evaluates to a value `v`, then
+* If `e1` evaluates to `false`, and if `e3` evaluates to a value `v`, then
   `if e1 then e2 else e3` evaluates to `v`.
 
 We call these *evaluation rules*: they define how to evaluate expressions. Note
@@ -149,7 +151,7 @@ but for now we'll stick with this more informal style of explanation.
 
 **Static semantics.** The static semantics of an `if` expression:
 
-* if `e1` has type `bool` and `e2` has type `t` and `e3` has type `t` then
+* If `e1` has type `bool` and `e2` has type `t` and `e3` has type `t` then
   `if e1 then e2 else e3` has type `t`
 
 We call this a *typing rule*: it describes how to type check an expression. Note
@@ -175,6 +177,8 @@ In the above example, variable `x` has type `int`, which is what the colon
 indicates.
 
 ## Let Expressions
+
+{{ video_embed | replace("%%VID%%", "ug3L97FXC6A")}}
 
 In our use of the word `let` thus far, we've been making definitions in the
 toplevel and in `.ml` files. For example,
@@ -272,6 +276,8 @@ let x : t = e1 in e2
 
 ## Scope
 
+{{ video_embed | replace("%%VID%%", "_TpTC6eo34M")}}
+
 `Let` bindings are in effect only in the block of code in which they occur. This
 is exactly what you're used to from nearly any modern programming language. For
 example:
@@ -353,6 +359,8 @@ There is a term commonly used for this phenomenon: a new binding of a variable
 *shadows* any old binding of the variable name. Metaphorically, it's as if the
 new binding temporarily casts a shadow over the old binding. But eventually the
 old binding could reappear as the shadow recedes.
+
+{{ video_embed | replace("%%VID%%", "4SqMkUwakEA")}}
 
 Shadowing is not mutable assignment. For example, both of the following
 expressions evaluate to 11:

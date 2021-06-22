@@ -1,15 +1,17 @@
 # The Basics of OCaml
 
-This chapter will cover some of the basic features of OCaml.  But before
-we dive in to learning OCaml, let's first talk about a bigger idea:
-learning languages in general.
+This chapter will cover some of the basic features of OCaml. But before we dive
+in to learning OCaml, let's first talk about a bigger idea: learning languages
+in general.
 
-One of the secondary goals of this course is not just for you to learn
-a new programming language, but to improve your skills at learning
-*how to learn* new languages.
+One of the secondary goals of this course is not just for you to learn a new
+programming language, but to improve your skills at learning *how to learn* new
+languages.
 
-There are five essential components to learning a language: syntax,
-semantics, idioms, libraries, and tools.
+{{ video_embed | replace("%%VID%%", "A5IHFZtRfBs")}}
+
+There are five essential components to learning a language: syntax, semantics,
+idioms, libraries, and tools.
 
 **Syntax.** By *syntax*, we mean the rules that define what constitutes a
 textually well-formed program in the language, including the keywords,

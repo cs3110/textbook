@@ -443,6 +443,7 @@ equality operator.</p>
 </div>
 <div class="section" id="if-expressions">
 <h2><span class="section-number">2.3.3. </span>If Expressions<a class="headerlink" href="#if-expressions" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/XJ6QPtlPD7s" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The expression <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">e1</span> <span class="pre">then</span> <span class="pre">e2</span> <span class="pre">else</span> <span class="pre">e3</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">e2</span></code> if <code class="docutils literal notranslate"><span class="pre">e1</span></code> evaluates to
 <code class="docutils literal notranslate"><span class="pre">true</span></code>, and to <code class="docutils literal notranslate"><span class="pre">e3</span></code> otherwise. We call <code class="docutils literal notranslate"><span class="pre">e1</span></code> the <em>guard</em> of the <code class="docutils literal notranslate"><span class="pre">if</span></code> expression.</p>
 <div class="cell docutils container">
@@ -513,9 +514,9 @@ syntactic construct. The numbers after the letter <code class="docutils literal 
 distinguish the three different occurrences of it.</p>
 <p><strong>Dynamic semantics.</strong> The dynamic semantics of an <code class="docutils literal notranslate"><span class="pre">if</span></code> expression:</p>
 <ul class="simple">
-<li><p>if <code class="docutils literal notranslate"><span class="pre">e1</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">true</span></code>, and if <code class="docutils literal notranslate"><span class="pre">e2</span></code> evaluates to a value <code class="docutils literal notranslate"><span class="pre">v</span></code>, then
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e1</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">true</span></code>, and if <code class="docutils literal notranslate"><span class="pre">e2</span></code> evaluates to a value <code class="docutils literal notranslate"><span class="pre">v</span></code>, then
 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">e1</span> <span class="pre">then</span> <span class="pre">e2</span> <span class="pre">else</span> <span class="pre">e3</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">v</span></code></p></li>
-<li><p>if <code class="docutils literal notranslate"><span class="pre">e1</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">false</span></code>, and if <code class="docutils literal notranslate"><span class="pre">e3</span></code> evaluates to a value <code class="docutils literal notranslate"><span class="pre">v</span></code>, then
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e1</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">false</span></code>, and if <code class="docutils literal notranslate"><span class="pre">e3</span></code> evaluates to a value <code class="docutils literal notranslate"><span class="pre">v</span></code>, then
 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">e1</span> <span class="pre">then</span> <span class="pre">e2</span> <span class="pre">else</span> <span class="pre">e3</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
 </ul>
 <p>We call these <em>evaluation rules</em>: they define how to evaluate expressions. Note
@@ -526,7 +527,7 @@ Later we will develop a more mathematical way of expressing dynamic semantics,
 but for now we’ll stick with this more informal style of explanation.</p>
 <p><strong>Static semantics.</strong> The static semantics of an <code class="docutils literal notranslate"><span class="pre">if</span></code> expression:</p>
 <ul class="simple">
-<li><p>if <code class="docutils literal notranslate"><span class="pre">e1</span></code> has type <code class="docutils literal notranslate"><span class="pre">bool</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span></code> has type <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">e3</span></code> has type <code class="docutils literal notranslate"><span class="pre">t</span></code> then
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e1</span></code> has type <code class="docutils literal notranslate"><span class="pre">bool</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span></code> has type <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">e3</span></code> has type <code class="docutils literal notranslate"><span class="pre">t</span></code> then
 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">e1</span> <span class="pre">then</span> <span class="pre">e2</span> <span class="pre">else</span> <span class="pre">e3</span></code> has type <code class="docutils literal notranslate"><span class="pre">t</span></code></p></li>
 </ul>
 <p>We call this a <em>typing rule</em>: it describes how to type check an expression. Note
@@ -558,6 +559,7 @@ indicates.</p>
 </div>
 <div class="section" id="let-expressions">
 <h2><span class="section-number">2.3.4. </span>Let Expressions<a class="headerlink" href="#let-expressions" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/ug3L97FXC6A" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>In our use of the word <code class="docutils literal notranslate"><span class="pre">let</span></code> thus far, we’ve been making definitions in the
 toplevel and in <code class="docutils literal notranslate"><span class="pre">.ml</span></code> files. For example,</p>
 <div class="cell docutils container">
@@ -681,6 +683,7 @@ explicitly annotate it with this syntax:</p>
 </div>
 <div class="section" id="scope">
 <h2><span class="section-number">2.3.5. </span>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/_TpTC6eo34M" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p><code class="docutils literal notranslate"><span class="pre">Let</span></code> bindings are in effect only in the block of code in which they occur. This
 is exactly what you’re used to from nearly any modern programming language. For
 example:</p>
@@ -756,6 +759,7 @@ irrelevant.</p>
 <em>shadows</em> any old binding of the variable name. Metaphorically, it’s as if the
 new binding temporarily casts a shadow over the old binding. But eventually the
 old binding could reappear as the shadow recedes.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/4SqMkUwakEA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Shadowing is not mutable assignment. For example, both of the following
 expressions evaluate to 11:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">in</span> <span class="o">((</span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">6</span> <span class="k">in</span> <span class="n">x</span><span class="o">)</span> <span class="o">+</span> <span class="n">x</span><span class="o">)</span>
