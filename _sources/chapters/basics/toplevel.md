@@ -33,6 +33,9 @@ Let's dissect that response from utop, reading right to left:
 * `int` is the type of the value.
 * The value was not given a name, hence the symbol `-`.
 
+
+{{ video_embed | replace("%%VID%%", "eRnG4gwOTlI")}}
+
 You can bind values to names with a `let` definition, as follows:
 
 ```ocaml
