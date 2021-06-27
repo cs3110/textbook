@@ -1,5 +1,7 @@
 # Higher-Order Programming
 
+{{ video_embed | replace("%%VID%%", "rTbinjZ9-oc")}}
+
 Functions are values just like any other value in OCaml. What does that mean
 exactly? This means that we can pass functions around as arguments to other
 functions, that we can store functions in data structures, that we can return

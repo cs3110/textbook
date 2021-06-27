@@ -15,6 +15,8 @@ kernelspec:
 
 # Map
 
+{{ video_embed | replace("%%VID%%", "qz7kn2pIl3M")}}
+
 Here are two functions we might want to write:
 ```{code-cell} ocaml
 (** [add1 lst] adds 1 to each element of [lst] *)
@@ -78,7 +80,7 @@ let rec concat_bang' f = function
   | h :: t -> f h :: concat_bang' f t
 
 (** [concat_bang lst] concatenates "!" to each element of [lst] *)
-let concat_bang = concat_bang' (fun x -> x ^ "3110")
+let concat_bang = concat_bang' (fun x -> x ^ "!")
 ```
 
 But now there really is no difference at all between `add1'` and `concat_bang'`
@@ -97,7 +99,7 @@ let rec transform f = function
 let add1 = transform (fun x -> x + 1)
 
 (** [concat_bang lst] concatenates "!" to each element of [lst] *)
-let concat_bang = transform (fun x -> x ^ "3110")
+let concat_bang = transform (fun x -> x ^ "!")
 ```
 
 ````{note}
@@ -130,13 +132,15 @@ let rec map f = function
 let add1 = map (fun x -> x + 1)
 
 (** [concat_bang lst] concatenates "!" to each element of [lst] *)
-let concat_bang = map (fun x -> x ^ "3110")
+let concat_bang = map (fun x -> x ^ "!")
 ```
 
 We have now successfully applied the Abstraction Principle: the common structure
 has been factored out. What's left clearly expresses the computation, at least
 to the reader who is familiar with `map`, in a way that the original versions do
 not as quickly make apparent.
+
+{{ video_embed | replace("%%VID%%", "hynjCGMpcFk")}}
 
 ## Side Effects
 

@@ -26,6 +26,8 @@ library&mdash;that we call *combine*.
 
 ## Combine
 
+{{ video_embed | replace("%%VID%%", "uYJVwW2BFPg")}}
+
 Once more, let's write two functions:
 
 ```{code-cell} ocaml
@@ -97,6 +99,8 @@ Once more, the Abstraction Principle has led us to an amazingly simple and
 succinct expression of the computation.
 
 ## Fold Right
+
+{{ video_embed | replace("%%VID%%", "WKKkIGncRn8")}}
 
 The `combine` function is the idea underlying an actual OCaml library function.
 To get there, we need to make a couple of changes to the implementation we have

@@ -15,6 +15,8 @@ kernelspec:
 
 # Filter
 
+{{ video_embed | replace("%%VID%%", "FaWtD-LRdpU")}}
+
 Suppose we wanted to filter out only the even numbers from a list, or the odd
 numbers.  Here are some functions to do that:
 

@@ -15,6 +15,8 @@ kernelspec:
 
 # Beyond Lists
 
+{{ video_embed | replace("%%VID%%", "5Yyk-l-cUNI")}}
+
 Functionals like map and fold are not restricted to lists. They make sense for
 nearly any kind of data collection. For example, recall this tree
 representation:

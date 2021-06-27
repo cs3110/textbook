@@ -432,6 +432,7 @@
                 
   <div class="section" id="map">
 <h1><span class="section-number">4.2. </span>Map<a class="headerlink" href="#map" title="Permalink to this headline">¶</a></h1>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/qz7kn2pIl3M" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Here are two functions we might want to write:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -527,7 +528,7 @@ one helper function out from each main function and make it an argument:</p>
   <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">::</span> <span class="n">concat_bang&#39;</span> <span class="n">f</span> <span class="n">t</span>
 
 <span class="c">(** [concat_bang lst] concatenates &quot;!&quot; to each element of [lst] *)</span>
-<span class="k">let</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="n">concat_bang&#39;</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;3110&quot;</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="n">concat_bang&#39;</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;!&quot;</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
@@ -562,7 +563,7 @@ function to each element of the list:</p>
 <span class="k">let</span> <span class="n">add1</span> <span class="o">=</span> <span class="n">transform</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
 
 <span class="c">(** [concat_bang lst] concatenates &quot;!&quot; to each element of [lst] *)</span>
-<span class="k">let</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="n">transform</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;3110&quot;</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="n">transform</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;!&quot;</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
@@ -608,7 +609,7 @@ make one final change to that name:</p>
 <span class="k">let</span> <span class="n">add1</span> <span class="o">=</span> <span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
 
 <span class="c">(** [concat_bang lst] concatenates &quot;!&quot; to each element of [lst] *)</span>
-<span class="k">let</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;3110&quot;</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;!&quot;</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
@@ -628,6 +629,7 @@ make one final change to that name:</p>
 has been factored out. What’s left clearly expresses the computation, at least
 to the reader who is familiar with <code class="docutils literal notranslate"><span class="pre">map</span></code>, in a way that the original versions do
 not as quickly make apparent.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/hynjCGMpcFk" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <div class="section" id="side-effects">
 <h2><span class="section-number">4.2.1. </span>Side Effects<a class="headerlink" href="#side-effects" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">map</span></code> function exists already in OCaml’s standard library as <code class="docutils literal notranslate"><span class="pre">List.map</span></code>, but
