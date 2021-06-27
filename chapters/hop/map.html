@@ -1,0 +1,949 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.2. Map &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.3. Filter" href="filter.html" />
+    <link rel="prev" title="4.1. Higher-Order Functions" href="higher_order.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.6. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.7. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.8. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/hop/map.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/hop/map.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/hop/map.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/hop/map.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#side-effects">
+   4.2.1. Side Effects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-and-tail-recursion">
+   4.2.2. Map and Tail Recursion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-in-other-languages">
+   4.2.3. Map in Other Languages
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="map">
+<h1><span class="section-number">4.2. </span>Map<a class="headerlink" href="#map" title="Permalink to this headline">¶</a></h1>
+<p>Here are two functions we might want to write:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [add1 lst] adds 1 to each element of [lst] *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">add1</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">h</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">::</span> <span class="n">add1</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">lst1</span> <span class="o">=</span> <span class="n">add1</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add1 : int list -&gt; int list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst1 : int list = [2; 3; 4]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [concat_bang lst] concatenates &quot;!&quot; to each element of [lst] *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">h</span> <span class="o">^</span> <span class="s2">&quot;!&quot;</span><span class="o">)</span> <span class="o">::</span> <span class="n">concat_bang</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">lst2</span> <span class="o">=</span> <span class="n">concat_bang</span> <span class="o">[</span><span class="s2">&quot;sweet&quot;</span><span class="o">;</span> <span class="s2">&quot;salty&quot;</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat_bang : string list -&gt; string list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst2 : string list = [&quot;sweet!&quot;; &quot;salty!&quot;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>There’s a lot of similarity between those two functions:</p>
+<ul class="simple">
+<li><p>They both pattern match against a list.</p></li>
+<li><p>They both return the same value for the base case of the empty list.</p></li>
+<li><p>They both recurse on the tail in the case of a non-empty list.</p></li>
+</ul>
+<p>In fact the only difference (other than their names) is what they do for the
+head element: add versus concatenate. Let’s rewrite the two functions to make
+that difference even more explicit:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [add1 lst] adds 1 to each element of [lst] *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">add1</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span>
+    <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">in</span>
+    <span class="n">f</span> <span class="n">h</span> <span class="o">::</span> <span class="n">add1</span> <span class="n">t</span>
+
+<span class="c">(** [concat_bang lst] concatenates &quot;!&quot; to each element of [lst] *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span>
+    <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;!&quot;</span> <span class="k">in</span>
+    <span class="n">f</span> <span class="n">h</span> <span class="o">::</span> <span class="n">concat_bang</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add1 : int list -&gt; int list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat_bang : string list -&gt; string list = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now the only difference between the two functions (again, other than their
+names) is the body of helper function <code class="docutils literal notranslate"><span class="pre">f</span></code>. Why repeat all that code when there’s
+such a small difference between the functions? We might as well <em>abstract</em> that
+one helper function out from each main function and make it an argument:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">add1&#39;</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">::</span> <span class="n">add1&#39;</span> <span class="n">f</span> <span class="n">t</span>
+
+<span class="c">(** [add1 lst] adds 1 to each element of [lst] *)</span>
+<span class="k">let</span> <span class="n">add1</span> <span class="o">=</span> <span class="n">add1&#39;</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">concat_bang&#39;</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">::</span> <span class="n">concat_bang&#39;</span> <span class="n">f</span> <span class="n">t</span>
+
+<span class="c">(** [concat_bang lst] concatenates &quot;!&quot; to each element of [lst] *)</span>
+<span class="k">let</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="n">concat_bang&#39;</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;3110&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add1&#39; : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add1 : int list -&gt; int list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat_bang&#39; : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat_bang : string list -&gt; string list = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But now there really is no difference at all between <code class="docutils literal notranslate"><span class="pre">add1'</span></code> and <code class="docutils literal notranslate"><span class="pre">concat_bang'</span></code>
+except for their names. They are totally duplicated code. Even their types are
+now the same, because nothing about them mentions integers or strings. We might
+as well just keep only one of them and come up with a good new name for it. One
+possibility could be <code class="docutils literal notranslate"><span class="pre">transform</span></code>, because they tranform a list by applying a
+function to each element of the list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">transform</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">::</span> <span class="n">transform</span> <span class="n">f</span> <span class="n">t</span>
+
+<span class="c">(** [add1 lst] adds 1 to each element of [lst] *)</span>
+<span class="k">let</span> <span class="n">add1</span> <span class="o">=</span> <span class="n">transform</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="c">(** [concat_bang lst] concatenates &quot;!&quot; to each element of [lst] *)</span>
+<span class="k">let</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="n">transform</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;3110&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val transform : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add1 : int list -&gt; int list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat_bang : string list -&gt; string list = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Instead of</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">add1</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">transform</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">lst</span>
+</pre></div>
+</div>
+<p>above we wrote</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">add1</span> <span class="o">=</span> <span class="n">transform</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>This is another way of being higher order, but it’s one we already learned
+about under the guise of partial application.  The latter way of writing
+the function partially applies <code class="docutils literal notranslate"><span class="pre">transform</span></code> to just one of its two
+arguments, thus returning a function.  That function is bound to the
+name <code class="docutils literal notranslate"><span class="pre">add1</span></code>.</p>
+</div>
+<p>Indeed, the C++ library does call the equivalent function <code class="docutils literal notranslate"><span class="pre">transform</span></code>. But OCaml
+and many other languages (including Java and Python) use the shorter word <em>map</em>,
+in the mathematical sense of how a function maps an input to an output. So let’s
+make one final change to that name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">map</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">::</span> <span class="n">map</span> <span class="n">f</span> <span class="n">t</span>
+
+<span class="c">(** [add1 lst] adds 1 to each element of [lst] *)</span>
+<span class="k">let</span> <span class="n">add1</span> <span class="o">=</span> <span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="c">(** [concat_bang lst] concatenates &quot;!&quot; to each element of [lst] *)</span>
+<span class="k">let</span> <span class="n">concat_bang</span> <span class="o">=</span> <span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">^</span> <span class="s2">&quot;3110&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add1 : int list -&gt; int list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat_bang : string list -&gt; string list = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have now successfully applied the Abstraction Principle: the common structure
+has been factored out. What’s left clearly expresses the computation, at least
+to the reader who is familiar with <code class="docutils literal notranslate"><span class="pre">map</span></code>, in a way that the original versions do
+not as quickly make apparent.</p>
+<div class="section" id="side-effects">
+<h2><span class="section-number">4.2.1. </span>Side Effects<a class="headerlink" href="#side-effects" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">map</span></code> function exists already in OCaml’s standard library as <code class="docutils literal notranslate"><span class="pre">List.map</span></code>, but
+with one small difference from the implementation we discovered above.  First,
+let’s see what’s potentially wrong with our own implementation, then we’ll look
+at the standard library’s implementation.</p>
+<p>We’ve seen before in our discussion of <a class="reference internal" href="../data/exceptions.html"><span class="doc std std-doc">exceptions</span></a> that the
+OCaml language specification does not generally specify evaluation order of
+subexpressions, and that the current language implementation generally evaluates
+right-to-left. Because of that, the following (rather contrived) code actually
+causes the list elements to be printed in what might seem like reverse order:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">p</span> <span class="n">x</span> <span class="o">=</span> <span class="n">print_int</span> <span class="n">x</span><span class="o">;</span> <span class="n">print_newline</span><span class="bp">()</span><span class="o">;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">let</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">map</span> <span class="n">p</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val p : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst : int list = [2; 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s why:</p>
+<ul class="simple">
+<li><p>Expression <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">p</span> <span class="pre">[1;</span> <span class="pre">2]</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">1</span> <span class="pre">::</span> <span class="pre">map</span> <span class="pre">p</span> <span class="pre">[2]</span></code>.</p></li>
+<li><p>The right-hand side of that expression is then evaluated to
+<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">1</span> <span class="pre">::</span> <span class="pre">(p</span> <span class="pre">2</span> <span class="pre">::</span> <span class="pre">map</span> <span class="pre">p</span> <span class="pre">[])</span></code>. The application of <code class="docutils literal notranslate"><span class="pre">p</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code> has not
+yet occurred.</p></li>
+<li><p>The right-hand side of <code class="docutils literal notranslate"><span class="pre">::</span></code> is again evaluated next, yielding
+<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">1</span> <span class="pre">::</span> <span class="pre">(p</span> <span class="pre">2</span> <span class="pre">::</span> <span class="pre">[])</span></code>.</p></li>
+<li><p>Then <code class="docutils literal notranslate"><span class="pre">p</span></code> is applied to <code class="docutils literal notranslate"><span class="pre">2</span></code>, and finally to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+</ul>
+<p>That is likely surprising to anyone who is predisposed to thinking that
+evaluation would occur left-to-right.  The solution is to use a <code class="docutils literal notranslate"><span class="pre">let</span></code>
+expression to cause the evaluation of the function application to occur
+before the recursive call:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">map</span> <span class="n">f</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">let</span> <span class="n">h&#39;</span> <span class="o">=</span> <span class="n">f</span> <span class="n">h</span> <span class="k">in</span> <span class="n">h&#39;</span> <span class="o">::</span> <span class="n">map</span> <span class="n">f</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">lst2</span> <span class="o">=</span> <span class="n">map</span> <span class="n">p</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst2 : int list = [2; 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s why that works:</p>
+<ul class="simple">
+<li><p>Expression <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">p</span> <span class="pre">[1;</span> <span class="pre">2]</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">h'</span> <span class="pre">=</span> <span class="pre">p</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">h''</span> <span class="pre">::</span> <span class="pre">map</span> <span class="pre">p</span> <span class="pre">[2]</span></code>.</p></li>
+<li><p>The binding expression <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">1</span></code> is evaluated, causing <code class="docutils literal notranslate"><span class="pre">1</span></code> to be printed
+and <code class="docutils literal notranslate"><span class="pre">h'</span></code> to be bound to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p>The body expression <code class="docutils literal notranslate"><span class="pre">h''</span> <span class="pre">::</span> <span class="pre">map</span> <span class="pre">p</span> <span class="pre">[2]</span></code> is then evaluated, which
+leads to <code class="docutils literal notranslate"><span class="pre">2</span></code> being printed next.</p></li>
+</ul>
+<p>So that’s how the standard library defines <code class="docutils literal notranslate"><span class="pre">List.map</span></code>. We should use it instead
+of re-defining the function ourselves from now on. But it’s good that we have
+discovered the function “from scratch” as it were, and that if needed we could
+quickly re-code it.</p>
+<p>The bigger lesson to take away from this discussion is that when evaluation
+order matters, we need to use <code class="docutils literal notranslate"><span class="pre">let</span></code> to ensure it. When does it matter? Only when
+there are side effects. Printing and exceptions are the two we’ve seen so far.
+Later we’ll add mutability.</p>
+</div>
+<div class="section" id="map-and-tail-recursion">
+<h2><span class="section-number">4.2.2. </span>Map and Tail Recursion<a class="headerlink" href="#map-and-tail-recursion" title="Permalink to this headline">¶</a></h2>
+<p>Astute readers will have noticed that the implementation of <code class="docutils literal notranslate"><span class="pre">map</span></code> is not tail
+recursive. That is to some extent unavoidable. Here’s a tempting but awful way
+to create a tail-recursive version of it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">map_tr_aux</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">map_tr_aux</span> <span class="n">f</span> <span class="o">(</span><span class="n">acc</span> <span class="o">@</span> <span class="o">[</span><span class="n">f</span> <span class="n">h</span><span class="o">])</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">map_tr</span> <span class="n">f</span> <span class="o">=</span> <span class="n">map_tr_aux</span> <span class="n">f</span> <span class="bp">[]</span>
+
+<span class="k">let</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">map_tr</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map_tr_aux : (&#39;a -&gt; &#39;b) -&gt; &#39;b list -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map_tr : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst : int list = [2; 3; 4]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To some extent that works: the output is correct, and <code class="docutils literal notranslate"><span class="pre">map_tr_aux</span></code> is tail
+recursive. The subtle flaw is the subexpression <code class="docutils literal notranslate"><span class="pre">acc</span> <span class="pre">&#64;</span> <span class="pre">[f</span> <span class="pre">h]</span></code>. Recall that
+append is a linear-time operation on singly-linked lists. That is, if there are
+<span class="math notranslate nohighlight">\(n\)</span> list elements then append takes time <span class="math notranslate nohighlight">\(O(n)\)</span>. So at each recursive call we
+perform a <span class="math notranslate nohighlight">\(O(n)\)</span> operation. And there will be <span class="math notranslate nohighlight">\(n\)</span> recursive calls, one for each
+element of the list. That’s a total of <span class="math notranslate nohighlight">\(n \cdot O(n)\)</span> work, which is <span class="math notranslate nohighlight">\(O(n^2)\)</span>.
+So we achieved tail recursion, but at a high cost: what ought to be a
+linear-time operation became quadratic time.</p>
+<p>In an attempt to fix that, we could use the constant-time cons operation instead
+of the linear-time append operation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">map_tr_aux</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">map_tr_aux</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">h</span> <span class="o">::</span> <span class="n">acc</span><span class="o">)</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">map_tr</span> <span class="n">f</span> <span class="o">=</span> <span class="n">map_tr_aux</span> <span class="n">f</span> <span class="bp">[]</span>
+
+<span class="k">let</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">map_tr</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map_tr_aux : (&#39;a -&gt; &#39;b) -&gt; &#39;b list -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map_tr : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst : int list = [4; 3; 2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>And to some extent that works: it’s tail recursive and linear time. The
+not-so-subtle flaw this time is that the output is backwards. As we take each
+element off the front of the input list, we put it on the front of the output
+list, but that reverses their order.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To understand why the reversal occurs, it might help to think of the input and
+output lists as people standing in a queue:</p>
+<ul class="simple">
+<li><p>Input: Alice, Bob.</p></li>
+<li><p>Output: empty.</p></li>
+</ul>
+<p>Then we remove Alice from the input and add her to the output:</p>
+<ul class="simple">
+<li><p>Input: Bob.</p></li>
+<li><p>Output: Alice.</p></li>
+</ul>
+<p>Then we remove Bob from the input and add him to the output:</p>
+<ul class="simple">
+<li><p>Input: empty.</p></li>
+<li><p>Output: Bob, Alice.</p></li>
+</ul>
+<p>The point is that with singly-linked lists, we can only operate on the head of
+the list and still be constant time. We can’t move Bob to the back of the output
+without making him walk past Alice—and anyone else who might be standing
+in the output.</p>
+</div>
+<p>For that reason, the standard library calls this function <code class="docutils literal notranslate"><span class="pre">List.rev_map</span></code>, that
+is, a (tail-recursive) map function that returns its output in reverse order.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">rev_map_aux</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">rev_map_aux</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">h</span> <span class="o">::</span> <span class="n">acc</span><span class="o">)</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="n">rev_map</span> <span class="n">f</span> <span class="o">=</span> <span class="n">rev_map_aux</span> <span class="n">f</span> <span class="bp">[]</span>
+
+<span class="k">let</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">rev_map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val rev_map_aux : (&#39;a -&gt; &#39;b) -&gt; &#39;b list -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val rev_map : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst : int list = [4; 3; 2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want the output in the “right” order, that’s easy: just apply <code class="docutils literal notranslate"><span class="pre">List.rev</span></code>
+to it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">rev_map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst : int list = [2; 3; 4]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">List.rev</span></code> is both linear time and tail recursive, that yields a complete
+solution. We get a linear-time and tail-recursive map computation. The expense
+is that it requires two passes through the list: one to transform, the other to
+reverse. We’re not going to do better than this efficiency with a singly-linked
+list. Of course, there are other data structures that implement lists, and we’ll
+come to those eventually. Meanwhile, recall that we generally don’t have to
+worry about tail recursion (which is to say, about stack space) until lists have
+10,000 or more elements.</p>
+<p>Why doesn’t the standard library provide this all-in-one function? Maybe it will
+someday if there’s good enough reason. But you might discover in your own
+programming there’s not a lot of need for it. In many cases, we can either do
+without the tail recursion, or be content with a reversed list.</p>
+<p>The bigger lesson to take away from this discussion is that there can be a
+tradeoff between time and space efficiency for recursive functions. By
+attempting to make a function more space efficient (i.e., tail recursive), we
+can accidentally make it asympotically less time efficient (i.e., quadratic
+instead of linear), or if we’re clever keep the asymptotic time efficiency the
+same (i.e., linear) at the cost of a constant factor (i.e., processing twice).</p>
+</div>
+<div class="section" id="map-in-other-languages">
+<h2><span class="section-number">4.2.3. </span>Map in Other Languages<a class="headerlink" href="#map-in-other-languages" title="Permalink to this headline">¶</a></h2>
+<p>We mentioned above that the idea of map exists in many programming languages.
+Here’s an example from Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])))</span>
+<span class="go">[2, 3, 4]</span>
+</pre></div>
+</div>
+<p>We have to use the <code class="docutils literal notranslate"><span class="pre">list</span></code> function to convert the result of the <code class="docutils literal notranslate"><span class="pre">map</span></code> back to a
+list, because Python for sake of efficiency produces each element of the <code class="docutils literal notranslate"><span class="pre">map</span></code>
+output as needed. Here again we see the theme of “when does it get evaluated?”
+returning.</p>
+<p>In Java, map is part of the <code class="docutils literal notranslate"><span class="pre">Stream</span></code> abstraction that was added in Java 8. Since
+there isn’t a built-in Java syntax for lists or streams, it’s a little more
+verbose to give an example. Here we use a factory method <code class="docutils literal notranslate"><span class="pre">Stream.of</span></code> to create a
+stream:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">jshell</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">).</span><span class="na">map</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">())</span>
+<span class="n">$1</span> <span class="o">==&gt;</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Like in the Python example, we have to use something to convert the stream back
+into a list. In this case it’s the <code class="docutils literal notranslate"><span class="pre">collect</span></code> method.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/hop"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="higher_order.html" title="previous page"><span class="section-number">4.1. </span>Higher-Order Functions</a>
+    <a class='right-next' id="next-link" href="filter.html" title="next page"><span class="section-number">4.3. </span>Filter</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

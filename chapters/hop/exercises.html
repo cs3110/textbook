@@ -1,0 +1,639 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.9. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="4.8. Summary" href="summary.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.6. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.7. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.8. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/hop/exercises.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/hop/exercises.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/hop/exercises.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="exercises">
+<h1><span class="section-number">4.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: twice, no arguments [★]</strong></p>
+<p>Consider the following definitions:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">double</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+<span class="k">let</span> <span class="n">square</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+<span class="k">let</span> <span class="n">twice</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">quad</span> <span class="o">=</span> <span class="n">twice</span> <span class="n">double</span>
+<span class="k">let</span> <span class="n">fourth</span> <span class="o">=</span> <span class="n">twice</span> <span class="n">square</span>
+</pre></div>
+</div>
+<p>Use the toplevel to determine what the types of <code class="docutils literal notranslate"><span class="pre">quad</span></code> and <code class="docutils literal notranslate"><span class="pre">fourth</span></code> are. Explain
+how it can be that <code class="docutils literal notranslate"><span class="pre">quad</span></code> is not syntactically written as a function that takes
+an argument, and yet its type shows that it is in fact a function.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: mystery operator 1 [★★]</strong></p>
+<p>What does the following operator do?</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">$</span> <span class="o">)</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">f</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p><em>Hint: investigate <code class="docutils literal notranslate"><span class="pre">square</span> <span class="pre">$</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span></code> vs. <code class="docutils literal notranslate"><span class="pre">square</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span></code>.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: mystery operator 2 [★★]</strong></p>
+<p>What does the following operator do?</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">@@</span> <span class="o">)</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">|&gt;</span> <span class="n">g</span> <span class="o">|&gt;</span> <span class="n">f</span>
+</pre></div>
+</div>
+<p><em>Hint: investigate <code class="docutils literal notranslate"><span class="pre">String.length</span> <span class="pre">&#64;&#64;</span> <span class="pre">string_of_int</span></code> applied to <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">100</span></code>,
+etc.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: repeat [★★]</strong></p>
+<p>Generalize <code class="docutils literal notranslate"><span class="pre">twice</span></code> to a function <code class="docutils literal notranslate"><span class="pre">repeat</span></code>, such that <code class="docutils literal notranslate"><span class="pre">repeat</span> <span class="pre">f</span> <span class="pre">n</span> <span class="pre">x</span></code> applies <code class="docutils literal notranslate"><span class="pre">f</span></code>
+to <code class="docutils literal notranslate"><span class="pre">x</span></code> a total of <code class="docutils literal notranslate"><span class="pre">n</span></code> times. That is,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">repeat</span> <span class="pre">f</span> <span class="pre">0</span> <span class="pre">x</span></code> yields <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">repeat</span> <span class="pre">f</span> <span class="pre">1</span> <span class="pre">x</span></code> yields <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">repeat</span> <span class="pre">f</span> <span class="pre">2</span> <span class="pre">x</span></code> yields <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">(f</span> <span class="pre">x)</span></code> (which is the same as <code class="docutils literal notranslate"><span class="pre">twice</span> <span class="pre">f</span> <span class="pre">x</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">repeat</span> <span class="pre">f</span> <span class="pre">3</span> <span class="pre">x</span></code> yields <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">(f</span> <span class="pre">(f</span> <span class="pre">x))</span></code></p></li>
+<li><p>…</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: product [★]</strong></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">fold_left</span></code> to write a function <code class="docutils literal notranslate"><span class="pre">product_left</span></code> that computes the product of
+a list of floats. The product of the empty list is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. <em>Hint: recall how we
+implemented <code class="docutils literal notranslate"><span class="pre">sum</span></code> in just one line of code in lecture.</em></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">fold_right</span></code> to write a function <code class="docutils literal notranslate"><span class="pre">product_right</span></code> that computes the product
+of a list of floats. <em>Same hint applies.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: terse product [★★]</strong></p>
+<p>How terse can you make your solutions to the <strong>product</strong> exercise? <em>Hints: you
+need only one line of code for each, and you do not need the <code class="docutils literal notranslate"><span class="pre">fun</span></code> keyword. For
+<code class="docutils literal notranslate"><span class="pre">fold_left</span></code>, your function definition does not even need to explicitly take a
+list argument. If you use <code class="docutils literal notranslate"><span class="pre">ListLabels</span></code>, the same is true for <code class="docutils literal notranslate"><span class="pre">fold_right</span></code>.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: sum_cube_odd [★★]</strong></p>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">sum_cube_odd</span> <span class="pre">n</span></code> that computes the sum of the cubes of all the
+odd numbers between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code> inclusive. Do not write any new recursive
+functions. Instead, use the functionals map, fold, and filter, and the <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">--</span> <span class="pre">)</span></code>
+operator (defined in the discussion of pipelining).</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: sum_cube_odd pipeline [★★]</strong></p>
+<p>Rewrite the function <code class="docutils literal notranslate"><span class="pre">sum_cube_odd</span></code> to use the pipeline operator <code class="docutils literal notranslate"><span class="pre">|&gt;</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: exists [★★]</strong></p>
+<p>Consider writing a function <code class="docutils literal notranslate"><span class="pre">exists:</span> <span class="pre">('a</span> <span class="pre">-&gt;</span> <span class="pre">bool)</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code>, such that
+<code class="docutils literal notranslate"><span class="pre">exists</span> <span class="pre">p</span> <span class="pre">[a1;</span> <span class="pre">...;</span> <span class="pre">an]</span></code> returns whether at least one element of the list
+satisfies the predicate <code class="docutils literal notranslate"><span class="pre">p</span></code>. That is, it evaluates the same as
+<code class="docutils literal notranslate"><span class="pre">(p</span> <span class="pre">a1)</span> <span class="pre">||</span> <span class="pre">(p</span> <span class="pre">a2)</span> <span class="pre">||</span> <span class="pre">...</span> <span class="pre">||</span> <span class="pre">(p</span> <span class="pre">an)</span></code>. When applied to an empty list, it evaluates
+to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>Write three solutions to this problem, as we did above:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">exists_rec</span></code>, which must be a recursive function that does not use the <code class="docutils literal notranslate"><span class="pre">List</span></code>
+module,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exists_fold</span></code>, which uses either <code class="docutils literal notranslate"><span class="pre">List.fold_left</span></code> or <code class="docutils literal notranslate"><span class="pre">List.fold_right</span></code>, but
+not any other <code class="docutils literal notranslate"><span class="pre">List</span></code> module functions nor the <code class="docutils literal notranslate"><span class="pre">rec</span></code> keyword, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exists_lib</span></code>, which uses any combination of <code class="docutils literal notranslate"><span class="pre">List</span></code> module functions other than
+<code class="docutils literal notranslate"><span class="pre">fold_left</span></code> or <code class="docutils literal notranslate"><span class="pre">fold_right</span></code>, and does not use the <code class="docutils literal notranslate"><span class="pre">rec</span></code> keyword.</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: account balance [★★★]</strong></p>
+<p>Write a function which, given a list of numbers representing debits, deducts
+them from an account balance, and finally returns the remaining amount in the
+balance. Write three versions: <code class="docutils literal notranslate"><span class="pre">fold_left</span></code>, <code class="docutils literal notranslate"><span class="pre">fold_right</span></code>, and a direct recursive
+implementation.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: library uncurried [★★]</strong></p>
+<p>Here is an uncurried version of <code class="docutils literal notranslate"><span class="pre">List.nth</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">uncurried_nth</span> <span class="o">(</span><span class="n">lst</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">nth</span> <span class="n">lst</span> <span class="n">n</span>
+</pre></div>
+</div>
+<p>In a similar way, write uncurried versions of these library functions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">List.append</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Char.compare</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Stdlib.max</span></code></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: map composition [★★★]</strong></p>
+<p>Show how to replace any expression of the form <code class="docutils literal notranslate"><span class="pre">List.map</span> <span class="pre">f</span> <span class="pre">(List.map</span> <span class="pre">g</span> <span class="pre">lst)</span></code>
+with an equivalent expression that calls <code class="docutils literal notranslate"><span class="pre">List.map</span></code> only once.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: more list fun [★★★]</strong></p>
+<p>Write functions that perform the following computations. Each function that you
+write should use one of <code class="docutils literal notranslate"><span class="pre">List.fold</span></code>, <code class="docutils literal notranslate"><span class="pre">List.map</span></code> or <code class="docutils literal notranslate"><span class="pre">List.filter</span></code>. To choose
+which of those to use, think about what the computation is doing: combining,
+transforming, or filtering elements.</p>
+<ul class="simple">
+<li><p>Find those elements of a list of strings whose length is strictly greater than
+3.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">1.0</span></code> to every element of a list of floats.</p></li>
+<li><p>Given a list of strings <code class="docutils literal notranslate"><span class="pre">strs</span></code> and another string <code class="docutils literal notranslate"><span class="pre">sep</span></code>, produce the string
+that contains every element of <code class="docutils literal notranslate"><span class="pre">strs</span></code> separated by <code class="docutils literal notranslate"><span class="pre">sep</span></code>. For example, given
+inputs <code class="docutils literal notranslate"><span class="pre">[&quot;hi&quot;;&quot;bye&quot;]</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;,&quot;</span></code>, produce <code class="docutils literal notranslate"><span class="pre">&quot;hi,bye&quot;</span></code>, being sure not to produce
+an extra comma either at the beginning or end of the result string.</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: association list keys [★★★]</strong></p>
+<p>Recall that an association list is an implementation of a dictionary in terms of
+a list of pairs, in which we treat the first component of each pair as a key and
+the second component as a value.</p>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">keys:</span> <span class="pre">('a</span> <span class="pre">*</span> <span class="pre">'b)</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">list</span></code> that returns a list of the
+unique keys in an association list. Since they must be unique, no value should
+appear more than once in the output list. The order of values output does not
+matter. How compact and efficient can you make your solution? Can you do it in
+one line and linearithmic space and time? <em>Hint: <code class="docutils literal notranslate"><span class="pre">List.sort_uniq</span></code>.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: valid matrix [★★★]</strong></p>
+<p>A mathematical <em>matrix</em> can be represented with lists. In <em>row-major</em>
+representation, this matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 9 &amp; 8 &amp; 7 \end{bmatrix} \end{split}\]</div>
+<p>would be represented as the list <code class="docutils literal notranslate"><span class="pre">[[1;</span> <span class="pre">1;</span> <span class="pre">1];</span> <span class="pre">[9;</span> <span class="pre">8;</span> <span class="pre">7]]</span></code>. Let’s represent a
+<em>row vector</em> as an <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">list</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">[9;</span> <span class="pre">8;</span> <span class="pre">7]</span></code> is a row vector.</p>
+<p>A <em>valid</em> matrix is an <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">list</span> <span class="pre">list</span></code> that has at least one row, at least one
+column, and in which every column has the same number of rows. There are many
+values of type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">list</span> <span class="pre">list</span></code> that are invalid, for example,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[[1;</span> <span class="pre">2];</span> <span class="pre">[3]]</span></code></p></li>
+</ul>
+<p>Implement a function <code class="docutils literal notranslate"><span class="pre">is_valid_matrix:</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code> that returns
+whether the input matrix is valid. Unit test the function.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: row vector add [★★★]</strong></p>
+<p>Implement a function <code class="docutils literal notranslate"><span class="pre">add_row_vectors:</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">list</span></code> for the
+element-wise addition of two row vectors. For example, the addition of
+<code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">1;</span> <span class="pre">1]</span></code> and <code class="docutils literal notranslate"><span class="pre">[9;</span> <span class="pre">8;</span> <span class="pre">7]</span></code> is <code class="docutils literal notranslate"><span class="pre">[10;</span> <span class="pre">9;</span> <span class="pre">8]</span></code>. If the two vectors do not have the
+same number of entries, the behavior of your function is
+<em>unspecified</em>—that is, it may do whatever you like. <em>Hint: there is an
+elegant one-line solution using <code class="docutils literal notranslate"><span class="pre">List.map2</span></code>.</em> Unit test the function.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: matrix add [★★★]</strong></p>
+<p>Implement a function <code class="docutils literal notranslate"><span class="pre">add_matrices:</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">list</span></code> for <a class="reference external" href="http://mathworld.wolfram.com/MatrixAddition.html">matrix addition</a>. If the two input matrices are not the same
+size, the behavior is unspecified. <em>Hint: there is an elegant one-line solution
+using <code class="docutils literal notranslate"><span class="pre">List.map2</span></code> and <code class="docutils literal notranslate"><span class="pre">add_row_vectors</span></code>.</em> Unit test the function.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: matrix multiply [★★★★]</strong></p>
+<p>Implement a function <code class="docutils literal notranslate"><span class="pre">multiply_matrices:</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">list</span></code> for <a class="reference external" href="http://mathworld.wolfram.com/MatrixMultiplication.html">matrix multiplication</a>. If the two input matrices are
+not of sizes that can be multiplied together, the behavior is unspecified. Unit
+test the function. <em>Hint: define functions for matrix transposition and row
+vector dot product.</em></p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/hop"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="summary.html" title="previous page"><span class="section-number">4.8. </span>Summary</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

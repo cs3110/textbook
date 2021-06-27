@@ -206,13 +206,13 @@ let x = 42
 
 Similarly, OCaml functions do not have to have names; they may be *anonymous*.
 For example, here is an anonymous function that increments its input:
-`fun x -> x+1`. Here, `fun` is a keyword indicating an anonymous function, `x`
+`fun x -> x + 1`. Here, `fun` is a keyword indicating an anonymous function, `x`
 is the argument, and `->` separates the argument from the body.
 
 We now have two ways we could write an increment function:
 ```ocaml
 let inc x = x + 1
-let inc = fun x -> x+1
+let inc = fun x -> x + 1
 ```
 
 They are syntactically different but semantically equivalent. That is, even
@@ -473,13 +473,13 @@ multi-argument function. This works because the following three functions are
 different ways of expressing the same computation:
 
 ```ocaml
-let add x y = x+y
-let add x = fun y -> x+y
-let add = fun x -> (fun y -> x+y)
+let add x y = x + y
+let add x = fun y -> x + y
+let add = fun x -> (fun y -> x + y)
 ```
 
 So `add` is really a function that takes an argument `x` and returns a function
-`(fun y -> x+y)`. Which leads us to a deep truth...
+`(fun y -> x + y)`. Which leads us to a deep truth...
 
 ## Function Associativity
 
@@ -488,7 +488,7 @@ Are you ready for the truth?  Here goes...
 **Every OCaml function takes exactly one argument.**
 
 Why? Consider `add`: although we can write it as `let add x y = x + y`, we know
-that's semantically equivalent to `let add = fun x -> (fun y -> x+y)`. And in
+that's semantically equivalent to `let add = fun x -> (fun y -> x + y)`. And in
 general,
 
 ```ocaml
