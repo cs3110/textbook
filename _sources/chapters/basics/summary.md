@@ -53,3 +53,7 @@ throughout the course to deepen our understanding.
 * *Introduction to Objective Caml*, chapter 3
 * *OCaml from the Very Beginning*, chapter 2
 * *Real World OCaml*, chapter 2
+* [*Tail Recursion, The Musical*][tr]. Tail-call optimization explained in the
+  context of JavaScript with cute 8-bit animations, and Disney songs!
+
+[tr]: https://www.youtube.com/watch?v=-PX0BV9hGZY

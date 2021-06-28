@@ -581,3 +581,249 @@ And now `2 ^^ 3` evaluates to `3`.
 The rules for which punctuation can be used to create infix operators are not
 necessarily intuitive. Nor is the relative precedence with which such operators
 will be parsed. So be careful with this usage.
+
+## Tail Recursion
+
+Consider the following seemingly uninteresting function, which counts from 1 to
+`n`:
+
+```{code-cell} ocaml
+(** [count n] is [n], computed by adding 1 to itself [n] times.  That is,
+    this function counts up from 1 to [n]. *)
+let rec count n =
+  if n = 0 then 0 else 1 + count (n - 1)
+```
+
+Counting to 10 is no problem:
+```{code-cell} ocaml
+count 10
+```
+
+Counting to 100,000 is no problem either:
+```{code-cell} ocaml
+count 100_000
+```
+
+But try counting to 1,000,000 and you'll get the following error:
+```
+Stack overflow during evaluation (looping recursion?).
+```
+
+What's going on here?
+
+**The Call Stack.** The issue is that the *call stack* has a limited size. You
+probably learned in one of your introductory programming classes that most
+languages implement function calls with a stack. That stack contains one element
+for each function call that has been started but has not yet completed. Each
+element stores information like the values of local variables and which
+instruction in the function is currently being executed. When the evaluation of
+one function body calls another function, a new element is pushed on the call
+stack, and it is popped off when the called function completes.
+
+The size of the stack is usually limited by the operating system. So if the
+stack runs out of space, it becomes impossible to make another function call.
+Normally this doesn't happen, because there's no reason to make that many
+successive function calls before returning. In cases where it does happen,
+there's good reason for the operating system to make that program stop: it might
+be in the process of eating up *all* the memory available on the entire
+computer, thus harming other programs running on the same computer. The `count`
+function isn't likely to do that, but this function would:
+
+```{code-cell} ocaml
+let rec count_forever n = 1 + count_forever n
+```
+
+So the operating system for safety's sake limits the call stack size. That means
+eventually `count` will run out of stack space on a large enough input. Notice
+how that choice is really independent of the programming language. So this same
+issue can and does occur in languages other than OCaml, including Python and
+Java. You're just less likely to have seen it manifest there, because you
+probably never wrote quite as many recursive functions in those languages.
+
+**Tail Recursion.** There is a solution to this issue that was described in a
+[1977 paper about LISP by Guy Steele][lisp-tailcall]. The solution, *tail-call
+optimization*, requires some cooperation between the programmer and the
+compiler. The programmer does a little rewriting of the function, which the
+compiler then notices and applies an optimization. Let's see how it works.
+
+[lisp-tailcall]: https://dl.acm.org/doi/pdf/10.1145/800179.810196
+
+Suppose that a recursive function `f` calls itself then returns the result of
+that recursive call. Our `count` function does *not* do that:
+```{code-cell} ocaml
+let rec count n =
+  if n = 0 then 0 else 1 + count (n - 1)
+```
+Rather, after the recursive call `count (n - 1)`, there is computation
+remaining: the computer still needs to add `1` to the result of that call.
+
+But we as programmers could rewrite the `count` function so that it does *not*
+need to do any additional computation after the recursive call. The trick is
+to create a helper function with an extra parameter:
+```{code-cell} ocaml
+let rec count_aux n acc =
+  if n = 0 then acc else count_aux (n - 1) (acc + 1)
+
+let count_tr n = count_aux n 0
+```
+Function `count_aux` is almost the same as our original `count`, but it adds an
+extra parameter named `acc`, which is idiomatic and stands for "accumulator".
+The idea is that the value we want to return from the function is slowly, with
+each recursive call, being accumulated in it. The "remaining computation"
+&mdash;the addition of 1&mdash; now happens *before* the recursive call not
+*after*.  When the base case of the recursion finally arrives, the function
+now returns `acc`, where the answer has been accumulated.
+
+But the original base case of 0 still needs to exist in the code somwhere.
+And it does, as the original value of `acc` that is passed to `count_aux`.
+Now `count_tr` (we'll get to why the name is "tr" in just a minute) works
+as a replacement for our original `count`.
+
+At this point we've completed the programmer's responsibility, but it's probably
+not clear why we went through this effort. After all `count_aux` will still call
+itself recursively too many times as `count` did, and eventually overflow the
+stack.
+
+That's where the compiler's responsibility kicks in. A good compiler (and the
+OCaml compiler is good this way) can notice when a recursive call is in *tail
+position*, which is a technical way of saying "there's no more computation to be
+done after it returns". The recursive call to `count_aux` is in tail position;
+the recursive call to `count` is not. Here they are again so you can compare
+them:
+```{code-cell} ocaml
+:tags: ["remove-output"]
+let rec count n =
+  if n = 0 then 0 else 1 + count (n - 1)
+
+let rec count_aux n acc =
+  if n = 0 then acc else count_aux (n - 1) (acc + 1)
+```
+Here's why tail position matters: **A recursive call in tail position does not
+need a new stack frame. It can just reuse the existing stack frame.** That's
+because there's nothing left of use in the existing stack frame! There's no
+computation left to be done, so none of the local variables, or next instruction
+to execute, etc. matter any more. None of that memory ever needs to be read
+again, because that call is effectively already finished. So instead of wasting
+space by allocating another stack frame, the compiler "recycles" the space used
+by the previous frame.
+
+This is the *tail-call optimization*. It can even be applied in cases beyond
+recursive functions if the calling function's stack frame is suitably compatible
+with the callee. And, it's a big deal. The tail-call optimization reduces the
+stack space requirements from linear to constant. Whereas `count` needed $O(n)$
+stack frames, `count_aux` needs only $O(1)$, because the same frame gets reused
+over and over again for each recursive call. And that means `count_tr` actually
+can count to 1,000,000:
+
+```{code-cell} ocaml
+count_tr 1_000_000
+```
+
+Finally, why did we name this function `count_tr`? The "tr" stands for *tail
+recursive*. A tail recursive function is a recursive function whose recursive
+calls are all in tail position. In other words, it's a function that (unless
+there are other pathologies) will not exhaust the stack.
+
+**The Importance of Tail Recursion.** Sometimes beginning functional programmers
+fixate a bit too much upon it. If all you care about is writing the first draft
+of a function, you probably don't need to worry about tail recursion. It's
+pretty easy to make it tail recursive later if you need to, just by adding an
+accumulator argument. Or maybe you should rethink how you have designed the
+function. Take `count`, for example: it's kind of dumb. But later we'll see
+examples that aren't dumb, such as iterating over lists with thousands of
+elements.
+
+It is important that the compiler support the optimization. Otherwise, the
+transformation you do to the code as a programmer makes no difference. Indeed,
+most compilers do support it, at least as an option. Java is a notable
+exception.
+
+**The Recipe for Tail Recursion.** In a nutshell, here's how we made a function
+be tail recursive:
+
+1. Change the function into a helper function. Add an extra argument: the
+   accumulator, often named `acc`.
+1. Write a new "main" version of the function that calls the helper. It passes
+   the original base case's return value as the initial value of the
+   accumulator.
+1. Change the helper function to return the accumulator in the base case.
+1. Change the helper function's recursive case. It now needs to do the extra
+   work on the accumulator argument, before the recursive call. This is the only
+   step that requires much ingenuity.
+
+**An Example: Factorial.** Let's tranform this factorial function to be
+tail recursive:
+
+```{code-cell} ocaml
+(* [fact n] is [n] factorial *)
+let rec fact n =
+  if n = 0 then 1 else n * fact (n - 1)
+```
+
+First, we change its name and add an accumulator argument:
+```ocaml
+let rec fact_aux n acc = ...
+```
+
+Second, we write a new "main" function that calls the helper with the original
+base case as the accumulator:
+```ocaml
+let rec fact_tr n = fact_aux n 1
+```
+
+Third, we change the helper function to return the accumulator in the base case:
+```ocaml
+if n = 0 then acc ...
+```
+
+Finally, we change the recursive case:
+```ocaml
+else fact (n - 1) (n * acc)
+```
+
+Putting it all together, we have:
+```{code-cell} ocaml
+let rec fact_aux n acc =
+  if n = 0 then acc else fact_aux (n - 1) (n * acc)
+
+let fact_tr n = fact_aux n 1
+```
+
+It was a nice exercise, but maybe not worthwhile.  Even before we exhaust the
+stack space, the computation suffers from integer overflow:
+```{code-cell} ocaml
+fact 50
+```
+To solve that problem, we turn to OCaml's big integer library,
+[Zarith][zarith]. Here we use a few OCaml features that are beyond anything
+we've seen so far, but hopefully nothing terribly surprising.
+
+[zarith]: https://antoinemine.github.io/Zarith/doc/latest/Z.html
+
+```{code-cell} ocaml
+#require "zarith.top";;
+
+let rec zfact_aux n acc =
+  if Z.equal n Z.zero then acc else zfact_aux (Z.pred n) (Z.mul acc n);;
+
+let zfact_tr n = zfact_aux n Z.one;;
+
+zfact_tr (Z.of_int 50)
+```
+
+If you want you can use that code to compute `zfact_tr 1_000_000` without stack
+or integer overflow, though it will take several minutes.
+
+The chapter on modules will explain the OCaml features we used above in detail,
+but for now:
+
+- `#require` loads the library, which provides a module named `Z`. Recall that
+  $\mathbb{Z}$ is the symbol used in mathematics to denote the integers.
+
+- `Z.n` means the name `n` defined inside of `Z`.
+
+- The type `Z.t` is the library's name for the type of big integers.
+
+- We use library values `Z.equal` for equality comparison, `Z.zero` for 0,
+  `Z.pred` for predecessor (i.e., subtracting 1), `Z.mul` for multiplication,
+  `Z.one` for 1, and `Z.of_int` to convert a primitive integer to a big integer.

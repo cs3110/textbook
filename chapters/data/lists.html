@@ -1151,10 +1151,10 @@ never really needed.</p>
 </div>
 <div class="section" id="tail-recursion">
 <h2><span class="section-number">3.1.9. </span>Tail Recursion<a class="headerlink" href="#tail-recursion" title="Permalink to this headline">¶</a></h2>
-<p>A function is <em>tail recursive</em> if it calls itself recursively but does not
-perform any computation after the recursive call returns, and immediately
-returns to its caller the value of its recursive call. Consider these two
-implementations, <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">sum_tr</span></code> of summing a list:</p>
+<p>Recall that a function is <em>tail recursive</em> if it calls itself recursively but
+does not perform any computation after the recursive call returns, and
+immediately returns to its caller the value of its recursive call. Consider
+these two implementations, <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">sum_tr</span></code> of summing a list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="kt">int</span> <span class="kt">list</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span>
@@ -1189,34 +1189,12 @@ In the <code class="docutils literal notranslate"><span class="pre">sum</span></
 returned its value, we add <code class="docutils literal notranslate"><span class="pre">x</span></code> to it. In the tail recursive <code class="docutils literal notranslate"><span class="pre">sum_tr</span></code>, or rather
 in <code class="docutils literal notranslate"><span class="pre">sum_plus_acc</span></code>, after the recursive call returns, we immediately return the
 value without further computation.</p>
-<p>Why do we care about tail recursion? Actually, sometimes functional programmers
-fixate a bit too much upon it. If all you care about is writing the first draft
-of a function, you probably don’t need to worry about it.</p>
-<p>But if you’re going to write functions on really long lists, tail recursion
-becomes important for performance. Recall that there is a <em>call stack</em>, which
-is a stack (the data structure with push and pop operations) with one element
-for each function call that has been started but has not yet completed. Each
-element stores things like the value of local variables and what part of the
-function has not been evaluated yet. When the evaluation of one function body
-calls another function, a new element is pushed on the call stack and it is
-popped off when the called function completes.</p>
-<p>When a function makes a recursive call to itself and there is nothing more for
-the caller to do after the callee returns (except return the callee’s result),
-this situation is called a tail call. Functional languages like OCaml (and even
-imperative languages like C++) typically include an hugely useful optimization:
-when a call is a tail call, the caller’s stack-frame is popped before the
-call—the callee’s stack-frame just replaces the caller’s. This makes
-sense: the caller was just going to return the callee’s result anyway. With this
-optimization, recursion can sometimes be as efficient as a while loop in
-imperative languages (such loops don’t make the call-stack bigger.) The
-“sometimes” is exactly when calls are tail calls—something both you and
-the compiler can (often) figure out. With tail-call optimization, the space
-performance of a recursive algorithm can be reduced from <span class="math notranslate nohighlight">\(O(n)\)</span> to <span class="math notranslate nohighlight">\(O(1)\)</span>,
-that is, from one stack frame per call to a single stack frame for all calls.</p>
-<p>So when you have a choice between using a tail-recursive vs. non-tail-recursive
-function, you are likely better off using the tail-recursive function on really
-long lists to achieve space efficiency. For that reason, the List module
-documents which functions are tail recursive and which are not.</p>
+<p>If you’re going to write functions on really long lists, tail recursion becomes
+important for performance. So when you have a choice between using a
+tail-recursive vs. non-tail-recursive function, you are likely better off using
+the tail-recursive function on really long lists to achieve space efficiency.
+For that reason, the List module documents which functions are tail recursive
+and which are not.</p>
 <p>But that doesn’t mean that a tail-recursive implementation is strictly better.
 For example, the tail-recursive function might be harder to read. (Consider
 <code class="docutils literal notranslate"><span class="pre">sum_plus_acc</span></code>.) Also, there are cases where implementing a tail-recursive
