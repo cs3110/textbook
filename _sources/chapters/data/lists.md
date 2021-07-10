@@ -617,16 +617,31 @@ here? That's hard to say, but maybe 10,000 is a good estimate, according to the
 [list]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
 
 Here is a useful tail-recursive function to produce a long list:
+
 ```{code-cell} ocaml
 (** [from i j l] is the list containing the integers from [i] to [j],
     inclusive, followed by the list [l].
-    Example:  [from 1 3 [0] = [1;2;3;0]] *)
+    Example:  [from 1 3 [0] = [1; 2; 3; 0]] *)
 let rec from i j l = if i > j then l else from i (j - 1) (j :: l)
 
 (** [i -- j] is the list containing the integers from [i] to [j], inclusive. *)
 let ( -- ) i j = from i j []
 
-let longlist = 0 -- 1_000_000
+let long_list = 0 -- 1_000_000
 ```
-It would be worthwhile to study the definition of `--` to convince yourself
-that you understand (i) how it works and (ii) why it is tail recursive.
+
+It would be worthwhile to study the definition of `--` to convince yourself that
+you understand (i) how it works and (ii) why it is tail recursive.
+
+You might in the future decide you want to create such a list again. Rather than
+having to remember where this definition is, and having to copy it into your
+code, here's an easy way to create the same list using a built-in library
+function:
+
+```{code-cell} ocaml
+List.init 1_000_000 Fun.id
+```
+
+Expression `List.init len f` creates the list `[f 0; f 1; ...; f (len - 1)]`,
+and it does so tail recursively if `len` is bigger than 10,000. Function
+`Fun.id` is simply the identify function `fun x -> x`.

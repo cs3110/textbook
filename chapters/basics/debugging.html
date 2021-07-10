@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.6. Debugging &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>2.7. Debugging &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.7. Summary" href="summary.html" />
-    <link rel="prev" title="2.5. Documentation" href="documentation.html" />
+    <link rel="next" title="2.8. Summary" href="summary.html" />
+    <link rel="prev" title="2.6. Printing" href="printing.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -157,19 +157,24 @@
      2.5. Documentation
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="printing.html">
+     2.6. Printing
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.6. Debugging
+     2.7. Debugging
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
-     2.7. Summary
+     2.8. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercises.html">
-     2.8. Exercises
+     2.9. Exercises
     </a>
    </li>
   </ul>
@@ -178,7 +183,7 @@
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../data/intro.html">
-   3. Data
+   3. Data and Types
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -309,6 +314,70 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 
 </nav> <!-- To handle the deprecated key -->
@@ -403,27 +472,22 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#defenses-against-bugs">
-   2.6.1. Defenses against Bugs
+   2.7.1. Defenses against Bugs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-to-debug">
-   2.6.2. How to Debug
+   2.7.2. How to Debug
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#debugging-in-ocaml">
-   2.6.3. Debugging in OCaml
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#printing">
-   2.6.4. Printing
+   2.7.3. Debugging in OCaml
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#defensive-programming">
-   2.6.5. Defensive Programming
+   2.7.4. Defensive Programming
   </a>
  </li>
 </ul>
@@ -439,11 +503,11 @@
               <div>
                 
   <div class="section" id="debugging">
-<h1><span class="section-number">2.6. </span>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.7. </span>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
 <p>Debugging is a last resort when everything else has failed. Let’s take a
 step back and think about everything that comes <em>before</em> debugging.</p>
 <div class="section" id="defenses-against-bugs">
-<h2><span class="section-number">2.6.1. </span>Defenses against Bugs<a class="headerlink" href="#defenses-against-bugs" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.1. </span>Defenses against Bugs<a class="headerlink" href="#defenses-against-bugs" title="Permalink to this headline">¶</a></h2>
 <p>According to
 <a class="reference external" href="https://stellar.mit.edu/S/course/6/fa08/6.005/courseMaterial/topics/topic3/lectureNotes/Debugging/Debugging.pdf">Rob Miller</a>,
 there are four defenses against bugs:</p>
@@ -498,7 +562,7 @@ so that if you ever break the code, you find out as soon as possible.
 debugging.</p>
 </div>
 <div class="section" id="how-to-debug">
-<h2><span class="section-number">2.6.2. </span>How to Debug<a class="headerlink" href="#how-to-debug" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.2. </span>How to Debug<a class="headerlink" href="#how-to-debug" title="Permalink to this headline">¶</a></h2>
 <p>So you’ve discovered a bug. What next?</p>
 <ol class="simple">
 <li><p><strong>Distill the bug into a small test case.</strong> Debugging is hard work, but the
@@ -527,7 +591,7 @@ bug. Repeatedly running tests distilled from previous bugs is called
 </ol>
 </div>
 <div class="section" id="debugging-in-ocaml">
-<h2><span class="section-number">2.6.3. </span>Debugging in OCaml<a class="headerlink" href="#debugging-in-ocaml" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.3. </span>Debugging in OCaml<a class="headerlink" href="#debugging-in-ocaml" title="Permalink to this headline">¶</a></h2>
 <p>Here are a couple tips on how to debug—if you are forced into it—in
 OCaml.</p>
 <ul>
@@ -543,9 +607,6 @@ function:</p>
   <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>The <a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html">Stdlib</a>
-module contains many other printing statements you can use. We cover some of
-them in the next section.</p>
 </li>
 <li><p><strong>Function traces.</strong> Suppose you want to see the <em>trace</em> of recursive calls
 and returns for a function. Use the <code class="docutils literal notranslate"><span class="pre">#trace</span></code> directive:</p>
@@ -571,82 +632,8 @@ probably find this tool to be harder to use than just inserting print
 statements.</p></li>
 </ul>
 </div>
-<div class="section" id="printing">
-<h2><span class="section-number">2.6.4. </span>Printing<a class="headerlink" href="#printing" title="Permalink to this headline">¶</a></h2>
-<p>OCaml has built-in printing functions for several of the built-in primitive
-types: <code class="docutils literal notranslate"><span class="pre">print_char</span></code>, <code class="docutils literal notranslate"><span class="pre">print_int</span></code>, <code class="docutils literal notranslate"><span class="pre">print_string</span></code>, and <code class="docutils literal notranslate"><span class="pre">print_float</span></code>. There’s
-also a <code class="docutils literal notranslate"><span class="pre">print_endline</span></code> function, which is like <code class="docutils literal notranslate"><span class="pre">print_string</span></code>, but also outputs
-a newline.</p>
-<p>Let’s look at the types of a couple of those functions:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string -&gt; unit = &lt;fun&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_string</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string -&gt; unit = &lt;fun&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<p>They both take a string as input and return a value of type <code class="docutils literal notranslate"><span class="pre">unit</span></code>, which we
-haven’t seen before. There is only one value of this type, which is written <code class="docutils literal notranslate"><span class="pre">()</span></code>
-and is also pronounced “unit”. So <code class="docutils literal notranslate"><span class="pre">unit</span></code> is like <code class="docutils literal notranslate"><span class="pre">bool</span></code>, except there is one
-fewer value of type <code class="docutils literal notranslate"><span class="pre">unit</span></code> than there is of <code class="docutils literal notranslate"><span class="pre">bool</span></code>. Unit is therefore used when
-you need to take an argument or return a value, but there’s no interesting value
-to pass or return. Unit is often used when you’re writing or using code that has
-side effects. Printing is an example of a side effect: it changes the world and
-can’t be undone.</p>
-<p>If you want to print one thing after another, you could sequence some print
-functions using nested let expressions:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;THIS&quot;</span> <span class="k">in</span>
-<span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;IS&quot;</span> <span class="k">in</span>
-<span class="n">print_endline</span> <span class="s2">&quot;3110&quot;</span>
-</pre></div>
-</div>
-<p>But the boilerplate of all the <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">...</span> <span class="pre">in</span></code> above is annoying to have to
-write! We don’t really care about giving names to the unit values returned by
-those printing functions. So there’s a special syntax that can be used to chain
-together multiple functions who return unit. The expression <code class="docutils literal notranslate"><span class="pre">e1;</span> <span class="pre">e2</span></code> first
-evaluates <code class="docutils literal notranslate"><span class="pre">e1</span></code>, which should evaluate to <code class="docutils literal notranslate"><span class="pre">()</span></code>, then discards that value, and
-evaluates <code class="docutils literal notranslate"><span class="pre">e2</span></code>. So we could rewrite the above code as:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span> <span class="s2">&quot;THIS&quot;</span><span class="o">;</span>
-<span class="n">print_endline</span> <span class="s2">&quot;IS&quot;</span><span class="o">;</span>
-<span class="n">print_endline</span> <span class="s2">&quot;3110&quot;</span>
-</pre></div>
-</div>
-<p>And that is far more idiomatic code.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">e1</span></code> does not have type <code class="docutils literal notranslate"><span class="pre">unit</span></code>, then <code class="docutils literal notranslate"><span class="pre">e1;</span> <span class="pre">e2</span></code> will give a warning, because
-you are discarding useful values. If that is truly your intent, you can call the
-built-in function <code class="docutils literal notranslate"><span class="pre">ignore</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code> to convert any value to <code class="docutils literal notranslate"><span class="pre">()</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="n">ignore</span> <span class="mi">3</span><span class="o">);</span> <span class="mi">5</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 5
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 <div class="section" id="defensive-programming">
-<h2><span class="section-number">2.6.5. </span>Defensive Programming<a class="headerlink" href="#defensive-programming" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.4. </span>Defensive Programming<a class="headerlink" href="#defensive-programming" title="Permalink to this headline">¶</a></h2>
 <p>As we discussed earlier in the section on debugging, one defense against bugs is
 to make any bugs (or errors) immediately visible. That idea connects with idea
 of preconditions.</p>
@@ -745,8 +732,8 @@ making you a more productive programmer.</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="documentation.html" title="previous page"><span class="section-number">2.5. </span>Documentation</a>
-    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">2.7. </span>Summary</a>
+    <a class='left-prev' id="prev-link" href="printing.html" title="previous page"><span class="section-number">2.6. </span>Printing</a>
+    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">2.8. </span>Summary</a>
 
         </div>
         

@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. Data &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>3. Data and Types &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="3.1. Lists" href="lists.html" />
-    <link rel="prev" title="2.8. Exercises" href="../basics/exercises.html" />
+    <link rel="prev" title="2.9. Exercises" href="../basics/exercises.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -158,18 +158,23 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../basics/debugging.html">
-     2.6. Debugging
+     2.7. Debugging
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../basics/summary.html">
-     2.7. Summary
+     2.8. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../basics/exercises.html">
-     2.8. Exercises
+     2.9. Exercises
     </a>
    </li>
   </ul>
@@ -178,7 +183,7 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="current reference internal" href="#">
-   3. Data
+   3. Data and Types
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -309,6 +314,70 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 
 </nav> <!-- To handle the deprecated key -->
@@ -400,8 +469,8 @@
         
               <div>
                 
-  <div class="section" id="data">
-<h1><span class="section-number">3. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="data-and-types">
+<h1><span class="section-number">3. </span>Data and Types<a class="headerlink" href="#data-and-types" title="Permalink to this headline">¶</a></h1>
 <p>In this chapter, we’ll examine some of OCaml’s built-in data types, including
 lists, variants, records, tuples, and options. Many of those are likely to feel
 familiar from other programming languages. In particular,</p>
@@ -456,7 +525,7 @@ of the other built-in types; and</p></li>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../basics/exercises.html" title="previous page"><span class="section-number">2.8. </span>Exercises</a>
+    <a class='left-prev' id="prev-link" href="../basics/exercises.html" title="previous page"><span class="section-number">2.9. </span>Exercises</a>
     <a class='right-next' id="next-link" href="lists.html" title="next page"><span class="section-number">3.1. </span>Lists</a>
 
         </div>

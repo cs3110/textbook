@@ -234,9 +234,11 @@ can be bound inside a given block of code.
 let x = e1 in e2
 ```
 
-As usual, `x` is an identifier. We call `e1` the *binding expression*, because
-it's what's being bound to `x`; and we call `e2` the *body expression*, because
-that's the body of code in which the binding will be in scope.
+As usual, `x` is an identifier. These identifiers must begin with lower-case,
+not upper, and idiomatically are written with `snake_case` not `camelCase`. We
+call `e1` the *binding expression*, because it's what's being bound to `x`; and
+we call `e2` the *body expression*, because that's the body of code in which the
+binding will be in scope.
 
 **Dynamic semantics.**
 

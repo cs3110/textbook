@@ -18,6 +18,22 @@ kernelspec:
 Since OCaml is a functional language, there's a lot to cover about functions.
 Let's get started.
 
+```{important}
+Methods and functions are not the same idea. A method is a component of an
+object, and it implicitly has a receiver that is usually accessed with a keyword
+like `this` or `self`. OCaml functions are not methods: they are not components
+of objects, and they do not have a receiver.
+
+Some might say that all methods are functions, but not all functions are
+methods. Some might even quibble with that, making a distinction between
+functions and procedures. The latter would be functions that do not return any
+meaningful value, such as a `void` return type in Java or `None` return value in
+Python.
+
+So if you're coming from an object-oriented background, be careful about the
+terminology. **Everything here is a strictly a function, not a method.**
+```
+
 ## Function Definitions
 
 {{ video_embed | replace("%%VID%%", "vCxIlagS7kA")}}
@@ -60,7 +76,7 @@ though. (Nor does the Scheme family of languages.)
 One of the best known recursive functions is the factorial function. In OCaml,
 it can be written as follows:
 
-```ocaml
+```{code-cell} ocaml
 (** [fact n] is [n]!.
     Requires: [n >= 0]. *)
 let rec fact n = if n = 0 then 1 else n * fact (n - 1)
@@ -84,7 +100,7 @@ integer or a pointer.)
 
 
 Here's another recursive function:
-```ocaml
+```{code-cell} ocaml
 (** [pow x y] is [x] to the power of [y].
      Requires: [y >= 0]. *)
 let rec pow x y = if y = 0 then 1 else x * pow x (y - 1)
@@ -143,7 +159,7 @@ and g y1 ... yn = e2
 ```
 
 For example:
-```ocaml
+```{code-cell} ocaml
 (** [even n] is whether [n] is even.
     Requires: [n >= 0]. *)
 let rec even n =
@@ -195,12 +211,12 @@ in scope inside the function body itself (just like the arguments are in scope).
 We already know that we can have values that are not bound to names.
 The integer `42`, for example, can be entered at the toplevel without
 giving it a name:
-```{code-cell}
+```{code-cell} ocaml
 42
 ```
 
 Or we can bind it to a name:
-```{code-cell}
+```{code-cell} ocaml
 let x = 42
 ```
 
@@ -210,7 +226,7 @@ For example, here is an anonymous function that increments its input:
 is the argument, and `->` separates the argument from the body.
 
 We now have two ways we could write an increment function:
-```ocaml
+```{code-cell} ocaml
 let inc x = x + 1
 let inc = fun x -> x + 1
 ```
@@ -301,13 +317,19 @@ There is a built-in infix operator in OCaml for function application called the
 *pipeline* operator, written `|>`. Imagine that as depicting a triangle pointing
 to the right. The metaphor is that values are sent through the pipeline from
 left to right. For example, suppose we have the increment function `inc` from
-above as well as a function `square` that squares its input. Here are two
-equivalent ways of writing the same computation:
-```ocaml
-square (inc 5)
-5 |> inc |> square
-(* both yield 36 *)
+above as well as a function `square` that squares its input:
+
+```{code-cell} ocaml
+let square x = x * x
 ```
+
+Here are two equivalent ways of squaring `6`:
+
+```{code-cell} ocaml
+square (inc 5);;
+5 |> inc |> square;;
+```
+
 The latter uses the pipeline operator to send `5` through the `inc` function,
 then send the result of that through the `square` function. This is a nice,
 idiomatic way of expressing the computation in OCaml. The former way is arguably
@@ -315,11 +337,12 @@ not as elegant: it involves writing extra parentheses and requires the reader's
 eyes to jump around, rather than move linearly from left to right. The latter
 way scales up nicely when the number of functions being applied grows, where as
 the former way requires more and more parentheses:
-```ocaml
-5 |> inc |> square |> inc |> inc |> square
-square (inc (inc (square (inc 5))))
-(* both yield 1444 *)
+
+```{code-cell} ocaml
+5 |> inc |> square |> inc |> inc |> square;;
+square (inc (inc (square (inc 5))));;
 ```
+
 It might feel weird at first, but try using the pipeline operator in your own
 code the next time you find yourself writing a big chain of function
 applications.
@@ -334,8 +357,14 @@ semantically equivalent.
 {{ video_embed | replace("%%VID%%", "UWmxYBEKzN8")}}
 
 The *identity* function is the function that simply returns its input:
-```{code-cell}
-let id x = x;;
+
+```{code-cell} ocaml
+let id x = x
+```
+
+Or equivalently as an anonymous function:
+```{code-cell} ocaml
+let id = fun x -> x
 ```
 
 The `'a` is a *type variable*: it stands for an unknown type, just like a
@@ -345,19 +374,113 @@ OCaml programmers typically pronounce in Greek: alpha, beta, and gamma.
 
 We can apply the identity function to any type of value we like:
 
-```text
-# id 42;;
-- : int = 42
-
-# id true;;
-- : bool = true
-
-# id "bigred";;
-- : string = "bigred"
+```{code-cell} ocaml
+id 42;;
+id true;;
+id "bigred";;
 ```
 
 Because you can apply `id` to many types of values, it is a *polymorphic*
 function: it can be applied to many (*poly*) forms (*morph*).
+
+With manual type annotations, it's possible to give a more restrictive type
+to a polymorphic function than the type the compiler automatically infers.
+For example:
+
+```{code-cell} ocaml
+let id_int (x : int) : int = x
+```
+
+That's the same function as `id`, except for the two manual type annotations.
+Because of those, we cannot apply `id_int` to a bool like we did `id`:
+
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+id_int true
+```
+
+Another way of writing `id_int` would be in terms of `id`:
+
+```{code-cell} ocaml
+let id_int' : int -> int = id
+```
+
+In effect we took a value of type `'a -> 'a`, and we bound it to a name whose
+type was manually specified as being `int -> int`. You might ask, why does that
+work? They aren't the same types, after all.
+
+One way to think about this is in terms of **behavior.** The type of `id_int`
+specifies one aspect of its behavior: given an `int` as input, it promises to
+produce an `int` as output. It turns out that `id` also makes the same promise:
+given an `int` as input, it too will return an `int` as output. Now `id` also
+makes many more promises, such as: given a `bool` as input, it will return a
+`bool` as output. So by binding `id` to a more restrictive type `int -> int`, we
+have thrown away all those additional promises as irrelevant. Sure, that's
+information lost, but at least no promises will be broken.  It's always
+going to be safe to use a function of type `'a -> 'a` when what we needed
+was a function of type `int -> int`.
+
+The converse is not true.  If we needed a function of type `'a -> 'a` but tried
+to use a function of type `int -> int`, we'd be in trouble as soon as someone
+passed an input of e.g. type `bool`.  Here are two concrete examples, which
+of course do not compile:
+
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+let id' : 'a -> 'a = fun x -> x + 1;;
+let id'' : 'a -> 'a = id_int;;
+```
+
+The first is maybe more obviously wrong than the second. Function `id'` is
+actually the increment function, not the identify function. So passing it a
+`bool` or `string` or some complicated data structure is not safe; the only data
+`+` can safely manipulate are integers.
+
+Function `id''` is maybe less obviously wrong. If follow the chain of definition
+backwards, we discover that `id''` is really going to be just `fun x -> x`.
+There's nothing wrong with that code as the implementation of `id''`: it's
+guaranteed to return an output of the same type as its input, because it *does*
+return its input. But the compiler doesn't go back and peek "under the covers"
+like that. Function `id_int` has type `int -> int` at the point `id''` is being
+defined, and that's all that matters. The compiler has to assume it could be
+*any* function of that type, including the increment function.
+
+That leads us to another, more mechanical, way to think about all of this in
+terms of **application**. By that we mean the very same notion of how a function
+is applied to arguments: when evaluating the application `id 5`, the argument
+`x` is *instantiated* with value `5`. Likewise, the `'a` in the type of `id` is
+being instantiated with type `int` at that application. So if we write
+
+```{code-cell} ocaml
+let id_int' : int -> int = id
+```
+
+we are in fact instantiating the `'a` in the type of `id` with the type `int`.
+And just as there is no way to "unapply" a function&mdash;for example, given `6`
+we can't compute backwards to `id 5`&mdash;we can't unapply that type
+instantiation and change `int` back to `'a`.
+
+To make that precise, suppose we have a `let` definition [or expression]:
+
+```ocaml
+let x = e [in e']
+```
+
+and that OCaml infers `x` has a type `t` that includes some type variables `'a`,
+'`b`, etc. Then we are permitted to instantiate those type variables. We can do
+that by applying the function to arguments that reveal what the type
+instantiations should be (as in `id 5`) or by a type annotation (as in
+`id_int'`), among other ways. But we have to be consistent with the
+instantiation. For example, we cannot take a function of type `'a -> 'b -> 'a`
+and instantiate it at type `int -> 'b -> string`, because the instantiation of
+`'a` is not the same type in each of the two places it occurred:
+
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+let first x y = x;;
+let first_int : int -> 'b -> int = first;;
+let bad_first : int -> 'b -> string = first;;
+```
 
 ## Labeled and Optional Arguments
 
@@ -368,7 +491,7 @@ might guess that the function `String.sub` returns a substring of the given
 string (and you would be correct). You could type in `String.sub` to find its
 type:
 
-```{code-cell}
+```{code-cell} ocaml
 String.sub;;
 ```
 
@@ -378,7 +501,7 @@ the documentation.
 OCaml supports labeled arguments to functions. You can declare this kind of
 function using the following syntax:
 
-```{code-cell}
+```{code-cell} ocaml
 let f ~name1:arg1 ~name2:arg2 = arg1 + arg2;;
 ```
 
@@ -392,7 +515,7 @@ Labels for arguments are often the same as the variable names for them. OCaml
 provides a shorthand for this case. The following are equivalent:
 
 ```ocaml
-let f ~name1:name1 ~name2:name2 = name1+name2
+let f ~name1:name1 ~name2:name2 = name1 + name2
 let f ~name1 ~name2 = name1 + name2
 ```
 
@@ -410,17 +533,17 @@ It is also possible to make some arguments optional. When called without an
 optional argument, a default value will be provided. To declare such a function,
 use the following syntax:
 
-```{code-cell}
+```{code-cell} ocaml
 let f ?name:(arg1=8) arg2 = arg1 + arg2
 ```
 
 You can then call a function with or without the argument:
 
-```{code-cell}
+```{code-cell} ocaml
 f ~name:2 7
 ```
 
-```{code-cell}
+```{code-cell} ocaml
 f 7
 ```
 
@@ -430,13 +553,13 @@ f 7
 
 We could define an addition function as follows:
 
-```{code-cell}
+```{code-cell} ocaml
 let add x y = x + y
 ```
 
 Here's a rather similar function:
 
-```{code-cell}
+```{code-cell} ocaml
 let addx x = fun y -> x + y
 ```
 
@@ -448,21 +571,21 @@ The type of `addx` is `int -> int -> int`. The type of `add` is also
 function. But the form of `addx` suggests something interesting: we can apply it
 to just a single argument.
 
-```{code-cell}
+```{code-cell} ocaml
 let add5 = addx 5
 ```
 
-```{code-cell}
+```{code-cell} ocaml
 add5 2
 ```
 
 It turns out the same can be done with `add`:
 
-```{code-cell}
+```{code-cell} ocaml
 let add5 = add 5
 ```
 
-```{code-cell}
+```{code-cell} ocaml
 add5 2;;
 ```
 
@@ -483,7 +606,7 @@ So `add` is really a function that takes an argument `x` and returns a function
 
 ## Function Associativity
 
-Are you ready for the truth?  Here goes...
+Are you ready for the truth?  Take a deep breath.  Here goes...
 
 **Every OCaml function takes exactly one argument.**
 
@@ -550,19 +673,19 @@ The addition operator `+` has type `int -> int -> int`. It is normally written
 *infix*, e.g., `3 + 4`. By putting parentheses around it, we can make it a
 *prefix* operator:
 
-```{code-cell}
+```{code-cell} ocaml
 ( + )
 ```
 
-```{code-cell}
+```{code-cell} ocaml
 ( + ) 3 4;;
 ```
 
-```{code-cell}
+```{code-cell} ocaml
 let add3 = ( + ) 3
 ```
 
-```{code-cell}
+```{code-cell} ocaml
 add3 2
 ```
 

@@ -1,4 +1,4 @@
-# Data
+# Data and Types
 
 In this chapter, we'll examine some of OCaml's built-in data types, including
 lists, variants, records, tuples, and options. Many of those are likely to feel

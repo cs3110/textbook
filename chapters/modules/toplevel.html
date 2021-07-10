@@ -1,0 +1,800 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.3. Modules and the Toplevel &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.4. Encapsulation" href="encapsulation.html" />
+    <link rel="prev" title="5.2. Modules" href="modules.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/modules/toplevel.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/modules/toplevel.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/modules/toplevel.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/modules/toplevel.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-compiled-modules">
+   5.3.1. Loading Compiled Modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initializing-the-toplevel">
+   5.3.2. Initializing the Toplevel
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#requiring-libraries">
+   5.3.3. Requiring Libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dependencies">
+   5.3.4. Dependencies
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-vs-use">
+   5.3.5. Load vs Use
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="modules-and-the-toplevel">
+<h1><span class="section-number">5.3. </span>Modules and the Toplevel<a class="headerlink" href="#modules-and-the-toplevel" title="Permalink to this headline">¶</a></h1>
+<p>There are several pragmatics involving modules and the toplevel that are
+important to master to use the two together effectively.</p>
+<div class="section" id="loading-compiled-modules">
+<h2><span class="section-number">5.3.1. </span>Loading Compiled Modules<a class="headerlink" href="#loading-compiled-modules" title="Permalink to this headline">¶</a></h2>
+<p>Compiling an OCaml file produces a module having the same name as the file, but
+with the first letter capitalized. These compiled modules can be loaded into the
+toplevel using <code class="docutils literal notranslate"><span class="pre">#load</span></code>.</p>
+<p>For example, suppose you create a file called <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code>, and put the following
+code in it:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;bigred&quot;</span>
+<span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Then suppose you type <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span> <span class="pre">mods.byte</span></code> to compile it. Inside the <code class="docutils literal notranslate"><span class="pre">_build</span></code>
+directory you will now find the files that <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span></code> produced. One of them is
+<code class="docutils literal notranslate"><span class="pre">mods.cmo</span></code>: this is a <u>c</u>ompiled <u>m</u>odule <u>o</u>bject file, aka
+bytecode.</p>
+<p>You can make this bytecode available for use in the toplevel with the following
+directives. Recall that the <code class="docutils literal notranslate"><span class="pre">#</span></code> character is required in front of a directive.
+It is not part of the prompt.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">directory</span> <span class="s2">&quot;_build&quot;</span><span class="o">;;</span>
+<span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods.cmo&quot;</span><span class="o">;;</span>
+</pre></div>
+</div>
+<p>The first directive tells utop to add the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory to the path in
+which it looks for compiled (and source) files. The second directive loads the
+bytecode found in <code class="docutils literal notranslate"><span class="pre">mods.cmo</span></code>, thus making a module named <code class="docutils literal notranslate"><span class="pre">Mods</span></code> available to be
+used. Both of these expressions will therefore evaluate successfully:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Mods</span><span class="p">.</span><span class="n">b</span><span class="o">;;</span>
+<span class="nn">Mods</span><span class="p">.</span><span class="nn">M</span><span class="p">.</span><span class="n">y</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;bigred&quot;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 42
+</pre></div>
+</div>
+</div>
+</div>
+<p>But this will fail:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">inc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[3]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="n">inc</span>
+    <span class="o">^^^</span>
+<span class="ne">Error</span>: Unbound value inc
+<span class="ne">Hint</span>: Did you mean incr?
+</pre></div>
+</div>
+</div>
+</div>
+<p>It fails because <code class="docutils literal notranslate"><span class="pre">inc</span></code> is in the namespace of <code class="docutils literal notranslate"><span class="pre">Mods</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Mods</span><span class="p">.</span><span class="n">inc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Of course, if you open the module, you can directly name <code class="docutils literal notranslate"><span class="pre">inc</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Mods</span><span class="o">;;</span>
+<span class="n">inc</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="initializing-the-toplevel">
+<h2><span class="section-number">5.3.2. </span>Initializing the Toplevel<a class="headerlink" href="#initializing-the-toplevel" title="Permalink to this headline">¶</a></h2>
+<p>If you are doing a lot of testing of a particular module, it can be annoying to
+have to type those directives (<code class="docutils literal notranslate"><span class="pre">#directory</span></code> and <code class="docutils literal notranslate"><span class="pre">#load</span></code>) every time you start
+utop. You really want to initialize the toplevel with some code as it launches,
+so that you don’t have to keep typing that code.</p>
+<p>The solution is to create a file in the working directory and call that file
+<code class="docutils literal notranslate"><span class="pre">.ocamlinit</span></code>. Note that the <code class="docutils literal notranslate"><span class="pre">.</span></code> at the front of that filename is required and
+makes it a <a class="reference external" href="https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory">hidden file</a> that won’t appear in directory listings unless
+explicitly requested (e.g., with <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-a</span></code>). Everything in <code class="docutils literal notranslate"><span class="pre">.ocamlinit</span></code> will be
+processed by utop when it loads.</p>
+<p>For example, suppose you create a file named <code class="docutils literal notranslate"><span class="pre">.ocamlinit</span></code> in the same directory
+as <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code>, and in that file put the following code:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">directory</span> <span class="s2">&quot;_build&quot;</span><span class="o">;;</span>
+<span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods.cmo&quot;</span><span class="o">;;</span>
+<span class="k">open</span> <span class="nc">Mods</span>
+</pre></div>
+</div>
+<p>Now restart utop. All the names defined in <code class="docutils literal notranslate"><span class="pre">Mods</span></code> will already be in scope. For
+example, these will both succeed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">inc</span><span class="o">;;</span>
+<span class="nn">M</span><span class="p">.</span><span class="n">y</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 42
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="requiring-libraries">
+<h2><span class="section-number">5.3.3. </span>Requiring Libraries<a class="headerlink" href="#requiring-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you were to add the following lines to the end of <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">OUnit2</span>
+<span class="k">let</span> <span class="n">test</span> <span class="o">=</span> <span class="s2">&quot;testb&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="s2">&quot;bigred&quot;</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>If you try to recompile the module with <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span> <span class="pre">mods.byte</span></code>, it will fail.
+The problem is that you need to tell the build system to include the third-party
+library OUnit. Recompiling with <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span> <span class="pre">-pkg</span> <span class="pre">ounit2</span> <span class="pre">mods.byte</span></code> will, as
+usual, succeed.</p>
+<p>But if you restart utop, there will be an error message:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>File &quot;.ocamlinit&quot;, line 1:
+Error: Reference to undefined global `OUnit2&#39;
+</pre></div>
+</div>
+<p>The problem is that the OUnit library hasn’t been loaded into utop yet. It can
+be with the following directive:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">require</span> <span class="s2">&quot;ounit2&quot;</span><span class="o">;;</span>
+</pre></div>
+</div>
+<p>Now you can successfully load your own module without getting an error.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods.cmo&quot;</span><span class="o">;;</span>
+</pre></div>
+</div>
+<p>Moreover, if you add that <code class="docutils literal notranslate"><span class="pre">#require</span></code> directive to <code class="docutils literal notranslate"><span class="pre">.ocamlinit</span></code> anywhere before
+the <code class="docutils literal notranslate"><span class="pre">#load</span></code> directive, the “undefined global” error will go away.</p>
+</div>
+<div class="section" id="dependencies">
+<h2><span class="section-number">5.3.4. </span>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>When compiling a file, the build system automatically figures out which other
+files it depends on and recompiles those as necessary. The toplevel, however, is
+not as sophisticated: you have to make sure to load all the dependencies of a
+file.</p>
+<p>Suppose you have a file named <code class="docutils literal notranslate"><span class="pre">mods2.ml</span></code> in the same directory as <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code>
+from above, and <code class="docutils literal notranslate"><span class="pre">mods2.ml</span></code> contains this code:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Mods</span>
+<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">inc</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>If you run <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span> <span class="pre">-pkg</span> <span class="pre">ounit2</span> <span class="pre">mods2.byte</span></code>, the compilation will succeed.
+You don’t have to name <code class="docutils literal notranslate"><span class="pre">mods.byte</span></code> on the command line, even though <code class="docutils literal notranslate"><span class="pre">mods2.ml</span></code>
+depends on the module <code class="docutils literal notranslate"><span class="pre">Mod</span></code>. The build system is smart that way.</p>
+<p>Also suppose that <code class="docutils literal notranslate"><span class="pre">.ocamlinit</span></code> contains exactly the following:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">directory</span> <span class="s2">&quot;_build&quot;</span><span class="o">;;</span>
+<span class="o">#</span><span class="n">require</span> <span class="s2">&quot;ounit2&quot;</span><span class="o">;;</span>
+</pre></div>
+</div>
+<p>If you restart utop and try to load <code class="docutils literal notranslate"><span class="pre">mods2.cmo</span></code>, you will get an error:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># #load &quot;mods2.cmo&quot;;;
+Error: Reference to undefined global `Mods&#39;
+</pre></div>
+</div>
+<p>The problem is that the toplevel does not automatically load the modules that
+<code class="docutils literal notranslate"><span class="pre">Mods2</span></code> depends upon. There are two ways to solve this problem.
+First, you can manually load the dependencies, like this:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods.cmo&quot;</span><span class="o">;;</span>
+<span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods2.cmo&quot;</span><span class="o">;;</span>
+</pre></div>
+</div>
+<p>Second, you could instead tell the toplevel to load <code class="docutils literal notranslate"><span class="pre">Mods2</span></code> and recursively
+to load everything it depends on:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">load_rec</span> <span class="s2">&quot;mods2.cmo&quot;</span><span class="o">;;</span>
+</pre></div>
+</div>
+<p>And that is probably the better solution.</p>
+</div>
+<div class="section" id="load-vs-use">
+<h2><span class="section-number">5.3.5. </span>Load vs Use<a class="headerlink" href="#load-vs-use" title="Permalink to this headline">¶</a></h2>
+<p>There is a big difference between <code class="docutils literal notranslate"><span class="pre">#load</span></code>-ing a compiled module file and
+<code class="docutils literal notranslate"><span class="pre">#use</span></code>-ing an uncompiled source file. The former loads bytecode and makes it
+available for use. For example, loading <code class="docutils literal notranslate"><span class="pre">mods.cmo</span></code> caused the <code class="docutils literal notranslate"><span class="pre">Mod</span></code> module to be
+available, and we could access its members with expressions like <code class="docutils literal notranslate"><span class="pre">Mod.b</span></code>. The
+latter (<code class="docutils literal notranslate"><span class="pre">#use</span></code>) is <em>textual inclusion</em>: it’s like typing the contents of the
+file directly into the toplevel. So using <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code> does <strong>not</strong> cause a <code class="docutils literal notranslate"><span class="pre">Mod</span></code>
+module to be available, and the definitions in the file can be accessed
+directly, e.g., <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p>For example, in the following interaction, we can directly refer to <code class="docutils literal notranslate"><span class="pre">b</span></code> but
+cannot use the qualified name <code class="docutils literal notranslate"><span class="pre">Mods.b</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># #use &quot;mods.ml&quot;
+
+# b;;
+val b : string = &quot;bigred&quot;
+
+# Mods.b;;
+Error: Unbound module Mods
+</pre></div>
+</div>
+<p>Whereas in this interaction the situation is reversed:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># #directory &quot;_build&quot;;;
+# #load &quot;mods.cmo&quot;;;
+
+# Mods.b;;
+- : string = &quot;bigred&quot;
+
+# b;;
+Error: Unbound value b
+</pre></div>
+</div>
+<p>So when you’re using the toplevel to experiment with your code, it’s often
+better to work with <code class="docutils literal notranslate"><span class="pre">#load</span></code> rather than <code class="docutils literal notranslate"><span class="pre">#use</span></code>. The <code class="docutils literal notranslate"><span class="pre">#load</span></code> directive accurately
+reflects how your modules interact with each other and with the outside world.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/modules"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="modules.html" title="previous page"><span class="section-number">5.2. </span>Modules</a>
+    <a class='right-next' id="next-link" href="encapsulation.html" title="next page"><span class="section-number">5.4. </span>Encapsulation</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

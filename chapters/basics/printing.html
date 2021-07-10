@@ -1,0 +1,932 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.6. Printing &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.7. Debugging" href="debugging.html" />
+    <link rel="prev" title="2.5. Documentation" href="documentation.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/basics/printing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/basics/printing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/basics/printing.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/basics/printing.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unit">
+   2.6.1. Unit
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#semicolon">
+   2.6.2. Semicolon
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ignore">
+   2.6.3. Ignore
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#printf">
+   2.6.4. Printf
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="printing">
+<h1><span class="section-number">2.6. </span>Printing<a class="headerlink" href="#printing" title="Permalink to this headline">¶</a></h1>
+<p>OCaml has built-in printing functions for a few of the built-in primitive
+types: <code class="docutils literal notranslate"><span class="pre">print_char</span></code>, <code class="docutils literal notranslate"><span class="pre">print_string</span></code>, <code class="docutils literal notranslate"><span class="pre">print_int</span></code>, and <code class="docutils literal notranslate"><span class="pre">print_float</span></code>. There’s
+also a <code class="docutils literal notranslate"><span class="pre">print_endline</span></code> function, which is like <code class="docutils literal notranslate"><span class="pre">print_string</span></code>, but also outputs
+a newline.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span> <span class="s2">&quot;Camels are bae&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Camels are bae
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="unit">
+<h2><span class="section-number">2.6.1. </span>Unit<a class="headerlink" href="#unit" title="Permalink to this headline">¶</a></h2>
+<p>Let’s look at the types of a couple of those functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_string</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>They both take a string as input and return a value of type <code class="docutils literal notranslate"><span class="pre">unit</span></code>, which we
+haven’t seen before. There is only one value of this type, which is written <code class="docutils literal notranslate"><span class="pre">()</span></code>
+and is also pronounced “unit”. So <code class="docutils literal notranslate"><span class="pre">unit</span></code> is like <code class="docutils literal notranslate"><span class="pre">bool</span></code>, except there is one
+fewer value of type <code class="docutils literal notranslate"><span class="pre">unit</span></code> than there is of <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
+<p>Unit is used when you need to take an argument or return a value, but there’s no
+interesting value to pass or return. It is the equivalent of <code class="docutils literal notranslate"><span class="pre">void</span></code> in Java, and
+is similar to <code class="docutils literal notranslate"><span class="pre">None</span></code> in Python. Unit is often used when you’re writing or using
+code that has side effects. Printing is an example of a side effect: it changes
+the world and can’t be undone.</p>
+</div>
+<div class="section" id="semicolon">
+<h2><span class="section-number">2.6.2. </span>Semicolon<a class="headerlink" href="#semicolon" title="Permalink to this headline">¶</a></h2>
+<p>If you want to print one thing after another, you could sequence some print
+functions using nested <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;Camels&quot;</span> <span class="k">in</span>
+<span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;are&quot;</span> <span class="k">in</span>
+<span class="n">print_endline</span> <span class="s2">&quot;bae&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Camels
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>are
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bae
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">_</span> <span class="pre">=</span> <span class="pre">e</span></code> syntax above is a way of evaluating <code class="docutils literal notranslate"><span class="pre">e</span></code> but not binding
+its value to any name.  Indeed, we know the value each of those <code class="docutils literal notranslate"><span class="pre">print_endline</span></code>
+functions will return: it will always be <code class="docutils literal notranslate"><span class="pre">()</span></code>, the unit value. So there’s
+no good reason to bind it to a variable name.  We could also write <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">()</span> <span class="pre">=</span> <span class="pre">e</span></code>
+to indicate we know it’s just a unit value that we don’t care about:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;Camels&quot;</span> <span class="k">in</span>
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;are&quot;</span> <span class="k">in</span>
+<span class="n">print_endline</span> <span class="s2">&quot;bae&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Camels
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>are
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bae
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+</div>
+</div>
+<p>But either way the boilerplate of all the <code class="docutils literal notranslate"><span class="pre">let..in</span></code> is annoying to have to
+write! So there’s a special syntax that can be used to chain
+together multiple functions that return unit. The expression <code class="docutils literal notranslate"><span class="pre">e1;</span> <span class="pre">e2</span></code> first
+evaluates <code class="docutils literal notranslate"><span class="pre">e1</span></code>, which should evaluate to <code class="docutils literal notranslate"><span class="pre">()</span></code>, then discards that value, and
+evaluates <code class="docutils literal notranslate"><span class="pre">e2</span></code>. So we could rewrite the above code as:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span> <span class="s2">&quot;Camels&quot;</span><span class="o">;</span>
+<span class="n">print_endline</span> <span class="s2">&quot;are&quot;</span><span class="o">;</span>
+<span class="n">print_endline</span> <span class="s2">&quot;bae&quot;</span><span class="o">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Camels
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>are
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bae
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+</div>
+</div>
+<p>That is more idiomatic OCaml code, and it also looks more natural to imperative
+programmers.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>There is no semicolon after the final <code class="docutils literal notranslate"><span class="pre">print_endline</span></code> in that example. A common
+mistake is to put a semicolon <em>after</em> each print statement. Instead, the
+semicolons go strictly <em>between</em> statements. That is, semicolon is a statement
+<em>separator</em> not a statement <em>terminator</em>. If you were to add a semicolon at the
+end, you could get a syntax error depending on the surrounding code.</p>
+</div>
+</div>
+<div class="section" id="ignore">
+<h2><span class="section-number">2.6.3. </span>Ignore<a class="headerlink" href="#ignore" title="Permalink to this headline">¶</a></h2>
+<p>If <code class="docutils literal notranslate"><span class="pre">e1</span></code> does not have type <code class="docutils literal notranslate"><span class="pre">unit</span></code>, then <code class="docutils literal notranslate"><span class="pre">e1;</span> <span class="pre">e2</span></code> will give a warning, because
+you are discarding a potentially useful value. If that is truly your intent, you
+can call the built-in function <code class="docutils literal notranslate"><span class="pre">ignore</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code> to convert any value to
+<code class="docutils literal notranslate"><span class="pre">()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="n">ignore</span> <span class="mi">3</span><span class="o">);</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Actually <code class="docutils literal notranslate"><span class="pre">ignore</span></code> is easy to implement yourself:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">ignore</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ignore : &#39;a -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or you can even write underscore to indicate the function takes in a value but
+does not bind that value to a name. That means the function can never use that
+value in its body. But that’s okay: we want to ignore it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">ignore</span> <span class="o">_</span> <span class="o">=</span> <span class="bp">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ignore : &#39;a -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="printf">
+<h2><span class="section-number">2.6.4. </span>Printf<a class="headerlink" href="#printf" title="Permalink to this headline">¶</a></h2>
+<p>For complicated text outputs, using the built-in functions for primitive type
+printing quickly becomes tedious. For example, suppose you wanted to write a
+function to print a statistic:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [print_stat name num] prints [name: num]. *)</span>
+<span class="k">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
+  <span class="n">print_string</span> <span class="n">name</span><span class="o">;</span>
+  <span class="n">print_string</span> <span class="s2">&quot;: &quot;</span><span class="o">;</span>
+  <span class="n">print_float</span> <span class="n">num</span><span class="o">;</span>
+  <span class="n">print_newline</span> <span class="bp">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val print_stat : string -&gt; float -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_stat</span> <span class="s2">&quot;mean&quot;</span> <span class="mi">84</span><span class="o">.</span><span class="mi">39</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean: 84.39
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+</div>
+</div>
+<p>How could we shorten <code class="docutils literal notranslate"><span class="pre">print_stat</span></code>? In Java you might use the overloaded <code class="docutils literal notranslate"><span class="pre">+</span></code>
+operator to turn all objects into strings:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">print_stat</span><span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">,</span> <span class="kt">double</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span> <span class="o">+</span> <span class="n">num</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>But OCaml values are not objects, and they do not have a <code class="docutils literal notranslate"><span class="pre">toString()</span></code> method
+they inherit from some root <code class="docutils literal notranslate"><span class="pre">Object</span></code> class. Nor does OCaml permit overloading of
+operators.</p>
+<p>Long ago though, FORTRAN invented a different solution that other languages like
+C and Java and even Python support. The idea is to use a <em>format specifier</em> to
+—as the name suggest— specify how to format output. The name this
+idea is best known under is probably “printf”, which refers to the name of the C
+library function that implemented it. Many other languages and libraries still
+use that name, including OCaml’s <code class="docutils literal notranslate"><span class="pre">Printf</span></code> module.</p>
+<p>Here’s how we’d use <code class="docutils literal notranslate"><span class="pre">printf</span></code> to re-implement <code class="docutils literal notranslate"><span class="pre">print_stat</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
+  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s: %F</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val print_stat : string -&gt; float -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_stat</span> <span class="s2">&quot;mean&quot;</span> <span class="mi">84</span><span class="o">.</span><span class="mi">39</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean: 84.39
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first argument to function <code class="docutils literal notranslate"><span class="pre">Printf.printf</span></code> is the format specifier. It
+<em>looks</em> like a string, but there’s more to it than that. It’s actually
+understood by the OCaml compiler in quite a deep way. Inside the format
+specifier there are:</p>
+<ul class="simple">
+<li><p>plain characters, and</p></li>
+<li><p>conversion specifiers, which begin with <code class="docutils literal notranslate"><span class="pre">%</span></code>.</p></li>
+</ul>
+<p>There are about two dozen conversion specifiers available, which you can read
+about in the <a class="reference external" href="https://ocaml.org/api/Printf.html">documentation of <code class="docutils literal notranslate"><span class="pre">Printf</span></code></a>. Let’s pick apart the
+format specifier above as an example.</p>
+<ul class="simple">
+<li><p>It starts with <code class="docutils literal notranslate"><span class="pre">&quot;%s&quot;</span></code>, which is the conversion specifier for strings.  That means
+the next argument to <code class="docutils literal notranslate"><span class="pre">printf</span></code> must be a <code class="docutils literal notranslate"><span class="pre">string</span></code>, and the contents of that string
+will be output.</p></li>
+<li><p>It continues with <code class="docutils literal notranslate"><span class="pre">&quot;:</span> <span class="pre">&quot;</span></code>, which are just plain characters.  Those are inserted
+into the output.</p></li>
+<li><p>It then has another conversion specifier, <code class="docutils literal notranslate"><span class="pre">%F</span></code>. That means the next argument of
+<code class="docutils literal notranslate"><span class="pre">printf</span></code> must have type <code class="docutils literal notranslate"><span class="pre">float</span></code>, and will be output in the same format that
+OCaml uses to print floats.</p></li>
+<li><p>The newline <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> after that is another plain character sequence.</p></li>
+<li><p>Finally the conversion specifier <code class="docutils literal notranslate"><span class="pre">&quot;%!&quot;</span></code> means to <em>flush the output buffer</em>. As
+you might have learned in earlier programming classes, output is often
+<em>buffered</em>, meaning that it doesn’t all happen at once or right away. Flushing
+the buffer ensures that anything still sitting in the buffer gets output
+immediately. This specifier is special in that it doesn’t actually need
+another argument to <code class="docutils literal notranslate"><span class="pre">printf</span></code>.</p></li>
+</ul>
+<p>If the type of an argument is incorrect with respect to the conversion specifier,
+OCaml will detect that.  Let’s add a type annotation to force <code class="docutils literal notranslate"><span class="pre">num</span></code> to be an
+<code class="docutils literal notranslate"><span class="pre">int</span></code>, and see what happens with the float conversion specifier <code class="docutils literal notranslate"><span class="pre">%F</span></code>:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="o">(</span><span class="n">num</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">=</span>
+  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s: %F</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[14]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">34</span><span class="o">-</span><span class="mi">37</span><span class="p">:</span>
+<span class="mi">2</span> <span class="o">|</span>   <span class="n">Printf</span><span class="o">.</span><span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%F</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
+                                      <span class="o">^^^</span>
+<span class="ne">Error</span>: This expression has type int but an expression was expected of type
+         <span class="nb">float</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To fix that, we can change to the conversion specifier for <code class="docutils literal notranslate"><span class="pre">int</span></code>, which is <code class="docutils literal notranslate"><span class="pre">%i</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
+  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s: %i</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val print_stat : string -&gt; int -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another very useful variant of <code class="docutils literal notranslate"><span class="pre">printf</span></code> is <code class="docutils literal notranslate"><span class="pre">sprintf</span></code>, which collects the output
+in string instead of printing it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">string_of_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
+  <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;%s: %F&quot;</span> <span class="n">name</span> <span class="n">num</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val string_of_stat : string -&gt; float -&gt; string = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">string_of_stat</span> <span class="s2">&quot;mean&quot;</span> <span class="mi">84</span><span class="o">.</span><span class="mi">39</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;mean: 84.39&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/basics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="documentation.html" title="previous page"><span class="section-number">2.5. </span>Documentation</a>
+    <a class='right-next' id="next-link" href="debugging.html" title="next page"><span class="section-number">2.7. </span>Debugging</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

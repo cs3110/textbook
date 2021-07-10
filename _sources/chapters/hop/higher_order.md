@@ -64,7 +64,7 @@ Part of being an excellent programmer is recognizing such similarities and
 them. Bruce MacLennan names this the **Abstraction Principle** in his textbook
 *Functional Programming: Theory and Practice* (1990). The Abstraction Principle
 says to avoid requiring something to be stated more than once; instead, *factor
-out* the recurring pattern.Higher-order functions enable such refactoring,
+out* the recurring pattern. Higher-order functions enable such refactoring,
 because they allow us to factor out functions and parameterize functions on
 other functions.
 

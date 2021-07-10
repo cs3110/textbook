@@ -1,0 +1,998 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.6. Module Type Constraints &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.7. Compilation Units" href="compilation_units.html" />
+    <link rel="prev" title="5.5. Functional Data Structures" href="functional_data_structures.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/modules/module_type_constraints.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/modules/module_type_constraints.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/modules/module_type_constraints.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/modules/module_type_constraints.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#specializing-module-types">
+   5.6.1. Specializing Module Types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constraints">
+   5.6.2. Constraints
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="module-type-constraints">
+<h1><span class="section-number">5.6. </span>Module Type Constraints<a class="headerlink" href="#module-type-constraints" title="Permalink to this headline">¶</a></h1>
+<p>We have extolled the virtues of encapsulation. Now we’re going to do something
+that might seem counter-intuitive: selectively violate encapsulation.</p>
+<p>As a motivating example, here is a module type that represents values that
+support the usual operations from arithmetic, or more precisely, a <em><a class="reference external" href="https://en.wikipedia.org/wiki/Field_(mathematics)">field</a></em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Field</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">one</span> <span class="o">:</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">to_string</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Field =
+  sig
+    type t
+    val zero : t
+    val one : t
+    val ( + ) : t -&gt; t -&gt; t
+    val ( * ) : t -&gt; t -&gt; t
+    val ( ~- ) : t -&gt; t
+    val to_string : t -&gt; string
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall that we must write <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">*</span> <span class="pre">)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">(*)</span></code> because the latter would be
+parsed as beginning a comment. And we write the <code class="docutils literal notranslate"><span class="pre">~</span></code> in <code class="docutils literal notranslate"><span class="pre">(~-)</span></code> to indicate a
+<em>unary</em> negation operator.</p>
+<p>This is a bit weird of an example. We don’t normally think of numbers as a data
+structure. But what is a data structure except for a set of values and
+operations on them? The <code class="docutils literal notranslate"><span class="pre">Field</span></code> module type makes it clear that’s what we have.</p>
+<p>Here is a module that implements that module type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntField</span> <span class="o">:</span> <span class="nc">Field</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
+  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntField : Field
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">t</span></code> is abstract, the toplevel can’t give us good output about what the
+sum of one and one is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntField.t = &lt;abstr&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we could convert it to a string:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span> <span class="o">|&gt;</span> <span class="n">to_string</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;2&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We could even install a pretty printer to avoid having to manually call
+<code class="docutils literal notranslate"><span class="pre">to_string</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">pp_intfield</span> <span class="n">fmt</span> <span class="n">i</span> <span class="o">=</span>
+  <span class="nn">Format</span><span class="p">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;%s&quot;</span> <span class="o">(</span><span class="nn">IntField</span><span class="p">.</span><span class="n">to_string</span> <span class="n">i</span><span class="o">);;</span>
+
+<span class="o">#</span><span class="n">install_printer</span> <span class="n">pp_intfield</span><span class="o">;;</span>
+
+<span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pp_intfield : Format.formatter -&gt; IntField.t -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntField.t = 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>We could implement other kinds of fields, too:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">FloatField</span> <span class="o">:</span> <span class="nc">Field</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
+  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
+  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+.</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*.</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-.</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_float</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatField : Field
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we’d have to install a printer for it, too:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">pp_floatfield</span> <span class="n">fmt</span> <span class="n">f</span> <span class="o">=</span>
+  <span class="nn">Format</span><span class="p">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;%s&quot;</span> <span class="o">(</span><span class="nn">FloatField</span><span class="p">.</span><span class="n">to_string</span> <span class="n">f</span><span class="o">);;</span>
+
+<span class="o">#</span><span class="n">install_printer</span> <span class="n">pp_floatfield</span><span class="o">;;</span>
+
+<span class="nn">FloatField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pp_floatfield : Format.formatter -&gt; FloatField.t -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : FloatField.t = 2.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Was there really a need to make type <code class="docutils literal notranslate"><span class="pre">t</span></code> abstract in the field examples above?
+Arguably not. And if it were not abstract, we wouldn’t have to go to the trouble
+of converting abstract values into strings, or installing printers. Let’s pursue
+that idea, next.</p>
+<div class="section" id="specializing-module-types">
+<h2><span class="section-number">5.6.1. </span>Specializing Module Types<a class="headerlink" href="#specializing-module-types" title="Permalink to this headline">¶</a></h2>
+<p>In the past, we’ve seen that we can leave off the module type annotation,
+then do a separate check to make sure the structure satisfies the signature:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntField</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
+  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="o">_</span> <span class="o">:</span> <span class="nc">Field</span> <span class="o">=</span> <span class="nc">IntField</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntField :
+  sig
+    type t = int
+    val zero : int
+    val one : int
+    val ( + ) : int -&gt; int -&gt; int
+    val ( * ) : int -&gt; int -&gt; int
+    val ( ~- ) : int -&gt; int
+    val to_string : int -&gt; string
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>There’s a more sophisticated way of accomplishing the same goal. We can
+specialize the <code class="docutils literal notranslate"><span class="pre">Field</span></code> module type to specify that <code class="docutils literal notranslate"><span class="pre">t</span></code> must be <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>.
+We do that by adding a <em>constraint</em> using the <code class="docutils literal notranslate"><span class="pre">with</span></code> keyword:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">INT_FIELD</span> <span class="o">=</span> <span class="nc">Field</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type INT_FIELD =
+  sig
+    type t = int
+    val zero : t
+    val one : t
+    val ( + ) : t -&gt; t -&gt; t
+    val ( * ) : t -&gt; t -&gt; t
+    val ( ~- ) : t -&gt; t
+    val to_string : t -&gt; string
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how the <code class="docutils literal notranslate"><span class="pre">INT_FIELD</span></code> module type now specifies that <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span></code> are the
+same type. It exposes or <em>shares</em> that fact with the world, so we could
+call these “sharing constraints.”</p>
+<p>Now <code class="docutils literal notranslate"><span class="pre">IntField</span></code> can be given that module type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntField</span> <span class="o">:</span> <span class="nc">INT_FIELD</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
+  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntField : INT_FIELD
+</pre></div>
+</div>
+</div>
+</div>
+<p>And since the equality of <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span></code> is exposed, the toplevel can print
+values of type <code class="docutils literal notranslate"><span class="pre">t</span></code> without any help needed from a pretty printer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntField.t = 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Programmers can even mix and match built-in <code class="docutils literal notranslate"><span class="pre">int</span></code> values with those provided
+by <code class="docutils literal notranslate"><span class="pre">IntField</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntField.t = 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>The same can be done for floats:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">FLOAT_FIELD</span> <span class="o">=</span> <span class="nc">Field</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
+
+<span class="k">module</span> <span class="nc">FloatField</span> <span class="o">:</span> <span class="nc">FLOAT_FIELD</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
+  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
+  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+.</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*.</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-.</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_float</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type FLOAT_FIELD =
+  sig
+    type t = float
+    val zero : t
+    val one : t
+    val ( + ) : t -&gt; t -&gt; t
+    val ( * ) : t -&gt; t -&gt; t
+    val ( ~- ) : t -&gt; t
+    val to_string : t -&gt; string
+  end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatField : FLOAT_FIELD
+</pre></div>
+</div>
+</div>
+</div>
+<p>It turns out there’s no need to separately define <code class="docutils literal notranslate"><span class="pre">INT_FIELD</span></code> and <code class="docutils literal notranslate"><span class="pre">FLOAT_FIELD</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">with</span></code> keyword can be used as part of the <code class="docutils literal notranslate"><span class="pre">module</span></code> definition, though the
+syntax becomes a little harder to read because of the proximity of the two <code class="docutils literal notranslate"><span class="pre">=</span></code>
+signs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">FloatField</span> <span class="o">:</span> <span class="nc">Field</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
+  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
+  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+.</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*.</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-.</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_float</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatField :
+  sig
+    type t = float
+    val zero : t
+    val one : t
+    val ( + ) : t -&gt; t -&gt; t
+    val ( * ) : t -&gt; t -&gt; t
+    val ( ~- ) : t -&gt; t
+    val to_string : t -&gt; string
+  end
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="constraints">
+<h2><span class="section-number">5.6.2. </span>Constraints<a class="headerlink" href="#constraints" title="Permalink to this headline">¶</a></h2>
+<p><strong>Syntax.</strong></p>
+<p>There are two sorts of constraints. One is the sort we saw above, with <code class="docutils literal notranslate"><span class="pre">type</span></code>
+equations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">with</span> <span class="pre">type</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">t</span></code>, where <code class="docutils literal notranslate"><span class="pre">T</span></code> is a module type, <code class="docutils literal notranslate"><span class="pre">x</span></code> is a type name, and
+<code class="docutils literal notranslate"><span class="pre">t</span></code> is a type.</p></li>
+</ul>
+<p>The other sort is a <code class="docutils literal notranslate"><span class="pre">module</span></code> equation, which is syntactic sugar for specifying
+the equality of <em>all</em> types in the two modules:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">with</span> <span class="pre">module</span> <span class="pre">M</span> <span class="pre">=</span> <span class="pre">N</span></code>, where <code class="docutils literal notranslate"><span class="pre">M</span></code> and <code class="docutils literal notranslate"><span class="pre">N</span></code> are module names.</p></li>
+</ul>
+<p>Multiple constraints can be added with the <code class="docutils literal notranslate"><span class="pre">and</span></code> keyword:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">with</span> <span class="pre">constraint1</span> <span class="pre">and</span> <span class="pre">constraint2</span> <span class="pre">and</span> <span class="pre">...</span> <span class="pre">constraintN</span></code></p></li>
+</ul>
+<p><strong>Static semantics.</strong></p>
+<p>The constrained module type <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">with</span> <span class="pre">type</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">t</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">T</span></code>, except that
+the declaration of <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">x</span></code> inside <code class="docutils literal notranslate"><span class="pre">T</span></code> is replaced by <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">t</span></code>. For example,
+compare the two signatures output below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">sig</span> <span class="k">type</span> <span class="n">t</span> <span class="k">end</span>
+<span class="k">module</span> <span class="k">type</span> <span class="nc">U</span> <span class="o">=</span> <span class="nc">T</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig type t end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type U = sig type t = int end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Likewise, <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">with</span> <span class="pre">module</span> <span class="pre">M</span> <span class="pre">=</span> <span class="pre">N</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">T</span></code>, except that the any
+declaration <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">x</span></code> inside the module type of <code class="docutils literal notranslate"><span class="pre">M</span></code> is replaced by
+<code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">N.X</span></code>. (And the same recursively for any nested modules.) It takes more
+work to give and understand this example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">XY</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="n">x</span>
+  <span class="k">type</span> <span class="n">y</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="k">type</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">module</span> <span class="nc">A</span> <span class="o">:</span> <span class="nc">XY</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">B</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">x</span> <span class="o">=</span> <span class="kt">int</span>
+  <span class="k">type</span> <span class="n">y</span> <span class="o">=</span> <span class="kt">float</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="k">type</span> <span class="nc">U</span> <span class="o">=</span> <span class="nc">T</span> <span class="k">with</span> <span class="k">module</span> <span class="nc">A</span> <span class="o">=</span> <span class="nc">B</span>
+
+<span class="k">module</span> <span class="nc">C</span> <span class="o">:</span> <span class="nc">U</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">module</span> <span class="nc">A</span> <span class="o">=</span> <span class="k">struct</span>
+    <span class="k">type</span> <span class="n">x</span> <span class="o">=</span> <span class="kt">int</span>
+    <span class="k">type</span> <span class="n">y</span> <span class="o">=</span> <span class="kt">float</span>
+    <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type XY = sig type x type y end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig module A : XY end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module B : sig type x = int type y = float end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type U = sig module A : sig type x = int type y = float end end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module C : U
+</pre></div>
+</div>
+</div>
+</div>
+<p>Focus on the output for module type <code class="docutils literal notranslate"><span class="pre">U</span></code>. Notice that the types of <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> in
+it have become <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">float</span></code> because of the <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">A</span> <span class="pre">=</span> <span class="pre">B</span></code> constraint. Also
+notice how modules <code class="docutils literal notranslate"><span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">C.A</span></code> are <em>not</em> the same module; the latter has an
+extra item <code class="docutils literal notranslate"><span class="pre">x</span></code> in it. So the syntax <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">A</span> <span class="pre">=</span> <span class="pre">B</span></code> is potentially confusing. The
+constraint is not specifying that the two <em>modules</em> are the same. Rather, it
+specifies that all their <em>types</em> are constrained to be equal.</p>
+<p><strong>Dynamic semantics.</strong></p>
+<p>There are no dynamic semantics for constraints, because they are only for type
+checking.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/modules"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="functional_data_structures.html" title="previous page"><span class="section-number">5.5. </span>Functional Data Structures</a>
+    <a class='right-next' id="next-link" href="compilation_units.html" title="next page"><span class="section-number">5.7. </span>Compilation Units</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

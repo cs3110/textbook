@@ -1,0 +1,927 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.11. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="5.10. Summary" href="summary.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/modules/exercises.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/modules/exercises.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/modules/exercises.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="exercises">
+<h1><span class="section-number">5.11. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
+<p>Solutions to exercises are available to students in Cornell’s CS 3110.
+Instructors at other institutions are welcome to contact Michael Clarkson
+for access.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: complex synonym [★]</strong></p>
+<p>Here is a module type for complex numbers, which have a real and imaginary
+component:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">ComplexSig</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">val</span> <span class="n">zero</span> <span class="o">:</span> <span class="kt">float</span> <span class="o">*</span> <span class="kt">float</span>
+  <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="kt">float</span> <span class="o">*</span> <span class="kt">float</span> <span class="o">-&gt;</span> <span class="kt">float</span> <span class="o">*</span> <span class="kt">float</span> <span class="o">-&gt;</span> <span class="kt">float</span> <span class="o">*</span> <span class="kt">float</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Improve that code by adding <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">t</span> <span class="pre">=</span> <span class="pre">float</span> <span class="pre">*</span> <span class="pre">float</span></code>. Show how the signature can
+be written more tersely because of the type synonym.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: complex encapsulation [★★]</strong></p>
+<p>Here is a module for the module type from the previous exercise:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Complex</span> <span class="o">:</span> <span class="nc">ComplexSig</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span> <span class="o">*</span> <span class="kt">float</span>
+  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="o">(</span><span class="mi">0</span><span class="o">.,</span> <span class="mi">0</span><span class="o">.)</span>
+  <span class="k">let</span> <span class="n">add</span> <span class="o">(</span><span class="n">r1</span><span class="o">,</span> <span class="n">i1</span><span class="o">)</span> <span class="o">(</span><span class="n">r2</span><span class="o">,</span> <span class="n">i2</span><span class="o">)</span> <span class="o">=</span> <span class="n">r1</span> <span class="o">+.</span> <span class="n">r2</span><span class="o">,</span> <span class="n">i1</span> <span class="o">+.</span> <span class="n">i2</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Investigate what happens if you make the following changes (each
+independently), and explain why any errors arise:</p>
+<ul class="simple">
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">zero</span></code> from the structure</p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">add</span></code> from the signature</p></li>
+<li><p>change <code class="docutils literal notranslate"><span class="pre">zero</span></code> in the structure to <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">zero</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">0</span></code></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: big list queue [★★]</strong></p>
+<p>Use the following code to create <code class="docutils literal notranslate"><span class="pre">ListQueue</span></code> of exponentially increasing length:
+10, 100, 1000, etc. How big of a queue can you create before there is a
+noticeable delay? How big until there’s a delay of at least 10 seconds? (Note:
+you can abort utop computations with Ctrl-C.)</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Creates a ListQueue filled with [n] elements. *)</span>
+<span class="k">let</span> <span class="n">fill_listqueue</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">loop</span> <span class="n">n</span> <span class="n">q</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">q</span>
+    <span class="k">else</span> <span class="n">loop</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="nn">ListQueue</span><span class="p">.</span><span class="n">enqueue</span> <span class="n">n</span> <span class="n">q</span><span class="o">)</span> <span class="k">in</span>
+  <span class="n">loop</span> <span class="n">n</span> <span class="nn">ListQueue</span><span class="p">.</span><span class="n">empty</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: big batched queue [★★]</strong></p>
+<p>Use the following function to create <code class="docutils literal notranslate"><span class="pre">BatchedQueue</span></code> of exponentially increasing
+length:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fill_batchedqueue</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">loop</span> <span class="n">n</span> <span class="n">q</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">q</span>
+    <span class="k">else</span> <span class="n">loop</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="nn">BatchedQueue</span><span class="p">.</span><span class="n">enqueue</span> <span class="n">n</span> <span class="n">q</span><span class="o">)</span> <span class="k">in</span>
+  <span class="n">loop</span> <span class="n">n</span> <span class="nn">BatchedQueue</span><span class="p">.</span><span class="n">empty</span>
+</pre></div>
+</div>
+<p>Now how big of a queue can you create before there’s a delay of at least 10
+seconds?</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: queue efficiency [★★★]</strong></p>
+<p>Compare the implementations of <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> in <code class="docutils literal notranslate"><span class="pre">ListQueue</span></code> vs. <code class="docutils literal notranslate"><span class="pre">BatchedQueue</span></code>.
+Explain in your own words why the efficiency of <code class="docutils literal notranslate"><span class="pre">ListQueue.enqueue</span></code> is linear
+time in the length of the queue. <em>Hint: consider the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator.</em> Then explain
+why adding <span class="math notranslate nohighlight">\(n\)</span> elements to the queue takes time that is quadratic in <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Now consider <code class="docutils literal notranslate"><span class="pre">BatchedQueue.enqueue</span></code>. Suppose that the queue is in a state where
+it has never had any elements dequeued. Explain in your own words why
+<code class="docutils literal notranslate"><span class="pre">BatchedQueue.enqueue</span></code> is constant time. Then explain why adding <span class="math notranslate nohighlight">\(n\)</span> elements
+to the queue takes time that is linear in <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: binary search tree dictionary [★★★]</strong></p>
+<p>Write a module <code class="docutils literal notranslate"><span class="pre">BstDict</span></code> that implements the <code class="docutils literal notranslate"><span class="pre">Dictionary</span></code> module type using the
+a binary search tree type.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: fraction [★★★]</strong></p>
+<p>Write a module that implements the <code class="docutils literal notranslate"><span class="pre">Fraction</span></code> module type below:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Fraction</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(* A fraction is a rational number p/q, where q != 0.*)</span>
+  <span class="k">type</span> <span class="n">t</span>
+
+  <span class="c">(** [make n d] is n/d. Requires d != 0. *)</span>
+  <span class="k">val</span> <span class="n">make</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">t</span>
+
+  <span class="k">val</span> <span class="n">numerator</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+  <span class="k">val</span> <span class="n">denominator</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+  <span class="k">val</span> <span class="n">to_string</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
+  <span class="k">val</span> <span class="n">to_float</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">float</span>
+
+  <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">mul</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: fraction reduced [★★★]</strong></p>
+<p>Modify your implementation of <code class="docutils literal notranslate"><span class="pre">Fraction</span></code> to ensure these invariants hold of
+every value <code class="docutils literal notranslate"><span class="pre">v</span></code> of type <code class="docutils literal notranslate"><span class="pre">t</span></code> that is returned from <code class="docutils literal notranslate"><span class="pre">make</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code>, and <code class="docutils literal notranslate"><span class="pre">mul</span></code>:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">v</span></code> is in <em><a class="reference external" href="https://en.wikipedia.org/wiki/Irreducible_fraction">reduced form</a></em></p></li>
+<li><p>the denominator of <code class="docutils literal notranslate"><span class="pre">v</span></code> is positive</p></li>
+</ol>
+<p>For the first invariant, you might find this implementation of Euclid’s
+algorithm to be helpful:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [gcd x y] is the greatest common divisor of [x] and [y].</span>
+<span class="c">    Requires: [x] and [y] are positive. *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">gcd</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">y</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="k">then</span> <span class="n">gcd</span> <span class="o">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span>
+  <span class="k">else</span> <span class="n">gcd</span> <span class="n">y</span> <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: make char map [★]</strong></p>
+<p>To create a standard library map, we first have to use the <code class="docutils literal notranslate"><span class="pre">Map.Make</span></code> functor to
+produce a module that is specialized for the type of keys we want. Type the
+following in utop:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">module</span> <span class="nc">CharMap</span> <span class="o">=</span> <span class="nn">Map</span><span class="p">.</span><span class="nc">Make</span><span class="o">(</span><span class="nc">Char</span><span class="o">);;</span>
+</pre></div>
+</div>
+<p>The output tells you that a new module named <code class="docutils literal notranslate"><span class="pre">CharMap</span></code> has been defined, and it
+gives you a signature for it. Find the values <code class="docutils literal notranslate"><span class="pre">empty</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code>, and <code class="docutils literal notranslate"><span class="pre">remove</span></code> in
+that signature. Explain their types in your own words.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: char ordered [★]</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Map.Make</span></code> functor requires its input module to match the <code class="docutils literal notranslate"><span class="pre">Map.OrderedType</span></code>
+signature. Look at <a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.OrderedType.html">that signature</a> as well as the
+<a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Char.html">signature for the <code class="docutils literal notranslate"><span class="pre">Char</span></code> module</a>. Explain in your own words why we are
+allowed to pass <code class="docutils literal notranslate"><span class="pre">Char</span></code> as an argument to <code class="docutils literal notranslate"><span class="pre">Map.Make</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: use char map [★★]</strong></p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">CharMap</span></code> you just made, create a map that contains the following
+bindings:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'A'</span></code> maps to <code class="docutils literal notranslate"><span class="pre">&quot;Alpha&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'E'</span></code> maps to <code class="docutils literal notranslate"><span class="pre">&quot;Echo&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'S'</span></code> maps to <code class="docutils literal notranslate"><span class="pre">&quot;Sierra&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'V'</span></code> maps to <code class="docutils literal notranslate"><span class="pre">&quot;Victor&quot;</span></code></p></li>
+</ul>
+<p>Use <code class="docutils literal notranslate"><span class="pre">CharMap.find</span></code> to find the binding for <code class="docutils literal notranslate"><span class="pre">'E'</span></code>.</p>
+<p>Now remove the binding for <code class="docutils literal notranslate"><span class="pre">'A'</span></code>. Use <code class="docutils literal notranslate"><span class="pre">CharMap.mem</span></code> to find whether <code class="docutils literal notranslate"><span class="pre">'A'</span></code> is
+still bound.</p>
+<p>Use the function <code class="docutils literal notranslate"><span class="pre">CharMap.bindings</span></code> to convert your map into an association
+list.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: bindings [★★]</strong></p>
+<p>Investigate the <a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.S.html">documentation of the <code class="docutils literal notranslate"><span class="pre">Map.S</span></code></a> signature to find the
+specification of <code class="docutils literal notranslate"><span class="pre">bindings</span></code>. Which of these expressions will return the same
+association list?</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CharMap.(empty</span> <span class="pre">|&gt;</span> <span class="pre">add</span> <span class="pre">'x'</span> <span class="pre">0</span> <span class="pre">|&gt;</span> <span class="pre">add</span> <span class="pre">'y'</span> <span class="pre">1</span> <span class="pre">|&gt;</span> <span class="pre">bindings)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CharMap.(empty</span> <span class="pre">|&gt;</span> <span class="pre">add</span> <span class="pre">'y'</span> <span class="pre">1</span> <span class="pre">|&gt;</span> <span class="pre">add</span> <span class="pre">'x'</span> <span class="pre">0</span> <span class="pre">|&gt;</span> <span class="pre">bindings)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CharMap.(empty</span> <span class="pre">|&gt;</span> <span class="pre">add</span> <span class="pre">'x'</span> <span class="pre">2</span> <span class="pre">|&gt;</span> <span class="pre">add</span> <span class="pre">'y'</span> <span class="pre">1</span> <span class="pre">|&gt;</span> <span class="pre">remove</span> <span class="pre">'x'</span> <span class="pre">|&gt;</span> <span class="pre">add</span> <span class="pre">'x'</span> <span class="pre">0</span> <span class="pre">|&gt;</span> <span class="pre">bindings)</span></code></p></li>
+</ol>
+<p>Check your answer in utop.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: date order [★★]</strong></p>
+<p>Here is a type for dates:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">date</span> <span class="o">=</span> <span class="o">{</span><span class="n">month</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span> <span class="n">day</span> <span class="o">:</span> <span class="kt">int</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>For example, March 31st would be represented as <code class="docutils literal notranslate"><span class="pre">{month</span> <span class="pre">=</span> <span class="pre">3;</span> <span class="pre">day</span> <span class="pre">=</span> <span class="pre">31}</span></code>. Our
+goal in the next few exercises is to implement a map whose keys have type
+<code class="docutils literal notranslate"><span class="pre">date</span></code>.</p>
+<p>Obviously it’s possible to represent invalid dates with type <code class="docutils literal notranslate"><span class="pre">date</span></code>—for
+example, <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">month=6;</span> <span class="pre">day=50</span> <span class="pre">}</span></code> would be June 50th, which is
+<a class="reference external" href="http://nbcparksandrec.tumblr.com/post/46760908046/march-31st-is-a-day">not a real date</a>. The behavior of your code in the exercises below
+is unspecified for invalid dates.</p>
+<p>To create a map over dates, we need a module that we can pass as input to
+<code class="docutils literal notranslate"><span class="pre">Map.Make</span></code>. That module will need to match the <code class="docutils literal notranslate"><span class="pre">Map.OrderedType</span></code> signature.
+Create such a module. Here is some code to get you started:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Date</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">date</span>
+  <span class="k">let</span> <span class="n">compare</span> <span class="o">...</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Recall the <a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.OrderedType.html">specification of <code class="docutils literal notranslate"><span class="pre">compare</span></code></a> in <code class="docutils literal notranslate"><span class="pre">Map.OrderedType</span></code> as you write
+your <code class="docutils literal notranslate"><span class="pre">Date.compare</span></code> function.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: calendar [★★]</strong></p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">Map.Make</span></code> functor with your <code class="docutils literal notranslate"><span class="pre">Date</span></code> module to create a <code class="docutils literal notranslate"><span class="pre">DateMap</span></code> module.
+Then define a <code class="docutils literal notranslate"><span class="pre">calendar</span></code> type as follows:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">calendar</span> <span class="o">=</span> <span class="kt">string</span> <span class="nn">DateMap</span><span class="p">.</span><span class="n">t</span>
+</pre></div>
+</div>
+<p>The idea is that <code class="docutils literal notranslate"><span class="pre">calendar</span></code> maps a <code class="docutils literal notranslate"><span class="pre">date</span></code> to the name of an event occurring on
+that date.</p>
+<p>Using the functions in the <code class="docutils literal notranslate"><span class="pre">DateMap</span></code> module, create a calendar with a few
+entries in it, such as birthdays or anniversaries.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: print calendar [★★]</strong></p>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">print_calendar</span> <span class="pre">:</span> <span class="pre">calendar</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code> that prints each entry in a
+calendar in a format similar the inspiring examples in the previous exercise.
+<em>Hint: use <code class="docutils literal notranslate"><span class="pre">DateMap.iter</span></code>, which is documented in the
+<a class="reference external" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.S.html"><code class="docutils literal notranslate"><span class="pre">Map.S</span></code> signature</a>.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: is for [★★★]</strong></p>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">is_for</span> <span class="pre">:</span> <span class="pre">string</span> <span class="pre">CharMap.t</span> <span class="pre">-&gt;</span> <span class="pre">string</span> <span class="pre">CharMap.t</span></code> that given an
+input map with bindings from <span class="math notranslate nohighlight">\(k_1\)</span> to <span class="math notranslate nohighlight">\(v_1\)</span>, …, <span class="math notranslate nohighlight">\(k_n\)</span> to <span class="math notranslate nohighlight">\(v_n\)</span>, produces an
+output map with the same keys, but where each key <span class="math notranslate nohighlight">\(k_i\)</span> is now bound to the
+string “<span class="math notranslate nohighlight">\(k_i\)</span> is for <span class="math notranslate nohighlight">\(v_i\)</span>”. For example, if <code class="docutils literal notranslate"><span class="pre">m</span></code> maps <code class="docutils literal notranslate"><span class="pre">'a'</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;apple&quot;</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">is_for</span> <span class="pre">m</span></code> would map <code class="docutils literal notranslate"><span class="pre">'a'</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;a</span> <span class="pre">is</span> <span class="pre">for</span> <span class="pre">apple&quot;</span></code>. <em>Hint: there is a one-line
+solution that uses a function from the <code class="docutils literal notranslate"><span class="pre">Map.S</span></code> signature. To convert a character
+to a string, you could use <code class="docutils literal notranslate"><span class="pre">String.make</span></code>. An even fancier way would be to use
+<code class="docutils literal notranslate"><span class="pre">Printf.sprintf</span></code>.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: first after [★★★]</strong></p>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">first_after</span> <span class="pre">:</span> <span class="pre">calendar</span> <span class="pre">-&gt;</span> <span class="pre">Date.t</span> <span class="pre">-&gt;</span> <span class="pre">string</span></code> that returns the
+name of the first event that occurs strictly after the given date. If there is
+no such event, the function should raise <code class="docutils literal notranslate"><span class="pre">Not_found</span></code>, which is an exception
+already defined in the standard library. <em>Hint: there is a one-line solution
+that uses two functions from the <code class="docutils literal notranslate"><span class="pre">Map.S</span></code> signature.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: sets [★★★]</strong></p>
+<p>The standard library <code class="docutils literal notranslate"><span class="pre">Set</span></code> module is quite similar to the <code class="docutils literal notranslate"><span class="pre">Map</span></code> module. Use it
+to create a module that represents sets of <em>case-insensitive strings</em>. Strings
+that differ only in their case should be considered equal by the set. For
+example, the sets {“grr”, “argh”} and {“aRgh”, “GRR”} should be considered the
+same, and adding “gRr” to either set should not change the set.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: ToString [★★]</strong></p>
+<p>Write a module type <code class="docutils literal notranslate"><span class="pre">ToString</span></code> that specifies a signature with an abstract type
+<code class="docutils literal notranslate"><span class="pre">t</span></code> and a function <code class="docutils literal notranslate"><span class="pre">to_string</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">-&gt;</span> <span class="pre">string</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: Print [★★]</strong></p>
+<p>Write a functor <code class="docutils literal notranslate"><span class="pre">Print</span></code> that takes as input a module named <code class="docutils literal notranslate"><span class="pre">M</span></code> of type
+<code class="docutils literal notranslate"><span class="pre">ToString</span></code>. The nidyke returned by your functor should have exactly one value in
+it, <code class="docutils literal notranslate"><span class="pre">print</span></code>, which is a function that takes a value of type <code class="docutils literal notranslate"><span class="pre">M.t</span></code> and prints a
+string representation of that value.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: Print Int [★★]</strong></p>
+<p>Create a module named <code class="docutils literal notranslate"><span class="pre">PrintInt</span></code> that is the result of applying the functor
+<code class="docutils literal notranslate"><span class="pre">Print</span></code> to a new module <code class="docutils literal notranslate"><span class="pre">Int</span></code>. You will need to write <code class="docutils literal notranslate"><span class="pre">Int</span></code> yourself. The type
+<code class="docutils literal notranslate"><span class="pre">Int.t</span></code> should be <code class="docutils literal notranslate"><span class="pre">int</span></code>. <em>Hint: do not seal <code class="docutils literal notranslate"><span class="pre">Int</span></code>.</em></p>
+<p>Experiment with <code class="docutils literal notranslate"><span class="pre">PrintInt</span></code> in utop. Use it to print the value of an integer.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: Print String [★★]</strong></p>
+<p>Create a module named <code class="docutils literal notranslate"><span class="pre">PrintString</span></code> that is the result of applying the functor
+<code class="docutils literal notranslate"><span class="pre">Print</span></code> to a new module <code class="docutils literal notranslate"><span class="pre">MyString</span></code>. You will need to write <code class="docutils literal notranslate"><span class="pre">MyString</span></code> yourself.
+<em>Hint: do not seal <code class="docutils literal notranslate"><span class="pre">MyString</span></code>.</em></p>
+<p>Experiment with <code class="docutils literal notranslate"><span class="pre">PrintString</span></code> in utop. Use it to print the value of a string.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: Print Reuse [★]</strong></p>
+<p>Explain in your own words how <code class="docutils literal notranslate"><span class="pre">Print</span></code> has achieved code reuse, albeit a very
+small amount.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: Print String reuse revisited [★★]</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">PrintString</span></code> module you created above supports just one operation: <code class="docutils literal notranslate"><span class="pre">print</span></code>.
+It would be great to have a module that supports all the <code class="docutils literal notranslate"><span class="pre">String</span></code> module
+functions in addition to that <code class="docutils literal notranslate"><span class="pre">print</span></code> operation, and it would be super great to
+derive such a module without having to copy any code.</p>
+<p>Define a module <code class="docutils literal notranslate"><span class="pre">StringWithPrint</span></code>. It should have all the values of the built-in
+<code class="docutils literal notranslate"><span class="pre">String</span></code> module. It should also have the <code class="docutils literal notranslate"><span class="pre">print</span></code> operation, which should be
+derived from the <code class="docutils literal notranslate"><span class="pre">Print</span></code> functor rather than being copied code. <em>Hint: use two
+<code class="docutils literal notranslate"><span class="pre">include</span></code> statements.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: implementation without interface [★]</strong></p>
+<p>Create a file named <code class="docutils literal notranslate"><span class="pre">date.ml</span></code>.  In it put the following code:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">date</span> <span class="o">=</span> <span class="o">{</span><span class="n">month</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span> <span class="n">day</span> <span class="o">:</span> <span class="kt">int</span><span class="o">}</span>
+<span class="k">let</span> <span class="n">make_date</span> <span class="n">month</span> <span class="n">day</span> <span class="o">=</span> <span class="o">{</span><span class="n">month</span><span class="o">;</span> <span class="n">day</span><span class="o">}</span>
+<span class="k">let</span> <span class="n">get_month</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span>
+<span class="k">let</span> <span class="n">get_day</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span>
+<span class="k">let</span> <span class="n">to_string</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="o">)</span> <span class="o">^</span> <span class="s2">&quot;/&quot;</span> <span class="o">^</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Compile that file to bytecode:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild date.cmo
+</pre></div>
+</div>
+<p>Now start utop and type the following to use the module you’ve just created:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">directory</span> <span class="s2">&quot;_build&quot;</span><span class="o">;;</span>
+<span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;date.cmo&quot;</span><span class="o">;;</span>
+</pre></div>
+</div>
+<p>Finally, create a date, access its day, and convert it to a string.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: implementation with interface [★]</strong></p>
+<p>After doing the previous exercise, also create a file named <code class="docutils literal notranslate"><span class="pre">date.mli</span></code>. In it
+put the following code:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">date</span> <span class="o">=</span> <span class="o">{</span><span class="n">month</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span> <span class="n">day</span> <span class="o">:</span> <span class="kt">int</span><span class="o">}</span>
+<span class="k">val</span> <span class="n">make_date</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">date</span>
+<span class="k">val</span> <span class="n">get_month</span> <span class="o">:</span> <span class="n">date</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="k">val</span> <span class="n">get_day</span> <span class="o">:</span> <span class="n">date</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="k">val</span> <span class="n">to_string</span> <span class="o">:</span> <span class="n">date</span> <span class="o">-&gt;</span> <span class="kt">string</span>
+</pre></div>
+</div>
+<p>Recompile <code class="docutils literal notranslate"><span class="pre">date.ml</span></code> to bytecode:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild date.cmo
+</pre></div>
+</div>
+<p>Restart utop and re-issue the same phrases as before.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: implementation with abstracted interface [★]</strong></p>
+<p>After doing the previous two exercises, edit <code class="docutils literal notranslate"><span class="pre">date.mli</span></code> and change the first
+declaration in it to the following:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">date</span>
+</pre></div>
+</div>
+<p>The type <code class="docutils literal notranslate"><span class="pre">date</span></code> is now abstract. Recompile <code class="docutils literal notranslate"><span class="pre">date.ml</span></code> to bytecode, restart utop,
+and re-issue the same phrases as before. The responses to two of them will
+change. Explain in your own words those changes.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: printer for dat [★★★]</strong></p>
+<p>Add a declaration to <code class="docutils literal notranslate"><span class="pre">date.mli</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">format</span> <span class="o">:</span> <span class="nn">Format</span><span class="p">.</span><span class="n">formatter</span> <span class="o">-&gt;</span> <span class="n">date</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+</pre></div>
+</div>
+<p>And add a definition of <code class="docutils literal notranslate"><span class="pre">format</span></code> to <code class="docutils literal notranslate"><span class="pre">date.ml</span></code>. <em>Hint: use <code class="docutils literal notranslate"><span class="pre">Format.fprintf</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Date.to_string</span></code>.</em></p>
+<p>Now recompile, load utop, and after loading <code class="docutils literal notranslate"><span class="pre">date.cmo</span></code> install the printer by
+issuing the directive</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">install_printer</span> <span class="nn">Date</span><span class="p">.</span><span class="n">format</span><span class="o">;;</span>
+</pre></div>
+</div>
+<p>Reissue the other phrases to utop as you did in the exercises above. The
+response from one phrase will change in a helpful way. Explain why.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: refactor arith [★★★★]</strong></p>
+<p>Download this file: <a href="../../code/algebra.ml">algebra.ml</a>. It
+contains two signatures and four structures:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ring</span></code> is signature that describes the algebraic structure called a <em><a class="reference external" href="https://en.wikipedia.org/wiki/Ring_(mathematics)">ring</a></em>,
+which is an abstraction of the addition and multiplication operators.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Field</span></code> is a signature that describes the algebraic structure called a
+<em><a class="reference external" href="https://en.wikipedia.org/wiki/Field_(mathematics)">field</a></em>, which is like a ring but also has an abstraction of the division
+operation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IntRing</span></code> and <code class="docutils literal notranslate"><span class="pre">FloatRing</span></code> are structures that implement rings in terms of
+<code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IntField</span></code> and <code class="docutils literal notranslate"><span class="pre">FloatField</span></code> are structures that implement fields in terms of
+<code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IntRational</span></code> and <code class="docutils literal notranslate"><span class="pre">FloatRational</span></code> are structures that implement fields in
+terms of ratios (aka fractions)—that is, pairs of <code class="docutils literal notranslate"><span class="pre">int</span></code> and pairs of
+<code class="docutils literal notranslate"><span class="pre">float</span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Dear fans of abstract algebra: of course these representations don’t necessarily
+obey all the axioms of rings and fields because of the limitations of machine
+arithmetic. Also, the division operation in <code class="docutils literal notranslate"><span class="pre">IntField</span></code> is ill-defined on zero.
+Try not to worry about that.</p>
+</div>
+<p>Refactor the code to improve the amount of code reuse it exhibits. To do that,
+use <code class="docutils literal notranslate"><span class="pre">include</span></code>, functors, and introduce additional structures and signatures as
+needed. There isn’t necessarily a right answer here, but here’s some advice:</p>
+<ul class="simple">
+<li><p>No name should be <em>directly declared</em> in more than one signature. For example,
+<code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span></code> should not be directly declared in <code class="docutils literal notranslate"><span class="pre">Field</span></code>; it should be reused from
+an earlier signature. By “directly declared” we mean a declaration of the form
+<code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">name</span> <span class="pre">:</span> <span class="pre">...</span></code>. An indirect declaration would be one that results from an
+<code class="docutils literal notranslate"><span class="pre">include</span></code>.</p></li>
+<li><p>You need only three <em>direct definitions</em> of the algebraic operations and
+numbers (plus, minus, times, divide, zero, one): once for <code class="docutils literal notranslate"><span class="pre">int</span></code>, once for
+<code class="docutils literal notranslate"><span class="pre">float</span></code>, and once for ratios. For example, <code class="docutils literal notranslate"><span class="pre">IntField.(</span> <span class="pre">+</span> <span class="pre">)</span></code> should not be
+directly defined as <code class="docutils literal notranslate"><span class="pre">Stdlib.(</span> <span class="pre">+</span> <span class="pre">)</span></code>; rather, it should be reused from
+elsewhere. By “directly defined” we mean a definition of the form
+<code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">name</span> <span class="pre">=</span> <span class="pre">...</span></code>. An indirect definition would be one that results from an
+<code class="docutils literal notranslate"><span class="pre">include</span></code> or a functor application.</p></li>
+<li><p>The rational structures can both be produced by a single functor that is
+applied once to <code class="docutils literal notranslate"><span class="pre">IntField</span></code> and once to <code class="docutils literal notranslate"><span class="pre">FloatField</span></code>.</p></li>
+<li><p>It’s possible to eliminate all duplication of <code class="docutils literal notranslate"><span class="pre">of_int</span></code>, such that it is
+directly defined exactly once, and all structures reuse that definition; and
+such that it is directly declared in only one signature. This will require the
+use of functors. It will also require inventing an algorithm that can convert
+an integer to an arbitrary <code class="docutils literal notranslate"><span class="pre">Ring</span></code> representation, regardless of what the
+representation type of that <code class="docutils literal notranslate"><span class="pre">Ring</span></code> is.</p></li>
+</ul>
+<p>When you’re done, the types of all the modules should remain unchanged. You can
+easily see those types by running <code class="docutils literal notranslate"><span class="pre">ocamlc</span> <span class="pre">-i</span> <span class="pre">algebra.ml</span></code>.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/modules"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="summary.html" title="previous page"><span class="section-number">5.10. </span>Summary</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

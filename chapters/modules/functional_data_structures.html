@@ -1,0 +1,1344 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.5. Functional Data Structures &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.6. Module Type Constraints" href="module_type_constraints.html" />
+    <link rel="prev" title="5.4. Encapsulation" href="encapsulation.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/modules/functional_data_structures.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/modules/functional_data_structures.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/modules/functional_data_structures.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/modules/functional_data_structures.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lists">
+   5.5.1. Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stacks">
+   5.5.2. Stacks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#options-vs-exceptions">
+   5.5.3. Options vs Exceptions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#queues">
+   5.5.4. Queues
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dictionaries">
+   5.5.5. Dictionaries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sets">
+   5.5.6. Sets
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="functional-data-structures">
+<h1><span class="section-number">5.5. </span>Functional Data Structures<a class="headerlink" href="#functional-data-structures" title="Permalink to this headline">¶</a></h1>
+<p>A <em>functional data structure</em> is one that does not make use of any imperative
+features. That is, no operations of the data structure have any side effects.
+It’s possible to build functional data structures both in functional languages
+and in imperative languages.</p>
+<p>Functional data structures have the property of being <em>persistent</em>: updating the
+data structure with one of its operations does not change the existing version
+of the data structure but instead produces a new version. Both exist and both
+can still be accessed. A good language implementation will ensure that any parts
+of the data structure that are not changed by an operation will be <em>shared</em>
+between the old version and the new version. Any parts that do change will be
+<em>copied</em> so that the old version may persist. The opposite of a persistent data
+structure is an <em>ephemeral</em> data structure: changes are destructive, so that
+only one version exists at any time. Both persistent and ephemeral data
+structures can be built in both functional and imperative languages.</p>
+<div class="section" id="lists">
+<h2><span class="section-number">5.5.1. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>The built-in singly-linked <code class="docutils literal notranslate"><span class="pre">list</span></code> data structure in OCaml is functional. We know
+that, because we’ve seen how to implement it with algebraic data types. It’s
+also persistent, which we can demonstrate:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">lst</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">];;</span>
+<span class="k">let</span> <span class="n">lst&#39;</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">tl</span> <span class="n">lst</span><span class="o">;;</span>
+<span class="n">lst&#39;</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst : int list = [1; 2]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst&#39; : int list = [2]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list = [2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Taking the tail of <code class="docutils literal notranslate"><span class="pre">lst</span></code> does not change the list. Both <code class="docutils literal notranslate"><span class="pre">lst</span></code> and <code class="docutils literal notranslate"><span class="pre">lst'</span></code>
+coexist without affecting one another.</p>
+</div>
+<div class="section" id="stacks">
+<h2><span class="section-number">5.5.2. </span>Stacks<a class="headerlink" href="#stacks" title="Permalink to this headline">¶</a></h2>
+<p>We implemented stacks earlier in this chapter. Here’s a terse variant of one of
+those implementations, in which add a <code class="docutils literal notranslate"><span class="pre">to_list</span></code> operation to make it easier to
+view the contents of the stack in examples:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">exception</span> <span class="nc">Empty</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+  <span class="k">val</span> <span class="n">to_list</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">exception</span> <span class="nc">Empty</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+  <span class="k">let</span> <span class="n">push</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span>
+  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
+  <span class="k">let</span> <span class="n">to_list</span> <span class="o">=</span> <span class="nn">Fun</span><span class="p">.</span><span class="n">id</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Stack =
+  sig
+    type &#39;a t
+    exception Empty
+    val empty : &#39;a t
+    val is_empty : &#39;a t -&gt; bool
+    val push : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val peek : &#39;a t -&gt; &#39;a
+    val pop : &#39;a t -&gt; &#39;a t
+    val size : &#39;a t -&gt; int
+    val to_list : &#39;a t -&gt; &#39;a list
+  end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack : Stack
+</pre></div>
+</div>
+</div>
+</div>
+<p>That implementation is functional, as can be seen above, and also persistent:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">ListStack</span><span class="o">;;</span>
+<span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">2</span><span class="o">;;</span>
+<span class="k">let</span> <span class="n">s&#39;</span> <span class="o">=</span> <span class="n">pop</span> <span class="n">s</span><span class="o">;;</span>
+<span class="n">to_list</span> <span class="n">s</span><span class="o">;;</span>
+<span class="n">to_list</span> <span class="n">s&#39;</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s : int ListStack.t = &lt;abstr&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s&#39; : int ListStack.t = &lt;abstr&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list = [2; 1]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list = [1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The value <code class="docutils literal notranslate"><span class="pre">s</span></code> is unchanged by the <code class="docutils literal notranslate"><span class="pre">pop</span></code> operation on <code class="docutils literal notranslate"><span class="pre">s'</span></code>. Both versions of the
+stack coexist.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Stack</span></code> module type gives us a strong hint that the data structure is
+persistent in the types it provides for <code class="docutils literal notranslate"><span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">pop</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+</pre></div>
+</div>
+<p>Both of those take a stack as an argument and return a new stack as a result. An
+ephemeral data structure usually would not bother to return a stack. In Java,
+for example, similar methods might have a <code class="docutils literal notranslate"><span class="pre">void</span></code> return type; the equivalent in
+OCaml would be returning <code class="docutils literal notranslate"><span class="pre">unit</span></code>.</p>
+</div>
+<div class="section" id="options-vs-exceptions">
+<h2><span class="section-number">5.5.3. </span>Options vs Exceptions<a class="headerlink" href="#options-vs-exceptions" title="Permalink to this headline">¶</a></h2>
+<p>All of our stack implementations so far have raised an exception whenever <code class="docutils literal notranslate"><span class="pre">peek</span></code>
+or <code class="docutils literal notranslate"><span class="pre">pop</span></code> is applied to the empty stack. Another possibility would be to use an
+<code class="docutils literal notranslate"><span class="pre">option</span></code> for the return value. If the input stack is empty, then <code class="docutils literal notranslate"><span class="pre">peek</span></code> and
+<code class="docutils literal notranslate"><span class="pre">pop</span></code> return <code class="docutils literal notranslate"><span class="pre">None</span></code>; otherwise, they return <code class="docutils literal notranslate"><span class="pre">Some</span></code>.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">option</span>
+  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="n">option</span>
+  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+  <span class="k">val</span> <span class="n">to_list</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">exception</span> <span class="nc">Empty</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+  <span class="k">let</span> <span class="n">push</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span>
+  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="nc">None</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="n">x</span>
+  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="nc">None</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="n">s</span>
+  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
+  <span class="k">let</span> <span class="n">to_list</span> <span class="o">=</span> <span class="nn">Fun</span><span class="p">.</span><span class="n">id</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Stack =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val is_empty : &#39;a t -&gt; bool
+    val push : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val peek : &#39;a t -&gt; &#39;a option
+    val pop : &#39;a t -&gt; &#39;a t option
+    val size : &#39;a t -&gt; int
+    val to_list : &#39;a t -&gt; &#39;a list
+  end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack : Stack
+</pre></div>
+</div>
+</div>
+</div>
+<p>But that makes it harder to pipeline:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="o">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">pop</span> <span class="o">|&gt;</span> <span class="n">peek</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[5]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">37</span><span class="o">-</span><span class="mi">41</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="n">ListStack</span><span class="o">.</span><span class="p">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">pop</span> <span class="o">|&gt;</span> <span class="n">peek</span><span class="p">)</span>
+                                         <span class="o">^^^^</span>
+<span class="ne">Error</span>: This expression has type &#39;a ListStack.t -&gt; &#39;a option
+       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span> <span class="n">ListStack</span><span class="o">.</span><span class="n">t</span> <span class="n">option</span> <span class="o">-&gt;</span> <span class="s1">&#39;b</span>
+       <span class="n">Type</span> <span class="s1">&#39;a ListStack.t is not compatible with type int ListStack.t option </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The types break down for the pipeline right after the <code class="docutils literal notranslate"><span class="pre">pop</span></code>, because that
+now returns an <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">t</span> <span class="pre">option</span></code>, but <code class="docutils literal notranslate"><span class="pre">peek</span></code> expects an input that is merely
+an <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">t</span></code>.</p>
+<p>It is possible to define some additional operators to help restore the ability
+to pipeline. In fact, these functions are already defined in the <code class="docutils literal notranslate"><span class="pre">Option</span></code> module
+in the standard library, though not as infix operators:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* Option.map aka fmap *)</span>
+<span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;|</span> <span class="o">)</span> <span class="n">opt</span> <span class="n">f</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">opt</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
+  <span class="o">|</span> <span class="nc">Some</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="c">(* Option.bind *)</span>
+<span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="n">opt</span> <span class="n">f</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">opt</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
+  <span class="o">|</span> <span class="nc">Some</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &gt;&gt;| ) : &#39;a option -&gt; (&#39;a -&gt; &#39;b) -&gt; &#39;b option = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &gt;&gt;= ) : &#39;a option -&gt; (&#39;a -&gt; &#39;b option) -&gt; &#39;b option = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use those as needed for pipelining:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="o">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">pop</span> <span class="o">&gt;&gt;|</span> <span class="n">push</span> <span class="mi">2</span> <span class="o">&gt;&gt;=</span> <span class="n">pop</span> <span class="o">&gt;&gt;|</span> <span class="n">push</span> <span class="mi">3</span> <span class="o">&gt;&gt;|</span> <span class="n">to_list</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list option = Some [3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>But it’s not so pleasant to figure out which of the three operators to use
+where.</p>
+<p>There is therefore a tradeoff in the interface design:</p>
+<ul class="simple">
+<li><p>Using options ensures that surprising exceptions regarding empty stacks never
+occur at run-time. The program is therefore more robust. But the convenient
+pipeline operator is lost.</p></li>
+<li><p>Using exceptions means that programmers don’t have to write as much code. If
+they are sure that an exception can’t occur, they can omit the code for
+handling it. The program is less robust, but writing it is more convenient.</p></li>
+</ul>
+<p>There is thus a tradeoff between writing more code early (with options) or doing
+more debugging later (with exceptions). The OCaml standard library has recently
+begun providing both versions of the interface in a data structure, so that the
+client can make the choice of how they want to use it.  For example, we could
+provide both <code class="docutils literal notranslate"><span class="pre">peek</span></code> and <code class="docutils literal notranslate"><span class="pre">peek_opt</span></code>, and the same for <code class="docutils literal notranslate"><span class="pre">pop</span></code>, for clients of
+our stack module:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="k">val</span> <span class="n">peek_opt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">option</span>
+  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">pop_opt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="n">option</span>
+  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+  <span class="k">val</span> <span class="n">to_list</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">exception</span> <span class="nc">Empty</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+  <span class="k">let</span> <span class="n">push</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span>
+  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="k">let</span> <span class="n">peek_opt</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="nc">None</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="n">x</span>
+  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+  <span class="k">let</span> <span class="n">pop_opt</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="nc">None</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="n">s</span>
+  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
+  <span class="k">let</span> <span class="n">to_list</span> <span class="o">=</span> <span class="nn">Fun</span><span class="p">.</span><span class="n">id</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Stack =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val is_empty : &#39;a t -&gt; bool
+    val push : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val peek : &#39;a t -&gt; &#39;a
+    val peek_opt : &#39;a t -&gt; &#39;a option
+    val pop : &#39;a t -&gt; &#39;a t
+    val pop_opt : &#39;a t -&gt; &#39;a t option
+    val size : &#39;a t -&gt; int
+    val to_list : &#39;a t -&gt; &#39;a list
+  end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack : Stack
+</pre></div>
+</div>
+</div>
+</div>
+<p>One nice thing about this implementation is that it is efficient. All the
+operations except for <code class="docutils literal notranslate"><span class="pre">size</span></code> are constant time. We saw earlier in the chapter
+that <code class="docutils literal notranslate"><span class="pre">size</span></code> could be made constant time as well, at the cost of some extra space
+— though just a constant factor more — by caching the size of the
+stack at each node in the list.</p>
+</div>
+<div class="section" id="queues">
+<h2><span class="section-number">5.5.4. </span>Queues<a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h2>
+<p>Queues and stacks are fairly similar interfaces.  We’ll stick with exceptions
+instead of options for now.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Queue</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(** An [&#39;a t] is a queue whose elements have type [&#39;a]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** Raised if [front] or [dequeue] is applied to the empty queue. *)</span>
+  <span class="k">exception</span> <span class="nc">Empty</span>
+
+  <span class="c">(** [empty] is the empty queue. *)</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [is_empty q] is whether [q] is empty. *)</span>
+  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+
+  <span class="c">(** [enqueue x q] is the queue [q] with [x] added to the end. *)</span>
+  <span class="k">val</span> <span class="n">enqueue</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [front q] is the element at the front of the queue. Raises [Empty]</span>
+<span class="c">      if [q] is empty. *)</span>
+  <span class="k">val</span> <span class="n">front</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
+
+  <span class="c">(** [dequeue q] is the queue containing all the elements of [q] except the</span>
+<span class="c">      front of [q]. Raises [Empty] is [q] is empty. *)</span>
+  <span class="k">val</span> <span class="n">dequeue</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [size q] is the number of elements in [q]. *)</span>
+  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+
+  <span class="c">(** [to_list q] is a list containing the elements of [q] in order from</span>
+<span class="c">      front to back. *)</span>
+  <span class="k">val</span> <span class="n">to_list</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Queue =
+  sig
+    type &#39;a t
+    exception Empty
+    val empty : &#39;a t
+    val is_empty : &#39;a t -&gt; bool
+    val enqueue : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val front : &#39;a t -&gt; &#39;a
+    val dequeue : &#39;a t -&gt; &#39;a t
+    val size : &#39;a t -&gt; int
+    val to_list : &#39;a t -&gt; &#39;a list
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Similarly to <code class="docutils literal notranslate"><span class="pre">peek</span></code> and <code class="docutils literal notranslate"><span class="pre">pop</span></code>, note how <code class="docutils literal notranslate"><span class="pre">front</span></code> and <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> divide the
+responsibility of getting the first element vs. getting all the rest of the
+elements.</p>
+</div>
+<p>It’s easy to implement queues with lists, just as it was for implementing
+stacks:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListQueue</span> <span class="o">:</span> <span class="nc">Queue</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** The list [x1; x2; ...; xn] represents the queue with [x1] at its front,</span>
+<span class="c">      followed by [x2], ..., followed by [xn]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">exception</span> <span class="nc">Empty</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+  <span class="k">let</span> <span class="n">enqueue</span> <span class="n">x</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span> <span class="o">@</span> <span class="o">[</span><span class="n">x</span><span class="o">]</span>
+  <span class="k">let</span> <span class="n">front</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="k">let</span> <span class="n">dequeue</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">q</span> <span class="o">-&gt;</span> <span class="n">q</span>
+  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
+  <span class="k">let</span> <span class="n">to_list</span> <span class="o">=</span> <span class="nn">Fun</span><span class="p">.</span><span class="n">id</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListQueue : Queue
+</pre></div>
+</div>
+</div>
+</div>
+<p>But despite being as easy, this implementation is not as efficient as our
+list-based stacks. Dequeueing is a constant-time operation with this
+representation, but enqueueing is a linear-time operation. That’s because
+<code class="docutils literal notranslate"><span class="pre">dequeue</span></code> does a single pattern match, whereas <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> must traverse the
+entire list to append the new element at the end.</p>
+<p>There’s a very clever way to do better on efficiency. We can use two lists to
+represent a single queue. This representation was invented by Robert Melville as
+part of his PhD dissertation at Cornell (<em>Asymptotic Complexity of Iterative
+Computations</em>, Jan 1981), which was advised by Prof. David Gries. Chris Okasaki
+(<em>Purely Functional Data Structures</em>, Cambridge University Press, 1988) calls
+these <em>batched queues</em>. Sometimes you will see this same implementation referred
+to as “implementing a queue with two stacks”. That’s because stacks and lists
+are so similar (as we’ve already seen) that you could rewrite <code class="docutils literal notranslate"><span class="pre">pop</span></code> as
+<code class="docutils literal notranslate"><span class="pre">List.tl</span></code>, and so forth.</p>
+<p>The core idea has a Part A and a Part B. Part A is: we use the two lists to
+split the queue into two pieces, the <em>inbox</em> and <em>outbox</em>. When new elements are
+enqueued, we put them in the inbox. Eventually (we’ll soon come to how) elements
+are transferred from the inbox to the outbox. When a dequeue is requested, that
+element is removed from the outbox; or when the front element is requested, we
+check the outbox for it. For example, if the inbox currently had <code class="docutils literal notranslate"><span class="pre">[3;</span> <span class="pre">4;</span> <span class="pre">5]</span></code> and
+the outbox had <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2]</span></code>, then the front element would be <code class="docutils literal notranslate"><span class="pre">1</span></code>, which is the head
+of the outbox. Dequeuing would remove that element and leave the inbox with just
+<code class="docutils literal notranslate"><span class="pre">[2]</span></code>, which is the tail of the outbox. Likewise, enqueuing <code class="docutils literal notranslate"><span class="pre">6</span></code> would make the
+inbox become <code class="docutils literal notranslate"><span class="pre">[3;</span> <span class="pre">4;</span> <span class="pre">5;</span> <span class="pre">6]</span></code>.</p>
+<p>The efficiency of <code class="docutils literal notranslate"><span class="pre">front</span></code> and <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> is very good so far. We just have to
+take the head or tail of the outbox, respectively, assuming it is non-empty.
+Those are constant-time operations. But the efficiency of <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> is still
+bad. It’s linear time, because we have to append the new element to the end of
+the list. It’s too bad we have to use the append operator, which is inherently
+linear time. It would be much better if we could use cons, which is constant
+time.</p>
+<p>So here’s Part B of the core idea: let’s keep the inbox in reverse order.  For
+example, if we enqueued <code class="docutils literal notranslate"><span class="pre">3</span></code> then <code class="docutils literal notranslate"><span class="pre">4</span></code> then <code class="docutils literal notranslate"><span class="pre">5</span></code>, the inbox would actually
+be <code class="docutils literal notranslate"><span class="pre">[5;</span> <span class="pre">4;</span> <span class="pre">3]</span></code>, not <code class="docutils literal notranslate"><span class="pre">[3;</span> <span class="pre">4;</span> <span class="pre">5]</span></code>.  Then if <code class="docutils literal notranslate"><span class="pre">6</span></code> were enqueued next, we could
+cons it onto the beginning of the inbox, which becomes <code class="docutils literal notranslate"><span class="pre">[6;</span> <span class="pre">5;</span> <span class="pre">4;</span> <span class="pre">3]</span></code>.  The
+queue represented by inbox <code class="docutils literal notranslate"><span class="pre">i</span></code> and outbox <code class="docutils literal notranslate"><span class="pre">o</span></code> is therefore <code class="docutils literal notranslate"><span class="pre">o</span> <span class="pre">&#64;</span> <span class="pre">List.rev</span> <span class="pre">i</span></code>.
+So <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> can now always be a constant-time operation.</p>
+<p>But what about <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> (and <code class="docutils literal notranslate"><span class="pre">front</span></code>)? They’re constant time too, <strong>as long as
+the outbox is not empty.</strong> If it’s empty, we have a problem. We need to transfer
+whatever is in the inbox to the outbox at that point.  For example, if the
+outbox is empty, and the inbox is <code class="docutils literal notranslate"><span class="pre">[6;</span> <span class="pre">5;</span> <span class="pre">4;</span> <span class="pre">3]</span></code>, then we need to switch them
+around, making the outbox be <code class="docutils literal notranslate"><span class="pre">[3;</span> <span class="pre">4;</span> <span class="pre">5;</span> <span class="pre">6]</span></code> and the inbox be empty.  That’s
+actually easy:  we just have to reverse the list.</p>
+<p>Unfortunately, we just re-introduced a linear-time operation. But with one
+crucial difference: we don’t have to do that linear-time reverse on every
+<code class="docutils literal notranslate"><span class="pre">dequeue</span></code>, whereas with <code class="docutils literal notranslate"><span class="pre">ListQueue</span></code> above we had to do the linear-time append on
+every <code class="docutils literal notranslate"><span class="pre">enqueue</span></code>. Instead, we only have to do the reverse on those rare occasions
+when the outbox becomes empty.</p>
+<p>So even though in the worst case <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> (and <code class="docutils literal notranslate"><span class="pre">front</span></code>) will be linear time,
+most of the time they will not be. In fact, later in this book when we study
+<em>amortized analysis</em> we will show that in the long run they can be understood as
+constant-time operations. For now, here’s a piece of intuition to support that
+claim: every individual element enters the outbox once (with a cons), moves to
+the inbox once (with a pattern match then cons), and leaves the inbox once (with
+a pattern match). Each of those is constant time. So each element only ever
+experiences constant-time operations from its own perspective.</p>
+<p>For now, let’s move on to implementing these ideas. In the implementation, we’ll
+add one more idea: the outbox always has to have an element in it, unless the
+queue is empty. In other words, if the outbox is empty, we’re guaranteed the
+inbox is too. That requirement isn’t necessary for batched queues, but it does
+keep the code simpler by reducing the number of times we have to check whether a
+list is empty. The tiny tradeoff is that if the queue is empty, <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> now
+has to directly put an element into the outbox. No matter, that’s still a
+constant-time operation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">BatchedQueue</span> <span class="o">:</span> <span class="nc">Queue</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** [{o; i]} represents the queue [o @ List.rev i]. For example,</span>
+<span class="c">      [{o = [1; 2]; i = [5; 4; 3]}] represents the queue [1, 2, 3, 4, 5],</span>
+<span class="c">      where [1] is the front element. To avoid ambiguity about emptiness,</span>
+<span class="c">      whenever only one of the lists is empty, it must be [i]. For example,</span>
+<span class="c">      [{o = [1]; i = []}] is a legal representation, but [{o = []; i = [1]}]</span>
+<span class="c">      is not. This implies that if [o] is empty, [i] must also be empty. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="o">{</span><span class="n">o</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span><span class="o">;</span> <span class="n">i</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span><span class="o">}</span>
+
+  <span class="k">exception</span> <span class="nc">Empty</span>
+
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+
+  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+    <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+
+  <span class="k">let</span> <span class="n">enqueue</span> <span class="n">x</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="o">[</span><span class="n">x</span><span class="o">];</span> <span class="n">i</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+    <span class="o">|</span> <span class="o">{</span><span class="n">o</span><span class="o">;</span> <span class="n">i</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">o</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">i</span><span class="o">}</span>
+
+  <span class="k">let</span> <span class="n">front</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
+    <span class="o">|</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="n">h</span> <span class="o">::</span> <span class="o">_}</span> <span class="o">-&gt;</span> <span class="n">h</span>
+
+  <span class="k">let</span> <span class="n">dequeue</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
+    <span class="o">|</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="o">[_];</span> <span class="n">i</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="n">i</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+    <span class="o">|</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="o">_</span> <span class="o">::</span> <span class="n">t</span><span class="o">;</span> <span class="n">i</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span> <span class="n">i</span><span class="o">}</span>
+
+  <span class="k">let</span> <span class="n">size</span> <span class="o">{</span><span class="n">o</span><span class="o">;</span> <span class="n">i</span><span class="o">}</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="o">(</span><span class="n">length</span> <span class="n">o</span> <span class="o">+</span> <span class="n">length</span> <span class="n">i</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">to_list</span> <span class="o">{</span><span class="n">o</span><span class="o">;</span> <span class="n">i</span><span class="o">}</span> <span class="o">=</span> <span class="n">o</span> <span class="o">@</span> <span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="n">i</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module BatchedQueue : Queue
+</pre></div>
+</div>
+</div>
+</div>
+<p>The efficiency of batched queues comes at a price in readability. If we compare
+<code class="docutils literal notranslate"><span class="pre">ListQueue</span></code> and <code class="docutils literal notranslate"><span class="pre">BatchedQueue</span></code>, it’s hopefully clear that <code class="docutils literal notranslate"><span class="pre">ListQueue</span></code> is a
+simple and correct implementation of a queue data structure. It’s probably far
+less clear that <code class="docutils literal notranslate"><span class="pre">BatchedQueue</span></code> is a correct implementation. Just look at how
+many paragraphs of writing it took to explain it above!</p>
+</div>
+<div class="section" id="dictionaries">
+<h2><span class="section-number">5.5.5. </span>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>Recall that a <em>dictionary</em> binds keys to values. Here is a module type for
+dictionaries.  There are many other operations a dictionary might support,
+but these will suffice for now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Dictionary</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(** [(&#39;k, &#39;v) t] is the type of dictionaries that bind keys of type [&#39;k] to</span>
+<span class="c">      values of type [&#39;v]. *)</span>
+  <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
+
+  <span class="c">(** [empty] does not bind any keys. *)</span>
+  <span class="k">val</span> <span class="n">empty</span>  <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
+
+  <span class="c">(** [insert k v d] is the dictionary that binds [k] to [v], and also contains</span>
+<span class="c">      all the bindings of [d].  If [k] was already bound in [d], that old</span>
+<span class="c">      binding is superseded by the binding to [v] in the returned dictionary. *)</span>
+  <span class="k">val</span> <span class="n">insert</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
+
+  <span class="c">(** [lookup k d] is the value bound to [k] in [d]. Raises: [Not_found] if [k]</span>
+<span class="c">      is not bound in [d]. *)</span>
+  <span class="k">val</span> <span class="n">lookup</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span>
+
+  <span class="c">(** [bindings d] is an association list containing the same bindings as [d].</span>
+<span class="c">      The keys in the list are guaranteed to be unique. *)</span>
+  <span class="k">val</span> <span class="n">bindings</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Dictionary =
+  sig
+    type (&#39;k, &#39;v) t
+    val empty : (&#39;k, &#39;v) t
+    val insert : &#39;k -&gt; &#39;v -&gt; (&#39;k, &#39;v) t -&gt; (&#39;k, &#39;v) t
+    val lookup : &#39;k -&gt; (&#39;k, &#39;v) t -&gt; &#39;v
+    val bindings : (&#39;k, &#39;v) t -&gt; (&#39;k * &#39;v) list
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how <code class="docutils literal notranslate"><span class="pre">Dictionary.t</span></code> is parameterized on two types, <code class="docutils literal notranslate"><span class="pre">'k</span></code> and <code class="docutils literal notranslate"><span class="pre">'v</span></code>, which are
+written in parentheses and separated by commas. Although <code class="docutils literal notranslate"><span class="pre">('k,</span> <span class="pre">'v)</span></code> might look
+like a pair of values, it is not: it is a syntax for writing multiple type
+variables.</p>
+<p>Recall that association lists are lists of pairs, where the first element of
+each pair is a key, and the second element is the value it binds. For example,
+here is an association list that maps some well-known names to an approximation
+of their numeric value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="s2">&quot;pi&quot;</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">);</span> <span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="mf">2.718</span><span class="p">);</span> <span class="p">(</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="mf">1.618</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Naturally we can implement the <code class="docutils literal notranslate"><span class="pre">Dictionary</span></code> module type with association lists:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">AssocListDict</span> <span class="o">:</span> <span class="nc">Dictionary</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** The list [(k1, v1); ...; (kn, vn)] binds key [ki] to value [vi].</span>
+<span class="c">      If a key appears more than once in the list, it is bound to the</span>
+<span class="c">      the left-most occurrence in the list. *)</span>
+  <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="n">d</span>
+  <span class="k">let</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">d</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">assoc</span> <span class="n">k</span> <span class="n">d</span>
+  <span class="k">let</span> <span class="n">keys</span> <span class="n">d</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="o">(</span><span class="n">d</span> <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">fst</span> <span class="o">|&gt;</span> <span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">bindings</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span> <span class="o">|&gt;</span> <span class="n">keys</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">k</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">d</span><span class="o">))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module AssocListDict : Dictionary
+</pre></div>
+</div>
+</div>
+</div>
+<p>This implementation of dictionaries is persistent.  For example, adding a new
+binding to the dictionary <code class="docutils literal notranslate"><span class="pre">d</span></code> below does not change <code class="docutils literal notranslate"><span class="pre">d</span></code> itself:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">AssocListDict</span>
+<span class="k">let</span> <span class="n">d</span> <span class="o">=</span> <span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">insert</span> <span class="s2">&quot;pi&quot;</span> <span class="mi">3</span><span class="o">.</span><span class="mi">14</span> <span class="o">|&gt;</span> <span class="n">insert</span> <span class="s2">&quot;e&quot;</span> <span class="mi">2</span><span class="o">.</span><span class="mi">718</span>
+<span class="k">let</span> <span class="n">d&#39;</span> <span class="o">=</span> <span class="n">d</span> <span class="o">|&gt;</span> <span class="n">insert</span> <span class="s2">&quot;phi&quot;</span> <span class="mi">1</span><span class="o">.</span><span class="mi">618</span>
+<span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">bindings</span> <span class="n">d</span>
+<span class="k">let</span> <span class="n">b&#39;</span> <span class="o">=</span> <span class="n">bindings</span> <span class="n">d&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val d : (string, float) AssocListDict.t = &lt;abstr&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val d&#39; : (string, float) AssocListDict.t = &lt;abstr&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val b : (string * float) list = [(&quot;e&quot;, 2.718); (&quot;pi&quot;, 3.14)]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val b&#39; : (string * float) list = [(&quot;e&quot;, 2.718); (&quot;phi&quot;, 1.618); (&quot;pi&quot;, 3.14)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">insert</span></code> operation is constant time, which is great. But the <code class="docutils literal notranslate"><span class="pre">lookup</span></code>
+operation is linear time. It’s possible to do much better than that. In a later
+chapter, we’ll see how to do better. Logarithmic-time performance is achievable
+with balanced binary trees, and something like constant-time performance with
+hash tables. Neither of those, however, achieves the simplicity of the code
+above.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">bindings</span></code> operation is complicated by potential duplicate keys in the list.
+It uses a <code class="docutils literal notranslate"><span class="pre">keys</span></code> helper function to extract the unique list of keys with the
+help of library function <code class="docutils literal notranslate"><span class="pre">List.sort_uniq</span></code>. That function sorts an input list and
+in the process discards duplicates. It requires a comparison function as input.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A comparison function must return 0 if its arguments compare as equal, a
+positive integer if the first is greater, and a negative integer if the first is
+smaller.</p>
+</div>
+<p>Here we use the standard library’s comparison function <code class="docutils literal notranslate"><span class="pre">Stdlib.compare</span></code>, which
+behaves essentially the same as the built-in comparison operators <code class="docutils literal notranslate"><span class="pre">=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>,
+etc. Custom comparison functions are useful if you want to have a relaxed notion
+of what being a duplicate means. For example, maybe you’d like to ignore the
+case of strings, or the sign of a number, etc.</p>
+<p>The running time of <code class="docutils literal notranslate"><span class="pre">List.sort_uniq</span></code> is linearithmic, and it produces a linear
+number of keys as output.  For each of those keys, we do a linear-time lookup
+operation.  So the total running time of <code class="docutils literal notranslate"><span class="pre">bindings</span></code> is <span class="math notranslate nohighlight">\(O(n \log n) + O(n) \cdot
+O(n)\)</span>, which is <span class="math notranslate nohighlight">\(O(n^2)\)</span>.  We can definitely do better than that with
+more advanced data structures.</p>
+<p>Actually we can have a constant-time <code class="docutils literal notranslate"><span class="pre">bindings</span></code> operation even with association
+lists, if we are willing to pay for a linear-time <code class="docutils literal notranslate"><span class="pre">insert</span></code> operation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">UniqAssocListDict</span> <span class="o">:</span> <span class="nc">Dictionary</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** The list [(k1, v1); ...; (kn, vn)] binds key [ki] to value [vi].</span>
+<span class="c">      No duplicate keys may occur. *)</span>
+  <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="nn">List</span><span class="p">.</span><span class="n">remove_assoc</span> <span class="n">k</span> <span class="n">d</span>
+  <span class="k">let</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">d</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">assoc</span> <span class="n">k</span> <span class="n">d</span>
+  <span class="k">let</span> <span class="n">bindings</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module UniqAssocListDict : Dictionary
+</pre></div>
+</div>
+</div>
+</div>
+<p>That implementation removes any duplicate binding of <code class="docutils literal notranslate"><span class="pre">k</span></code> before inserting
+a new binding.</p>
+</div>
+<div class="section" id="sets">
+<h2><span class="section-number">5.5.6. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h2>
+<p>Here is a module type for sets. There are many other operations a set data
+structure might be expected to support, but these will suffice for now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(** [&#39;a t] is the type of sets whose elements are of type [&#39;a]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [empty] is the empty set *)</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [mem x s] is whether [x] is an element of [s]. *)</span>
+  <span class="k">val</span> <span class="n">mem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+
+  <span class="c">(** [add x s] is the set that contains [x] and all the elements of [s]. *)</span>
+  <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [elements s] is a list containing the elements of [s].  No guarantee</span>
+<span class="c">      is made about the ordering of that list, but each is guaranteed to</span>
+<span class="c">      be unique. *)</span>
+  <span class="k">val</span> <span class="n">elements</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Set =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val mem : &#39;a -&gt; &#39;a t -&gt; bool
+    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val elements : &#39;a t -&gt; &#39;a list
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s an implementation of that interface using a list to represent the set.
+This implementation ensures that the list never contains any duplicate elements,
+since sets themselves do not:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">UniqListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">mem</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem</span>
+  <span class="k">let</span> <span class="n">add</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="k">if</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">s</span> <span class="k">then</span> <span class="n">s</span> <span class="k">else</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
+  <span class="k">let</span> <span class="n">elements</span> <span class="o">=</span> <span class="nn">Fun</span><span class="p">.</span><span class="n">id</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module UniqListSet : Set
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how <code class="docutils literal notranslate"><span class="pre">add</span></code> ensures that the representation never contains any duplicates, so
+the implementation of <code class="docutils literal notranslate"><span class="pre">elements</span></code> is easy. Of course, that comes with the
+tradeoff of <code class="docutils literal notranslate"><span class="pre">add</span></code> being linear time.</p>
+<p>Here’s a second implementation, which permits duplicates in the list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">mem</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem</span>
+  <span class="k">let</span> <span class="n">add</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span>
+  <span class="k">let</span> <span class="n">elements</span> <span class="n">s</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span> <span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSet : Set
+</pre></div>
+</div>
+</div>
+</div>
+<p>In that implementation, the <code class="docutils literal notranslate"><span class="pre">add</span></code> operation is now constant time, and the
+<code class="docutils literal notranslate"><span class="pre">elements</span></code> operation is linearithmic time.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/modules"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="encapsulation.html" title="previous page"><span class="section-number">5.4. </span>Encapsulation</a>
+    <a class='right-next' id="next-link" href="module_type_constraints.html" title="next page"><span class="section-number">5.6. </span>Module Type Constraints</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

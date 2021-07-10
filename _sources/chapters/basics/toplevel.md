@@ -1,3 +1,18 @@
+---
+jupytext:
+  cell_metadata_filter: -all
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.10.3
+kernelspec:
+  display_name: OCaml
+  language: OCaml
+  name: ocaml-jupyter
+---
+
 # The OCaml Toplevel
 
 {{ video_embed | replace("%%VID%%", "3fzrFY-2ZQ8")}}
@@ -33,14 +48,41 @@ Let's dissect that response from utop, reading right to left:
 * `int` is the type of the value.
 * The value was not given a name, hence the symbol `-`.
 
+That utop interaction was "hardcoded" as part of this book. We had to type in
+all the characters: the `#`, the `-`, etc. But the infrastructure used to write
+this book actually enables us to write code that is evaluated by OCaml at the
+time the book is translated into HTML or PDF. From now on, that's usually what
+we will do.  It looks like this:
+
+```{code-cell} ocaml
+42
+```
+
+The first code block with the `42` in it is the code we asked OCaml to run. If
+you want to enter that into utop, you can copy and paste it. There's an icon in
+the top right of the block to do that easily. Just remember to add the double
+semicolon at the end. The second code block, which is indented a little, is the
+output from OCaml as the book was being translated.
+
+```{tip}
+If you're viewing this in a web browser, look to the top right for a download
+icon. Choose the `.md` option, and you'll see the original
+[MyST Markdown][myst] source code for this page of the book. You'll see that the
+output from the second example above is not actually present in the source code.
+That's good! It means that the output stays consistent with whatever current
+version of the OCaml compiler we use to build the book. It also means that any
+compilation errors can be detected as part of building the book, instead of
+lurking for you, dear reader, to find them.
+```
+
+[myst]: https://myst-parser.readthedocs.io/en/latest/
 
 {{ video_embed | replace("%%VID%%", "eRnG4gwOTlI")}}
 
 You can bind values to names with a `let` definition, as follows:
 
-```ocaml
-# let x = 42;;
-val x : int = 42
+```{code-cell} ocaml
+let x = 42
 ```
 
 Again, let's dissect that response, this time reading left to right:
@@ -56,9 +98,8 @@ You can pronounce the entire output as "`x` has type `int` and equals `42`."
 
 A function can be defined at the toplevel using syntax like this:
 
-```ocaml
-# let increment x = x+1;;
-val increment : int -> int = <fun>
+```{code-cell} ocaml
+let increment x = x + 1
 ```
 
 Let's dissect that response:
@@ -79,13 +120,16 @@ Let's dissect that response:
 
 You can "call" functions with syntax like this:
 
-```ocaml
-# increment 0;;
-- : int = 1
-# increment(21);;
-- : int = 22
-# increment (increment 5);;
-- : int = 7
+```{code-cell} ocaml
+increment 0
+```
+
+```{code-cell} ocaml
+increment(21)
+```
+
+```{code-cell} ocaml
+increment (increment 5)
 ```
 
 But in OCaml the usual vocabulary is that we "apply" the function rather than
@@ -95,7 +139,8 @@ Note how OCaml is flexible about whether you write the parentheses or not, and
 whether you write whitespace or not. One of the challenges of first learning
 OCaml can be figuring out when parentheses are actually required. So if you find
 yourself having problems with syntax errors, one strategy is to try adding some
-parentheses.
+parentheses. The preferred style, though, is usually to omit parentheses when
+they are not needed. So, `increment 21` is better than `increment(21)`.
 
 ## Loading code in the toplevel
 
@@ -115,10 +160,9 @@ let inc x = x + 1
 Start the toplevel. Try entering the following expression, and observe the
 error:
 
-```ocaml
-# inc 3;;
-Error: Unbound value inc
-Hint: Did you mean incr?
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+inc 3
 ```
 
 The error occurs because the toplevel does not yet know anything about a
@@ -135,9 +179,13 @@ are trying to apply a function named `use`.
 
 Now try again:
 
-```ocaml
-# inc 3;;
-- : int = 4
+```{code-cell} ocaml
+:tags: ["remove-cell"]
+let inc x = x + 1
+```
+
+```{code-cell} ocaml
+inc 3
 ```
 
 ## Workflow in the toplevel

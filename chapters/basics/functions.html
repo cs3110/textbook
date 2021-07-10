@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -160,18 +160,23 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="debugging.html">
-     2.6. Debugging
+     2.7. Debugging
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
-     2.7. Summary
+     2.8. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercises.html">
-     2.8. Exercises
+     2.9. Exercises
     </a>
    </li>
   </ul>
@@ -180,7 +185,7 @@
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../data/intro.html">
-   3. Data
+   3. Data and Types
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -305,6 +310,70 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../hop/exercises.html">
      4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
     </a>
    </li>
   </ul>
@@ -469,6 +538,20 @@
 <h1><span class="section-number">2.4. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
 <p>Since OCaml is a functional language, there’s a lot to cover about functions.
 Let’s get started.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Methods and functions are not the same idea. A method is a component of an
+object, and it implicitly has a receiver that is usually accessed with a keyword
+like <code class="docutils literal notranslate"><span class="pre">this</span></code> or <code class="docutils literal notranslate"><span class="pre">self</span></code>. OCaml functions are not methods: they are not components
+of objects, and they do not have a receiver.</p>
+<p>Some might say that all methods are functions, but not all functions are
+methods. Some might even quibble with that, making a distinction between
+functions and procedures. The latter would be functions that do not return any
+meaningful value, such as a <code class="docutils literal notranslate"><span class="pre">void</span></code> return type in Java or <code class="docutils literal notranslate"><span class="pre">None</span></code> return value in
+Python.</p>
+<p>So if you’re coming from an object-oriented background, be careful about the
+terminology. <strong>Everything here is a strictly a function, not a method.</strong></p>
+</div>
 <div class="section" id="function-definitions">
 <h2><span class="section-number">2.4.1. </span>Function Definitions<a class="headerlink" href="#function-definitions" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/vCxIlagS7kA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
@@ -500,10 +583,19 @@ languages assume by default that they are. OCaml doesn’t make that assumption,
 though. (Nor does the Scheme family of languages.)</p>
 <p>One of the best known recursive functions is the factorial function. In OCaml,
 it can be written as follows:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [fact n] is [n]!.</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [fact n] is [n]!.</span>
 <span class="c">    Requires: [n &gt;= 0]. *)</span>
 <span class="k">let</span> <span class="k">rec</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span> <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fact</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fact : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>We provided a specification comment above the function to document the
 precondition (<code class="docutils literal notranslate"><span class="pre">Requires</span></code>) and postcondition (<code class="docutils literal notranslate"><span class="pre">is</span></code>) of the function.</p>
@@ -518,10 +610,19 @@ collector needs to distinguish between integers and pointers. The runtime
 representation of these therefore steals one bit to flag whether a word is an
 integer or a pointer.)</p>
 <p>Here’s another recursive function:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [pow x y] is [x] to the power of [y].</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [pow x y] is [x] to the power of [y].</span>
 <span class="c">     Requires: [y &gt;= 0]. *)</span>
 <span class="k">let</span> <span class="k">rec</span> <span class="n">pow</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="k">if</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">x</span> <span class="o">*</span> <span class="n">pow</span> <span class="n">x</span> <span class="o">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pow : int -&gt; int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Note how we didn’t have to write any types in either of our functions: the OCaml
 compiler infers them for us automatically. The compiler solves this <em>type
@@ -567,7 +668,9 @@ version will help us focus.</p>
 </pre></div>
 </div>
 <p>For example:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [even n] is whether [n] is even.</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [even n] is whether [n] is even.</span>
 <span class="c">    Requires: [n &gt;= 0]. *)</span>
 <span class="k">let</span> <span class="k">rec</span> <span class="n">even</span> <span class="n">n</span> <span class="o">=</span>
   <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">odd</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
@@ -577,6 +680,14 @@ version will help us focus.</p>
 <span class="ow">and</span> <span class="n">odd</span> <span class="n">n</span> <span class="o">=</span>
   <span class="n">n</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">even</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);;</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val even : int -&gt; bool = &lt;fun&gt;
+val odd : int -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/W0rO84YXIXo" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The syntax for function types is:</p>
@@ -644,9 +755,21 @@ For example, here is an anonymous function that increments its input:
 <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code>. Here, <code class="docutils literal notranslate"><span class="pre">fun</span></code> is a keyword indicating an anonymous function, <code class="docutils literal notranslate"><span class="pre">x</span></code>
 is the argument, and <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> separates the argument from the body.</p>
 <p>We now have two ways we could write an increment function:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="k">let</span> <span class="n">inc</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val inc : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val inc : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>They are syntactically different but semantically equivalent. That is, even
 though they involve different keywords and put some identifiers in different
@@ -720,12 +843,35 @@ function application.</p>
 <em>pipeline</em> operator, written <code class="docutils literal notranslate"><span class="pre">|&gt;</span></code>. Imagine that as depicting a triangle pointing
 to the right. The metaphor is that values are sent through the pipeline from
 left to right. For example, suppose we have the increment function <code class="docutils literal notranslate"><span class="pre">inc</span></code> from
-above as well as a function <code class="docutils literal notranslate"><span class="pre">square</span></code> that squares its input. Here are two
-equivalent ways of writing the same computation:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">square</span> <span class="o">(</span><span class="n">inc</span> <span class="mi">5</span><span class="o">)</span>
-<span class="mi">5</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span>
-<span class="c">(* both yield 36 *)</span>
+above as well as a function <code class="docutils literal notranslate"><span class="pre">square</span></code> that squares its input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">square</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val square : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are two equivalent ways of squaring <code class="docutils literal notranslate"><span class="pre">6</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">square</span> <span class="o">(</span><span class="n">inc</span> <span class="mi">5</span><span class="o">);;</span>
+<span class="mi">5</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 36
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 36
+</pre></div>
+</div>
+</div>
 </div>
 <p>The latter uses the pipeline operator to send <code class="docutils literal notranslate"><span class="pre">5</span></code> through the <code class="docutils literal notranslate"><span class="pre">inc</span></code> function,
 then send the result of that through the <code class="docutils literal notranslate"><span class="pre">square</span></code> function. This is a nice,
@@ -734,10 +880,21 @@ not as elegant: it involves writing extra parentheses and requires the reader’
 eyes to jump around, rather than move linearly from left to right. The latter
 way scales up nicely when the number of functions being applied grows, where as
 the former way requires more and more parentheses:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span>
-<span class="n">square</span> <span class="o">(</span><span class="n">inc</span> <span class="o">(</span><span class="n">inc</span> <span class="o">(</span><span class="n">square</span> <span class="o">(</span><span class="n">inc</span> <span class="mi">5</span><span class="o">))))</span>
-<span class="c">(* both yield 1444 *)</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span><span class="o">;;</span>
+<span class="n">square</span> <span class="o">(</span><span class="n">inc</span> <span class="o">(</span><span class="n">inc</span> <span class="o">(</span><span class="n">square</span> <span class="o">(</span><span class="n">inc</span> <span class="mi">5</span><span class="o">))));;</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 1444
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 1444
+</pre></div>
+</div>
+</div>
 </div>
 <p>It might feel weird at first, but try using the pipeline operator in your own
 code the next time you find yourself writing a big chain of function
@@ -753,7 +910,20 @@ semantically equivalent.</p>
 <p>The <em>identity</em> function is the function that simply returns its input:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : &#39;a -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or equivalently as an anonymous function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -768,18 +938,177 @@ regular variable stands for an unknown value. Type variables always begin with a
 single quote. Commonly used type variables include <code class="docutils literal notranslate"><span class="pre">'a</span></code>, <code class="docutils literal notranslate"><span class="pre">'b</span></code>, and <code class="docutils literal notranslate"><span class="pre">'c</span></code>, which
 OCaml programmers typically pronounce in Greek: alpha, beta, and gamma.</p>
 <p>We can apply the identity function to any type of value we like:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># id 42;;
-- : int = 42
-
-# id true;;
-- : bool = true
-
-# id &quot;bigred&quot;;;
-- : string = &quot;bigred&quot;
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">id</span> <span class="mi">42</span><span class="o">;;</span>
+<span class="n">id</span> <span class="bp">true</span><span class="o">;;</span>
+<span class="n">id</span> <span class="s2">&quot;bigred&quot;</span><span class="o">;;</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 42
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : bool = true
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;bigred&quot;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Because you can apply <code class="docutils literal notranslate"><span class="pre">id</span></code> to many types of values, it is a <em>polymorphic</em>
 function: it can be applied to many (<em>poly</em>) forms (<em>morph</em>).</p>
+<p>With manual type annotations, it’s possible to give a more restrictive type
+to a polymorphic function than the type the compiler automatically infers.
+For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id_int</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id_int : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s the same function as <code class="docutils literal notranslate"><span class="pre">id</span></code>, except for the two manual type annotations.
+Because of those, we cannot apply <code class="docutils literal notranslate"><span class="pre">id_int</span></code> to a bool like we did <code class="docutils literal notranslate"><span class="pre">id</span></code>:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">id_int</span> <span class="bp">true</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[14]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">7</span><span class="o">-</span><span class="mi">11</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="n">id_int</span> <span class="n">true</span>
+           <span class="o">^^^^</span>
+<span class="ne">Error</span>: This expression has type bool but an expression was expected of type
+         <span class="nb">int</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another way of writing <code class="docutils literal notranslate"><span class="pre">id_int</span></code> would be in terms of <code class="docutils literal notranslate"><span class="pre">id</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id_int&#39;</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="n">id</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id_int&#39; : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In effect we took a value of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>, and we bound it to a name whose
+type was manually specified as being <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>. You might ask, why does that
+work? They aren’t the same types, after all.</p>
+<p>One way to think about this is in terms of <strong>behavior.</strong> The type of <code class="docutils literal notranslate"><span class="pre">id_int</span></code>
+specifies one aspect of its behavior: given an <code class="docutils literal notranslate"><span class="pre">int</span></code> as input, it promises to
+produce an <code class="docutils literal notranslate"><span class="pre">int</span></code> as output. It turns out that <code class="docutils literal notranslate"><span class="pre">id</span></code> also makes the same promise:
+given an <code class="docutils literal notranslate"><span class="pre">int</span></code> as input, it too will return an <code class="docutils literal notranslate"><span class="pre">int</span></code> as output. Now <code class="docutils literal notranslate"><span class="pre">id</span></code> also
+makes many more promises, such as: given a <code class="docutils literal notranslate"><span class="pre">bool</span></code> as input, it will return a
+<code class="docutils literal notranslate"><span class="pre">bool</span></code> as output. So by binding <code class="docutils literal notranslate"><span class="pre">id</span></code> to a more restrictive type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>, we
+have thrown away all those additional promises as irrelevant. Sure, that’s
+information lost, but at least no promises will be broken.  It’s always
+going to be safe to use a function of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> when what we needed
+was a function of type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p>
+<p>The converse is not true.  If we needed a function of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> but tried
+to use a function of type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>, we’d be in trouble as soon as someone
+passed an input of e.g. type <code class="docutils literal notranslate"><span class="pre">bool</span></code>.  Here are two concrete examples, which
+of course do not compile:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id&#39;</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;;</span>
+<span class="k">let</span> <span class="n">id&#39;&#39;</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="n">id_int</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id&#39; : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id&#39;&#39; : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first is maybe more obviously wrong than the second. Function <code class="docutils literal notranslate"><span class="pre">id'</span></code> is
+actually the increment function, not the identify function. So passing it a
+<code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">string</span></code> or some complicated data structure is not safe; the only data
+<code class="docutils literal notranslate"><span class="pre">+</span></code> can safely manipulate are integers.</p>
+<p>Function <code class="docutils literal notranslate"><span class="pre">id''</span></code> is maybe less obviously wrong. If follow the chain of definition
+backwards, we discover that <code class="docutils literal notranslate"><span class="pre">id''</span></code> is really going to be just <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x</span></code>.
+There’s nothing wrong with that code as the implementation of <code class="docutils literal notranslate"><span class="pre">id''</span></code>: it’s
+guaranteed to return an output of the same type as its input, because it <em>does</em>
+return its input. But the compiler doesn’t go back and peek “under the covers”
+like that. Function <code class="docutils literal notranslate"><span class="pre">id_int</span></code> has type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> at the point <code class="docutils literal notranslate"><span class="pre">id''</span></code> is being
+defined, and that’s all that matters. The compiler has to assume it could be
+<em>any</em> function of that type, including the increment function.</p>
+<p>That leads us to another, more mechanical, way to think about all of this in
+terms of <strong>application</strong>. By that we mean the very same notion of how a function
+is applied to arguments: when evaluating the application <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">5</span></code>, the argument
+<code class="docutils literal notranslate"><span class="pre">x</span></code> is <em>instantiated</em> with value <code class="docutils literal notranslate"><span class="pre">5</span></code>. Likewise, the <code class="docutils literal notranslate"><span class="pre">'a</span></code> in the type of <code class="docutils literal notranslate"><span class="pre">id</span></code> is
+being instantiated with type <code class="docutils literal notranslate"><span class="pre">int</span></code> at that application. So if we write</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id_int&#39;</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="n">id</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id_int&#39; : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>we are in fact instantiating the <code class="docutils literal notranslate"><span class="pre">'a</span></code> in the type of <code class="docutils literal notranslate"><span class="pre">id</span></code> with the type <code class="docutils literal notranslate"><span class="pre">int</span></code>.
+And just as there is no way to “unapply” a function—for example, given <code class="docutils literal notranslate"><span class="pre">6</span></code>
+we can’t compute backwards to <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">5</span></code>—we can’t unapply that type
+instantiation and change <code class="docutils literal notranslate"><span class="pre">int</span></code> back to <code class="docutils literal notranslate"><span class="pre">'a</span></code>.</p>
+<p>To make that precise, suppose we have a <code class="docutils literal notranslate"><span class="pre">let</span></code> definition [or expression]:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e</span> <span class="o">[</span><span class="k">in</span> <span class="n">e&#39;</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>and that OCaml infers <code class="docutils literal notranslate"><span class="pre">x</span></code> has a type <code class="docutils literal notranslate"><span class="pre">t</span></code> that includes some type variables <code class="docutils literal notranslate"><span class="pre">'a</span></code>,
+‘<code class="docutils literal notranslate"><span class="pre">b</span></code>, etc. Then we are permitted to instantiate those type variables. We can do
+that by applying the function to arguments that reveal what the type
+instantiations should be (as in <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">5</span></code>) or by a type annotation (as in
+<code class="docutils literal notranslate"><span class="pre">id_int'</span></code>), among other ways. But we have to be consistent with the
+instantiation. For example, we cannot take a function of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'b</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>
+and instantiate it at type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">'b</span> <span class="pre">-&gt;</span> <span class="pre">string</span></code>, because the instantiation of
+<code class="docutils literal notranslate"><span class="pre">'a</span></code> is not the same type in each of the two places it occurred:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">first</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">;;</span>
+<span class="k">let</span> <span class="n">first_int</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="n">first</span><span class="o">;;</span>
+<span class="k">let</span> <span class="n">bad_first</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="o">=</span> <span class="n">first</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val first : &#39;a -&gt; &#39;b -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val first_int : int -&gt; &#39;b -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[18]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">38</span><span class="o">-</span><span class="mi">43</span><span class="p">:</span>
+<span class="mi">3</span> <span class="o">|</span> <span class="n">let</span> <span class="n">bad_first</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;b -&gt; string = first;;</span>
+                                          <span class="o">^^^^^</span>
+<span class="ne">Error</span>: This expression has type int -&gt; &#39;b -&gt; int
+       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;b -&gt; string</span>
+       <span class="n">Type</span> <span class="nb">int</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">compatible</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">string</span> 
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="labeled-and-optional-arguments">
 <h2><span class="section-number">2.4.6. </span>Labeled and Optional Arguments<a class="headerlink" href="#labeled-and-optional-arguments" title="Permalink to this headline">¶</a></h2>
@@ -823,7 +1152,7 @@ function using the following syntax:</p>
 </div>
 <p>Labels for arguments are often the same as the variable names for them. OCaml
 provides a shorthand for this case. The following are equivalent:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f</span> <span class="o">~</span><span class="n">name1</span><span class="o">:</span><span class="n">name1</span> <span class="o">~</span><span class="n">name2</span><span class="o">:</span><span class="n">name2</span> <span class="o">=</span> <span class="n">name1</span><span class="o">+</span><span class="n">name2</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f</span> <span class="o">~</span><span class="n">name1</span><span class="o">:</span><span class="n">name1</span> <span class="o">~</span><span class="n">name2</span><span class="o">:</span><span class="n">name2</span> <span class="o">=</span> <span class="n">name1</span> <span class="o">+</span> <span class="n">name2</span>
 <span class="k">let</span> <span class="n">f</span> <span class="o">~</span><span class="n">name1</span> <span class="o">~</span><span class="n">name2</span> <span class="o">=</span> <span class="n">name1</span> <span class="o">+</span> <span class="n">name2</span>
 </pre></div>
 </div>
@@ -974,7 +1303,7 @@ different ways of expressing the same computation:</p>
 </div>
 <div class="section" id="function-associativity">
 <h2><span class="section-number">2.4.8. </span>Function Associativity<a class="headerlink" href="#function-associativity" title="Permalink to this headline">¶</a></h2>
-<p>Are you ready for the truth?  Here goes…</p>
+<p>Are you ready for the truth?  Take a deep breath.  Here goes…</p>
 <p><strong>Every OCaml function takes exactly one argument.</strong></p>
 <p>Why? Consider <code class="docutils literal notranslate"><span class="pre">add</span></code>: although we can write it as <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">add</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code>, we know
 that’s semantically equivalent to <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">add</span> <span class="pre">=</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">(fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y)</span></code>. And in

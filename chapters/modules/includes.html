@@ -1,0 +1,1137 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.8. Includes &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.9. Functors" href="functors.html" />
+    <link rel="prev" title="5.7. Compilation Units" href="compilation_units.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/exercises.html">
+     1.6. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/modules/includes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/modules/includes.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/modules/includes.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/modules/includes.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#semantics-of-includes">
+   5.8.1. Semantics of Includes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#encapsulation-and-includes">
+   5.8.2. Encapsulation and Includes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#include-vs-open">
+   5.8.3. Include vs. Open
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#including-code-in-multiple-modules">
+   5.8.4. Including Code in Multiple Modules
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="includes">
+<h1><span class="section-number">5.8. </span>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h1>
+<p>Copying and pasting code is almost always a bad idea. Duplication of code causes
+duplication and proliferation of errors. So why are we so prone to making this
+mistake? Maybe because it always seems like the easier option — easier and
+quicker than applying the Abstraction Principle as we should to factor out
+common code.</p>
+<p>The OCaml module system provides a neat feature called <em>includes</em> that is like a
+principled copy-and-paste that is quick and easy to use, but avoids actual
+duplication. It can be used to solve some of the same problems as <em>inheritance</em>
+in object-oriented languages.</p>
+<p>Let’s start with an example. Recall this implementation of sets as lists:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">mem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">elements</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">mem</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem</span>
+  <span class="k">let</span> <span class="n">add</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span>
+  <span class="k">let</span> <span class="n">elements</span> <span class="n">s</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span> <span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Set =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val mem : &#39;a -&gt; &#39;a t -&gt; bool
+    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val elements : &#39;a t -&gt; &#39;a list
+  end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSet : Set
+</pre></div>
+</div>
+</div>
+</div>
+<p>Suppose we wanted to add a function <code class="docutils literal notranslate"><span class="pre">of_list</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">t</span></code> that could
+construct a set out of a list. If we had access to the source code of both
+<code class="docutils literal notranslate"><span class="pre">ListSet</span></code> and <code class="docutils literal notranslate"><span class="pre">Set</span></code>, and if we were permitted to modify it, this wouldn’t be
+hard. But what if they were third-party libraries for which we didn’t have
+source code?</p>
+<p>In Java, we might use inheritance to solve this problem:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">interface</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="kd">class</span> <span class="nc">ListSet</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="kd">class</span> <span class="nc">ListSetExtended</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">ListSet</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="n">Set</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">ofList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">lst</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That helps us to reuse code, because the subclass inherits all the methods of
+its superclass.</p>
+<p>OCaml <em>includes</em> are similar. They enable a module to include all the items
+defined by another module, or a module type to include all the specifications of
+another module type.</p>
+<p>Here’s how we can use includes to solve the problem of adding <code class="docutils literal notranslate"><span class="pre">of_list</span></code> to
+<code class="docutils literal notranslate"><span class="pre">ListSet</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSetExtended</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ListSet</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="n">add</span> <span class="n">lst</span> <span class="n">empty</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSetExtended :
+  sig
+    type &#39;a t = &#39;a ListSet.t
+    val empty : &#39;a t
+    val mem : &#39;a -&gt; &#39;a t -&gt; bool
+    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val elements : &#39;a t -&gt; &#39;a list
+    val of_list : &#39;a list -&gt; &#39;a t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>This code says that <code class="docutils literal notranslate"><span class="pre">ListSetExtended</span></code> is a module that includes all the
+definitions of the <code class="docutils literal notranslate"><span class="pre">ListSet</span></code> module, as well as a definition of <code class="docutils literal notranslate"><span class="pre">of_list</span></code>. We
+don’t have to know the source code implementing <code class="docutils literal notranslate"><span class="pre">ListSet</span></code> to make this happen.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You might wonder we why can’t simply implement <code class="docutils literal notranslate"><span class="pre">of_list</span></code> as the identity
+function. See the section below on encapsulation for the answer.</p>
+</div>
+<div class="section" id="semantics-of-includes">
+<h2><span class="section-number">5.8.1. </span>Semantics of Includes<a class="headerlink" href="#semantics-of-includes" title="Permalink to this headline">¶</a></h2>
+<p>Includes can be used inside of structures and signatures. When we include inside
+a signature, we must be including another signature. And when we include inside
+a structure, we must be including another structure.</p>
+<p><strong>Including a structure</strong> is effectively just syntactic sugar for writing a
+local definition for each name defined in the module. Writing <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">ListSet</span></code>
+as we did above, for example, has an effect similar to writing the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSetExtended</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(* BEGIN all the includes *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="nn">ListSet</span><span class="p">.</span><span class="n">t</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="nn">ListSet</span><span class="p">.</span><span class="n">empty</span>
+  <span class="k">let</span> <span class="n">mem</span> <span class="o">=</span> <span class="nn">ListSet</span><span class="p">.</span><span class="n">mem</span>
+  <span class="k">let</span> <span class="n">add</span> <span class="o">=</span> <span class="nn">ListSet</span><span class="p">.</span><span class="n">add</span>
+  <span class="k">let</span> <span class="n">elements</span> <span class="o">=</span> <span class="nn">ListSet</span><span class="p">.</span><span class="n">elements</span>
+  <span class="c">(* END all the includes *)</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="n">add</span> <span class="n">lst</span> <span class="n">empty</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSetExtended :
+  sig
+    type &#39;a t = &#39;a ListSet.t
+    val empty : &#39;a ListSet.t
+    val mem : &#39;a -&gt; &#39;a ListSet.t -&gt; bool
+    val add : &#39;a -&gt; &#39;a ListSet.t -&gt; &#39;a ListSet.t
+    val elements : &#39;a ListSet.t -&gt; &#39;a list
+    val of_list : &#39;a list -&gt; &#39;a ListSet.t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>None of that is actually copying the source code of <code class="docutils literal notranslate"><span class="pre">ListSet</span></code>. Rather, the
+<code class="docutils literal notranslate"><span class="pre">include</span></code> just creates a new definition in <code class="docutils literal notranslate"><span class="pre">ListSetExtended</span></code> with the same name
+as each definition in <code class="docutils literal notranslate"><span class="pre">ListSet</span></code>. But if the set of names defined inside
+<code class="docutils literal notranslate"><span class="pre">ListSet</span></code> ever changed, the <code class="docutils literal notranslate"><span class="pre">include</span></code> would reflect that change, whereas a
+copy-paste job would not.</p>
+<p><strong>Including a signature</strong> is much the same. For example, we could write:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">SetExtended</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">include</span> <span class="nc">Set</span>
+  <span class="k">val</span> <span class="n">of_list</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type SetExtended =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val mem : &#39;a -&gt; &#39;a t -&gt; bool
+    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val elements : &#39;a t -&gt; &#39;a list
+    val of_list : &#39;a list -&gt; &#39;a t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which would have an effect similar to writing the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">SetExtended</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(* BEGIN all the includes *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">mem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">elements</span>  <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="c">(* END all the includes *)</span>
+  <span class="k">val</span> <span class="n">of_list</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type SetExtended =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val mem : &#39;a -&gt; &#39;a t -&gt; bool
+    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val elements : &#39;a t -&gt; &#39;a list
+    val of_list : &#39;a list -&gt; &#39;a t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>That module type would be suitable for <code class="docutils literal notranslate"><span class="pre">ListSetExtended</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSetExtended</span> <span class="o">:</span> <span class="nc">SetExtended</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ListSet</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="n">add</span> <span class="n">lst</span> <span class="n">empty</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSetExtended : SetExtended
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="encapsulation-and-includes">
+<h2><span class="section-number">5.8.2. </span>Encapsulation and Includes<a class="headerlink" href="#encapsulation-and-includes" title="Permalink to this headline">¶</a></h2>
+<p>We mentioned above that you might wonder why we didn’t write this simpler
+definition of <code class="docutils literal notranslate"><span class="pre">of_list</span></code>:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSetExtended</span> <span class="o">:</span> <span class="nc">SetExtended</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ListSet</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[7]&quot;</span><span class="p">,</span> <span class="n">lines</span> <span class="mi">1</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">39</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="o">.......................................</span><span class="n">struct</span>
+<span class="mi">2</span> <span class="o">|</span>   <span class="n">include</span> <span class="n">ListSet</span>
+<span class="mi">3</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span>
+<span class="mi">4</span> <span class="o">|</span> <span class="n">end</span>
+<span class="ne">Error</span>: Signature mismatch:
+       <span class="o">...</span>
+       <span class="n">Values</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+         <span class="n">val</span> <span class="n">of_list</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span>
+       <span class="ow">is</span> <span class="ow">not</span> <span class="n">included</span> <span class="ow">in</span>
+         <span class="n">val</span> <span class="n">of_list</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span>
+       <span class="n">File</span> <span class="s2">&quot;[5]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">9</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">2</span><span class="o">-</span><span class="mi">31</span><span class="p">:</span> <span class="n">Expected</span> <span class="n">declaration</span>
+       <span class="n">File</span> <span class="s2">&quot;[7]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">13</span><span class="p">:</span> <span class="n">Actual</span> <span class="n">declaration</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check out that error message.  It looks like <code class="docutils literal notranslate"><span class="pre">of_list</span></code> doesn’t have the right
+type.  What if we try adding some type annotations?</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSetExtended</span> <span class="o">:</span> <span class="nc">SetExtended</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ListSet</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="o">(</span><span class="n">lst</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="n">lst</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[8]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">39</span><span class="o">-</span><span class="mi">42</span><span class="p">:</span>
+<span class="mi">3</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">of_list</span> <span class="p">(</span><span class="n">lst</span> <span class="p">:</span> <span class="s1">&#39;a list) : &#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="n">lst</span>
+                                           <span class="o">^^^</span>
+<span class="ne">Error</span>: This expression has type &#39;a list
+       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="s1">&#39;a t = &#39;</span><span class="n">a</span> <span class="n">ListSet</span><span class="o">.</span><span class="n">t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ah, now the problem is clearer: in the body of <code class="docutils literal notranslate"><span class="pre">of_list</span></code>, the equality of <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">t</span></code>
+and <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">list</span></code> isn’t known. In <code class="docutils literal notranslate"><span class="pre">ListSetExtended</span></code>, we do know that
+<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">t</span> <span class="pre">=</span> <span class="pre">'a</span> <span class="pre">ListSet.t</span></code>, because that’s what the <code class="docutils literal notranslate"><span class="pre">include</span></code> gave us. But the fact
+that <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">ListSet.t</span> <span class="pre">=</span> <span class="pre">'a</span> <span class="pre">list</span></code> was hidden when <code class="docutils literal notranslate"><span class="pre">ListSet</span></code> was sealed at module
+type <code class="docutils literal notranslate"><span class="pre">Set</span></code>. So, includes must obey encapsulation, just like the rest of the
+module system.</p>
+<p>One workaround is to rewrite the definitions as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSetImpl</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">mem</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem</span>
+  <span class="k">let</span> <span class="n">add</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span>
+  <span class="k">let</span> <span class="n">elements</span> <span class="n">s</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span> <span class="n">s</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="nc">ListSetImpl</span>
+
+<span class="k">module</span> <span class="k">type</span> <span class="nc">SetExtended</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">include</span> <span class="nc">Set</span>
+  <span class="k">val</span> <span class="n">of_list</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListSetExtendedImpl</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ListSetImpl</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListSetExtended</span> <span class="o">:</span> <span class="nc">SetExtended</span> <span class="o">=</span> <span class="nc">ListSetExtendedImpl</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSetImpl :
+  sig
+    type &#39;a t = &#39;a list
+    val empty : &#39;a list
+    val mem : &#39;a -&gt; &#39;a list -&gt; bool
+    val add : &#39;a -&gt; &#39;a list -&gt; &#39;a list
+    val elements : &#39;a list -&gt; &#39;a list
+  end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSet : Set
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type SetExtended =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val mem : &#39;a -&gt; &#39;a t -&gt; bool
+    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val elements : &#39;a t -&gt; &#39;a list
+    val of_list : &#39;a list -&gt; &#39;a t
+  end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSetExtendedImpl :
+  sig
+    type &#39;a t = &#39;a list
+    val empty : &#39;a list
+    val mem : &#39;a -&gt; &#39;a list -&gt; bool
+    val add : &#39;a -&gt; &#39;a list -&gt; &#39;a list
+    val elements : &#39;a list -&gt; &#39;a list
+    val of_list : &#39;a -&gt; &#39;a
+  end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSetExtended : SetExtended
+</pre></div>
+</div>
+</div>
+</div>
+<p>The important change is that <code class="docutils literal notranslate"><span class="pre">ListSetImpl</span></code> is not sealed, so its type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">t</span></code> is
+not abstract. When we include it in <code class="docutils literal notranslate"><span class="pre">ListSetExtended</span></code>, we can therefore exploit
+the fact that it’s a synonym for <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">list</span></code>.</p>
+<p>What we just did is effectively the same as what Java does to handle the
+visibility modifiers <code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code>, etc. The “private version” of a class
+is like the <code class="docutils literal notranslate"><span class="pre">Impl</span></code> version above: anyone who can see that version gets to see
+all the exposed items (fields in Java, types in OCaml), without any
+encapsulation. The “public version” of a class is like the sealed version above:
+anyone who can see that version is forced to treat the items as abstract, hence
+encapsulated.</p>
+<p>With that technique, if we want to provide a new implementation of one of the
+included functions we <em>could</em> do that too:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSetExtendedImpl</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ListSetImpl</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="n">add</span> <span class="n">lst</span> <span class="n">empty</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">elements</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+    <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">mem</span> <span class="n">h</span> <span class="n">t</span> <span class="k">then</span> <span class="n">elements</span> <span class="n">t</span> <span class="k">else</span> <span class="n">h</span> <span class="o">::</span> <span class="n">elements</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSetExtendedImpl :
+  sig
+    type &#39;a t = &#39;a list
+    val empty : &#39;a list
+    val mem : &#39;a -&gt; &#39;a list -&gt; bool
+    val add : &#39;a -&gt; &#39;a list -&gt; &#39;a list
+    val of_list : &#39;a list -&gt; &#39;a list
+    val elements : &#39;a list -&gt; &#39;a list
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>But that’s a bad idea. First, it’s actually a quadratic implementation of
+<code class="docutils literal notranslate"><span class="pre">elements</span></code> instead of linearithmic. Second, it does not <em>replace</em> the original
+implementation of <code class="docutils literal notranslate"><span class="pre">elements</span></code>. Remember the semantics of modules: all definitions
+are evaluated from top to bottom, in order. So the new definition of <code class="docutils literal notranslate"><span class="pre">elements</span></code>
+above won’t come into use until the very end of evaluation. If any earlier
+functions had happened to use <code class="docutils literal notranslate"><span class="pre">elements</span></code> as a helper, they would use the
+original linearithmic version, not the new quadratic version.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This differs from what you might expect from Java, which uses a language feature
+called <a class="reference external" href="https://en.wikipedia.org/wiki/Dynamic_dispatch">dynamic dispatch</a> to figure out which method implementation to
+invoke. Dynamic dispatch is arguably <em>the</em> defining feature of object-oriented
+languages. OCaml functions are not methods, and they do not use dynamic
+dispatch.</p>
+</div>
+</div>
+<div class="section" id="include-vs-open">
+<h2><span class="section-number">5.8.3. </span>Include vs. Open<a class="headerlink" href="#include-vs-open" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">open</span></code> statements are quite similar, but they have
+a subtly different effect on a structure.  Consider this code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">N</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">M</span>
+  <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">O</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">open</span> <span class="nc">M</span>
+  <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val x : int end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module N : sig val x : int val y : int end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module O : sig val y : int end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Look closely at the values contained in each structure. <code class="docutils literal notranslate"><span class="pre">N</span></code> has both an <code class="docutils literal notranslate"><span class="pre">x</span></code> and
+<code class="docutils literal notranslate"><span class="pre">y</span></code>, whereas <code class="docutils literal notranslate"><span class="pre">O</span></code> has only a <code class="docutils literal notranslate"><span class="pre">y</span></code>. The reason is that <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">M</span></code> causes all the
+definitions of <code class="docutils literal notranslate"><span class="pre">M</span></code> to also be included in <code class="docutils literal notranslate"><span class="pre">N</span></code>, so the definition of <code class="docutils literal notranslate"><span class="pre">x</span></code> from <code class="docutils literal notranslate"><span class="pre">M</span></code>
+is present in <code class="docutils literal notranslate"><span class="pre">N</span></code>. But <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">M</span></code> only made those definitions available in the
+<em>scope</em> of <code class="docutils literal notranslate"><span class="pre">O</span></code>; it doesn’t actually make them part of the <em>structure</em>. So <code class="docutils literal notranslate"><span class="pre">O</span></code>
+does not contain a definition of <code class="docutils literal notranslate"><span class="pre">x</span></code>, even though <code class="docutils literal notranslate"><span class="pre">x</span></code> is in scope during the
+evaluation of <code class="docutils literal notranslate"><span class="pre">O</span></code>’s definition of <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>A metaphor for understanding this difference might be: <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">M</span></code> imports
+definitions from <code class="docutils literal notranslate"><span class="pre">M</span></code> and makes them available for local consumption, but they
+aren’t exported to the outside world. Whereas <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">M</span></code> imports definitions
+from <code class="docutils literal notranslate"><span class="pre">M</span></code>, makes them available for local consumption, and additionally exports
+them to the outside world.</p>
+</div>
+<div class="section" id="including-code-in-multiple-modules">
+<h2><span class="section-number">5.8.4. </span>Including Code in Multiple Modules<a class="headerlink" href="#including-code-in-multiple-modules" title="Permalink to this headline">¶</a></h2>
+<p>Recall that we also had an implementation of sets that made sure every element
+of the underlying list was unique:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">UniqListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** All values in the list must be unique. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">mem</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem</span>
+  <span class="k">let</span> <span class="n">add</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="k">if</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">s</span> <span class="k">then</span> <span class="n">s</span> <span class="k">else</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
+  <span class="k">let</span> <span class="n">elements</span> <span class="o">=</span> <span class="nn">Fun</span><span class="p">.</span><span class="n">id</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module UniqListSet : Set
+</pre></div>
+</div>
+</div>
+</div>
+<p>Suppose we wanted add <code class="docutils literal notranslate"><span class="pre">of_list</span></code> to that module too. One possibility would be to
+copy and paste that function from <code class="docutils literal notranslate"><span class="pre">ListSet</span></code> into <code class="docutils literal notranslate"><span class="pre">UniqListSet</span></code>. But that’s poor
+software engineering. So let’s rule that out right away as a non-solution.</p>
+<p>Instead, suppose we try to define the function outside of either module:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="n">add</span> <span class="n">lst</span> <span class="n">empty</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[13]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">34</span><span class="o">-</span><span class="mi">37</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="n">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">fold_right</span> <span class="n">add</span> <span class="n">lst</span> <span class="n">empty</span>
+                                      <span class="o">^^^</span>
+<span class="ne">Error</span>: Unbound value add
+</pre></div>
+</div>
+</div>
+</div>
+<p>The problem is we either need to choose which module’s <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">empty</span></code> we
+want. But as soon as we do, the function becomes useful only with that one
+module:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="nn">ListSet</span><span class="p">.</span><span class="n">add</span> <span class="n">lst</span> <span class="nn">ListSet</span><span class="p">.</span><span class="n">empty</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val of_list : &#39;a list -&gt; &#39;a ListSet.t = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We could make <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">empty</span></code> be parameters instead:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">of_list&#39;</span> <span class="n">add</span> <span class="n">empty</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="n">add</span> <span class="n">lst</span> <span class="n">empty</span>
+
+<span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">of_list&#39;</span> <span class="nn">ListSet</span><span class="p">.</span><span class="n">add</span> <span class="nn">ListSet</span><span class="p">.</span><span class="n">empty</span> <span class="n">lst</span>
+<span class="k">let</span> <span class="n">of_list_uniq</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">of_list&#39;</span> <span class="nn">UniqListSet</span><span class="p">.</span><span class="n">add</span> <span class="nn">UniqListSet</span><span class="p">.</span><span class="n">empty</span> <span class="n">lst</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val of_list&#39; : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a list -&gt; &#39;b = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val of_list : &#39;a list -&gt; &#39;a ListSet.t = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val of_list_uniq : &#39;a list -&gt; &#39;a UniqListSet.t = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But this is annoying in a couple of ways. First, we have to remember which
+function name to call, whereas all the other operations that are part of those
+modules have the same name, regardless of which module they’re in. Second, the
+<code class="docutils literal notranslate"><span class="pre">of_list</span></code> functions live outside either module, so clients who open one of the
+modules won’t automatically get the ability to name those functions.</p>
+<p>Let’s try to use includes to solve this problem. First, we write a module that
+contains the parameterized implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">SetOfList</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">let</span> <span class="n">of_list&#39;</span> <span class="n">add</span> <span class="n">empty</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="n">add</span> <span class="n">lst</span> <span class="n">empty</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module SetOfList :
+  sig val of_list&#39; : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a list -&gt; &#39;b end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we include that module to get the helper function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">UniqListSetExtended</span> <span class="o">:</span> <span class="nc">SetExtended</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">UniqListSet</span>
+  <span class="k">include</span> <span class="nc">SetOfList</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">of_list&#39;</span> <span class="n">add</span> <span class="n">empty</span> <span class="n">lst</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListSetExtended</span> <span class="o">:</span> <span class="nc">SetExtended</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">include</span> <span class="nc">ListSet</span>
+  <span class="k">include</span> <span class="nc">SetOfList</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">of_list&#39;</span> <span class="n">add</span> <span class="n">empty</span> <span class="n">lst</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module UniqListSetExtended : SetExtended
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSetExtended : SetExtended
+</pre></div>
+</div>
+</div>
+</div>
+<p>That works, but we’ve only partially succeeded in achieving code reuse:</p>
+<ul class="simple">
+<li><p>On the positive side, the code that implements <code class="docutils literal notranslate"><span class="pre">of_list'</span></code> has been factored
+out into a single location and reused in the two structures.</p></li>
+<li><p>But on the negative side, we still had to write an implementation of <code class="docutils literal notranslate"><span class="pre">of_list</span></code>
+in both modules. Worse yet, those implementations are identical. So there’s
+still code duplication occurring.</p></li>
+</ul>
+<p>Could we do better? Yes. And that leads us to functors, next.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/modules"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="compilation_units.html" title="previous page"><span class="section-number">5.7. </span>Compilation Units</a>
+    <a class='right-next' id="next-link" href="functors.html" title="next page"><span class="section-number">5.9. </span>Functors</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
