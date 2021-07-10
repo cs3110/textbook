@@ -25,7 +25,7 @@ language][exprs]. Though that page starts with a rather cryptic overview, if you
 scroll down, you'll come to some English explanations. Don't worry about
 studying that page now; just know that it's available for reference.
 
-[exprs]:  http://caml.inria.fr/pub/docs/manual-ocaml/expr.html
+[exprs]:  http://ocaml.org/manual/expr.html
 
 The primary task of computation in a functional language is to *evaluate* an
 expression to a *value*. A value is an expression for which there is no
@@ -36,7 +36,7 @@ all expressions are values. Examples of values include `2`, `true`, and
 The OCaml manual also has a definition of [all the values][values], though
 again, that page is mostly useful for reference rather than study.
 
-[values]: http://caml.inria.fr/pub/docs/manual-ocaml/values.html
+[values]: http://ocaml.org/manual/values.html
 
 Sometimes an expression might fail to evaluate to a value. There are two reasons
 that might happen:
@@ -77,8 +77,8 @@ difficult if you're coming from a language like Java where `==` is the usual
 equality operator.
 ```
 
-[ops]: http://caml.inria.fr/pub/docs/manual-ocaml/expr.html#sec139
-[stdlib]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Stdlib.html
+[ops]: https://ocaml.org/manual/expr.html#ss%3Aexpr-operators
+[stdlib]: http://ocaml.org/api/Stdlib.html
 
 ## If Expressions
 
@@ -163,7 +163,7 @@ any OCaml type; the OCaml manual also has definition of [all types][types]
 (which curiously does not name the base types of the language like `int` and
 `bool`).
 
-[types]: http://caml.inria.fr/pub/docs/manual-ocaml/types.html
+[types]: http://ocaml.org/manual/types.html
 
 We're going to be writing "has type" a lot, so let's introduce a more compact
 notation for it. Whenever we would write "`e` has type `t`", let's instead write

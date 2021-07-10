@@ -551,7 +551,7 @@ the documentation. For example, here is a way we could rewrite that comment:
 In `[lst = []]`, the outer square brackets indicate source code as part of a
 comment, whereas the inner square brackets indicate the empty list.
 
-[std-web]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
+[std-web]: http://ocaml.org/api/List.html
 [std-src]: https://github.com/ocaml/ocaml/blob/trunk/stdlib/list.mli
 
 ## List Comprehensions
@@ -614,7 +614,7 @@ tail-recursive version less time efficient. What constitutes "small" vs. "big"
 here? That's hard to say, but maybe 10,000 is a good estimate, according to the
 [standard library documentation of the `List` module][list].
 
-[list]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
+[list]: http://ocaml.org/api/List.html
 
 Here is a useful tail-recursive function to produce a long list:
 

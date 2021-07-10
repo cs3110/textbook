@@ -161,8 +161,8 @@ signature. Look at [that signature][ord] as well as the
 [signature for the `Char` module][char]. Explain in your own words why we are
 allowed to pass `Char` as an argument to `Map.Make`.
 
-[ord]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.OrderedType.html
-[char]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Char.html
+[ord]: http://ocaml.org/api/Map.OrderedType.html
+[char]: http://ocaml.org/api/Char.html
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "use char map")}}
@@ -198,7 +198,7 @@ association list?
 
 Check your answer in utop.
 
-[map.s]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.S.html
+[map.s]: http://ocaml.org/api/Map.S.html
 
 
 <!--------------------------------------------------------------------------->
@@ -487,8 +487,6 @@ needed. There isn't necessarily a right answer here, but here's some advice:
   use of functors. It will also require inventing an algorithm that can convert
   an integer to an arbitrary `Ring` representation, regardless of what the
   representation type of that `Ring` is.
-
-[dsub]: http://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec234
 
 When you're done, the types of all the modules should remain unchanged. You can
 easily see those types by running `ocamlc -i algebra.ml`.

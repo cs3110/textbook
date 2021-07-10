@@ -55,7 +55,7 @@ Consult the [`List` standard library][listdoc] to solve these exercises:
   descending order. *Hint: `List.sort` with `Stdlib.compare` as its first
   argument, and `List.rev`.*
 
-[listdoc]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
+[listdoc]: http://ocaml.org/api/List.html
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "library test")}}
@@ -146,7 +146,7 @@ let print_int_list' lst =
   List.iter (fun x -> (* fill in here *)) lst
 ```
 
-[list]: http://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html
+[list]: http://ocaml.org/api/List.html
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "student")}}

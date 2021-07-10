@@ -433,4 +433,4 @@ So `option` is really just a type constructor, with (value) constructors
 
 You can see both `list` and `option` defined in the [core OCaml library][core].
 
-[core]: http://caml.inria.fr/pub/docs/manual-ocaml/core.html
+[core]: http://ocaml.org/manual/core.html

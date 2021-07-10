@@ -38,11 +38,10 @@ variant value. Here, for example, is an exception value whose constructor is
 ```{code-cell} ocaml
 Failure "something went wrong"
 ```
-This constructor is [pre-defined in the standard library][stdlib-exn] (scroll
-down to "predefined exceptions") and is one of the more common exceptions that
+This constructor is [pre-defined in the standard library][stdlib-exn] and is one of the more common exceptions that
 OCaml programmers use.
 
-[stdlib-exn]: http://caml.inria.fr/pub/docs/manual-ocaml/core.html#sec512
+[stdlib-exn]: https://ocaml.org/manual/core.html#ss:predef-exn
 
 To raise an exception value `e`, simply write
 ```ocaml
@@ -75,8 +74,8 @@ variant, which allows new constructors of the variant to be defined after the
 variant type itself is defined. See the OCaml manual for more information about
 [extensible variants][extvar] if you're interested.
 
-[core]: http://caml.inria.fr/pub/docs/manual-ocaml/core.html
-[extvar]: http://caml.inria.fr/pub/docs/manual-ocaml/extn.html
+[core]: http://ocaml.org/manual/core.html
+[extvar]: http://ocaml.org/manual/extn.html
 
 ## Exception Semantics
 

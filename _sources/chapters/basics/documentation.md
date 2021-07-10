@@ -27,7 +27,7 @@ programming assignments, we ask you to complete a comment like this:
 ```
 
 For the full range of possible markup inside a OCamldoc comment, see
-[the OCamldoc manual](https://caml.inria.fr/pub/docs/manual-ocaml/ocamldoc.html).
+[the OCamldoc manual](https://ocaml.org/manual/ocamldoc.html).
 But what we've covered here is good enough for most documentation that you'll
 need to write.
 
