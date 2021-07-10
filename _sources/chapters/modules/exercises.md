@@ -161,8 +161,8 @@ signature. Look at [that signature][ord] as well as the
 [signature for the `Char` module][char]. Explain in your own words why we are
 allowed to pass `Char` as an argument to `Map.Make`.
 
-[ord]: http://ocaml.org/api/Map.OrderedType.html
-[char]: http://ocaml.org/api/Char.html
+[ord]: https://ocaml.org/api/Map.OrderedType.html
+[char]: https://ocaml.org/api/Char.html
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "use char map")}}
@@ -198,7 +198,7 @@ association list?
 
 Check your answer in utop.
 
-[map.s]: http://ocaml.org/api/Map.S.html
+[map.s]: https://ocaml.org/api/Map.S.html
 
 
 <!--------------------------------------------------------------------------->

@@ -33,7 +33,7 @@ Here are some additional pattern forms that are useful:
 
 You can read about [all the pattern forms][patterns] in the manual.
 
-[patterns]: http://ocaml.org/manual/patterns.html
+[patterns]: https://ocaml.org/manual/patterns.html
 
 ## Pattern Matching with Let
 

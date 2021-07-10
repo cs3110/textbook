@@ -52,5 +52,5 @@ this kind of iteration.
 * "[Second-order and Higher-order Logic][solhol]" in *The Stanford Encyclopedia
   of Philosophy*.
 
-[solhol]:  http://plato.stanford.edu/entries/logic-higher-order/#4
+[solhol]:  http://plato.stanford.edu/entries/logic-higher-order/
 [backus-turing]: https://dl.acm.org/doi/pdf/10.1145/359576.359579

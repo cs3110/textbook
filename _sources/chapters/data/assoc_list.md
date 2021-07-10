@@ -54,4 +54,4 @@ functions below it in the documentation. What we just wrote as `lookup` is
 actually already defined as `List.assoc_opt`. There is no pre-defined `insert`
 function in the library because it's so trivial just to cons a pair on.
 
-[list]: http://ocaml.org/api/List.html
+[list]: https://ocaml.org/api/List.html

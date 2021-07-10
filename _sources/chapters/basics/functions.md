@@ -51,7 +51,7 @@ study. Definitions are not expressions, nor are expressions
 definitions&mdash;they are distinct syntactic classes. But definitions can have
 expressions nested inside them, and vice-versa.
 
-[definitions]: http://ocaml.org/manual/modules.html
+[definitions]: https://ocaml.org/manual/modules.html
 
 For now, let's focus on one particular kind of definition, a *function
 definition*. Non-recursive functions are defined like this:
@@ -145,7 +145,7 @@ names `x1` through `xn` are metavariables indicating argument identifiers. These
 follow the same rules as function identifiers. The keyword `rec` is required if
 `f` is to be a recursive function; otherwise it may be omitted.
 
-[lowercase]: http://ocaml.org/manual/lex.html#lowercase-ident
+[lowercase]: https://ocaml.org/manual/lex.html#lowercase-ident
 
 Note that syntax for function definitions is actually simplified compared to
 what OCaml really allows. We will learn more about some augmented syntax for

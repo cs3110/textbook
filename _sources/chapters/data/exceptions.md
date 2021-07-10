@@ -74,8 +74,8 @@ variant, which allows new constructors of the variant to be defined after the
 variant type itself is defined. See the OCaml manual for more information about
 [extensible variants][extvar] if you're interested.
 
-[core]: http://ocaml.org/manual/core.html
-[extvar]: http://ocaml.org/manual/extn.html
+[core]: https://ocaml.org/manual/core.html
+[extvar]: https://ocaml.org/manual/extn.html
 
 ## Exception Semantics
 

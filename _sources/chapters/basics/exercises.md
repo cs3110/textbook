@@ -26,7 +26,7 @@ scroll down to find it on that page).
   there is no built-in integer exponentiation operator in OCaml (nor is there in
   C, by the way), in part because it is not an operation provided by most CPUs.*
 
-[ops]: http://ocaml.org/manual/expr.html
+[ops]: https://ocaml.org/manual/expr.html
 
 <!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "equality")}}

@@ -351,7 +351,7 @@ let lowercase_ascii = String.lowercase_ascii
 ...
 ```
 
-[string]: http://ocaml.org/api/String.html
+[string]: https://ocaml.org/api/String.html
 
 If there are types, exceptions, or modules defined in a module, those also are
 brought into scope with `open`.
@@ -364,7 +364,7 @@ though you could do so if you ever needed to unambiguously identify a name from
 it. In earlier days, this module was named `Pervasives`, and you might still see
 that name in some code bases.
 
-[stdlib]: http://ocaml.org/api/Stdlib.html
+[stdlib]: https://ocaml.org/api/Stdlib.html
 
 **Open as a Module Item.**
 An `open` is another sort of `module_item`. So we can open one module inside

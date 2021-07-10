@@ -322,7 +322,7 @@ arguments in a uniform order thanks to their labels. However, we still have to
 be careful about which argument to the combining operator is the list element
 vs. the accumulator value.
 
-[listlabels]: http://ocaml.org/api/ListLabels.html
+[listlabels]: https://ocaml.org/api/ListLabels.html
 
 ## A Digression on Labeled Arguments and Fold
 
