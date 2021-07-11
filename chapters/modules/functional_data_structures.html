@@ -49,9 +49,9 @@
     <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -111,18 +111,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../intro/3110.html">
-     1.4. A Brief History of CS 3110
+     1.5. A Brief History of CS 3110
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../intro/summary.html">
-     1.5. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/exercises.html">
-     1.6. Exercises
+     1.6. Summary
     </a>
    </li>
   </ul>
@@ -461,6 +461,26 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/modules/functional_data_structures.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -516,6 +536,7 @@
                 
   <div class="section" id="functional-data-structures">
 <h1><span class="section-number">5.5. </span>Functional Data Structures<a class="headerlink" href="#functional-data-structures" title="Permalink to this headline">¶</a></h1>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/CLeXXZDkkCI" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>A <em>functional data structure</em> is one that does not make use of any imperative
 features. That is, no operations of the data structure have any side effects.
 It’s possible to build functional data structures both in functional languages
@@ -560,6 +581,7 @@ coexist without affecting one another.</p>
 </div>
 <div class="section" id="stacks">
 <h2><span class="section-number">5.5.2. </span>Stacks<a class="headerlink" href="#stacks" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/LWmGzSCpvVY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We implemented stacks earlier in this chapter. Here’s a terse variant of one of
 those implementations, in which add a <code class="docutils literal notranslate"><span class="pre">to_list</span></code> operation to make it easier to
 view the contents of the stack in examples:</p>
@@ -652,6 +674,7 @@ OCaml would be returning <code class="docutils literal notranslate"><span class=
 </div>
 <div class="section" id="options-vs-exceptions">
 <h2><span class="section-number">5.5.3. </span>Options vs Exceptions<a class="headerlink" href="#options-vs-exceptions" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/tbMU_pv0p9o" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>All of our stack implementations so far have raised an exception whenever <code class="docutils literal notranslate"><span class="pre">peek</span></code>
 or <code class="docutils literal notranslate"><span class="pre">pop</span></code> is applied to the empty stack. Another possibility would be to use an
 <code class="docutils literal notranslate"><span class="pre">option</span></code> for the return value. If the input stack is empty, then <code class="docutils literal notranslate"><span class="pre">peek</span></code> and
@@ -841,6 +864,7 @@ stack at each node in the list.</p>
 </div>
 <div class="section" id="queues">
 <h2><span class="section-number">5.5.4. </span>Queues<a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/rCiBfZO67A4" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Queues and stacks are fairly similar interfaces.  We’ll stick with exceptions
 instead of options for now.</p>
 <div class="cell tag_hide-output docutils container">
@@ -1291,8 +1315,8 @@ tradeoff of <code class="docutils literal notranslate"><span class="pre">add</sp
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "cs3110/textbook",
+            ref: "jupyter",
         },
         codeMirrorConfig: {
             theme: "abcdef",

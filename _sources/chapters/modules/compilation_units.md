@@ -1,5 +1,7 @@
 # Compilation Units
 
+{{ video_embed | replace("%%VID%%", "hjZ8FvMUw2k")}}
+
 A *compilation unit* is a pair of OCaml source files in the same
 directory. They share the same base name, call it `x`, but their
 extensions differ: one file is `x.ml`, the other is `x.mli`. The file

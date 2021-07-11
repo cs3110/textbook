@@ -49,9 +49,9 @@
     <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -109,18 +109,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../intro/3110.html">
-     1.4. A Brief History of CS 3110
+     1.5. A Brief History of CS 3110
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../intro/summary.html">
-     1.5. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/exercises.html">
-     1.6. Exercises
+     1.6. Summary
     </a>
    </li>
   </ul>
@@ -459,6 +459,26 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/data/options.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -626,8 +646,8 @@ sensible in the <code class="docutils literal notranslate"><span class="pre">Non
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "cs3110/textbook",
+            ref: "jupyter",
         },
         codeMirrorConfig: {
             theme: "abcdef",

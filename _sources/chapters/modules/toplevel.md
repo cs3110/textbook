@@ -15,6 +15,8 @@ kernelspec:
 
 # Modules and the Toplevel
 
+{{ video_embed | replace("%%VID%%", "4yo-04VVzIw")}}
+
 There are several pragmatics involving modules and the toplevel that are
 important to master to use the two together effectively.
 

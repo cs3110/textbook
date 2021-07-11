@@ -49,9 +49,9 @@
     <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -109,18 +109,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../intro/3110.html">
-     1.4. A Brief History of CS 3110
+     1.5. A Brief History of CS 3110
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../intro/summary.html">
-     1.5. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/exercises.html">
-     1.6. Exercises
+     1.6. Summary
     </a>
    </li>
   </ul>
@@ -471,6 +471,7 @@
                 
   <div class="section" id="modular-programming">
 <h1><span class="section-number">5. </span>Modular Programming<a class="headerlink" href="#modular-programming" title="Permalink to this headline">¶</a></h1>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/PRvrkOy1ihY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>When a program is small enough, we can keep all of the details of the program in
 our heads at once. But real-world applications can be many order of magnitude
 larger than those we write in college classes. They are simply too large and
@@ -543,8 +544,8 @@ its interface.</p>
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "cs3110/textbook",
+            ref: "jupyter",
         },
         codeMirrorConfig: {
             theme: "abcdef",

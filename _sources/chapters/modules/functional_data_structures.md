@@ -15,6 +15,8 @@ kernelspec:
 
 # Functional Data Structures
 
+{{ video_embed | replace("%%VID%%", "CLeXXZDkkCI")}}
+
 A *functional data structure* is one that does not make use of any imperative
 features. That is, no operations of the data structure have any side effects.
 It's possible to build functional data structures both in functional languages
@@ -47,6 +49,8 @@ Taking the tail of `lst` does not change the list. Both `lst` and `lst'`
 coexist without affecting one another.
 
 ## Stacks
+
+{{ video_embed | replace("%%VID%%", "LWmGzSCpvVY")}}
 
 We implemented stacks earlier in this chapter. Here's a terse variant of one of
 those implementations, in which add a `to_list` operation to make it easier to
@@ -106,6 +110,8 @@ for example, similar methods might have a `void` return type; the equivalent in
 OCaml would be returning `unit`.
 
 ## Options vs Exceptions
+
+{{ video_embed | replace("%%VID%%", "tbMU_pv0p9o")}}
 
 All of our stack implementations so far have raised an exception whenever `peek`
 or `pop` is applied to the empty stack. Another possibility would be to use an
@@ -230,6 +236,8 @@ that `size` could be made constant time as well, at the cost of some extra space
 stack at each node in the list.
 
 ## Queues
+
+{{ video_embed | replace("%%VID%%", "rCiBfZO67A4")}}
 
 Queues and stacks are fairly similar interfaces.  We'll stick with exceptions
 instead of options for now.

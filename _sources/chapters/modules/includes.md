@@ -15,6 +15,8 @@ kernelspec:
 
 # Includes
 
+{{ video_embed | replace("%%VID%%", "SmG3ChuOLpQ")}}
+
 Copying and pasting code is almost always a bad idea. Duplication of code causes
 duplication and proliferation of errors. So why are we so prone to making this
 mistake? Maybe because it always seems like the easier option &mdash; easier and

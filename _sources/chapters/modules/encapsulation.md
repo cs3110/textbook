@@ -174,6 +174,8 @@ visibility in OO languages at first.
 
 ## Abstract Types
 
+{{ video_embed | replace("%%VID%%", "vuKBUhMpr-c")}}
+
 In an earlier section we implemented stacks as lists with the following
 module and type:
 

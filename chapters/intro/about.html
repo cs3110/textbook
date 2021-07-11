@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1.7. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>1.4. About This Book &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -49,15 +49,15 @@
     <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2. The Basics of OCaml" href="../basics/intro.html" />
-    <link rel="prev" title="1.6. Summary" href="summary.html" />
+    <link rel="next" title="1.5. A Brief History of CS 3110" href="3110.html" />
+    <link rel="prev" title="1.3. Look to Your Future" href="future.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -108,8 +108,8 @@
      1.3. Look to Your Future
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="about.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      1.4. About This Book
     </a>
    </li>
@@ -121,11 +121,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
      1.6. Summary
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     1.7. Exercises
     </a>
    </li>
   </ul>
@@ -421,9 +416,12 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/intro/about.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/chapters/intro/exercises.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/chapters/intro/about.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -443,10 +441,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/intro/exercises.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/intro/about.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/intro/exercises.md"><button
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/intro/about.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -461,6 +459,26 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/intro/about.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -474,12 +492,107 @@
         
               <div>
                 
-  <div class="section" id="exercises">
-<h1><span class="section-number">1.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
-<p>Future chapters of this textbook contain exercises as the final section. The
-exercises are annotated with a difficulty rating:</p>
+  <div class="section" id="about-this-book">
+<h1><span class="section-number">1.4. </span>About This Book<a class="headerlink" href="#about-this-book" title="Permalink to this headline">¶</a></h1>
+<p><strong>Reporting Errors.</strong> If you find an error, please report it! Or if you have a
+suggestion about how to rewrite some part of the book, let us know. Just go to
+the page of the book for which you’d like to make a suggestion, click on the
+Github icon (it looks like a cat) near the top right of the page, and click
+“open issue” or “suggest edit”. The latter is a little heavier weight, because
+it requires you to fork the textbook repository with Github. But for minor edits
+that will be appreciated and lead to much quicker uptake of suggestions.</p>
+<p><strong>Videos.</strong> You will find about 200 YouTube videos embedded throughout this
+book. The videos usually provide an introduction to material, upon which the
+textbook then expands. These videos were produced during pandemic when the
+Cornell course that uses this textbook, CS 3110, had to be asynchronous. The
+student response to them was overwhelmingly positive, so they are now being made
+public as part of the textbook. But just so you know, they were not produced by
+a professional A/V team—just a guy in his basement who was learning as he
+went.</p>
+<p>The videos mostly use the versions of OCaml and its ecosystem that were current
+in Fall 2020. Current versions you are using are likely to look different from
+the videos, but don’t be alarmed: the underlying ideas are the same. The most
+visible difference is likely to be the VS Code plugin for OCaml. In Fall 2020
+the badly-aging “OCaml and Reason IDE” plugin was still being used. It has since
+been superseded by the “OCaml Platform” plugin.</p>
+<p>The order that the textbook covers topics sometimes differs from the order that
+the videos cover the topics, simply because the videos originate from lectures.
+The videos are placed in the textbook nearest to the topic they cover, but that
+does mean sometimes the videos are not in chronological order.</p>
+<p><strong>Collaborative Annotations.</strong> At the right margin of each page, you will find
+an annotation feature provided by <a class="reference external" href="https://web.hypothes.is/">hypothes.is</a>. You can use this to
+highlight and make private notes as you study the text. You can form study
+groups to share your annotations, or share them publicly. Check out these
+<a class="reference external" href="https://web.hypothes.is/annotation-tips-for-students/">tips for how to annotate effectively</a>.</p>
+<p><strong>Executable Code.</strong> Many pages of this book have OCaml code embedded in them.
+The output of that code is already shown in the book. Here’s an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span> <span class="s2">&quot;Hello world!&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world!
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also edit and re-run the code yourself to experiment and check your
+understanding.  Look for the icon near the top right of the page that looks
+like a rocket ship.  In the drop-down menu you’ll find two ways to interact
+with the code:</p>
 <ul class="simple">
-<li><p>One star [★]:  easy exercises that should take only a minute or two.</p></li>
+<li><p><em>Binder</em> will launch the site [<a class="reference external" href="http://mybinder.org">mybinder.org</a>], which is a free cloud-based
+service for “reproducible, interactive, sharable environments for science at
+scale.” All the computation happens in their cloud servers, but the UI is
+provided through your browser. It will take a little while for the textbook
+page to open in Binder. Once it does, you can edit and run the code in a
+<a class="reference external" href="https://jupyter.org/"><em>Jupyter notebook</em></a>. Jupyter notebooks are documents (usually ending
+in the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> extension) that can be viewed in web browsers and used to
+write narrative content as well as code. They became popular in data science
+communities (especially Python, R, and Julia) as a way of sharing analyses.
+Now many languages can run in Jupyter notebooks, including OCaml. Code and
+text are written in <em>cells</em> in a Jupyter notebook. Look at the “Cell” menu in
+it for commands to run cells. Note that Shift-Enter is usually a hotkey for
+running the cell that has focus.</p></li>
+<li><p><em>Live code</em> will actually do about the same thing, except that instead of
+leaving the current textbook page and taking you off to Binder, it will modify
+the code cells on the page to be editable. It takes some time for the
+connection to be made behind the scenes, during which you will see “Waiting
+for kernel”. After the connection has been made, you can edit all the code
+cells on the page and re-run them.</p></li>
+</ul>
+<p>Try interacting with the cell above now to make it print <code class="docutils literal notranslate"><span class="pre">&quot;Camels</span> <span class="pre">are</span> <span class="pre">bae.&quot;</span></code></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When you write “real” OCaml code, this is not the interface you’ll be using.
+You’ll write code in an editor such as Visual Studio Code or Emacs, and you’ll
+compile it from a terminal. Binder and Live Code are just for interacting in a
+seamless with the textbook.</p>
+</div>
+<p><strong>Downloadable Pages.</strong> Each page of this book is downloadable in a variety of
+formats. The download icon is at the top right of each page. You’ll always find
+the original source code of the page, which is usually <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>—or
+more precisely <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/">MyST Markdown</a>, which is an extension of Markdown for
+technical writing. Each page is also individually available as PDF, which simply
+prints from your browser. For the entire book as a PDF, see the paragraph about
+that below.</p>
+<p>Pages with OCaml code cells embedded in them can also be downloaded as Jupyter
+notebooks. To run those locally on your own machine (instead of in the cloud on
+Binder), you’ll need to install Jupyter. The easiest way of doing that is
+typically to install <a class="reference external" href="https://www.anaconda.com/">Anaconda</a>. Then you’ll need to install
+<a class="reference external" href="https://github.com/akabe/ocaml-jupyter">OCaml Jupyter</a>, which requires that you already have OCaml
+installed. To be clear, there’s no need to install Jupyter or to use notebooks.
+It’s just another way to interact with this textbook beyond reading it.</p>
+<p><strong>Exercises and Solutions.</strong> At the end of each chapter except the first, you
+will find a section of exercises. The exercises are annotated with a difficulty
+rating:</p>
+<ul class="simple">
+<li><p>One star [★]: easy exercises that should take only a minute or two.</p></li>
 <li><p>Two stars [★★]: straightforward exercises that should take a few
 minutes.</p></li>
 <li><p>Three stars [★★★]: exercises that might require anywhere
@@ -491,39 +604,45 @@ material.</p></li>
 <p>It’s possible we’ve misjudged the difficulty of a problem from time to time. Let
 us know if you think an annotation is off.</p>
 <p>Please do not post your solutions to the exercises anywhere, especially not in
-public repositories where they could be found by search engines. A repository of
-solutions is available to current students in the course. Instructions for how
-to access it will be provided elsewhere. Instructors from other universities may
-also request access.</p>
+public repositories where they could be found by search engines. Solutions to exercises are available to students in Cornell’s CS 3110.
+Instructors at other institutions are welcome to contact Michael Clarkson
+for access.
+</p>
+<p><strong>Binder.</strong> TODO</p>
+<p><strong>PDF.</strong> An experimental <a href="ocaml_programming.pdf">full PDF version of
+this book</a> is available. It does not contain the embedded videos,
+annotations, or other features that the HTML version has. It might also have
+typesetting errors. At this time, no tablet (ePub, etc.) version is available,
+but most tablets will let you import PDFs.</p>
 </div>
 
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "cs3110/textbook",
+            ref: "jupyter",
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ocaml-jupyter"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "ocaml-jupyter",
             path: "./chapters/intro"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'ocaml-jupyter'</script>
 
               </div>
               
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="summary.html" title="previous page"><span class="section-number">1.6. </span>Summary</a>
-    <a class='right-next' id="next-link" href="../basics/intro.html" title="next page"><span class="section-number">2. </span>The Basics of OCaml</a>
+    <a class='left-prev' id="prev-link" href="future.html" title="previous page"><span class="section-number">1.3. </span>Look to Your Future</a>
+    <a class='right-next' id="next-link" href="3110.html" title="next page"><span class="section-number">1.5. </span>A Brief History of CS 3110</a>
 
         </div>
         

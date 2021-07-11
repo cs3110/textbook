@@ -49,9 +49,9 @@
     <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -109,18 +109,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../intro/3110.html">
-     1.4. A Brief History of CS 3110
+     1.5. A Brief History of CS 3110
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../intro/summary.html">
-     1.5. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/exercises.html">
-     1.6. Exercises
+     1.6. Summary
     </a>
    </li>
   </ul>
@@ -459,6 +459,26 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/modules/modules.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -509,6 +529,7 @@
                 
   <div class="section" id="modules">
 <h1><span class="section-number">5.2. </span>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/hIUSrPxCdHc" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We begin with a couple of examples of the OCaml module system before diving
 into the details.</p>
 <p>A <em>structure</em> is simply a collection of definitions, such as:</p>
@@ -574,6 +595,7 @@ a function.” But if we broaden our sight a little, we could allow that the typ
 of a function is part of its specification. So it’s at least a related sense of
 the word.</p>
 </div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/8Q-2b7iGvXE" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The definitions in a module are usually more closely related than those in
 <code class="docutils literal notranslate"><span class="pre">MyModule</span></code>. Often a module will implement some data structure. For example, here
 is a module for stacks implemented as linked lists:</p>
@@ -720,6 +742,7 @@ functions—<code class="docutils literal notranslate"><span class="pre">push</s
 </div>
 <div class="section" id="module-definitions">
 <h2><span class="section-number">5.2.1. </span>Module Definitions<a class="headerlink" href="#module-definitions" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/EUJXBpra0oY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The <code class="docutils literal notranslate"><span class="pre">module</span></code> definition keyword is much like the <code class="docutils literal notranslate"><span class="pre">let</span></code> definition keyword that
 we learned before. (The OCaml designers hypothetically could have chosen to use
 <code class="docutils literal notranslate"><span class="pre">let_module</span></code> instead of <code class="docutils literal notranslate"><span class="pre">module</span></code> to emphasize the similarity.) The difference is
@@ -900,6 +923,7 @@ to first talk about scope.</p>
 </div>
 <div class="section" id="scope-and-open">
 <h2><span class="section-number">5.2.2. </span>Scope and Open<a class="headerlink" href="#scope-and-open" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/GjlKfsY2nY8" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>After a module <code class="docutils literal notranslate"><span class="pre">M</span></code> has been defined, you can access the names within it using
 the dot operator. For example:</p>
 <div class="cell docutils container">
@@ -1105,6 +1129,7 @@ of opening and simply to be explicit about which module we are using where:</p>
 </div>
 <div class="section" id="module-type-definitions">
 <h2><span class="section-number">5.2.3. </span>Module Type Definitions<a class="headerlink" href="#module-type-definitions" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/4Uew8GEegyg" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We’ve already seen that OCaml will infer a signature as the type of a module.
 Let’s now see how to write those modules types ourselves. As an example, here is
 a module type for our list-based stacks:</p>
@@ -1416,6 +1441,7 @@ be lengthy.</p>
 </div>
 <div class="section" id="module-type-semantics">
 <h2><span class="section-number">5.2.4. </span>Module Type Semantics<a class="headerlink" href="#module-type-semantics" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/VprvFk7KKWk" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The key question we have to answer is: what does a type annotation mean for
 modules? That is, what does it mean when we write the <code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">T</span></code> in
 <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">M</span> <span class="pre">:</span> <span class="pre">T</span> <span class="pre">=</span> <span class="pre">...</span></code>?</p>
@@ -1756,8 +1782,8 @@ visible to code outside of <code class="docutils literal notranslate"><span clas
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "cs3110/textbook",
+            ref: "jupyter",
         },
         codeMirrorConfig: {
             theme: "abcdef",

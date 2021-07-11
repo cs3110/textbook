@@ -15,6 +15,8 @@ kernelspec:
 
 # Modules
 
+{{ video_embed | replace("%%VID%%", "hIUSrPxCdHc")}}
+
 We begin with a couple of examples of the OCaml module system before diving
 into the details.
 
@@ -76,6 +78,8 @@ a function." But if we broaden our sight a little, we could allow that the type
 of a function is part of its specification. So it's at least a related sense of
 the word.
 ```
+
+{{ video_embed | replace("%%VID%%", "8Q-2b7iGvXE")}}
 
 The definitions in a module are usually more closely related than those in
 `MyModule`. Often a module will implement some data structure. For example, here
@@ -181,6 +185,8 @@ let s2 = ListStack.(empty |> push 3)
 
 
 ## Module Definitions
+
+{{ video_embed | replace("%%VID%%", "EUJXBpra0oY")}}
 
 The `module` definition keyword is much like the `let` definition keyword that
 we learned before. (The OCaml designers hypothetically could have chosen to use
@@ -310,6 +316,8 @@ There's more to module types than that, though. Let's put that off for a moment
 to first talk about scope.
 
 ## Scope and Open
+
+{{ video_embed | replace("%%VID%%", "GjlKfsY2nY8")}}
 
 After a module `M` has been defined, you can access the names within it using
 the dot operator. For example:
@@ -444,6 +452,8 @@ end
 ```
 
 ## Module Type Definitions
+
+{{ video_embed | replace("%%VID%%", "4Uew8GEegyg")}}
 
 We've already seen that OCaml will infer a signature as the type of a module.
 Let's now see how to write those modules types ourselves. As an example, here is
@@ -681,6 +691,8 @@ discussion.  We do so, next, in its own section, because the discussion will
 be lengthy.
 
 ## Module Type Semantics
+
+{{ video_embed | replace("%%VID%%", "VprvFk7KKWk")}}
 
 The key question we have to answer is: what does a type annotation mean for
 modules? That is, what does it mean when we write the `: T` in

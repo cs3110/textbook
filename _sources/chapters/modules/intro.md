@@ -1,5 +1,7 @@
 # Modular Programming
 
+{{ video_embed | replace("%%VID%%", "PRvrkOy1ihY")}}
+
 When a program is small enough, we can keep all of the details of the program in
 our heads at once. But real-world applications can be many order of magnitude
 larger than those we write in college classes. They are simply too large and

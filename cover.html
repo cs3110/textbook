@@ -49,9 +49,9 @@
     <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -108,18 +108,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="chapters/intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="chapters/intro/3110.html">
-     1.4. A Brief History of CS 3110
+     1.5. A Brief History of CS 3110
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="chapters/intro/summary.html">
-     1.5. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="chapters/intro/exercises.html">
-     1.6. Exercises
+     1.6. Summary
     </a>
    </li>
   </ul>
@@ -470,32 +470,20 @@
                 
   <div class="section" id="ocaml-programming-correct-efficient-beautiful">
 <h1>OCaml Programming: Correct + Efficient + Beautiful<a class="headerlink" href="#ocaml-programming-correct-efficient-beautiful" title="Permalink to this headline">¶</a></h1>
-<p><strong>Fall 2021 Edition</strong></p>
 <p>A textbook on functional programming and data structures in OCaml, with an
-emphasis on semantics and software engineering.</p>
-<p>Based on courses taught by Michael R. Clarkson, Robert L. Constable,
-Nate Foster, Michael D. George, Dan Grossman, Daniel P. Huttenlocher,
-Dexter Kozen, Greg Morrisett, Andrew C. Myers, Radu Rugina, and Ramin
-Zabih.</p>
-<p>This work is based on over 20 years worth of course notes and intellectual
-contributions by the authors named above; teasing out who contributed
-what is, by now, not an easy task. The primary compiler and author of
-this work in its form as a unified textbook is Michael R. Clarkson.</p>
-<p>For the most recent version of this work, see the most recent
-<a class="reference external" href="https://www.cs.cornell.edu/courses/cs3110">CS 3110 course website</a>.</p>
-<p>Solutions to the exercises at the end of each chapter are available. Cornell
-students will have access to them as part of the course. Instructors at other
-institutions are welcome to contact Michael Clarkson for access.</p>
-<!-- The link in the next paragraph apparently needs to be in a raw block.
-Otherwise, Sphinx notices that the target doesn't actually exist at
-build time, and issues an error about a bad cross-reference.-->
-<p>
-An experimental <a href="ocaml_programming.pdf">PDF version of this book</a> is
-available. It does not contain the embedded videos that the HTML version has. It
-might also have typesetting errors.
-</p><p>The title of this book was previously “Functional Programming in OCaml”.</p>
-<p>Copyright 2021 Michael R. Clarkson.
-Released under the <a rel="license"
+emphasis on semantics and software engineering. This book is the textbook for CS
+3110 Data Structures and Functional Programming at Cornell University. A past
+title of this book was “Functional Programming in OCaml”.</p>
+<p><strong>Fall 2021 Edition.</strong> For the most recent version of this work, see the most
+recent <a class="reference external" href="https://www.cs.cornell.edu/courses/cs3110">CS 3110 course website</a>.</p>
+<p><strong>Authors.</strong> This book is based on courses taught by Michael R. Clarkson, Robert
+L. Constable, Nate Foster, Michael D. George, Dan Grossman, Daniel P.
+Huttenlocher, Dexter Kozen, Greg Morrisett, Andrew C. Myers, Radu Rugina, and
+Ramin Zabih. Together they have created over 20 years worth of course notes and
+intellectual contributions. Teasing out who contributed what is, by now, not an
+easy task. The primary compiler and author of this work in its form as a unified
+textbook is Michael R. Clarkson.</p>
+<p><strong>Copyright 2021 Michael R. Clarkson.</strong> Released under the <a rel="license"
 href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons
 Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
@@ -509,8 +497,8 @@ src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "cs3110/textbook",
+            ref: "jupyter",
         },
         codeMirrorConfig: {
             theme: "abcdef",
