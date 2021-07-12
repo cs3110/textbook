@@ -255,6 +255,8 @@ dispatch.
 
 ## Include vs. Open
 
+{{ video_embed | replace("%%VID%%", "P1-gLiagAK4")}}
+
 The `include` and `open` statements are quite similar, but they have
 a subtly different effect on a structure.  Consider this code:
 

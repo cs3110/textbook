@@ -15,6 +15,8 @@ kernelspec:
 
 # Functors
 
+{{ video_embed | replace("%%VID%%", "CLi5RmgQ9Mg")}}
+
 The problem we were having in the previous section was that we wanted to add
 code to two different modules, but that code needed to be parameterized on the
 details of the module to which it was being added. It's that kind of
@@ -278,7 +280,9 @@ module FX = F (X)
 module FZ = F (Z)
 ```
 
-## The `Map` module
+## The `Map` Module
+
+{{ video_embed | replace("%%VID%%", "sCbUwQvNYJA")}}
 
 The standard library's Map module implements a dictionary data structure using
 balanced binary trees. It uses functors in an important way. In this section, we
