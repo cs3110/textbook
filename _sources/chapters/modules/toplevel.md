@@ -37,16 +37,8 @@ module M = struct
 end
 ```
 
-```{code-cell} ocaml
-:tags: ["remove-cell"]
-module Mods = struct
-  let b = "bigred"
-  let inc x = x + 1
-  module M = struct
-    let y = 42
-  end
-end
-```
+Note that there is no `module Mods = struct ... end` around that. The code is at
+the topmost level of the file, as it were.
 
 Then suppose you type `ocamlbuild mods.byte` to compile it. Inside the `_build`
 directory you will now find the files that `ocamlbuild` produced. One of them is
@@ -65,7 +57,19 @@ It is not part of the prompt.
 The first directive tells utop to add the `_build` directory to the path in
 which it looks for compiled (and source) files. The second directive loads the
 bytecode found in `mods.cmo`, thus making a module named `Mods` available to be
-used. Both of these expressions will therefore evaluate successfully:
+used.  It exactly as if you had entered this code:
+
+```{code-cell} ocaml
+module Mods = struct
+  let b = "bigred"
+  let inc x = x + 1
+  module M = struct
+    let y = 42
+  end
+end
+```
+
+Both of these expressions will therefore evaluate successfully:
 
 ```{code-cell} ocaml
 Mods.b;;

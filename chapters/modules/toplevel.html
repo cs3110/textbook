@@ -546,6 +546,8 @@ code in it:</p>
 <span class="k">end</span>
 </pre></div>
 </div>
+<p>Note that there is no <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">Mods</span> <span class="pre">=</span> <span class="pre">struct</span> <span class="pre">...</span> <span class="pre">end</span></code> around that. The code is at
+the topmost level of the file, as it were.</p>
 <p>Then suppose you type <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span> <span class="pre">mods.byte</span></code> to compile it. Inside the <code class="docutils literal notranslate"><span class="pre">_build</span></code>
 directory you will now find the files that <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span></code> produced. One of them is
 <code class="docutils literal notranslate"><span class="pre">mods.cmo</span></code>: this is a <u>c</u>ompiled <u>m</u>odule <u>o</u>bject file, aka
@@ -560,7 +562,27 @@ It is not part of the prompt.</p>
 <p>The first directive tells utop to add the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory to the path in
 which it looks for compiled (and source) files. The second directive loads the
 bytecode found in <code class="docutils literal notranslate"><span class="pre">mods.cmo</span></code>, thus making a module named <code class="docutils literal notranslate"><span class="pre">Mods</span></code> available to be
-used. Both of these expressions will therefore evaluate successfully:</p>
+used.  It exactly as if you had entered this code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Mods</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;bigred&quot;</span>
+  <span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
+    <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">42</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Mods :
+  sig val b : string val inc : int -&gt; int module M : sig val y : int end end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both of these expressions will therefore evaluate successfully:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Mods</span><span class="p">.</span><span class="n">b</span><span class="o">;;</span>
