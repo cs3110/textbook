@@ -65,19 +65,19 @@ understanding.  Look for the icon near the top right of the page that looks
 like a rocket ship.  In the drop-down menu you'll find two ways to interact
 with the code:
 
-- *Binder* will launch the site [mybinder.org], which is a free cloud-based
-  service for "reproducible, interactive, sharable environments for science at
-  scale." All the computation happens in their cloud servers, but the UI is
-  provided through your browser. It will take a little while for the textbook
-  page to open in Binder. Once it does, you can edit and run the code in a
-  [*Jupyter notebook*][jupyter]. Jupyter notebooks are documents (usually ending
-  in the `.ipynb` extension) that can be viewed in web browsers and used to
-  write narrative content as well as code. They became popular in data science
-  communities (especially Python, R, and Julia) as a way of sharing analyses.
-  Now many languages can run in Jupyter notebooks, including OCaml. Code and
-  text are written in *cells* in a Jupyter notebook. Look at the "Cell" menu in
-  it for commands to run cells. Note that Shift-Enter is usually a hotkey for
-  running the cell that has focus.
+- *Binder* will launch the site [mybinder.org](https://mybinder.org), which is a
+  free cloud-based service for "reproducible, interactive, sharable environments
+  for science at scale." All the computation happens in their cloud servers, but
+  the UI is provided through your browser. It will take a little while for the
+  textbook page to open in Binder. Once it does, you can edit and run the code
+  in a [*Jupyter notebook*][jupyter]. Jupyter notebooks are documents (usually
+  ending in the `.ipynb` extension) that can be viewed in web browsers and used
+  to write narrative content as well as code. They became popular in data
+  science communities (especially Python, R, and Julia) as a way of sharing
+  analyses. Now many languages can run in Jupyter notebooks, including OCaml.
+  Code and text are written in *cells* in a Jupyter notebook. Look at the "Cell"
+  menu in it for commands to run cells. Note that Shift-Enter is usually a
+  hotkey for running the cell that has focus.
 
 - *Live code* will actually do about the same thing, except that instead of
   leaving the current textbook page and taking you off to Binder, it will modify
@@ -86,7 +86,8 @@ with the code:
   for kernel". After the connection has been made, you can edit all the code
   cells on the page and re-run them.
 
-Try interacting with the cell above now to make it print `"Camels are bae."`
+Try interacting with the cell above now to make it print a string of your choice.
+How about: `"Camels are bae."`
 
 ```{tip}
 When you write "real" OCaml code, this is not the interface you'll be using.
@@ -139,10 +140,8 @@ us know if you think an annotation is off.
 Please do not post your solutions to the exercises anywhere, especially not in
 public repositories where they could be found by search engines. {{ solutions }}
 
-**Binder.** TODO
-
-**PDF.** An experimental <a href="ocaml_programming.pdf">full PDF version of
-this book</a> is available. It does not contain the embedded videos,
-annotations, or other features that the HTML version has. It might also have
-typesetting errors. At this time, no tablet (ePub, etc.) version is available,
-but most tablets will let you import PDFs.
+**PDF.** A <a href="ocaml_programming.pdf">full PDF version of this book</a> is
+available. It does not contain the embedded videos, annotations, or other
+features that the HTML version has. It might also have typesetting errors. At
+this time, no tablet (ePub, etc.) version is available, but most tablets will
+let you import PDFs.
