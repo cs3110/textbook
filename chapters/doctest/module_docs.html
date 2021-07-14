@@ -1,0 +1,1045 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.3. Module Documentation &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="6.2. Function Documentation" href="function_docs.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.5. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.6. Summary
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   6. Documentation and Testing
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.3. Module Documentation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/doctest/module_docs.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/doctest/module_docs.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/doctest/module_docs.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/doctest/module_docs.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/doctest/module_docs.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#abstraction-functions">
+   6.3.1. Abstraction Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-abstraction-function">
+   6.3.2. Implementing the Abstraction Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commutative-diagrams">
+   6.3.3. Commutative Diagrams
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#representation-invariants">
+   6.3.4. Representation Invariants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-representation-invariant">
+   6.3.5. Implementing the Representation Invariant
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="module-documentation">
+<h1><span class="section-number">6.3. </span>Module Documentation<a class="headerlink" href="#module-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/4OTspWNefn4" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>The specification of functions provided by a module can be found in its
+interface, which is what clients will consult. But what about <em>internal</em>
+documentation, which is relevant to those who implement and maintain a module?
+The purpose of such implementation comments is to explain to the reader how the
+implementation correctly implements its interface.</p>
+<div class="admonition-reminder admonition">
+<p class="admonition-title">Reminder</p>
+<p>It is inappropriate to copy the specifications of functions found in the module
+interface into the module implementation. Copying runs the risk of introducing
+inconsistency as the program evolves, because programmers don’t keep the copies
+in sync. Copying code and specifications is a major source (if not <em>the</em> major
+source) of program bugs. In any case, implementers can always look at the
+interface for the specification.</p>
+</div>
+<p>Implementation comments fall into two categories. The first category arises
+because a module implementation may define new types and functions that are
+purely internal to the module. If their significance is not obvious, these types
+and functions should be documented in much the same style that we have suggested
+for documenting interfaces. Often, as the code is written, it becomes apparent
+that the new types and functions defined in the module form an internal data
+abstraction or at least a collection of functionality that makes sense as a
+module in its own right. This is a signal that the internal data abstraction
+might be moved to a separate module and manipulated only through its operations.</p>
+<p>The second category of implementation comments is associated with the use of
+<em>data abstraction</em>. Suppose we are implementing an abstraction for a set of
+items of type <code class="docutils literal notranslate"><span class="pre">'a</span></code>. The interface might look something like this:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** A set is an unordered collection in which multiplicity is ignored. *)</span>
+<span class="k">module</span> <span class="k">type</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">sig</span>
+
+  <span class="c">(** [&#39;a t] represents a set whose elements are of type [&#39;a] *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [empty] is the set containing no elements *)</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [mem x s] is whether [x] is a member of set [s] *)</span>
+  <span class="k">val</span> <span class="n">mem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+
+  <span class="c">(** [add x s] is the set containing all the elements of [s]</span>
+<span class="c">      as well as [x]. *)</span>
+  <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [rem x s] is the set containing all the elements of [s],</span>
+<span class="c">      minus [x]. *)</span>
+  <span class="k">val</span> <span class="n">rem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [size s] is the cardinality of [s] *)</span>
+  <span class="k">val</span> <span class="n">size</span><span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+
+  <span class="c">(** [union s1 s2] is the set containing all the elements that</span>
+<span class="c">      are in either [s1] or [s2]. *)</span>
+  <span class="k">val</span> <span class="n">union</span><span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [inter s1 s2] is the set containing all the elements that</span>
+<span class="c">      are in both [s1] and [s2]. *)</span>
+  <span class="k">val</span> <span class="n">inter</span><span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Set =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val mem : &#39;a -&gt; &#39;a t -&gt; bool
+    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val rem : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val size : &#39;a t -&gt; int
+    val union : &#39;a t -&gt; &#39;a t -&gt; &#39;a t
+    val inter : &#39;a t -&gt; &#39;a t -&gt; &#39;a t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>In a real signature for sets, we’d want operations such as <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">fold</span></code> as
+well, but let’s omit these for now for simplicity. There are many ways to
+implement this abstraction.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/abtrrowewaw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>As we’ve seen before, one easy way is as a list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Implementation of sets as lists with duplicates *)</span>
+<span class="k">module</span> <span class="nc">ListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">mem</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem</span>
+  <span class="k">let</span> <span class="n">add</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span>
+  <span class="k">let</span> <span class="n">rem</span> <span class="n">x</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="o">((</span> <span class="o">&lt;&gt;</span> <span class="o">)</span> <span class="n">x</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">size</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="o">(</span><span class="n">lst</span> <span class="o">|&gt;</span> <span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span> <span class="o">|&gt;</span> <span class="n">length</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">union</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span> <span class="n">lst1</span> <span class="o">@</span> <span class="n">lst2</span>
+  <span class="k">let</span> <span class="n">inter</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">h</span> <span class="o">-&gt;</span> <span class="n">mem</span> <span class="n">h</span> <span class="n">lst2</span><span class="o">)</span> <span class="n">lst1</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListSet : Set
+</pre></div>
+</div>
+</div>
+</div>
+<p>This implementation has the advantage of simplicity. For small sets that tend
+not to have duplicate elements, it will be a fine choice. Its performance will
+be poor for large sets or applications with many duplicates but for some
+applications that’s not an issue.</p>
+<p>Notice that the types of the functions do not need to be written down in the
+implementation. They aren’t needed because they’re already present in the
+signature, just like the specifications that are also in the signature don’t
+need to be replicated in the structure.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/n8irzSGGVao" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>Here is another implementation of <code class="docutils literal notranslate"><span class="pre">Set</span></code> that also uses <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">list</span></code> but requires
+the lists to contain no duplicates. This implementation is also correct (and
+also slow for large sets). Notice that we are using the same representation
+type, yet some important aspects of the implementation (<code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>,
+<code class="docutils literal notranslate"><span class="pre">union</span></code>) are quite different.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Implementation of sets as lists without duplicates *)</span>
+<span class="k">module</span> <span class="nc">UniqListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">mem</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem</span>
+  <span class="k">let</span> <span class="n">add</span> <span class="n">x</span> <span class="n">lst</span> <span class="o">=</span> <span class="k">if</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">lst</span> <span class="k">then</span> <span class="n">lst</span> <span class="k">else</span> <span class="n">x</span> <span class="o">::</span> <span class="n">lst</span>
+  <span class="k">let</span> <span class="n">rem</span> <span class="n">x</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="o">((</span> <span class="o">&lt;&gt;</span> <span class="o">)</span> <span class="n">x</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
+  <span class="k">let</span> <span class="n">union</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span> <span class="n">lst1</span> <span class="o">@</span> <span class="n">lst2</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span>
+  <span class="k">let</span> <span class="n">inter</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">h</span> <span class="o">-&gt;</span> <span class="n">mem</span> <span class="n">h</span> <span class="n">lst2</span><span class="o">)</span> <span class="n">lst1</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module UniqListSet : Set
+</pre></div>
+</div>
+</div>
+</div>
+<p>An important reason why we introduced the writing of function specifications was
+to enable <em>local reasoning</em>: once a function has a spec, we can judge whether
+the function does what it is supposed to without looking at the rest of the
+program. We can also judge whether the rest of the program works without looking
+at the code of the function. However, we cannot reason locally about the
+individual functions in the three module implementations just given. The problem
+is that we don’t have enough information about the relationship between the
+concrete type (<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">list</span></code>) and the corresponding abstract type (<code class="docutils literal notranslate"><span class="pre">set</span></code>). This
+lack of information can be addressed by adding two new kinds of comments to the
+implementation: the <em>abstraction function</em> and the <em>representation invariant</em>
+for the abstract data type. We turn to discussion of those, next.</p>
+<div class="section" id="abstraction-functions">
+<h2><span class="section-number">6.3.1. </span>Abstraction Functions<a class="headerlink" href="#abstraction-functions" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/ZYYa66804Q4" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>The client of any <code class="docutils literal notranslate"><span class="pre">Set</span></code> implementation should not be able to distinguish it from
+any other implementation based on its functional behavior. As far as the client
+can tell, the operations act like operations on the mathematical ideal of a set.
+In the first implementation, the lists <code class="docutils literal notranslate"><span class="pre">[3;</span> <span class="pre">1]</span></code>, <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">3]</span></code>, and <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">1;</span> <span class="pre">3]</span></code> are
+distinguishable to the implementer, but not to the client. To the client, they
+all represent the abstract set {1, 3} and cannot be distinguished by any of the
+operations of the <code class="docutils literal notranslate"><span class="pre">Set</span></code> signature. From the point of view of the client, the
+abstract data type describes a set of abstract values and associated operations.
+The implementer knows that these abstract values are represented by concrete
+values that may contain additional information invisible from the client’s view.
+This loss of information is described by the <em>abstraction function</em>, which is a
+mapping from the space of concrete values to the abstract space. The abstraction
+function for the implementation <code class="docutils literal notranslate"><span class="pre">ListSet</span></code> looks like this:</p>
+<p><img alt="af-listset" src="../../_images/abst-fcn2.png" /></p>
+<p>Notice that several concrete values may map to a single abstract value;
+that is, the abstraction function may be <em>many-to-one</em>. It is also
+possible that some concrete values do not map to any abstract value; the
+abstraction function may be <em>partial</em>. That is not the case with <code class="docutils literal notranslate"><span class="pre">ListSet</span></code>,
+but it might be with other implementations.</p>
+<p>The abstraction function is important for deciding whether an
+implementation is correct, therefore it belongs as a comment in the
+implementation of any abstract data type. For example, in the <code class="docutils literal notranslate"><span class="pre">ListSet</span></code>
+module, we could document the abstraction function as follows:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** Abstraction function: The list [[a1; ...; an]] represents the</span>
+<span class="c">      set [{b1, ..., bm}], where [[b1; ...; bm]] is the same list as</span>
+<span class="c">      [[a1; ...; an]] but with any duplicates removed. The empty list</span>
+<span class="c">      [[]] represents the empty set [{}]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>This comment explicitly points out that the list may contain duplicates, which
+is helpful as a reinforcement of the first sentence. Similarly, the case of an
+empty list is mentioned explicitly for clarity, although some might consider it
+to be redundant.</p>
+<p>The abstraction function for the second implementation, which does not allow
+duplicates, hints at an important difference. We can write the abstraction
+function for this second representation a bit more simply because we know that
+the elements are distinct.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">UniqListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** Abstraction function: The list [[a1; ...; an]] represents the set</span>
+<span class="c">      [{a1, ..., an}]. The empty list [[]] represents the empty set [{}]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-the-abstraction-function">
+<h2><span class="section-number">6.3.2. </span>Implementing the Abstraction Function<a class="headerlink" href="#implementing-the-abstraction-function" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/ebcnwXuWPI0" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>What would it mean to implement the abstraction function for <code class="docutils literal notranslate"><span class="pre">ListSet</span></code>? We’d
+want a function that took an input of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">ListSet.t</span></code>. But what should its
+output type be? The abstract values are mathematical sets, not OCaml types. If
+we did hypothetically have a type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">set</span></code> that our abstraction function could
+return, there would have been little point in developing <code class="docutils literal notranslate"><span class="pre">ListSet</span></code>; we could
+have just used that <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">set</span></code> type without doing any work of our own.</p>
+<p>On the other hand, we might implement something close to the abstraction
+function by converting an input of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">ListSet.t</span></code> to a built-in OCaml type
+or standard library type:</p>
+<ul class="simple">
+<li><p>We could convert to a <code class="docutils literal notranslate"><span class="pre">string</span></code>. That would have the advantage of being easily
+readable by humans in the toplevel or in debug output. Java programmers use
+<code class="docutils literal notranslate"><span class="pre">toString()</span></code> for similar purposes.</p></li>
+<li><p>We could convert to <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">list</span></code>. (Actually there’s little conversion to be
+done). For data collections this is a convenient choice, since lists can at
+least approximately represent many data structures: stacks, queues,
+dictionaries, sets, heaps, etc.</p></li>
+</ul>
+<p>The following functions implement those ideas.  Note that <code class="docutils literal notranslate"><span class="pre">to_string</span></code> has
+to take an additional argument <code class="docutils literal notranslate"><span class="pre">string_of_val</span></code> from the client to convert
+<code class="docutils literal notranslate"><span class="pre">'a</span></code> to <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="o">...</span>
+
+  <span class="k">let</span> <span class="n">uniq</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span> <span class="n">lst</span>
+
+  <span class="k">let</span> <span class="n">to_string</span> <span class="n">string_of_val</span> <span class="n">lst</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">interior</span> <span class="o">=</span>
+      <span class="n">lst</span> <span class="o">|&gt;</span> <span class="n">uniq</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">string_of_val</span> <span class="o">|&gt;</span> <span class="nn">String</span><span class="p">.</span><span class="n">concat</span> <span class="s2">&quot;, &quot;</span>
+    <span class="k">in</span>
+    <span class="s2">&quot;{&quot;</span> <span class="o">^</span> <span class="n">interior</span> <span class="o">^</span> <span class="s2">&quot;}&quot;</span>
+
+  <span class="k">let</span> <span class="n">to_list</span> <span class="o">=</span> <span class="n">uniq</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Installing a custom formatter, as discussed in the
+<a class="reference internal" href="../modules/encapsulation.html"><span class="doc std std-doc">section on encapsulation</span></a>, could also be understood as implementing the
+abstraction function. But in that case it’s usable only by humans at the
+toplevel rather than other code, programatically.</p>
+</div>
+<div class="section" id="commutative-diagrams">
+<h2><span class="section-number">6.3.3. </span>Commutative Diagrams<a class="headerlink" href="#commutative-diagrams" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/PKAgq97NBdg" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>Using the abstraction function, we can now talk about what it means for an
+implementation of an abstraction to be <em>correct</em>. It is correct exactly when
+every operation that takes place in the concrete space makes sense when mapped
+by the abstraction function into the abstract space. This can be visualized as a
+<em>commutative diagram</em>:</p>
+<p><img alt="commutative-diagram" src="../../_images/commutation.png" /></p>
+<p>A commutative diagram means that if we take the two paths around the diagram, we
+have to get to the same place. Suppose that we start from a concrete value and
+apply the actual implementation of some operation to it to obtain a new concrete
+value or values. When viewed abstractly, a concrete result should be an abstract
+value that is a possible result of applying the function <em>as described in its
+specification</em> to the abstract view of the actual inputs. For example, consider
+the union function from the implementation of sets as lists with repeated
+elements covered last time. When this function is applied to the concrete pair
+[1; 3], [2; 2], it corresponds to the lower-left corner of the diagram. The
+result of this operation is the list [2; 2; 1; 3], whose corresponding abstract
+value is the list {1, 2, 3}. Note that if we apply the abstraction function AF
+to the input lists [1; 3] and [2; 2], we have the sets {1, 3} and {2}. The
+commutative diagram requires that in this instance the union of {1, 3} and {2}
+is {1, 2, 3}, which is of course true.</p>
+</div>
+<div class="section" id="representation-invariants">
+<h2><span class="section-number">6.3.4. </span>Representation Invariants<a class="headerlink" href="#representation-invariants" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/mEtR4YGMRPY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>The abstraction function explains how information within the module is viewed
+abstractly by module clients. But that is not all we need to know to ensure
+correctness of the implementation. Consider the <code class="docutils literal notranslate"><span class="pre">size</span></code> function in each of the
+two implementations. For <code class="docutils literal notranslate"><span class="pre">ListSet</span></code>, which allows duplicates, we need to be sure
+not to double-count duplicate elements:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">size</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="o">(</span><span class="n">lst</span> <span class="o">|&gt;</span> <span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span> <span class="o">|&gt;</span> <span class="n">length</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>But for <code class="docutils literal notranslate"><span class="pre">UniqListSet</span></code>, in which the lists have no duplicates, the size is just
+the length of the list:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
+</pre></div>
+</div>
+<p>How do wo know that latter implementation is correct? That is, how do we know
+that “lists have no duplicates”? It’s hinted at by the name of the module, and
+it can be deduced from the implementation of <code class="docutils literal notranslate"><span class="pre">add</span></code>, but we’ve never carefully
+documented it. Right now, the code does not explicitly say that there are no
+duplicates.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">UniqListSet</span></code> representation, not all concrete data items represent
+abstract data items. That is, the <em>domain</em> of the abstraction function does not
+include all possible lists. There are some lists, such as <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">1;</span> <span class="pre">2]</span></code>, that
+contain duplicates and must never occur in the representation of a set in the
+<code class="docutils literal notranslate"><span class="pre">UniqListSet</span></code> implementation; the abstraction function is undefined on such
+lists. We need to include a second piece of information, the <em>representation
+invariant</em> (or <em>rep invariant</em>, or <em>RI</em>), to determine which concrete data items
+are valid representations of abstract data items. For sets represented as lists
+without duplicates, we write this as part of the comment together with the
+abstraction function:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">UniqListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** Abstraction function: the list [[a1; ...; an]] represents the set</span>
+<span class="c">      [{a1, ..., an}].  The empty list [[]] represents the empty set [{}].</span>
+<span class="c">      Representation invariant: the list contains no duplicates. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>If we think about this issue in terms of the commutative diagram, we see that
+there is a crucial property that is necessary to ensure correctness: namely,
+that all concrete operations preserve the representation invariant. If this
+constraint is broken, functions such as <code class="docutils literal notranslate"><span class="pre">size</span></code> will not return the correct
+answer. The relationship between the representation invariant and the
+abstraction function is depicted in this figure:</p>
+<p><img alt="af-and-ri" src="../../_images/ri-af.png" /></p>
+<p>We can use the rep invariant and abstraction function to judge whether the
+implementation of a single operation is correct <em>in isolation from the rest of
+the functions in the module</em>. A function is correct if these conditions:</p>
+<ol class="simple">
+<li><p>The function’s preconditions hold of the argument values.</p></li>
+<li><p>The concrete representations of the arguments satisfy the rep invariant.</p></li>
+</ol>
+<p>imply these conditions:</p>
+<ol class="simple">
+<li><p>All new representation values created satisfy the rep invariant.</p></li>
+<li><p>The commutative diagram holds.</p></li>
+</ol>
+<p>The rep invariant makes it easier to write code that is provably correct,
+because it means that we don’t have to write code that works for all possible
+incoming concrete representations—only those that satisfy the rep
+invariant. For example, in the implementation <code class="docutils literal notranslate"><span class="pre">UniqListSet</span></code>, we do not care what
+the code does on lists that contain duplicate elements. However, we do need to
+be concerned that on return, we only produce values that satisfy the rep
+invariant. As suggested in the figure above, if the rep invariant holds for the
+input values, then it should hold for the output values, which is why we call it
+an <em>invariant</em>.</p>
+</div>
+<div class="section" id="implementing-the-representation-invariant">
+<h2><span class="section-number">6.3.5. </span>Implementing the Representation Invariant<a class="headerlink" href="#implementing-the-representation-invariant" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/4bfh_aONcRc" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>When implementing a complex abstract data type, it is often helpful to write an
+internal function that can be used to check that the rep invariant holds of a
+given data item. By convention we will call this function <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code>. If the
+module accepts values of the abstract type that are created outside the module,
+say by exposing the implementation of the type in the signature, then <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code>
+should be applied to these to ensure the representation invariant is satisfied.
+In addition, if the implementation creates any new values of the abstract type,
+<code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> can be applied to them as a sanity check. With this approach, bugs are
+caught early, and a bug in one function is less likely to create the appearance
+of a bug in another.</p>
+<p>A convenient way to write <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> is to make it an identity function that just
+returns the input value if the rep invariant holds and raises an exception if it
+fails.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* Checks whether x satisfies the representation invariant. *)</span>
+<span class="k">let</span> <span class="n">rep_ok</span> <span class="n">x</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="c">(* check the RI holds of x *)</span> <span class="k">then</span> <span class="n">x</span> <span class="k">else</span> <span class="n">failwith</span> <span class="s2">&quot;RI violated&quot;</span>
+</pre></div>
+</div>
+<p>Here is an implementation of <code class="docutils literal notranslate"><span class="pre">Set</span></code> that uses the same data representation as
+<code class="docutils literal notranslate"><span class="pre">UniqListSet</span></code>, but includes copious <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> checks. Note that <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> is
+applied to all input sets and to any set that is ever created. This ensures that
+if a bad set representation is created, it will be detected immediately. In case
+we somehow missed a check on creation, we also apply <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> to incoming set
+arguments. If there is a bug, these checks will help us quickly figure out where
+the rep invariant is being broken.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Implementation of sets as lists without duplicates. *)</span>
+<span class="k">module</span> <span class="nc">UniqListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
+
+  <span class="c">(** Abstraction function: The list [[a1; ...; an]] represents the</span>
+<span class="c">      set {a1, ..., an}. The empty list [[]] represents the empty set [{}].</span>
+<span class="c">      Representation invariant: the list contains no duplicates. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+
+  <span class="k">let</span> <span class="n">rep_ok</span> <span class="n">lst</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">u</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span> <span class="n">lst</span> <span class="k">in</span>
+    <span class="k">match</span> <span class="nn">List</span><span class="p">.</span><span class="n">compare_lengths</span> <span class="n">lst</span> <span class="n">u</span> <span class="k">with</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">lst</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;RI&quot;</span>
+
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+
+  <span class="k">let</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem</span> <span class="n">x</span> <span class="o">(</span><span class="n">rep_ok</span> <span class="n">lst</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">add</span> <span class="n">x</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">rep_ok</span> <span class="o">(</span><span class="k">if</span> <span class="n">mem</span> <span class="n">x</span> <span class="o">(</span><span class="n">rep_ok</span> <span class="n">lst</span><span class="o">)</span> <span class="k">then</span> <span class="n">lst</span> <span class="k">else</span> <span class="n">x</span> <span class="o">::</span> <span class="n">lst</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">rem</span> <span class="n">x</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">rep_ok</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="o">((</span> <span class="o">&lt;&gt;</span> <span class="o">)</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">rep_ok</span> <span class="n">lst</span><span class="o">))</span>
+
+  <span class="k">let</span> <span class="n">size</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span> <span class="o">(</span><span class="n">rep_ok</span> <span class="n">lst</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">union</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span>
+    <span class="n">rep_ok</span>
+      <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span>
+         <span class="o">(</span><span class="k">fun</span> <span class="n">u</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">lst2</span> <span class="k">then</span> <span class="n">u</span> <span class="k">else</span> <span class="n">x</span> <span class="o">::</span> <span class="n">u</span><span class="o">)</span>
+         <span class="o">(</span><span class="n">rep_ok</span> <span class="n">lst2</span><span class="o">)</span> <span class="o">(</span><span class="n">rep_ok</span> <span class="n">lst1</span><span class="o">))</span>
+
+  <span class="k">let</span> <span class="n">inter</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span> <span class="n">rep_ok</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">h</span> <span class="o">-&gt;</span> <span class="n">mem</span> <span class="n">h</span> <span class="n">lst2</span><span class="o">)</span> <span class="o">(</span><span class="n">rep_ok</span> <span class="n">lst1</span><span class="o">))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module UniqListSet : Set
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> on every argument can be too expensive for the production
+version of a program. The <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> above, for example, requires linearithmic
+time, which destroys the efficiency of all the previously constant time or
+linear time operations. For production code, it may be more appropriate to use a
+version of <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> that only checks the parts of the rep invariant that are
+cheap to check. When there is a requirement that there be no run-time cost,
+<code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> can be changed to an identity function (or macro) so the compiler
+optimizes away the calls to it. However, it is a good idea to keep around the
+full code of <code class="docutils literal notranslate"><span class="pre">rep_ok</span></code> so it can be easily reinstated during future debugging:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">rep_ok</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span>
+
+<span class="k">let</span> <span class="n">rep_ok_expensive</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">u</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span> <span class="n">lst</span> <span class="k">in</span>
+  <span class="k">match</span> <span class="nn">List</span><span class="p">.</span><span class="n">compare_lengths</span> <span class="n">lst</span> <span class="n">u</span> <span class="k">with</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">lst</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;RI&quot;</span>
+</pre></div>
+</div>
+<p>Some languages provide support for <em>conditional compilation</em>, which provides
+some kind of support for compiling some parts of the codebase but not others.
+The OCaml compiler supports a flag <code class="docutils literal notranslate"><span class="pre">noassert</span></code> that disables assertion checking.
+So you could implement rep invariant checking with <code class="docutils literal notranslate"><span class="pre">assert</span></code>, and turn it off
+with <code class="docutils literal notranslate"><span class="pre">noassert</span></code>. The problem with that is that some portions of your codebase
+might <em>require</em> assertion checking to be turned on to work correctly.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/doctest"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="function_docs.html" title="previous page"><span class="section-number">6.2. </span>Function Documentation</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
