@@ -1,0 +1,971 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.5. Testing &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6.6. Debugging" href="debugging.html" />
+    <link rel="prev" title="6.4. Validation" href="validation.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.5. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.6. Summary
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   6. Documentation and Testing
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="validation.html">
+     6.4. Validation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.5. Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="debugging.html">
+     6.6. Debugging
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/doctest/testing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/doctest/testing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/doctest/testing.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/doctest/testing.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/doctest/testing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#black-box-testing">
+   6.5.1. Black-box Testing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glass-box-testing">
+   6.5.2. Glass-box Testing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bisect">
+   6.5.3. Bisect
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bisect-tutorial">
+   6.5.4. Bisect Tutorial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-data-abstractions">
+   6.5.5. Testing Data Abstractions
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="testing">
+<h1><span class="section-number">6.5. </span>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<p>We would like to know that a program works on all possible inputs. The problem
+with testing is that it is usually infeasible to try all the possible inputs.
+For example, suppose that we are implementing a module that provides an abstract
+data type for rational numbers. One of its operations might be an addition
+function <code class="docutils literal notranslate"><span class="pre">plus</span></code>, e.g.:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Rational</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(** AF: [(p, q)] represents the rational number [p/q]</span>
+<span class="c">      RI: [q] is not 0. *)</span>
+  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">int</span>
+
+  <span class="c">(** [create p q] is the rational number [p/q].</span>
+<span class="c">      Raises: [Invalid_argument &quot;0&quot;] if [q] is 0. *)</span>
+  <span class="k">val</span> <span class="n">create</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">t</span>
+
+  <span class="c">(** [plus r1 r2] is [r1 + r2] *)</span>
+  <span class="k">val</span> <span class="n">plus</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Rational =
+  sig
+    type t = int * int
+    val create : int -&gt; int -&gt; t
+    val plus : t -&gt; t -&gt; t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>What would it take to exhaustively test just this one function? We’d want to try
+all possible rationals as both the <code class="docutils literal notranslate"><span class="pre">r1</span></code> and <code class="docutils literal notranslate"><span class="pre">r2</span></code> arguments. A rational is formed
+from two ints, and there are <span class="math notranslate nohighlight">\(2^{63}\)</span> ints on a modern OCaml implementation.
+Therefore there are approximately <span class="math notranslate nohighlight">\((2^{63})^4 = 2^{252}\)</span> possible inputs to the
+<code class="docutils literal notranslate"><span class="pre">plus</span></code> function. Even if we test one addition every nanosecond, it will take
+about <span class="math notranslate nohighlight">\(10^{59}\)</span> years to finish testing this one function.</p>
+<p>Clearly we can’t test software exhaustively. But that doesn’t mean we should
+give up on testing. It just means that we need to think carefully about what our
+test cases should be so that they are as effective as possible at convincing us
+that the code works.</p>
+<p>Consider our <code class="docutils literal notranslate"><span class="pre">create</span></code> function, above. It takes in two integers <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code> as
+arguments. How should we go about selecting a relatively small number of test
+cases that will convince us that the function works correctly on all possible
+inputs? We can visualize the space of all possible inputs as a large square:</p>
+<p><img alt="" src="../../_images/create_inputs.gif" /></p>
+<p>There are about <span class="math notranslate nohighlight">\(2^{126}\)</span> points in this square, so we can’t afford to test them
+all. And testing them all is going to mostly be a waste of time—most of
+the possible inputs provide nothing new. We need a way to find a set of points
+in this space to test that are interesting and will give a good sense of the
+behavior of the program across the whole space.</p>
+<p>Input spaces generally comprise a number of subsets in which the behavior of the
+code is similar in some essential fashion across the entire subset. We don’t get
+any additional information by testing more than one input from each such subset.</p>
+<p>If we test all the interesting regions of the input space, we have achieved good
+<em>coverage</em>. We want tests that in some useful sense cover the space of possible
+program inputs.</p>
+<p>Two good ways of achieving coverage are <em>black-box testing</em> and <em>glass-box
+testing</em>. We discuss those, next.</p>
+<div class="section" id="black-box-testing">
+<h2><span class="section-number">6.5.1. </span>Black-box Testing<a class="headerlink" href="#black-box-testing" title="Permalink to this headline">¶</a></h2>
+<p>In selecting our test cases for good coverage, we might want to consider both
+the specification and the implementation of the program or module being tested.
+It turns out that we can often do a pretty good job of picking test cases by
+just looking at the specification and ignoring the implementation. This is known
+as <strong>black-box testing</strong>. The idea is that we think of the code as a black box
+about which all we can see is its surface: its specification. We pick test cases
+by looking at how the specification implicitly introduces boundaries that divide
+the space of possible inputs into different regions.</p>
+<p>When writing black-box test cases, we ask ourselves what set of test cases that
+will produce distinctive behavior as predicted by the specification. It is
+important to try out both <em>typical inputs</em> and inputs that are <em>boundary cases</em>
+aka <em>corner cases</em> or <em>edge cases</em>. A common error is to only test typical
+inputs, with the result that the program usually works but fails in less
+frequent situations. It’s also important to identify ways in which the
+specification creates classes of inputs that should elicit similar behavior from
+the function, and to test on those <em>paths through the specification</em>. Here are
+some examples.</p>
+<p><strong>Example 1.</strong></p>
+<p>Here are some ideas for how to test the <code class="docutils literal notranslate"><span class="pre">create</span></code> function:</p>
+<ul class="simple">
+<li><p>Looking at the square above, we see that it has boundaries at <code class="docutils literal notranslate"><span class="pre">min_int</span></code> and
+<code class="docutils literal notranslate"><span class="pre">max_int</span></code>. We want to try to construct rationals at the corners and along the
+sides of the square, e.g. <code class="docutils literal notranslate"><span class="pre">create</span> <span class="pre">min_int</span> <span class="pre">min_int</span></code>, <code class="docutils literal notranslate"><span class="pre">create</span> <span class="pre">max_int</span> <span class="pre">2</span></code>, etc.</p></li>
+<li><p>The line <code class="docutils literal notranslate"><span class="pre">p=0</span></code> is important because <code class="docutils literal notranslate"><span class="pre">p/q</span></code> is zero all along it. We should try
+<code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">q)</span></code> for various values of <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p></li>
+<li><p>We should try some typical <code class="docutils literal notranslate"><span class="pre">(p,</span> <span class="pre">q)</span></code> pairs in all four quadrants of the space.</p></li>
+<li><p>We should try both <code class="docutils literal notranslate"><span class="pre">(p,</span> <span class="pre">q)</span></code> pairs in which <code class="docutils literal notranslate"><span class="pre">q</span></code> divides evenly into <code class="docutils literal notranslate"><span class="pre">p</span></code>, and
+pairs in which <code class="docutils literal notranslate"><span class="pre">q</span></code> does not divide into <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p></li>
+<li><p>Pairs of the form <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">q)</span></code>, <code class="docutils literal notranslate"><span class="pre">(-1,</span> <span class="pre">q)</span></code>, <code class="docutils literal notranslate"><span class="pre">(p,</span> <span class="pre">1)</span></code>, <code class="docutils literal notranslate"><span class="pre">(p,</span> <span class="pre">-1)</span></code> for various <code class="docutils literal notranslate"><span class="pre">p</span></code> and
+<code class="docutils literal notranslate"><span class="pre">q</span></code> also may be interesting given the properties of rational numbers.</p></li>
+</ul>
+<p>The specification also says that the code will check that <code class="docutils literal notranslate"><span class="pre">q</span></code> is not zero. We
+should construct some test cases to ensure this checking is done as advertised.
+Trying <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0)</span></code>, <code class="docutils literal notranslate"><span class="pre">(max_int,</span> <span class="pre">0)</span></code>, <code class="docutils literal notranslate"><span class="pre">(min_int,</span> <span class="pre">0)</span></code>, <code class="docutils literal notranslate"><span class="pre">(-1,</span> <span class="pre">0)</span></code>, <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> to see that
+they all raise the specified exception would probably be an adequate set of
+black-box tests.</p>
+<p><strong>Example 2.</strong></p>
+<p>Consider a function <code class="docutils literal notranslate"><span class="pre">list_max</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Return the maximum element in the list. *)</span>
+<span class="k">val</span> <span class="n">list_max</span><span class="o">:</span> <span class="kt">int</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+</pre></div>
+</div>
+<p>What is a good set of black-box test cases? Here the input space is the set of
+all possible lists of ints. We need to try some typical inputs and also consider
+boundary cases. Based on this spec, boundary cases include the following:</p>
+<ul class="simple">
+<li><p>A list containing one element. In fact, an empty list is probably the first
+boundary case we think of. Looking at the spec above, we realize that it
+doesn’t specify what happens in the case of an empty list. Thus, thinking
+about boundary cases is also useful in identifying errors in the
+specification.</p></li>
+<li><p>A list containing two elements.</p></li>
+<li><p>A list in which the maximum is the first element. Or the last element. Or
+somewhere in the middle of the list.</p></li>
+<li><p>A list in which every element is equal.</p></li>
+<li><p>A list in which the elements are arranged in ascending sorted order, and one
+in which they are arranged in descending sorted order.</p></li>
+<li><p>A list in which the maximum element is <code class="docutils literal notranslate"><span class="pre">max_int</span></code>, and a list in which the
+maximum element is <code class="docutils literal notranslate"><span class="pre">min_int</span></code>.</p></li>
+</ul>
+<p><strong>Example 3.</strong></p>
+<p>Consider the function <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [sqrt x n] is the square root of [x] computed to an accuracy of [n]</span>
+<span class="c">    significant digits.</span>
+<span class="c">    Requires: [x &gt;= 0] and [n &gt;= 1]. *)</span>
+<span class="k">val</span> <span class="n">sqrt</span> <span class="o">:</span> <span class="kt">float</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">float</span>
+</pre></div>
+</div>
+<p>The precondition identifies two possibilities for <code class="docutils literal notranslate"><span class="pre">x</span></code> (either it is 0 or
+greater) and two possibilities for <code class="docutils literal notranslate"><span class="pre">n</span></code> (either it is 1 or greater). That leads
+to four “paths through the specification”, i.e., representative and boundary
+cases for satisfying the precondition, which we should test:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> is 0 and <code class="docutils literal notranslate"><span class="pre">n</span></code> is 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> is greater than 0 and <code class="docutils literal notranslate"><span class="pre">n</span></code> is 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> is 0 and <code class="docutils literal notranslate"><span class="pre">n</span></code> is greater than 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> is greater than 0 and <code class="docutils literal notranslate"><span class="pre">n</span></code> is greater than 1.</p></li>
+</ul>
+</div>
+<div class="section" id="glass-box-testing">
+<h2><span class="section-number">6.5.2. </span>Glass-box Testing<a class="headerlink" href="#glass-box-testing" title="Permalink to this headline">¶</a></h2>
+<p>Black-box testing is a good place to start when writing test cases, but
+ultimately it is not enough. In particular, it’s not possible to determine how
+much coverage of the implementation a black-box test suite actually
+achieves—we actually need to know the implementation source code. Testing
+based on that code is known as <em>glass box</em> or <em>white box</em> testing. Glass-box
+testing can improve on black-box by testing <em>execution paths</em> through the
+implementation code: the series of expressions that is conditionally evaluated
+based on if-expressions, match-expressions, and function applications. Test
+cases that collectively exercise all paths are said to be <em>path-complete</em>. At a
+minimum, path-completeness requires that for every line of code, and even for
+every expression in the program, there should be a test case that causes it to
+be executed. Any unexecuted code could contain a bug if has never been tested.</p>
+<p>For true path completeness we must consider all possible execution paths from
+start to finish of each function, and try to exercise every distinct path. In
+general this is infeasible, because there are too many paths. A good approach is
+to think of the set of paths as the space that we are trying to explore, and to
+identify boundary cases within this space that are worth testing.</p>
+<p>For example, consider the following implementation of a function that finds the
+maximum of its three arguments:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">max3</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">z</span> <span class="k">then</span> <span class="n">x</span> <span class="k">else</span> <span class="n">z</span>
+  <span class="k">else</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="n">z</span> <span class="k">then</span> <span class="n">y</span> <span class="k">else</span> <span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val max3 : &#39;a -&gt; &#39;a -&gt; &#39;a -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Black-box testing might lead us to invent many tests, but looking at the
+implementation reveals that there are only four paths through the code—the
+paths that return <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, or <code class="docutils literal notranslate"><span class="pre">z</span></code> (again). We could test each of those
+paths with representative inputs such as: <code class="docutils literal notranslate"><span class="pre">max3</span> <span class="pre">3</span> <span class="pre">2</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">max3</span> <span class="pre">3</span> <span class="pre">2</span> <span class="pre">4</span></code>,
+<code class="docutils literal notranslate"><span class="pre">max3</span> <span class="pre">1</span> <span class="pre">2</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">max3</span> <span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span></code>.</p>
+<p>When doing glass box testing, we should include test cases for each branch of
+each (nested) if expression, and each branch of each (nested) pattern match. If
+there are recursive functions, we should include test cases for the base cases
+as well as each recursive call. Also, we should include test cases to trigger
+each place where an exception might be raised.</p>
+<p>Of course, path complete testing does not guarantee an absence of errors. We
+still need to test against the specification, i.e., do black-box testing. For
+example, here is a broken implementation of <code class="docutils literal notranslate"><span class="pre">max3</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">max3</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>The test <code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">2</span> <span class="pre">1</span> <span class="pre">1</span></code> is path complete, but doesn’t reveal the error.</p>
+</div>
+<div class="section" id="bisect">
+<h2><span class="section-number">6.5.3. </span>Bisect<a class="headerlink" href="#bisect" title="Permalink to this headline">¶</a></h2>
+<p>Glass-box testing can be aided by <em>code-coverage tools</em> that assess how much of
+the code has been exercised by a test suite. The <a class="reference external" href="https://github.com/aantron/bisect_ppx">bisect_ppx</a> tool for OCaml
+can tell you which expressions in your program have been tested, and which have
+not. Here’s how it works:</p>
+<ul class="simple">
+<li><p>You compile your code using Bisect_ppx (henceforth, just Bisect for short) as
+part of the compilation process. It <em>instruments</em> your code, mainly by
+inserting additional expressions to be evaluated.</p></li>
+<li><p>You run your code. The instrumentation that Bisect inserted causes your
+program to do something in addition to whatever functionality you programmed
+yourself: the program will now record which expressions from the source code
+actually get executed at run time, and which do not. Also, the program will
+now produce an output file that contains that information.</p></li>
+<li><p>You run a tool called <code class="docutils literal notranslate"><span class="pre">bisect-ppx-report</span></code> on that output file. It produces
+HTML showing you which parts of your code got executed, and which did not.</p></li>
+</ul>
+<p>How does that help with computing coverage of a test suite? If you run your
+OUnit test suite, the test cases in it will cause the code in whatever functions
+they test to be executed. If you don’t have enough test cases, some code in your
+functions will never be executed. The report produced by Bisect will show you
+exactly what code that is. You can then design new glass-box test cases to cause
+that code to execute, add them to your OUnit suite, and create a new Bisect
+report to confirm that the code really did get executed.</p>
+</div>
+<div class="section" id="bisect-tutorial">
+<h2><span class="section-number">6.5.4. </span>Bisect Tutorial<a class="headerlink" href="#bisect-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>Download the file <a href="../../code/sorts.ml">sorts.ml</a>. You will
+find an implementation of insertion sort and merge sort.</p>
+<p>Create a file in the same directory called <code class="docutils literal notranslate"><span class="pre">myocamlbuild.ml</span></code>. That file name is
+actually mandatory, despite the customary use of “my” in CS demos to indicate a
+name that you could choose yourself. Put this code in it:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Ocamlbuild_plugin</span>
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">dispatch</span> <span class="nn">Bisect_ppx_plugin</span><span class="p">.</span><span class="n">dispatch</span>
+</pre></div>
+</div>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">_tags</span></code> file in the same directory, and put the following in it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">sorts</span><span class="o">.</span><span class="n">ml</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">coverage</span>
+<span class="o">&lt;</span><span class="n">test_sorts</span><span class="o">.</span><span class="p">{</span><span class="n">byte</span><span class="p">,</span><span class="n">native</span><span class="p">}</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">coverage</span>
+<span class="n">true</span><span class="p">:</span> <span class="n">package</span><span class="p">(</span><span class="n">ounit2</span><span class="p">),</span> <span class="n">package</span><span class="p">(</span><span class="n">bisect_ppx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Download the file <a href="../../code/test_sorts.ml">test_sorts.ml</a>. It has
+the skeleton for an OUnit test suite.</p>
+<p>Run</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">BISECT_COVERAGE</span><span class="o">=</span>YES ocamlbuild -use-ocamlfind -plugin-tag <span class="s1">&#39;package(bisect_ppx-ocamlbuild)&#39;</span> test_sorts.byte
+</pre></div>
+</div>
+<p>to build the test suite, and</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./test_sorts.byte
+</pre></div>
+</div>
+<p>to run it. OUnit will by default attempt to run some of the tests in parallel,
+which reduces the time it takes to run a large test suite, at the tradeoff of
+making it nondeterministic in what order the tests run.  If you want you can
+instead add a flag:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./test_sorts.byte -runner sequential
+</pre></div>
+</div>
+<p>That makes the tests run one at a time in order.</p>
+<p>Running the suite will cause a file named <code class="docutils literal notranslate"><span class="pre">bisectNNNN.coverage</span></code> to be produced.
+Next run</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bisect-ppx-report html
+</pre></div>
+</div>
+<p>to generate the Bisect report from your test suite execution.</p>
+<p>Open the file <code class="docutils literal notranslate"><span class="pre">_coverage/index.html</span></code> in a web browser. Look at the per-file
+coverage; you’ll see we’ve managed to test only 10% of <code class="docutils literal notranslate"><span class="pre">sorts.ml</span></code> with our test
+suite so far. Click on the link in that report for <code class="docutils literal notranslate"><span class="pre">sorts.ml</span></code>. You’ll see that
+we’ve managed to cover a couple lines of the source code so far with our test
+suite.</p>
+<p>There are some additional tests in the test file. Try uncommenting those, as
+documented in the test file, and increasing your code coverage. Between each
+run, you will need to delete the report file, recompile, rerun OUnit, and rerun
+the Bisect report tool. (Obviously, a Makefile would be a good thing to
+construct.)</p>
+<p>By the time you’re done uncommenting the provided tests, you should be at 30%
+coverage, including all of the insertion sort implementation. For fun, try
+adding more tests to get 100% coverage of merge sort.</p>
+</div>
+<div class="section" id="testing-data-abstractions">
+<h2><span class="section-number">6.5.5. </span>Testing Data Abstractions<a class="headerlink" href="#testing-data-abstractions" title="Permalink to this headline">¶</a></h2>
+<p>When testing a data abstraction, a simple first step is to look at the
+abstraction function and representation invariant for hints about what
+boundaries may exist in the space of values manipulated by a data abstraction.
+The rep invariant is a particularly effective tool for constructing useful test
+cases. Looking at the rep invariant of the rational data abstraction above, we
+see that it requires that q is non-zero. Therefore we should construct test
+cases that make q as close to 0 as possible, i.e. 1 or -1.</p>
+<p>We should also test how each <em>consumer</em> of the data abstraction handles every
+path through each <em>producer</em> of it. A consumer is an operation that takes a
+value of the data abstraction as input, and a producer is an operation that
+returns such a value.</p>
+<p>For example, consider this set abstraction:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">sig</span>
+
+  <span class="c">(** [&#39;a t] is the type of a set whose elements have type [&#39;a]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [empty] is the empty set. *)</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [size s] is the number of elements in [s]. *</span>
+<span class="c">      [size empty] is [0]. *)</span>
+  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+
+  <span class="c">(** [add x s] is a set containing all the elements of</span>
+<span class="c">      [s] as well as element [x]. *)</span>
+  <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** [mem x s] is [true] iff [x] is an element of [s]. *)</span>
+  <span class="k">val</span> <span class="n">mem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Set =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val size : &#39;a t -&gt; int
+    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val mem : &#39;a -&gt; &#39;a t -&gt; bool
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">empty</span></code> and <code class="docutils literal notranslate"><span class="pre">add</span></code> functions are producers; and the <code class="docutils literal notranslate"><span class="pre">size</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">mem</span></code>
+functions are consumers. So we should test how</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code> handles the <code class="docutils literal notranslate"><span class="pre">empty</span></code> set;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code> handles a set produced by <code class="docutils literal notranslate"><span class="pre">add</span></code>, both when <code class="docutils literal notranslate"><span class="pre">add</span></code> leaves the set
+unchanged as well as when it increases the set;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add</span></code> handles sets produced by <code class="docutils literal notranslate"><span class="pre">empty</span></code> as well as <code class="docutils literal notranslate"><span class="pre">add</span></code> itself;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mem</span></code> handles sets produced by <code class="docutils literal notranslate"><span class="pre">empty</span></code> as well as <code class="docutils literal notranslate"><span class="pre">add</span></code>, including paths where
+<code class="docutils literal notranslate"><span class="pre">mem</span></code> is invoked on elements that have been added as well as elements that
+have not.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/doctest"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="validation.html" title="previous page"><span class="section-number">6.4. </span>Validation</a>
+    <a class='right-next' id="next-link" href="debugging.html" title="next page"><span class="section-number">6.6. </span>Debugging</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
