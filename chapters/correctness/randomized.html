@@ -58,7 +58,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6.7. Summary" href="summary.html" />
+    <link rel="next" title="6.7. Proving Correctness" href="proving_correctness.html" />
     <link rel="prev" title="6.5. Black-box and Glass-box Testing" href="black_glass_box.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -382,7 +382,7 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="intro.html">
-   6. Documentation and Testing
+   6. Correctness
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2">
@@ -416,13 +416,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
-     6.7. Summary
+     6.10. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercises.html">
-     6.8. Exercises
+     6.11. Exercises
     </a>
    </li>
   </ul>
@@ -468,11 +483,11 @@
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
         <a class="dropdown-buttons"
-            href="../../_sources/chapters/doctest/randomized.ipynb"><button type="button"
+            href="../../_sources/chapters/correctness/randomized.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/chapters/doctest/randomized.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/chapters/correctness/randomized.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -492,10 +507,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/doctest/randomized.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/correctness/randomized.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/doctest/randomized.md"><button
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/correctness/randomized.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -515,7 +530,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/doctest/randomized.md"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/correctness/randomized.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -693,13 +708,13 @@ than the values below:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 52
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 34
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 55
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 17
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 25
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 73
 </pre></div>
 </div>
 </div>
@@ -855,7 +870,7 @@ generate at least one odd integer.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-random seed: 200202529
+random seed: 20969137
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1000,7 +1015,7 @@ to the generators found in <code class="docutils literal notranslate"><span clas
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test my_test failed (85 shrink steps):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test my_test failed (104 shrink steps):
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1045,12 +1060,6 @@ QCheck test to see whether the output of <code class="docutils literal notransla
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val t : QCheck.Test.t = QCheck.Test.Test &lt;abstr&gt;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">success</span> (ran 1 tests)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 0
@@ -1126,7 +1135,7 @@ and biased toward being smaller numbers in that range.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_4 failed (16 shrink steps):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_4 failed (9 shrink steps):
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1164,7 +1173,7 @@ property. Generator <code class="docutils literal notranslate"><span class="pre"
         },
         kernelOptions: {
             kernelName: "ocaml-jupyter",
-            path: "./chapters/doctest"
+            path: "./chapters/correctness"
         },
         predefinedOutput: true
     }
@@ -1177,7 +1186,7 @@ property. Generator <code class="docutils literal notranslate"><span class="pre"
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="black_glass_box.html" title="previous page"><span class="section-number">6.5. </span>Black-box and Glass-box Testing</a>
-    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">6.7. </span>Summary</a>
+    <a class='right-next' id="next-link" href="proving_correctness.html" title="next page"><span class="section-number">6.7. </span>Proving Correctness</a>
 
         </div>
         

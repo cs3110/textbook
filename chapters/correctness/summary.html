@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>6.7. Summary &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>6.10. Summary &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -56,8 +56,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6.8. Exercises" href="exercises.html" />
-    <link rel="prev" title="6.6. Randomized Testing with QCheck" href="randomized.html" />
+    <link rel="next" title="6.11. Exercises" href="exercises.html" />
+    <link rel="prev" title="6.9. Algebraic Specification" href="alg_spec.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -380,7 +380,7 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="intro.html">
-   6. Documentation and Testing
+   6. Correctness
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2">
@@ -413,14 +413,29 @@
      6.6. Randomized Testing with QCheck
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     6.7. Summary
+     6.10. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercises.html">
-     6.8. Exercises
+     6.11. Exercises
     </a>
    </li>
   </ul>
@@ -467,7 +482,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/chapters/doctest/summary.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/chapters/correctness/summary.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -487,10 +502,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/doctest/summary.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/correctness/summary.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/doctest/summary.md"><button
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/correctness/summary.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -518,12 +533,17 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#terms-and-concepts">
-   6.7.1. Terms and Concepts
+   6.10.1. Terms and Concepts
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#further-reading">
-   6.7.2. Further reading
+   6.10.2. Further Reading
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#acknowledgments">
+   6.10.3. Acknowledgments
   </a>
  </li>
 </ul>
@@ -539,7 +559,7 @@
               <div>
                 
   <div class="section" id="summary">
-<h1><span class="section-number">6.7. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">6.10. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
 <p>Documentation and testing are crucial to establishing the truth of what a
 correct program does. Documentation communicates to other humans the intent of
 the programmer. Testing communicates evidence about the success of the
@@ -550,50 +570,81 @@ for two different audiences, clients and maintainers.  The latter needs
 to know about abstraction functions and representation invariants.</p>
 <p>Testing methodologies include black-box, glass-box, and randomized tests. These
 are complementary, not orthogonal, approaches to developing correct code.</p>
+<p>Formal methods is an important link between mathematics and computer science. We
+can use techniques from discrete math, such as induction, to prove the
+correctness of functional programs. Equational reasoning makes the proofs
+relatively pleasant.</p>
+<p>Proving the correctness of imperative programs can be more challenging, because
+of the need to reason about mutable state. That can break equational reasoning.
+Instead, <em>Hoare logic</em>, named for Tony Hoare, is a common formal method for
+imperative programs. Dijkstra’s <em>weakest precondition</em> calculus is another.</p>
 <div class="section" id="terms-and-concepts">
-<h2><span class="section-number">6.7.1. </span>Terms and Concepts<a class="headerlink" href="#terms-and-concepts" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.10.1. </span>Terms and Concepts<a class="headerlink" href="#terms-and-concepts" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>abstract value</p></li>
 <li><p>abstraction by specification</p></li>
 <li><p>abstraction function</p></li>
+<li><p>algebraic specification</p></li>
 <li><p>asserting</p></li>
+<li><p>associative</p></li>
+<li><p>base case</p></li>
 <li><p>black box</p></li>
 <li><p>boundary case</p></li>
 <li><p>bug</p></li>
+<li><p>canonical form</p></li>
 <li><p>client</p></li>
 <li><p>code inspection</p></li>
 <li><p>code review</p></li>
 <li><p>code walkthrough</p></li>
 <li><p>comments</p></li>
+<li><p>commutative</p></li>
 <li><p>commutative diagram</p></li>
 <li><p>concrete value</p></li>
 <li><p>conditional compilation</p></li>
 <li><p>consumer</p></li>
+<li><p>correctness</p></li>
 <li><p>data abstraction</p></li>
 <li><p>debugging by scientific method</p></li>
 <li><p>defensive programming</p></li>
+<li><p>equation</p></li>
+<li><p>equational reasoning</p></li>
 <li><p>example clause</p></li>
+<li><p>extensionality</p></li>
 <li><p>failure</p></li>
 <li><p>fault</p></li>
 <li><p>formal methods</p></li>
+<li><p>formal methods</p></li>
+<li><p>generator</p></li>
 <li><p>glass box</p></li>
+<li><p>identity</p></li>
 <li><p>implementer</p></li>
+<li><p>induction</p></li>
+<li><p>induction hypothesis</p></li>
+<li><p>induction principle</p></li>
+<li><p>inductive case</p></li>
 <li><p>inputs for classes of output</p></li>
 <li><p>inputs that satisfy precondition</p></li>
 <li><p>inputs that trigger exceptions</p></li>
+<li><p>iterative</p></li>
 <li><p>locality</p></li>
+<li><p>manipulator</p></li>
 <li><p>many to one</p></li>
 <li><p>minimal test case</p></li>
 <li><p>modifiability</p></li>
+<li><p>natural numbers</p></li>
 <li><p>pair programming</p></li>
 <li><p>partial</p></li>
+<li><p>partial correctness</p></li>
 <li><p>partial function</p></li>
 <li><p>path coverage</p></li>
 <li><p>paths through implementation</p></li>
 <li><p>paths through specification</p></li>
 <li><p>postcondition</p></li>
+<li><p>postcondition</p></li>
+<li><p>precondition</p></li>
 <li><p>precondition</p></li>
 <li><p>producer</p></li>
+<li><p>query</p></li>
 <li><p>raises clause</p></li>
 <li><p>randomized testing</p></li>
 <li><p>regression testing</p></li>
@@ -607,19 +658,53 @@ are complementary, not orthogonal, approaches to developing correct code.</p>
 <li><p>satisfaction</p></li>
 <li><p>social methods</p></li>
 <li><p>specification</p></li>
+<li><p>specification</p></li>
 <li><p>testing</p></li>
+<li><p>total correctness</p></li>
 <li><p>total function</p></li>
 <li><p>typical input</p></li>
 <li><p>validation</p></li>
+<li><p>verification</p></li>
+<li><p>well-founded</p></li>
 </ul>
 </div>
 <div class="section" id="further-reading">
-<h2><span class="section-number">6.7.2. </span>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.10.2. </span>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://newcatalog.library.cornell.edu/catalog/4178051"><em>Program Development in Java: Abstraction, Specification, and
-Object-Oriented Design</em></a>, chapters 3, 5, and 9, by Barbara
+<li><p><em>Program Development in Java: Abstraction, Specification, and
+Object-Oriented Design</em>, chapters 3, 5, and 9, by Barbara
 Liskov with John Guttag.</p></li>
 </ul>
+<ul class="simple">
+<li><p><em>The Functional Approach to Programming</em>, section 3.4.  Guy Cousineau and
+Michel Mauny. Cambridge, 1998.</p></li>
+<li><p><em>ML for the Working Programmer</em>, second edition, chapter 6.  L.C. Paulson.
+Cambridge, 1996.</p></li>
+<li><p><em>Thinking Functionally with Haskell</em>, chapter 6.  Richard Bird.  Cambridge,
+2015.</p></li>
+<li><p><em>Software Foundations</em>, volume 1, chapters Basic, Induction, Lists, Poly.
+Benjamin Pierce et al. <a class="reference external" href="https://softwarefoundations.cis.upenn.edu/">https://softwarefoundations.cis.upenn.edu/</a></p></li>
+<li><p>“Algebraic Specifications”, Robert McCloskey,
+<a class="reference external" href="https://www.cs.scranton.edu/~mccloske/courses/se507/alg_specs_lec.html">https://www.cs.scranton.edu/~mccloske/courses/se507/alg_specs_lec.html</a>.</p></li>
+<li><p><em>Software Engineering: Theory and Practice</em>, third edition, section 4.5.
+Shari Lawrence Pfleeger and Joanne M. Atlee.  Prentice Hall, 2006.</p></li>
+<li><p>“Algebraic Semantics”, chapter 12 of <em>Formal Syntax and Semantics of
+Programming Languages</em>, Kenneth Slonneger and Barry L. Kurtz, Addison-Wesley,
+1995.</p></li>
+<li><p>“Algebraic Semantics”, Muffy Thomas.  Chapter 6 in <em>Programming Language
+Syntax and Semantics</em>, David Watt, Prentice Hall, 1991.</p></li>
+<li><p><em>Fundamentals of Algebraic Specification 1: Equations and Initial Semantics</em>.
+H. Ehrig and B. Mahr.  Springer-Verlag, 1985.</p></li>
+</ul>
+</div>
+<div class="section" id="acknowledgments">
+<h2><span class="section-number">6.10.3. </span>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
+<p>Our treatment of formal methods is inspired by and indebted to course materials
+for Princeton COS 326 by David Walker et al.</p>
+<p>Our example algebraic specifications are based on McCloskey’s. The terminology
+of “generator”, “manipulator”, and “query” is based on Pfleeger and Atlee.</p>
+<p>Many of our exercises on formal methods are inspired by <em>Software Foundations</em>,
+volume 1.</p>
 </div>
 </div>
 
@@ -636,7 +721,7 @@ Liskov with John Guttag.</p></li>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./chapters/doctest"
+            path: "./chapters/correctness"
         },
         predefinedOutput: true
     }
@@ -648,8 +733,8 @@ Liskov with John Guttag.</p></li>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="randomized.html" title="previous page"><span class="section-number">6.6. </span>Randomized Testing with QCheck</a>
-    <a class='right-next' id="next-link" href="exercises.html" title="next page"><span class="section-number">6.8. </span>Exercises</a>
+    <a class='left-prev' id="prev-link" href="alg_spec.html" title="previous page"><span class="section-number">6.9. </span>Algebraic Specification</a>
+    <a class='right-next' id="next-link" href="exercises.html" title="next page"><span class="section-number">6.11. </span>Exercises</a>
 
         </div>
         

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>6.8. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>6.11. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -58,7 +58,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="6.7. Summary" href="summary.html" />
+    <link rel="prev" title="6.10. Summary" href="summary.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -381,7 +381,7 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="intro.html">
-   6. Documentation and Testing
+   6. Correctness
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2">
@@ -415,13 +415,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
-     6.7. Summary
+     6.10. Summary
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     6.8. Exercises
+     6.11. Exercises
     </a>
    </li>
   </ul>
@@ -468,7 +483,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/chapters/doctest/exercises.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/chapters/correctness/exercises.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -488,10 +503,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/doctest/exercises.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/correctness/exercises.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/doctest/exercises.md"><button
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/correctness/exercises.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -520,7 +535,7 @@
               <div>
                 
   <div class="section" id="exercises">
-<h1><span class="section-number">6.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">6.11. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
 <p>Solutions to exercises are available to students in Cornell’s CS 3110.
 Instructors at other institutions are welcome to contact Michael Clarkson
 for access.</p>
@@ -663,6 +678,139 @@ that triggers that bug?</p>
 <p>Write a QCheck test that detects the bug. For the property that you check,
 construct your own <em>reference implementation</em> of average—that is,
 a less optimized version of <code class="docutils literal notranslate"><span class="pre">avg</span></code> that is obviously correct.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: exp [★★]</strong></p>
+<p>Prove that <code class="docutils literal notranslate"><span class="pre">exp</span> <span class="pre">x</span> <span class="pre">(m</span> <span class="pre">+</span> <span class="pre">n)</span> <span class="pre">=</span> <span class="pre">exp</span> <span class="pre">x</span> <span class="pre">m</span> <span class="pre">*</span> <span class="pre">exp</span> <span class="pre">x</span> <span class="pre">n</span></code>, where</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">exp</span> <span class="n">x</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">x</span> <span class="o">*</span> <span class="n">exp</span> <span class="n">x</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Proceed by induction on <code class="docutils literal notranslate"><span class="pre">m</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: fibi [★★★]</strong></p>
+<p>Prove that <code class="docutils literal notranslate"><span class="pre">forall</span> <span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">1,</span> <span class="pre">fib</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">fibi</span> <span class="pre">n</span> <span class="pre">(0,</span> <span class="pre">1)</span></code>, where</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fib</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">then</span> <span class="mi">1</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">then</span> <span class="mi">1</span>
+  <span class="k">else</span> <span class="n">fib</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="n">fib</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">fibi</span> <span class="n">n</span> <span class="o">(</span><span class="n">prev</span><span class="o">,</span> <span class="n">curr</span><span class="o">)</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">then</span> <span class="n">curr</span>
+  <span class="k">else</span> <span class="n">fibi</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">curr</span><span class="o">,</span> <span class="n">prev</span> <span class="o">+</span> <span class="n">curr</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Proceed by induction on <code class="docutils literal notranslate"><span class="pre">n</span></code>, rather than trying to apply the theorem about
+converting recursion into iteration.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: expsq [★★★]</strong></p>
+<p>Prove that <code class="docutils literal notranslate"><span class="pre">expsq</span> <span class="pre">x</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">exp</span> <span class="pre">x</span> <span class="pre">n</span></code>, where</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">expsq</span> <span class="n">x</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">then</span> <span class="n">x</span>
+  <span class="k">else</span> <span class="o">(</span><span class="k">if</span> <span class="n">n</span> <span class="ow">mod</span> <span class="mi">2</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">x</span><span class="o">)</span> <span class="o">*</span> <span class="n">expsq</span> <span class="o">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Proceed by <em><a class="reference external" href="https://en.wikipedia.org/wiki/Mathematical_induction#Complete_(strong)_induction">strong induction</a></em> on <code class="docutils literal notranslate"><span class="pre">n</span></code>. Function <code class="docutils literal notranslate"><span class="pre">expsq</span></code> implements
+<em>exponentiation by repeated squaring</em>, which results in more efficient
+computation than <code class="docutils literal notranslate"><span class="pre">exp</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: mult [★★]</strong></p>
+<p>Prove that <code class="docutils literal notranslate"><span class="pre">forall</span> <span class="pre">n,</span> <span class="pre">mult</span> <span class="pre">n</span> <span class="pre">Z</span> <span class="pre">=</span> <span class="pre">Z</span></code> by induction on <code class="docutils literal notranslate"><span class="pre">n</span></code>, where:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">mult</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">a</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Z</span> <span class="o">-&gt;</span> <span class="nc">Z</span>
+  <span class="o">|</span> <span class="nc">S</span> <span class="n">k</span> <span class="o">-&gt;</span> <span class="n">plus</span> <span class="n">b</span> <span class="o">(</span><span class="n">mult</span> <span class="n">k</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: append nil [★★]</strong></p>
+<p>Prove that <code class="docutils literal notranslate"><span class="pre">forall</span> <span class="pre">lst,</span> <span class="pre">lst</span> <span class="pre">&#64;</span> <span class="pre">[]</span> <span class="pre">=</span> <span class="pre">lst</span></code> by induction on <code class="docutils literal notranslate"><span class="pre">lst</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: rev dist append [★★★]</strong></p>
+<p>Prove that reverse distributes over append, i.e., that
+<code class="docutils literal notranslate"><span class="pre">forall</span> <span class="pre">lst1</span> <span class="pre">lst2,</span> <span class="pre">rev</span> <span class="pre">(lst1</span> <span class="pre">&#64;</span> <span class="pre">lst2)</span> <span class="pre">=</span> <span class="pre">rev</span> <span class="pre">lst2</span> <span class="pre">&#64;</span> <span class="pre">rev</span> <span class="pre">lst1</span></code>, where:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">rev</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">rev</span> <span class="n">t</span> <span class="o">@</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>(That is, of course, an inefficient implementation of <code class="docutils literal notranslate"><span class="pre">rev</span></code>.) You will need to
+choose which list to induct over. You will need the previous exercise as a
+lemma, as well as the associativity of <code class="docutils literal notranslate"><span class="pre">append</span></code>, which was proved in the notes
+above.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: rev involutive [★★★]</strong></p>
+<p>Prove that reverse is an involution, i.e., that
+<code class="docutils literal notranslate"><span class="pre">forall</span> <span class="pre">lst,</span> <span class="pre">rev</span> <span class="pre">(rev</span> <span class="pre">lst)</span> <span class="pre">=</span> <span class="pre">lst</span></code>. Proceed by induction on <code class="docutils literal notranslate"><span class="pre">lst</span></code>. You will need
+the previous exercise as a lemma.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: reflect size [★★★]</strong></p>
+<p>Prove that <code class="docutils literal notranslate"><span class="pre">forall</span> <span class="pre">t,</span> <span class="pre">size</span> <span class="pre">(reflect</span> <span class="pre">t)</span> <span class="pre">=</span> <span class="pre">size</span> <span class="pre">t</span></code> by induction on <code class="docutils literal notranslate"><span class="pre">t</span></code>, where:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">size</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">l</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">size</span> <span class="n">l</span> <span class="o">+</span> <span class="n">size</span> <span class="n">r</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: fold theorem 2 [★★★★]</strong></p>
+<p>We proved that <code class="docutils literal notranslate"><span class="pre">fold_left</span></code> and <code class="docutils literal notranslate"><span class="pre">fold_right</span></code> yield the same results if their
+function argument is associative and commutative. But that doesn’t explain why
+these two implementations of <code class="docutils literal notranslate"><span class="pre">concat</span></code> yield the same results, because <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">^</span> <span class="pre">)</span></code> is
+not commutative:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">concat_l</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">(</span> <span class="o">^</span> <span class="o">)</span> <span class="s2">&quot;&quot;</span> <span class="n">lst</span>
+<span class="k">let</span> <span class="n">concat_r</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="o">(</span> <span class="o">^</span> <span class="o">)</span> <span class="n">lst</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Formulate and prove a new theorem about when <code class="docutils literal notranslate"><span class="pre">fold_left</span></code> and <code class="docutils literal notranslate"><span class="pre">fold_right</span></code> yield
+the same results, under the relaxed assumption that their function argument is
+associative but not necessarily commutative. <em>Hint: make a new assumption about
+the initial value of the accumulator.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: propositions [★★★★]</strong></p>
+<p>In propositional logic, we have atomic propositions, negation, conjunction,
+disjunction, and implication. For example, <code class="docutils literal notranslate"><span class="pre">raining</span> <span class="pre">/\</span> <span class="pre">snowing</span> <span class="pre">/\</span> <span class="pre">cold</span></code> is a
+proposition stating that it is simultaneously raining and snowing and cold (a
+weather condition known as <em>Ithacating</em>).</p>
+<p>Define an OCaml type to represent propositions. Then state the induction
+principle for that type.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: list spec [★★★]</strong></p>
+<p>Design an OCaml interface for lists that has <code class="docutils literal notranslate"><span class="pre">nil</span></code>, <code class="docutils literal notranslate"><span class="pre">cons</span></code>, <code class="docutils literal notranslate"><span class="pre">append</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">length</span></code> operations. Design the equational specification. Hint: the equations
+will look strikingly like the OCaml implementations of <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> and <code class="docutils literal notranslate"><span class="pre">List.length</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: bag spec [★★★★]</strong></p>
+<p>A <em>bag</em> or <em>multiset</em> is like a blend of a list and a set: like a set, order
+does not matter; like a list, elements may occur more than once. The number of
+times an element occurs is its <em>multiplicity</em>. An element that does not occur in
+the bag has multiplicity 0. Here is an OCaml signature for bags:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Bag</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">insert</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">mult</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+  <span class="k">val</span> <span class="n">remove</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Categorize the operations in the <code class="docutils literal notranslate"><span class="pre">Bag</span></code> interface as generators, manipulators, or
+queries. Then design an equational specification for bags. For the <code class="docutils literal notranslate"><span class="pre">remove</span></code>
+operation, your specification should cause at most one occurrence of an element
+to be removed. That is, the multiplicity of that value should decrease by at
+most one.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -678,7 +826,7 @@ a less optimized version of <code class="docutils literal notranslate"><span cla
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./chapters/doctest"
+            path: "./chapters/correctness"
         },
         predefinedOutput: true
     }
@@ -690,7 +838,7 @@ a less optimized version of <code class="docutils literal notranslate"><span cla
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="summary.html" title="previous page"><span class="section-number">6.7. </span>Summary</a>
+    <a class='left-prev' id="prev-link" href="summary.html" title="previous page"><span class="section-number">6.10. </span>Summary</a>
 
         </div>
         

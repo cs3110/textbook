@@ -1,0 +1,1279 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.8. Structural Induction &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6.9. Algebraic Specification" href="alg_spec.html" />
+    <link rel="prev" title="6.7. Proving Correctness" href="proving_correctness.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.5. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.6. Summary
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   6. Correctness
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/correctness/structural_induction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/correctness/structural_induction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/correctness/structural_induction.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/correctness/structural_induction.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/correctness/structural_induction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-on-naturals">
+   6.8.1. Induction on Naturals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-on-lists">
+   6.8.2. Induction on Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-theorem-about-folding">
+   6.8.3. A Theorem about Folding
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-on-trees">
+   6.8.4. Induction on Trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-principles-for-all-variants">
+   6.8.5. Induction Principles for All Variants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-and-recursion">
+   6.8.6. Induction and Recursion
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="structural-induction">
+<h1><span class="section-number">6.8. </span>Structural Induction<a class="headerlink" href="#structural-induction" title="Permalink to this headline">¶</a></h1>
+<p>So far we’ve proved the correctness of recursive functions on natural numbers.
+We can do correctness proofs about recursive functions on variant types, too.
+That requires us to figure out how induction works on variants. We’ll do that,
+next, starting with a variant type for representing natural numbers, then
+generalizing to lists, trees, and other variants. This inductive proof technique
+is sometimes known as <em>structural induction</em> instead of <em>mathematical
+induction</em>. But that’s just a piece of vocabulary; don’t get hung up on it. The
+core idea is completely the same.</p>
+<div class="section" id="induction-on-naturals">
+<h2><span class="section-number">6.8.1. </span>Induction on Naturals<a class="headerlink" href="#induction-on-naturals" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/Lkb-eTUrHTs" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>We used OCaml’s <code class="docutils literal notranslate"><span class="pre">int</span></code> type as a representation of the naturals. Of course, that
+type is somewhat of a mismatch: negative <code class="docutils literal notranslate"><span class="pre">int</span></code> values don’t represent naturals,
+and there is an upper bound to what natural numbers we can represent with <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<p>Let’s fix those problems by defining our own variant to represent natural
+numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">nat</span> <span class="o">=</span> <span class="nc">Z</span> <span class="o">|</span> <span class="nc">S</span> <span class="k">of</span> <span class="n">nat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type nat = Z | S of nat
+</pre></div>
+</div>
+</div>
+</div>
+<p>The constructor <code class="docutils literal notranslate"><span class="pre">Z</span></code> represents zero; and the constructor <code class="docutils literal notranslate"><span class="pre">S</span></code> represents the
+successor of another natural number. So,</p>
+<ul class="simple">
+<li><p>0 is represented by <code class="docutils literal notranslate"><span class="pre">Z</span></code>,</p></li>
+<li><p>1 by <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">Z</span></code>,</p></li>
+<li><p>2 by <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">(S</span> <span class="pre">Z)</span></code>,</p></li>
+<li><p>3 by <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">(S</span> <span class="pre">(S</span> <span class="pre">Z))</span></code>,</p></li>
+</ul>
+<p>and so forth. This variant is thus a <em>unary</em> (as opposed to binary or decimal)
+representation of the natural numbers: the number of times <code class="docutils literal notranslate"><span class="pre">S</span></code> occurs in a value
+<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">:</span> <span class="pre">nat</span></code> is the natural number that <code class="docutils literal notranslate"><span class="pre">n</span></code> represents.</p>
+<p>We can define addition on natural numbers with the following function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">plus</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">a</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Z</span> <span class="o">-&gt;</span> <span class="n">b</span>
+  <span class="o">|</span> <span class="nc">S</span> <span class="n">k</span> <span class="o">-&gt;</span> <span class="nc">S</span> <span class="o">(</span><span class="n">plus</span> <span class="n">k</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val plus : nat -&gt; nat -&gt; nat = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Immediately we can prove the following rather trivial claim:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Claim:  plus Z n = n
+
+Proof:
+
+  plus Z n
+=   { evaluation }
+  n
+
+QED
+</pre></div>
+</div>
+<p>But suppose we want to prove this also trivial-seeming claim:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Claim:  plus n Z = n
+
+Proof:
+
+  plus n Z
+=
+  ???
+</pre></div>
+</div>
+<p>We can’t just evaluate <code class="docutils literal notranslate"><span class="pre">plus</span> <span class="pre">n</span> <span class="pre">Z</span></code>, because <code class="docutils literal notranslate"><span class="pre">plus</span></code> matches against its first
+argument, not second. One possibility would be to do a case analysis: what if
+<code class="docutils literal notranslate"><span class="pre">n</span></code> is <code class="docutils literal notranslate"><span class="pre">Z</span></code>, vs. <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">k</span></code> for some <code class="docutils literal notranslate"><span class="pre">k</span></code>? Let’s attempt that.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Proof:
+
+By case analysis on n, which must be either Z or S k.
+
+Case:  n = Z
+
+  plus Z Z
+=   { evaluation }
+  Z
+
+Case:  n = S k
+
+  plus (S k) Z
+=   { evaluation }
+  S (plus k Z)
+=
+  ???
+</pre></div>
+</div>
+<p>We are again stuck, and for the same reason: once more <code class="docutils literal notranslate"><span class="pre">plus</span></code> can’t be evaluated
+any further.</p>
+<p>When you find yourself needing to solve the same subproblem in programming, you
+use recursion. When it happens in a proof, you use induction!</p>
+<p>We’ll need an induction principle for <code class="docutils literal notranslate"><span class="pre">nat</span></code>. Here it is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>forall properties P,
+  if P(Z),
+  and if forall k, P(k) implies P(S k),
+  then forall n, P(n)
+</pre></div>
+</div>
+<p>Compare that to the induction principle we used for natural numbers before,
+when we were using <code class="docutils literal notranslate"><span class="pre">int</span></code> in place of natural numbers:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>forall properties P,
+  if P(0),
+  and if forall k, P(k) implies P(k + 1),
+  then forall n, P(n)
+</pre></div>
+</div>
+<p>There’s no essential difference between the two: we just use <code class="docutils literal notranslate"><span class="pre">Z</span></code> in place of
+<code class="docutils literal notranslate"><span class="pre">0</span></code>, and <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">k</span></code> in place of <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
+<p>Using that induction principle, we can carry out the proof:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Claim:  plus n Z = n
+
+Proof: by induction on n.
+P(n) = plus n Z = n
+
+Base case: n = Z
+Show: plus Z Z = Z
+
+  plus Z Z
+=   { evaluation }
+  Z
+
+Inductive case: n = S k
+IH: plus k Z = k
+Show: plus (S k) Z = S k
+
+  plus (S k) Z
+=   { evaluation }
+  S (plus k Z)
+=   { IH }
+  S k
+
+QED
+</pre></div>
+</div>
+</div>
+<div class="section" id="induction-on-lists">
+<h2><span class="section-number">6.8.2. </span>Induction on Lists<a class="headerlink" href="#induction-on-lists" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/Xo3rW_dTqEg" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>It turns out that natural numbers and lists are quite similar, when viewed
+as data types.  Here are the definitions of both, aligned for comparison:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span>    <span class="n">nat</span>  <span class="o">=</span> <span class="nc">Z</span>  <span class="o">|</span> <span class="nc">S</span>      <span class="k">of</span> <span class="n">nat</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">=</span> <span class="bp">[]</span> <span class="o">|</span> <span class="o">(</span> <span class="o">::</span> <span class="o">)</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+</pre></div>
+</div>
+<p>Both types have a constructor representing a concept of “nothing”. Both types
+also have a constructor representing “one more” than another value of the type:
+<code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">n</span></code> is one more than <code class="docutils literal notranslate"><span class="pre">n</span></code>, and <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">::</span> <span class="pre">t</span></code> is a list with one more element than
+<code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
+<p>The induction principle for lists is likewise quite similar to the induction
+principle for natural numbers. Here is the principle for lists:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>forall properties P,
+  if P([]),
+  and if forall h t, P(t) implies P(h :: t),
+  then forall lst, P(lst)
+</pre></div>
+</div>
+<p>An inductive proof for lists therefore has the following structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Proof: by induction on lst.
+P(lst) = ...
+
+Base case: lst = []
+Show: P([])
+
+Inductive case: lst = h :: t
+IH: P(t)
+Show: P(h :: t)
+</pre></div>
+</div>
+<p>Let’s try an example of this kind of proof. Recall the definition of the append
+operator:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">append</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst1</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">lst2</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">::</span> <span class="n">append</span> <span class="n">t</span> <span class="n">lst2</span>
+
+<span class="k">let</span> <span class="o">(</span> <span class="o">@</span> <span class="o">)</span> <span class="o">=</span> <span class="n">append</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val append : &#39;a list -&gt; &#39;a list -&gt; &#39;a list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( @ ) : &#39;a list -&gt; &#39;a list -&gt; &#39;a list = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll prove that append is associative.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Theorem: forall xs ys zs, xs @ (ys @ zs) = (xs @ ys) @ zs
+
+Proof: by induction on xs.
+P(xs) = forall ys zs, xs @ (ys @ zs) = (xs @ ys) @ zs
+
+Base case: xs = []
+Show: forall ys zs, [] @ (ys @ zs) = ([] @ ys) @ zs
+
+  [] @ (ys @ zs)
+=   { evaluation }
+  ys @ zs
+=   { evaluation }
+  ([] @ ys) @ zs
+
+Inductive case: xs = h :: t
+IH: forall ys zs, t @ (ys @ zs) = (t @ ys) @ zs
+Show: forall ys zs, (h :: t) @ (ys @ zs) = ((h :: t) @ ys) @ zs
+
+  (h :: t) @ (ys @ zs)
+=   { evaluation }
+  h :: (t @ (ys @ zs))
+=   { IH }
+  h :: ((t @ ys) @ zs)
+
+  ((h :: t) @ ys) @ zs
+=   { evaluation of inner @ }
+  (h :: (t @ ys)) @ zs
+=   { evaluation of outer @ }
+  h :: ((t @ ys) @ zs)
+
+QED
+</pre></div>
+</div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/4B2jF2zHSCs" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+</div>
+<div class="section" id="a-theorem-about-folding">
+<h2><span class="section-number">6.8.3. </span>A Theorem about Folding<a class="headerlink" href="#a-theorem-about-folding" title="Permalink to this headline">¶</a></h2>
+<p>When we studied <code class="docutils literal notranslate"><span class="pre">List.fold_left</span></code> and <code class="docutils literal notranslate"><span class="pre">List.fold_right</span></code>, we discussed how they
+sometimes compute the same function, but in general do not. For example,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">List</span><span class="o">.</span><span class="n">fold_left</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">=</span> <span class="p">(((</span><span class="mi">0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="o">=</span> <span class="mi">6</span>
+<span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">0</span><span class="p">))</span>
+<span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">fold_right</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="n">lst</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>but</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">List</span><span class="o">.</span><span class="n">fold_left</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">=</span> <span class="p">(((</span><span class="mi">0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span>
+<span class="o">=</span> <span class="o">-</span><span class="mi">6</span>
+<span class="o">&lt;&gt;</span> <span class="mi">2</span>
+<span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">0</span><span class="p">))</span>
+<span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">fold_right</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="n">lst</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Based on the equations above, it looks like the fact that <code class="docutils literal notranslate"><span class="pre">+</span></code> is commutative and
+associative, whereas <code class="docutils literal notranslate"><span class="pre">-</span></code> is not, explains this difference between when the two
+fold functions get the same answer. Let’s prove it!</p>
+<p>First, recall the definitions of the fold functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">acc</span> <span class="n">h</span><span class="o">)</span> <span class="n">t</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">fold_right</span> <span class="n">f</span> <span class="n">lst</span> <span class="n">acc</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">(</span><span class="n">fold_right</span> <span class="n">f</span> <span class="n">t</span> <span class="n">acc</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fold_left : (&#39;a -&gt; &#39;b -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;b list -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fold_right : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b -&gt; &#39;b = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Second, recall what it means for a function <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> to be commutative and
+associative:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Commutative:  forall x y, f x y = f y x
+Associative:  forall x y z, f x (f y z) = f (f x y) z
+</pre></div>
+</div>
+<p>Those might look a little different than the normal formulations of those
+properties, because we are using <code class="docutils literal notranslate"><span class="pre">f</span></code> as a prefix operator. If we were to write
+<code class="docutils literal notranslate"><span class="pre">f</span></code> instead as an infix operator <code class="docutils literal notranslate"><span class="pre">op</span></code>, they would look more familiar:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Commutative:  forall x y, x op y = y op x
+Associative:  forall x y z, x op (y op z) = (x op y) op z
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">f</span></code> is both commutative and associative we have this little interchange
+lemma that lets us swap two arguments around:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Lemma</span> <span class="p">(</span><span class="n">interchange</span><span class="p">):</span> <span class="n">f</span> <span class="n">x</span> <span class="p">(</span><span class="n">f</span> <span class="n">y</span> <span class="n">z</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span> <span class="n">y</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">z</span><span class="p">)</span>
+
+<span class="n">Proof</span><span class="p">:</span>
+
+  <span class="n">f</span> <span class="n">x</span> <span class="p">(</span><span class="n">f</span> <span class="n">y</span> <span class="n">z</span><span class="p">)</span>
+<span class="o">=</span>   <span class="p">{</span> <span class="n">associativity</span> <span class="p">}</span>
+  <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="n">z</span>
+<span class="o">=</span>   <span class="p">{</span> <span class="n">commutativity</span> <span class="p">}</span>
+  <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="n">y</span> <span class="n">x</span><span class="p">)</span> <span class="n">z</span>
+<span class="o">=</span>   <span class="p">{</span> <span class="n">associativity</span> <span class="p">}</span>
+  <span class="n">f</span> <span class="n">y</span> <span class="p">(</span><span class="n">f</span> <span class="n">z</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">QED</span>
+</pre></div>
+</div>
+<p>Now we’re ready to state and prove the theorem.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Theorem: If f is commutative and associative, then
+  forall lst acc,
+    fold_left f acc lst = fold_right f lst acc.
+
+Proof: by induction on lst.
+P(lst) = forall acc,
+  fold_left f acc lst = fold_right f lst acc
+
+Base case: lst = []
+Show: forall acc,
+  fold_left f acc [] = fold_right f [] acc
+
+  fold_left f acc []
+=   { evaluation }
+  acc
+=   { evaluation }
+  fold_right f [] acc
+
+Inductive case: lst = h :: t
+IH: forall acc,
+  fold_left f acc t = fold_right f t acc
+Show: forall acc,
+  fold_left f acc (h :: t) = fold_right f (h :: t) acc
+
+  fold_left f acc (h :: t)
+=   { evaluation }
+  fold_left f (f acc h) t
+=   { IH with acc := f acc h }
+  fold_right f t (f acc h)
+
+  fold_right f (h :: t) acc
+=   { evaluation }
+  f h (fold_right f t acc)
+</pre></div>
+</div>
+<p>Now, it might seem as though we are stuck: the left and right sides of the
+equality we want to show have failed to “meet in the middle.” But we’re actually
+in a similar situation to when we proved the correctness of <code class="docutils literal notranslate"><span class="pre">facti</span></code> earlier:
+there’s something (applying <code class="docutils literal notranslate"><span class="pre">f</span></code> to <code class="docutils literal notranslate"><span class="pre">h</span></code> and another argument) that we want to
+push into the accumulator of that last line (so that we have <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">acc</span> <span class="pre">h</span></code>).</p>
+<p>Let’s try proving that with its own lemma:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Lemma: forall lst acc x,
+  f x (fold_right f lst acc) = fold_right f lst (f acc x)
+
+Proof: by induction on lst.
+P(lst) = forall acc x,
+  f x (fold_right f lst acc) = fold_right f lst (f acc x)
+
+Base case: lst = []
+Show: forall acc x,
+  f x (fold_right f [] acc) = fold_right f [] (f acc x)
+
+  f x (fold_right f [] acc)
+=   { evaluation }
+  f x acc
+
+  fold_right f [] (f acc x)
+=   { evaluation }
+  f acc x
+=   { commutativity of f }
+  f x acc
+
+Inductive case: lst = h :: t
+IH: forall acc x,
+  f x (fold_right f t acc) = fold_right f t (f acc x)
+Show: forall acc x,
+  f x (fold_right f (h :: t) acc) = fold_right f (h :: t) (f acc x)
+
+  f x (fold_right f (h :: t) acc)
+=  { evaluation }
+  f x (f h (fold_right f t acc))
+=  { interchange lemma }
+  f h (f x (fold_right f t acc))
+=  { IH }
+  f h (fold_right f t (f acc x))
+
+  fold_right f (h :: t) (f acc x)
+=   { evaluation }
+  f h (fold_right f t (f acc x))
+
+QED
+</pre></div>
+</div>
+<p>Now that the lemma is completed, we can resume the proof of the theorem. We’ll
+restart at the beginning of the inductive case:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Inductive case: lst = h :: t
+IH: forall acc,
+  fold_left f acc t = fold_right f t acc
+Show: forall acc,
+  fold_left f acc (h :: t) = fold_right f (h :: t) acc
+
+  fold_left f acc (h :: t)
+=   { evaluation }
+  fold_left f (f acc h) t
+=   { IH with acc := f acc h }
+  fold_right f t (f acc h)
+
+  fold_right f (h :: t) acc
+=   { evaluation }
+  f h (fold_right f t acc)
+=   { lemma with x := h and lst := t }
+  fold_right f t (f acc h)
+
+QED
+</pre></div>
+</div>
+<p>It took two inductions to prove the theorem, but we succeeded! Now we know that
+the behavior we observed with <code class="docutils literal notranslate"><span class="pre">+</span></code> wasn’t a fluke: any commutative and
+associative operator causes <code class="docutils literal notranslate"><span class="pre">fold_left</span></code> and <code class="docutils literal notranslate"><span class="pre">fold_right</span></code> to get the same answer.</p>
+</div>
+<div class="section" id="induction-on-trees">
+<h2><span class="section-number">6.8.4. </span>Induction on Trees<a class="headerlink" href="#induction-on-trees" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/UJyE8ylHFA0" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>Lists and binary trees are similar when viewed as data types.  Here are the
+definitions of both, aligned for comparison:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">=</span> <span class="bp">[]</span>   <span class="o">|</span> <span class="o">(</span> <span class="o">::</span> <span class="o">)</span> <span class="k">of</span>           <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">tree</span> <span class="o">=</span> <span class="nc">Leaf</span> <span class="o">|</span> <span class="nc">Node</span>   <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">tree</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">tree</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a list = [] | (::) of &#39;a * &#39;a list
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a tree = Leaf | Node of &#39;a tree * &#39;a * &#39;a tree
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both have a constructor that represents “empty”, and both have a constructor
+that combines a value of type <code class="docutils literal notranslate"><span class="pre">'a</span></code> together with another instance of the
+data type.  The only real difference is that <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">::</span> <span class="pre">)</span></code> takes just <em>one</em> list,
+whereas <code class="docutils literal notranslate"><span class="pre">Node</span></code> takes <em>two</em> trees.</p>
+<p>The induction principle for binary trees is therefore very similar to the
+induction principle for lists, except that with binary trees we get
+<em>two</em> inductive hypotheses, one for each subtree:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>forall properties P,
+  if P(Leaf),
+  and if forall l v r, (P(l) and P(r)) implies P(Node (l, v, r)),
+  then forall t, P(t)
+</pre></div>
+</div>
+<p>An inductive proof for binary trees therefore has the following structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Proof: by induction on t.
+P(t) = ...
+
+Base case: t = Leaf
+Show: P(Leaf)
+
+Inductive case: t = Node (l, v, r)
+IH1: P(l)
+IH2: P(r)
+Show: P(Node (l, v, r))
+</pre></div>
+</div>
+<p>Let’s try an example of this kind of proof. Here is a function that creates the
+mirror image of a tree, swapping its left and right subtrees at all levels:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">reflect</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="nc">Leaf</span>
+  <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">l</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">reflect</span> <span class="n">r</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">reflect</span> <span class="n">l</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val reflect : &#39;a tree -&gt; &#39;a tree = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>For example, these two trees are reflections of each other:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>     1               1
+   /   \           /   \
+  2     3         3     2
+ / \   / \       / \   / \
+4   5 6   7     7   6 5   4
+</pre></div>
+</div>
+<p>If you take the mirror image of a mirror image, you should get the original
+back. That means reflection is an <em>involution</em>, which is any function <code class="docutils literal notranslate"><span class="pre">f</span></code> such
+that <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">(f</span> <span class="pre">x)</span> <span class="pre">=</span> <span class="pre">x</span></code>. Another example of an involution is multiplication by
+negative one on the integers.</p>
+<p>Let’s prove that <code class="docutils literal notranslate"><span class="pre">reflect</span></code> is an involution.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Claim: forall t, reflect (reflect t) = t
+
+Proof: by induction on t.
+P(t) = reflect (reflect t) = t
+
+Base case: t = Leaf
+Show: reflect (reflect Leaf) = Leaf
+
+  reflect (reflect Leaf)
+=   { evaluation }
+  reflect Leaf
+=   { evaluation }
+  Leaf
+
+Inductive case: t = Node (l, v, r)
+IH1: reflect (reflect l) = l
+IH2: reflect (reflect r) = r
+Show: reflect (reflect (Node (l, v, r))) = Node (l, v, r)
+
+  reflect (reflect (Node (l, v, r)))
+=   { evaluation }
+  reflect (Node (reflect r, v, reflect l))
+=   { evaluation }
+  Node (reflect (reflect l), v, reflect (reflect r))
+=   { IH1 }
+  Node (l, v, reflect (reflect r))
+=   { IH2 }
+  Node (l, v, r)
+
+QED
+</pre></div>
+</div>
+<p>Induction on trees is really no more difficult than induction on lists or
+natural numbers. Just keep track of the inductive hypotheses, using our stylized
+proof notation, and it isn’t hard at all.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/aiJDQeWL2G0" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+</div>
+<div class="section" id="induction-principles-for-all-variants">
+<h2><span class="section-number">6.8.5. </span>Induction Principles for All Variants<a class="headerlink" href="#induction-principles-for-all-variants" title="Permalink to this headline">¶</a></h2>
+<p>We’ve now seen induction principles for <code class="docutils literal notranslate"><span class="pre">nat</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>, and <code class="docutils literal notranslate"><span class="pre">tree</span></code>. Generalizing
+from what we’ve seen, each constructor of a variant either generates a base case
+for the inductive proof, or an inductive case. And, if a constructor itself
+carries values of that data type, each of those values generates in inductive
+hypothesis. For example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Z</span></code>, <code class="docutils literal notranslate"><span class="pre">[]</span></code>, and <code class="docutils literal notranslate"><span class="pre">Leaf</span></code> all generated base cases.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">::</span></code>, and <code class="docutils literal notranslate"><span class="pre">Node</span></code> all generated inductive cases.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">::</span></code> each generated one IH, because each carries one value of the
+data type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Node</span></code> generated two IHs, because it carries two values of the data type.</p></li>
+</ul>
+<p>Suppose we have these types to represent the AST for expressions in a simple
+language with integers, Booleans, unary operators, and binary operators:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">uop</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">UMinus</span>
+
+<span class="k">type</span> <span class="n">bop</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">BPlus</span>
+  <span class="o">|</span> <span class="nc">BMinus</span>
+
+<span class="k">type</span> <span class="n">expr</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">Int</span> <span class="k">of</span> <span class="kt">int</span>
+  <span class="o">|</span> <span class="nc">Bool</span> <span class="k">of</span> <span class="kt">bool</span>
+  <span class="o">|</span> <span class="nc">Unop</span> <span class="k">of</span> <span class="n">uop</span> <span class="o">*</span> <span class="n">expr</span>
+  <span class="o">|</span> <span class="nc">Binop</span> <span class="k">of</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">bop</span> <span class="o">*</span> <span class="n">expr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type uop = UMinus
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type bop = BPlus | BMinus
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type expr =
+    Int of int
+  | Bool of bool
+  | Unop of uop * expr
+  | Binop of expr * bop * expr
+</pre></div>
+</div>
+</div>
+</div>
+<p>The induction principle for <code class="docutils literal notranslate"><span class="pre">expr</span></code> is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>forall properties P,
+  if forall i, P(Int i)
+  and forall b, P(Bool b)
+  and forall u e, P(e) implies P(Unop (u, e))
+  and forall b e1 e2, (P(e1) and P(e2)) implies P(Binop (e1, b, e2))
+  then forall e, P(e)
+</pre></div>
+</div>
+<p>There are two base cases, corresponding to the two constructors that don’t carry
+an <code class="docutils literal notranslate"><span class="pre">expr</span></code>. There are two inductive cases, corresponding to the two constructors
+that do carry <code class="docutils literal notranslate"><span class="pre">expr</span></code>s. <code class="docutils literal notranslate"><span class="pre">Unop</span></code> gets one IH, whereas <code class="docutils literal notranslate"><span class="pre">Binop</span></code> gets two IHs, because
+of the number of <code class="docutils literal notranslate"><span class="pre">expr</span></code>s that each carries.</p>
+</div>
+<div class="section" id="induction-and-recursion">
+<h2><span class="section-number">6.8.6. </span>Induction and Recursion<a class="headerlink" href="#induction-and-recursion" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/J-x9hcNqRhY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>Inductive proofs and recursive programs bear a striking similarity. In a sense,
+an inductive proof <em>is</em> a recursive program that shows how to construct evidence
+for a theorem involving an algebraic data type (ADT). The <strong>structure</strong> of an ADT determines the structure of proofs and programs:</p>
+<ul class="simple">
+<li><p>The <strong>constructors</strong> of an ADT are the organizational principle of both proofs
+and programs. In a proof, we have a base or inductive case for each
+constructor. In a program, we have a pattern-matching case for each
+constructor.</p></li>
+<li><p>The use of <strong>recursive types</strong> in an ADT determine where recursion occurs in
+both proofs and programs. By “recursive type”, we mean the occurrence of the
+type in its own definition, such as the second <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">list</span></code> in
+<code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">'a</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">[]</span> <span class="pre">|</span> <span class="pre">(</span> <span class="pre">::</span> <span class="pre">)</span> <span class="pre">'a</span> <span class="pre">*</span> <span class="pre">'a</span> <span class="pre">list</span></code>. Such occurrences lead to “smaller”
+values of a type occurring inside larger values. In a proof, we apply the
+inductive hypothesis upon reaching such a smaller value. In a program, we
+recurse on the smaller value.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/correctness"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="proving_correctness.html" title="previous page"><span class="section-number">6.7. </span>Proving Correctness</a>
+    <a class='right-next' id="next-link" href="alg_spec.html" title="next page"><span class="section-number">6.9. </span>Algebraic Specification</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

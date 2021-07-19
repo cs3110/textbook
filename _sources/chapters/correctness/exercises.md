@@ -160,3 +160,165 @@ let avg lst =
 Write a QCheck test that detects the bug. For the property that you check,
 construct your own *reference implementation* of average&mdash;that is,
 a less optimized version of `avg` that is obviously correct.
+
+<!--------------------------------------------------------------------------->
+{{ ex2 | replace("%%NAME%%", "exp")}}
+
+Prove that `exp x (m + n) = exp x m * exp x n`, where
+
+```ocaml
+let rec exp x n =
+  if n = 0 then 1 else x * exp x (n - 1)
+```
+
+Proceed by induction on `m`.
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "fibi")}}
+
+Prove that `forall n >= 1, fib n = fibi n (0, 1)`, where
+
+```ocaml
+let rec fib n =
+  if n = 1 then 1
+  else if n = 2 then 1
+  else fib (n - 2) + fib (n - 1)
+
+let rec fibi n (prev, curr) =
+  if n = 1 then curr
+  else fibi (n - 1) (curr, prev + curr)
+```
+
+Proceed by induction on `n`, rather than trying to apply the theorem about
+converting recursion into iteration.
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "expsq")}}
+
+Prove that `expsq x n = exp x n`, where
+
+```ocaml
+let rec expsq x n =
+  if n = 0 then 1
+  else if n = 1 then x
+  else (if n mod 2 = 0 then 1 else x) * expsq (x * x) (n / 2)
+```
+
+Proceed by *[strong induction][strong-ind]* on `n`. Function `expsq` implements
+*exponentiation by repeated squaring*, which results in more efficient
+computation than `exp`.
+
+[strong-ind]: https://en.wikipedia.org/wiki/Mathematical_induction#Complete_(strong)_induction
+
+<!--------------------------------------------------------------------------->
+{{ ex2 | replace("%%NAME%%", "mult")}}
+
+Prove that `forall n, mult n Z = Z` by induction on `n`, where:
+
+```ocaml
+let rec mult a b =
+  match a with
+  | Z -> Z
+  | S k -> plus b (mult k b)
+```
+
+<!--------------------------------------------------------------------------->
+{{ ex2 | replace("%%NAME%%", "append nil")}}
+
+Prove that `forall lst, lst @ [] = lst` by induction on `lst`.
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "rev dist append")}}
+
+Prove that reverse distributes over append, i.e., that
+`forall lst1 lst2, rev (lst1 @ lst2) = rev lst2 @ rev lst1`, where:
+
+```ocaml
+let rec rev = function
+  | [] -> []
+  | h :: t -> rev t @ [h]
+```
+
+(That is, of course, an inefficient implementation of `rev`.) You will need to
+choose which list to induct over. You will need the previous exercise as a
+lemma, as well as the associativity of `append`, which was proved in the notes
+above.
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "rev involutive")}}
+
+Prove that reverse is an involution, i.e., that
+`forall lst, rev (rev lst) = lst`. Proceed by induction on `lst`. You will need
+the previous exercise as a lemma.
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "reflect size")}}
+
+Prove that `forall t, size (reflect t) = size t` by induction on `t`, where:
+
+```ocaml
+let rec size = function
+  | Leaf -> 0
+  | Node (l, v, r) -> 1 + size l + size r
+```
+
+<!--------------------------------------------------------------------------->
+{{ ex4 | replace("%%NAME%%", "fold theorem 2")}}
+
+We proved that `fold_left` and `fold_right` yield the same results if their
+function argument is associative and commutative. But that doesn't explain why
+these two implementations of `concat` yield the same results, because `( ^ )` is
+not commutative:
+
+```ocaml
+let concat_l lst = List.fold_left ( ^ ) "" lst
+let concat_r lst = List.fold_right ( ^ ) lst ""
+```
+
+Formulate and prove a new theorem about when `fold_left` and `fold_right` yield
+the same results, under the relaxed assumption that their function argument is
+associative but not necessarily commutative. *Hint: make a new assumption about
+the initial value of the accumulator.*
+
+<!--------------------------------------------------------------------------->
+{{ ex4 | replace("%%NAME%%", "propositions")}}
+
+In propositional logic, we have atomic propositions, negation, conjunction,
+disjunction, and implication. For example, `raining /\ snowing /\ cold` is a
+proposition stating that it is simultaneously raining and snowing and cold (a
+weather condition known as *Ithacating*).
+
+Define an OCaml type to represent propositions. Then state the induction
+principle for that type.
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "list spec")}}
+
+Design an OCaml interface for lists that has `nil`, `cons`, `append`, and
+`length` operations. Design the equational specification. Hint: the equations
+will look strikingly like the OCaml implementations of `@` and `List.length`.
+
+<!--------------------------------------------------------------------------->
+{{ ex4 | replace("%%NAME%%", "bag spec")}}
+
+A *bag* or *multiset* is like a blend of a list and a set: like a set, order
+does not matter; like a list, elements may occur more than once. The number of
+times an element occurs is its *multiplicity*. An element that does not occur in
+the bag has multiplicity 0. Here is an OCaml signature for bags:
+
+```ocaml
+module type Bag = sig
+  type 'a t
+  val empty : 'a t
+  val is_empty : 'a t -> bool
+  val insert : 'a -> 'a t -> 'a t
+  val mult : 'a -> 'a t -> int
+  val remove : 'a -> 'a t -> 'a t
+end
+```
+
+Categorize the operations in the `Bag` interface as generators, manipulators, or
+queries. Then design an equational specification for bags. For the `remove`
+operation, your specification should cause at most one occurrence of an element
+to be removed. That is, the multiplicity of that value should decrease by at
+most one.

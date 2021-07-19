@@ -17,7 +17,24 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-`QCheck_runner.to_ounit2_test
+module BatchedQueue = struct
+  (* AF: [(o, i)] represents the queue [o @ (List.rev i)].
+     RI: if [o] is empty then [i] is empty. *)
+  type 'a t = 'a list * 'a list
+
+  let empty = ([], [])
+
+  let is_empty (o, i) = if o = [] then true else false
+
+  let enq x (o, i) = if o = [] then ([x], []) else (o, x :: i)
+
+  let front (o, _) = List.hd o
+
+  let deq (o, i) =
+    match List.tl o with
+    | [] -> (List.rev i, [])
+    | t -> (t, b)
+end
 ------------------
 
 

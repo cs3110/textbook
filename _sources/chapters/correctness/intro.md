@@ -1,4 +1,8 @@
-# Documentation and Testing
+# Correctness
+
+When we write code, we always hope that we get it right. We *hope* that our code
+is correct. But how can we *know* it's correct? In this chapter, we'll study
+three possible answers: documentation, testing, and proof.
 
 Let's be honest: we all at one time or another have thought that documentation
 or testing was a boring, tedious, and altogether postponable task. But with
@@ -58,3 +62,10 @@ no worries. You will be in the future, if you stick with the craft of
 programming long enough. Meanwhile, let's proceed with learning about how to do
 it better. In this chapter, we're going to learn about some successful (and
 hopefully new-to-you) techniques for both.
+
+Finally, beyond documentation and testing, there is mathematical **proof** of
+correctness. Techniques from logic and discrete math can be used to formally
+prove that a program is correct according to a specification. Such proofs aren't
+necessarily easy&mdash;in fact they take even more human discipline and training
+than documentation and testing do. But they can make sense to apply when
+programs are used for safety critical tasks where human lives are on the line.

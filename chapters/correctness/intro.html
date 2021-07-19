@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>6. Documentation and Testing &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>6. Correctness &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -380,7 +380,7 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="current reference internal" href="#">
-   6. Documentation and Testing
+   6. Correctness
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -414,13 +414,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
-     6.7. Summary
+     6.10. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercises.html">
-     6.8. Exercises
+     6.11. Exercises
     </a>
    </li>
   </ul>
@@ -467,7 +482,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/chapters/doctest/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/chapters/correctness/intro.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -487,10 +502,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/doctest/intro.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/correctness/intro.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/doctest/intro.md"><button
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/correctness/intro.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -518,8 +533,11 @@
         
               <div>
                 
-  <div class="section" id="documentation-and-testing">
-<h1><span class="section-number">6. </span>Documentation and Testing<a class="headerlink" href="#documentation-and-testing" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="correctness">
+<h1><span class="section-number">6. </span>Correctness<a class="headerlink" href="#correctness" title="Permalink to this headline">¶</a></h1>
+<p>When we write code, we always hope that we get it right. We <em>hope</em> that our code
+is correct. But how can we <em>know</em> it’s correct? In this chapter, we’ll study
+three possible answers: documentation, testing, and proof.</p>
 <p>Let’s be honest: we all at one time or another have thought that documentation
 or testing was a boring, tedious, and altogether postponable task. But with
 maturity programmers come to realize that both are essential to writing correct
@@ -571,6 +589,12 @@ no worries. You will be in the future, if you stick with the craft of
 programming long enough. Meanwhile, let’s proceed with learning about how to do
 it better. In this chapter, we’re going to learn about some successful (and
 hopefully new-to-you) techniques for both.</p>
+<p>Finally, beyond documentation and testing, there is mathematical <strong>proof</strong> of
+correctness. Techniques from logic and discrete math can be used to formally
+prove that a program is correct according to a specification. Such proofs aren’t
+necessarily easy—in fact they take even more human discipline and training
+than documentation and testing do. But they can make sense to apply when
+programs are used for safety critical tasks where human lives are on the line.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -588,7 +612,7 @@ hopefully new-to-you) techniques for both.</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./chapters/doctest"
+            path: "./chapters/correctness"
         },
         predefinedOutput: true
     }

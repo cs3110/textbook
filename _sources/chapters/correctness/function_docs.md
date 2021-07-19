@@ -231,11 +231,16 @@ improving your own specifications.
 
 In addition to specifying functions, programmers need to provide comments in the
 body of the functions. In fact, programmers usually do not write enough comments
-in their code. But this doesn't mean that adding more comments is always better.
-The wrong comments will simply obscure the code further. Shoveling as many
-comments into code as possible usually makes the code worse! Both code and
-comments are precise tools for communication (with the computer and with other
-programmers) that should be wielded carefully.
+in their code. (For a classic example, check out the
+[actual comment on line 561][quake3-wtf] of the Quake 3 Arena game engine.)
+
+[quake3-wtf]: https://archive.softwareheritage.org/swh:1:cnt:bb0faf6919fc60636b2696f32ec9b3c2adb247fe;origin=https://github.com/id-Software/Quake-III-Arena;visit=swh:1:snp:4ab9bcef131aaf449a7c01370aff8c91dcecbf5f;anchor=swh:1:rev:dbe4ddb10315479fc00086f08e25d968b4b43c49;path=/code/game/q_math.c;lines=558-564
+
+But this doesn't mean that adding more comments is always better. The wrong
+comments will simply obscure the code further. Shoveling as many comments into
+code as possible usually makes the code worse! Both code and comments are
+precise tools for communication (with the computer and with other programmers)
+that should be wielded carefully.
 
 It is particularly annoying to read code that contains many interspersed
 comments (typically of questionable value), e.g.:

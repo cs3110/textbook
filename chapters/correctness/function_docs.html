@@ -380,7 +380,7 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="intro.html">
-   6. Documentation and Testing
+   6. Correctness
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2">
@@ -414,13 +414,28 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
-     6.7. Summary
+     6.10. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercises.html">
-     6.8. Exercises
+     6.11. Exercises
     </a>
    </li>
   </ul>
@@ -466,11 +481,11 @@
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
         <a class="dropdown-buttons"
-            href="../../_sources/chapters/doctest/function_docs.ipynb"><button type="button"
+            href="../../_sources/chapters/correctness/function_docs.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/chapters/doctest/function_docs.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/chapters/correctness/function_docs.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -490,10 +505,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/doctest/function_docs.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/correctness/function_docs.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/doctest/function_docs.md"><button
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/correctness/function_docs.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -513,7 +528,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/doctest/function_docs.md"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/correctness/function_docs.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -761,11 +776,13 @@ improving your own specifications.</p>
 <h2><span class="section-number">6.2.6. </span>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <p>In addition to specifying functions, programmers need to provide comments in the
 body of the functions. In fact, programmers usually do not write enough comments
-in their code. But this doesn’t mean that adding more comments is always better.
-The wrong comments will simply obscure the code further. Shoveling as many
-comments into code as possible usually makes the code worse! Both code and
-comments are precise tools for communication (with the computer and with other
-programmers) that should be wielded carefully.</p>
+in their code. (For a classic example, check out the
+<a class="reference external" href="https://archive.softwareheritage.org/swh:1:cnt:bb0faf6919fc60636b2696f32ec9b3c2adb247fe%3Borigin=https://github.com/id-Software/Quake-III-Arena%3Bvisit=swh:1:snp:4ab9bcef131aaf449a7c01370aff8c91dcecbf5f%3Banchor=swh:1:rev:dbe4ddb10315479fc00086f08e25d968b4b43c49%3Bpath=/code/game/q_math.c;lines=558-564">actual comment on line 561</a> of the Quake 3 Arena game engine.)</p>
+<p>But this doesn’t mean that adding more comments is always better. The wrong
+comments will simply obscure the code further. Shoveling as many comments into
+code as possible usually makes the code worse! Both code and comments are
+precise tools for communication (with the computer and with other programmers)
+that should be wielded carefully.</p>
 <p>It is particularly annoying to read code that contains many interspersed
 comments (typically of questionable value), e.g.:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="c">(* make y one greater than x *)</span>
@@ -834,7 +851,7 @@ annotation at the point where the variable comes into scope.</p>
         },
         kernelOptions: {
             kernelName: "ocaml-jupyter",
-            path: "./chapters/doctest"
+            path: "./chapters/correctness"
         },
         predefinedOutput: true
     }

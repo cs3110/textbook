@@ -1,0 +1,1281 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.9. Algebraic Specification &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6.10. Summary" href="summary.html" />
+    <link rel="prev" title="6.8. Structural Induction" href="structural_induction.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.5. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.6. Summary
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="intro.html">
+   6. Correctness
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/correctness/alg_spec.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/correctness/alg_spec.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/correctness/alg_spec.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/correctness/alg_spec.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/correctness/alg_spec.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-stacks">
+   6.9.1. Example: Stacks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-queues">
+   6.9.2. Example: Queues
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-batched-queues">
+   6.9.3. Example: Batched Queues
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#designing-algebraic-specifications">
+   6.9.4. Designing Algebraic Specifications
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="algebraic-specification">
+<h1><span class="section-number">6.9. </span>Algebraic Specification<a class="headerlink" href="#algebraic-specification" title="Permalink to this headline">¶</a></h1>
+<p>Next let’s tackle a bigger challenge: proving the correctness of a data
+structure, such as a stack, queue, or set.</p>
+<p>Correctness proofs always need specifications. In proving the correctness of
+iterative factorial, we used recursive factorial as a specification. By analogy,
+we could provide two implementations of a data structure—one simple, the other
+complex and efficient—and prove that the two are equivalent. That would
+require us to introduce ways to translate between the two implementations. For
+example, we could prove the correctness of a dictionary implemented as a
+red-black tree relative to an implementation as an association list, by defining
+functions to convert trees to lists. Such an approach is certainly valid, but it
+doesn’t lead to new ideas about verification for us to study.</p>
+<p>Instead, we will pursue a different approach based on <em>equational
+specifications</em>, aka <em>algebraic specifications</em>. The idea with these is to</p>
+<ul class="simple">
+<li><p>define the types of the data structure operations, and</p></li>
+<li><p>to write a set of equations that define how the operations interact with one
+another.</p></li>
+</ul>
+<p>The reason the word “algebra” shows up here is (in part) that this
+type-and-equation based approach is something we learned in high-school algebra.
+For example, here is a specification for some operators:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="o">:</span> <span class="kt">int</span>
+<span class="mi">1</span> <span class="o">:</span> <span class="kt">int</span>
+<span class="o">-</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="o">+</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="o">*</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+
+<span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">+</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="o">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">c</span><span class="o">)</span>
+<span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">a</span>
+<span class="n">a</span> <span class="o">+</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">a</span> <span class="o">+</span> <span class="o">(-</span><span class="n">a</span><span class="o">)</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="o">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">*</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="o">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">c</span><span class="o">)</span>
+<span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">a</span>
+<span class="n">a</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">a</span> <span class="o">*</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">a</span> <span class="o">*</span> <span class="o">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">c</span><span class="o">)</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span>
+</pre></div>
+</div>
+<p>The types of those operators, and the associated equations, are facts learned
+when studying algebra.</p>
+<p>Our goal is now to write similar specifications for data structures, and use
+them to reason about the correctness of implementations.</p>
+<div class="section" id="example-stacks">
+<h2><span class="section-number">6.9.1. </span>Example: Stacks<a class="headerlink" href="#example-stacks" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/Pyz2xEzD2cY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>Here are a few familiar operations on stacks along with their types.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Stack =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val is_empty : &#39;a t -&gt; bool
+    val peek : &#39;a t -&gt; &#39;a
+    val push : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val pop : &#39;a t -&gt; &#39;a t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>As usual, there is a design choice to be made with <code class="docutils literal notranslate"><span class="pre">peek</span></code> etc. about what to do
+with empty stacks. Here we have not used <code class="docutils literal notranslate"><span class="pre">option</span></code>, which suggests that <code class="docutils literal notranslate"><span class="pre">peek</span></code>
+will raise an exception on the empty stack. So we are cautiously relaxing our
+prohibition on exceptions.</p>
+<p>In the past we’ve given these operations specifications in English, e.g.,</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** [push x s] is the stack [s] with [x] pushed on the top. *)</span>
+  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span>
+</pre></div>
+</div>
+<p>But now, we’ll write some equations to describe how the operations work:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1. is_empty empty = true
+2. is_empty (push x s) = false
+3. peek (push x s) = x
+4. pop (push x s) = s
+</pre></div>
+</div>
+<p>(Later we’ll return to the question of <em>how</em> to design such equations.) The
+variables appearing in these equations are implicitly universally quantified.
+Here’s how to read each equation:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_empty</span> <span class="pre">empty</span> <span class="pre">=</span> <span class="pre">true</span></code>.  The empty stack is empty.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_empty</span> <span class="pre">(push</span> <span class="pre">x</span> <span class="pre">s)</span> <span class="pre">=</span> <span class="pre">false</span></code>.  A stack that has just been pushed is
+non-empty.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">peek</span> <span class="pre">(push</span> <span class="pre">x</span> <span class="pre">s)</span> <span class="pre">=</span> <span class="pre">x</span></code>.  Pushing then immediately peeking yields whatever
+value was pushed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pop</span> <span class="pre">(push</span> <span class="pre">x</span> <span class="pre">s)</span> <span class="pre">=</span> <span class="pre">s</span></code>.  Pushing then immediately popping yields the original
+stack.</p></li>
+</ol>
+<p>Just with these equations alone, we already can deduce a lot about how any
+sequence of stack operations must work. For example,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  peek (pop (push 1 (push 2 empty)))
+=   { equation 4 }
+  peek (push 2 empty)
+=   { equation 3 }
+  2
+</pre></div>
+</div>
+<p>And <code class="docutils literal notranslate"><span class="pre">peek</span> <span class="pre">empty</span></code> doesn’t equal any value according to the equations, since there
+is no equation of the form <code class="docutils literal notranslate"><span class="pre">peek</span> <span class="pre">empty</span> <span class="pre">=</span> <span class="pre">...</span></code>. All that is true regardless of
+the stack implementation that is chosen: any correct implementation must cause
+the equations to hold.</p>
+<p>Suppose we implemented stacks as lists, as follows:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStack</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">hd</span>
+  <span class="k">let</span> <span class="n">push</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">cons</span>
+  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">tl</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack :
+  sig
+    type &#39;a t = &#39;a list
+    val empty : &#39;a list
+    val is_empty : &#39;a list -&gt; bool
+    val peek : &#39;a list -&gt; &#39;a
+    val push : &#39;a -&gt; &#39;a list -&gt; &#39;a list
+    val pop : &#39;a list -&gt; &#39;a list
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we could <em>prove</em> that each equation holds of the implementation. All these
+proofs are quite easy by now, and proceed entirely by evaluation. For example,
+here’s a proof of equation 3:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  peek (push x s)
+=   { evaluation }
+  peek (x :: s)
+=   { evaluation }
+  x
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-queues">
+<h2><span class="section-number">6.9.2. </span>Example: Queues<a class="headerlink" href="#example-queues" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/lAJz6ZnsbNI" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>Stacks were easy.  How about queues?  Here is the specification:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Queue</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">front</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="k">val</span> <span class="n">enq</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">deq</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Queue =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val is_empty : &#39;a t -&gt; bool
+    val front : &#39;a t -&gt; &#39;a
+    val enq : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val deq : &#39;a t -&gt; &#39;a t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1.  is_empty empty = true
+2.  is_empty (enq x q) = false
+3a. front (enq x q) = x            if is_empty q = true
+3b. front (enq x q) = front q      if is_empty q = false
+4a. deq (enq x q) = empty          if is_empty q = true
+4b. deq (enq x q) = enq x (deq q)  if is_empty q = false
+</pre></div>
+</div>
+<p>The types of the queue operations are actually identical to the types
+of the stack operations.  Here they are, side-by-side for comparison:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">sig</span>            <span class="k">module</span> <span class="k">type</span> <span class="nc">Queue</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>                          <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>                   <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>        <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>              <span class="k">val</span> <span class="n">front</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>      <span class="k">val</span> <span class="n">enq</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>             <span class="k">val</span> <span class="n">deq</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>                                <span class="k">end</span>
+</pre></div>
+</div>
+<p>Look at each line:  though the operation may have a different name, its type
+is the same.  Obviously, the types alone don’t tell us enough about the
+operations.  But the equations do!  Here’s how to read each equation:</p>
+<ol class="simple">
+<li><p>The empty queue is empty.</p></li>
+<li><p>Enqueueing makes a queue non-empty.</p></li>
+<li><p>Enqueueing <code class="docutils literal notranslate"><span class="pre">x</span></code> on an empty queue makes <code class="docutils literal notranslate"><span class="pre">x</span></code> the front element.
+But if the queue isn’t empty, enqueueing doesn’t change the front element.</p></li>
+<li><p>Enqueueing then dequeueing on an empty queue leaves the queue empty.
+But if the queue isn’t empty, the enqueue and dequeue operations can
+be swapped.</p></li>
+</ol>
+<p>For example,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  front (deq (enq 1 (enq 2 empty)))
+=   { equation 4b }
+  front (enq 1 (deq (enq 2 empty)))
+=   { equation 4a }
+  front (enq 1 empty)
+=   { equation 3a }
+  1
+</pre></div>
+</div>
+<p>And <code class="docutils literal notranslate"><span class="pre">front</span> <span class="pre">empty</span></code> doesn’t equal any value according to the equations.</p>
+<p>Implementing a queue as a list results in an implementation that is easy to
+verify just with evaluation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListQueue</span> <span class="o">:</span> <span class="nc">Queue</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">is_empty</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span> <span class="o">=</span> <span class="bp">[]</span>
+  <span class="k">let</span> <span class="n">front</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">hd</span>
+  <span class="k">let</span> <span class="n">enq</span> <span class="n">x</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span> <span class="o">@</span> <span class="o">[</span><span class="n">x</span><span class="o">]</span>
+  <span class="k">let</span> <span class="n">deq</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">tl</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListQueue : Queue
+</pre></div>
+</div>
+</div>
+</div>
+<p>For example, 4a can be verified as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  deq (enq x empty)
+=   { evaluation of empty and enq}
+  deq ([] @ [x])
+=   { evaluation of @ }
+  deq [x]
+=   { evaluation of deq }
+  []
+=   { evaluation of empty }
+  empty
+</pre></div>
+</div>
+<p>And 4b, as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  deq (enq x q)
+=  { evaluation of enq and deq }
+  List.tl (q @ [x])
+=  { lemma, below, and q &lt;&gt; [] }
+  (List.tl q) @ [x]
+
+  enq x (deq q)
+=  { evaluation }
+  (List.tl q) @ [x]
+</pre></div>
+</div>
+<p>Here is the lemma:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Lemma: if xs &lt;&gt; [], then List.tl (xs @ ys) = (List.tl xs) @ ys.
+Proof: if xs &lt;&gt; [], then xs = h :: t for some h and t.
+
+  List.tl ((h :: t) @ ys)
+=   { evaluation of @ }
+  List.tl (h :: (t @ ys))
+=   { evaluation of tl }
+  t @ ys
+
+  (List.tl (h :: t)) @ ys
+=   { evaluation of tl }
+  t @ ys
+
+QED
+</pre></div>
+</div>
+<p>Note how the precondition in 3b and 4b of <code class="docutils literal notranslate"><span class="pre">q</span></code> not being empty ensures that we
+never have to deal with an exception being raised in the equational proofs.</p>
+</div>
+<div class="section" id="example-batched-queues">
+<h2><span class="section-number">6.9.3. </span>Example: Batched Queues<a class="headerlink" href="#example-batched-queues" title="Permalink to this headline">¶</a></h2>
+<p>Recall that batched queues represent a queue with two lists:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">BatchedQueue</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(* AF: [(o, i)] represents the queue [o @ (List.rev i)].</span>
+<span class="c">     RI: if [o] is empty then [i] is empty. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="o">(</span><span class="bp">[]</span><span class="o">,</span> <span class="bp">[]</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="o">=</span> <span class="k">if</span> <span class="n">o</span> <span class="o">=</span> <span class="bp">[]</span> <span class="k">then</span> <span class="bp">true</span> <span class="k">else</span> <span class="bp">false</span>
+
+  <span class="k">let</span> <span class="n">enq</span> <span class="n">x</span> <span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="o">=</span> <span class="k">if</span> <span class="n">o</span> <span class="o">=</span> <span class="bp">[]</span> <span class="k">then</span> <span class="o">([</span><span class="n">x</span><span class="o">],</span> <span class="bp">[]</span><span class="o">)</span> <span class="k">else</span> <span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="n">x</span> <span class="o">::</span> <span class="n">i</span><span class="o">)</span>
+
+  <span class="k">let</span> <span class="n">front</span> <span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="o">_)</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">hd</span> <span class="n">o</span>
+
+  <span class="k">let</span> <span class="n">deq</span> <span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="nn">List</span><span class="p">.</span><span class="n">tl</span> <span class="n">o</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="n">i</span><span class="o">,</span> <span class="bp">[]</span><span class="o">)</span>
+    <span class="o">|</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module BatchedQueue :
+  sig
+    type &#39;a t = &#39;a list * &#39;a list
+    val empty : &#39;a list * &#39;b list
+    val is_empty : &#39;a list * &#39;b -&gt; bool
+    val enq : &#39;a -&gt; &#39;a list * &#39;a list -&gt; &#39;a list * &#39;a list
+    val front : &#39;a list * &#39;b -&gt; &#39;a
+    val deq : &#39;a list * &#39;a list -&gt; &#39;a list * &#39;a list
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>This implementation is superficially different from the earlier implementation
+we gave, in that it uses pairs instead of records, and it raises the built-in
+exception <code class="docutils literal notranslate"><span class="pre">Failure</span></code> instead of a custom exception <code class="docutils literal notranslate"><span class="pre">Empty</span></code>.</p>
+<p>Is this implementation correct?  We need only verify the equations to find out.</p>
+<p>First, a lemma:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Lemma:  if is_empty q = true, then q = empty.
+Proof:  Since is_empty q = true, it must be that q = (f, b) and f = [].
+By the RI, it must also be that b = [].  Thus q = ([], []) = empty.
+QED
+</pre></div>
+</div>
+<p>Verifying equation 1:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  is_empty empty
+=   { eval empty }
+  is_empty ([], [])
+=   { eval is_empty }
+  [] = []
+=   { eval = }
+  true
+</pre></div>
+</div>
+<p>Verifying equation 2:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  is_empty (enq x q) = false
+=   { eval enq }
+  is_empty (if f = [] then [x], [] else f, x :: b)
+
+case analysis: f = []
+
+  is_empty (if f = [] then [x], [] else f, x :: b)
+=   { eval if, f = [] }
+  is_empty ([x], [])
+=   { eval is_empty }
+  [x] = []
+=   { eval = }
+  false
+
+case analysis: f = h :: t
+
+  is_empty (if f = [] then [x], [] else f, x :: b)
+=   { eval if, f = h :: t }
+  is_empty (h :: t, x :: b)
+=   { eval is_empty }
+  h :: t = []
+=   { eval = }
+  false
+</pre></div>
+</div>
+<p>Verifying equation 3a:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  front (enq x q) = x
+=   { emptiness lemma }
+  front (enq x ([], []))
+=   { eval enq }
+  front ([x], [])
+=   { eval front }
+  x
+</pre></div>
+</div>
+<p>Verifying equation 3b:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  front (enq x q)
+=   { rewrite q as (h :: t, b), because q is not empty }
+  front (enq x (h :: t, b))
+=   { eval enq }
+  front (h :: t, x :: b)
+=   { eval front }
+  h
+
+  front q
+=   { rewrite q as (h :: t, b), because q is not empty }
+  front (h :: t, b)
+=   { eval front }
+  h
+</pre></div>
+</div>
+<p>Verifying equation 4a:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  deq (enq x q)
+=   { emptiness lemma }
+  deq (enq x ([], []))
+=   { eval enq }
+  deq ([x], [])
+=   { eval deq }
+  List.rev [], []
+=   { eval rev }
+  [], []
+=   { eval empty }
+  empty
+</pre></div>
+</div>
+<p>Verifying equation 4b:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Show: deq (enq x q) = enq x (deq q)  assuming is_empty q = false.
+Proof: Since is_empty q = false, q must be (h :: t, b).
+
+Case analysis:  t = [], b = []
+
+  deq (enq x q)
+=   { rewriting q as ([h], []) }
+  deq (enq x ([h], []))
+=   { eval enq }
+  deq ([h], [x])
+=   { eval deq }
+  List.rev [x], []
+=   { eval rev }
+  [x], []
+
+  enq x (deq q)
+=   { rewriting q as ([h], []) }
+  enq x (deq ([h], []))
+=   { eval deq }
+  enq x (List.rev [], [])
+=   { eval rev }
+  enq x ([], [])
+=   { eval enq }
+  [x], []
+
+Case analysis:  t = [], b = h&#39; :: t&#39;
+
+  deq (enq x q)
+=   { rewriting q as ([h], h&#39; :: t&#39;) }
+  deq (enq x ([h], h&#39; :: t&#39;))
+=   { eval enq }
+  deq ([h], x :: h&#39; :: t&#39;)
+=   { eval deq }
+  List.rev (x :: h&#39; :: t&#39;), []
+
+  enq x (deq q)
+=   { rewriting q as ([h], h&#39; :: t&#39;) }
+  enq x (deq ([h], h&#39; :: t&#39;))
+=   { eval deq }
+  enq x (List.rev (h&#39; :: t&#39;), [])
+=   { eval enq }
+  (List.rev (h&#39; :: t&#39;), [x])
+
+STUCK
+</pre></div>
+</div>
+<p>Wait, we just got stuck! <code class="docutils literal notranslate"><span class="pre">List.rev</span> <span class="pre">(x</span> <span class="pre">::</span> <span class="pre">h'</span> <span class="pre">::</span> <span class="pre">t'),</span> <span class="pre">[]</span></code> and
+<code class="docutils literal notranslate"><span class="pre">(List.rev</span> <span class="pre">(h'</span> <span class="pre">::</span> <span class="pre">t'),</span> <span class="pre">[x])</span></code> are not the same. But, abstractly, they do
+represent the same queue: <code class="docutils literal notranslate"><span class="pre">(List.rev</span> <span class="pre">t')</span> <span class="pre">&#64;</span> <span class="pre">[h';</span> <span class="pre">x]</span></code>. We need to allow an
+additional equation for the representation type:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e = e&#39;   if  AF(e) = AF(e&#39;)
+</pre></div>
+</div>
+<p>Using that additional equation, we can continue:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  (List.rev (h&#39; :: t&#39;), [x])
+=   { AF equation }
+  List.rev (x :: h&#39; :: t&#39;), []
+
+The AF equation holds because:
+
+  List.rev (h&#39; :: t&#39;) @ [x]
+=   { eval rev }
+  List.rev (h&#39; :: t&#39;) @ List.rev [x]
+=   { rev distributes over @, an exercise in the previous lecture }
+  List.rev ([x] @ (h&#39; :: t&#39;))
+=   { eval @ }
+  List.rev (x :: h&#39; :: t&#39;))
+=   { lst @ [] = lst, an exercise in the previous lecture }
+  List.rev (x :: h&#39; :: t&#39;) @ []
+
+Case analysis:  t = h&#39; :: t&#39;
+
+  deq (enq x q)
+=   { rewriting q as (h :: h&#39; :: t&#39;, b) }
+  deq (enq x (h :: h&#39; :: t&#39;, b))
+=   { eval enq }
+  deq (h :: h&#39; :: t, x :: b)
+=   { eval deq }
+  h&#39; :: t, x :: b
+
+  enq x (deq q)
+=   { rewriting q as (h :: h&#39; :: t&#39;, b) }
+  enq x (deq (h :: h&#39; :: t&#39;, b))
+=   { eval deq }
+  enq x (h&#39; :: t&#39;, b)
+=   { eval enq }
+  h&#39; :: t&#39;, x :: b
+
+QED
+</pre></div>
+</div>
+<p>That concludes our verification of the batched queue. Note that we had to add
+the extra equation involving the abstraction function to get the proofs to go
+through:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e = e&#39;   if  AF(e) = AF(e&#39;)
+</pre></div>
+</div>
+<p>and that we made use of the RI during the proof. The AF and RI really are
+important!</p>
+</div>
+<div class="section" id="designing-algebraic-specifications">
+<h2><span class="section-number">6.9.4. </span>Designing Algebraic Specifications<a class="headerlink" href="#designing-algebraic-specifications" title="Permalink to this headline">¶</a></h2>
+<p>For both stacks and queues we provided some equations as the specification.
+Designing those equations is, in part, a matter of thinking hard about the data
+structure. But there’s more to it than that.</p>
+<p>Every value of the data structure is constructed with some operations. For a
+stack, those operations are <code class="docutils literal notranslate"><span class="pre">empty</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code>. There might be some <code class="docutils literal notranslate"><span class="pre">pop</span></code>
+operations involved, but those can be eliminated. For example, <code class="docutils literal notranslate"><span class="pre">pop</span> <span class="pre">(push</span> <span class="pre">1</span> <span class="pre">(push</span> <span class="pre">2</span> <span class="pre">empty))</span></code> is really the same stack as <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">2</span> <span class="pre">empty</span></code>. The latter is the
+<em>canonical form</em> of that stack: there are many other ways to construct it, but
+that is the simplest. Indeed, every possible stack value can be constructed just
+with <code class="docutils literal notranslate"><span class="pre">empty</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code>. Similarly, every possible queue value can be
+constructed just with <code class="docutils literal notranslate"><span class="pre">empty</span></code> and <code class="docutils literal notranslate"><span class="pre">enq</span></code>: if there are <code class="docutils literal notranslate"><span class="pre">deq</span></code> operations involved,
+those can be eliminated.</p>
+<p>Let’s categorize the operations of a data structure as follows:</p>
+<ul class="simple">
+<li><p><strong>Generators</strong> are those operations involved in creating a canonical form.
+They return a value of the data structure type. For example, <code class="docutils literal notranslate"><span class="pre">empty</span></code>, <code class="docutils literal notranslate"><span class="pre">push</span></code>,
+<code class="docutils literal notranslate"><span class="pre">enq</span></code>.</p></li>
+<li><p><strong>Manipulators</strong> are operations that create a value of the data structure
+type, but are not needed to create canonical forms. For example, <code class="docutils literal notranslate"><span class="pre">pop</span></code>, <code class="docutils literal notranslate"><span class="pre">deq</span></code>.</p></li>
+<li><p><strong>Queries</strong> do not return a value of the data structure type. For example,
+<code class="docutils literal notranslate"><span class="pre">is_empty</span></code>, <code class="docutils literal notranslate"><span class="pre">peek</span></code>, <code class="docutils literal notranslate"><span class="pre">front</span></code>.</p></li>
+</ul>
+<p>Given such a categorization, we can design the equational specification of a
+data structure by applying non-generators to generators. For example: What does
+<code class="docutils literal notranslate"><span class="pre">is_empty</span></code> return on <code class="docutils literal notranslate"><span class="pre">empty</span></code>? on <code class="docutils literal notranslate"><span class="pre">push</span></code>? What does <code class="docutils literal notranslate"><span class="pre">front</span></code> return on <code class="docutils literal notranslate"><span class="pre">enq</span></code>? What
+does <code class="docutils literal notranslate"><span class="pre">deq</span></code> return on <code class="docutils literal notranslate"><span class="pre">enq</span></code>? etc.</p>
+<p>So if there are <code class="docutils literal notranslate"><span class="pre">n</span></code> generators and <code class="docutils literal notranslate"><span class="pre">m</span></code> non-generators of a data structure, we
+would begin by trying to create <code class="docutils literal notranslate"><span class="pre">n*m</span></code> equations, one for each pair of a
+generator and non-generator. Each equation would show how to simplify an
+expression. In some cases we might need a couple equations, depending on the
+result of some comparison. For example, in the queue specification, we have the
+following equations:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_empty</span> <span class="pre">empty</span> <span class="pre">=</span> <span class="pre">true</span></code>: this is a non-generator <code class="docutils literal notranslate"><span class="pre">is_empty</span></code> applied to a
+generator <code class="docutils literal notranslate"><span class="pre">empty</span></code>. It reduces just to a Boolean value, which doesn’t involve
+the data structure type (queues) at all.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_empty</span> <span class="pre">(enq</span> <span class="pre">x</span> <span class="pre">q)</span> <span class="pre">=</span> <span class="pre">false</span></code>: a non-generator <code class="docutils literal notranslate"><span class="pre">is_empty</span></code> applied to a
+generator <code class="docutils literal notranslate"><span class="pre">enq</span></code>. Again it reduces simply to a Boolean value.</p></li>
+<li><p>There are two subcases.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">front</span> <span class="pre">(enq</span> <span class="pre">x</span> <span class="pre">q)</span> <span class="pre">=</span> <span class="pre">x</span></code>, if <code class="docutils literal notranslate"><span class="pre">is_empty</span> <span class="pre">q</span> <span class="pre">=</span> <span class="pre">true</span></code>. A non-generator <code class="docutils literal notranslate"><span class="pre">front</span></code>
+applied to a generator <code class="docutils literal notranslate"><span class="pre">enq</span></code>. It reduces to <code class="docutils literal notranslate"><span class="pre">x</span></code>, which is a smaller
+expression than the original <code class="docutils literal notranslate"><span class="pre">front</span> <span class="pre">(enq</span> <span class="pre">x</span> <span class="pre">q)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">front</span> <span class="pre">(enq</span> <span class="pre">x</span> <span class="pre">q)</span> <span class="pre">=</span> <span class="pre">front</span> <span class="pre">q</span></code>, <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">is_empty</span> <span class="pre">q</span> <span class="pre">=</span> <span class="pre">false</span></code>. This similarly
+reduces to a smaller expression.</p></li>
+</ul>
+</li>
+<li><p>Again, there are two subcases.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">deq</span> <span class="pre">(enq</span> <span class="pre">x</span> <span class="pre">q)</span> <span class="pre">=</span> <span class="pre">empty</span></code>, if <code class="docutils literal notranslate"><span class="pre">is_empty</span> <span class="pre">q</span> <span class="pre">=</span> <span class="pre">true</span></code>. This simplifies the
+original expression by reducing it to <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deq</span> <span class="pre">(enq</span> <span class="pre">x</span> <span class="pre">q)</span> <span class="pre">=</span> <span class="pre">enq</span> <span class="pre">x</span> <span class="pre">(deq</span> <span class="pre">q)</span></code>, if <code class="docutils literal notranslate"><span class="pre">is_empty</span> <span class="pre">q</span> <span class="pre">=</span> <span class="pre">false</span></code>. This simplifies
+the original expression by reducing it to an generator applied to a smaller
+argument, <code class="docutils literal notranslate"><span class="pre">deq</span> <span class="pre">q</span></code> instead of <code class="docutils literal notranslate"><span class="pre">deq</span> <span class="pre">(enq</span> <span class="pre">x</span> <span class="pre">q)</span></code>.</p></li>
+</ul>
+</li>
+</ol>
+<p>We don’t usually design equations involving pairs of non-generators. Sometimes
+pairs of generators are needed, though, as we will see in the next example.</p>
+<p><strong>Example: Sets.</strong>  Here is a small interface for sets:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">mem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="k">val</span> <span class="n">remove</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Set =
+  sig
+    type &#39;a t
+    val empty : &#39;a t
+    val is_empty : &#39;a t -&gt; bool
+    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val mem : &#39;a -&gt; &#39;a t -&gt; bool
+    val remove : &#39;a -&gt; &#39;a t -&gt; &#39;a t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>The generators are <code class="docutils literal notranslate"><span class="pre">empty</span></code> and <code class="docutils literal notranslate"><span class="pre">add</span></code>. The only manipulator is <code class="docutils literal notranslate"><span class="pre">remove</span></code>. Finally,
+<code class="docutils literal notranslate"><span class="pre">is_empty</span></code> and <code class="docutils literal notranslate"><span class="pre">mem</span></code> are queries. So we should expect at least 2 * 3 = 6
+equations, one for each pair of generator and non-generator. Here is an
+equational specification:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1.  is_empty empty = true
+2.  is_empty (add x s) = false
+3.  mem x empty = false
+4a. mem y (add x s) = true                    if x = y
+4b. mem y (add x s) = mem y s                 if x &lt;&gt; y
+5.  remove x empty = empty
+6a. remove y (add x s) = remove y s           if x = y
+6b. remove y (add x s) = add x (remove y s)   if x &lt;&gt; y
+</pre></div>
+</div>
+<p>Consider, though, these two sets:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">0</span> <span class="pre">(add</span> <span class="pre">1</span> <span class="pre">empty)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">1</span> <span class="pre">(add</span> <span class="pre">0</span> <span class="pre">empty)</span></code></p></li>
+</ul>
+<p>They both intuitively represent the set {0,1}. Yet, we cannot prove that those
+two sets are equal using the above specification. We are missing an equation
+involving two generators:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">7.</span>  <span class="n">add</span> <span class="n">x</span> <span class="p">(</span><span class="n">add</span> <span class="n">y</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="n">add</span> <span class="n">y</span> <span class="p">(</span><span class="n">add</span> <span class="n">x</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/correctness"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="structural_induction.html" title="previous page"><span class="section-number">6.8. </span>Structural Induction</a>
+    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">6.10. </span>Summary</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
