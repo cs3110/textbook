@@ -502,8 +502,35 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="hash_tables.html">
-     7.4. Hash Tables
+    <a class="reference internal" href="summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../eff/intro.html">
+   8. Efficient Data Structures
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../eff/hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../eff/amortized.html">
+     8.2. Amortized Analysis
     </a>
    </li>
   </ul>
@@ -614,20 +641,21 @@
                 
   <div class="section" id="mutability">
 <h1><span class="section-number">7. </span>Mutability<a class="headerlink" href="#mutability" title="Permalink to this headline">¶</a></h1>
-<p>OCaml is not a <em>pure</em> language: it does admit side effects.  We have
-seen that already with I/O, especially printing.  But up till now we
-have limited ourself to the subset of the language that is <em>immutable</em>:
-values could not change.</p>
-<p>Mutability is neither good nor bad.  It enables new functionality that
-we couldn’t implement (at least not easily) before, and it enables
-us to create certain data structures that are asymptotically more
-efficient than their purely functional analogues.  But mutability
-does make code more difficult to reason about, hence it is a source
-of many faults in code.  One reason for that might be that humans
-are not good at thinking about change.  With immutable values,
-we’re guaranteed that any fact we might establish about them
-can never change.  But with mutable values, that’s no longer true.
-“Change is hard,” as they say.</p>
+<p>OCaml is not a <em>pure</em> language: it does admit side effects. We have seen that
+already with I/O, especially printing. But up till now we have limited ourself
+to the subset of the language that is <em>immutable</em>: values could not change.</p>
+<p>Mutability is neither good nor bad. It enables new functionality that we
+couldn’t implement (at least not easily) before, and it enables us to create
+certain data structures that are asymptotically more efficient than their purely
+functional analogues. But mutability does make code more difficult to reason
+about, hence it is a source of many faults in code. One reason for that might be
+that humans are not good at thinking about change. With immutable values, we’re
+guaranteed that any fact we might establish about them can never change. But
+with mutable values, that’s no longer true. “Change is hard,” as they say.</p>
+<p>In this shorter chapter we’ll cover the few mutable features of OCaml we’ve
+omitted so far, and we’ll use them for some simple data structures. The real
+win, though, will come in the next chapter, where we put the features to more
+complicated uses.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>

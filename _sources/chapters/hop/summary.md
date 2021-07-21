@@ -15,7 +15,7 @@ factor out the *iteration* over a data structure from the *computation* done at
 each element. Languages such as Python, Ruby, and Java 8 now have support for
 this kind of iteration.
 
-## Terms and concepts
+## Terms and Concepts
 
 * Abstraction Principle
 * accumulator
@@ -33,7 +33,7 @@ this kind of iteration.
 * pipeline
 * pipelining
 
-## Further reading
+## Further Reading
 
 * *Introduction to Objective Caml*, chapters 3.1.3, 5.3
 * *OCaml from the Very Beginning*, chapter 6

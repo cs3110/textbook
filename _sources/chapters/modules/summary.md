@@ -44,7 +44,7 @@ language: namespaces, abstraction, and code reuse. Having seen those ideas in a
 couple very different languages, you're equipped to recognize them more clearly
 in the next language you learn.
 
-## Terms and concepts
+## Terms and Concepts
 
 * abstract type
 * abstraction
@@ -83,7 +83,7 @@ in the next language you learn.
 * specification
 * structure
 
-## Further reading
+## Further Reading
 
 * *Introduction to Objective Caml*, chapters 11, 12, and 13
 * *OCaml from the Very Beginning*, chapter 16
