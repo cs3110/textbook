@@ -529,6 +529,8 @@ important!
 
 ## Designing Algebraic Specifications
 
+{{ video_embed | replace("%%VID%%", "8uJmKmsiF2I")}}
+
 For both stacks and queues we provided some equations as the specification.
 Designing those equations is, in part, a matter of thinking hard about the data
 structure. But there's more to it than that.

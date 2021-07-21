@@ -113,7 +113,7 @@ imperative programs. Dijkstra's _weakest precondition_ calculus is another.
 
 ## Further Reading
 
-* *Program Development in Java: Abstraction, Specification, and
+- *Program Development in Java: Abstraction, Specification, and
   Object-Oriented Design*, chapters 3, 5, and 9, by Barbara
   Liskov with John Guttag.
 
