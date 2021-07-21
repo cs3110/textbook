@@ -23,10 +23,11 @@ iterative factorial, we used recursive factorial as a specification. By analogy,
 we could provide two implementations of a data structure---one simple, the other
 complex and efficient---and prove that the two are equivalent. That would
 require us to introduce ways to translate between the two implementations. For
-example, we could prove the correctness of a dictionary implemented as a
-red-black tree relative to an implementation as an association list, by defining
-functions to convert trees to lists. Such an approach is certainly valid, but it
-doesn't lead to new ideas about verification for us to study.
+example, we could prove the correctness of a map implemented with an efficient
+balanced binary search tree relative to an implementation as an inefficient
+association list, by defining functions to convert trees to lists. Such an
+approach is certainly valid, but it doesn't lead to new ideas about verification
+for us to study.
 
 Instead, we will pursue a different approach based on *equational
 specifications*, aka *algebraic specifications*. The idea with these is to

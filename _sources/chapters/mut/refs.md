@@ -664,7 +664,8 @@ let empty () : 'a mlist = ref None
 ```
 
 Note the type of `empty`: instead of being a value, it is now a function. This
-is typical of functions that create mutable data structures.
+is typical of functions that create mutable data structures. At the end of this
+section, we'll return to why `empty` *has* to be a function.
 
 Inserting a new first element just requires creating a new node, linking from
 it to the original list, and mutating the list:
@@ -706,3 +707,94 @@ to_list lst1;;
 ```
 
 The change to `lst0` mutates `lst1`, because they are aliases.
+
+**The type of `empty`.** Returning to `empty`, why must it be a function? It
+might seem as though we could define it more simply as follows:
+
+```{code-cell} ocaml
+let empty = ref None
+```
+
+But that would be committing the same mistake as when we broke the counter
+above.  Now there is only ever *one* ref that gets created, hence there
+is only one list ever in existence:
+
+```{code-cell} ocaml
+let lst2 = empty;;
+let lst3 = empty;;
+insert_first lst2 2;;
+insert_first lst3 3;;
+to_list lst2;;
+to_list lst3;;
+```
+
+Note how the mutations affect both lists, because they are both aliases
+for the same ref.
+
+By correctly making `empty` a function, we guarantee that a new ref is
+returned every time an empty list is created.
+
+```{code-cell} ocaml
+let empty () = ref None
+```
+
+It really doesn't matter what argument that function takes, since it will
+never use it.  We could define it as any of these in principle:
+
+```{code-cell} ocaml
+let empty _ = ref None
+let empty (b : bool) = ref None
+let empty (n : int) = ref None
+(* etc. *)
+```
+
+But the reason we prefer `unit` as the argument type is to indicate to the
+client that the argument value is not going to be used. After all, there's
+nothing interesting that the function can do with the unit value. Another way to
+think about that would be that a function whose input type is `unit` is like a
+function or method in an imperative language that takes in no arguments. For
+example, in Java a linked list class could have a constructor that takes no
+arguments and creates an empty list:
+
+```java
+class LinkedList {
+  /** Returns an empty list. */
+  LinkedList() { ... }
+}
+```
+
+**Mutable values.** In `mlist`, the nodes of the list are mutable, but the
+values are not.  If we wanted the values also to be mutable, we can make
+them refs too:
+
+```{code-cell} ocaml
+:tags: ["hide-output"]
+type 'a node = { next : 'a mlist; value : 'a ref }
+and 'a mlist = 'a node option ref
+
+let empty () : 'a mlist = ref None
+
+let insert_first (lst : 'a mlist) (v : 'a) : unit =
+  lst := Some { next = ref !lst; value = ref v }
+
+let rec set (lst : 'a mlist) (n : int) (v : 'a) : unit =
+  match (!lst, n) with
+  | None, _ -> invalid_arg "out of bounds"
+  | Some { value }, 0 -> value := v
+  | Some { next }, _ -> set next (n - 1) v
+
+let rec to_list (lst : 'a mlist) : 'a list =
+  match !lst with None -> [] | Some { next; value } -> !value :: to_list next
+```
+
+Now rather than having to create new nodes if we want to change a value,
+we can directly mutate the value in a node:
+
+```{code-cell} ocaml
+let lst = empty ();;
+insert_first lst 42;;
+insert_first lst 41;;
+to_list lst;;
+set lst 1 43;;
+to_list lst;;
+```

@@ -86,9 +86,9 @@ leads to errors. Another reason is that OCamldoc has the ability to
 automatically inject the comments from the interface file into the generated
 HTML from the implementation file.
 
-Only in interface files &mdash;that is, `.mli` files&mdash; OCamldoc comments can
-be placed either before or after an element of the interface. For example, both
-of these placements are possible:
+In interface files &mdash;that is, `.mli` files&mdash; OCamldoc comments can be
+placed either before or after an element of the interface. For example, both of
+these placements are possible:
 
 ```ocaml
 (** The mathematical constant 3.14... *)

@@ -418,40 +418,39 @@ simple and correct implementation of a queue data structure. It's probably far
 less clear that `BatchedQueue` is a correct implementation. Just look at how
 many paragraphs of writing it took to explain it above!
 
-## Dictionaries
+## Maps
 
-Recall that a *dictionary* binds keys to values. Here is a module type for
-dictionaries.  There are many other operations a dictionary might support,
-but these will suffice for now.
+Recall that a *map* (aka *dictionary*) binds keys to values. Here is a module
+type for maps. There are many other operations a map might support, but
+these will suffice for now.
 
 ```{code-cell} ocaml
-module type Dictionary = sig
-  (** [('k, 'v) t] is the type of dictionaries that bind keys of type ['k] to
+module type Map = sig
+  (** [('k, 'v) t] is the type of maps that bind keys of type ['k] to
       values of type ['v]. *)
   type ('k, 'v) t
 
   (** [empty] does not bind any keys. *)
   val empty  : ('k, 'v) t
 
-  (** [insert k v d] is the dictionary that binds [k] to [v], and also contains
-      all the bindings of [d].  If [k] was already bound in [d], that old
-      binding is superseded by the binding to [v] in the returned dictionary. *)
+  (** [insert k v m] is the map that binds [k] to [v], and also contains
+      all the bindings of [m].  If [k] was already bound in [m], that old
+      binding is superseded by the binding to [v] in the returned map. *)
   val insert : 'k -> 'v -> ('k, 'v) t -> ('k, 'v) t
 
-  (** [lookup k d] is the value bound to [k] in [d]. Raises: [Not_found] if [k]
-      is not bound in [d]. *)
+  (** [lookup k m] is the value bound to [k] in [m]. Raises: [Not_found] if [k]
+      is not bound in [m]. *)
   val lookup : 'k -> ('k, 'v) t -> 'v
 
-  (** [bindings d] is an association list containing the same bindings as [d].
+  (** [bindings m] is an association list containing the same bindings as [m].
       The keys in the list are guaranteed to be unique. *)
   val bindings : ('k, 'v) t -> ('k * 'v) list
 end
 ```
 
-Note how `Dictionary.t` is parameterized on two types, `'k` and `'v`, which are
-written in parentheses and separated by commas. Although `('k, 'v)` might look
-like a pair of values, it is not: it is a syntax for writing multiple type
-variables.
+Note how `Map.t` is parameterized on two types, `'k` and `'v`, which are written
+in parentheses and separated by commas. Although `('k, 'v)` might look like a
+pair of values, it is not: it is a syntax for writing multiple type variables.
 
 Recall that association lists are lists of pairs, where the first element of
 each pair is a key, and the second element is the value it binds. For example,
@@ -462,31 +461,31 @@ of their numeric value:
 [("pi", 3.14); ("e", 2.718); ("phi", 1.618)]
 ```
 
-Naturally we can implement the `Dictionary` module type with association lists:
+Naturally we can implement the `Map` module type with association lists:
 
 ```{code-cell} ocaml
-module AssocListDict : Dictionary = struct
+module AssocListMap : Map = struct
   (** The list [(k1, v1); ...; (kn, vn)] binds key [ki] to value [vi].
       If a key appears more than once in the list, it is bound to the
       the left-most occurrence in the list. *)
   type ('k, 'v) t = ('k * 'v) list
   let empty = []
-  let insert k v d = (k, v) :: d
-  let lookup k d = List.assoc k d
-  let keys d = List.(d |> map fst |> sort_uniq Stdlib.compare)
-  let bindings d = d |> keys |> List.map (fun k -> (k, lookup k d))
+  let insert k v m = (k, v) :: m
+  let lookup k m = List.assoc k m
+  let keys m = List.(m |> map fst |> sort_uniq Stdlib.compare)
+  let bindings m = m |> keys |> List.map (fun k -> (k, lookup k m))
 end
 ```
 
-This implementation of dictionaries is persistent.  For example, adding a new
-binding to the dictionary `d` below does not change `d` itself:
+This implementation of maps is persistent.  For example, adding a new
+binding to the map `m` below does not change `m` itself:
 
 ```{code-cell} ocaml
-open AssocListDict
-let d = empty |> insert "pi" 3.14 |> insert "e" 2.718
-let d' = d |> insert "phi" 1.618
-let b = bindings d
-let b' = bindings d'
+open AssocListMap
+let m = empty |> insert "pi" 3.14 |> insert "e" 2.718
+let m' = m |> insert "phi" 1.618
+let b = bindings m
+let b' = bindings m'
 ```
 
 The `insert` operation is constant time, which is great. But the `lookup`
@@ -523,14 +522,14 @@ Actually we can have a constant-time `bindings` operation even with association
 lists, if we are willing to pay for a linear-time `insert` operation:
 
 ```{code-cell} ocaml
-module UniqAssocListDict : Dictionary = struct
+module UniqAssocListMap : Map = struct
   (** The list [(k1, v1); ...; (kn, vn)] binds key [ki] to value [vi].
       No duplicate keys may occur. *)
   type ('k, 'v) t = ('k * 'v) list
   let empty = []
-  let insert k v d = (k, v) :: List.remove_assoc k d
-  let lookup k d = List.assoc k d
-  let bindings d = d
+  let insert k v m = (k, v) :: List.remove_assoc k m
+  let lookup k m = List.assoc k m
+  let bindings m = m
 end
 ```
 

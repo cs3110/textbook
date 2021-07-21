@@ -284,9 +284,9 @@ module FZ = F (Z)
 
 {{ video_embed | replace("%%VID%%", "sCbUwQvNYJA")}}
 
-The standard library's Map module implements a dictionary data structure using
-balanced binary trees. It uses functors in an important way. In this section, we
-study how to use it. You can see the
+The standard library's Map module implements a map (a binding from keys to
+values) using balanced binary trees. It uses functors in an important way. In
+this section, we study how to use it. You can see the
 [implementation of that module on GitHub][mapimplsrc] as well as its
 [interface][mapintsrc].
 

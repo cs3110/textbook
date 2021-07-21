@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>5.5. Functional Data Structures &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -35,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -46,7 +43,7 @@
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe,.cell"
@@ -60,14 +57,14 @@
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="5.6. Module Type Constraints" href="module_type_constraints.html" />
     <link rel="prev" title="5.4. Encapsulation" href="encapsulation.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -76,25 +73,30 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../../index.html">
-  
-  <img src="../../_static/lambda-light.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="current nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../intro/intro.html">
    1. Better Programming Through OCaml
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../intro/past.html">
      1.1. The Past of OCaml
@@ -126,14 +128,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../basics/intro.html">
    2. The Basics of OCaml
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../basics/toplevel.html">
      2.1. The OCaml Toplevel
@@ -180,14 +185,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../data/intro.html">
    3. Data and Types
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../data/lists.html">
      3.1. Lists
@@ -259,14 +267,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../hop/intro.html">
    4. Higher-Order Programming
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../hop/higher_order.html">
      4.1. Higher-Order Functions
@@ -313,14 +324,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 current active collapsible-parent">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="intro.html">
    5. Modular Programming
   </a>
-  <ul class="current collapse-ul">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="module_systems.html">
      5.1. Module Systems
@@ -377,14 +391,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../correctness/intro.html">
    6. Correctness
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../correctness/specifications.html">
      6.1. Specifications
@@ -441,14 +458,17 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../mut/intro.html">
    7. Mutability
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../mut/refs.html">
      7.1. Refs
@@ -464,12 +484,28 @@
      7.3. Arrays and Loops
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/hash_tables.html">
+     7.4. Hash Tables
+    </a>
+   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -540,12 +576,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -574,12 +610,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lists">
    5.5.1. Lists
@@ -601,8 +636,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dictionaries">
-   5.5.5. Dictionaries
+  <a class="reference internal nav-link" href="#maps">
+   5.5.5. Maps
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -612,8 +647,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -1155,31 +1189,31 @@ simple and correct implementation of a queue data structure. It’s probably far
 less clear that <code class="docutils literal notranslate"><span class="pre">BatchedQueue</span></code> is a correct implementation. Just look at how
 many paragraphs of writing it took to explain it above!</p>
 </div>
-<div class="section" id="dictionaries">
-<h2><span class="section-number">5.5.5. </span>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
-<p>Recall that a <em>dictionary</em> binds keys to values. Here is a module type for
-dictionaries.  There are many other operations a dictionary might support,
-but these will suffice for now.</p>
+<div class="section" id="maps">
+<h2><span class="section-number">5.5.5. </span>Maps<a class="headerlink" href="#maps" title="Permalink to this headline">¶</a></h2>
+<p>Recall that a <em>map</em> (aka <em>dictionary</em>) binds keys to values. Here is a module
+type for maps. There are many other operations a map might support, but
+these will suffice for now.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Dictionary</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="c">(** [(&#39;k, &#39;v) t] is the type of dictionaries that bind keys of type [&#39;k] to</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Map</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(** [(&#39;k, &#39;v) t] is the type of maps that bind keys of type [&#39;k] to</span>
 <span class="c">      values of type [&#39;v]. *)</span>
   <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
   <span class="c">(** [empty] does not bind any keys. *)</span>
   <span class="k">val</span> <span class="n">empty</span>  <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
-  <span class="c">(** [insert k v d] is the dictionary that binds [k] to [v], and also contains</span>
-<span class="c">      all the bindings of [d].  If [k] was already bound in [d], that old</span>
-<span class="c">      binding is superseded by the binding to [v] in the returned dictionary. *)</span>
+  <span class="c">(** [insert k v m] is the map that binds [k] to [v], and also contains</span>
+<span class="c">      all the bindings of [m].  If [k] was already bound in [m], that old</span>
+<span class="c">      binding is superseded by the binding to [v] in the returned map. *)</span>
   <span class="k">val</span> <span class="n">insert</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
-  <span class="c">(** [lookup k d] is the value bound to [k] in [d]. Raises: [Not_found] if [k]</span>
-<span class="c">      is not bound in [d]. *)</span>
+  <span class="c">(** [lookup k m] is the value bound to [k] in [m]. Raises: [Not_found] if [k]</span>
+<span class="c">      is not bound in [m]. *)</span>
   <span class="k">val</span> <span class="n">lookup</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span>
 
-  <span class="c">(** [bindings d] is an association list containing the same bindings as [d].</span>
+  <span class="c">(** [bindings m] is an association list containing the same bindings as [m].</span>
 <span class="c">      The keys in the list are guaranteed to be unique. *)</span>
   <span class="k">val</span> <span class="n">bindings</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
 <span class="k">end</span>
@@ -1187,7 +1221,7 @@ but these will suffice for now.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Dictionary =
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Map =
   sig
     type (&#39;k, &#39;v) t
     val empty : (&#39;k, &#39;v) t
@@ -1199,10 +1233,9 @@ but these will suffice for now.</p>
 </div>
 </div>
 </div>
-<p>Note how <code class="docutils literal notranslate"><span class="pre">Dictionary.t</span></code> is parameterized on two types, <code class="docutils literal notranslate"><span class="pre">'k</span></code> and <code class="docutils literal notranslate"><span class="pre">'v</span></code>, which are
-written in parentheses and separated by commas. Although <code class="docutils literal notranslate"><span class="pre">('k,</span> <span class="pre">'v)</span></code> might look
-like a pair of values, it is not: it is a syntax for writing multiple type
-variables.</p>
+<p>Note how <code class="docutils literal notranslate"><span class="pre">Map.t</span></code> is parameterized on two types, <code class="docutils literal notranslate"><span class="pre">'k</span></code> and <code class="docutils literal notranslate"><span class="pre">'v</span></code>, which are written
+in parentheses and separated by commas. Although <code class="docutils literal notranslate"><span class="pre">('k,</span> <span class="pre">'v)</span></code> might look like a
+pair of values, it is not: it is a syntax for writing multiple type variables.</p>
 <p>Recall that association lists are lists of pairs, where the first element of
 each pair is a key, and the second element is the value it binds. For example,
 here is an association list that maps some well-known names to an approximation
@@ -1210,46 +1243,46 @@ of their numeric value:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="s2">&quot;pi&quot;</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">);</span> <span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="mf">2.718</span><span class="p">);</span> <span class="p">(</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="mf">1.618</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p>Naturally we can implement the <code class="docutils literal notranslate"><span class="pre">Dictionary</span></code> module type with association lists:</p>
+<p>Naturally we can implement the <code class="docutils literal notranslate"><span class="pre">Map</span></code> module type with association lists:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">AssocListDict</span> <span class="o">:</span> <span class="nc">Dictionary</span> <span class="o">=</span> <span class="k">struct</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">AssocListMap</span> <span class="o">:</span> <span class="nc">Map</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="c">(** The list [(k1, v1); ...; (kn, vn)] binds key [ki] to value [vi].</span>
 <span class="c">      If a key appears more than once in the list, it is bound to the</span>
 <span class="c">      the left-most occurrence in the list. *)</span>
   <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
   <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
-  <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="n">d</span>
-  <span class="k">let</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">d</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">assoc</span> <span class="n">k</span> <span class="n">d</span>
-  <span class="k">let</span> <span class="n">keys</span> <span class="n">d</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="o">(</span><span class="n">d</span> <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">fst</span> <span class="o">|&gt;</span> <span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span><span class="o">)</span>
-  <span class="k">let</span> <span class="n">bindings</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span> <span class="o">|&gt;</span> <span class="n">keys</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">k</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">d</span><span class="o">))</span>
+  <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="n">m</span>
+  <span class="k">let</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">m</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">assoc</span> <span class="n">k</span> <span class="n">m</span>
+  <span class="k">let</span> <span class="n">keys</span> <span class="n">m</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="o">(</span><span class="n">m</span> <span class="o">|&gt;</span> <span class="n">map</span> <span class="n">fst</span> <span class="o">|&gt;</span> <span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">bindings</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m</span> <span class="o">|&gt;</span> <span class="n">keys</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">k</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">m</span><span class="o">))</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module AssocListDict : Dictionary
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module AssocListMap : Map
 </pre></div>
 </div>
 </div>
 </div>
-<p>This implementation of dictionaries is persistent.  For example, adding a new
-binding to the dictionary <code class="docutils literal notranslate"><span class="pre">d</span></code> below does not change <code class="docutils literal notranslate"><span class="pre">d</span></code> itself:</p>
+<p>This implementation of maps is persistent.  For example, adding a new
+binding to the map <code class="docutils literal notranslate"><span class="pre">m</span></code> below does not change <code class="docutils literal notranslate"><span class="pre">m</span></code> itself:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">AssocListDict</span>
-<span class="k">let</span> <span class="n">d</span> <span class="o">=</span> <span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">insert</span> <span class="s2">&quot;pi&quot;</span> <span class="mi">3</span><span class="o">.</span><span class="mi">14</span> <span class="o">|&gt;</span> <span class="n">insert</span> <span class="s2">&quot;e&quot;</span> <span class="mi">2</span><span class="o">.</span><span class="mi">718</span>
-<span class="k">let</span> <span class="n">d&#39;</span> <span class="o">=</span> <span class="n">d</span> <span class="o">|&gt;</span> <span class="n">insert</span> <span class="s2">&quot;phi&quot;</span> <span class="mi">1</span><span class="o">.</span><span class="mi">618</span>
-<span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">bindings</span> <span class="n">d</span>
-<span class="k">let</span> <span class="n">b&#39;</span> <span class="o">=</span> <span class="n">bindings</span> <span class="n">d&#39;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">AssocListMap</span>
+<span class="k">let</span> <span class="n">m</span> <span class="o">=</span> <span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">insert</span> <span class="s2">&quot;pi&quot;</span> <span class="mi">3</span><span class="o">.</span><span class="mi">14</span> <span class="o">|&gt;</span> <span class="n">insert</span> <span class="s2">&quot;e&quot;</span> <span class="mi">2</span><span class="o">.</span><span class="mi">718</span>
+<span class="k">let</span> <span class="n">m&#39;</span> <span class="o">=</span> <span class="n">m</span> <span class="o">|&gt;</span> <span class="n">insert</span> <span class="s2">&quot;phi&quot;</span> <span class="mi">1</span><span class="o">.</span><span class="mi">618</span>
+<span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">bindings</span> <span class="n">m</span>
+<span class="k">let</span> <span class="n">b&#39;</span> <span class="o">=</span> <span class="n">bindings</span> <span class="n">m&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val d : (string, float) AssocListDict.t = &lt;abstr&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val m : (string, float) AssocListMap.t = &lt;abstr&gt;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val d&#39; : (string, float) AssocListDict.t = &lt;abstr&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val m&#39; : (string, float) AssocListMap.t = &lt;abstr&gt;
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val b : (string * float) list = [(&quot;e&quot;, 2.718); (&quot;pi&quot;, 3.14)]
@@ -1290,20 +1323,20 @@ more advanced data structures.</p>
 lists, if we are willing to pay for a linear-time <code class="docutils literal notranslate"><span class="pre">insert</span></code> operation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">UniqAssocListDict</span> <span class="o">:</span> <span class="nc">Dictionary</span> <span class="o">=</span> <span class="k">struct</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">UniqAssocListMap</span> <span class="o">:</span> <span class="nc">Map</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="c">(** The list [(k1, v1); ...; (kn, vn)] binds key [ki] to value [vi].</span>
 <span class="c">      No duplicate keys may occur. *)</span>
   <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
   <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
-  <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="nn">List</span><span class="p">.</span><span class="n">remove_assoc</span> <span class="n">k</span> <span class="n">d</span>
-  <span class="k">let</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">d</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">assoc</span> <span class="n">k</span> <span class="n">d</span>
-  <span class="k">let</span> <span class="n">bindings</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+  <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="nn">List</span><span class="p">.</span><span class="n">remove_assoc</span> <span class="n">k</span> <span class="n">m</span>
+  <span class="k">let</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">m</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">assoc</span> <span class="n">k</span> <span class="n">m</span>
+  <span class="k">let</span> <span class="n">bindings</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module UniqAssocListDict : Dictionary
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module UniqAssocListMap : Map
 </pre></div>
 </div>
 </div>
@@ -1446,11 +1479,9 @@ tradeoff of <code class="docutils literal notranslate"><span class="pre">add</sp
 
       </div>
     </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>

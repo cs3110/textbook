@@ -1,0 +1,1031 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Big-Oh Notation &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="7.4. Hash Tables" href="../mut/hash_tables.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.5. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.6. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/hash_tables.html">
+     7.4. Hash Tables
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/appendix/bigoh.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/appendix/bigoh.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/appendix/bigoh.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithms-and-efficiency-attempt-1">
+   Algorithms and Efficiency, Attempt 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithms-and-efficiency-attempt-2">
+   Algorithms and Efficiency, Attempt 2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#big-ell-notation">
+   Big-Ell Notation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Big-Oh Notation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#big-oh-finished">
+   Big-Oh, Finished
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#big-oh-notation-warnings">
+   Big-Oh Notation Warnings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algorithms-and-efficiency-attempt-3">
+   Algorithms and Efficiency, Attempt 3
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="big-oh-notation">
+<h1>Big-Oh Notation<a class="headerlink" href="#big-oh-notation" title="Permalink to this headline">¶</a></h1>
+<p>What does it mean to be <em>efficient</em>? Cornell professors Bobby Kleinberg and Eva
+Tardos have a wonderful explanation in chapter 2 of their textbook, <em>Algorithm
+Design</em> (2006). This appendix is a summary and reinterpretation of that
+explanation from a functional programming perspective. The ultimate answer will
+be that an algorithm is <em>efficient</em> if its worst-case running time on input size
+<span class="math notranslate nohighlight">\(n\)</span> is <span class="math notranslate nohighlight">\(O(n^d)\)</span> for some constant <span class="math notranslate nohighlight">\(d\)</span>. But it will take us several steps to
+build up to that definition.</p>
+<div class="section" id="algorithms-and-efficiency-attempt-1">
+<h2>Algorithms and Efficiency, Attempt 1<a class="headerlink" href="#algorithms-and-efficiency-attempt-1" title="Permalink to this headline">¶</a></h2>
+<p>A naive attempt at defining efficiency might proceed as follows:</p>
+<p><strong>Attempt 1:</strong> An algorithm is efficient if, when implemented, it runs in a
+small amount of time on particular input instances.</p>
+<p>But there are many problems with that definition, such as:</p>
+<ul class="simple">
+<li><p>Inefficient algorithms can run quickly on small test cases.</p></li>
+<li><p>Fast processors and optimizing compilers can make inefficient algorithms run
+quickly.</p></li>
+<li><p>Efficient algorithms can run slowly when coded sloppily.</p></li>
+<li><p>Some input instances are harder than others.</p></li>
+<li><p>Efficiency on small inputs doesn’t imply efficiency on large inputs.</p></li>
+<li><p>Some clients can afford to be more patient than others; quick for me might be
+slow for you.</p></li>
+</ul>
+<p><strong>Lesson 1:</strong> One lesson learned from that attempt is: time measured by a clock
+is not the right metric for algorithm efficiency. We need a metric that is
+reasonably independent of the hardware, compiler, other software that is
+running, etc. Perhaps a good metric would be to give up on time and instead
+count the number of <em>steps</em> taken during evaluation.</p>
+<p>But, now we have a new problem: how should we define a “step”? It needs to be
+something machine independent. It ought to somehow represent a primitive unit of
+computation. There’s a lot of flexibility. Here are some common choices:</p>
+<ul class="simple">
+<li><p>In pseudocode, we might think of a step as being a single line.</p></li>
+<li><p>In imperative languages, we might count assignments, array indexes, pointer
+dereferences, and arithmetic operations as steps.</p></li>
+<li><p>In OCaml, we could count function or operator application, let bindings, and
+choosing a branch of an <code class="docutils literal notranslate"><span class="pre">if</span></code> or <code class="docutils literal notranslate"><span class="pre">match</span></code> as steps.</p></li>
+</ul>
+<p>In reality, all of those “steps” could really take a different amount of time.
+But in practice, that doesn’t really matter much.</p>
+<p><strong>Lesson 2:</strong> Another lesson we learned from attempt 1 was: running time on a
+particular input instance is not the right metric. We need a metric that can
+predict running time on any input instance. So instead of using the particular
+input (e.g., a number, or a matrix, or a text document), it might be better to
+use the <em>size</em> of the input (e.g., the number of bits it takes to represent the
+number, or the number of rows and columns in the matrix, or the number of bytes
+in the document) as the metric.</p>
+<p>But again we have a new problem: how to define “size”? As in the examples we
+just gave, size should be some measure of how big an input is compared to other
+inputs. Perhaps the most common representation of size in the context of data
+structures is just the number of elements maintained by the data structure: the
+number of nodes in a list, or the number of nodes and edges in a graph, etc.</p>
+<p>Could an algorithm run in a different amount of time on two inputs of the same
+“size”? Sure. For example, multiplying a matrix by all zeroes might be faster
+than multiplying by arbitrary numbers. But in practice, size matters more than
+exact inputs.</p>
+<p><strong>Lesson 3:</strong> A third lesson we learned from attempt 1 was that “small amount of
+time” is too relative a term. We want a metric that is reasonably objective,
+rather than relying on subjective notions of what constitutes “small”.</p>
+<p>One sort-of-okay idea would be that an efficient algorithm needs to beat
+<em>brute-force search</em>. That means enumerating all answers one-by-one, checking
+each to see whether it’s right. For example, a brute-force sorting algorithm
+would enumerate every possible permutation of a list, checking to see whether
+it’s a sorted version of the input list. That’s a terrible sorting algorithm!
+Certainly quicksort beats it.</p>
+<p>Brute-force search is the simple, dumb solution to nearly any algorithmic
+problem. But it requires enumeration of a huge space. In fact, an
+exponentially-sized space. So a better idea would be doing less than exponential
+work. What’s less than exponential (e.g., <span class="math notranslate nohighlight">\(2^n\)</span>)? One possibility is polynomial
+(e.g., <span class="math notranslate nohighlight">\(n^2\)</span>).</p>
+<p>An immediate objection might be that polynomials come in all sizes. For example,
+<span class="math notranslate nohighlight">\(n^{100}\)</span> is way bigger than <span class="math notranslate nohighlight">\(n^2\)</span>. And some non-polynomials, such as
+<span class="math notranslate nohighlight">\(n^{1 +.02 (\log n)}\)</span>, might do an adequate job of beating exponentials.
+But in practice, polynomials do seem to work fine.</p>
+</div>
+<div class="section" id="algorithms-and-efficiency-attempt-2">
+<h2>Algorithms and Efficiency, Attempt 2<a class="headerlink" href="#algorithms-and-efficiency-attempt-2" title="Permalink to this headline">¶</a></h2>
+<p>Combining lessons 1 through 3 from Attempt 1, we have a second attempt at
+defining efficiency:</p>
+<p><strong>Attempt 2:</strong> An algorithm is efficient if its maximum number of execution
+steps is polynomial in the size of its input.</p>
+<p>Note how all three ideas come together there: steps, size, polynomial.</p>
+<p>But if we try to put that definition to use, it still isn’t perfect. Coming up
+with an exact formula for the maximum number of execution steps can be insanely
+tedious. For example, in one other algorithm textbook, the authors develop this
+following polynomial for the number of execution steps taken by a pseudo-code
+implementation of insertion sort:</p>
+<div class="math notranslate nohighlight">
+\[
+c_1 n + c_2 (n - 1) + c_4 (n - 1) + c_5 \sum_{j=2}^{n} t_j + c_6 \sum_{j=2}^{n} (t_j - 1) + c_7 \sum_{j=2}^{n} (t_j - 1) + c_8 (n - 1)
+\]</div>
+<p>No need for us to explain what all the variables mean. It’s too complicated. Our
+hearts go out to the poor grad student who had to work out that one!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>That formula for running time of insertion sort is from <em>Introduction to
+Algorithms</em>, 3rd edition, 2009, by Cormen, Leiserson, Rivest, and Stein. We
+aren’t making fun of them. They would also tell you that such formulas are too
+complicated.</p>
+</div>
+<p>Precise execution bounds like that are exhausting to find and somewhat
+meaningless. If it takes 25 steps in Java pseudocode, but compiled down to
+RISC-V would take 250 steps, is the precision useful?</p>
+<p>In some cases, yes. If you’re building code that flies an airplane or controls a
+nuclear reactor, you might actually care about precise, real-time guarantees.</p>
+<p>But otherwise, it would be better for us to identify broad classes of algorithms
+with similar performance. Instead of saying that an algorithm runs in</p>
+<div class="math notranslate nohighlight">
+\[1.62 n^2 + 3.5 n + 8\]</div>
+<p>steps, how about just saying it runs in <span class="math notranslate nohighlight">\(n^2\)</span> steps? That is, we could ignore
+the <em>low-order terms</em> and the <em>constant factor</em> of the highest-order term.</p>
+<p>We ignore low-order terms because we want to THINK BIG. Algorithm efficiency is
+all about explaining the performance of algorithms when inputs get really big.
+We don’t care so much about small inputs. And low-order terms don’t matter when
+we think big. The following table shows the number of steps as a function of
+input size N, assuming each step takes 1 microsecond. “Very long” means more
+than the estimated number of atoms in the universe.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(N\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(N^2\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(N^3\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(2^N\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>N=10</p></td>
+<td class="text-align:center"><p>&lt; 1 sec</p></td>
+<td class="text-align:center"><p>&lt; 1 sec</p></td>
+<td class="text-align:center"><p>&lt; 1 sec</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>N=100</p></td>
+<td class="text-align:center"><p>&lt; 1 sec</p></td>
+<td class="text-align:center"><p>&lt; 1 sec</p></td>
+<td class="text-align:center"><p>1 sec</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>N=1,000</p></td>
+<td class="text-align:center"><p>&lt; 1 sec</p></td>
+<td class="text-align:center"><p>1 sec</p></td>
+<td class="text-align:center"><p>18 min</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>N=10,000</p></td>
+<td class="text-align:center"><p>&lt; 1 sec</p></td>
+<td class="text-align:center"><p>2 min</p></td>
+<td class="text-align:center"><p>12 days</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>N=100,000</p></td>
+<td class="text-align:center"><p>&lt; 1 sec</p></td>
+<td class="text-align:center"><p>3 hours</p></td>
+<td class="text-align:center"><p>32 years</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>N=1,000,000</p></td>
+<td class="text-align:center"><p>1 sec</p></td>
+<td class="text-align:center"><p>12 days</p></td>
+<td class="text-align:center"><p>104 years</p></td>
+</tr>
+</tbody>
+</table>
+<p>As you can see, when inputs get big, there’s a serious difference between
+<span class="math notranslate nohighlight">\(N^3\)</span> and <span class="math notranslate nohighlight">\(N^2\)</span> and <span class="math notranslate nohighlight">\(N\)</span>. We might as well ignore low-order terms,
+because they are completely dominated by the highest-order term when we think
+big.</p>
+<p>What about constant factors? My current laptop might be 2x faster (that is, a
+constant factor of 2) than the one I bought several years ago, but that’s not an
+interesting property of the algorithm. Likewise, <span class="math notranslate nohighlight">\(1.62 n^2\)</span> steps in pseduocode
+might be <span class="math notranslate nohighlight">\(1620 n^2\)</span> steps in assembly (that is, a constant factor of 1000), but
+it’s again not an interesting property of the algorithm. So, should we really
+care if one algorithm takes 2x or 1000x longer than another, if it’s just a
+constant factor?</p>
+<p>The answer is: maybe. Performance tuning in real-world code is about getting the
+constants to be small. Your employer might be really happy if you make something
+run twice as fast! But that’s not about the <strong>algorithm.</strong> When we’re measuring
+algorithm efficiency, in practice the constant factors just don’t matter much.</p>
+<p>So all that argues for having an <strong>imprecise abstraction</strong> to measure running
+time. Instead of <span class="math notranslate nohighlight">\(1.62 n^2 + 3.5 n + 8\)</span>, we can just write <span class="math notranslate nohighlight">\(n^2\)</span>. Imprecise
+abstractions are nothing new to you. You might write <span class="math notranslate nohighlight">\(\pm 1\)</span> to imprecisely
+abstract a quantity within 1. In computer science, you already know that we use
+Big-Oh notation as an imprecise abstraction: <span class="math notranslate nohighlight">\(1.62 n^2 + 3.5 n + 8\)</span> is <span class="math notranslate nohighlight">\(O(n^2)\)</span>.</p>
+</div>
+<div class="section" id="big-ell-notation">
+<h2>Big-Ell Notation<a class="headerlink" href="#big-ell-notation" title="Permalink to this headline">¶</a></h2>
+<p>Before reviewing Big-Oh notation, let’s start with something simpler that you
+might not have seen before: Big-Ell notation.</p>
+<p>Big-Ell is an imprecise abstraction of natural numbers <u>l</u>ess than or equal
+to another number, hence the L. It’s defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+L(n) = \{ m \mathrel{|} 0 \leq m \leq n\}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span> are natural numbers. That is, <span class="math notranslate nohighlight">\(L(n)\)</span> represents all the
+natural numbers less than or equal to <span class="math notranslate nohighlight">\(n\)</span>. For example, <span class="math notranslate nohighlight">\(L(5) = \{0, 1, 2, 3, 4,
+5\}\)</span>.</p>
+<p>Could you do arithmetic with Big-Ell? For example, what would <span class="math notranslate nohighlight">\(1 + L(5)\)</span> be?
+It’s not a well-posed question, to be honest: addition is an operation we think
+of being defined on integers, not sets of integers. But a reasonable
+interpretation of <span class="math notranslate nohighlight">\(1 + \{0, 1, 2, 3, 4, 5\}\)</span> could be doing the addition for
+each element in the set, yielding <span class="math notranslate nohighlight">\(\{1, 2, 3, 4, 5, 6\}\)</span>. Note that <span class="math notranslate nohighlight">\(\{1, 2, 3,
+4, 5, 6\}\)</span> is a proper subset of <span class="math notranslate nohighlight">\(\{0, 1, 2, 3, 4, 5, 6\}\)</span>, and the latter is
+<span class="math notranslate nohighlight">\(L(6)\)</span>. So we could say that <span class="math notranslate nohighlight">\(1 + L(5) \subseteq L(6)\)</span>. We could even say that
+<span class="math notranslate nohighlight">\(1 + L(5) \subseteq L(7)\)</span>, but it’s not <em>tight</em>: the former subset relation
+included the fewest possible extra elements, whereas the latter was <em>loose</em> by
+needlessly including extra.</p>
+<p>For more about Big Ell, see <em>Concrete Mathematics</em>, chapter 9, 1989, by Graham,
+Knuth, and Patashnik.</p>
+</div>
+<div class="section" id="id1">
+<h2>Big-Oh Notation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>If you understand Big-Ell, and you understand functional programming, here’s
+some good news: you can easily understand Big-Oh.</p>
+<p>Let’s build up the definition of Big-Oh in a few steps. We’ll start with version
+1, which we’ll write as <span class="math notranslate nohighlight">\(O_1\)</span>. It’s based on <span class="math notranslate nohighlight">\(L\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L(n)\)</span> represents any <strong>natural number</strong> that is less than or equal to a
+<strong>natural number</strong> <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(O_1(g)\)</span> represents any <strong>natural function</strong> that is less than or equal
+to a <strong>natural function</strong> <span class="math notranslate nohighlight">\(g\)</span>.</p></li>
+</ul>
+<p>A <em>natural function</em> is just a function on natural numbers; that is, its type is
+<span class="math notranslate nohighlight">\(\mathbb{N} \rightarrow \mathbb{N}\)</span>.</p>
+<p>All we do with <span class="math notranslate nohighlight">\(O_1\)</span> is upgrade from <strong>natural numbers</strong> to <strong>natural
+functions</strong>. So Big-Oh version 1 is just the <em>higher-order</em> version of Big-Ell.
+How about that!</p>
+<p>Of course, we need to work out what it means for a function to be less than
+another function. Here’s a reasonable formalization:</p>
+<p><strong>Big-Oh Version 1:</strong> <span class="math notranslate nohighlight">\(O_1(g) = \{ f \mathrel{|} \forall n \mathrel{.} f(n) \leq g(n)\}\)</span></p>
+<p>For example, consider the function that doubles its input. In math textbooks,
+that function might be written as <span class="math notranslate nohighlight">\(g(n) = 2n\)</span>. In OCaml we would write
+<code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">g</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">fun</span> <span class="pre">n</span> <span class="pre">-&gt;</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">n</span></code> or just anonymously as
+<code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">n</span> <span class="pre">-&gt;</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">n</span></code>. In math that same anonymous function would be written with
+lambda notation as <span class="math notranslate nohighlight">\(\lambda n . 2n\)</span>. Proceeding with lambda notation, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+O_1(\lambda n . 2n) = \{ f \mathrel{|} \forall n . f(n) \leq 2n \}
+\]</div>
+<p>and therefore</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((\lambda n . n) \in O_1(\lambda n . 2n)\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\((\lambda n . \frac{n}{2}) \in O_1(\lambda n . 2n)\)</span>, but</p></li>
+<li><p><span class="math notranslate nohighlight">\((\lambda n . 3n) \notin O_1(\lambda n . 2n)\)</span>.</p></li>
+</ul>
+<p>Next, recall that in defining algorithmic efficiency, we wanted to ignore
+constant factors. <span class="math notranslate nohighlight">\(O_1\)</span> does not help us with that. We’d really like for all
+these functions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((\lambda n . n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\lambda n . 2n)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\lambda n . 3n)\)</span></p></li>
+</ul>
+<p>to be in <span class="math notranslate nohighlight">\(O(\lambda n . n)\)</span>.</p>
+<p>Toward that end, let’s define <span class="math notranslate nohighlight">\(O_2\)</span> to ignore constant factors:</p>
+<p><strong>Big-Oh Version 2:</strong> <span class="math notranslate nohighlight">\(O_2(g) = \{ f \mathrel{|} \exists c \gt 0 \forall n
+\mathrel{.} f(n) \leq c g(n)\}\)</span></p>
+<p>That existentially-quantified positive constant <span class="math notranslate nohighlight">\(c\)</span> lets us “bump up” the
+function <span class="math notranslate nohighlight">\(g\)</span> to whatever constant factor we need. For example,</p>
+<div class="math notranslate nohighlight">
+\[
+O_2(\lambda n . n^3) = \{ f \mathrel{|} \exists c \gt 0 \forall n . f(n) \leq c n^3 \}
+\]</div>
+<p>and therefore <span class="math notranslate nohighlight">\((\lambda n . 3n^3) \in O_2(\lambda n . n^3)\)</span>, because <span class="math notranslate nohighlight">\(3 n^3 \leq
+c n^3\)</span> if we take <span class="math notranslate nohighlight">\(c = 3\)</span>, or <span class="math notranslate nohighlight">\(c = 4\)</span>, or any larger <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p>Finally, recall that we don’t care about small inputs: we want to THINK BIG when
+we analyze algorithmic efficiency. It doesn’t matter whether the running time of
+an algorithm happens to be a little faster or a little slower for small inputs.
+In fact, we could just hardcode a lookup table for those small inputs if the
+algorithm is too slow on them! What matters really is the performance on
+big-sized inputs.</p>
+<p>Toward that end, let’s define <span class="math notranslate nohighlight">\(O_3\)</span> to ignore small inputs:</p>
+<p><strong>Big-Oh Version 3:</strong> <span class="math notranslate nohighlight">\(O_3(g) = \{ f \mathrel{|} \exists c \gt 0 \exists n_0 \gt
+0 \forall n \geq n_0 \mathrel{.} f(n) \leq c g(n)\}\)</span></p>
+<p>That existentially quantified positive constant <span class="math notranslate nohighlight">\(n_0\)</span> lets us “ignore” all
+inputs of that size or smaller. For example,</p>
+<div class="math notranslate nohighlight">
+\[
+O_3(\lambda n . n^2) = \{ f \mathrel{|} \exists c \gt 0 \exists n_0 \gt 0 \forall n \geq n_0 \mathrel{.} f(n) \leq c n^2\}
+\]</div>
+<p>and therefore <span class="math notranslate nohighlight">\((\lambda n . 2n) \in O_3(\lambda n . n^2)\)</span>, because <span class="math notranslate nohighlight">\(2n \leq c
+n^2\)</span> if we take <span class="math notranslate nohighlight">\(c = 2\)</span> and <span class="math notranslate nohighlight">\(n_0 = 2\)</span>. Note how we get to ignore the fact that
+<span class="math notranslate nohighlight">\(\lambda n . 2n\)</span> is temporarily a little too big at <span class="math notranslate nohighlight">\(n = 1\)</span> by picking <span class="math notranslate nohighlight">\(n_0 =
+2\)</span>. That’s the power of ignoring “small” inputs.</p>
+</div>
+<div class="section" id="big-oh-finished">
+<h2>Big-Oh, Finished<a class="headerlink" href="#big-oh-finished" title="Permalink to this headline">¶</a></h2>
+<p>Version 3 is the right definition of Big-Oh.  We repeat it here, for real:</p>
+<p><strong>Big-Oh:</strong> <span class="math notranslate nohighlight">\(O(g) = \{ f \mathrel{|} \exists c \gt 0 \exists n_0 \gt 0 \forall n \geq n_0 \mathrel{.} f(n) \leq c g(n)\}\)</span></p>
+<p>That’s the final, important version you should know. But don’t just memorize it.
+If you understand the derivation we gave here, you’ll be able to recreate it
+from scratch anytime you need it.</p>
+<p>Big-Oh is called an <em>asymptotic upper bound</em>. If <span class="math notranslate nohighlight">\(f \in O(g)\)</span>, then <span class="math notranslate nohighlight">\(f\)</span> is at
+least as efficient as <span class="math notranslate nohighlight">\(g\)</span>, and might be more efficient.</p>
+</div>
+<div class="section" id="big-oh-notation-warnings">
+<h2>Big-Oh Notation Warnings<a class="headerlink" href="#big-oh-notation-warnings" title="Permalink to this headline">¶</a></h2>
+<p><strong>Warning 1.</strong> Because it’s an upper bound, we can always inflate a Big-Oh
+statement: for example, if <span class="math notranslate nohighlight">\(f \in O(n^2)\)</span>, then also <span class="math notranslate nohighlight">\(f \in O(n^3)\)</span>, and <span class="math notranslate nohighlight">\(f \in
+O(2^n)\)</span>, etc. But our goal is always to give <em>tight</em> upper bounds, whether we
+explicitly say that or not. So when asked what the running time of an algorithm
+is, you must always give the tightest bound you can with Big-Oh.</p>
+<p><strong>Warning 2.</strong> Instead of <span class="math notranslate nohighlight">\(O(g) = \{ f \mathrel{|} \ldots \}\)</span>, most authors
+instead write <span class="math notranslate nohighlight">\(O(g(n)) = \{ f(n) \mathrel{|} \ldots \}\)</span>. They don’t really mean
+<span class="math notranslate nohighlight">\(g\)</span> applied to <span class="math notranslate nohighlight">\(n\)</span>. They mean a function <span class="math notranslate nohighlight">\(g\)</span> parameterized on input <span class="math notranslate nohighlight">\(n\)</span> but not
+yet applied. This is badly misleading and generally a result of not
+understanding anonymous functions. Moral of that story: more people need to
+study functional programming.</p>
+<p><strong>Warning 3.</strong> Instead of <span class="math notranslate nohighlight">\(\lambda n . 2n \in O(\lambda n . n^2)\)</span> nearly all
+authors write <span class="math notranslate nohighlight">\(2n = O(n^2)\)</span>. This is a hideous and inexcusable abuse of notation
+that should never have been allowed and yet has permanently infected the
+computer science consciousness. The standard defense is that <span class="math notranslate nohighlight">\(=\)</span> here should be
+read as “is” not as “equals”. That is patently ridiculous, and even those who
+make that defense usually have the good grace to admit it’s nonsense. Sometimes
+we become stuck with the mistakes of our ancestors. This is one of those times.
+Be careful of this “one-directional equality” and, if you ever have a chance,
+teach your (intellectual) children to do better.</p>
+</div>
+<div class="section" id="algorithms-and-efficiency-attempt-3">
+<h2>Algorithms and Efficiency, Attempt 3<a class="headerlink" href="#algorithms-and-efficiency-attempt-3" title="Permalink to this headline">¶</a></h2>
+<p>Let’s review.  Our first attempt at defining efficiency was:</p>
+<p><strong>Attempt 1:</strong> An algorithm is efficient if, when implemented, it runs in a
+small amount of time on particular input instances.</p>
+<p>By replacing time with steps, particular instances with input size, and small
+with polynomial, we improved that to:</p>
+<p><strong>Attempt 2:</strong> An algorithm is efficient if its maximum number of execution
+steps is polynomial in the size of its input.</p>
+<p>And that’s really a pretty good definition.  But using Big-Oh notation to
+make it a little more concrete, we can produce our third and final attempt:</p>
+<p><strong>Attempt 3:</strong> An algorithm is efficient if its worst-case running time on input
+size <span class="math notranslate nohighlight">\(n\)</span> is <span class="math notranslate nohighlight">\(O(n^d)\)</span> for some constant <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<p>By “worst-case running time” we mean the same thing as “maximum number of
+execution steps”, just expressed in different and probably more common words.
+The worst-case is when execution takes the longest. “Time” is a common euphemism
+here for execution steps, and is used to emphasize we’re thinking about how long
+a computation takes.</p>
+<p><em>Space</em> is the most common other feature of efficiency to consider. Algorithms
+can be more or less efficient at requiring constant or linear space, for
+example. You’re already familiar with that from tail recursion and lists in
+OCaml.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/appendix"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../mut/hash_tables.html" title="previous page"><span class="section-number">7.4. </span>Hash Tables</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

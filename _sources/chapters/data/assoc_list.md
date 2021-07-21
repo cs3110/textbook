@@ -15,10 +15,10 @@ kernelspec:
 
 # Association Lists
 
-A *dictionary* is a data structure that maps *keys* to *values*. One easy
-implementation of a dictionary is an *association list*, which is a list of
-pairs. Here, for example, is an association list that maps some shape names to
-the number of sides they have:
+A *map* is a data structure that maps *keys* to *values*. Maps are also known as
+*dictionaries*. One easy implementation of a map is an *association list*, which
+is a list of pairs. Here, for example, is an association list that maps some
+shape names to the number of sides they have:
 ```{code-cell} ocaml
 let d = [("rectangle", 4); ("nonagon", 9); ("icosagon", 20)]
 ```

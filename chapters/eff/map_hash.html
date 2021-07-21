@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7.4.4. Maps as Hash Tables &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.5. Amortized Analysis" href="amortized.html" />
+    <link rel="prev" title="7.4.3. Maps as Arrays" href="map_dat.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/about.html">
+     1.4. About This Book
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.5. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.6. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="eff_maps.html">
+     7.4. Efficient Maps
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="map_assoclist.html">
+       7.4.2. Maps as Association Lists
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="map_dat.html">
+       7.4.3. Maps as Arrays
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       7.4.4. Maps as Hash Tables
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="amortized.html">
+     7.5. Amortized Analysis
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+    <label for="toctree-checkbox-9">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="amortized_hash.html">
+       7.5.1. Amortized Analysis of Hash Tables
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="amortized_queue.html">
+       7.5.2. Amortized Analysis of Two-List Queues
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="amortized_methods.html">
+       7.5.3. Bankers and Physicists
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="amortized_persistence.html">
+       7.5.4. Amortized Analysis and Persistence
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/eff/map_hash.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/eff/map_hash.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/eff/map_hash.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hash-table-interface">
+   7.4.4.1. Hash table interface
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hash-table-representation-type">
+   7.4.4.2. Hash table representation type
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-factor-and-resizing">
+   7.4.4.3. Load factor and resizing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hash-table-implementation">
+   7.4.4.4. Hash table implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hash-functions">
+   7.4.4.5. Hash functions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="maps-as-hash-tables">
+<h1><span class="section-number">7.4.4. </span>Maps as Hash Tables<a class="headerlink" href="#maps-as-hash-tables" title="Permalink to this headline">¶</a></h1>
+<p>Arrays offer constant time performance, but come with severe restrictions on
+keys. Association lists don’t place those restrictions on keys, but they also
+don’t offer constant time performance. Is there a way to get the best of both
+worlds? Yes (more or less)! <em>Hash tables</em> are the solution.</p>
+<p>The key idea is that we assume the existence of a <em>hash function</em> <code class="docutils literal notranslate"><span class="pre">hash</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> that can convert any key to a non-negative integer. Then we can use that
+function to index into an array, as we did with direct address tables. Of
+course, we want the hash function itself to run in constant time, otherwise the
+operations that use it would not be efficient.</p>
+<p>One immediate problem with this idea is what to do if the output of the hash is
+not within the bounds of the array. It’s easy to solve this: if <code class="docutils literal notranslate"><span class="pre">a</span></code> is the
+length of the array then computing <code class="docutils literal notranslate"><span class="pre">(hash</span> <span class="pre">k)</span> <span class="pre">mod</span> <span class="pre">a</span></code> will return an index that is
+within bounds.</p>
+<p>Another problem is what to do if the hash function is not <em>injective</em>, meaning
+that it is not one-to-one. Then multiple keys could <em>collide</em> and need to be
+stored at the same index in the array. That’s okay! We deliberately allow that.
+But it does mean we need a strategy for what to do when keys collide.</p>
+<p><strong>Collisions.</strong> There are two well-known strategies for dealing with collisions.
+One is to store multiple bindings at each array index. The array elements are
+called <em>buckets</em>. Typically, the bucket is implemented as a linked list. This
+strategy is known by many names, including <em>chaining</em>, <em>closed addressing</em>, and
+<em>open hashing</em>. We’ll use <strong>chaining</strong> as the name. To check whether an element
+is in the hash table, the key is first hashed to find the correct bucket to look
+in. Then, the linked list is scanned to see if the desired element is present.
+If the linked list is short, this scan is very quick. An element is added or
+removed by hashing it to find the correct bucket. Then, the bucket is checked to
+see if the element is there, and finally the element is added or removed
+appropriately from the bucket in the usual way for linked lists.</p>
+<p>The other strategy is to <strong>store bindings at places other than their proper
+location according to the hash.</strong> When adding a new binding to the hash table
+would create a collision, the insert operation instead finds an empty location
+in the array to put the binding. This strategy is (confusingly) known as
+<em>probing</em>, <em>open addressing</em>, and <em>closed hashing</em>. We’ll use <strong>probing</strong> as the
+name. A simple way to find an empty location is to search ahead through the
+array indices with a fixed stride (often 1), looking for an unused entry; this
+<em>linear probing</em> strategy tends to produce a lot of clustering of elements in
+the table, leading to bad performance. A better strategy is to use a second hash
+function to compute the probing interval; this strategy is called <em>double
+hashing</em>. Regardless of how probing is implemented, however, the time required
+to search for or add an element grows rapidly as the hash table fills up.</p>
+<p>Chaining is usually preferred over probing in software implementations, because
+it’s easier to implement the linked lists in software. Hardware implementations
+have often used probing, when the size of the table is fixed by circuitry. But
+some modern software implementations are rexamining the benefits of probing.</p>
+<div class="section" id="hash-table-interface">
+<h2><span class="section-number">7.4.4.1. </span>Hash table interface<a class="headerlink" href="#hash-table-interface" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">TableMap</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">mutable</span> <span class="n">table</span><span class="o">-</span><span class="n">based</span> <span class="n">maps</span> <span class="n">that</span>
+      <span class="n">bind</span> <span class="n">keys</span> <span class="n">of</span> <span class="nb">type</span> <span class="p">[</span><span class="s1">&#39;k] to values of type [&#39;</span><span class="n">v</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="nb">type</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span><span class="p">]</span> <span class="n">mutates</span> <span class="nb">map</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="n">to</span> <span class="n">bind</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span> <span class="n">If</span>
+      <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">was</span> <span class="n">already</span> <span class="n">bound</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">that</span> <span class="n">binding</span> <span class="ow">is</span> <span class="n">replaced</span>
+      <span class="n">by</span> <span class="n">the</span> <span class="n">binding</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">insert</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; &#39;</span><span class="n">v</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">unit</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">find</span> <span class="n">k</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">Some</span> <span class="n">v</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="n">binds</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="ow">and</span>
+      <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">bind</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">find</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t -&gt; &#39;</span><span class="n">v</span> <span class="n">option</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">remove</span> <span class="n">k</span> <span class="n">m</span><span class="p">]</span> <span class="n">mutates</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="n">to</span> <span class="n">remove</span> <span class="nb">any</span> <span class="n">binding</span> <span class="n">of</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span>
+      <span class="n">If</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">bound</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">the</span> <span class="nb">map</span> <span class="ow">is</span> <span class="n">unchanged</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">remove</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t -&gt; unit</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">create</span> <span class="nb">hash</span> <span class="n">c</span><span class="p">]</span> <span class="n">creates</span> <span class="n">a</span> <span class="n">new</span> <span class="n">table</span> <span class="nb">map</span> <span class="k">with</span> <span class="n">capacity</span> <span class="p">[</span><span class="n">c</span><span class="p">]</span>
+      <span class="n">that</span> <span class="n">will</span> <span class="n">use</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="k">as</span> <span class="n">the</span> <span class="n">function</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">keys</span> <span class="n">to</span>
+      <span class="n">integers</span><span class="o">.</span> 
+      <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="n">distributes</span> <span class="n">keys</span> <span class="n">uniformly</span> <span class="n">over</span> <span class="n">integers</span><span class="p">,</span>
+      <span class="ow">and</span> <span class="n">the</span> <span class="n">output</span> <span class="n">of</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="ow">is</span> <span class="n">always</span> <span class="n">non</span><span class="o">-</span><span class="n">negative</span><span class="p">,</span> <span class="ow">and</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span>
+      <span class="n">runs</span> <span class="ow">in</span> <span class="n">constant</span> <span class="n">time</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">create</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k -&gt; int) -&gt; int -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">bindings</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">association</span> <span class="nb">list</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">bindings</span> <span class="k">as</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span>
+      <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">bindings</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">&#39;k * &#39;</span><span class="n">v</span><span class="p">)</span> <span class="nb">list</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">of_list</span> <span class="nb">hash</span> <span class="n">lst</span><span class="p">]</span> <span class="n">creates</span> <span class="n">a</span> <span class="nb">map</span> <span class="k">with</span> <span class="n">the</span> <span class="n">same</span> <span class="n">bindings</span> <span class="k">as</span> <span class="p">[</span><span class="n">lst</span><span class="p">],</span> <span class="n">using</span>
+      <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="k">as</span> <span class="n">the</span> <span class="nb">hash</span> <span class="n">function</span><span class="o">.</span>
+      <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">contain</span> <span class="nb">any</span> <span class="n">duplicate</span> <span class="n">keys</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">of_list</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k -&gt; int) -&gt; (&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="s1">&#39;v) list -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t  </span>
+<span class="n">end</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hash-table-representation-type">
+<h2><span class="section-number">7.4.4.2. </span>Hash table representation type<a class="headerlink" href="#hash-table-representation-type" title="Permalink to this headline">¶</a></h2>
+<p>Here is a representation type for a hash table that uses chaining:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="p">(</span><span class="s1">&#39;k,&#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nb">hash</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; int;</span>
+  <span class="n">mutable</span> <span class="n">size</span> <span class="p">:</span> <span class="nb">int</span><span class="p">;</span>
+  <span class="n">mutable</span> <span class="n">buckets</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k * &#39;</span><span class="n">v</span><span class="p">)</span> <span class="nb">list</span> <span class="n">array</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">buckets</span></code> array has elements that are association lists, which store the
+bindings. The <code class="docutils literal notranslate"><span class="pre">hash</span></code> function is used to determine which bucket a key goes into.
+The <code class="docutils literal notranslate"><span class="pre">size</span></code> is used to keep track of the number of bindings currently in the
+table, since that would be expensive to compute by iterating over <code class="docutils literal notranslate"><span class="pre">buckets</span></code>.</p>
+<p>Here are the AF and RI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">(</span><span class="o">**</span> <span class="n">AF</span><span class="p">:</span>  <span class="n">If</span> <span class="p">[</span><span class="n">buckets</span><span class="p">]</span> <span class="ow">is</span>
+        <span class="p">[</span><span class="o">|</span> <span class="p">[(</span><span class="n">k11</span><span class="p">,</span><span class="n">v11</span><span class="p">);</span> <span class="p">(</span><span class="n">k12</span><span class="p">,</span><span class="n">v12</span><span class="p">);</span> <span class="o">...</span><span class="p">];</span>
+           <span class="p">[(</span><span class="n">k21</span><span class="p">,</span><span class="n">v21</span><span class="p">);</span> <span class="p">(</span><span class="n">k22</span><span class="p">,</span><span class="n">v22</span><span class="p">);</span> <span class="o">...</span><span class="p">];</span> 
+           <span class="o">...</span> <span class="o">|</span><span class="p">]</span>
+      <span class="n">that</span> <span class="n">represents</span> <span class="n">the</span> <span class="nb">map</span>
+        <span class="p">{</span><span class="n">k11</span><span class="p">:</span><span class="n">v11</span><span class="p">,</span> <span class="n">k12</span><span class="p">:</span><span class="n">v12</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>
+         <span class="n">k21</span><span class="p">:</span><span class="n">v21</span><span class="p">,</span> <span class="n">k22</span><span class="p">:</span><span class="n">v22</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>  <span class="o">...</span><span class="p">}</span><span class="o">.</span>
+      <span class="n">RI</span><span class="p">:</span> <span class="n">No</span> <span class="n">key</span> <span class="n">appears</span> <span class="n">more</span> <span class="n">than</span> <span class="n">once</span> <span class="ow">in</span> <span class="n">array</span> <span class="p">(</span><span class="n">so</span><span class="p">,</span> <span class="n">no</span>
+        <span class="n">duplicate</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">association</span> <span class="n">lists</span><span class="p">)</span><span class="o">.</span>  <span class="n">All</span> <span class="n">keys</span> <span class="n">are</span>
+        <span class="ow">in</span> <span class="n">the</span> <span class="n">right</span> <span class="n">buckets</span><span class="p">:</span> <span class="k">if</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">in</span> <span class="p">[</span><span class="n">buckets</span><span class="p">]</span> <span class="n">at</span> <span class="n">index</span>
+        <span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="n">then</span> <span class="p">[</span><span class="nb">hash</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="n">b</span><span class="p">]</span><span class="o">.</span> <span class="n">The</span> <span class="n">output</span> <span class="n">of</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="n">must</span> <span class="n">always</span>
+        <span class="n">be</span> <span class="n">non</span><span class="o">-</span><span class="n">negative</span><span class="o">.</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="n">must</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">constant</span> <span class="n">time</span><span class="o">.*</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What would the efficiency of <code class="docutils literal notranslate"><span class="pre">insert</span></code>, <code class="docutils literal notranslate"><span class="pre">find</span></code>, and <code class="docutils literal notranslate"><span class="pre">remove</span></code> be for this rep
+type? All require hashing the key (constant time), indexing into the appropriate
+bucket (constant time), and finding out whether the key is already in the
+association list (linear in the number of elements in that list). So the
+efficiency of the hash table depends on the number of elements in each bucket.
+That, in turn, is determined by how well the hash function distributes keys
+across all the buckets.</p>
+<p>A terrible hash function, such as the constant function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">k</span> <span class="pre">-&gt;</span> <span class="pre">42</span></code>, would put
+all keys into same bucket. Then every operation would be linear in the number
+$<span class="math notranslate nohighlight">\(n\)</span><span class="math notranslate nohighlight">\( of bindings in the map&amp;mdash;that is, \)</span><span class="math notranslate nohighlight">\(O(n)\)</span>$. We definitely don’t want
+that.</p>
+<p>Instead, we want hash functions that distribute keys more or less randomly
+across the buckets. Then the expected length of every bucket will be about the
+same. If we could arrange that, on average, the bucket length were a constant
+$<span class="math notranslate nohighlight">\(L\)</span><span class="math notranslate nohighlight">\(, then insert, find, and remove would all in expectation run in time
+\)</span><span class="math notranslate nohighlight">\(O(L)\)</span>$.</p>
+</div>
+<div class="section" id="load-factor-and-resizing">
+<h2><span class="section-number">7.4.4.3. </span>Load factor and resizing<a class="headerlink" href="#load-factor-and-resizing" title="Permalink to this headline">¶</a></h2>
+<p>How could we arrange for buckets to have expected constant length? To answer
+that, let’s think about the number of bindings and buckets in the table. Define
+the <em>load factor</em> of the table to be (# bindings) / (# buckets). So a table with
+20 bindings and 10 buckets has a load factor of 2, and a table with 10 bindings
+and 20 buckets has a load factor of 0.5. The load factor is therefore the
+average number of bindings in a bucket. So if we could keep the load factor
+constant, we could keep $<span class="math notranslate nohighlight">\(L\)</span>$ constant, thereby keeping the performance to
+(expected) constant time.</p>
+<p>Toward that end, note that the number of bindings is not under the control of
+the hash table implementer—but the number of buckets is. So by changing
+the number of buckets, the implementer can change the load factor. A common
+strategy is to keep the load factor from approximately 1/2 to 2. Then each
+bucket contains only a couple bindings, and expected constant-time performance
+is guaranteed.</p>
+<p>There’s no way for the implementer to know in advance, though, exactly how many
+buckets will be needed. So instead, the implementer will have to <em>resize</em> the
+bucket array whenever the load factor gets too high. Typically the newly
+allocated bucket will be of a size to restore the load factor to about 1.</p>
+<p>Putting those two ideas together, if the load factor reaches 2, then there are
+twice as many bindings as buckets in the table. So by doubling the size of the
+array, we can restore the load factor to 1. Similarly, if the load factor
+reaches 1/2, then there are twice as many buckets as bindings, and halving the
+size of the array will restore the load factor to 1.</p>
+<p>Resizing the bucket array to become larger is an essential technique for hash
+tables. Resizing it to become smaller, though, is not essential. As long as the
+load factor is bounded by a constant from above, we can achieve expected
+constant bucket length. So not all implementations will reduce the size of the
+array. Although doing so would recover some space, it might not be worth the
+effort. That’s especially true if the size of the hash table is cyclic: although
+sometimes it becomes smaller, eventually it becomes bigger again.</p>
+<p>Unfortunately, resizing would seem to ruin our expected constant-time
+performance though. Insertion of a binding might cause the load factor to go
+over 2, thus causing a resize. When the resize occurs, all the existing bindings
+must be rehashed and added to the new bucket array. Thus, insertion has become a
+worst-case linear time operation! The same is true for removal, if we resize the
+array to become smaller when the load factor is too low.</p>
+</div>
+<div class="section" id="hash-table-implementation">
+<h2><span class="section-number">7.4.4.4. </span>Hash table implementation<a class="headerlink" href="#hash-table-implementation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">HashMap</span> <span class="p">:</span> <span class="n">TableMap</span> <span class="o">=</span> <span class="n">struct</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="n">AF</span> <span class="ow">and</span> <span class="n">RI</span><span class="p">:</span> <span class="n">above</span> <span class="o">*</span><span class="p">)</span>
+  <span class="nb">type</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">hash</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; int;</span>
+    <span class="n">mutable</span> <span class="n">size</span> <span class="p">:</span> <span class="nb">int</span><span class="p">;</span>
+    <span class="n">mutable</span> <span class="n">buckets</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k * &#39;</span><span class="n">v</span><span class="p">)</span> <span class="nb">list</span> <span class="n">array</span>
+  <span class="p">}</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">capacity</span> <span class="n">tab</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">buckets</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span><span class="o">.</span> 
+      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">capacity</span> <span class="p">{</span><span class="n">buckets</span><span class="p">}</span> <span class="o">=</span>
+    <span class="n">Array</span><span class="o">.</span><span class="n">length</span> <span class="n">buckets</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">load_factor</span> <span class="n">tab</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">load</span> <span class="n">factor</span> <span class="n">of</span> <span class="p">[</span><span class="n">tab</span><span class="p">],</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="p">,</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span>
+      <span class="n">bindings</span> <span class="n">divided</span> <span class="n">by</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">buckets</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">load_factor</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">float_of_int</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">/.</span> <span class="n">float_of_int</span> <span class="p">(</span><span class="n">capacity</span> <span class="n">tab</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">create</span> <span class="nb">hash</span> <span class="n">n</span> <span class="o">=</span>
+    <span class="p">{</span><span class="nb">hash</span><span class="p">;</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">buckets</span> <span class="o">=</span> <span class="n">Array</span><span class="o">.</span><span class="n">make</span> <span class="n">n</span> <span class="p">[]}</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">index</span> <span class="n">k</span> <span class="n">tab</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">index</span> <span class="n">at</span> <span class="n">which</span> <span class="n">key</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">should</span> <span class="n">be</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">the</span>
+      <span class="n">buckets</span> <span class="n">of</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span><span class="o">.</span> 
+      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="p">(</span><span class="n">tab</span><span class="o">.</span><span class="n">hash</span> <span class="n">k</span><span class="p">)</span> <span class="n">mod</span> <span class="p">(</span><span class="n">capacity</span> <span class="n">tab</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span><span class="p">]</span> <span class="n">inserts</span> <span class="n">a</span> <span class="n">binding</span> <span class="kn">from</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span>
+      <span class="ow">and</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">resize</span> <span class="n">the</span> <span class="n">table</span><span class="p">,</span> <span class="n">regardless</span> <span class="n">of</span> <span class="n">what</span> <span class="n">happens</span> <span class="n">to</span> <span class="n">the</span>
+      <span class="n">load</span> <span class="n">factor</span><span class="o">.</span>
+      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">expected</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="ow">in</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+    <span class="n">let</span> <span class="n">old_bucket</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">in</span>
+    <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="p">::</span> <span class="n">List</span><span class="o">.</span><span class="n">remove_assoc</span> <span class="n">k</span> <span class="n">old_bucket</span><span class="p">;</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">List</span><span class="o">.</span><span class="n">mem_assoc</span> <span class="n">k</span> <span class="n">old_bucket</span><span class="p">)</span> <span class="n">then</span>
+      <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">()</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">rehash</span> <span class="n">tab</span> <span class="n">new_capacity</span><span class="p">]</span> <span class="n">replaces</span> <span class="n">the</span> <span class="n">buckets</span> <span class="n">array</span> <span class="n">of</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span> <span class="k">with</span> <span class="n">a</span> <span class="n">new</span>
+      <span class="n">array</span> <span class="n">of</span> <span class="n">size</span> <span class="p">[</span><span class="n">new_capacity</span><span class="p">],</span> <span class="ow">and</span> <span class="n">re</span><span class="o">-</span><span class="n">inserts</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">bindings</span> <span class="n">of</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span>
+      <span class="n">into</span> <span class="n">the</span> <span class="n">new</span> <span class="n">array</span><span class="o">.</span>  <span class="n">The</span> <span class="n">keys</span> <span class="n">are</span> <span class="n">re</span><span class="o">-</span><span class="n">hashed</span><span class="p">,</span> <span class="n">so</span> <span class="n">the</span> <span class="n">bindings</span> <span class="n">will</span>
+      <span class="n">likely</span> <span class="n">land</span> <span class="ow">in</span> <span class="n">different</span> <span class="n">buckets</span><span class="o">.</span> 
+      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">where</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">bindings</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">rehash</span> <span class="n">tab</span> <span class="n">new_capacity</span> <span class="o">=</span>
+    <span class="p">(</span><span class="o">*</span> <span class="n">insert</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="n">into</span> <span class="n">tab</span> <span class="o">*</span><span class="p">)</span>
+    <span class="n">let</span> <span class="n">rehash_binding</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">=</span>
+      <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span>
+    <span class="ow">in</span>
+    <span class="p">(</span><span class="o">*</span> <span class="n">insert</span> <span class="nb">all</span> <span class="n">bindings</span> <span class="n">of</span> <span class="n">bucket</span> <span class="n">into</span> <span class="n">tab</span> <span class="o">*</span><span class="p">)</span>
+    <span class="n">let</span> <span class="n">rehash_bucket</span> <span class="n">bucket</span> <span class="o">=</span>
+      <span class="n">List</span><span class="o">.</span><span class="n">iter</span> <span class="n">rehash_binding</span> <span class="n">bucket</span>
+    <span class="ow">in</span>
+    <span class="n">let</span> <span class="n">old_buckets</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span> <span class="ow">in</span>
+    <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span> <span class="o">&lt;-</span> <span class="n">Array</span><span class="o">.</span><span class="n">make</span> <span class="n">new_capacity</span> <span class="p">[];</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+    <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">rehash_binding</span><span class="p">]</span> <span class="ow">is</span> <span class="n">called</span> <span class="n">by</span> <span class="p">[</span><span class="n">rehash_bucket</span><span class="p">]</span> <span class="n">once</span> <span class="k">for</span> <span class="n">every</span> <span class="n">binding</span> <span class="o">*</span><span class="p">)</span>
+    <span class="n">Array</span><span class="o">.</span><span class="n">iter</span> <span class="n">rehash_bucket</span> <span class="n">old_buckets</span> <span class="p">(</span><span class="o">*</span> <span class="n">expected</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">resize_if_needed</span> <span class="n">tab</span><span class="p">]</span> <span class="n">resizes</span> <span class="ow">and</span> <span class="n">rehashes</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span> <span class="k">if</span> <span class="n">the</span> <span class="n">load</span> <span class="n">factor</span>
+     <span class="ow">is</span> <span class="n">too</span> <span class="n">big</span> <span class="ow">or</span> <span class="n">too</span> <span class="n">small</span><span class="o">.</span>  <span class="n">Load</span> <span class="n">factors</span> <span class="n">are</span> <span class="n">allowed</span> <span class="n">to</span> <span class="nb">range</span> <span class="kn">from</span>
+     <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="n">to</span> <span class="mf">2.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">let</span> <span class="n">lf</span> <span class="o">=</span> <span class="n">load_factor</span> <span class="n">tab</span> <span class="ow">in</span>
+    <span class="k">if</span> <span class="n">lf</span> <span class="o">&gt;</span> <span class="mf">2.0</span> <span class="n">then</span>
+      <span class="n">rehash</span> <span class="n">tab</span> <span class="p">(</span><span class="n">capacity</span> <span class="n">tab</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">lf</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="n">then</span>
+      <span class="n">rehash</span> <span class="n">tab</span> <span class="p">(</span><span class="n">capacity</span> <span class="n">tab</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">()</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span><span class="p">;</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+    <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">expected</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">find</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">List</span><span class="o">.</span><span class="n">assoc_opt</span> <span class="n">k</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">index</span> <span class="n">k</span> <span class="n">tab</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span><span class="p">]</span> <span class="n">removes</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="kn">from</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span> <span class="ow">and</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">trigger</span>
+      <span class="n">a</span> <span class="n">resize</span><span class="p">,</span> <span class="n">regardless</span> <span class="n">of</span> <span class="n">what</span> <span class="n">happens</span> <span class="n">to</span> <span class="n">the</span> <span class="n">load</span> <span class="n">factor</span><span class="o">.</span> 
+      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">expected</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="ow">in</span>
+    <span class="n">let</span> <span class="n">old_bucket</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">in</span>
+    <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">List</span><span class="o">.</span><span class="n">remove_assoc</span> <span class="n">k</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">List</span><span class="o">.</span><span class="n">mem_assoc</span> <span class="n">k</span> <span class="n">old_bucket</span> <span class="n">then</span>
+      <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">()</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">remove</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span><span class="p">;</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+    <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">bindings</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">Array</span><span class="o">.</span><span class="n">fold_left</span>
+      <span class="p">(</span><span class="n">fun</span> <span class="n">acc</span> <span class="n">bucket</span> <span class="o">-&gt;</span>
+         <span class="n">List</span><span class="o">.</span><span class="n">fold_left</span>
+           <span class="p">(</span><span class="o">*</span> <span class="mi">1</span> <span class="n">cons</span> <span class="k">for</span> <span class="n">every</span> <span class="n">binding</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+           <span class="p">(</span><span class="n">fun</span> <span class="n">acc</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="p">::</span> <span class="n">acc</span><span class="p">)</span> 
+           <span class="n">acc</span> <span class="n">bucket</span><span class="p">)</span>
+      <span class="p">[]</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span>
+
+  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">of_list</span> <span class="nb">hash</span> <span class="n">lst</span> <span class="o">=</span>
+    <span class="n">let</span> <span class="n">m</span> <span class="o">=</span> <span class="n">create</span> <span class="nb">hash</span> <span class="p">(</span><span class="n">List</span><span class="o">.</span><span class="n">length</span> <span class="n">lst</span><span class="p">)</span> <span class="ow">in</span>  <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+    <span class="n">List</span><span class="o">.</span><span class="n">iter</span> <span class="p">(</span><span class="n">fun</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span><span class="p">)</span> <span class="n">lst</span><span class="p">;</span> <span class="p">(</span><span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+    <span class="n">m</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>An optimization of <code class="docutils literal notranslate"><span class="pre">rehash</span></code> is possible. When it calls <code class="docutils literal notranslate"><span class="pre">insert_no_resize</span></code> to
+re-insert a binding, extra work is being done: there’s no need for that
+insertion to call <code class="docutils literal notranslate"><span class="pre">remove_assoc</span></code> or <code class="docutils literal notranslate"><span class="pre">mem_assoc</span></code>, because we are guaranteed the
+binding does not contain a duplicate key. We could omit that work. If the hash
+function is good, it’s only a constant amount of work that we save. But if the
+hash function is bad and doesn’t distribute keys uniformly, that could be
+an important optimization.</p>
+</div>
+<div class="section" id="hash-functions">
+<h2><span class="section-number">7.4.4.5. </span>Hash functions<a class="headerlink" href="#hash-functions" title="Permalink to this headline">¶</a></h2>
+<p>Hash tables are one of the most useful data structures ever invented.
+Unfortunately, they are also one of the most misused. Code built using hash
+tables often falls far short of achievable performance. There are two reasons
+for this:</p>
+<ul class="simple">
+<li><p>Clients choose poor hash functions that do not distribute keys randomly
+over buckets.</p></li>
+<li><p>Hash table abstractions do not adequately specify what is required of the
+hash function, or make it difficult to provide a good hash function.</p></li>
+</ul>
+<p>Clearly, a bad hash function can destroy our attempts at a constant running
+time. A lot of obvious hash function choices are bad. For example, if we’re
+mapping names to phone numbers, then hashing each name to its length would be a
+very poor function, as would a hash function that used only the first name, or
+only the last name. We want our hash function to use all of the information in
+the key. This is a bit of an art. While hash tables are extremely effective when
+used well, all too often poor hash functions are used that sabotage performance.</p>
+<p>Hash tables work well when the hash function looks random. If it is to look
+random, this means that any change to a key, even a small one, should change the
+bucket index in an apparently random way. If we imagine writing the bucket index
+as a binary number, a small change to the key should randomly flip the bits in
+the bucket index. This is called information <em>diffusion</em>. For example, a one-bit
+change to the key should cause every bit in the index to flip with 1/2
+probability.</p>
+<p><strong>Client vs. implementer.</strong> As we’ve described it, the hash function is a single
+function that maps from the key type to a bucket index. In practice, the hash
+function is the composition of <em>two</em> functions, one provided by the client and
+one by the implementer. This is because the implementer doesn’t understand the
+element type, the client doesn’t know how many buckets there are, and the
+implementer probably doesn’t trust the client to achieve diffusion.</p>
+<p>The client function <code class="docutils literal notranslate"><span class="pre">hash_c</span></code> first converts the key into an integer hash code,
+and the implementation function <code class="docutils literal notranslate"><span class="pre">hash_i</span></code> converts the hash code into a bucket
+index. The actual hash function is the composition of these two functions. As a
+hash table designer, you need to figure out which of the client hash function
+and the implementation hash function is going to provide diffusion. If clients
+are sufficiently savvy, it makes sense to push the diffusion onto them, leaving
+the hash table implementation as simple and fast as possible. The easy way to
+accomplish this is to break the computation of the bucket index into three
+steps.</p>
+<ol class="simple">
+<li><p>Serialization: Transform the key into a stream of bytes that contains all of
+the information in the original key. Two equal keys must result in the same
+byte stream. Two byte streams should be equal only if the keys are actually
+equal. How to do this depends on the form of the key. If the key is a
+string, then the stream of bytes would simply be the characters of the
+string.</p></li>
+<li><p>Diffusion: Map the stream of bytes into a large integer <em>x</em> in a way that
+causes every change in the stream to affect the bits of <em>x</em> apparently
+randomly. There is a tradeoff in performance versus randomness (and
+security) here.</p></li>
+<li><p>Compression: Reduce that large integer to be within the range of the
+buckets. For example, compute the hash bucket index as <em>x</em> mod <em>m</em>. This
+is particularly cheap if <em>m</em> is a power of two.</p></li>
+</ol>
+<p>Unfortunately, hash table implementations are rarely forthcoming about what they
+assume of client hash functions. So it can be hard to know, as a client, how to
+get good performance from a table. The more information the implementation can
+provide to a client about how well distributed keys are in buckets, the better.
+OCaml’s <code class="docutils literal notranslate"><span class="pre">Hashtbl</span></code> includes a function to get statistics about the bucket
+distribution, which can be helpful in diagnosing whether the hash function is
+providing adequate diffusion.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/eff"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="map_dat.html" title="previous page"><span class="section-number">7.4.3. </span>Maps as Arrays</a>
+    <a class='right-next' id="next-link" href="amortized.html" title="next page"><span class="section-number">7.5. </span>Amortized Analysis</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
