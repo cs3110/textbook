@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>8. Efficient Data Structures &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>8. Data Structures &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -86,6 +86,18 @@
     <div class="bd-toc-item active">
         <p class="caption">
  <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   Introduction
  </span>
 </p>
@@ -116,18 +128,13 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../intro/about.html">
-     1.4. About This Book
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../intro/3110.html">
-     1.5. A Brief History of CS 3110
+     1.4. A Brief History of CS 3110
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../intro/summary.html">
-     1.6. Summary
+     1.5. Summary
     </a>
    </li>
   </ul>
@@ -515,7 +522,7 @@
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
-   8. Efficient Data Structures
+   8. Data Structures
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -531,6 +538,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="amortized.html">
      8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence.html">
+     8.4. Sequences
     </a>
    </li>
   </ul>
@@ -588,7 +605,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/chapters/eff/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/chapters/ds/intro.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -608,10 +625,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/eff/intro.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/ds/intro.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/eff/intro.md"><button
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/ds/intro.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -639,12 +656,25 @@
         
               <div>
                 
-  <div class="section" id="efficient-data-structures">
-<h1><span class="section-number">8. </span>Efficient Data Structures<a class="headerlink" href="#efficient-data-structures" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="data-structures">
+<h1><span class="section-number">8. </span>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h1>
 <p>Efficient data structures are important building blocks for large programs.
 In this chapter, we’ll discuss what it means to be efficient, how to
 implement some efficient data structures using both imperative and
 functional programming, and learn about the technique of <em>amortized analysis</em>.</p>
+<p>Of course, we’ve already covered quite a few simple data structures, especially
+in the <a class="reference internal" href="../modules/functional_data_structures.html"><span class="doc std std-doc">modules chapter</span></a>, where we used lists to implement stacks, queues,
+maps, and sets. For stacks and (batched) queues, those implementations were
+already efficient. But we can do much better for maps (and sets). In this
+chapter we’ll see efficient implementations of maps using hash tables and
+red-black trees.</p>
+<p>We’ll also take a look at some cool functional data structures that appear less
+often in imperative languages: <em>sequences</em>, which are infinite lists implemented
+with functions called <em>thunks</em>; <em>lazy lists</em>, which are implemented with a
+language feature (aptly called “laziness”) that suspends evaluation; <em>promises</em>,
+which are a way of organizing concurrent computations that has recently become
+popular in imperative web programming; and <em>monads</em>, which are a way of
+organizing any kind of computation that has (side) effects.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -662,7 +692,7 @@ functional programming, and learn about the technique of <em>amortized analysis<
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./chapters/eff"
+            path: "./chapters/ds"
         },
         predefinedOutput: true
     }
