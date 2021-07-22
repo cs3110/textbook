@@ -1,0 +1,1235 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8.5. Memoization &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="8.6. Promises" href="promises.html" />
+    <link rel="prev" title="8.4. Sequences" href="sequence.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   8. Data Structures
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="amortized.html">
+     8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence.html">
+     8.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     8.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="promises.html">
+     8.6. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="monads.html">
+     8.7. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     8.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     8.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/ds/memoization.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/ds/memoization.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/ds/memoization.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/ds/memoization.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/jupyter?urlpath=tree/src/chapters/ds/memoization.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fibonacci">
+   8.5.1. Fibonacci
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#memoization-using-higher-order-functions">
+   8.5.2. Memoization Using Higher-order Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#just-for-fun-party-optimization">
+   8.5.3. Just for Fun: Party Optimization
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="memoization">
+<h1><span class="section-number">8.5. </span>Memoization<a class="headerlink" href="#memoization" title="Permalink to this headline">¶</a></h1>
+<p>In the previous section, we saw that the <code class="docutils literal notranslate"><span class="pre">Lazy</span></code> module memoizes the results of
+computations, so that no time has to be wasted on recomputing them. Memoization
+is a powerful technique for asymptotically speeding up simple recursive
+algorithms, without having to change the way the algorithm works.</p>
+<p>Let’s see apply the Abstraction Principle and invent a way to memoize <em>any</em>
+function, so that the function only had to be evaluated once on any given input.
+We’ll end up using imperative data structures (arrays and hash tables) as part
+of our solution.</p>
+<div class="section" id="fibonacci">
+<h2><span class="section-number">8.5.1. </span>Fibonacci<a class="headerlink" href="#fibonacci" title="Permalink to this headline">¶</a></h2>
+<p>Let’s again consider the problem of computing the nth Fibonacci number.
+The naive recursive implementation takes exponential time, because of the
+recomputation of the same Fibonacci numbers over and over again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fib</span> <span class="n">n</span> <span class="o">=</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">fib</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">fib</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fib : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To be precise, its running time turns out to be <span class="math notranslate nohighlight">\(O(\phi^n)\)</span>, where <span class="math notranslate nohighlight">\(\phi\)</span> is the
+golden ratio, <span class="math notranslate nohighlight">\(\frac{1 + \sqrt{5}}{2}\)</span>.</p>
+</div>
+<p>If we record Fibonacci numbers as they are computed, we can avoid this redundant
+work. The idea is that whenever we compute <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">n</span></code>, we store it in a table indexed
+by <code class="docutils literal notranslate"><span class="pre">n</span></code>. In this case the indexing keys are integers, so we can use implement
+this table using an array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fibm</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">memo</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="kt">array</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">make</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="nc">None</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">f_mem</span> <span class="n">n</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">memo</span><span class="o">.(</span><span class="n">n</span><span class="o">)</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="n">result</span> <span class="o">-&gt;</span> <span class="c">(* computed already *)</span> <span class="n">result</span>
+    <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span>
+        <span class="k">let</span> <span class="n">result</span> <span class="o">=</span>
+          <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">f_mem</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">f_mem</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span>
+        <span class="k">in</span>
+        <span class="c">(* record in table *)</span>
+        <span class="n">memo</span><span class="o">.(</span><span class="n">n</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="nc">Some</span> <span class="n">result</span><span class="o">;</span>
+        <span class="n">result</span>
+  <span class="k">in</span>
+  <span class="n">f_mem</span> <span class="n">n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fibm : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">f_mem</span></code> defined inside <code class="docutils literal notranslate"><span class="pre">fibm</span></code> contains the original recursive
+algorithm, except before doing that calculation it first checks if the result
+has already been computed and stored in the table in which case it simply
+returns the result.</p>
+<p>How do we analyze the running time of this function? The time spent in a single
+call to <code class="docutils literal notranslate"><span class="pre">f_mem</span></code> is <span class="math notranslate nohighlight">\(O(1)\)</span> if we exclude the time spent in any recursive calls
+that it happens to make. Now we look for a way to bound the total number of
+recursive calls by finding some measure of the progress that is being made.</p>
+<p>A good choice of progress measure, not only here but also for many uses of
+memoization, is the number of nonempty entries in the table (i.e. entries that
+contain <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">n</span></code> rather than <code class="docutils literal notranslate"><span class="pre">None</span></code>). Each time <code class="docutils literal notranslate"><span class="pre">f_mem</span></code> makes the two recursive
+calls it also increases the number of nonempty entries by one (filling in a
+formerly empty entry in the table with a new value). Since the table has only
+<code class="docutils literal notranslate"><span class="pre">n</span></code> entries, there can thus only be a total of <span class="math notranslate nohighlight">\(O(n)\)</span> calls to <code class="docutils literal notranslate"><span class="pre">f_mem</span></code>, for a
+total running time of <span class="math notranslate nohighlight">\(O(n)\)</span> (because we established above that each call takes
+<span class="math notranslate nohighlight">\(O(1)\)</span> time). This speedup from memoization thus reduces the running time from
+exponential to linear, a huge change—e.g., for <span class="math notranslate nohighlight">\(n=4\)</span> the speedup from
+memoization is more than a factor of a million!</p>
+<p>The key to being able to apply memoization is that there are common sub-problems
+which are being solved repeatedly. Thus we are able to use some extra storage to
+save on repeated computation.</p>
+<p>Although this code uses imperative constructs (specifically, array update), the
+side effects are not visible outside the function <code class="docutils literal notranslate"><span class="pre">fibm</span></code>. So from a client’s
+perspective, <code class="docutils literal notranslate"><span class="pre">fibm</span></code> is functional. There’s not need to mention the imperative
+implementation (i.e., the benign side effects) that are used internally.</p>
+</div>
+<div class="section" id="memoization-using-higher-order-functions">
+<h2><span class="section-number">8.5.2. </span>Memoization Using Higher-order Functions<a class="headerlink" href="#memoization-using-higher-order-functions" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve seen an example of memoizing one function, let’s use higher-order
+functions to memoize any function. First, consider the case of memoizing a
+non-recursive function <code class="docutils literal notranslate"><span class="pre">f</span></code>. In that case we simply need to create a hash table
+that stores the corresponding value for each argument that <code class="docutils literal notranslate"><span class="pre">f</span></code> is called with
+(and to memoize multi-argument functions we can use currying and uncurrying to
+convert to a single argument function).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">memo</span> <span class="n">f</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">h</span> <span class="o">=</span> <span class="nn">Hashtbl</span><span class="p">.</span><span class="n">create</span> <span class="mi">11</span> <span class="k">in</span>
+  <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span>
+    <span class="k">try</span> <span class="nn">Hashtbl</span><span class="p">.</span><span class="n">find</span> <span class="n">h</span> <span class="n">x</span>
+    <span class="k">with</span> <span class="nc">Not_found</span> <span class="o">-&gt;</span>
+      <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">f</span> <span class="n">x</span> <span class="k">in</span>
+      <span class="nn">Hashtbl</span><span class="p">.</span><span class="n">add</span> <span class="n">h</span> <span class="n">x</span> <span class="n">y</span><span class="o">;</span>
+      <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val memo : (&#39;a -&gt; &#39;b) -&gt; &#39;a -&gt; &#39;b = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>For recursive functions, however, the recursive call structure needs to be
+modified. This can be abstracted out independent of the function that is being
+memoized:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">memo_rec</span> <span class="n">f</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">h</span> <span class="o">=</span> <span class="nn">Hashtbl</span><span class="p">.</span><span class="n">create</span> <span class="mi">16</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span>
+    <span class="k">try</span> <span class="nn">Hashtbl</span><span class="p">.</span><span class="n">find</span> <span class="n">h</span> <span class="n">x</span>
+    <span class="k">with</span> <span class="nc">Not_found</span> <span class="o">-&gt;</span>
+      <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="k">in</span>
+      <span class="nn">Hashtbl</span><span class="p">.</span><span class="n">add</span> <span class="n">h</span> <span class="n">x</span> <span class="n">y</span><span class="o">;</span>
+      <span class="n">y</span>
+  <span class="k">in</span>
+  <span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val memo_rec : ((&#39;a -&gt; &#39;b) -&gt; &#39;a -&gt; &#39;b) -&gt; &#39;a -&gt; &#39;b = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can slightly rewrite the original <code class="docutils literal notranslate"><span class="pre">fib</span></code> function above using this general
+memoization technique:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fib_memo</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">fib</span> <span class="n">self</span> <span class="n">n</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">self</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">self</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span>
+  <span class="k">in</span>
+  <span class="n">memo_rec</span> <span class="n">fib</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fib_memo : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="just-for-fun-party-optimization">
+<h2><span class="section-number">8.5.3. </span>Just for Fun: Party Optimization<a class="headerlink" href="#just-for-fun-party-optimization" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we want to throw a party for a company whose org chart is a binary tree.
+Each employee has an associated “fun value” and we want the set of invited
+employees to have a maximum total fun value. However, no employee is fun if his
+superior is invited, so we never invite two employees who are connected in the
+org chart. (The less fun name for this problem is the maximum weight independent
+set in a tree.) There are <span class="math notranslate nohighlight">\(2n\)</span> possible invitation lists, so the naive algorithm
+that compares the fun of every invitation list takes exponential time.</p>
+<p>We can use memoization to turn this into a linear-time algorithm. We start by
+defining a variant type to represent the employees. The int at each node is the
+fun.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">tree</span> <span class="o">=</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="nc">Node</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">tree</span> <span class="o">*</span> <span class="n">tree</span>
+</pre></div>
+</div>
+<p>Now, how can we solve this recursively? One important observation is that in any
+tree, the optimal invitation list that doesn’t include the root node will be the
+union of optimal invitation lists for the left and right subtrees. And the
+optimal invitation list that does include the root node will be the union of
+optimal invitation lists for the left and right children that do not include
+their respective root nodes. So it seems useful to have functions that optimize
+the invite lists for the case where the root node is required to be invited, and
+for the case where the root node is excluded. We’ll call these two functions
+party_in and party_out. Then the result of party is just the maximum of these
+two functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Unmemoized</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">tree</span> <span class="o">=</span>
+    <span class="o">|</span> <span class="nc">Empty</span>
+    <span class="o">|</span> <span class="nc">Node</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">tree</span> <span class="o">*</span> <span class="n">tree</span>
+
+  <span class="c">(* Returns optimum fun for t. *)</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">party</span> <span class="n">t</span> <span class="o">=</span> <span class="n">max</span> <span class="o">(</span><span class="n">party_in</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">party_out</span> <span class="n">t</span><span class="o">)</span>
+
+  <span class="c">(* Returns optimum fun for t assuming the root node of t</span>
+<span class="c">   * is included. *)</span>
+  <span class="ow">and</span> <span class="n">party_in</span> <span class="n">t</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Empty</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+    <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">v</span> <span class="o">+</span> <span class="n">party_out</span> <span class="n">left</span> <span class="o">+</span> <span class="n">party_out</span> <span class="n">right</span>
+
+  <span class="c">(* Returns optimum fun for t assuming the root node of t</span>
+<span class="c">   * is excluded. *)</span>
+  <span class="ow">and</span> <span class="n">party_out</span> <span class="n">t</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Empty</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+    <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">party</span> <span class="n">left</span> <span class="o">+</span> <span class="n">party</span> <span class="n">right</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Unmemoized :
+  sig
+    type tree = Empty | Node of int * tree * tree
+    val party : tree -&gt; int
+    val party_in : tree -&gt; int
+    val party_out : tree -&gt; int
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>This code has exponential running time. But notice that there are only <span class="math notranslate nohighlight">\(n\)</span>
+possible distinct calls to party. If we change the code to memoize the results
+of these calls, the performance will be linear in <span class="math notranslate nohighlight">\(n\)</span>. Here is a version that
+memoizes the result of party and also computes the actual invitation lists.
+Notice that this code memoizes results directly in the tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Memoized</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(* This version memoizes the optimal fun value for each tree node. It</span>
+<span class="c">     also remembers the best invite list. Each tree node has the name of</span>
+<span class="c">     the employee as a string. *)</span>
+  <span class="k">type</span> <span class="n">tree</span> <span class="o">=</span>
+    <span class="o">|</span> <span class="nc">Empty</span>
+    <span class="o">|</span> <span class="nc">Node</span> <span class="k">of</span>
+        <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">*</span> <span class="n">tree</span> <span class="o">*</span> <span class="n">tree</span> <span class="o">*</span> <span class="o">(</span><span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="kt">list</span><span class="o">)</span> <span class="n">option</span> <span class="n">ref</span>
+
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">party</span> <span class="n">t</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="kt">list</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Empty</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="bp">[]</span><span class="o">)</span>
+    <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">,</span> <span class="n">memo</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span>
+        <span class="k">match</span> <span class="o">!</span><span class="n">memo</span> <span class="k">with</span>
+        <span class="o">|</span> <span class="nc">Some</span> <span class="n">result</span> <span class="o">-&gt;</span> <span class="n">result</span>
+        <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span>
+            <span class="k">let</span> <span class="n">infun</span><span class="o">,</span> <span class="n">innames</span> <span class="o">=</span> <span class="n">party_in</span> <span class="n">t</span> <span class="k">in</span>
+            <span class="k">let</span> <span class="n">outfun</span><span class="o">,</span> <span class="n">outnames</span> <span class="o">=</span> <span class="n">party_out</span> <span class="n">t</span> <span class="k">in</span>
+            <span class="k">let</span> <span class="n">result</span> <span class="o">=</span>
+              <span class="k">if</span> <span class="n">infun</span> <span class="o">&gt;</span> <span class="n">outfun</span> <span class="k">then</span> <span class="o">(</span><span class="n">v</span> <span class="o">+</span> <span class="n">infun</span><span class="o">,</span> <span class="n">name</span> <span class="o">::</span> <span class="n">innames</span><span class="o">)</span>
+              <span class="k">else</span> <span class="o">(</span><span class="n">outfun</span><span class="o">,</span> <span class="n">outnames</span><span class="o">)</span>
+            <span class="k">in</span>
+            <span class="n">memo</span> <span class="o">:=</span> <span class="nc">Some</span> <span class="n">result</span><span class="o">;</span>
+            <span class="n">result</span><span class="o">)</span>
+
+  <span class="ow">and</span> <span class="n">party_in</span> <span class="n">t</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Empty</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="bp">[]</span><span class="o">)</span>
+    <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">r</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span>
+        <span class="k">let</span> <span class="n">lfun</span><span class="o">,</span> <span class="n">lnames</span> <span class="o">=</span> <span class="n">party_out</span> <span class="n">l</span> <span class="ow">and</span> <span class="n">rfun</span><span class="o">,</span> <span class="n">rnames</span> <span class="o">=</span> <span class="n">party_out</span> <span class="n">r</span> <span class="k">in</span>
+        <span class="o">(</span><span class="n">v</span> <span class="o">+</span> <span class="n">lfun</span> <span class="o">+</span> <span class="n">rfun</span><span class="o">,</span> <span class="n">name</span> <span class="o">::</span> <span class="n">lnames</span> <span class="o">@</span> <span class="n">rnames</span><span class="o">)</span>
+
+  <span class="ow">and</span> <span class="n">party_out</span> <span class="n">t</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Empty</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="bp">[]</span><span class="o">)</span>
+    <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="o">_,</span> <span class="n">l</span><span class="o">,</span> <span class="n">r</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span>
+        <span class="k">let</span> <span class="n">lfun</span><span class="o">,</span> <span class="n">lnames</span> <span class="o">=</span> <span class="n">party</span> <span class="n">l</span> <span class="ow">and</span> <span class="n">rfun</span><span class="o">,</span> <span class="n">rnames</span> <span class="o">=</span> <span class="n">party</span> <span class="n">r</span> <span class="k">in</span>
+        <span class="o">(</span><span class="n">lfun</span> <span class="o">+</span> <span class="n">rfun</span><span class="o">,</span> <span class="n">lnames</span> <span class="o">@</span> <span class="n">rnames</span><span class="o">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Memoized :
+  sig
+    type tree =
+        Empty
+      | Node of int * string * tree * tree * (int * string list) option ref
+    val party : tree -&gt; int * string list
+    val party_in : tree -&gt; int * string list
+    val party_out : tree -&gt; int * string list
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Why was memoization so effective for solving this problem? As with the Fibonacci
+algorithm, we had the overlapping sub-problems property, in which the naive
+recursive implementation called the function party many times with the same
+arguments. Memoization saves all those calls. Further, the party optimization
+problem has the property of optimal substructure, meaning that the optimal
+answer to a problem is computed from optimal answers to sub-problems. Not all
+optimization problems have this property. The key to using memoization
+effectively for optimization problems is to figure out how to write a recursive
+function that implements the algorithm and has two properties. Sometimes this
+requires thinking carefully.</p>
+<!--
+*****
+MRC 7/22/21: the section below needs a lot more explanation. Also the value
+`big` was undefined in the original notes, so the code didn't compile.
+I added a definition of `target + 1` but IDK whether that's "big enough".
+*****
+
+## Optimal Line Breaking
+
+Here is a more involved example. Suppose that we have some text that we want to
+format as a paragraph within a certain column width. For example, we might have
+to do this if we were writing a web browser. For simplicity we will assume that
+all characters have the same width. A formatting of the text consists of
+choosing certain pairs of words to put line breaks in between. For example, when
+applied to the list of words in this paragraph, with width 60, we want output
+like the following:
+
+```ocaml
+let it =
+  ["Here is a more involved example of memoization. Suppose that",
+   "we have some text that we want to format as a paragraph",
+   ...
+   "applied to the list of words in this paragraph, with width",
+   "60, we want output like the following:"] : string list
+```
+
+A good formatting uses up a lot of each column, and also gives each line similar
+widths. The greedy approach would be to just fill each line as much as possible,
+but this can result in lines with very different lengths. For example, if we
+format the string “this may be a difficult example” at a width of 13 characters,
+we get a formatting that could be improved:
+
+```text
+this may be a
+difficult
+example
+```
+
+Note that the optimal splitting is:
+```text
+this may be
+a difficult
+example
+```
+
+The TeX formatting program does a good job of keeping line widths similar by
+finding the formatting that minimizes the sum of the cube of the leftover space
+in each line (except for the last). However, for $n$ words, there are
+$\Omega(2^n)$ possible formattings, so the algorithm can't possibly check them
+all for large text inputs. Remarkably, we can use memoization to find the
+optimal formatting efficiently. In fact, memoization is useful for many
+optimization problems.
+
+We start by writing a simple recursive algorithm to walk down the list and try
+either inserting a line break after each word, or not inserting a linebreak:
+
+```{code-cell} ocaml
+(** Result of formatting a string. A result [(lst, n)] means a string
+    was formatted into the lines in [lst], with a total sum-of-cubes
+    cost of [n]. Invariant: the list is never empty. *)
+type break_result = string list * int
+
+(** Result: format the words in [words] into a list of lines optimally,
+    minimizing the sum of the cubes of differences between the line
+    lengths and [target]. Performance: worst-case time is exponential in
+    the number of words. *)
+let linebreak1 (words : string list) (target : int) : string list =
+  let rec lb (clen : int) (words : string list) : break_result =
+    match words with
+    | [] -> ([ "" ], 0) (* no charge for last line *)
+    | word :: rest ->
+        (* Try two ways of doing it: (1) insert a linebreak right after
+           current word, or (2) continue the current line. Pick the
+           better one. *)
+        let wlen = String.length word in
+        let contlen = if clen = 0 then wlen else clen + 1 + wlen in
+        let l1, c1' = lb 0 rest in
+        let cube x = x * x * x in
+        let c1 = c1' + cube (target - contlen) in
+        if contlen <= target then
+          match lb contlen rest with
+          | [], _ -> failwith "invariant violated"
+          | h2 :: t2, c2 ->
+              if c1 < c2 then (word :: l1, c1)
+              else
+                ((if h2 = "" then word else word ^ " " ^ h2) :: t2, c2)
+        else
+          let big = target + 1 in
+          (word :: l1, big)
+  in
+  let result, cost = lb 0 words in
+  result
+```
+
+This algorithm is exponential because it computes all possible formattings. It
+is therefore much too slow to be practical.
+
+The key observation is that in the optimal formatting of a paragraph of text,
+the formatting of the text past any given point is the optimal formatting of
+just that text, given that its first character starts at the column position
+where the prior formatted text ends. Thus, the formatting problem has optimal
+substructure when cast in this way.
+
+So if we compute the best formatting after a particular line break position,
+that formatting is the best for all possible formattings of the text before the
+break.
+
+We can make `linebreak` take linear time by memoizing the best formatting for
+the calls where `clen = 0`. (We could memoize all calls, but that wouldn't
+improve speed much.) This requires just introducing a function `lb_mem` that
+looks up and records memoized formatting results:
+
+```ocaml
+(** Result of formatting a string. A result [(lst, n)] means a string
+    was formatted into the lines in [lst], with a total sum-of-cubes
+    cost of [n]. Invariant: the list is never empty. *)
+type break_result = string list * int
+
+(* Same spec as linebreak1. Performance: worst-case time is linear in
+   the number of words. *)
+let linebreak2 (words : string list) (target : int) : string list =
+  let memo : break_result option array =
+    Array.make (List.length words + 1) None
+  in
+  let rec lb_mem (words : string list) : break_result =
+    let n = List.length words in
+    match Array.get memo n with
+    | Some br -> br
+    | None ->
+        let br = lb 0 words in
+        Array.set memo n (Some br);
+        br
+  and lb (clen : int) (words : string list) : break_result =
+    match words with
+    | [] -> ([ "" ], 0) (* no charge for last line *)
+    | word :: rest -> (
+        let wlen = String.length word in
+        let contlen = if clen = 0 then wlen else clen + 1 + wlen in
+        let l1, c1' = lb_mem rest in
+        let c1 = c1' + cube (target - contlen) in
+        if contlen > target then
+          let big = target + 1 in
+          (word :: l1, big)
+        else
+          match lb contlen rest with
+          | [], _ -> failwith "invariant violated"
+          | h2 :: t2, c2 ->
+              if c1 < c2 then (word :: l1, c1)
+              else
+                ((if h2 = "" then word else word ^ " " ^ h2) :: t2, c2))
+  in
+  let result, cost = lb 0 words in
+  result
+```
+--></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/ds"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="sequence.html" title="previous page"><span class="section-number">8.4. </span>Sequences</a>
+    <a class='right-next' id="next-link" href="promises.html" title="next page"><span class="section-number">8.6. </span>Promises</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

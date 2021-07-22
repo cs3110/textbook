@@ -1,0 +1,1369 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8.9. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Big-Oh Notation" href="../appendix/bigoh.html" />
+    <link rel="prev" title="8.8. Summary" href="summary.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   8. Data Structures
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="amortized.html">
+     8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sequence.html">
+     8.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="memoization.html">
+     8.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="promises.html">
+     8.6. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="monads.html">
+     8.7. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     8.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     8.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/ds/exercises.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/ds/exercises.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/ds/exercises.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="exercises">
+<h1><span class="section-number">8.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
+<p>Solutions to exercises are available to students in Cornell’s CS 3110.
+Instructors at other institutions are welcome to contact Michael Clarkson
+for access.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: hash insert [★★]</strong></p>
+<p>Suppose we have a hash table on integer keys. The table currently has 7
+empty buckets, and the hash function is simply <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">hash</span> <span class="pre">k</span> <span class="pre">=</span> <span class="pre">k</span> <span class="pre">mod</span> <span class="pre">7</span></code>.
+Draw the hash table that results from inserting the keys 4, 8, 15, 16,
+23, and 42 (with whatever values you like).</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: relax bucket RI [★★]</strong></p>
+<p>We required that hash table buckets must not contain duplicates. What would
+happen if we relaxed this RI to allow duplicates? Would the efficiency of any
+operations (insert, find, or remove) change?</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: strengthen bucket RI [★★]</strong></p>
+<p>What would happen if we strengthened the bucket RI to require each bucket to be
+sorted by the key? Would the efficiency of any operations (insert, find, or
+remove) change?</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: hash values [★★]</strong></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">Hashtbl.hash</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">to</span> <span class="pre">hash</span> <span class="pre">several</span> <span class="pre">values</span> <span class="pre">of</span> <span class="pre">different</span> <span class="pre">types.</span> <span class="pre">Make</span> <span class="pre">sure</span> <span class="pre">to</span> <span class="pre">try</span> <span class="pre">at</span> <span class="pre">least</span> </code>()<code class="docutils literal notranslate"><span class="pre">,</span> </code>false<code class="docutils literal notranslate"><span class="pre">,</span> </code>true<code class="docutils literal notranslate"><span class="pre">,</span> </code>0<code class="docutils literal notranslate"><span class="pre">,</span> </code>1<code class="docutils literal notranslate"><span class="pre">,</span> </code>“”<code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">and</span> </code>[]`, as well as
+several “larger” values of each type. We saw that lists quickly can create
+collisions. Try creating binary trees and finding a collision.□</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: hashtbl usage [★★]</strong></p>
+<p>Create a hash table <code class="docutils literal notranslate"><span class="pre">tab</span></code> with <code class="docutils literal notranslate"><span class="pre">Hashtbl.create</span></code> whose initial size is 16. Add 31
+bindings to it with <code class="docutils literal notranslate"><span class="pre">Hashtbl.add</span></code>. For example, you could add the numbers 1..31
+as keys and the strings “1”..”31” as their values. Use <code class="docutils literal notranslate"><span class="pre">Hashtbl.find</span></code> to look
+for keys that are in <code class="docutils literal notranslate"><span class="pre">tab</span></code>, as well as keys that are not.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: hashtbl stats [★]</strong></p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">Hashtbl.stats</span></code> function to find out the statistics of <code class="docutils literal notranslate"><span class="pre">tab</span></code> (from an
+exercise above). How many buckets are in the table? How many buckets have a
+single binding in them?</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: hashtbl bindings [★★]</strong></p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">bindings</span> <span class="pre">:</span> <span class="pre">('a,'b)</span> <span class="pre">Hashtbl.t</span> <span class="pre">-&gt;</span> <span class="pre">('a*'b)</span> <span class="pre">list</span></code>, such that
+<code class="docutils literal notranslate"><span class="pre">bindings</span> <span class="pre">h</span></code> returns a list of all bindings in <code class="docutils literal notranslate"><span class="pre">h</span></code>. Use your function to see all
+the bindings in <code class="docutils literal notranslate"><span class="pre">tab</span></code> (from an exercise above). <em>Hint: fold.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: hashtbl load factor [★★]</strong></p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">load_factor</span> <span class="pre">:</span> <span class="pre">('a,'b)</span> <span class="pre">Hashtbl.t</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>, such that
+<code class="docutils literal notranslate"><span class="pre">load_factor</span> <span class="pre">h</span></code> is the load factor of <code class="docutils literal notranslate"><span class="pre">h</span></code>. What is the load factor of <code class="docutils literal notranslate"><span class="pre">tab</span></code>?
+<em>Hint: stats.</em></p>
+<p>Add one more binding to <code class="docutils literal notranslate"><span class="pre">tab</span></code>. Do the stats or load factor change? Now add yet
+another binding. Now do the stats or load factor change? <em>Hint: Hashtbl
+resizes when the load factor goes strictly above 2.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: functorial interface [★★★]</strong></p>
+<p>Use the functorial interface (i.e., <code class="docutils literal notranslate"><span class="pre">Hashtbl.Make</span></code>) to create a hash table whose
+keys are strings that are case insensitive. Be careful to obey the specification
+of <code class="docutils literal notranslate"><span class="pre">Hashtbl.HashedType.hash</span></code>:</p>
+<blockquote>
+<div><p>If two keys are equal according to <code class="docutils literal notranslate"><span class="pre">equal</span></code>, then they have identical hash
+values as computed by <code class="docutils literal notranslate"><span class="pre">hash</span></code>.</p>
+</div></blockquote>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: equals and hash [★★]</strong></p>
+<p>The previous exercise quoted the specification of <code class="docutils literal notranslate"><span class="pre">Hashtbl.HashedType.hash</span></code>.
+Compare that to Java’s <code class="docutils literal notranslate"><span class="pre">Object.hashCode()</span></code> <a class="reference external" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--">specification</a>. Why do
+they both have this similar requirement?</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: bad hash [★★]</strong></p>
+<p>Use the functorial interface to create a hash table with a really bad hash
+function (e.g., a constant function). Use the <code class="docutils literal notranslate"><span class="pre">stats</span></code> function to see how bad
+the bucket distribution becomes.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: linear probing [★★★★]</strong></p>
+<p>We briefly mentioned <em>probing</em> as an alternative to <em>chaining</em>. Probing can be
+effectively used in hardware implementations of hash tables, as well as in
+databases. With probing, every bucket contains exactly one binding. In case of a
+collision, we search forward through the array, as described below.</p>
+<p><strong>Your task:</strong> Implement a hash table that uses linear probing. The details are
+below.</p>
+<p><strong>Find.</strong> Suppose we are trying to find a binding in the table. We hash the
+binding’s key and look in the appropriate bucket. If there is already a
+different key in that bucket, we start searching forward through the array at
+the next bucket, then the next bucket, and so forth, wrapping back around to the
+beginning of the array if necessary. Eventually we will either</p>
+<ul class="simple">
+<li><p>find an empty bucket, in which case the key we’re searching for is not bound
+in the table;</p></li>
+<li><p>find the key before we reach an empty bucket, in which case we can return the
+value; or</p></li>
+<li><p>never find the key or an empty bucket, instead wrapping back around to the
+original bucket, in which case all buckets are full and the key is not bound
+in the table. This case actually should never occur, because we won’t allow
+the load factor to get high enough for all buckets to be filled.</p></li>
+</ul>
+<p><strong>Insert.</strong> Insertion follows the same algorithm as finding a key, except that
+whenever we first find an empty bucket, we can insert the binding there.</p>
+<p><strong>Remove.</strong> Removal is more difficult. Once the key is found, we can’t just make
+the bucket empty, because that would affect future searches by causing them to
+stop early. Instead, we can introduce a special “deleted” value into that bucket
+to indicate that the bucket does not contain a binding but the searches should
+not stop at it.</p>
+<p><strong>Resizing.</strong> Since we never want the array to become completely full, we can
+keep the load factor near 1/4. When the load factor exceeds 1/2, we can double
+the array, bringing the load factor back to 1/4. When the load factor goes below
+1/8, we can half the array, again bringing the load factor back to 1/4.
+“Deleted” bindings complicate the definition of load factor:</p>
+<ul class="simple">
+<li><p>When determining whether to double the table size, we calculate the load
+factor as (# of bindings + # of deleted bindings) / (# of buckets). That is,
+deleted bindings contribute toward increasing the load factor.</p></li>
+<li><p>When determining whether the half the table size, we calculate the load factor
+as (# of bindings) / (# buckets). That is, deleted bindings do not count
+toward increasing the load factor.</p></li>
+</ul>
+<p>When rehashing the table, deleted bindings are of course not re-inserted into
+the new table.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: functorized BST [★★★]</strong></p>
+<p>Our implementation of BSTs assumed that it was okay to compare values using the
+built-in comparison operators <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">=</span></code>, and <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>. But what if the client wanted
+to use their own comparison operators? (e.g., to ignore case in strings, or to
+have sets of records where only a single field of the record was used for
+ordering.) Implement a <code class="docutils literal notranslate"><span class="pre">BstSet</span></code> abstraction as a functor parameterized on a
+structure that enables client-provided comparison operator(s), much like the
+<a class="reference external" href="https://ocaml.org/api/Set.html">standard library <code class="docutils literal notranslate"><span class="pre">Set</span></code></a>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: efficient traversal [★★★]</strong></p>
+<p>Suppose you wanted to convert a tree to a list. You’d have to put the values
+stored in the tree in some order. Here are three ways of doing that:</p>
+<ul class="simple">
+<li><p><em>preorder</em>: each node’s value appears in the list before the values of its
+left then right subtrees.</p></li>
+<li><p><em>inorder</em>: the values of the left subtree appear, then the value at the node,
+then the values of the right subtree.</p></li>
+<li><p><em>postorder</em>: the values of a node’s left then right subtrees appear, followed
+by the value at the node.</p></li>
+</ul>
+<p>Here is code that implements those <em>traversals</em>, along with some example
+applications:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">tree</span> <span class="o">=</span> <span class="nc">Leaf</span> <span class="o">|</span> <span class="nc">Node</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">tree</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">tree</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">preorder</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">l</span><span class="o">,</span><span class="n">v</span><span class="o">,</span><span class="n">r</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">@</span> <span class="n">preorder</span> <span class="n">l</span> <span class="o">@</span> <span class="n">preorder</span> <span class="n">r</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">inorder</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">l</span><span class="o">,</span><span class="n">v</span><span class="o">,</span><span class="n">r</span><span class="o">)</span> <span class="o">-&gt;</span>  <span class="n">inorder</span> <span class="n">l</span> <span class="o">@</span> <span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">@</span> <span class="n">inorder</span> <span class="n">r</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">postorder</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+  <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">l</span><span class="o">,</span><span class="n">v</span><span class="o">,</span><span class="n">r</span><span class="o">)</span> <span class="o">-&gt;</span>  <span class="n">postorder</span> <span class="n">l</span> <span class="o">@</span> <span class="n">postorder</span> <span class="n">r</span> <span class="o">@</span> <span class="o">[</span><span class="n">v</span><span class="o">]</span>
+
+<span class="k">let</span> <span class="n">t</span> <span class="o">=</span>
+  <span class="nc">Node</span><span class="o">(</span><span class="nc">Node</span><span class="o">(</span><span class="nc">Node</span><span class="o">(</span><span class="nc">Leaf</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">),</span> <span class="mi">2</span><span class="o">,</span> <span class="nc">Node</span><span class="o">(</span><span class="nc">Leaf</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">)),</span>
+       <span class="mi">4</span><span class="o">,</span>
+       <span class="nc">Node</span><span class="o">(</span><span class="nc">Node</span><span class="o">(</span><span class="nc">Leaf</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">),</span> <span class="mi">6</span><span class="o">,</span> <span class="nc">Node</span><span class="o">(</span><span class="nc">Leaf</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">)))</span>
+
+<span class="c">(*</span>
+<span class="c">  t is</span>
+<span class="c">        4</span>
+<span class="c">      /   \</span>
+<span class="c">     2     6</span>
+<span class="c">    / \   / \</span>
+<span class="c">   1   3 5   7</span>
+<span class="c">*)</span>
+
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">preorder</span> <span class="n">t</span>  <span class="o">=</span> <span class="o">[</span><span class="mi">4</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">1</span><span class="o">;</span><span class="mi">3</span><span class="o">;</span><span class="mi">6</span><span class="o">;</span><span class="mi">5</span><span class="o">;</span><span class="mi">7</span><span class="o">])</span>
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">inorder</span> <span class="n">t</span>   <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">;</span><span class="mi">4</span><span class="o">;</span><span class="mi">5</span><span class="o">;</span><span class="mi">6</span><span class="o">;</span><span class="mi">7</span><span class="o">])</span>
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">postorder</span> <span class="n">t</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">3</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">5</span><span class="o">;</span><span class="mi">7</span><span class="o">;</span><span class="mi">6</span><span class="o">;</span><span class="mi">4</span><span class="o">])</span>
+</pre></div>
+</div>
+<p>On unbalanced trees, the traversal functions above require quadratic worst-case
+time (in the number of nodes), because of the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator. Re-implement the
+functions without <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, and instead using <code class="docutils literal notranslate"><span class="pre">::</span></code>, such that they perform exactly
+one cons per <code class="docutils literal notranslate"><span class="pre">Node</span></code> in the tree. Thus the worst-case execution time will be
+linear. You will need to add an additional accumulator argument to each
+function, much like with tail recursion. (But your implementations won’t
+actually be tail recursive.)</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: RB draw complete [★★]</strong></p>
+<p>Draw the perfect binary tree on the values 1, 2, …, 15. Color the nodes in
+three different ways such that (i) each way is a red-black tree (i.e., satisfies
+the red-black invariants), and (ii) the three ways create trees with black
+heights of 2, 3, and 4, respectively. Recall that the <em>black height</em> of a tree
+is the maximum number of black nodes along any path from its root to a leaf.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: RB draw insert [★★]</strong></p>
+<p>Draw the red-black tree that results from inserting the characters D A T A S T R
+U C T U R E into an empty tree. Carry out the insertion algorithm yourself by
+hand, then check your work with the implementation provided in the book.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: standard library set [★★]</strong></p>
+<p>Read the <a class="reference external" href="https://github.com/ocaml/ocaml/blob/trunk/stdlib/set.ml">source code</a> of the standard library <code class="docutils literal notranslate"><span class="pre">Set</span></code> module.
+Find the representation invariant for the balanced trees that it uses.
+Which kind of tree does it most resemble:  2-3, AVL, or red-black?</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: pow2 [★★]</strong></p>
+<p>Using this type:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="o">(</span><span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Define a value <code class="docutils literal notranslate"><span class="pre">pow2</span> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">sequence</span></code> whose elements are the powers of two:
+<code class="docutils literal notranslate"><span class="pre">&lt;1;</span> <span class="pre">2;</span> <span class="pre">4;</span> <span class="pre">8;</span> <span class="pre">16,</span> <span class="pre">...&gt;</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: more sequences [★★]</strong></p>
+<p>Define the following sequences:</p>
+<ul class="simple">
+<li><p>the even naturals</p></li>
+<li><p>the lower-case alphabet on endless repeat:  a, b, c, …, z, a, b, …</p></li>
+<li><p>unending pseudorandom coin flips (e.g., booleans or a variant with <code class="docutils literal notranslate"><span class="pre">Heads</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Tails</span></code> constructors)</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: nth [★★]</strong></p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">nth</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>, such that
+<code class="docutils literal notranslate"><span class="pre">nth</span> <span class="pre">s</span> <span class="pre">n</span></code> the element at zero-based position <code class="docutils literal notranslate"><span class="pre">n</span></code> in sequence <code class="docutils literal notranslate"><span class="pre">s</span></code>.
+For example, <code class="docutils literal notranslate"><span class="pre">nth</span> <span class="pre">pow2</span> <span class="pre">0</span> <span class="pre">=</span> <span class="pre">1</span></code>, and <code class="docutils literal notranslate"><span class="pre">nth</span> <span class="pre">pow2</span> <span class="pre">4</span> <span class="pre">=</span> <span class="pre">16</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: hd tl [★★]</strong></p>
+<p>Explain how each of the following sequence expressions is evaluated:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hd</span> <span class="pre">nats</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tl</span> <span class="pre">nats</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hd</span> <span class="pre">(tl</span> <span class="pre">nats)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tl</span> <span class="pre">(tl</span> <span class="pre">nats)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hd</span> <span class="pre">(tl</span> <span class="pre">(tl</span> <span class="pre">nats))</span></code></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: filter [★★★]</strong></p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">:</span> <span class="pre">('a</span> <span class="pre">-&gt;</span> <span class="pre">bool)</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">sequence</span></code>, such
+that <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">p</span> <span class="pre">s</span></code> is the sub-sequence of <code class="docutils literal notranslate"><span class="pre">s</span></code> whose elements satisfy the
+predicate <code class="docutils literal notranslate"><span class="pre">p</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">(fun</span> <span class="pre">n</span> <span class="pre">-&gt;</span> <span class="pre">n</span> <span class="pre">mod</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">0)</span> <span class="pre">nats</span></code> would be the
+sequence <code class="docutils literal notranslate"><span class="pre">&lt;0;</span> <span class="pre">2;</span> <span class="pre">4;</span> <span class="pre">6;</span> <span class="pre">8;</span> <span class="pre">10;</span> <span class="pre">...&gt;</span></code>. If there is no element of <code class="docutils literal notranslate"><span class="pre">s</span></code> that
+satisfies <code class="docutils literal notranslate"><span class="pre">p</span></code>, then <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">p</span> <span class="pre">s</span></code> does not terminate.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: interleave [★★★]</strong></p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">interleave</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">sequence</span></code>, such
+that <code class="docutils literal notranslate"><span class="pre">interleave</span> <span class="pre">&lt;a1;</span> <span class="pre">a2;</span> <span class="pre">a3;</span> <span class="pre">...&gt;</span> <span class="pre">&lt;b1;</span> <span class="pre">b2;</span> <span class="pre">b3;</span> <span class="pre">...&gt;</span></code> is the sequence
+<code class="docutils literal notranslate"><span class="pre">&lt;a1;</span> <span class="pre">b1;</span> <span class="pre">a2;</span> <span class="pre">b2;</span> <span class="pre">a3;</span> <span class="pre">b3;</span> <span class="pre">...&gt;</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">interleave</span> <span class="pre">nats</span> <span class="pre">pow2</span></code> would be
+<code class="docutils literal notranslate"><span class="pre">&lt;0;</span> <span class="pre">1;</span> <span class="pre">1;</span> <span class="pre">2;</span> <span class="pre">2;</span> <span class="pre">4;</span> <span class="pre">3;</span> <span class="pre">8;</span> <span class="pre">...&gt;</span></code></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: sift [★★★]</strong></p>
+<p>The <em>Sieve of Eratosthenes</em> is a way of computing the prime numbers.</p>
+<ul class="simple">
+<li><p>Start with the sequence <code class="docutils literal notranslate"><span class="pre">&lt;2;</span> <span class="pre">3;</span> <span class="pre">4;</span> <span class="pre">5;</span> <span class="pre">6;</span> <span class="pre">...&gt;</span></code>.</p></li>
+<li><p>Take 2 as prime.  Delete all multiples of 2, since they cannot be prime.
+That leaves <code class="docutils literal notranslate"><span class="pre">&lt;3;</span> <span class="pre">5;</span> <span class="pre">7;</span> <span class="pre">9;</span> <span class="pre">11;</span> <span class="pre">...&gt;</span></code>.</p></li>
+<li><p>Take 3 as prime and delete its multiples.
+That leaves <code class="docutils literal notranslate"><span class="pre">&lt;5;</span> <span class="pre">7;</span> <span class="pre">11;</span> <span class="pre">13;</span> <span class="pre">17;</span> <span class="pre">...&gt;</span></code>.</p></li>
+<li><p>Take 5 as prime, etc.</p></li>
+</ul>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">sift</span> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">sequence</span></code>, such that
+<code class="docutils literal notranslate"><span class="pre">sift</span> <span class="pre">n</span> <span class="pre">s</span></code> removes all multiples of <code class="docutils literal notranslate"><span class="pre">n</span></code> from <code class="docutils literal notranslate"><span class="pre">s</span></code>. <em>Hint: filter.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: primes [★★★]</strong></p>
+<p>Define a sequence <code class="docutils literal notranslate"><span class="pre">prime</span> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">sequence</span></code>, containing all the prime numbers
+starting with 2.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: approximately e [★★★★]</strong></p>
+<p>The exponential function <span class="math notranslate nohighlight">\(e^x\)</span> can be computed by the following
+infinite sum:</p>
+<div class="math notranslate nohighlight">
+\[
+e^x = \frac{x^0}{0!} + \frac{x^1}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^k}{k!} + \cdots
+\]</div>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">e_terms</span> <span class="pre">:</span> <span class="pre">float</span> <span class="pre">-&gt;</span> <span class="pre">float</span> <span class="pre">sequence</span></code>. Element <code class="docutils literal notranslate"><span class="pre">k</span></code> of the
+sequence should be term <code class="docutils literal notranslate"><span class="pre">k</span></code> from the infinite sum. For example, <code class="docutils literal notranslate"><span class="pre">e_terms</span> <span class="pre">1.0</span></code> is
+the sequence <code class="docutils literal notranslate"><span class="pre">&lt;1.0;</span> <span class="pre">1.0;</span> <span class="pre">0.5;</span> <span class="pre">0.1666...;</span> <span class="pre">0.041666...;</span> <span class="pre">...&gt;</span></code>. The easy way to
+compute that involves a function that computes <span class="math notranslate nohighlight">\(f(k) = \frac{x^k}{k!}\)</span>.</p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">total</span> <span class="pre">:</span> <span class="pre">float</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">float</span> <span class="pre">sequence</span></code>, such that
+<code class="docutils literal notranslate"><span class="pre">total</span> <span class="pre">&lt;a;</span> <span class="pre">b;</span> <span class="pre">c;</span> <span class="pre">...&gt;</span></code> is a running total of the input elements, i.e.,
+<code class="docutils literal notranslate"><span class="pre">&lt;a;</span> <span class="pre">a+.b;</span> <span class="pre">a+.b+.c;</span> <span class="pre">...&gt;</span></code>.</p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">within</span> <span class="pre">:</span> <span class="pre">float</span> <span class="pre">-&gt;</span> <span class="pre">float</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>, such that
+<code class="docutils literal notranslate"><span class="pre">within</span> <span class="pre">eps</span> <span class="pre">s</span></code> is the first element of <code class="docutils literal notranslate"><span class="pre">s</span></code> for which the absolute difference
+between that element and the element before it is strictly less than <code class="docutils literal notranslate"><span class="pre">eps</span></code>. If
+there is no such element, <code class="docutils literal notranslate"><span class="pre">within</span></code> is permitted not to terminate (i.e., go into
+an “infinite loop”). As a precondition, the <em>tolerance</em> <code class="docutils literal notranslate"><span class="pre">eps</span></code> must be strictly
+positive. For example,
+<code class="docutils literal notranslate"><span class="pre">within</span> <span class="pre">0.1</span> <span class="pre">&lt;1.0;</span> <span class="pre">2.0;</span> <span class="pre">2.5;</span> <span class="pre">2.75;</span> <span class="pre">2.875;</span> <span class="pre">2.9375;</span> <span class="pre">2.96875;</span> <span class="pre">...&gt;</span></code> is <code class="docutils literal notranslate"><span class="pre">2.9375</span></code>.</p>
+<p>Finally, define a function <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">:</span> <span class="pre">float</span> <span class="pre">-&gt;</span> <span class="pre">float</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code> such that <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">x</span> <span class="pre">eps</span></code> is
+<span class="math notranslate nohighlight">\(e^x\)</span> computed to within a tolerance of <code class="docutils literal notranslate"><span class="pre">eps</span></code>, which must be strictly positive.
+Note that there is an interesting boundary case where <code class="docutils literal notranslate"><span class="pre">x=1.0</span></code> for the first two
+terms of the sum; you could choose to drop the first term (which is always
+<code class="docutils literal notranslate"><span class="pre">1.0</span></code>) from the sequence before using <code class="docutils literal notranslate"><span class="pre">within</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: better e [★★★★]</strong></p>
+<p>Although the idea for computing <span class="math notranslate nohighlight">\(e^x\)</span> above through the summation of an infinite
+series is good, the exact algorithm suggested above could be improved. For
+example, computing the 20th term in the sequence leads to a very large numerator
+and denominator if <span class="math notranslate nohighlight">\(x\)</span> is large. Investigate that behavior, comparing it to the
+built-in function <code class="docutils literal notranslate"><span class="pre">exp</span> <span class="pre">:</span> <span class="pre">float</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>. Find a better way to structure the
+computation to improve the approximations you obtain. <em>Hint: what if when
+computing term <span class="math notranslate nohighlight">\(k\)</span> you already had term <span class="math notranslate nohighlight">\(k-1\)</span>? Then you could just do a single
+multiplication and division.</em></p>
+<p>Also, you could improve the test that <code class="docutils literal notranslate"><span class="pre">within</span></code> uses to determine whether two
+values are close. A good one for determining whether <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are close might
+be:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|a - b|}{\frac{|a| + |b|}{2} + 1} &lt; \epsilon.
+\]</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: different sequence rep [★★★]</strong></p>
+<p>Consider this alternative representation of sequences:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="o">(</span><span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>How would you code up <code class="docutils literal notranslate"><span class="pre">hd</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tl</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">sequence</span></code>, <code class="docutils literal notranslate"><span class="pre">nats</span> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">sequence</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">:</span> <span class="pre">('a</span> <span class="pre">-&gt;</span> <span class="pre">'b)</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">'b</span> <span class="pre">sequence</span></code> for it? Explain how this
+representation is even lazier than our original representation.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: lazy hello [★]</strong></p>
+<p>Define a value of type <code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">Lazy.t</span></code> (which is synonymous with <code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">lazy_t</span></code>),
+such that forcing that value with <code class="docutils literal notranslate"><span class="pre">Lazy.force</span></code> causes <code class="docutils literal notranslate"><span class="pre">&quot;Hello</span> <span class="pre">lazy</span> <span class="pre">world&quot;</span></code> to be
+printed. If you force it again, the string should not be printed.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: lazy and [★★]</strong></p>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">(&amp;&amp;&amp;)</span> <span class="pre">:</span> <span class="pre">bool</span> <span class="pre">Lazy.t</span> <span class="pre">-&gt;</span> <span class="pre">bool</span> <span class="pre">Lazy.t</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code>. It should behave
+like a short circuit Boolean AND. That is, <code class="docutils literal notranslate"><span class="pre">lb1</span> <span class="pre">&amp;&amp;&amp;</span> <span class="pre">lb2</span></code> should first force
+<code class="docutils literal notranslate"><span class="pre">lb1</span></code>. If it is <code class="docutils literal notranslate"><span class="pre">false</span></code>, the function should return <code class="docutils literal notranslate"><span class="pre">false</span></code>. Otherwise, it
+should force <code class="docutils literal notranslate"><span class="pre">lb2</span></code> and return its value.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: lazy sequence [★★★]</strong></p>
+<p>Implement <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">filter</span></code> for the <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">lazysequence</span></code> type provided in the
+section on laziness.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: promise and resolve [★★]</strong></p>
+<p>Use the finished version of the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> module we developed to do the
+following: create a integer promise and resolver, bind a function on the promise
+to print the contents of the promise, then resolve the promise. Only after the
+promise is resolved should the printing occur.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: promise and resolve lwt [★★]</strong></p>
+<p>Repeat the above exercise, but use the Lwt library instead of our own Promise
+library. Make sure to use Lwt’s I/O functions (e.g., <code class="docutils literal notranslate"><span class="pre">Lwt_io.printf</span></code>).</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: timing challenge 1 [★★]</strong></p>
+<p>Here is a function that produces a time delay.  We can use it
+to simulate an I/O call that takes a long time to complete.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [delay s] is a promise that resolves after about [s] seconds. *)</span>
+<span class="k">let</span> <span class="n">delay</span> <span class="o">(</span><span class="n">sec</span> <span class="o">:</span> <span class="kt">float</span><span class="o">)</span> <span class="o">:</span> <span class="kt">unit</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span>
+  <span class="nn">Lwt_unix</span><span class="p">.</span><span class="n">sleep</span> <span class="n">sec</span>
+</pre></div>
+</div>
+<p>Write a function <code class="docutils literal notranslate"><span class="pre">delay_then_print</span> <span class="pre">:</span> <span class="pre">unit</span> <span class="pre">-&gt;</span> <span class="pre">unit</span> <span class="pre">Lwt.t</span></code> that delays for three
+seconds then prints <code class="docutils literal notranslate"><span class="pre">&quot;done&quot;</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: timing challenge 2 [★★★]</strong></p>
+<p>What happens when <code class="docutils literal notranslate"><span class="pre">timing2</span> <span class="pre">()</span></code> is run? How long does it take to run? Make a
+prediction, then run the code to find out.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nn">Lwt</span><span class="p">.</span><span class="nc">Infix</span>
+
+<span class="k">let</span> <span class="n">timing2</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="o">_</span><span class="n">t1</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">1</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;1&quot;</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="o">_</span><span class="n">t2</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">10</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;2&quot;</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="o">_</span><span class="n">t3</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">20</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;3&quot;</span> <span class="k">in</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;all done&quot;</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: timing challenge 3 [★★★]</strong></p>
+<p>What happens when <code class="docutils literal notranslate"><span class="pre">timing3</span> <span class="pre">()</span></code> is run? How long does it take to run? Make a
+prediction, then run the code to find out.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nn">Lwt</span><span class="p">.</span><span class="nc">Infix</span>
+
+<span class="k">let</span> <span class="n">timing3</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="n">delay</span> <span class="mi">1</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;1&quot;</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+  <span class="n">delay</span> <span class="mi">10</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;2&quot;</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+  <span class="n">delay</span> <span class="mi">20</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;3&quot;</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;all done&quot;</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: timing challenge 4 [★★★]</strong></p>
+<p>What happens when <code class="docutils literal notranslate"><span class="pre">timing4</span> <span class="pre">()</span></code> is run? How long does it take to run? Make a
+prediction, then run the code to find out.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nn">Lwt</span><span class="p">.</span><span class="nc">Infix</span>
+
+<span class="k">let</span> <span class="n">timing4</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">t1</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">1</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;1&quot;</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">10</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;2&quot;</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">t3</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">20</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;3&quot;</span> <span class="k">in</span>
+  <span class="nn">Lwt</span><span class="p">.</span><span class="n">join</span> <span class="o">[</span><span class="n">t1</span><span class="o">;</span> <span class="n">t2</span><span class="o">;</span> <span class="n">t3</span><span class="o">]</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;all done&quot;</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: file monitor [★★★★]</strong></p>
+<p>Write an Lwt program that monitors the contents of a file named “log”.
+Specifically, your program should open the file, continually read a line from
+the file, and as each line becomes available, print the line to stdout. When you
+reach the end of the file (EOF), your program should terminate cleanly without
+any exceptions.</p>
+<p>Here is starter code:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nn">Lwt</span><span class="p">.</span><span class="nc">Infix</span>
+<span class="k">open</span> <span class="nc">Lwt_io</span>
+<span class="k">open</span> <span class="nc">Lwt_unix</span>
+
+<span class="c">(** [log ()] is a promise for an [input_channel] that reads from</span>
+<span class="c">    the file named &quot;log&quot;. *)</span>
+<span class="k">let</span> <span class="n">log</span> <span class="bp">()</span> <span class="o">:</span> <span class="n">input_channel</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span>
+  <span class="n">openfile</span> <span class="s2">&quot;log&quot;</span> <span class="o">[</span><span class="nc">O_RDONLY</span><span class="o">]</span> <span class="mi">0</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">fd</span> <span class="o">-&gt;</span>
+  <span class="nn">Lwt</span><span class="p">.</span><span class="n">return</span> <span class="o">(</span><span class="n">of_fd</span> <span class="n">input</span> <span class="n">fd</span><span class="o">)</span>
+
+<span class="c">(** [loop ic] reads one line from [ic], prints it to stdout,</span>
+<span class="c">    then calls itself recursively. It is an infinite loop. *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">loop</span> <span class="o">(</span><span class="n">ic</span> <span class="o">:</span> <span class="n">input_channel</span><span class="o">)</span> <span class="o">=</span>
+  <span class="n">failwith</span> <span class="s2">&quot;TODO&quot;</span>
+  <span class="c">(* hint: use [Lwt_io.read_line] and [Lwt_io.printlf] *)</span>
+
+<span class="c">(** [monitor ()] monitors the file named &quot;log&quot;. *)</span>
+<span class="k">let</span> <span class="n">monitor</span> <span class="bp">()</span> <span class="o">:</span> <span class="kt">unit</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span>
+  <span class="n">log</span> <span class="bp">()</span> <span class="o">&gt;&gt;=</span> <span class="n">loop</span>
+
+<span class="c">(** [handler] is a helper function for [main]. If its input is</span>
+<span class="c">    [End_of_file], it handles cleanly exiting the program by</span>
+<span class="c">    returning the unit promise. Any other input is re-raised</span>
+<span class="c">    with [Lwt.fail]. *)</span>
+<span class="k">let</span> <span class="n">handler</span> <span class="o">:</span> <span class="n">exn</span> <span class="o">-&gt;</span> <span class="kt">unit</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span>
+  <span class="n">failwith</span> <span class="s2">&quot;TODO&quot;</span>
+
+<span class="k">let</span> <span class="n">main</span> <span class="bp">()</span> <span class="o">:</span> <span class="kt">unit</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span>
+  <span class="nn">Lwt</span><span class="p">.</span><span class="n">catch</span> <span class="n">monitor</span> <span class="n">handler</span>
+
+<span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="o">(</span><span class="n">main</span> <span class="bp">()</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Complete <code class="docutils literal notranslate"><span class="pre">loop</span></code> and <code class="docutils literal notranslate"><span class="pre">handler</span></code>. You might find the
+<a class="reference external" href="https://ocsigen.org/lwt/">Lwt manual</a> to be useful.</p>
+<p>To compile your code, put it in a file named <code class="docutils literal notranslate"><span class="pre">monitor.ml</span></code> and run</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild -use-ocamlfind -pkg lwt.unix -tag thread monitor.byte
+</pre></div>
+</div>
+<p>To simulate a file to which lines are being added over time,
+open a new terminal window and enter the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkfifo log
+<span class="gp">$ </span>cat &gt;log
+</pre></div>
+</div>
+<p>Now anything you type into the terminal window (after pressing return) will be
+added to the file named <code class="docutils literal notranslate"><span class="pre">log</span></code>. That will enable you to interactively test your
+program.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: add opt [★★]</strong></p>
+<p>Here are the definitions for the maybe monad:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Monad</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">Maybe</span> <span class="o">:</span> <span class="nc">Monad</span> <span class="o">=</span>
+<span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">option</span>
+
+  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Some</span> <span class="n">x</span>
+
+  <span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="n">m</span> <span class="n">f</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">m</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">x</span>
+    <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
+
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Implement <code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">Maybe.t</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">Maybe.t</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">Maybe.t</span></code>. If either of the
+inputs is <code class="docutils literal notranslate"><span class="pre">None</span></code>, then the output should be <code class="docutils literal notranslate"><span class="pre">None</span></code>. Otherwise, if the inputs are
+<code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">b</span></code> then the output should be <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">(a+b)</span></code>. The definition of
+<code class="docutils literal notranslate"><span class="pre">add</span></code> must be located outside of <code class="docutils literal notranslate"><span class="pre">Maybe</span></code>, as shown above, which means that your
+solution may not use the constructors <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">Some</span></code> in its code.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: fmap and join [★★]</strong></p>
+<p>Here is an extended signature for monads that adds two new operations:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">ExtMonad</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;|</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">join</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Just as the infix operator <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> is known as <code class="docutils literal notranslate"><span class="pre">bind</span></code>, the infix operator <code class="docutils literal notranslate"><span class="pre">&gt;&gt;|</span></code> is
+known as <code class="docutils literal notranslate"><span class="pre">fmap</span></code>. The two operators differ only in the return type of their
+function argument.</p>
+<p>Using the box metaphor, <code class="docutils literal notranslate"><span class="pre">&gt;&gt;|</span></code> takes a boxed value, and a function that only
+knows how to work on unboxed values, extracts the value from the box, runs the
+function on it, and boxes up that output as its own return value.</p>
+<p>Also using the box metaphor, <code class="docutils literal notranslate"><span class="pre">join</span></code> takes a value that is wrapped in two boxes
+and removes one of the boxes.</p>
+<p>It’s possible to implement <code class="docutils literal notranslate"><span class="pre">&gt;&gt;|</span></code> and <code class="docutils literal notranslate"><span class="pre">join</span></code> directly with pattern matching (as
+we already implemented <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code>). It’s also possible to implement them without
+pattern matching.</p>
+<p>For this exercise, do the former: implement <code class="docutils literal notranslate"><span class="pre">&gt;&gt;|</span></code> and <code class="docutils literal notranslate"><span class="pre">join</span></code> as part of the
+<code class="docutils literal notranslate"><span class="pre">Maybe</span></code> monad, and do not use <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> or <code class="docutils literal notranslate"><span class="pre">return</span></code> in the body of <code class="docutils literal notranslate"><span class="pre">&gt;&gt;|</span></code> or <code class="docutils literal notranslate"><span class="pre">join</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: fmap and join again [★★]</strong></p>
+<p>Solve the previous exercise again.  This time, you must use <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> and <code class="docutils literal notranslate"><span class="pre">return</span></code>
+to implement <code class="docutils literal notranslate"><span class="pre">&gt;&gt;|</span></code> and <code class="docutils literal notranslate"><span class="pre">join</span></code>, and you may not use <code class="docutils literal notranslate"><span class="pre">Some</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code> in the body
+of <code class="docutils literal notranslate"><span class="pre">&gt;&gt;|</span></code> and <code class="docutils literal notranslate"><span class="pre">join</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: bind from fmap+join [★★★]</strong></p>
+<p>The previous exercise demonstrates that <code class="docutils literal notranslate"><span class="pre">&gt;&gt;|</span></code> and <code class="docutils literal notranslate"><span class="pre">join</span></code> can be implemented
+entirely in terms of <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> (and <code class="docutils literal notranslate"><span class="pre">return</span></code>), without needing to know anything
+about the representation type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">t</span></code> of the monad.</p>
+<p>It’s actually possible to go the other direction. That is, <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> can be
+implemented using just <code class="docutils literal notranslate"><span class="pre">&gt;&gt;|</span></code> and <code class="docutils literal notranslate"><span class="pre">join</span></code>, without needing to know anything about
+the representation type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">t</span></code>.</p>
+<p>Prove that this is so by completing the following code:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">FmapJoinMonad</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;|</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">join</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="k">type</span> <span class="nc">BindMonad</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">MakeMonad</span> <span class="o">(</span><span class="nc">M</span> <span class="o">:</span> <span class="nc">FmapJoinMonad</span><span class="o">)</span> <span class="o">:</span> <span class="nc">BindMonad</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(* TODO *)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><em>Hint: let the types be your guide.</em></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: list monad [★★★]</strong></p>
+<p>We’ve seen three examples of monads already; let’s examine a fourth, the <em>list
+monad</em>. The “something more” that it does is to upgrade functions to work on
+lists instead of just single values. (Note, there is no notion of concurrency
+intended here. It’s not that the list monad runs functions concurrently on every
+element of a list. The Lwt monad does, however, provide that kind of
+functionality.)</p>
+<p>For example, suppose you have these functions:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">let</span> <span class="n">pm</span> <span class="n">x</span> <span class="o">=</span> <span class="o">[</span><span class="n">x</span><span class="o">;</span> <span class="o">-</span><span class="n">x</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Then the list monad could be used to apply those functions to every
+element of a list and return the result as a list. For example,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3]</span> <span class="pre">&gt;&gt;|</span> <span class="pre">inc</span></code> is <code class="docutils literal notranslate"><span class="pre">[2;</span> <span class="pre">3;</span> <span class="pre">4]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3]</span> <span class="pre">&gt;&gt;=</span> <span class="pre">pm</span></code> is <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">-1;</span> <span class="pre">2;</span> <span class="pre">-2;</span> <span class="pre">3;</span> <span class="pre">-3]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3]</span> <span class="pre">&gt;&gt;=</span> <span class="pre">pm</span> <span class="pre">&gt;&gt;|</span> <span class="pre">inc</span></code> is <code class="docutils literal notranslate"><span class="pre">[2;</span> <span class="pre">0;</span> <span class="pre">3;</span> <span class="pre">-1;</span> <span class="pre">4;</span> <span class="pre">-2]</span></code>.</p></li>
+</ul>
+<p>One way to think about this is that the list monad operators take a list of
+inputs to a function, run the function on all those inputs, and give you back
+the combined list of outputs.</p>
+<p>Complete the following definition of the list monad:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">ExtMonad</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;|</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="n">join</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">ListMonad</span> <span class="o">:</span> <span class="nc">ExtMonad</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+
+  <span class="c">(* TODO *)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><em>Hints:</em> Leave <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> for last.  Let the types be your guide.  There are
+two very useful list library functions that can help you.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: trivial monad laws [★★★]</strong></p>
+<p>Here is the world’s most trivial monad. All it does is wrap a value inside of a
+constructor.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Trivial</span> <span class="o">:</span> <span class="nc">Monad</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="nc">Wrap</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Wrap</span> <span class="n">x</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">(</span><span class="nc">Wrap</span> <span class="n">x</span><span class="o">)</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f</span> <span class="n">x</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Prove that the three monad laws, as formulated using <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> and <code class="docutils literal notranslate"><span class="pre">return</span></code>, hold
+for the trivial monad.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/ds"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="summary.html" title="previous page"><span class="section-number">8.8. </span>Summary</a>
+    <a class='right-next' id="next-link" href="../appendix/bigoh.html" title="next page">Big-Oh Notation</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
