@@ -22,6 +22,10 @@ that the need for and use of each piece can be appreciated.
 
 ## Maps
 
+{{ video_embed | replace("%%VID%%", "hr8SmQK8ld8")}}
+
+{{ video_embed | replace("%%VID%%", "I5E_BPkE_fE")}}
+
 Hash tables implement the *map* data abstraction. A map binds *keys* to
 *values*. This abstraction is so useful that it goes by many other names, among
 them *associative array*, *dictionary*, and *symbol table*. We'll write maps
@@ -105,6 +109,8 @@ we'll pay close attention to the AF, RI, and efficiency of the operations.
 
 ## Maps as Association Lists
 
+{{ video_embed | replace("%%VID%%", "6JUcwUgAHl8")}}
+
 The simplest implementation of a map in OCaml is as an association list. We've
 seen that representation twice so far [[1]][assoc-list] [[2]][map-module]. Here
 is an implementation of `Map` using it:
@@ -154,7 +160,17 @@ module ListMap : Map = struct
 end
 ```
 
+{{ video_embed | replace("%%VID%%", "yZkQhcIM0OA")}}
+
+{{ video_embed | replace("%%VID%%", "5aZNbVTXmtE")}}
+
+{{ video_embed | replace("%%VID%%", "bKFfD3oHKTE")}}
+
+{{ video_embed | replace("%%VID%%", "ek2Obhfx064")}}
+
 ## Maps as Arrays
+
+{{ video_embed | replace("%%VID%%", "cUEN8sFVkS4")}}
 
 *Mutable maps* are maps whose bindings may be mutated. The interface for a
 mutable map therefore differs from a immutable map. Insertion and removal
@@ -216,6 +232,8 @@ module type DirectAddressMap = sig
 end
 ```
 
+{{ video_embed | replace("%%VID%%", "eDd9i-imDYo")}}
+
 Here is an implementation of that interface:
 
 ```{code-cell} ocaml
@@ -265,7 +283,11 @@ constant time. But that comes at the expense of forcing keys to be integers.
 Moreover, they need to be small integers (or at least integers from a small
 range), otherwise the arrays we use will need to be huge.
 
+{{ video_embed | replace("%%VID%%", "mrpti_Guevs")}}
+
 ## Maps as Hash Tables
+
+{{ video_embed | replace("%%VID%%", "NyZ07rpq7tk")}}
 
 Arrays offer constant time performance, but come with severe restrictions on
 keys. Association lists don't place those restrictions on keys, but they also
