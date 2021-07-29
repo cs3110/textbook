@@ -23,6 +23,15 @@ Github icon (it looks like a cat) near the top right of the page, and click
 it requires you to fork the textbook repository with Github. But for minor edits
 that will be appreciated and lead to much quicker uptake of suggestions.
 
+**Background.** This book is used at Cornell for a third-semester programming
+course. Most students have had one semester of introductory programming in
+Python, followed by one semester of object-oriented programming in Java.
+Frequent comparisons are therefore made to those two languages. Readers who have
+studied similar languages should have no difficulty following along. The book
+does not assume any prior knowledge of functional programming, but it does
+assume that readers have prior experience programming in some mainstream
+imperative language.
+
 **Videos.** You will find about 200 YouTube videos embedded throughout this
 book. The videos usually provide an introduction to material, upon which the
 textbook then expands. These videos were produced during pandemic when the

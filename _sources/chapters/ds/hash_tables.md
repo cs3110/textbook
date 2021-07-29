@@ -300,6 +300,8 @@ function to index into an array, as we did with direct address tables. Of
 course, we want the hash function itself to run in constant time, otherwise the
 operations that use it would not be efficient.
 
+{{ video_embed | replace("%%VID%%", "8IJpySZ5iLM")}}
+
 That leads to the following interface, in which the client of the hash table has
 to pass in a hash function when a table is created:
 
@@ -382,6 +384,8 @@ performance benefits of probing.
 
 ### Chaining Representation
 
+{{ video_embed | replace("%%VID%%", "LOWAC3WOl6Q")}}
+
 Here is a representation type for a hash table that uses chaining:
 
 ```ocaml
@@ -438,6 +442,8 @@ $O(L)$.
 
 ### Resizing
 
+{{ video_embed | replace("%%VID%%", "mn2pDfusFyY")}}
+
 How could we arrange for buckets to have expected constant length? To answer
 that, let's think about the number of bindings and buckets in the table. Define
 the *load factor* of the table to be
@@ -469,6 +475,8 @@ twice as many bindings as buckets in the table. So by doubling the size of the
 array, we can restore the load factor to 1. Similarly, if the load factor
 reaches 1/2, then there are twice as many buckets as bindings, and halving the
 size of the array will restore the load factor to 1.
+
+{{ video_embed | replace("%%VID%%", "BzusuFH1tNw")}}
 
 Resizing the bucket array to become larger is an essential technique for hash
 tables. Resizing it to become smaller, though, is not essential. As long as the
@@ -607,6 +615,14 @@ module HashMap : TableMap = struct
 end
 ```
 
+{{ video_embed | replace("%%VID%%", "FN-YyNaSkz8")}}
+
+{{ video_embed | replace("%%VID%%", "Du4SxDJzS6g")}}
+
+{{ video_embed | replace("%%VID%%", "GKtcy5AfPgc")}}
+
+{{ video_embed | replace("%%VID%%", "YQUHqv-RXI8")}}
+
 An optimization of `rehash` is possible. When it calls `insert_no_resize` to
 re-insert a binding, extra work is being done: there's no need for that
 insertion to call `remove_assoc` or `mem_assoc`, because we are guaranteed the
@@ -616,6 +632,8 @@ hash function is bad and doesn't distribute keys uniformly, that could be an
 important optimization.
 
 ## Hash Functions
+
+{{ video_embed | replace("%%VID%%", "tGktnJWmCy0")}}
 
 Hash tables are one of the most useful data structures ever invented.
 Unfortunately, they are also one of the most misused. Code built using hash

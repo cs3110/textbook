@@ -1088,6 +1088,7 @@ worlds? Yes (more or less)! <em>Hash tables</em> are the solution.</p>
 function to index into an array, as we did with direct address tables. Of
 course, we want the hash function itself to run in constant time, otherwise the
 operations that use it would not be efficient.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/8IJpySZ5iLM" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>That leads to the following interface, in which the client of the hash table has
 to pass in a hash function when a table is created:</p>
 <div class="cell docutils container">
@@ -1181,6 +1182,7 @@ circuitry. But some modern software implementations are re-examining the
 performance benefits of probing.</p>
 <div class="section" id="chaining-representation">
 <h3><span class="section-number">8.1.4.1. </span>Chaining Representation<a class="headerlink" href="#chaining-representation" title="Permalink to this headline">¶</a></h3>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/LOWAC3WOl6Q" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Here is a representation type for a hash table that uses chaining:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">=</span> <span class="o">{</span>
   <span class="n">hash</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">;</span>
@@ -1231,6 +1233,7 @@ same. If we could arrange that, on average, the bucket length were a constant
 </div>
 <div class="section" id="resizing">
 <h3><span class="section-number">8.1.4.2. </span>Resizing<a class="headerlink" href="#resizing" title="Permalink to this headline">¶</a></h3>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/mn2pDfusFyY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>How could we arrange for buckets to have expected constant length? To answer
 that, let’s think about the number of bindings and buckets in the table. Define
 the <em>load factor</em> of the table to be</p>
@@ -1258,6 +1261,7 @@ twice as many bindings as buckets in the table. So by doubling the size of the
 array, we can restore the load factor to 1. Similarly, if the load factor
 reaches 1/2, then there are twice as many buckets as bindings, and halving the
 size of the array will restore the load factor to 1.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/BzusuFH1tNw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Resizing the bucket array to become larger is an essential technique for hash
 tables. Resizing it to become smaller, though, is not essential. As long as the
 load factor is bounded by a constant from above, we can achieve expected
@@ -1400,6 +1404,10 @@ discussed above.</p>
 </div>
 </div>
 </div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/FN-YyNaSkz8" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/Du4SxDJzS6g" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/GKtcy5AfPgc" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/YQUHqv-RXI8" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>An optimization of <code class="docutils literal notranslate"><span class="pre">rehash</span></code> is possible. When it calls <code class="docutils literal notranslate"><span class="pre">insert_no_resize</span></code> to
 re-insert a binding, extra work is being done: there’s no need for that
 insertion to call <code class="docutils literal notranslate"><span class="pre">remove_assoc</span></code> or <code class="docutils literal notranslate"><span class="pre">mem_assoc</span></code>, because we are guaranteed the
@@ -1411,6 +1419,7 @@ important optimization.</p>
 </div>
 <div class="section" id="hash-functions">
 <h2><span class="section-number">8.1.5. </span>Hash Functions<a class="headerlink" href="#hash-functions" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/tGktnJWmCy0" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Hash tables are one of the most useful data structures ever invented.
 Unfortunately, they are also one of the most misused. Code built using hash
 tables often falls far short of achievable performance. There are two reasons
