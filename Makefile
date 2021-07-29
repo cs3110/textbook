@@ -29,7 +29,7 @@ epub:
 	gitbook epub . 3110.epub
 	
 mobi:
-	gitbook pdf . 3110.pdf
+	gitbook mobi . 3110.mobi
 
 serve:
 	sleep 10 && open http://127.0.0.1:4000/ &
