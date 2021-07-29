@@ -1,5 +1,7 @@
 # Amortized Analysis
 
+{{ video_embed | replace("%%VID%%", "1fPx0hcXlRg")}}
+
 Our analysis of the efficiency of hash table operations concluded that `find`
 runs in expected constant time, where the modifier "expected" is needed to
 express the fact the performance is on average and depends on the hash function
@@ -49,6 +51,8 @@ that's true.
 
 ## Amortized Analysis of Hash Tables
 
+{{ video_embed | replace("%%VID%%", "GwnYcPmn8PQ")}}
+
 "Amortization" is a financial term. One of its meanings is to pay off a debt
 over time. In algorithmic analysis, we use it to refer to paying off the cost of
 an expensive operation by inflating the cost of inexpensive operations. In
@@ -65,6 +69,8 @@ $$
 
 Thus, even if one operation is especially expensive, we could average that out
 over a bunch of inexpensive operations.
+
+{{ video_embed | replace("%%VID%%", "eKzgddLniSw")}}
 
 Applying that idea to a hash table, suppose the table has 8 bindings and 8
 buckets. Then 8 more inserts are made. The first 7 are (expected) constant-time,
@@ -162,7 +168,9 @@ makes the amortized cost of `insert` be $O(n)$, which is linear! Not constant.
 That's why it's so important to double the size of the array at each rehash.
 It's what gives us the amortized constant-time performance.
 
-## Amortized Analysis of Two-List Queues
+## Amortized Analysis of Batched Queues
+
+{{ video_embed | replace("%%VID%%", "7OV9iKT0Huw")}}
 
 The implementation of [batched queues][bq] with two lists was in a way more
 efficient than the implementation with just one list, because it managed to
@@ -232,6 +240,8 @@ worst-case linear-time performance.
 
 ## Bankers and Physicists
 
+{{ video_embed | replace("%%VID%%", "-846PptyO7Q")}}
+
 Conceptually, amortized analysis can be understood in three ways:
 
 1. Taking the average cost over a series of operations. This is what we've done
@@ -252,6 +262,8 @@ Conceptually, amortized analysis can be understood in three ways:
    operation the potential energy is $0$, then the amortized cost is $n + (0 -
    n)$, which is just $0$. This is called the *physicist's method* of amortized
    analysis.
+
+{{ video_embed | replace("%%VID%%", "ICT_TfQUa8w")}}
 
 The banker's and physicist's methods can be easier to use in many situations
 than a complicated analysis of a series of operations. Let's revisit our
