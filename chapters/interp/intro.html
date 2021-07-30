@@ -1,0 +1,981 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9. Interpreters &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.1. Parsing" href="parsing.html" />
+    <link rel="prev" title="8.9. Exercises" href="../ds/exercises.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/intro.html">
+   8. Data Structures
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/amortized.html">
+     8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/sequence.html">
+     8.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/memoization.html">
+     8.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/promises.html">
+     8.6. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/monads.html">
+     8.7. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/summary.html">
+     8.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/exercises.html">
+     8.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Language Implementation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
+   9. Interpreters
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="parsing.html">
+     9.1. Parsing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="substitution.html">
+     9.2. Substitution Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="environment.html">
+     9.3. Environment Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="typecheck.html">
+     9.4. Type Checking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inference.html">
+     9.5. Type Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     9.6. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     9.7. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/interp/intro.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/intro.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/interp/intro.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="interpreters">
+<h1><span class="section-number">9. </span>Interpreters<a class="headerlink" href="#interpreters" title="Permalink to this headline">¶</a></h1>
+<p>A skilled artisan must understand the tools with which they work. A carpenter
+needs to understand saws and planes. A chef needs to understand knives and pots.
+A programmer, among other tools, needs to understand the compilers that
+implement the programming languages they use.</p>
+<p>A full understanding of compilation requires a full course or two. So here,
+we’re going to take a necessarily brief look at how to implement programming
+languages. The goal is to understand some of the basic implementation
+techniques, so as to demystify the tools you’re using. Although you might never
+need to implement a full general-purpose programming language, it’s highly
+likely that at some point in your career you will want to design and implement
+some small, special-purpose language. Sometimes those are called
+<em>domain-specific languages</em> (DSLs). What we cover here should help you with that
+task.</p>
+<p>A <em>compiler</em> is a program that implements a programming language. So is an
+<em>interpreter</em>. But they differ in their implementation strategy.</p>
+<p>A compiler’s primary task is <em>translation</em>. It takes as input a <em>source program</em>
+and produces as output a <em>target program</em>. The source program is typically
+expressed in a high-level language, such as Java or OCaml. The target program is
+typically expressed in a low-level language, such as MIPS or x86 assembly. Then
+the compiler’s job is done, and it is no longer needed. Later the OS helps to
+load and execute the target program. Typically, a compiler results in
+higher-performance implementations.</p>
+<p>An interpreter’s primary task is <em>execution</em>. It takes as input a source program
+and directly executes that program without producing any target program. The OS
+actually loads and executes the interpreter, and the interpreter is then
+responsible for executing the program. Typically, an interpreter is easier to
+implement than a compiler.</p>
+<p>It’s also possible to implement a language using a mixture of compilation and
+interpretation. The most common example of that involves <em>virtual machines</em> that
+execute <em>bytecode</em>, such as the Java Virtual Machine (JVM) or the OCaml virtual
+machine (which used to be called the Zinc Machine). With this strategy, a
+compiler translates the source language into bytecode, and the virtual machine
+interprets the bytecode.</p>
+<p>High-performance virtual machines, such as Java’s HotSpot, take this a step
+further and embed a compiler inside the virtual machine. When the machine
+notices that a piece of bytecode is being interpreted frequently, it uses the
+compiler to translate that bytecode into the language of the machine (e.g., x86)
+on which the machine is running. This is called <em>just-in-time compilation</em>
+(JIT), because code is being compiled just before it is executed.</p>
+<p>A compiler goes through several phases as it translates a program:</p>
+<p><strong>Lexing.</strong> During lexing, the compiler transforms the original source code of
+the program from a sequence of characters to a sequence of <em>tokens</em>. Tokens are
+adjacent characters that have some meaning when grouped together. You might
+think of them analogously to words in a natural language. Indeed, keywords such
+as <code class="docutils literal notranslate"><span class="pre">if</span></code> and <code class="docutils literal notranslate"><span class="pre">match</span></code> would be tokens in OCaml. So would constants such as <code class="docutils literal notranslate"><span class="pre">42</span></code>
+and <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code>, variable names such as <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">lst</span></code>, and punctuation such as
+<code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">)</span></code>, and <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>. Lexing typically removes whitespace, because it is no longer
+needed once the tokens have been identified. (Though in a whitespace-sensitive
+language like Python, it would need to be preserved.)</p>
+<p><strong>Parsing.</strong> During parsing, the compiler transforms the sequence of tokens into
+a tree called the <em>abstract syntax tree</em> (AST). As the name suggests, this tree
+abstracts from the <em>concrete syntax</em> of the language. Recall that abstraction
+can mean “forgetting about details.” The AST typically forgets about concrete
+details. For example:</p>
+<ul>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">(2</span> <span class="pre">+</span> <span class="pre">3)</span></code> the parentheses group the right-hand addition operation,
+indicating it should be evaluated first. A tree can represent that as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="o">+</span>
+  <span class="o">/</span> \
+ <span class="mi">1</span>   <span class="o">+</span>
+    <span class="o">/</span> \
+   <span class="mi">2</span>   <span class="mi">3</span>
+</pre></div>
+</div>
+<p>Parentheses are no longer needed, because the structure of the tree encodes
+them.</p>
+</li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3]</span></code>, the square brackets delineate the beginning and end of the
+list, and the semicolons separate the list elements. A tree could represent
+that as a node with several children:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="nb">list</span>
+  <span class="o">/</span>  <span class="o">|</span>  \
+ <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>
+</pre></div>
+</div>
+<p>The brackets and semicolons are no longer needed.</p>
+</li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">42</span></code>, the <code class="docutils literal notranslate"><span class="pre">fun</span></code> keyword and <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> punctuation mark separate the
+arguments and body of the function from the surrounding code. A tree can
+represent that as a node with two children:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">function</span>
+  <span class="o">/</span>     \
+ <span class="n">x</span>       <span class="mi">42</span>
+</pre></div>
+</div>
+<p>The keyword and punctuation are no longer needed.</p>
+</li>
+</ul>
+<p>An AST thus represents the structure of a program at a level that is easier for
+the compiler writer to manipulate.</p>
+<p><strong>Semantic analysis.</strong> During semantic analysis, the compiler checks to see
+whether the program is meaningful according to the rules of the language that
+the compiler is implementing. The most common kind of semantic analysis is type
+checking: the compiler analyzes the types of all the expressions that appear in
+the program to see whether there is a type error or not. Type checking typically
+requires producing a data structure called a <em>symbol table</em> that maps
+identifiers (e.g., variable names) to their types. As a new scope is entered,
+the symbol table is extended with new bindings that might shadow old bindings;
+and as the scope is exited, the new bindings are removed, thus restoring the old
+bindings. So a symbol table blends features of a dictionary and a stack data
+structure.</p>
+<p>Besides type checking, there are other kinds of semantic analysis. Examples
+include the following:</p>
+<ul class="simple">
+<li><p>checking whether the branches of an OCaml pattern match are exhaustive,</p></li>
+<li><p>checking whether a C <code class="docutils literal notranslate"><span class="pre">break</span></code> keyword occurs within the body of a loop, and</p></li>
+<li><p>checking whether a Java field marked <code class="docutils literal notranslate"><span class="pre">final</span></code> has been initialized by the end
+of a constructor.</p></li>
+</ul>
+<p>You can think of parsing as “checking to see whether a program is
+meaningful”—which is how we just defined semantic analysis. So the
+distinction between parsing and semantic analysis is more about convenience:
+parsing does enough work to implement the production of an AST, and semantic
+analysis does the rest of the work.</p>
+<p>Sometimes semantic analysis is even necessary to fully determine what the AST
+should be! Consider, for example, the expression <code class="docutils literal notranslate"><span class="pre">(foo)</span> <span class="pre">-</span> <span class="pre">bar</span></code> in a C-like
+language. It might be:</p>
+<ul class="simple">
+<li><p>the unary negation of a variable <code class="docutils literal notranslate"><span class="pre">bar</span></code>, cast to the type <code class="docutils literal notranslate"><span class="pre">foo</span></code>, or</p></li>
+<li><p>the binary subtraction operation with operands <code class="docutils literal notranslate"><span class="pre">foo</span></code> and <code class="docutils literal notranslate"><span class="pre">bar</span></code>, where the
+parentheses were gratuitous.</p></li>
+</ul>
+<p>Until enough semantic analysis has been done to figure out whether <code class="docutils literal notranslate"><span class="pre">foo</span></code> is a
+variable name or a type name, the compiler doesn’t know which AST to generate.
+In such situations, the parser typically produces an AST in which some tree
+nodes represent the ambiguous syntax, then the semantic analysis phase rewrites
+the tree to be unambiguous.</p>
+<p><strong>Translation to intermediate representation.</strong> After semantic analysis, a
+compiler <em>could</em> immediately translate the AST (augmented with symbol tables)
+into the target language. But if the same compiler wanted to produce output for
+multiple targets (e.g., for x86 and ARM and MIPS), that would require defining a
+translation from the AST to each of the targets. In practice, compilers
+typically don’t do that. Instead, they first translate the AST to an
+intermediate representation (IR). Think of the IR as a kind of abstraction of
+many assembly languages. Many source languages (e.g., C, Java, OCaml) could be
+translated to the same IR, and from that IR, many target language outputs (e.g.,
+x86, ARM, MIPS) could be produced.</p>
+<p>An IR language typically has <em>abstract machine instructions</em> that accomplish
+conceptually simple tasks: loading from or storing to memory, performing binary
+operations, calling and returning, and jumping to other instructions. The
+abstract machine typically has an unbounded number of registers available for
+use, much like a source program can have an unbounded number of variables. Real
+machines, however, have a finite number of registers, which is one way in which
+the IR is an abstraction.</p>
+<p><strong>Target code generation.</strong> The final phase of compilation is to generate target
+code from the IR. This phase typically involves selecting concrete machine
+instructions (such as x86 opcodes), and determining which variables will be
+stored in memory (which is slow to access) vs. processor registers (which are
+fast to access but limited in number). As part of code generation, a compiler
+therefore attempts to <em>optimize</em> the performance of the target code. Some
+examples of optimizations include:</p>
+<ul class="simple">
+<li><p>eliminating array bounds checks, if they are provably guaranteed to succeed;</p></li>
+<li><p>eliminating redundant computations;</p></li>
+<li><p>replacing a function call with the body of the function itself, suitably
+instantiated on the arguments, to eliminate the overhead of calling and
+returning; and</p></li>
+<li><p>re-ordering machine instructions so that (e.g.) slow reads from memory are
+begun before their results are needed, and doing other instructions in the
+meanwhile that do not need the result of the read.</p></li>
+</ul>
+<p><strong>Groups of Phases.</strong> The phases of compilation can be grouped into two or three
+pieces:</p>
+<ul class="simple">
+<li><p>The <em>front end</em> of the compiler does lexing, parsing, and semantic analysis.
+It produces an AST and associated symbol tables. It transforms the AST into an
+IR.</p></li>
+<li><p>The <em>middle end</em> (if it exists) of the compiler operates on the IR. Usually
+this involves performing optimizations that are independent of the target
+language.</p></li>
+<li><p>The <em>back end</em> of the compiler does code generation, including further
+optimization.</p></li>
+</ul>
+<p><strong>Interpretation Phases.</strong> An interpreter works like the front (and possibly
+middle) end of a compiler. That is, an interpreter does lexing, parsing, and
+semantic analysis. It might then immediately begin executing the AST, or it
+might transform the AST into an IR and begin executing the IR.</p>
+<p>In the rest of this book, we are going to focus on interpreters. We’ll ignore
+IRs and code generation, and instead study how to directly execute the AST.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because of the additional tooling required, the code in this chapter is not
+runnable in a browser like previous chapters. But we do provide downloadable
+code for each interpreter implemented here.</p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/interp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../ds/exercises.html" title="previous page"><span class="section-number">8.9. </span>Exercises</a>
+    <a class='right-next' id="next-link" href="parsing.html" title="next page"><span class="section-number">9.1. </span>Parsing</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

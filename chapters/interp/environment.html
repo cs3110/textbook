@@ -1,0 +1,1130 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.3. Environment Model &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.4. Type Checking" href="typecheck.html" />
+    <link rel="prev" title="9.2. Substitution Model" href="substitution.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/intro.html">
+   8. Data Structures
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/amortized.html">
+     8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/sequence.html">
+     8.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/memoization.html">
+     8.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/promises.html">
+     8.6. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/monads.html">
+     8.7. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/summary.html">
+     8.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/exercises.html">
+     8.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Language Implementation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   9. Interpreters
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="parsing.html">
+     9.1. Parsing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="substitution.html">
+     9.2. Substitution Model
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.3. Environment Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="typecheck.html">
+     9.4. Type Checking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inference.html">
+     9.5. Type Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     9.6. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     9.7. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/interp/environment.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/environment.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/interp/environment.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-the-lambda-calculus-in-the-environment-model">
+   9.3.1. Evaluating the Lambda Calculus in the Environment Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-vs-static-scope">
+   9.3.2. Dynamic vs. Static Scope
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">
+   9.3.3. A Second Attempt at Evaluating the Lambda Calculus in the Environment Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-implementation-of-simpl-in-the-environment-model">
+   9.3.4. An Implementation of SimPL in the Environment Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-environment-model">
+   9.3.5. Evaluating Core OCaml in the Environment Model
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="environment-model">
+<h1><span class="section-number">9.3. </span>Environment Model<a class="headerlink" href="#environment-model" title="Permalink to this headline">¶</a></h1>
+<p>So far we’ve been using the substitution model to evaluate programs. It’s a
+great mental model for evaluation, and it’s commonly used in programming
+languages theory.</p>
+<p>But when it comes to implementation, the substitution model is not the best
+choice. It’s too <em>eager</em>: it substitutes for every occurrence of a variable,
+even if that occurrence will never be needed. For example, <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">42</span> <span class="pre">in</span> <span class="pre">e</span></code>
+will require crawling over all of <code class="docutils literal notranslate"><span class="pre">e</span></code>, which might be a very large expression,
+even if <code class="docutils literal notranslate"><span class="pre">x</span></code> never occurs in <code class="docutils literal notranslate"><span class="pre">e</span></code>, or even if <code class="docutils literal notranslate"><span class="pre">x</span></code> occurs only inside a branch of
+an if expression that never ends up being evaluated.</p>
+<p>For sake of efficiency, it would be better to substitute <em>lazily</em>: only when the
+value of a variable is needed should the interpreter have to do the
+substitution. That’s the key idea behind the <em>environment model</em>. In this model,
+there is a data structure called the <em>dynamic environment</em>, or just
+“environment” for short, that is a dictionary mapping variable names to values.
+Whenever the value of a variable is needed, it’s looked up in that dictionary.</p>
+<p>To account for the environment, the evaluation relation needs to change. Instead
+of <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">--&gt;</span> <span class="pre">e'</span></code> or <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">==&gt;</span> <span class="pre">v</span></code>, both of which are binary relations, we now need a
+ternary relation, which is either</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;env,</span> <span class="pre">e&gt;</span> <span class="pre">--&gt;</span> <span class="pre">e</span></code>, or</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;env,</span> <span class="pre">e&gt;</span> <span class="pre">==&gt;</span> <span class="pre">v</span></code>,</p></li>
+</ul>
+<p>where <code class="docutils literal notranslate"><span class="pre">env</span></code> denotes the environment, and <code class="docutils literal notranslate"><span class="pre">&lt;env,</span> <span class="pre">e&gt;</span></code> is called a <em>machine
+configuration</em>. That configuration represents the state of the computer as it
+evaluates a program: <code class="docutils literal notranslate"><span class="pre">env</span></code> represents a part of the computer’s memory (the
+binding of variables to values), and <code class="docutils literal notranslate"><span class="pre">e</span></code> represents the program.</p>
+<p>As notation, let:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{}</span></code> represent the empty environment,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{x1:v1,</span> <span class="pre">x2:v2,</span> <span class="pre">...}</span></code> represent the environment that binds <code class="docutils literal notranslate"><span class="pre">x1</span></code> to <code class="docutils literal notranslate"><span class="pre">v1</span></code>, etc.,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">env[x</span> <span class="pre">-&gt;</span> <span class="pre">v]</span></code> represent the environment <code class="docutils literal notranslate"><span class="pre">env</span></code> with the variable <code class="docutils literal notranslate"><span class="pre">x</span></code>
+additionally bound to the value <code class="docutils literal notranslate"><span class="pre">v</span></code>, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">env(x)</span></code> represent the binding of <code class="docutils literal notranslate"><span class="pre">x</span></code> in <code class="docutils literal notranslate"><span class="pre">env</span></code>.</p></li>
+</ul>
+<p>We’ll concentrate in the rest of this chapter on the big-step version of the
+environment model. It would of course be possible to define a small-step
+version, too.</p>
+<div class="section" id="evaluating-the-lambda-calculus-in-the-environment-model">
+<h2><span class="section-number">9.3.1. </span>Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
+<p>Recall that the lambda calculus is the fragment of a functional language
+involving functions and application:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | e1 e2 | fun x -&gt; e
+
+v ::= fun x -&gt; e
+</pre></div>
+</div>
+<p>Let’s explore how to define a big-step evaluation relation for the lambda
+calculus in the environment model. The rule for variables just says to look up
+the variable name in the environment:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, x&gt; ==&gt; env(x)
+</pre></div>
+</div>
+<p>This rule for functions says that an anonymous function evaluates
+just to itself.  After all, functions are values:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, fun x -&gt; e&gt; ==&gt; fun x -&gt; e
+</pre></div>
+</div>
+<p>Finally, this rule for application says to evaluate the left-hand side <code class="docutils literal notranslate"><span class="pre">e1</span></code> to a
+function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e</span></code>, the right-hand side to a value <code class="docutils literal notranslate"><span class="pre">v2</span></code>, then to evaluate the
+body <code class="docutils literal notranslate"><span class="pre">e</span></code> of the function in an extended environment that maps the function’s
+argument <code class="docutils literal notranslate"><span class="pre">x</span></code> to <code class="docutils literal notranslate"><span class="pre">v2</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, e1 e2&gt; ==&gt; v
+  if &lt;env, e1&gt; ==&gt; fun x -&gt; e
+  and &lt;env, e2&gt; ==&gt; v2
+  and &lt;env[x -&gt; v2], e&gt; ==&gt; v
+</pre></div>
+</div>
+<p>Seems reasonable, right? The problem is, <strong>it’s wrong.</strong> At least, it’s wrong if
+you want evaluation to behave the same as OCaml. Or, to be honest, nearly any
+other modern language.</p>
+<p>It will be easier to explain why it’s wrong if we add two more language feature:
+let expressions and integer constants. Integer constants would evaluate to
+themselves:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, i&gt; ==&gt; i
+</pre></div>
+</div>
+<p>As for let expressions, recall that we don’t actually <em>need</em> them,
+because <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">e1</span> <span class="pre">in</span> <span class="pre">e2</span></code> can be rewritten as <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e2)</span> <span class="pre">e1</span></code>.
+Nonetheless, their semantics would be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, let x = e1 in e2&gt; ==&gt; v
+  if &lt;env, e1&gt; ==&gt; v1
+  and &lt;env[x -&gt; v1], e2&gt; ==&gt; v
+</pre></div>
+</div>
+<p>Which is a rule that really just follows from the other rules above, using that
+rewriting.</p>
+<p>What would this expression evaluate to?</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = 1 in
+let f = fun y -&gt; x in
+let x = 2 in
+f 0
+</pre></div>
+</div>
+<p>According to our semantics thus far, it would evaluate as follows:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span></code> would produce the environment <code class="docutils literal notranslate"><span class="pre">{x:1}</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">f</span> <span class="pre">=</span> <span class="pre">fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x</span></code> would produce the environment <code class="docutils literal notranslate"><span class="pre">{x:1,</span> <span class="pre">f:(fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x)}</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span></code> would produce the environment <code class="docutils literal notranslate"><span class="pre">{x:2,</span> <span class="pre">f:(fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x)}</span></code>. Note how
+the binding of <code class="docutils literal notranslate"><span class="pre">x</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code> is shadowed by the new binding.</p></li>
+<li><p>Now we would evaluate <code class="docutils literal notranslate"><span class="pre">&lt;{x:2,</span> <span class="pre">f:(fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x)},</span> <span class="pre">f</span> <span class="pre">0&gt;</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;{x:2, f:(fun y -&gt; x)}, f 0&gt; ==&gt; 2
+  because &lt;{x:2, f:(fun y -&gt; x)}, f&gt; ==&gt; fun y -&gt; x
+  and &lt;{x:2, f:(fun y -&gt; x)}, 0&gt; ==&gt; 0
+  and &lt;{x:2, f:(fun y -&gt; x)}[y -&gt; 0], x&gt; ==&gt; 2`
+    because &lt;{x:2, f:(fun y -&gt; x), y:0}, x&gt; ==&gt; 2`
+</pre></div>
+</div>
+</li>
+<li><p>The result is therefore <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+</ul>
+<p>But according to utop (and the substitution model), it evaluates as follows:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">in</span>
+  <span class="n">f</span> <span class="mi">0</span><span class="o">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>And the result is therefore <code class="docutils literal notranslate"><span class="pre">1</span></code>. Obviously, <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code> are different answers!</p>
+<p>What went wrong??  It has to do with scope.</p>
+</div>
+<div class="section" id="dynamic-vs-static-scope">
+<h2><span class="section-number">9.3.2. </span>Dynamic vs. Static Scope<a class="headerlink" href="#dynamic-vs-static-scope" title="Permalink to this headline">¶</a></h2>
+<p>There are two different ways to understand the scope of a variable: variables
+can be <em>dynamically</em> scoped or <em>lexically</em> scoped. It all comes down to the
+environment that is used when a function body is being evaluated:</p>
+<ul class="simple">
+<li><p>With the <strong>rule of dynamic scope</strong>, the body of a function is evaluated in the
+current dynamic environment at the time the function is applied, not the old
+dynamic environment that existed at the time the function was defined.</p></li>
+<li><p>With the <strong>rule of lexical scope</strong>, the body of a function is evaluated in the
+old dynamic environment that existed at the time the function was defined, not
+the current environment when the function is applied.</p></li>
+</ul>
+<p>The rule of dynamic scope is what our semantics, above, implemented. Let’s look
+back at the semantics of function application:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, e1 e2&gt; ==&gt; v
+  if &lt;env, e1&gt; ==&gt; fun x -&gt; e
+  and &lt;env, e2&gt; ==&gt; v2
+  and &lt;env[x -&gt; v2], e&gt; ==&gt; v
+</pre></div>
+</div>
+<p>Note how the body <code class="docutils literal notranslate"><span class="pre">e</span></code> is being evaluated in the same environment <code class="docutils literal notranslate"><span class="pre">env</span></code>
+as when the function is applied.  In the example program</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = 1 in
+let f = fun y -&gt; x in
+let x = 2 in
+f 0
+</pre></div>
+</div>
+<p>that means that <code class="docutils literal notranslate"><span class="pre">f</span></code> is evaluated in an environment in which <code class="docutils literal notranslate"><span class="pre">x</span></code> is bound to <code class="docutils literal notranslate"><span class="pre">2</span></code>,
+because that’s the most recent binding of <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<p>But OCaml implements the rule of lexical scope, which coincides with the
+substitution model. With that rule, <code class="docutils literal notranslate"><span class="pre">x</span></code> is bound to <code class="docutils literal notranslate"><span class="pre">1</span></code> in the body of <code class="docutils literal notranslate"><span class="pre">f</span></code> when
+<code class="docutils literal notranslate"><span class="pre">f</span></code> is defined, and the later binding of <code class="docutils literal notranslate"><span class="pre">x</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code> doesn’t change that fact.</p>
+<p>The consensus after decades of experience with programming language design is
+that lexical scope is the right choice. Perhaps the main reason for that is that
+lexical scope supports the Principle of Name Irrelevance. Recall, that principle
+says that the name of a variable shouldn’t matter to the meaning of program, as
+long as the name is used consistently.</p>
+<p>Nonetheless, dynamic scope is useful in some situations. Some languages use it
+as the norm (e.g., Emacs LISP, LaTeX), and some languages have special ways to
+do it (e.g., Perl, Racket). But these days, most languages just don’t have it.</p>
+<p>There is one language feature that modern languages <em>do</em> have that resembles
+dynamic scope, and that is exceptions. Exception handling resembles dynamic
+scope, in that raising an exception transfers control to the “most recent”
+exception handler, just like how dynamic scope uses the “most recent” binding of
+variable.</p>
+</div>
+<div class="section" id="a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">
+<h2><span class="section-number">9.3.3. </span>A Second Attempt at Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
+<p>The question then becomes, how do we implement lexical scope? It seems to
+require time travel, because function bodies need to be evaluated in old dynamic
+environment that have long since disappeared.</p>
+<p>The answer is that the language implementation must arrange to keep old
+environments around. And that is indeed what OCaml and other languages must do.
+They use a data structure called a <em>closure</em> for this purpose.</p>
+<p>A closure has two parts:</p>
+<ul class="simple">
+<li><p>a <em>code</em> part, which contains a function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e</span></code>, and</p></li>
+<li><p>an <em>environment</em> part, which contains the environment <code class="docutils literal notranslate"><span class="pre">env</span></code> at the time that
+function was defined.</p></li>
+</ul>
+<p>You can think of a closure as being like a pair, except that there’s no way to
+directly write a closure in OCaml source code, and there’s no way to destruct
+the pair into its components in OCaml source code. The pair is entirely hidden
+from you by the language implementation.</p>
+<p>Let’s notate a closure as <code class="docutils literal notranslate"><span class="pre">(|</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e,</span> <span class="pre">env</span> <span class="pre">|)</span></code>. The delimiters <code class="docutils literal notranslate"><span class="pre">(|</span> <span class="pre">...</span> <span class="pre">|)</span></code>
+are meant to evoke an OCaml pair, but of course they are not legal OCaml syntax.</p>
+<p>Using that notation, we can re-define the evaluation relation as follows:</p>
+<p>The rule for functions now says that an anonymous function evaluates to a
+closure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, fun x -&gt; e&gt; ==&gt; (| fun x -&gt; e, env |)
+</pre></div>
+</div>
+<p>That rule saves the defining environment as part of the closure, so that it can
+be used at some future point.</p>
+<p>The rule for application says to use that closure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, e1 e2&gt; ==&gt; v
+  if &lt;env, e1&gt; ==&gt; (| fun x -&gt; e, defenv |)
+  and &lt;env, e2&gt; ==&gt; v2
+  and &lt;defenv[x -&gt; v2], e&gt; ==&gt; v
+</pre></div>
+</div>
+<p>That rule uses the closure’s environment <code class="docutils literal notranslate"><span class="pre">defenv</span></code> (whose name is meant to
+suggest the “defining environment”) to evaluate the function body <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p>
+<p>The derived rule for let expressions remains unchanged:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, let x = e1 in e2&gt; ==&gt; v
+  if &lt;env, e1&gt; ==&gt; v1
+  and &lt;env[x -&gt; v1], e2&gt; ==&gt; v
+</pre></div>
+</div>
+<p>That’s because the defining environment for the body <code class="docutils literal notranslate"><span class="pre">e2</span></code> is the same as the
+current environment <code class="docutils literal notranslate"><span class="pre">env</span></code> when the let expression is being evaluated.</p>
+</div>
+<div class="section" id="an-implementation-of-simpl-in-the-environment-model">
+<h2><span class="section-number">9.3.4. </span>An Implementation of SimPL in the Environment Model<a class="headerlink" href="#an-implementation-of-simpl-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
+<p>You can download a complete implementation of the two semantics above: <a href="../../code/lambda-env.zip">lambda-env.zip</a> In <code class="docutils literal notranslate"><span class="pre">main.ml</span></code>, there is a
+definition named <code class="docutils literal notranslate"><span class="pre">scope</span></code> that you can use to switch between lexical and dynamic
+scope.</p>
+</div>
+<div class="section" id="evaluating-core-ocaml-in-the-environment-model">
+<h2><span class="section-number">9.3.5. </span>Evaluating Core OCaml in the Environment Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
+<p>There isn’t anything new in the (big step) environment model semantics of Core
+OCaml, now that we know about closures, but for sake of completeness let’s state
+it anyway.</p>
+<p><strong>Syntax.</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | e1 e2 | fun x -&gt; e
+    | i | b | e1 + e2
+    | (e1,e2) | fst e1 | snd e2
+    | Left e | Right e
+    | match e with Left x1 -&gt; e1 | Right x2 -&gt; e2
+    | if e1 then e2 else e3
+    | let x = e1 in e2
+</pre></div>
+</div>
+<p><strong>Semantics.</strong></p>
+<p>We’ve already seen the semantics of the lambda calculus fragment of Core OCaml:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, x&gt; ==&gt; v
+  if env(x) = v
+
+&lt;env, e1 e2&gt; ==&gt; v
+  if  &lt;env, e1&gt; ==&gt; (| fun x -&gt; e, defenv |)
+  and &lt;env, e2&gt; ==&gt; v2
+  and &lt;defenv[x -&gt; v2], e&gt; ==&gt; v
+
+&lt;env, fun x -&gt; e&gt; ==&gt; (|fun x -&gt; e, env|)
+</pre></div>
+</div>
+<p>Evaluation of constants ignores the environment:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, i&gt; ==&gt; i
+
+&lt;env, b&gt; ==&gt; b
+</pre></div>
+</div>
+<p>Evaluation of most other language features just uses the environment without
+changing it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, e1 + e2&gt; ==&gt; n
+  if  &lt;env,e1&gt; ==&gt; n1
+  and &lt;env,e2&gt; ==&gt; n2
+  and n is the result of applying the primitive operation + to n1 and n2
+
+&lt;env, (e1, e2)&gt; ==&gt; (v1, v2)
+  if  &lt;env, e1&gt; ==&gt; v1
+  and &lt;env, e2&gt; ==&gt; v2
+
+&lt;env, fst e&gt; ==&gt; v1
+  if &lt;env, e&gt; ==&gt; (v1, v2)
+
+&lt;env, snd e&gt; ==&gt; v2
+  if &lt;env, e&gt; ==&gt; (v1, v2)
+
+&lt;env, Left e&gt; ==&gt; Left v
+  if &lt;env, e&gt; ==&gt; v
+
+&lt;env, Right e&gt; ==&gt; Right v
+  if &lt;env, e&gt; ==&gt; v
+
+&lt;env, if e1 then e2 else e3&gt; ==&gt; v2
+  if &lt;env, e1&gt; ==&gt; true
+  and &lt;env, e2&gt; ==&gt; v2
+
+&lt;env, if e1 then e2 else e3&gt; ==&gt; v3
+  if &lt;env, e1&gt; ==&gt; false
+  and &lt;env, e3&gt; ==&gt; v3
+</pre></div>
+</div>
+<p>Finally, evaluation of binding constructs (i.e., match
+and let expression) extends the environment with a new binding:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, match e with Left x1 -&gt; e1 | Right x2 -&gt; e2&gt; ==&gt; v1
+  if  &lt;env, e&gt; ==&gt; Left v
+  and &lt;env[x1 -&gt; v], e1&gt; ==&gt; v1
+
+&lt;env, match e with Left x1 -&gt; e1 | Right x2 -&gt; e2&gt; ==&gt; v2
+  if  &lt;env, e&gt; ==&gt; Right v
+  and &lt;env[x2 -&gt; v], e2&gt; ==&gt; v2
+
+&lt;env, let x = e1 in e2&gt; ==&gt; v2
+  if  &lt;env, e1&gt; ==&gt; v1
+  and &lt;env[x -&gt; v1], e2&gt; ==&gt; v2
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/interp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="substitution.html" title="previous page"><span class="section-number">9.2. </span>Substitution Model</a>
+    <a class='right-next' id="next-link" href="typecheck.html" title="next page"><span class="section-number">9.4. </span>Type Checking</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

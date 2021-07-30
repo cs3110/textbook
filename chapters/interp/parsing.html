@@ -1,0 +1,1313 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.1. Parsing &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.2. Substitution Model" href="substitution.html" />
+    <link rel="prev" title="9. Interpreters" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/intro.html">
+   8. Data Structures
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/amortized.html">
+     8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/sequence.html">
+     8.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/memoization.html">
+     8.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/promises.html">
+     8.6. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/monads.html">
+     8.7. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/summary.html">
+     8.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/exercises.html">
+     8.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Language Implementation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   9. Interpreters
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.1. Parsing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="substitution.html">
+     9.2. Substitution Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="environment.html">
+     9.3. Environment Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="typecheck.html">
+     9.4. Type Checking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inference.html">
+     9.5. Type Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     9.6. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     9.7. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/interp/parsing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/parsing.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/interp/parsing.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lexers">
+   9.1.1. Lexers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parsers">
+   9.1.2. Parsers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backus-naur-form">
+   9.1.3. Backus-Naur Form
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-simpl">
+   9.1.4. Example: SimPL
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-ast">
+     9.1.4.1. The AST
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-menhir-parser">
+     9.1.4.2. The Menhir Parser
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-ocamllex-lexer">
+     9.1.4.3. The Ocamllex Lexer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-the-parser-and-lexer">
+     9.1.4.4. Generating the Parser and Lexer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-driver">
+     9.1.4.5. The Driver
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="parsing">
+<h1><span class="section-number">9.1. </span>Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h1>
+<p>You <em>could</em> code your own lexer and parser from scratch.  But many
+languages include tools for automatically generating lexers and parsers
+from formal descriptions of the syntax of a language.  The ancestors of
+many of those tools are <a class="reference external" href="https://en.wikipedia.org/wiki/Lex_(software)">lex</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Yacc">yacc</a>, which generate
+lexers and parsers, respectively; lex and yacc were developed in the
+1970s for C.</p>
+<p>As part of the standard distribution, OCaml provides lexer and parser
+generators named <a class="reference external" href="https://ocaml.org/manual/lexyacc.html">ocamllex and ocamlyacc</a>. There is a more
+modern parser generator named <a class="reference external" href="http://gallium.inria.fr/~fpottier/menhir/">menhir</a> available through opam;
+menhir is “90% compatible” with ocamlyacc and provides significantly
+improved support for debugging generated parsers.</p>
+<div class="section" id="lexers">
+<h2><span class="section-number">9.1.1. </span>Lexers<a class="headerlink" href="#lexers" title="Permalink to this headline">¶</a></h2>
+<p>Lexer generators such as lex and ocamllex are built on the theory of
+deterministic finite automata, which is typically covered in a discrete math or
+theory of computation course. Such automata accept <em>regular languages</em>, which
+can be described with <em>regular expressions</em>. So, the input to a lexer generator
+is a collection of regular expressions that describe the tokens of the language.
+The output is an automaton implemented in a high-level language, such as C (for
+lex) or OCaml (for ocamllex).</p>
+<p>That automaton itself takes files (or strings) as input, and each character of
+the file becomes an input to the automaton. Eventually the automaton either
+<em>recognizes</em> the sequence of characters it has received as a valid token in the
+language, in which case the automaton produces an output of that token and
+resets itself to being recognizing the next token, or <em>rejects</em> the sequence of
+characters as an invalid token.</p>
+</div>
+<div class="section" id="parsers">
+<h2><span class="section-number">9.1.2. </span>Parsers<a class="headerlink" href="#parsers" title="Permalink to this headline">¶</a></h2>
+<p>Parser generators such as yacc and menhir are similarly built on the theory of
+automata. But they use <em>pushdown automata</em>, which are like finite automata that
+also maintain a stack onto which they can push and pop symbols. The stack
+enables them to accept a bigger class of languages, which are known as
+<em>context-free languages</em> (CFLs). One of the big improvements of CFLs over
+regular languages is that CFLs can express the idea that delimiters must be
+balanced—for example, that every opening parenthesis must be balanced by a
+closing parenthesis.</p>
+<p>Just as regular languages can be expressed with a special notation (regular
+expressions), so can CFLs. <em>Context-free grammars</em> are used to describe CFLs. A
+context-free grammar is a set of <em>production rules</em> of that describe how one
+symbol can be replaced by other symbols. For example, the language of balanced
+parentheses, which includes strings such as <code class="docutils literal notranslate"><span class="pre">(())</span></code> and <code class="docutils literal notranslate"><span class="pre">()()</span></code> and <code class="docutils literal notranslate"><span class="pre">(()())</span></code>, but
+not strings such as <code class="docutils literal notranslate"><span class="pre">)</span></code> or <code class="docutils literal notranslate"><span class="pre">(()</span></code>, is generated by these rules:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S \rightarrow (S)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S \rightarrow SS\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S \rightarrow \epsilon\)</span></p></li>
+</ul>
+<p>The symbols occurring in those rules are <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\((\)</span>, and <span class="math notranslate nohighlight">\()\)</span>. The <span class="math notranslate nohighlight">\(\epsilon\)</span>
+denotes the empty string. Every symbol is either a <em>nonterminal</em> or a
+<em>terminal</em>, depending on whether it is a token of the language being described.
+<span class="math notranslate nohighlight">\(S\)</span> is a nonterminal in the example above, and ( and ) are terminals.</p>
+<p>In the next section we’ll study <em>Backus-Naur Form</em> (BNF), which is a standard
+notation for context-free grammars. The input to a parser generator is typically
+a BNF description of the language’s syntax. The output of the parser generator
+is a program that recognizes the language of the grammar. As input, that program
+expects the output of the lexer. As output, the program produces a value of the
+AST type that represents the string that was accepted. The programs output by
+the parser generator and lexer generator are thus dependent upon on another and
+upon the AST type.</p>
+</div>
+<div class="section" id="backus-naur-form">
+<h2><span class="section-number">9.1.3. </span>Backus-Naur Form<a class="headerlink" href="#backus-naur-form" title="Permalink to this headline">¶</a></h2>
+<p>The standard way to describe the syntax of a language is with a mathematical
+notation called <em>Backus-Naur form</em> (BNF), named for its inventors, John Backus
+and Peter Naur. There are many variants of BNF. Here, we won’t be too picky
+about adhering to one variant or another. Our goal is just to have a reasonably
+good notation for describing language syntax.</p>
+<p>BNF uses a set of <em>derivation rules</em> to describe the syntax of a language. Let’s
+start with an example. Here’s the BNF description of a tiny language of
+expressions that include just the integers and addition:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= i | e + e
+i ::= &lt;integers&gt;
+</pre></div>
+</div>
+<p>These rules say that an expression <code class="docutils literal notranslate"><span class="pre">e</span></code> is either an integer <code class="docutils literal notranslate"><span class="pre">i</span></code>, or two
+expressions with the symbol <code class="docutils literal notranslate"><span class="pre">+</span></code> appearing between them. The syntax of “integers”
+is left unspecified by these rules.</p>
+<p>Each rule has the form</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>metavariable ::= symbols | ... | symbols
+</pre></div>
+</div>
+<p>A <em>metavariable</em> is variable used in the BNF rules, rather than a variable in
+the language being described. The <code class="docutils literal notranslate"><span class="pre">::=</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code> that appear in the rules are
+<em>metasyntax</em>: BNF syntax used to describe the language’s syntax. <em>Symbols</em> are
+sequences that can include metavariables (such as <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">e</span></code>) as well as tokens
+of the language (such as <code class="docutils literal notranslate"><span class="pre">+</span></code>). Whitespace is not relevant in these rules.</p>
+<p>Sometimes we might want to easily refer to individual occurrences of
+metavariables. We do that by appending some distinguishing mark to the
+metavariable(s). For example, we could rewrite the first rule above as</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= i | e1 + e2
+</pre></div>
+</div>
+<p>or as</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= i | e + e&#39;
+</pre></div>
+</div>
+<p>Now we can talk about <code class="docutils literal notranslate"><span class="pre">e2</span></code> or <code class="docutils literal notranslate"><span class="pre">e'</span></code> rather than having to say “the <code class="docutils literal notranslate"><span class="pre">e</span></code> on the
+right-hand side of <code class="docutils literal notranslate"><span class="pre">+</span></code>”.</p>
+<p>If the language itself contains either of the tokens <code class="docutils literal notranslate"><span class="pre">::=</span></code> or <code class="docutils literal notranslate"><span class="pre">|</span></code>—and
+OCaml does contain the latter—then writing BNF can become a little
+confusing. Some BNF notations attempt to deal with that by using additional
+delimiters to distinguish syntax from metasyntax. We will be more relaxed and
+assume that the reader can distinguish them.</p>
+</div>
+<div class="section" id="example-simpl">
+<h2><span class="section-number">9.1.4. </span>Example: SimPL<a class="headerlink" href="#example-simpl" title="Permalink to this headline">¶</a></h2>
+<p>As a running example, we’ll use a very simple programming language that we call
+SimPL. Here is its syntax in BNF:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
+    | if e1 then e2 else e3
+    | let x = e1 in e2
+
+bop ::= + | * | &lt;=
+
+x ::= &lt;identifiers&gt;
+
+i ::= &lt;integers&gt;
+
+b ::= true | false
+</pre></div>
+</div>
+<p>Obviously there’s a lot missing from this language, especially functions. But
+there’s enough in it for us to study the important concepts of interpreters
+without getting too distracted by lots of language features. Later, we will
+consider a larger fragment of OCaml.</p>
+<p>We’re going to develop a complete interpreter for SimPL. You can download the
+finished interpreter here: <a href="../../code/simpl.zip">simpl.zip</a>.
+Or, just follow along as we build each piece of it.</p>
+<div class="section" id="the-ast">
+<h3><span class="section-number">9.1.4.1. </span>The AST<a class="headerlink" href="#the-ast" title="Permalink to this headline">¶</a></h3>
+<p>Since the AST is the most important data structure in an interpreter, let’s
+design it first. We’ll put this code in a file named <code class="docutils literal notranslate"><span class="pre">ast.ml</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">bop</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">Add</span>
+  <span class="o">|</span> <span class="nc">Mult</span>
+  <span class="o">|</span> <span class="nc">Leq</span>
+
+<span class="k">type</span> <span class="n">expr</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">Var</span> <span class="k">of</span> <span class="kt">string</span>
+  <span class="o">|</span> <span class="nc">Int</span> <span class="k">of</span> <span class="kt">int</span>
+  <span class="o">|</span> <span class="nc">Bool</span> <span class="k">of</span> <span class="kt">bool</span>
+  <span class="o">|</span> <span class="nc">Binop</span> <span class="k">of</span> <span class="n">bop</span> <span class="o">*</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">expr</span>
+  <span class="o">|</span> <span class="nc">Let</span> <span class="k">of</span> <span class="kt">string</span> <span class="o">*</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">expr</span>
+  <span class="o">|</span> <span class="nc">If</span> <span class="k">of</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">expr</span>
+</pre></div>
+</div>
+<p>There is one constructor for each of the syntactic forms of expressions in the
+BNF. For the underlying primitive syntactic classes of identifiers, integers,
+and booleans, we’re using OCaml’s own <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, and <code class="docutils literal notranslate"><span class="pre">bool</span></code> types.</p>
+<p>Instead of defining the <code class="docutils literal notranslate"><span class="pre">bop</span></code> type and a single <code class="docutils literal notranslate"><span class="pre">Binop</span></code> constructor, we could
+have defined three separate constructors for the three binary operators:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">expr</span> <span class="o">=</span>
+  <span class="o">...</span>
+  <span class="o">|</span> <span class="nc">Add</span> <span class="k">of</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">expr</span>
+  <span class="o">|</span> <span class="nc">Mult</span> <span class="k">of</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">expr</span>
+  <span class="o">|</span> <span class="nc">Leq</span> <span class="k">of</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">expr</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>But by factoring out the <code class="docutils literal notranslate"><span class="pre">bop</span></code> type we will be able to avoid a lot of code
+duplication later in our implementation.</p>
+</div>
+<div class="section" id="the-menhir-parser">
+<h3><span class="section-number">9.1.4.2. </span>The Menhir Parser<a class="headerlink" href="#the-menhir-parser" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start with parsing, then return to lexing later. We’ll put all the Menhir
+code we write below in a file named <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code>. The <code class="docutils literal notranslate"><span class="pre">.mly</span></code> extension indicates
+that this file is intended as input to Menhir. (The ‘y’ alludes to yacc.) This
+file contains the <em>grammar definition</em> for the language we want to parse. The
+syntax of grammar definitions is described by example below. Be warned that it’s
+maybe a little weird, but that’s because it’s based on tools (like yacc) that
+were developed quite awhile ago. Menhir will process that file and produce a
+file named <code class="docutils literal notranslate"><span class="pre">parser.ml</span></code> as output; it contains an OCaml program that parses the
+language. (There’s nothing special about the name <code class="docutils literal notranslate"><span class="pre">parser</span></code> here; it’s just
+descriptive.)</p>
+<p>There are four parts to a grammar definition: header, declarations, rules, and
+trailer.</p>
+<p><strong>Header.</strong> The <em>header</em> appears between <code class="docutils literal notranslate"><span class="pre">%{</span></code> and <code class="docutils literal notranslate"><span class="pre">%}</span></code>. It is code that will be
+copied literally into the generated <code class="docutils literal notranslate"><span class="pre">parser.ml</span></code>. Here we use it just to open the
+<code class="docutils literal notranslate"><span class="pre">Ast</span></code> module so that, later on in the grammar definition, we can write
+expressions like <code class="docutils literal notranslate"><span class="pre">Int</span> <span class="pre">i</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Ast.Int</span> <span class="pre">i</span></code>. If we wanted we could also
+define some OCaml functions in the header.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%{
+open Ast
+%}
+</pre></div>
+</div>
+<p><strong>Declarations.</strong> The <em>declarations</em> section begins by saying what the lexical
+<em>tokens</em> of the language are. Here are the token declarations for SimPL:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%token &lt;int&gt; INT
+%token &lt;string&gt; ID
+%token TRUE
+%token FALSE
+%token LEQ
+%token TIMES
+%token PLUS
+%token LPAREN
+%token RPAREN
+%token LET
+%token EQUALS
+%token IN
+%token IF
+%token THEN
+%token ELSE
+%token EOF
+</pre></div>
+</div>
+<p>Each of these is just a descriptive name for the token. Nothing so far says that
+<code class="docutils literal notranslate"><span class="pre">LPAREN</span></code> really corresponds to <code class="docutils literal notranslate"><span class="pre">(</span></code>, for example. We’ll take care of that when we
+define the lexer.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">EOF</span></code> token is a special <em>end-of-file</em> token that the lexer will return when
+it comes to the end of the character stream. At that point we know the complete
+program has been read.</p>
+<p>The tokens that have a <code class="docutils literal notranslate"><span class="pre">&lt;type&gt;</span></code> annotation appearing in them are declaring that
+they will carry some additional data along with them. In the case of <code class="docutils literal notranslate"><span class="pre">INT</span></code>,
+that’s an OCaml <code class="docutils literal notranslate"><span class="pre">int</span></code>. In the case of <code class="docutils literal notranslate"><span class="pre">ID</span></code>, that’s an OCaml <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<p>After declaring the tokens, we have to provide some additional information about
+<em>precedence</em> and <em>associativity</em>. The following declarations say that <code class="docutils literal notranslate"><span class="pre">PLUS</span></code> is
+left associative, <code class="docutils literal notranslate"><span class="pre">IN</span></code> is not associative, and <code class="docutils literal notranslate"><span class="pre">PLUS</span></code> has higher precedence than
+<code class="docutils literal notranslate"><span class="pre">IN</span></code> (because <code class="docutils literal notranslate"><span class="pre">PLUS</span></code> appears on a line after <code class="docutils literal notranslate"><span class="pre">IN</span></code>).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%nonassoc IN
+%nonassoc ELSE
+%left LEQ
+%left PLUS
+%left TIMES
+</pre></div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">PLUS</span></code> is left associative, <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span></code> will parse as <code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">+</span> <span class="pre">2)</span> <span class="pre">+</span> <span class="pre">3</span></code> and
+not as <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">(2</span> <span class="pre">+</span> <span class="pre">3)</span></code>. Because <code class="docutils literal notranslate"><span class="pre">PLUS</span></code> has higher precedence than <code class="docutils literal notranslate"><span class="pre">IN</span></code>, the
+expression <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2</span></code> will parse as <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">(x</span> <span class="pre">+</span> <span class="pre">2)</span></code> and not as
+<code class="docutils literal notranslate"><span class="pre">(let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">x)</span> <span class="pre">+</span> <span class="pre">2</span></code>. The other declarations have similar effects.</p>
+<p>Getting the precedence and associativity declarations correct is one of the
+trickier parts of developing a grammar definition. It helps to develop the
+grammar definition incrementally, adding just a couple tokens (and their
+associated rules, discussed below) at a time to the language. Menhir will let
+you know when you’ve added a token (and rule) for which it is confused about
+what you intend the precedence and associativity should be. Then you can add
+declarations and test to make sure you’ve got them right.</p>
+<p>After declaring associativity and precedence, we need to declare what the
+starting point is for parsing the language. The following declaration says to
+start with a rule (defined below) named <code class="docutils literal notranslate"><span class="pre">prog</span></code>. The declaration also says that
+parsing a <code class="docutils literal notranslate"><span class="pre">prog</span></code> will return an OCaml value of type <code class="docutils literal notranslate"><span class="pre">Ast.expr</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%start &lt;Ast.expr&gt; prog
+</pre></div>
+</div>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">%%</span></code> ends the declarations section.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%%
+</pre></div>
+</div>
+<p><strong>Rules.</strong> The <em>rules</em> section contains production rules that resemble BNF,
+although where in BNF we would write “::=” these rules simply write “:”. The
+format of a rule is</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>name:
+  | production1 { action1 }
+  | production2 { action2 }
+  | ...
+  ;
+</pre></div>
+</div>
+<p>The <em>production</em> is the sequence of <em>symbols</em> that the rule matches. A symbol is
+either a token or the name of another rule. The <em>action</em> is the OCaml value to
+return if a <em>match</em> occurs. Each production can <em>bind</em> the value carried by a
+symbol and use that value in its action. This is perhaps best understood by
+example, so let’s dive in.</p>
+<p>The first rule, named <code class="docutils literal notranslate"><span class="pre">prog</span></code>, has just a single production. It says that a
+<code class="docutils literal notranslate"><span class="pre">prog</span></code> is an <code class="docutils literal notranslate"><span class="pre">expr</span></code> followed by <code class="docutils literal notranslate"><span class="pre">EOF</span></code>. The first part of the production,
+<code class="docutils literal notranslate"><span class="pre">e=expr</span></code>, says to match an <code class="docutils literal notranslate"><span class="pre">expr</span></code> and bind the resulting value to <code class="docutils literal notranslate"><span class="pre">e</span></code>. The
+action simply says to return that value <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>prog:
+  | e = expr; EOF { e }
+  ;
+</pre></div>
+</div>
+<p>The second and final rule, named <code class="docutils literal notranslate"><span class="pre">expr</span></code>, has productions for all the expressions
+in SimPL.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>expr:
+  | i = INT { Int i }
+  | x = ID { Var x }
+  | TRUE { Bool true }
+  | FALSE { Bool false }
+  | e1 = expr; LEQ; e2 = expr { Binop (Leq, e1, e2) }
+  | e1 = expr; TIMES; e2 = expr { Binop (Mult, e1, e2) }
+  | e1 = expr; PLUS; e2 = expr { Binop (Add, e1, e2) }
+  | LET; x = ID; EQUALS; e1 = expr; IN; e2 = expr { Let (x, e1, e2) }
+  | IF; e1 = expr; THEN; e2 = expr; ELSE; e3 = expr { If (e1, e2, e3) }
+  | LPAREN; e=expr; RPAREN {e}
+  ;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The first production, <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">INT</span></code>, says to match an <code class="docutils literal notranslate"><span class="pre">INT</span></code> token, bind the
+resulting OCaml <code class="docutils literal notranslate"><span class="pre">int</span></code> value to <code class="docutils literal notranslate"><span class="pre">i</span></code>, and return AST node <code class="docutils literal notranslate"><span class="pre">Int</span> <span class="pre">i</span></code>.</p></li>
+<li><p>The second production, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">ID</span></code>, says to match an <code class="docutils literal notranslate"><span class="pre">ID</span></code> token, bind the
+resulting OCaml <code class="docutils literal notranslate"><span class="pre">string</span></code> value to <code class="docutils literal notranslate"><span class="pre">x</span></code>, and return AST node <code class="docutils literal notranslate"><span class="pre">Var</span> <span class="pre">x</span></code>.</p></li>
+<li><p>The third and fourth productions match a <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> or <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> token and return
+the corresponding AST node.</p></li>
+<li><p>The fifth, sixth, and seventh productions handle binary operators. For
+example, <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">=</span> <span class="pre">expr;</span> <span class="pre">PLUS;</span> <span class="pre">e2</span> <span class="pre">=</span> <span class="pre">expr</span></code> says to match an <code class="docutils literal notranslate"><span class="pre">expr</span></code> followed by a
+<code class="docutils literal notranslate"><span class="pre">PLUS</span></code> token followed by another <code class="docutils literal notranslate"><span class="pre">expr</span></code>. The first <code class="docutils literal notranslate"><span class="pre">expr</span></code> is bound to <code class="docutils literal notranslate"><span class="pre">e1</span></code> and
+the second to <code class="docutils literal notranslate"><span class="pre">e2</span></code>. The AST node returned is <code class="docutils literal notranslate"><span class="pre">Binop</span> <span class="pre">(Add,</span> <span class="pre">e1,</span> <span class="pre">e2)</span></code>.</p></li>
+<li><p>The eighth production, <code class="docutils literal notranslate"><span class="pre">LET;</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">ID;</span> <span class="pre">EQUALS;</span> <span class="pre">e1</span> <span class="pre">=</span> <span class="pre">expr;</span> <span class="pre">IN;</span> <span class="pre">e2</span> <span class="pre">=</span> <span class="pre">expr</span></code>, says
+to match a <code class="docutils literal notranslate"><span class="pre">LET</span></code> token followed by an <code class="docutils literal notranslate"><span class="pre">ID</span></code> token followed by an <code class="docutils literal notranslate"><span class="pre">EQUALS</span></code> token
+followed by an <code class="docutils literal notranslate"><span class="pre">expr</span></code> followed by an <code class="docutils literal notranslate"><span class="pre">IN</span></code> token followed by another <code class="docutils literal notranslate"><span class="pre">expr</span></code>.
+The string carried by the <code class="docutils literal notranslate"><span class="pre">ID</span></code> is bound to <code class="docutils literal notranslate"><span class="pre">x</span></code>, and the two expressions are
+bound to <code class="docutils literal notranslate"><span class="pre">e1</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span></code>. The AST node returned is <code class="docutils literal notranslate"><span class="pre">Let</span> <span class="pre">(x,</span> <span class="pre">e1,</span> <span class="pre">e2)</span></code>.</p></li>
+<li><p>The last production, <code class="docutils literal notranslate"><span class="pre">LPAREN;</span> <span class="pre">e</span> <span class="pre">=</span> <span class="pre">expr;</span> <span class="pre">RPAREN</span></code> says to match an <code class="docutils literal notranslate"><span class="pre">LPAREN</span></code>
+token followed by an <code class="docutils literal notranslate"><span class="pre">expr</span></code> followed by an <code class="docutils literal notranslate"><span class="pre">RPAREN</span></code>. The expression is bound
+to <code class="docutils literal notranslate"><span class="pre">e</span></code> and returned.</p></li>
+</ul>
+<p>The final production might be surprising, because it was not included in the BNF
+we wrote for SimPL. That BNF was intended to describe the <em>abstract syntax</em> of
+the language, so it did not include the concrete details of how expressions can
+be grouped with parentheses. But the grammer definition we’ve been writing does
+have to describe the <em>concrete syntax</em>, including details like parentheses.</p>
+<p>There can also be a <em>trailer</em> section after the rules, which like the header is
+OCaml code that is copied directly into the output <code class="docutils literal notranslate"><span class="pre">parser.ml</span></code> file.</p>
+</div>
+<div class="section" id="the-ocamllex-lexer">
+<h3><span class="section-number">9.1.4.3. </span>The Ocamllex Lexer<a class="headerlink" href="#the-ocamllex-lexer" title="Permalink to this headline">¶</a></h3>
+<p>Now let’s see how the lexer generator is used. A lot of it will feel familiar
+from our discussion of the parser generator. We’ll put all the ocamllex code we
+write below in a file named <code class="docutils literal notranslate"><span class="pre">lexer.mll</span></code>. The <code class="docutils literal notranslate"><span class="pre">.mll</span></code> extension indicates that
+this file is intended as input to ocamllex. (The ‘l’ alludes to lexing.) This
+file contains the <em>lexer definition</em> for the language we want to lex. Menhir
+will process that file and produce a file named <code class="docutils literal notranslate"><span class="pre">lexer.ml</span></code> as output; it
+contains an OCaml program that lexes the language. (There’s nothing special
+about the name <code class="docutils literal notranslate"><span class="pre">lexer</span></code> here; it’s just descriptive.)</p>
+<p>There are four parts to a lexer definition: header, identifiers, rules, and
+trailer.</p>
+<p><strong>Header.</strong> The <em>header</em> appears between <code class="docutils literal notranslate"><span class="pre">{</span></code> and <code class="docutils literal notranslate"><span class="pre">}</span></code>. It is code that will
+simply be copied literally into the generated <code class="docutils literal notranslate"><span class="pre">lexer.ml</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+open Parser
+}
+</pre></div>
+</div>
+<p>Here, we’ve opened the <code class="docutils literal notranslate"><span class="pre">Parser</span></code> module, which is the code in <code class="docutils literal notranslate"><span class="pre">parser.ml</span></code> that
+was produced by Menhir out of <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code>. The reason we open it is so that we
+can use the token names declared in it, e.g., <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, <code class="docutils literal notranslate"><span class="pre">LET</span></code>, and <code class="docutils literal notranslate"><span class="pre">INT</span></code>, inside
+our lexer definition. Otherwise, we’d have to write <code class="docutils literal notranslate"><span class="pre">Parser.TRUE</span></code>, etc.</p>
+<p><strong>Identifiers.</strong> The next section of the lexer definition contains
+<em>identifiers</em>, which are named regular expressions. These will be used in the
+rules section, next.</p>
+<p>Here are the identifiers we’ll use with SimPL:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let white = [&#39; &#39; &#39;\t&#39;]+
+let digit = [&#39;0&#39;-&#39;9&#39;]
+let int = &#39;-&#39;? digit+
+let letter = [&#39;a&#39;-&#39;z&#39; &#39;A&#39;-&#39;Z&#39;]
+let id = letter+
+</pre></div>
+</div>
+<p>The regular expressions above are for whitespace (spaces and tabs), digits (0
+through 9), integers (nonempty sequences of digits, optionally preceded by a
+minus sign), letters (a through z, and A through Z), and SimPL variable names
+(nonempty sequences of letters) aka ids or “identifiers”—though we’re now
+using that word in two different senses.</p>
+<p>FYI, these aren’t exactly the same as the OCaml definitions of integers and
+identifiers.</p>
+<p>The identifiers section actually isn’t required; instead of writing <code class="docutils literal notranslate"><span class="pre">white</span></code> in
+the rules we could just directly write the regular expression for it. But the
+identifiers help make the lexer definition more self-documenting.</p>
+<p><strong>Rules.</strong> The rules section of a lexer definition is written in a notation that
+also resembles BNF. A rule has the form</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>rule name =
+  parse
+  | regexp1 { action1 }
+  | regexp2 { action2 }
+  | ...
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">rule</span></code> and <code class="docutils literal notranslate"><span class="pre">parse</span></code> are keywords. The lexer that is generated will attempt
+to match against regular expressions in the order they are listed. When a
+regular expression matches, the lexer produces the token specified by its
+<code class="docutils literal notranslate"><span class="pre">action</span></code>.</p>
+<p>Here is the (only) rule for the SimPL lexer:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>rule read =
+  parse
+  | white { read lexbuf }
+  | &quot;true&quot; { TRUE }
+  | &quot;false&quot; { FALSE }
+  | &quot;&lt;=&quot; { LEQ }
+  | &quot;*&quot; { TIMES }
+  | &quot;+&quot; { PLUS }
+  | &quot;(&quot; { LPAREN }
+  | &quot;)&quot; { RPAREN }
+  | &quot;let&quot; { LET }
+  | &quot;=&quot; { EQUALS }
+  | &quot;in&quot; { IN }
+  | &quot;if&quot; { IF }
+  | &quot;then&quot; { THEN }
+  | &quot;else&quot; { ELSE }
+  | id { ID (Lexing.lexeme lexbuf) }
+  | int { INT (int_of_string (Lexing.lexeme lexbuf)) }
+  | eof { EOF }
+</pre></div>
+</div>
+<p>Most of the regular expressions and actions are self-explanatory, but a couple
+are not:</p>
+<ul class="simple">
+<li><p>The first, <code class="docutils literal notranslate"><span class="pre">white</span> <span class="pre">{</span> <span class="pre">read</span> <span class="pre">lexbuf</span> <span class="pre">}</span></code>, means that if whitespace is matched,
+instead of returning a token the lexer should just call the <code class="docutils literal notranslate"><span class="pre">read</span></code> rule again
+and return whatever token results. In other words, whitespace will be skipped.</p></li>
+<li><p>The two for ids and ints use the expression <code class="docutils literal notranslate"><span class="pre">Lexing.lexeme</span> <span class="pre">lexbuf</span></code>. This calls
+a function <code class="docutils literal notranslate"><span class="pre">lexeme</span></code> defined in the <code class="docutils literal notranslate"><span class="pre">Lexing</span></code> module, and returns the string
+that matched the regular expression. For example, in the <code class="docutils literal notranslate"><span class="pre">id</span></code> rule, it would
+return the sequence of upper and lower case letters that form the variable
+name.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">eof</span></code> regular expression is a special one that matches the end of the file
+(or string) being lexed.</p></li>
+</ul>
+<p>Note that it’s important that the <code class="docutils literal notranslate"><span class="pre">id</span></code> regular expression occur nearly last in
+the list. Otherwise, keywords like <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">if</span></code> would be lexed as variable
+names rather than the <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> and <code class="docutils literal notranslate"><span class="pre">IF</span></code> tokens.</p>
+</div>
+<div class="section" id="generating-the-parser-and-lexer">
+<h3><span class="section-number">9.1.4.4. </span>Generating the Parser and Lexer<a class="headerlink" href="#generating-the-parser-and-lexer" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have completed parser and lexer definitions in <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code> and
+<code class="docutils literal notranslate"><span class="pre">lexer.mll</span></code>, we can run Menhir and ocamllex to generate the parser and lexer
+from them. Ocamlbuild already knows how to run those tools. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild lexer.ml
+</pre></div>
+</div>
+<p>will generate <code class="docutils literal notranslate"><span class="pre">_build/lexer.ml</span></code> from <code class="docutils literal notranslate"><span class="pre">lexer.mll</span></code>, and</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild -use-menhir parser.ml
+</pre></div>
+</div>
+<p>will generate <code class="docutils literal notranslate"><span class="pre">_build/parser.ml</span></code> from <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code>.</p>
+<p>The flag <code class="docutils literal notranslate"><span class="pre">-use-menhir</span></code> alerts ocamlbuild to use Menhir instead of ocamlyacc for
+files with the <code class="docutils literal notranslate"><span class="pre">.mly</span></code> extension. You can instead put that into your <code class="docutils literal notranslate"><span class="pre">_tags</span></code>
+file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>true: use_menhir
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-driver">
+<h3><span class="section-number">9.1.4.5. </span>The Driver<a class="headerlink" href="#the-driver" title="Permalink to this headline">¶</a></h3>
+<p>Finally, we can pull together the lexer and parser to transform a string into an
+AST. Put this code into a file named <code class="docutils literal notranslate"><span class="pre">main.ml</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Ast</span>
+
+<span class="k">let</span> <span class="n">parse</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="kt">string</span><span class="o">)</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">lexbuf</span> <span class="o">=</span> <span class="nn">Lexing</span><span class="p">.</span><span class="n">from_string</span> <span class="n">s</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">ast</span> <span class="o">=</span> <span class="nn">Parser</span><span class="p">.</span><span class="n">prog</span> <span class="nn">Lexer</span><span class="p">.</span><span class="n">read</span> <span class="n">lexbuf</span> <span class="k">in</span>
+  <span class="n">ast</span>
+</pre></div>
+</div>
+<p>This function takes a string <code class="docutils literal notranslate"><span class="pre">s</span></code> and uses the standard library’s <code class="docutils literal notranslate"><span class="pre">Lexing</span></code> module
+to create a <em>lexer buffer</em> from it. Think of that buffer as the token stream.
+The function then lexes and parses the string into an AST, using <code class="docutils literal notranslate"><span class="pre">Lexer.read</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Parser.prog</span></code>. The function <code class="docutils literal notranslate"><span class="pre">Lexer.read</span></code> corresponds to the rule named
+<code class="docutils literal notranslate"><span class="pre">read</span></code> in our lexer definition, and the function <code class="docutils literal notranslate"><span class="pre">Parser.prog</span></code> to the rule named
+<code class="docutils literal notranslate"><span class="pre">prog</span></code> in our parser definition.</p>
+<p>Note how this code runs the lexer on a string; there is a corresponding function
+<code class="docutils literal notranslate"><span class="pre">from_channel</span></code> to read from a file.</p>
+<p>We could now use <code class="docutils literal notranslate"><span class="pre">parse</span></code> interactively to parse some strings.  For example:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">parse</span> <span class="s2">&quot;let x = 3110 in x + x&quot;</span><span class="o">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">=</span> <span class="nc">Let</span> <span class="o">(</span><span class="s2">&quot;x&quot;</span><span class="o">,</span> <span class="nc">Int</span> <span class="mi">3110</span><span class="o">,</span> <span class="nc">Binop</span> <span class="o">(</span><span class="nc">Add</span><span class="o">,</span> <span class="nc">Var</span> <span class="s2">&quot;x&quot;</span><span class="o">,</span> <span class="nc">Var</span> <span class="s2">&quot;x&quot;</span><span class="o">))</span>
+</pre></div>
+</div>
+<p>That completes lexing and parsing for SimPL.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/interp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page"><span class="section-number">9. </span>Interpreters</a>
+    <a class='right-next' id="next-link" href="substitution.html" title="next page"><span class="section-number">9.2. </span>Substitution Model</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

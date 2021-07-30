@@ -1,0 +1,1794 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.2. Substitution Model &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.3. Environment Model" href="environment.html" />
+    <link rel="prev" title="9.1. Parsing" href="parsing.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/intro.html">
+   8. Data Structures
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/amortized.html">
+     8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/sequence.html">
+     8.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/memoization.html">
+     8.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/promises.html">
+     8.6. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/monads.html">
+     8.7. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/summary.html">
+     8.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/exercises.html">
+     8.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Language Implementation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   9. Interpreters
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="parsing.html">
+     9.1. Parsing
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.2. Substitution Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="environment.html">
+     9.3. Environment Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="typecheck.html">
+     9.4. Type Checking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inference.html">
+     9.5. Type Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     9.6. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     9.7. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/interp/substitution.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/substitution.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/interp/substitution.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-simpl-in-the-substitution-model">
+   9.2.1. Evaluating SimPL in the Substitution Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-single-step-relation">
+   9.2.2. Implementing the Single-Step Relation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-multistep-relation">
+   9.2.3. The Multistep Relation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-the-big-step-relation">
+   9.2.4. Defining the Big-Step Relation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-big-step-relation">
+   9.2.5. Implementing the Big-Step Relation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#substitution-in-simpl">
+   9.2.6. Substitution in SimPL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-substitution">
+   9.2.7. Implementing Substitution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-simpl-interpreter-is-done">
+   9.2.8. The SimPL Interpreter is Done!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#capture-avoiding-substitution">
+   9.2.9. Capture-Avoiding Substitution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#core-ocaml">
+   9.2.10. Core OCaml
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-substitution-model">
+   9.2.11. Evaluating Core OCaml in the Substitution Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#big-step-relation">
+   9.2.12. Big-Step Relation
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="substitution-model">
+<h1><span class="section-number">9.2. </span>Substitution Model<a class="headerlink" href="#substitution-model" title="Permalink to this headline">¶</a></h1>
+<p>After lexing and parsing, the next phase is type checking (and other semantic
+analysis). We will skip that phase for now and return to it at the end of this
+chapter.</p>
+<p>Instead, let’s turn our attention to evaluation. In a compiler, the next phase
+after semantic analysis would be rewriting the AST into an intermediate
+representation (IR), in preparation for translating the program into machine
+code. An interpreter might also rewrite the AST into an IR, or it might directly
+begin evaluating the AST. One reason to rewrite the AST would be to simplify it:
+sometimes, certain language features can be implemented in terms of others, and
+it makes sense to reduce the language to a small core to keep the interpreter
+implementation shorter. Syntactic sugar is a great example of that idea.</p>
+<p>Eliminating syntactic sugar is called <em>desugaring.</em> As an example, we know that
+<code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">e1</span> <span class="pre">in</span> <span class="pre">e2</span></code> and <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e2)</span> <span class="pre">e1</span></code> are equivalent. So, we could regard
+let expressions as syntactic sugar.</p>
+<p>Suppose we had a language whose AST corresponded to this BNF:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | fun x -&gt; e | e1 e2
+    | let x = e1 in e2
+</pre></div>
+</div>
+<p>Then the interpreter could desugar that into a simpler AST—in
+a sense, an IR—by transforming all occurrences of
+<code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">e1</span> <span class="pre">in</span> <span class="pre">e2</span></code> into <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e2)</span> <span class="pre">e1</span></code>.  Then the interpreter
+would need to evaluate only this smaller language:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | fun x -&gt; e | e1 e2
+</pre></div>
+</div>
+<p>After having simplified the AST, it’s time to evaluate it. <em>Evaluation</em> is the
+process of continuing to simplify the AST until it’s just a value. In other
+words, evaluation is the implementation of the language’s dynamic semantics.
+Recall that a <em>value</em> is an expression for which there is no computation
+remaining to be done. Typically, we think of values as a strict syntactic subset
+of expressions, though we’ll see some exceptions to that later.</p>
+<p><strong>Big vs. small step evaluation.</strong> We’ll define evaluation with a mathematical
+relation, just as we did with type checking. Actually, we’re going to define
+three relations for evaluation:</p>
+<ul class="simple">
+<li><p>The first, <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>, will represent how a program takes one single step of
+execution.</p></li>
+<li><p>The second, <code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code>, is the reflexive transitive closure of <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>, and it
+represents how a program takes multiple steps of execution.</p></li>
+<li><p>The third, <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code>, abstracts away from all the details of single steps and
+represents how a program reduces directly to a value.</p></li>
+</ul>
+<p>The style in which we are defining evaluation with these relations is known as
+<em>operational semantics</em>, because we’re using the relations to specify how the
+machine “operates” as it evaluates programs. There are two other major styles,
+known as <em>denotational semantics</em> and <em>axiomatic semantics</em>, but we won’t cover
+those here.</p>
+<p>We can further divide operational semantics into two separate sub-styles of
+defining evaluation: <em>small step</em> vs. <em>big step</em> semantics. The first relation,
+<code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>, is in the small-step style, because it represents execution in terms of
+individual small steps. The third, <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code>, is in the big-step style, because it
+represents execution in terms of a big step from an expression directly to a
+value. The second relation, <code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code>, blends the two. Indeed, our desire is for it
+to bridge the gap in the following sense:</p>
+<p><strong>Relating big and small steps:</strong> For all expressions <code class="docutils literal notranslate"><span class="pre">e</span></code> and values <code class="docutils literal notranslate"><span class="pre">v</span></code>, it
+holds that <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">--&gt;*</span> <span class="pre">v</span></code> if and only if <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">==&gt;</span> <span class="pre">v</span></code>.</p>
+<p>In other words, if an expression takes many small steps and eventually reaches a
+value, e.g., <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">--&gt;</span> <span class="pre">e1</span> <span class="pre">--&gt;</span> <span class="pre">....</span> <span class="pre">--&gt;</span> <span class="pre">en</span> <span class="pre">--&gt;</span> <span class="pre">v</span></code>, then it ought to be the case that
+<code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">==&gt;</span> <span class="pre">v</span></code>. So the big step relation is a faithful abstraction of the small step
+relation: it just forgets about all the intermediate steps.</p>
+<p>Why have two different styles, big and small? Each is a little easier to use
+than the other in certain circumstances, so it helps to have both in our
+toolkit. The small-step semantics tends to be easier to work with when it comes
+to modeling complicated language features, but the big-step semantics tends to
+be more similar to how an interpreter would actually be implemented.</p>
+<p><strong>Substitution vs. environment models.</strong> There’s another choice we have to make,
+and it’s orthogonal to the choice of small vs. big step. There are two different
+ways to think about the implementation of variables:</p>
+<ul class="simple">
+<li><p>We could eagerly <em>substitute</em> the value of a variable for its name throughout
+the scope of that name, as soon as we finding a binding of the variable.</p></li>
+<li><p>We could lazily record the substitution in a dictionary, which is usually
+called an <em>environment</em> when used for this purpose, and we could look up the
+variable’s value in that environment whenever we find its name mentioned in a
+scope.</p></li>
+</ul>
+<p>Those ideas lead to the <em>substitution model</em> of evaluation and the <em>environment
+model</em> of evaluation. As with small step vs. big step, the substitution model
+tends to be nicer to work with mathematically, whereas the environment model
+tends to be more similar to how an interpreter is implemented.</p>
+<p>Some examples will help to make sense of all this. Let’s look, next, at how to
+define the relations for SimPL.</p>
+<div class="section" id="evaluating-simpl-in-the-substitution-model">
+<h2><span class="section-number">9.2.1. </span>Evaluating SimPL in the Substitution Model<a class="headerlink" href="#evaluating-simpl-in-the-substitution-model" title="Permalink to this headline">¶</a></h2>
+<p>Let’s begin by defining a small-step substitution-model semantics for SimPL.
+That is, we’re going to define a relation <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> that represents how an
+expression take a single step at a time, and we’ll implement variables using
+substitution of values for names.</p>
+<p>Recall the syntax of SimPL:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
+    | if e1 then e2 else e3
+    | let x = e1 in e2
+
+bop ::= + | * | &lt;=
+</pre></div>
+</div>
+<p>We’re going to need to know when expressions are done evaluating, that is, when
+they are considered to be values. For SimPL, we’ll define the values as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>v ::= i | b
+</pre></div>
+</div>
+<p>That is, a value is either an integer constant or a Boolean constant.</p>
+<p>For each of the syntactic forms that a SimPL expression could have, we’ll now
+define some <em>evaluation rules</em>, which constitute an inductive definition of the
+<code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> relation. Each rule will have the form <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">--&gt;</span> <span class="pre">e'</span></code>, meaning that <code class="docutils literal notranslate"><span class="pre">e</span></code> takes
+a single step to <code class="docutils literal notranslate"><span class="pre">e'</span></code>.</p>
+<p>Although variables are given first in the BNF, let’s pass over them for now, and
+come back to them after all the other forms.</p>
+<p><strong>Constants.</strong> Integer and Boolean constants are already values, so they cannot
+take a step. That might at first seem surprising, but remember that we are
+intending to also define a <code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code> relation that will permit zero or more steps;
+whereas, the <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> relation represents <em>exactly</em> one step.</p>
+<p>Technically, all we have to do to accomplish this is to just not write any rules
+of the form <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">--&gt;</span> <span class="pre">e</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">--&gt;</span> <span class="pre">e</span></code> for some <code class="docutils literal notranslate"><span class="pre">e</span></code>. So we’re already done,
+actually: we haven’t defined any rules yet.</p>
+<p>Let’s introduce another notation written <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">-/-&gt;</span></code>, which is meant to look like
+an arrow with a slash through it, to mean “there does not exist an <code class="docutils literal notranslate"><span class="pre">e'</span></code> such
+that <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">--&gt;</span> <span class="pre">e'</span></code>. Using that we could write:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">-/-&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">-/-&gt;</span></code></p></li>
+</ul>
+<p>Though not strictly speaking part of the definition of <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>, those propositions
+help us remember that constants do not step. In fact, we could more generally
+write, “for all <code class="docutils literal notranslate"><span class="pre">v</span></code>, it holds that <code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">-/-&gt;</span></code>.”</p>
+<p><strong>Binary operators.</strong> A binary operator application <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">bop</span> <span class="pre">e2</span></code> has two
+subexpressions, <code class="docutils literal notranslate"><span class="pre">e1</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span></code>. That leads to some choices about how to evaluate
+the expression:</p>
+<ul class="simple">
+<li><p>We could first evaluate the left-hand side <code class="docutils literal notranslate"><span class="pre">e1</span></code>, then the right-hand side
+<code class="docutils literal notranslate"><span class="pre">e2</span></code>, then apply the operator.</p></li>
+<li><p>Or we could do the right-hand side first, then the left-hand side.</p></li>
+<li><p>Or we could interleave the evaluation, first doing a step of <code class="docutils literal notranslate"><span class="pre">e1</span></code>, then of
+<code class="docutils literal notranslate"><span class="pre">e2</span></code>, then <code class="docutils literal notranslate"><span class="pre">e1</span></code>, then <code class="docutils literal notranslate"><span class="pre">e2</span></code>, etc.</p></li>
+<li><p>Or maybe the operator is a <em>short-circuit</em> operator, in which case one of the
+subexpressions might never be evaluated.</p></li>
+</ul>
+<p>And there are many other strategies you might be able to invent.</p>
+<p>It turns out that the OCaml language definition says that (for non-short-circuit
+operators) it is unspecified which side is evaluated first. The current
+implementation happens to evaluate the right-hand side first, but that’s not
+something any programmer should rely upon.</p>
+<p>Many people would expect left-to-right evaluation, so let’s define the <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>
+relation for that. We start by saying that the left-hand side can take a step:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e1 bop e2 --&gt; e1&#39; bop e2
+  if e1 --&gt; e1&#39;
+</pre></div>
+</div>
+<p>Similarly to the type system for SimPL, this rule says that two expressions are
+in the <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> relation if two other (simpler) subexpressions are also in the
+<code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> relation. That’s what makes it an inductive definition.</p>
+<p>If the left-hand side is finished evaluating, then the right-hand side may begin
+stepping:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>v1 bop e2 --&gt; v1 bop e2&#39;
+  if e2 --&gt; e2&#39;
+</pre></div>
+</div>
+<p>Finally, when both sides have reached a value, the binary operator
+may be applied:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>v1 bop v2 --&gt; v
+  if v is the result of primitive operation v1 bop v2
+</pre></div>
+</div>
+<p>By <em>primitive operation</em>, we mean that there is some underlying notion of what
+<code class="docutils literal notranslate"><span class="pre">bop</span></code> actually means. For example, the character <code class="docutils literal notranslate"><span class="pre">+</span></code> is just a piece of syntax,
+but we are conditioned to understand its meaning as an arithmetic addition
+operation. The primitive operation typically is something implemented by
+hardware (e.g., an <code class="docutils literal notranslate"><span class="pre">ADD</span></code> opcode), or by a run-time library (e.g., a <code class="docutils literal notranslate"><span class="pre">pow</span></code>
+function).</p>
+<p>For SimPL, let’s delegate all primitive operations to OCaml. That is, the SimPL
+<code class="docutils literal notranslate"><span class="pre">+</span></code> operator will be the same as the OCaml <code class="docutils literal notranslate"><span class="pre">+</span></code> operator, as will <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>.</p>
+<p>Here’s an example of using the binary operator rule:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    (3*1000) + ((1*100) + ((1*10) + 0))
+--&gt; 3000 + ((1*100) + ((1*10) + 0))
+--&gt; 3000 + (100 + ((1*10) + 0))
+--&gt; 3000 + (100 + (10 + 0))
+--&gt; 3000 + (100 + 10)
+--&gt; 3000 + 110
+--&gt; 3110
+</pre></div>
+</div>
+<p><strong>If expressions.</strong> As with binary operators, there are many choices of how to
+evaluate the subexpressions of an if expression. Nonetheless, most programmers
+would expect the guard to be evaluated first, then only one of the branches to
+be evaluated, because that’s how most languages work. So let’s write evaluation
+rules for that semantics.</p>
+<p>First, the guard is evaluated to a value:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>if e1 then e2 else e3 --&gt; if e1&#39; then e2 else e3
+  if e1 --&gt; e1&#39;
+</pre></div>
+</div>
+<p>Then, based on the guard, the if expression is simplified
+to just one of the branches:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>if true then e2 else e3 --&gt; e2
+
+if false then e2 else e3 --&gt; e3
+</pre></div>
+</div>
+<p><strong>Let expressions.</strong> Let’s make SimPL let expressions evaluate in the same way
+as OCaml let expressions: first the binding expression, then the body.</p>
+<p>The rule that steps the binding expression is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = e1 in e2 --&gt; let x = e1&#39; in e2
+  if e1 --&gt; e1&#39;
+</pre></div>
+</div>
+<p>Next, if the binding expression has reached a value, we want to substitute that
+value for the name of the variable in the body expression:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = v1 in e2 --&gt; e2 with v1 substituted for x
+</pre></div>
+</div>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">42</span> <span class="pre">in</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> should step to <code class="docutils literal notranslate"><span class="pre">42</span> <span class="pre">+</span> <span class="pre">1</span></code>, because substituting
+<code class="docutils literal notranslate"><span class="pre">42</span></code> for <code class="docutils literal notranslate"><span class="pre">x</span></code> in <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> yields <code class="docutils literal notranslate"><span class="pre">42</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
+<p>Of course, the right hand side of that rule isn’t really an expression. It’s
+just giving an intuition for the expression that we really want. We need to
+formally define what “substitute” means. It turns out to be rather tricky. So,
+rather then getting side-tracked by it right now, let’s assume a new notation:
+<code class="docutils literal notranslate"><span class="pre">e'{e/x}</span></code>, which means, “the expression <code class="docutils literal notranslate"><span class="pre">e'</span></code> with <code class="docutils literal notranslate"><span class="pre">e</span></code> substituted for <code class="docutils literal notranslate"><span class="pre">x</span></code>.”
+We’ll come back to that notation in the next section and give it a careful
+definition.</p>
+<p>For now, we can add this rule:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = v1 in e2 --&gt; e2{v1/x}
+</pre></div>
+</div>
+<p><strong>Variables.</strong> Note how the let expression rule eliminates a variable from
+showing up in the body expression: the variable’s name is replaced by the value
+that variable should have. So, we should <em>never</em> reach the point of attempting
+to step a variable name—assuming that the program was well typed.</p>
+<p>Consider OCaml: if we try to evaluate an expression with an unbound variable,
+what happens? Let’s check utop:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># x;;
+Error: Unbound value x
+
+# let y = x in y;;
+Error: Unbound value x
+</pre></div>
+</div>
+<p>It’s an error —a type-checking error— for an expression to contain
+an unbound variable. Thus, any well-typed expression <code class="docutils literal notranslate"><span class="pre">e</span></code> will never reach the
+point of attempting to step a variable name.</p>
+<p>As with constants, we therefore don’t need to add any rules for variables. But,
+for clarity, we could state that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-/-&gt;</span></code>.</p>
+</div>
+<div class="section" id="implementing-the-single-step-relation">
+<h2><span class="section-number">9.2.2. </span>Implementing the Single-Step Relation<a class="headerlink" href="#implementing-the-single-step-relation" title="Permalink to this headline">¶</a></h2>
+<p>It’s easy to turn the above definitions of <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> into an OCaml function that
+pattern matches against AST nodes. In the code below, recall that we have yet
+finished defining substitution (i.e., <code class="docutils literal notranslate"><span class="pre">subst</span></code>); we’ll return to that in the next
+section.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [is_value e] is whether [e] is a value. *)</span>
+<span class="k">let</span> <span class="n">is_value</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Int</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Bool</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+  <span class="o">|</span> <span class="nc">Var</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Let</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Binop</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">If</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+
+<span class="c">(** [subst e v x] is [e{v/x}]. *)</span>
+<span class="k">let</span> <span class="n">subst</span> <span class="n">e</span> <span class="n">v</span> <span class="n">x</span> <span class="o">=</span>
+  <span class="n">failwith</span> <span class="s2">&quot;See next section&quot;</span>
+
+<span class="c">(** [step] is the [--&gt;] relation, that is, a single step of</span>
+<span class="c">    evaluation. *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">step</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">-&gt;</span> <span class="n">expr</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Int</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Bool</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;Does not step&quot;</span>
+  <span class="o">|</span> <span class="nc">Var</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;Unbound variable&quot;</span>
+  <span class="o">|</span> <span class="nc">Binop</span> <span class="o">(</span><span class="n">bop</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="k">when</span> <span class="n">is_value</span> <span class="n">e1</span> <span class="o">&amp;&amp;</span> <span class="n">is_value</span> <span class="n">e2</span> <span class="o">-&gt;</span>
+    <span class="n">step_bop</span> <span class="n">bop</span> <span class="n">e1</span> <span class="n">e2</span>
+  <span class="o">|</span> <span class="nc">Binop</span> <span class="o">(</span><span class="n">bop</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="k">when</span> <span class="n">is_value</span> <span class="n">e1</span> <span class="o">-&gt;</span>
+    <span class="nc">Binop</span> <span class="o">(</span><span class="n">bop</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">step</span> <span class="n">e2</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Binop</span> <span class="o">(</span><span class="n">bop</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">Binop</span> <span class="o">(</span><span class="n">bop</span><span class="o">,</span> <span class="n">step</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Let</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="k">when</span> <span class="n">is_value</span> <span class="n">e1</span> <span class="o">-&gt;</span> <span class="n">subst</span> <span class="n">e2</span> <span class="n">e1</span> <span class="n">x</span>
+  <span class="o">|</span> <span class="nc">Let</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">Let</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">step</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">If</span> <span class="o">(</span><span class="nc">Bool</span> <span class="bp">true</span><span class="o">,</span> <span class="n">e2</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="n">e2</span>
+  <span class="o">|</span> <span class="nc">If</span> <span class="o">(</span><span class="nc">Bool</span> <span class="bp">false</span><span class="o">,</span> <span class="o">_,</span> <span class="n">e3</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">e3</span>
+  <span class="o">|</span> <span class="nc">If</span> <span class="o">(</span><span class="nc">Int</span> <span class="o">_,</span> <span class="o">_,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;Guard of if must have type bool&quot;</span>
+  <span class="o">|</span> <span class="nc">If</span> <span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">,</span> <span class="n">e3</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">If</span> <span class="o">(</span><span class="n">step</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">,</span> <span class="n">e3</span><span class="o">)</span>
+
+<span class="c">(** [step_bop bop v1 v2] implements the primitive operation</span>
+<span class="c">    [v1 bop v2].  Requires: [v1] and [v2] are both values. *)</span>
+<span class="ow">and</span> <span class="n">step_bop</span> <span class="n">bop</span> <span class="n">e1</span> <span class="n">e2</span> <span class="o">=</span> <span class="k">match</span> <span class="n">bop</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Add</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Int</span> <span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Mult</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Int</span> <span class="o">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Leq</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Bool</span> <span class="o">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;Operator and operand type mismatch&quot;</span>
+</pre></div>
+</div>
+<p>The only new thing we had to deal with in that implementation was the two places
+where a run-time type error is discovered, namely, in the evaluation of
+<code class="docutils literal notranslate"><span class="pre">If</span> <span class="pre">(Int</span> <span class="pre">_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> and in the very last line, in which we discover that a binary
+operator is being applied to arguments of the wrong type. Type checking will
+guarantee that an exception never gets raised here, but OCaml’s exhaustiveness
+analysis of pattern matching forces us to write a branch nonetheless. Moreover,
+if it ever turned out that we had a bug in our type checker that caused
+ill-typed binary operator applications to be evaluated, this exception would
+help us discover what was going wrong.</p>
+</div>
+<div class="section" id="the-multistep-relation">
+<h2><span class="section-number">9.2.3. </span>The Multistep Relation<a class="headerlink" href="#the-multistep-relation" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve defined <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>, there’s really nothing left to do to define
+<code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code>. It’s just the reflexive transitive closure of <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>. In other words, it
+can be defined with just these two rules:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e --&gt;* e
+
+e --&gt;* e&#39;&#39;
+  if e --&gt; e&#39; and e&#39; --&gt;* e&#39;&#39;
+</pre></div>
+</div>
+<p>Of course, in implementing an interpreter, what we really want is to take
+multiple steps until the expression reaches a value. That is, we want to take as
+many steps as possible. So, we’re interested in the sub-relation <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">--&gt;*</span> <span class="pre">v</span></code> in
+which the right-hand side is a value. That’s easy to implement:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [eval_small e] is the [e --&gt;* v] relation.  That is,</span>
+<span class="c">    keep applying [step] until a value is produced.  *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">eval_small</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">is_value</span> <span class="n">e</span> <span class="k">then</span> <span class="n">e</span>
+  <span class="k">else</span> <span class="n">e</span> <span class="o">|&gt;</span> <span class="n">step</span> <span class="o">|&gt;</span> <span class="n">eval_small</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-the-big-step-relation">
+<h2><span class="section-number">9.2.4. </span>Defining the Big-Step Relation<a class="headerlink" href="#defining-the-big-step-relation" title="Permalink to this headline">¶</a></h2>
+<p>Recall that our goal in defining the big-step relation <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code> is to make sure it
+agrees with the multistep relation <code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code>.</p>
+<p>Constants are easy, because they big-step to themselves:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>i ==&gt; i
+
+b ==&gt; b
+</pre></div>
+</div>
+<p>Binary operators just big-step both of their subexpressions,
+then apply whatever the primitive operator is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e1 bop e2 ==&gt; v
+  if e1 ==&gt; v1
+  and e2 ==&gt; v2
+  and v is the result of primitive operation v1 bop v2
+</pre></div>
+</div>
+<p>If expressions big step the guard, then big step one
+of the branches:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>if e1 then e2 else e3 ==&gt; v2
+  if e1 ==&gt; true
+  and e2 ==&gt; v2
+
+if e1 then e2 else e3 ==&gt; v3
+  if e1 ==&gt; false
+  and e3 ==&gt; v3
+</pre></div>
+</div>
+<p>Let expressions big step the binding expression, do a substitution, and big step
+the result of the substitution:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = e1 in e2 ==&gt; v2
+  if e1 ==&gt; v1
+  and e2{v1/x} ==&gt; v2
+</pre></div>
+</div>
+<p>Finally, variables do not big step, for the same reason as with the small step
+semantics—a well-typed program will never reach the point of attempting to
+evaluate a variable name:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>x =/=&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-the-big-step-relation">
+<h2><span class="section-number">9.2.5. </span>Implementing the Big-Step Relation<a class="headerlink" href="#implementing-the-big-step-relation" title="Permalink to this headline">¶</a></h2>
+<p>The big-step evaluation relation is, if anything, even easier to implement than
+the small-step relation. It just recurses over the tree, evaluating
+subexpressions as required by the definition of <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [eval_big e] is the [e ==&gt; v] relation. *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">eval_big</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">=</span> <span class="k">match</span> <span class="n">e</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Int</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Bool</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">e</span>
+  <span class="o">|</span> <span class="nc">Var</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;Unbound variable&quot;</span>
+  <span class="o">|</span> <span class="nc">Binop</span> <span class="o">(</span><span class="n">bop</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">eval_bop</span> <span class="n">bop</span> <span class="n">e1</span> <span class="n">e2</span>
+  <span class="o">|</span> <span class="nc">Let</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">subst</span> <span class="n">e2</span> <span class="o">(</span><span class="n">eval_big</span> <span class="n">e1</span><span class="o">)</span> <span class="n">x</span> <span class="o">|&gt;</span> <span class="n">eval_big</span>
+  <span class="o">|</span> <span class="nc">If</span> <span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">,</span> <span class="n">e3</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">eval_if</span> <span class="n">e1</span> <span class="n">e2</span> <span class="n">e3</span>
+
+<span class="c">(** [eval_bop bop e1 e2] is the [e] such that [e1 bop e2 ==&gt; e]. *)</span>
+<span class="ow">and</span> <span class="n">eval_bop</span> <span class="n">bop</span> <span class="n">e1</span> <span class="n">e2</span> <span class="o">=</span> <span class="k">match</span> <span class="n">bop</span><span class="o">,</span> <span class="n">eval_big</span> <span class="n">e1</span><span class="o">,</span> <span class="n">eval_big</span> <span class="n">e2</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Add</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Int</span> <span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Mult</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Int</span> <span class="o">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Leq</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Int</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Bool</span> <span class="o">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;Operator and operand type mismatch&quot;</span>
+
+<span class="c">(** [eval_if e1 e2 e3] is the [e] such that [if e1 then e2 else e3 ==&gt; e]. *)</span>
+<span class="ow">and</span> <span class="n">eval_if</span> <span class="n">e1</span> <span class="n">e2</span> <span class="n">e3</span> <span class="o">=</span> <span class="k">match</span> <span class="n">eval_big</span> <span class="n">e1</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Bool</span> <span class="bp">true</span> <span class="o">-&gt;</span> <span class="n">eval_big</span> <span class="n">e2</span>
+  <span class="o">|</span> <span class="nc">Bool</span> <span class="bp">false</span> <span class="o">-&gt;</span> <span class="n">eval_big</span> <span class="n">e3</span>
+  <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;Guard of if must have type bool&quot;</span>
+</pre></div>
+</div>
+<p>It’s good engineering practice to factor out functions for each of the pieces of
+syntax, as we did above, unless the implementation can fit on just a single line
+in the main pattern match inside <code class="docutils literal notranslate"><span class="pre">eval_big</span></code>.</p>
+</div>
+<div class="section" id="substitution-in-simpl">
+<h2><span class="section-number">9.2.6. </span>Substitution in SimPL<a class="headerlink" href="#substitution-in-simpl" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section, we posited a new notation <code class="docutils literal notranslate"><span class="pre">e'{e/x}</span></code>, meaning
+“the expression <code class="docutils literal notranslate"><span class="pre">e'</span></code> with <code class="docutils literal notranslate"><span class="pre">e</span></code> substituted for <code class="docutils literal notranslate"><span class="pre">x</span></code>.” The intuition is
+that anywhere <code class="docutils literal notranslate"><span class="pre">x</span></code> appears in <code class="docutils literal notranslate"><span class="pre">e'</span></code>, we should replace <code class="docutils literal notranslate"><span class="pre">x</span></code> with <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p>
+<p>Let’s give a careful definition of substitution for SimPL. For the most part,
+it’s not too hard.</p>
+<p><strong>Constants</strong> have no variables appearing in them (e.g., <code class="docutils literal notranslate"><span class="pre">x</span></code> cannot
+syntactically occur in <code class="docutils literal notranslate"><span class="pre">42</span></code>), so substitution leaves them unchanged:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>i{e/x} = i
+b{e/x} = b
+</pre></div>
+</div>
+<p>For <strong>binary operators and if expressions</strong>, all that substitution needs to do
+is to recurse inside the subexpressions:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(e1 bop e2){e/x} = e1{e/x} bop e2{e/x}
+(if e1 then e2 else e3){e/x} = if e1{e/x} then e2{e/x} else e3{e/x}
+</pre></div>
+</div>
+<p><strong>Variables</strong> start to get a little trickier. There are two possibilities:
+either we encounter the variable <code class="docutils literal notranslate"><span class="pre">x</span></code>, which means we should do the substitution,
+or we encounter some other variable with a different name, say <code class="docutils literal notranslate"><span class="pre">y</span></code>, in which
+case we should not do the substitution:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>x{e/x} = e
+y{e/x} = y
+</pre></div>
+</div>
+<p>The first of those cases, <code class="docutils literal notranslate"><span class="pre">x{e/x}</span> <span class="pre">=</span> <span class="pre">e</span></code>, is important to note: it’s where the
+substitution operation finally takes place. Suppose, for example, we were trying
+to figure out the result of <code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">+</span> <span class="pre">42){1/x}</span></code>. Using the definitions from above,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  (x + 42){1/x}
+= x{1/x} + 42{1/x}   by the bop case
+= 1 + 42{1/x}        by the first variable case
+= 1 + 42             by the integer case
+</pre></div>
+</div>
+<p>Note that we are not defining the <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> relation right now. That is, none of
+these equalities represents a step of evaluation. To make that concrete, suppose
+we were evaluating <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">42</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    let x = 1 in x + 42
+--&gt; (x + 42){1/x}
+  = 1 + 42
+--&gt; 43
+</pre></div>
+</div>
+<p>There are two single steps here, one for the <code class="docutils literal notranslate"><span class="pre">let</span></code> and the other for <code class="docutils literal notranslate"><span class="pre">+</span></code>. But we
+consider the substitution to happen all at once, as part of the step that <code class="docutils literal notranslate"><span class="pre">let</span></code>
+takes. That’s why we write <code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">+</span> <span class="pre">42){1/x}</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">42</span></code>, not
+<code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">+</span> <span class="pre">42){1/x}</span> <span class="pre">--&gt;</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">42</span></code>.</p>
+<p>Finally, <strong>let expressions</strong> also have two cases, depending on the name of the
+bound variable:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(let x = e1 in e2){e/x}  =  let x = e1{e/x} in e2
+(let y = e1 in e2){e/x}  =  let y = e1{e/x} in e2{e/x}
+</pre></div>
+</div>
+<p>Both of those cases substitute <code class="docutils literal notranslate"><span class="pre">e</span></code> for <code class="docutils literal notranslate"><span class="pre">x</span></code> inside the binding expression <code class="docutils literal notranslate"><span class="pre">e1</span></code>.
+That’s to ensure that expressions like <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">42</span> <span class="pre">in</span> <span class="pre">let</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">y</span></code> would
+evaluate correctly: <code class="docutils literal notranslate"><span class="pre">x</span></code> needs to be in scope inside the binding <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code>, so we
+have to do a substitution there regardless of the name being bound.</p>
+<p>But the first case does not do a substitution inside <code class="docutils literal notranslate"><span class="pre">e2</span></code>, whereas the second
+case does. That’s so we <em>stop</em> substituting when we reach a shadowed name.
+Consider <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">5</span> <span class="pre">in</span> <span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">6</span> <span class="pre">in</span> <span class="pre">x</span></code>. We know it would evaluate to <code class="docutils literal notranslate"><span class="pre">6</span></code> in
+OCaml because of shadowing. Here’s how it would evaluate with our definitions of
+SimPL:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    let x = 5 in let x = 6 in x
+--&gt; (let x = 6 in x){5/x}
+  = let x = 6{5/x} in x      ***
+  = let x = 6 in x
+--&gt; x{6/x}
+  = 6
+</pre></div>
+</div>
+<p>On the line tagged <code class="docutils literal notranslate"><span class="pre">***</span></code> above, we’ve stopped substituting inside the body
+expression, because we reached a shadowed variable name. If we had instead kept
+going inside the body, we’d get a different result:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    let x = 5 in let x = 6 in x
+--&gt; (let x = 6 in x){5/x}
+  = let x = 6{5/x} in x{5/x}      ***WRONG***
+  = let x = 6 in 5
+--&gt; 5{6/x}
+  = 5
+</pre></div>
+</div>
+<p><strong>Example 1:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = 2 in x + 1
+--&gt; (x + 1){2/x}
+  = 2 + 1
+--&gt; 3
+</pre></div>
+</div>
+<p><strong>Example 2:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    let x = 0 in (let x = 1 in x)
+--&gt; (let x = 1 in x){0/x}
+  = (let x = 1{0/x} in x)
+  = (let x = 1 in x)
+--&gt; x{1/x}
+  = 1
+</pre></div>
+</div>
+<p><strong>Example 3:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    let x = 0 in x + (let x = 1 in x)
+--&gt; (x + (let x = 1 in x)){0/x}
+  = x{0/x} + (let x = 1 in x){0/x}
+  = 0 + (let x = 1{0/x} in x)
+  = 0 + (let x = 1 in x)
+--&gt; 0 + x{1/x}
+  = 0 + 1
+--&gt; 1
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-substitution">
+<h2><span class="section-number">9.2.7. </span>Implementing Substitution<a class="headerlink" href="#implementing-substitution" title="Permalink to this headline">¶</a></h2>
+<p>The definitions above are easy to turn into OCaml code. Note that, although we
+write <code class="docutils literal notranslate"><span class="pre">v</span></code> below, the function is actually able to substitute any expression for
+a variable, not just a value. The interpreter will only ever call this function
+on a value, though.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [subst e v x] is [e] with [v] substituted for [x], that</span>
+<span class="c">    is, [e{v/x}]. *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">subst</span> <span class="n">e</span> <span class="n">v</span> <span class="n">x</span> <span class="o">=</span> <span class="k">match</span> <span class="n">e</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Var</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="k">then</span> <span class="n">v</span> <span class="k">else</span> <span class="n">e</span>
+  <span class="o">|</span> <span class="nc">Bool</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">e</span>
+  <span class="o">|</span> <span class="nc">Int</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">e</span>
+  <span class="o">|</span> <span class="nc">Binop</span> <span class="o">(</span><span class="n">bop</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">Binop</span> <span class="o">(</span><span class="n">bop</span><span class="o">,</span> <span class="n">subst</span> <span class="n">e1</span> <span class="n">v</span> <span class="n">x</span><span class="o">,</span> <span class="n">subst</span> <span class="n">e2</span> <span class="n">v</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Let</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="o">-&gt;</span>
+    <span class="k">let</span> <span class="n">e1&#39;</span> <span class="o">=</span> <span class="n">subst</span> <span class="n">e1</span> <span class="n">v</span> <span class="n">x</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">then</span> <span class="nc">Let</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">e1&#39;</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span>
+    <span class="k">else</span> <span class="nc">Let</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">e1&#39;</span><span class="o">,</span> <span class="n">subst</span> <span class="n">e2</span> <span class="n">v</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">If</span> <span class="o">(</span><span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">,</span> <span class="n">e3</span><span class="o">)</span> <span class="o">-&gt;</span>
+    <span class="nc">If</span> <span class="o">(</span><span class="n">subst</span> <span class="n">e1</span> <span class="n">v</span> <span class="n">x</span><span class="o">,</span> <span class="n">subst</span> <span class="n">e2</span> <span class="n">v</span> <span class="n">x</span><span class="o">,</span> <span class="n">subst</span> <span class="n">e3</span> <span class="n">v</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-simpl-interpreter-is-done">
+<h2><span class="section-number">9.2.8. </span>The SimPL Interpreter is Done!<a class="headerlink" href="#the-simpl-interpreter-is-done" title="Permalink to this headline">¶</a></h2>
+<p>We’ve completed developing our SimPL interpreter. Recall that the finished
+interpreter can be downloaded here: <a href="../../code/simpl.zip">simpl.zip</a>. It includes some rudimentary test cases, as well as makefile
+targets that you will find helpful.</p>
+</div>
+<div class="section" id="capture-avoiding-substitution">
+<h2><span class="section-number">9.2.9. </span>Capture-Avoiding Substitution<a class="headerlink" href="#capture-avoiding-substitution" title="Permalink to this headline">¶</a></h2>
+<p>The definition of substitution for SimPL was a little tricky but not too
+complicated. It turns out, though, that for other languages, the definition gets
+more complicated.</p>
+<p>Let’s consider this tiny language:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | e1 e2 | fun x -&gt; e
+v ::= fun x -&gt; e
+</pre></div>
+</div>
+<p>It is known as the <em>lambda calculus</em>. There are only three kinds of expressions
+in it: variables, function application, and anonymous functions. The only values
+are anonymous functions. The language isn’t even typed. Yet, one of its most
+remarkable properties is that it <em>computationally universal:</em> it can express any
+computable function. (To learn more about that, read about the <em>Church-Turing
+Hypothesis</em>.)</p>
+<p>Defining a big-step evaluation relation for the lambda calculus is
+straightforward. In fact, there’s only one rule required:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e1 e2 ==&gt; v
+  if e1 ==&gt; fun x -&gt; e
+  and e2 ==&gt; v2
+  and e{v2/x} ==&gt; v
+</pre></div>
+</div>
+<p>That rule is named <em>call by value</em>, because it requires arguments to be reduced
+to a value before a function can be applied. If that seems obvious, it’s because
+you’re used to it from OCaml. Other languages use other rules. For example,
+Haskell uses a variant on <em>call by name</em>, which is this rule:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e1 e2 ==&gt; v
+  if e1 ==&gt; fun x -&gt; e
+  and e{e2/x} ==&gt; v
+</pre></div>
+</div>
+<p>With call by name, <code class="docutils literal notranslate"><span class="pre">e2</span></code> does not have to be reduced to a value; that can lead to
+greater efficiency if the value of <code class="docutils literal notranslate"><span class="pre">e2</span></code> is never needed.</p>
+<p>Now we need to define the substitution operation for the lambda calculus. We’d
+like a definition that works for either call by name or call by value. Inspired
+by our definition for SimPL, here’s the beginning of a definition:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>x{e/x} = e
+y{e/x} = y
+(e1 e2){e/x} = e1{e/x} e2{e/x}
+</pre></div>
+</div>
+<p>The first two lines are exactly how we defined variable substitution in SimPL.
+The next line resembles how we defined binary operator substitution; we just
+recurse into the subexpressions.</p>
+<p>What about substitution in a function? In SimPL, we stopped substituting when we
+reached a bound variable of the same name; otherwise, we proceeded. In the
+lambda calculus, that idea would be stated as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(fun x -&gt; e&#39;){e/x} = fun x -&gt; e&#39;
+(fun y -&gt; e&#39;){e/x} = fun y -&gt; e&#39;{e/x}
+</pre></div>
+</div>
+<p>Perhaps surprisingly, that definition turns out to be incorrect. Here’s why: it
+violates the Principle of Name Irrelevance. Suppose we were attempting this
+substitution:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(fun z -&gt; x){z/x}
+</pre></div>
+</div>
+<p>The result would be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  fun z -&gt; x{z/x}
+= fun z -&gt; z
+</pre></div>
+</div>
+<p>And, suddenly, a function that was <em>not</em> the identity function becomes the
+identity function. Whereas, if we had attempted this substitution:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(fun y -&gt; x){z/x}
+</pre></div>
+</div>
+<p>The result would be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  fun y -&gt; x{z/x}
+= fun y -&gt; z
+</pre></div>
+</div>
+<p>Which is not the identity function. So our definition of substitution inside
+anonymous functions is incorrect, because it <em>captures</em> variables. A variable
+name being substituted inside an anonymous function can accidentally be
+“captured” by the function’s argument name.</p>
+<p>Note that we never had this problem in SimPL, in part because SimPL was typed.
+The function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">z</span></code> if applied to any argument would just return <code class="docutils literal notranslate"><span class="pre">z</span></code>,
+which is an unbound variable. But the lambda calculus is untyped, so we can’t
+rely on typing to rule out this possibility here. Moreover, with rules such as
+call by name, we might well end up needing to evaluate such expressions.</p>
+<p>So the question becomes, how do we define substitution so that it gets the right
+answer, without capturing variables? The answer is called <em>capture-avoiding
+substitution</em>, and a correct definition of it eluded mathematicians for
+centuries.</p>
+<p>A correct definition is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(fun x -&gt; e&#39;){e/x} = fun x -&gt; e&#39;
+(fun y -&gt; e&#39;){e/x} = fun y -&gt; e&#39;{e/x}  if y is not in FV(e)
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">FV(e)</span></code> means the “free variables” of <code class="docutils literal notranslate"><span class="pre">e</span></code>, i.e., the variables
+that are not bound in it, and is defined as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FV(x) = {x}
+FV(e1 e2) = FV(e1) + FV(e2)
+FV(fun x -&gt; e) = FV(e) - {x}
+</pre></div>
+</div>
+<p>and <code class="docutils literal notranslate"><span class="pre">+</span></code> means set union, and <code class="docutils literal notranslate"><span class="pre">-</span></code> means set difference.</p>
+<p>That definition prevents the substitution <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">z</span> <span class="pre">-&gt;</span> <span class="pre">x){z/x}</span></code> from occurring,
+because <code class="docutils literal notranslate"><span class="pre">z</span></code> is in <code class="docutils literal notranslate"><span class="pre">FV(z)</span></code>.</p>
+<p>Unfortunately, because of the side-condition <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">FV(e)</span></code>, the
+substitution operation is now <em>partial</em>: there are times, like the example we
+just gave, where it cannot be applied.</p>
+<p>That problem can be solved by changing the names of variables: if we detect that
+a partiality has been encountered, we can change the name of the function’s
+argument. For example, when <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">z</span> <span class="pre">-&gt;</span> <span class="pre">x){z/x}</span></code> is encountered, the function’s
+argument could be replaced with a new name <code class="docutils literal notranslate"><span class="pre">w</span></code> that doesn’t occur anywhere else,
+yielding <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">w</span> <span class="pre">-&gt;</span> <span class="pre">x){z/x}</span></code>. (And if <code class="docutils literal notranslate"><span class="pre">z</span></code> occurred anywhere in the body, it
+would be replaced by <code class="docutils literal notranslate"><span class="pre">w</span></code>, too.) This is <em>replacement</em>, not substitution:
+absolutely anywhere we see <code class="docutils literal notranslate"><span class="pre">z</span></code>, we replace it with <code class="docutils literal notranslate"><span class="pre">w</span></code>. Then the substitution
+may proceed and correctly produce <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">w</span> <span class="pre">-&gt;</span> <span class="pre">z</span></code>.</p>
+<p>The tricky part of that is how to pick a new name that doesn’t occur anywhere
+else, that is, how to pick a <em>fresh</em> name. Here are three strategies:</p>
+<ol>
+<li><p>Pick a new variable name, check whether is fresh or not, and if not, try
+again, until that succeeds. For example, if trying to replace <code class="docutils literal notranslate"><span class="pre">z</span></code>, you might
+first try <code class="docutils literal notranslate"><span class="pre">z'</span></code>, then <code class="docutils literal notranslate"><span class="pre">z''</span></code>, etc.</p></li>
+<li><p>Augment the evaluation relation to maintain a stream (i.e., infinite list) of
+unused variable names. Each time you need a new one, take the head of the
+stream. But you have to be careful to use the tail of the stream anytime
+after that. To guarantee that they are unused, reserve some variable names
+for use by the interpreter alone, and make them illegal as variable names
+chosen by the programmer. For example, you might decide that programmer
+variable names may never start with the character <code class="docutils literal notranslate"><span class="pre">$</span></code>, then have a stream
+<code class="docutils literal notranslate"><span class="pre">&lt;$x1,</span> <span class="pre">$x2,</span> <span class="pre">$x3,</span> <span class="pre">...&gt;</span></code> of fresh names.</p></li>
+<li><p>Use an imperative counter to simulate the stream from the previous strategy.
+For example, the following function is guaranteed to return a fresh variable
+name each time it is called:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">gensym</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">0</span> <span class="k">in</span>
+  <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">incr</span> <span class="n">counter</span><span class="o">;</span> <span class="s2">&quot;$x&quot;</span> <span class="o">^</span> <span class="n">string_of_int</span> <span class="o">!</span><span class="n">counter</span>
+</pre></div>
+</div>
+<p>The name <code class="docutils literal notranslate"><span class="pre">gensym</span></code> is traditional for this kind of function. It comes from
+LISP, and shows up throughout compiler implementations. It means
+<u>gen</u>erate a fresh <u>sym</u>bol.</p>
+</li>
+</ol>
+<p>There is a complete implementation of an interpreter for the lambda calculus,
+including capture-avoiding substitution, that you can download: <a href="../../code/lambda-subst.zip">lambda-subst.zip</a>. It uses the <code class="docutils literal notranslate"><span class="pre">gensym</span></code> strategy from
+above the generate fresh names. There is a definition named <code class="docutils literal notranslate"><span class="pre">strategy</span></code> in
+<code class="docutils literal notranslate"><span class="pre">main.ml</span></code> that you can use to switch between call-by-value and call-by-name.</p>
+</div>
+<div class="section" id="core-ocaml">
+<h2><span class="section-number">9.2.10. </span>Core OCaml<a class="headerlink" href="#core-ocaml" title="Permalink to this headline">¶</a></h2>
+<p>Let’s now upgrade from SimPL and the lambda calculus to a larger language that
+we call <em>core OCaml</em>. Here is its syntax in BNF:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | e1 e2 | fun x -&gt; e
+    | i | b | e1 bop e2
+    | (e1, e2) | fst e | snd e
+    | Left e | Right e
+    | match e with Left x1 -&gt; e1 | Right x2 -&gt; e2
+    | if e1 then e2 else e3
+    | let x = e1 in e2
+
+bop ::= + | * | &lt; | =
+
+x ::= &lt;identifiers&gt;
+
+i ::= &lt;integers&gt;
+
+b ::= true | false
+
+v ::= fun x -&gt; e | i | b | (v1, v2) | Left v | Right v
+</pre></div>
+</div>
+<p>To keep tuples simple in this core model, we represent them with only two
+components (i.e., they are pairs). A longer tuple could be coded up with nested
+pairs. For example, <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code> in OCaml could be <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">(2,</span> <span class="pre">3))</span></code> in this core
+language.</p>
+<p>Also to keep variant types simple in this core model, we represent them with
+only two constructors, which we name <code class="docutils literal notranslate"><span class="pre">Left</span></code> and <code class="docutils literal notranslate"><span class="pre">Right</span></code>. A variant with more
+constructors could be coded up with nested applications of those two
+constructors. Since we have only two constructors, match expressions need only
+two branches. One caution in reading the BNF above: the occurrence of <code class="docutils literal notranslate"><span class="pre">|</span></code> in the
+match expression just before the <code class="docutils literal notranslate"><span class="pre">Right</span></code> constructor denotes syntax, not
+metasyntax.</p>
+<p>There are a few important OCaml constructs omitted from this core language,
+including recursive functions, exceptions, mutability, and modules. Types are
+also missing; core OCaml does not have any type checking. Nonetheless, there is
+enough in this core language to keep us entertained.</p>
+</div>
+<div class="section" id="evaluating-core-ocaml-in-the-substitution-model">
+<h2><span class="section-number">9.2.11. </span>Evaluating Core OCaml in the Substitution Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-substitution-model" title="Permalink to this headline">¶</a></h2>
+<p>Let’s define the small and big step relations for Core OCaml. To be honest,
+there won’t be much that’s surprising at this point; we’ve seen just about
+everything already in SimPL and in the lambda calculus.</p>
+<p><strong>Small-Step Relation.</strong> Here is the fragment of Core OCaml we already know from
+SimPL:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e1 + e2 --&gt; e1&#39; + e2
+	if e1 --&gt; e1&#39;
+
+v1 + e2 --&gt; v1 + e2&#39;
+	if e2 --&gt; e2&#39;
+
+i1 + i2 --&gt; i3
+	where i3 is the result of applying primitive operation +
+	to i1 and i2
+
+if e1 then e2 else e3 --&gt; if e1&#39; then e2 else e3
+	if e1 --&gt; e1&#39;
+
+if true then e2 else e3 --&gt; e2
+
+if false then e2 else e3 --&gt; e3
+
+let x = e1 in e2 --&gt; let x = e1&#39; in e2
+	if e1 --&gt; e1&#39;
+
+let x = v in e2 --&gt; e2{v/x}
+</pre></div>
+</div>
+<p>Here’s the fragment of Core OCaml that corresponds to the lambda calculus:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e1 e2 --&gt; e1&#39; e2
+	if e1 --&gt; e1&#39;
+
+v1 e2 --&gt; v1 e2&#39;
+	if e2 --&gt; e2&#39;
+
+(fun x -&gt; e) v2 --&gt; e{v2/x}
+</pre></div>
+</div>
+<p>And here are the new parts of Core OCaml. First, <strong>pairs</strong> evaluate their first
+component, then their second component:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(e1, e2) --&gt; (e1&#39;, e2)
+	if e1 --&gt; e1&#39;
+
+(v1, e2) --&gt; (v1, e2&#39;)
+	if e2 --&gt; e2&#39;
+
+fst (v1,v2) --&gt; v1
+
+snd (v1,v2) --&gt; v2
+</pre></div>
+</div>
+<p><strong>Constructors</strong> evaluate the expression they carry:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Left e --&gt; Left e&#39;
+	if e --&gt; e&#39;
+
+Right e --&gt; Right e&#39;
+	if e --&gt; e&#39;
+</pre></div>
+</div>
+<p><strong>Pattern matching</strong> evaluates the expression being matched, then reduces to one
+of the branches:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>match e with Left x1 -&gt; e1 | Right x2 -&gt; e2
+--&gt; match e&#39; with Left x1 -&gt; e1 | Right x2 -&gt; e2
+	if e --&gt; e&#39;
+
+match Left v with Left x1 -&gt; e1 | Right x2 -&gt; e2
+--&gt; e1{v/x1}
+
+match Right v with Left x1 -&gt; e1 | Right x2 -&gt; e2
+--&gt; e2{v/x2}
+</pre></div>
+</div>
+<p><strong>Substitution.</strong> We also need to define the substitution operation for Core
+OCaml. Here is what we already know from SimPL and the lambda calculus:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>i{v/x} = i
+
+b{v/x} = b
+
+(e1 + e2) {v/x} = e1{v/x} + e2{v/x}
+
+(if e1 then e2 else e3){v/x}
+ = if e1{v/x} then e2{v/x} else e3{v/x}
+
+(let x = e1 in e2){v/x} = let x = e1{v/x} in e2
+
+(let y = e1 in e2){v/x} = let y = e1{v/x} in e2{v/x}
+  if y not in FV(v)
+
+x{v/x} = v
+
+y{v/x} = y
+
+(e1 e2){v/x} = e1{v/x} e2{v/x}
+
+(fun x -&gt; e&#39;){v/x} = (fun x -&gt; e&#39;)
+
+(fun y -&gt; e&#39;){v/x} = (fun y -&gt; e&#39;{v/x})
+  if y not in FV(v)
+</pre></div>
+</div>
+<p>Note that we’ve now added the requirement of capture-avoiding substitution to
+the definitions for <code class="docutils literal notranslate"><span class="pre">let</span></code> and <code class="docutils literal notranslate"><span class="pre">fun</span></code>: they both require <code class="docutils literal notranslate"><span class="pre">y</span></code> not to be in the free
+variables of <code class="docutils literal notranslate"><span class="pre">v</span></code>. We therefore need to define the free variables of an
+expression:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FV(x) = {x}
+FV(e1 e2) = FV(e1) + FV(e2)
+FV(fun x -&gt; e) = FV(e) - {x}
+FV(i) = {}
+FV(b) = {}
+FV(e1 bop e2) = FV(e1) + FV(e2)
+FV((e1,e2)) = FV(e1) + FV(e2)
+FV(fst e1) = FV(e1)
+FV(snd e2) = FV(e2)
+FV(Left e) = FV(e)
+FV(Right e) = FV(e)
+FV(match e with Left x1 -&gt; e1 | Right x2 -&gt; e2)
+ = FV(e) + (FV(e1) - {x1}) + (FV(e2) - {x2})
+FV(if e1 then e2 else e3) = FV(e1) + FV(e2) + FV(e3)
+FV(let x = e1 in e2) = FV(e1) + (FV(e2) - {x})
+</pre></div>
+</div>
+<p>Finally, we define substitution for the new syntactic forms in Core OCaml.
+Expressions that do not bind variables are easy to handle:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(e1,e2){v/x} = (e1{v/x}, e2{v/x})
+
+(fst e){v/x} = fst (e{v/x})
+
+(snd e){v/x} = snd (e{v/x})
+
+(Left e){v/x} = Left (e{v/x})
+
+(Right e){v/x} = Right (e{v/x})
+</pre></div>
+</div>
+<p>Match expressions take a little more work, just like let expressions and
+anonymous functions, to make sure we get capture-avoidance correct:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(match e with Left x1 -&gt; e1 | Right x2 -&gt; e2){v/x}
+ = match e{v/x} with Left x1 -&gt; e1{v/x} | Right x2 -&gt; e2{v/x}
+     if ({x1,x2} intersect FV(v)) = {}
+
+(match e with Left x -&gt; e1 | Right x2 -&gt; e2){v/x}
+ = match e{v/x} with Left x -&gt; e1 | Right x2 -&gt; e2{v/x}
+     if ({x2} intersect FV(v)) = {}
+
+(match e with Left x1 -&gt; e1 | Right x -&gt; e2){v/x}
+ = match e{v/x} with Left x1 -&gt; e1{v/x} | Right x -&gt; e2
+      if ({x1} intersect FV(v)) = {}
+
+(match e with Left x -&gt; e1 | Right x -&gt; e2){v/x}
+ = match e{v/x} with Left x -&gt; e1 | Right x -&gt; e2
+</pre></div>
+</div>
+<p>We wouldn’t actually have to worry about capture-avoiding substitution in all
+the above rules as long as we are content with call-by-value semantics. But if
+we ever wanted call-by-name, we’d need all the extra conditions about free
+variables that we gave above.</p>
+</div>
+<div class="section" id="big-step-relation">
+<h2><span class="section-number">9.2.12. </span>Big-Step Relation<a class="headerlink" href="#big-step-relation" title="Permalink to this headline">¶</a></h2>
+<p>At this point there aren’t any new concepts remaining to introduce.
+We can just give the rules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e1</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
+  <span class="k">if</span> <span class="n">e1</span> <span class="o">==&gt;</span> <span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">e</span>
+  <span class="ow">and</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v2</span>
+  <span class="ow">and</span> <span class="n">e</span><span class="p">{</span><span class="n">v2</span><span class="o">/</span><span class="n">x</span><span class="p">}</span> <span class="o">==&gt;</span> <span class="n">v</span>
+
+<span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">e</span>
+
+<span class="n">i</span> <span class="o">==&gt;</span> <span class="n">i</span>
+
+<span class="n">b</span> <span class="o">==&gt;</span> <span class="n">b</span>
+
+<span class="n">e1</span> <span class="n">bop</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
+  <span class="k">if</span> <span class="n">e1</span> <span class="o">==&gt;</span> <span class="n">v1</span>
+  <span class="ow">and</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v2</span>
+  <span class="ow">and</span> <span class="n">v</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">result</span> <span class="n">of</span> <span class="n">primitive</span> <span class="n">operation</span> <span class="n">v1</span> <span class="n">bop</span> <span class="n">v2</span>
+
+<span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">)</span> <span class="o">==&gt;</span> <span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">e1</span> <span class="o">==&gt;</span> <span class="n">v1</span>
+  <span class="ow">and</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v2</span>
+
+<span class="n">fst</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">v1</span>
+  <span class="k">if</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+
+<span class="n">snd</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">v2</span>
+  <span class="k">if</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+
+<span class="n">Left</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">Left</span> <span class="n">v</span>
+  <span class="k">if</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">v</span>
+
+<span class="n">Right</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">Right</span> <span class="n">v</span>
+  <span class="k">if</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">v</span>
+
+<span class="n">match</span> <span class="n">e</span> <span class="k">with</span> <span class="n">Left</span> <span class="n">x1</span> <span class="o">-&gt;</span> <span class="n">e1</span> <span class="o">|</span> <span class="n">Right</span> <span class="n">x2</span> <span class="o">-&gt;</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
+  <span class="k">if</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">Left</span> <span class="n">v1</span>
+  <span class="ow">and</span> <span class="n">e1</span><span class="p">{</span><span class="n">v1</span><span class="o">/</span><span class="n">x1</span><span class="p">}</span> <span class="o">==&gt;</span> <span class="n">v</span>
+
+<span class="n">match</span> <span class="n">e</span> <span class="k">with</span> <span class="n">Left</span> <span class="n">x1</span> <span class="o">-&gt;</span> <span class="n">e1</span> <span class="o">|</span> <span class="n">Right</span> <span class="n">x2</span> <span class="o">-&gt;</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
+  <span class="k">if</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">Right</span> <span class="n">v2</span>
+  <span class="ow">and</span> <span class="n">e2</span><span class="p">{</span><span class="n">v2</span><span class="o">/</span><span class="n">x2</span><span class="p">}</span> <span class="o">==&gt;</span> <span class="n">v</span>
+
+<span class="k">if</span> <span class="n">e1</span> <span class="n">then</span> <span class="n">e2</span> <span class="k">else</span> <span class="n">e3</span> <span class="o">==&gt;</span> <span class="n">v</span>
+  <span class="k">if</span> <span class="n">e1</span> <span class="o">==&gt;</span> <span class="n">true</span>
+  <span class="ow">and</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
+
+<span class="k">if</span> <span class="n">e1</span> <span class="n">then</span> <span class="n">e2</span> <span class="k">else</span> <span class="n">e3</span> <span class="o">==&gt;</span> <span class="n">v</span>
+  <span class="k">if</span> <span class="n">e1</span> <span class="o">==&gt;</span> <span class="n">false</span>
+  <span class="ow">and</span> <span class="n">e3</span> <span class="o">==&gt;</span> <span class="n">v</span>
+
+<span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">e1</span> <span class="ow">in</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
+  <span class="k">if</span> <span class="n">e1</span> <span class="o">==&gt;</span> <span class="n">v1</span>
+  <span class="ow">and</span> <span class="n">e2</span><span class="p">{</span><span class="n">v1</span><span class="o">/</span><span class="n">x</span><span class="p">}</span> <span class="o">==&gt;</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/interp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="parsing.html" title="previous page"><span class="section-number">9.1. </span>Parsing</a>
+    <a class='right-next' id="next-link" href="environment.html" title="next page"><span class="section-number">9.3. </span>Environment Model</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

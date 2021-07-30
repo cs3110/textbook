@@ -1,0 +1,1346 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.7. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Big-Oh Notation" href="../appendix/bigoh.html" />
+    <link rel="prev" title="9.6. Summary" href="summary.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/intro.html">
+   8. Data Structures
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/amortized.html">
+     8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/sequence.html">
+     8.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/memoization.html">
+     8.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/promises.html">
+     8.6. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/monads.html">
+     8.7. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/summary.html">
+     8.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/exercises.html">
+     8.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Language Implementation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   9. Interpreters
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="parsing.html">
+     9.1. Parsing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="substitution.html">
+     9.2. Substitution Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="environment.html">
+     9.3. Environment Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="typecheck.html">
+     9.4. Type Checking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="inference.html">
+     9.5. Type Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     9.6. Summary
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.7. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/interp/exercises.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/exercises.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/interp/exercises.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="exercises">
+<h1><span class="section-number">9.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
+<p>Solutions to exercises are available to students in Cornell’s CS 3110.
+Instructors at other institutions are welcome to contact Michael Clarkson
+for access.</p>
+<p>Many of these exercises rely on the SimPL interpreter as starter code. You can
+download it here: <a href="../../code/simpl.zip">simpl.zip</a>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: parse [★]</strong></p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">make</span></code> in the SimPL interpreter implementation. It will compile the
+interpreter and launch utop. Evaluate the following expressions. Note what each
+returns.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;22&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;1+2+3&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">in</span> <span class="pre">20+x&quot;</span></code></p></li>
+</ul>
+<p>Also evaluate these expressions, which will raise exceptions.  Explain why
+each one is an error, and whether the error occurs during parsing or lexing.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;3.14&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;3+&quot;</span></code></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: <a class="reference external" href="http://parser.ml">parser.ml</a> and <a class="reference external" href="http://lexer.ml">lexer.ml</a> [★]</strong></p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">_build/parser.ml</span></code>, which is the module generated automatically by menhir
+from <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code>. Skim through the file to appreciate not having to write the
+parser yourself.</p>
+<p>Also open <code class="docutils literal notranslate"><span class="pre">_build/lexer.ml</span></code>, which is the module generated automatically by
+ocamllex from <code class="docutils literal notranslate"><span class="pre">lexer.mll</span></code>. Skim through the file to appreciate not having to
+write the lexer yourself.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: simpl ids [★★]</strong></p>
+<p>Examine the definition of the <code class="docutils literal notranslate"><span class="pre">id</span></code> regular expression in the SimPL lexer.
+Identify at least one way in which it differs from the definition of OCaml
+identifiers.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: times parsing [★★]</strong></p>
+<p>In the SimPL parser, the <code class="docutils literal notranslate"><span class="pre">TIMES</span></code> token is declared as having higher precedence
+than <code class="docutils literal notranslate"><span class="pre">PLUS</span></code>, and as being left associative. Let’s experiment with other choices.</p>
+<ul class="simple">
+<li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;1*2*3&quot;</span></code>. Note the AST. Now change the declaration of the
+associativity of <code class="docutils literal notranslate"><span class="pre">TIMES</span></code> in <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code> to be <code class="docutils literal notranslate"><span class="pre">%right</span></code> instead of <code class="docutils literal notranslate"><span class="pre">%left</span></code>.
+Recompile and reevaluate <code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;1*2*3&quot;</span></code>. How did the AST change? Before
+moving on, restore the declaration to be <code class="docutils literal notranslate"><span class="pre">%left</span></code>.</p></li>
+<li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;1+2*3&quot;</span></code>. Note the AST. Now swap the declaration <code class="docutils literal notranslate"><span class="pre">%left</span> <span class="pre">TIMES</span></code>
+in <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code> with the declaration <code class="docutils literal notranslate"><span class="pre">%left</span> <span class="pre">PLUS</span></code>. Recompile and reevaluate
+<code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;1+2*3&quot;</span></code>. How did the AST change? Before moving on, restore the
+original declaration order.</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: infer [★★]</strong></p>
+<p>Type inference for SimPL can be done in a much simpler way than for the larger
+language (with anonymous functions and let expression) that we considered in the
+section on type inference.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">make</span></code> in the SimPL interpreter implementation. It will compile the
+interpreter and launch utop. Now, define a function <code class="docutils literal notranslate"><span class="pre">infer</span> <span class="pre">:</span> <span class="pre">string</span> <span class="pre">-&gt;</span> <span class="pre">typ</span></code> such
+that <code class="docutils literal notranslate"><span class="pre">infer</span> <span class="pre">s</span></code> parses <code class="docutils literal notranslate"><span class="pre">s</span></code> into an expression and infers the type of <code class="docutils literal notranslate"><span class="pre">s</span></code> in the
+empty context. Your solution will make use of the <code class="docutils literal notranslate"><span class="pre">typeof</span></code> function. You don’t
+need constraint collection or unification.</p>
+<p>Try out your <code class="docutils literal notranslate"><span class="pre">infer</span></code> function on these test cases:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;3110&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;1</span> <span class="pre">&lt;=</span> <span class="pre">2&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">in</span> <span class="pre">20</span> <span class="pre">+</span> <span class="pre">x&quot;</span></code></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: subexpression types [★★]</strong></p>
+<p>Suppose that a SimPL expression is well typed in a context <code class="docutils literal notranslate"><span class="pre">ctx</span></code>. Are all of its
+subexpressions also well typed in <code class="docutils literal notranslate"><span class="pre">ctx</span></code>? For every subexpression, does there
+exist some context in which the subexpression is well typed? Why or why not?</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: typing [★★]</strong></p>
+<p>Use the SimPL type system to show that
+<code class="docutils literal notranslate"><span class="pre">{}</span> <span class="pre">|-</span> <span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">in</span> <span class="pre">if</span> <span class="pre">x</span> <span class="pre">&lt;=</span> <span class="pre">1</span> <span class="pre">then</span> <span class="pre">22</span> <span class="pre">else</span> <span class="pre">42</span> <span class="pre">:</span> <span class="pre">int</span></code>.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: substitution [★★]</strong></p>
+<p>What is the result of the following substitutions?</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">+</span> <span class="pre">1){2/x}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">+</span> <span class="pre">y){2/x}{3/y}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">+</span> <span class="pre">y){1/z}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1){2/x}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">+</span> <span class="pre">(let</span> <span class="pre">x=1</span> <span class="pre">in</span> <span class="pre">x+1)){2/x}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">((let</span> <span class="pre">x=1</span> <span class="pre">in</span> <span class="pre">x+1)</span> <span class="pre">+</span> <span class="pre">x){2/x}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(let</span> <span class="pre">x=y</span> <span class="pre">in</span> <span class="pre">x+1){2/y}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(let</span> <span class="pre">x=x</span> <span class="pre">in</span> <span class="pre">x+1){2/x}</span></code></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: step expressions [★]</strong></p>
+<p>Here is an example of evaluating an expression:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  7+5*2
+--&gt;  (step * operation)
+  7+10
+--&gt;  (step + operation)
+  17
+</pre></div>
+</div>
+<p>There are two steps in that example, and we’ve annotated each step with a
+parenthetical comment to hint at which evaluation rule we’ve used. We stopped
+evaluating when we reached a value.</p>
+<p>Evaluate the following expressions using the small-step substitution model. Use
+the “long form” of evaluation that we demonstrated above, in which you provide a
+hint as to which rule is applied at each step.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(3</span> <span class="pre">+</span> <span class="pre">5)</span> <span class="pre">*</span> <span class="pre">2</span></code> (2 steps)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span> <span class="pre">&lt;=</span> <span class="pre">4</span> <span class="pre">then</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">else</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span></code> (4 steps)</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: step let expressions [★★]</strong></p>
+<p>Evaluate these expressions, again using the “long form” from the previous
+exercise.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">in</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x</span></code> (3 steps)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">5</span> <span class="pre">in</span> <span class="pre">((let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">6</span> <span class="pre">in</span> <span class="pre">x)</span> <span class="pre">+</span> <span class="pre">x)</span></code> (3 steps)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">(let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x)</span></code> (4 steps)</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: variants [★]</strong></p>
+<p>Evaluate these Core OCaml expressions using the small-step substitution model:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Left</span> <span class="pre">(1+2)</span></code> (1 step)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">match</span> <span class="pre">Left</span> <span class="pre">42</span> <span class="pre">with</span> <span class="pre">Left</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x+1</span> <span class="pre">|</span> <span class="pre">Right</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">y-1</span></code> (2 steps)</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: application [★★]</strong></p>
+<p>Evaluate these Core OCaml expressions using the small-step substitution model:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">3</span> <span class="pre">+</span> <span class="pre">x)</span> <span class="pre">2</span></code> (2 steps)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">f</span> <span class="pre">=</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x)</span> <span class="pre">in</span> <span class="pre">(f</span> <span class="pre">3)</span> <span class="pre">+</span> <span class="pre">(f</span> <span class="pre">3)</span></code> (6 steps)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">f</span> <span class="pre">=</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">let</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">f</span> <span class="pre">y</span> <span class="pre">in</span> <span class="pre">g</span> <span class="pre">3</span></code> (7 steps)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">f</span> <span class="pre">=</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y)</span> <span class="pre">in</span> <span class="pre">let</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">3</span> <span class="pre">in</span> <span class="pre">(g</span> <span class="pre">1)</span> <span class="pre">+</span> <span class="pre">(f</span> <span class="pre">2</span> <span class="pre">3)</span></code> (9 steps)</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: omega [★★★]</strong></p>
+<p>Try evaluating <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">x)</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">x)</span></code>. This expression, which is
+usually called <span class="math notranslate nohighlight">\(\Omega\)</span>, doesn’t type check in real OCaml, but we can still use
+the Core OCaml small-step semantics on it.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: pair parsing [★★★]</strong></p>
+<p>Add pairs (i.e., tuples with exactly two components) to SimPL. Implement lexing
+and parsing of pairs. Assume that the parentheses around the pair are required
+(not optional, as they sometimes are in OCaml). Follow this strategy:</p>
+<ul class="simple">
+<li><p>Add a constructor for pairs to the <code class="docutils literal notranslate"><span class="pre">expr</span></code> type.</p></li>
+<li><p>Add a comma token to the parser.</p></li>
+<li><p>Implement lexing the comma token.</p></li>
+<li><p>Implement parsing of pairs.</p></li>
+</ul>
+<p>When you compile, you will get some inexhaustive pattern match warnings, because
+you have not yet implemented type checking nor interpretation of pairs. But you
+can still try parsing them in utop with the <code class="docutils literal notranslate"><span class="pre">parse</span></code> function.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: pair type checking [★★★]</strong></p>
+<p>Implement type checking of pairs.  Follow this strategy:</p>
+<ul class="simple">
+<li><p>Write down a new typing rule before implementing any code.</p></li>
+<li><p>Add a new constructor for pairs to the <code class="docutils literal notranslate"><span class="pre">typ</span></code> type.</p></li>
+<li><p>Add a new branch to <code class="docutils literal notranslate"><span class="pre">typeof</span></code>.</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: pair evaluation [★★★]</strong></p>
+<p>Implement evaluation of pairs.  Follow this strategy:</p>
+<ul class="simple">
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">is_value</span></code> for pairs. A pair of values (e.g., <code class="docutils literal notranslate"><span class="pre">(0,1)</span></code>) is itself a
+value, so the function will need to become recursive.</p></li>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">subst</span></code> for pairs:  <code class="docutils literal notranslate"><span class="pre">(e1,</span> <span class="pre">e2){v/x}</span> <span class="pre">=</span> <span class="pre">(e1{v/x},</span> <span class="pre">e2{v/x})</span></code>.</p></li>
+<li><p>Implement small-step and big-step evaluation of pairs, using these rules:</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(e1, e2) --&gt; (e1&#39;, e2)
+  if e1 --&gt; e1&#39;
+
+(v1, e2) --&gt; (v1, e2&#39;)
+  if e2 --&gt; e2&#39;
+
+(e1, e2) ==&gt; (v1, v2)
+  if e1 ==&gt; v1
+  and e2 ==&gt; v2
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: desugar list [★]</strong></p>
+<p>Suppose we treat list expressions like syntactic sugar in the following way:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code> is syntactic sugar for <code class="docutils literal notranslate"><span class="pre">Left</span> <span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">::</span> <span class="pre">e2</span></code> is syntactic sugar for <code class="docutils literal notranslate"><span class="pre">Right</span> <span class="pre">(e1,</span> <span class="pre">e2)</span></code>.</p></li>
+</ul>
+<p>What is the core OCaml expression to which <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3]</span></code> desugars?</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: list not empty [★★]</strong></p>
+<p>Write a core OCaml function <code class="docutils literal notranslate"><span class="pre">not_empty</span></code> that returns <code class="docutils literal notranslate"><span class="pre">1</span></code> if a list is non-empty
+and <code class="docutils literal notranslate"><span class="pre">0</span></code> if the list is empty. Use the substitution model to check that your
+function behaves properly on these test cases:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">not_empty</span> <span class="pre">[]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">not_empty</span> <span class="pre">[1]</span></code></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: list not empty [★★★★]</strong></p>
+<p>In core OCaml, there are only two patterns: <code class="docutils literal notranslate"><span class="pre">Left</span> <span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">Right</span> <span class="pre">x</span></code>,
+where <code class="docutils literal notranslate"><span class="pre">x</span></code> is a variable name.  But in full OCaml, patterns are far more
+general. Let’s see how far we can generalize patterns in core OCaml.</p>
+<p><strong>Step 1:</strong> Here is a BNF grammar for patterns, and slightly revised
+BNF grammar for expressions:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p ::= i | (p1, p2) | Left p | Right p | x | _
+
+e ::= ...
+    | match e with | p1 -&gt; e1 | p2 -&gt; e2 | ... | pn -&gt; en
+</pre></div>
+</div>
+<p>In the revised syntax for <code class="docutils literal notranslate"><span class="pre">match</span></code>, only the very first <code class="docutils literal notranslate"><span class="pre">|</span></code> on the line,
+immediately before the keyword <code class="docutils literal notranslate"><span class="pre">match</span></code>, is meta-syntax.  The remaining
+four <code class="docutils literal notranslate"><span class="pre">|</span></code> on the line are syntax.  Note that we require <code class="docutils literal notranslate"><span class="pre">|</span></code> before the
+first pattern.</p>
+<p><strong>Step 2:</strong> A value <code class="docutils literal notranslate"><span class="pre">v</span></code> matches a pattern <code class="docutils literal notranslate"><span class="pre">p</span></code> if by substituting any
+variables or wildcards in <code class="docutils literal notranslate"><span class="pre">p</span></code> with values, we can obtain exactly <code class="docutils literal notranslate"><span class="pre">v</span></code>.
+For example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> matches <code class="docutils literal notranslate"><span class="pre">x</span></code> because <code class="docutils literal notranslate"><span class="pre">x{2/x}</span></code> is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Right(0,Left</span> <span class="pre">0)</span></code> matches <code class="docutils literal notranslate"><span class="pre">Right(x,_)</span></code> because
+<code class="docutils literal notranslate"><span class="pre">Right(x,_){0/x}{Left</span> <span class="pre">0/_}</span></code> is <code class="docutils literal notranslate"><span class="pre">Right(0,Left</span> <span class="pre">0)</span></code>.</p></li>
+</ul>
+<p>Let’s define a new ternary relation called <code class="docutils literal notranslate"><span class="pre">matches</span></code>, guided by those
+examples:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>v =~ p // s
+</pre></div>
+</div>
+<p>Pronounce this relation as “<code class="docutils literal notranslate"><span class="pre">v</span></code> matches <code class="docutils literal notranslate"><span class="pre">p</span></code> producing substitutions <code class="docutils literal notranslate"><span class="pre">s</span></code>.”</p>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">s</span></code> is a sequence of substitutions, such as <code class="docutils literal notranslate"><span class="pre">{0/x}{Left</span> <span class="pre">3/y}{(1,2)/z}</span></code>.
+There is just a single rule for this relation:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>v =~ p // s
+  if v = p s
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>2 =~ x // {2/x}
+  because 2 = x{2/x}
+</pre></div>
+</div>
+<p><strong>Step 3:</strong> To evaluate a match expression:</p>
+<ul class="simple">
+<li><p>Evaluate the expression being matched to a value.</p></li>
+<li><p>If that expression matches the first pattern, evaluate the expression
+corresponding to that pattern.</p></li>
+<li><p>Otherwise, match against the second pattern, the third, etc.</p></li>
+<li><p>If none of the patterns matches, evaluation is <em>stuck</em>: it cannot take any
+more steps.</p></li>
+</ul>
+<p>Using those insights, complete the following evaluation rules
+by filling in the places marked with <code class="docutils literal notranslate"><span class="pre">???</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(* This rule should implement evaluation of e. *)
+match e with | p1 -&gt; e1 | p2 -&gt; e2 | ... | pn -&gt; en
+--&gt; ???
+  if ???
+
+(* This rule implements moving past p1 to the next pattern. *)
+match v with | p1 -&gt; e1 | p2 -&gt; e2 | ... | pn -&gt; en
+--&gt; match v with | p2 -&gt; e2 | ... | pn -&gt; en
+  if there does not exist an s such that ???
+
+(* This rule implements matching v with p1 then proceeding to evaluate e1. *)
+match v with | p1 -&gt; e1 | p2 -&gt; e2 | ... | pn -&gt; en
+--&gt; ??? (* something involving e1 *)
+  if ???
+</pre></div>
+</div>
+<p>Note that we don’t need to write the following rule explicitly:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>match v with |  -/-&gt;
+</pre></div>
+</div>
+<p>Evaluation will get stuck at that point because none of the three other
+rules above will apply.</p>
+<p><strong>Step 4:</strong> Double check your rules by evaluating the following
+expression:</p>
+<p><code class="docutils literal notranslate"><span class="pre">match</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">2,</span> <span class="pre">3)</span> <span class="pre">with</span> <span class="pre">|</span> <span class="pre">(1,0)</span> <span class="pre">-&gt;</span> <span class="pre">4</span> <span class="pre">|</span> <span class="pre">(1,x)</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">|</span> <span class="pre">(x,y)</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code></p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: let rec [★★★★]</strong></p>
+<p>One of the evaluation rules for <code class="docutils literal notranslate"><span class="pre">let</span></code> is</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = v in e --&gt; e{v/x}
+</pre></div>
+</div>
+<p>We could try adapting that to <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">rec</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let rec x = v in e --&gt; e{v/x}   (* broken *)
+</pre></div>
+</div>
+<p>But that rule doesn’t work properly, as we see in the following example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  let rec fact = fun x -&gt;
+	if x &lt;= 1 then 1 else x * (fact (x - 1)) in
+  fact 3
+
+--&gt;
+
+  (fun x -&gt; if x &lt;= 1 then 1 else x * (fact (x - 1)) 3
+
+--&gt;
+
+  if 3 &lt;= 1 then 1 else 3 * (fact (3 - 1))
+
+--&gt;
+
+  3 * (fact (3 - 1))
+
+--&gt;
+
+  3 * (fact 2)
+
+-/-&gt;
+</pre></div>
+</div>
+<p>We’re now stuck, because we need to evaluate <code class="docutils literal notranslate"><span class="pre">fact</span></code>, but it doesn’t step. In
+essence, the semantic rule we used “forgot” the function value that should have
+been associated with <code class="docutils literal notranslate"><span class="pre">fact</span></code>.</p>
+<p>A good way to fix this problem is to introduce a new language construct for
+recursion called simply <code class="docutils literal notranslate"><span class="pre">rec</span></code>. (Note that OCaml does not have any construct that
+corresponds directly to <code class="docutils literal notranslate"><span class="pre">rec</span></code>.) Formally, we extend the syntax for expressions
+as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= ...
+    | rec f -&gt; e
+</pre></div>
+</div>
+<p>and add the following evaluation rule:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>rec f -&gt; e  --&gt;  e{(rec f -&gt; e)/f}
+</pre></div>
+</div>
+<p>The intuitive reading of this rule is that when evaluating
+<code class="docutils literal notranslate"><span class="pre">rec</span> <span class="pre">f</span> <span class="pre">-&gt;</span> <span class="pre">e</span></code>, we “unfold” <code class="docutils literal notranslate"><span class="pre">f</span></code> in the body of <code class="docutils literal notranslate"><span class="pre">e</span></code>.  For example,
+here is an infinite loop coded with <code class="docutils literal notranslate"><span class="pre">rec</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  rec f -&gt; f
+
+--&gt;  (* step rec *)
+
+  f{(rec f -&gt; f)/f}
+
+= (* substitute *)
+
+  rec f -&gt; f
+
+--&gt; (* step rec *)
+
+  f{(rec f -&gt; f)/f}
+
+...
+</pre></div>
+</div>
+<p>Now we can use <code class="docutils literal notranslate"><span class="pre">rec</span></code> to implement <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">rec</span></code>. Anywhere <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">rec</span></code> appears in a
+program:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">f</span> <span class="o">=</span> <span class="n">e1</span> <span class="k">in</span> <span class="n">e2</span>
+</pre></div>
+</div>
+<p>we <em>desugar</em> (i.e., rewrite) it to</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">rec</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">e1</span> <span class="k">in</span> <span class="n">e2</span>
+</pre></div>
+</div>
+<p>Note that the second occurrence of <code class="docutils literal notranslate"><span class="pre">f</span></code> (inside the <code class="docutils literal notranslate"><span class="pre">rec</span></code>) shadows the first one.
+Going back to the <code class="docutils literal notranslate"><span class="pre">fact</span></code> example, its desugared version is</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fact</span> <span class="o">=</span> <span class="k">rec</span> <span class="n">fact</span> <span class="o">-&gt;</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span>
+  <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">x</span> <span class="o">*</span> <span class="o">(</span><span class="n">fact</span> <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="o">))</span> <span class="k">in</span>
+<span class="n">fact</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>Evaluate the following expression (17 steps, we think, though it does get pretty
+tedious). You may want to simplify your life by writing “F” in place of
+<code class="docutils literal notranslate"><span class="pre">(rec</span> <span class="pre">fact</span> <span class="pre">-&gt;</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">if</span> <span class="pre">x</span> <span class="pre">&lt;=</span> <span class="pre">1</span> <span class="pre">then</span> <span class="pre">1</span> <span class="pre">else</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">(fact</span> <span class="pre">(x-1)))</span></code></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let rec fact = fun x -&gt;
+  if x &lt;= 1 then 1 else x * (fact (x - 1)) in
+fact 3
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: simple expressions [★]</strong></p>
+<p>In the small-step substitution model, evaluation of an expression was rather
+<em>list-like</em>: we could write an evaluation in a linear form like
+<code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">--&gt;</span> <span class="pre">e1</span> <span class="pre">--&gt;</span> <span class="pre">e2</span> <span class="pre">--&gt;</span> <span class="pre">...</span> <span class="pre">--&gt;</span> <span class="pre">en</span> <span class="pre">--&gt;</span> <span class="pre">v</span></code>. In the big-step environment model,
+evaluation is instead rather <em>tree-like</em>: evaluations have a nested, recursive
+structure. Here’s an example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;{}, (3 + 5) * 2&gt; ==&gt; 16          (op rule)
+    because &lt;{}, (3 + 5)&gt; ==&gt; 8   (op rule)
+        because &lt;{},3&gt; ==&gt; 3      (int const rule)
+        and     &lt;{},5&gt; ==&gt; 5      (int const rule)
+        and 3+5 is 8
+    and &lt;{}, 2&gt; ==&gt; 2             (int const rule)
+    and 8*2 is 16
+</pre></div>
+</div>
+<p>We’ve used indentation here to show the shape of the tree, and we’ve labeled
+each usage of one of the semantic rules.</p>
+<p>Evaluate the following expressions using the big-step environment model. Use the
+notation for evaluation that we demonstrated above, in which you provide a hint
+as to which rule is applied at each node in the tree.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">110</span> <span class="pre">+</span> <span class="pre">3*1000</span></code> <em>hint: three uses of the constant rule, two uses of the op
+rule</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">3</span> <span class="pre">&lt;</span> <span class="pre">4</span> <span class="pre">then</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">else</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span></code> <em>hint: five uses of constant, three uses
+of op, one use of if(else)</em></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: let and match expressions [★★]</strong></p>
+<p>Evaluate these expressions, continuing to use the tree notation, and continuing
+to label each usage of a rule.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x=0</span> <span class="pre">in</span> <span class="pre">1</span></code> <em>hint: one use of let, two uses of constant</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x=2</span> <span class="pre">in</span> <span class="pre">x+1</span></code> <em>hint: one use of let, two uses of constant, one use of op,
+one use of variable</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">match</span> <span class="pre">Left</span> <span class="pre">2</span> <span class="pre">with</span> <span class="pre">Left</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x+1</span> <span class="pre">|</span> <span class="pre">Right</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x-1</span></code> <em>hint: one use of
+match(left), two uses of constant, one use of op, one use of variable</em></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: closures [★★]</strong></p>
+<p>Evaluate these expressions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x+1)</span> <span class="pre">2</span></code> <em>hint: one use of application, one use of anonymous
+function, two uses of constant, one use of op, one use of variable</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">f</span> <span class="pre">=</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x+1</span> <span class="pre">in</span> <span class="pre">f</span> <span class="pre">2</span></code> <em>hint: one use of let, one use of anonymous
+function, one use of application, two uses of variable, one use of op, two
+uses of constant</em></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: lexical scope and shadowing [★★]</strong></p>
+<p>Evaluate these expressions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x=0</span> <span class="pre">in</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">(let</span> <span class="pre">x=1</span> <span class="pre">in</span> <span class="pre">x)</span></code> <em>hint: two uses of let, two uses of variable,
+one use of op, two uses of constant</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x=1</span> <span class="pre">in</span> <span class="pre">let</span> <span class="pre">f=fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">let</span> <span class="pre">x=2</span> <span class="pre">in</span> <span class="pre">f</span> <span class="pre">0</span></code> <em>hint: three uses of let, one
+use of anonymous function, one use of application, two uses of variable,
+three uses of constant</em></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: more evaluation [★★]</strong></p>
+<p>Evaluate these:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">in</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">f</span> <span class="pre">=</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span> <span class="pre">in</span> <span class="pre">let</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">3</span> <span class="pre">in</span> <span class="pre">g</span> <span class="pre">2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">f</span> <span class="pre">=</span> <span class="pre">fst</span> <span class="pre">(let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">3</span> <span class="pre">in</span> <span class="pre">fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x,</span> <span class="pre">2)</span> <span class="pre">in</span> <span class="pre">f</span> <span class="pre">0</span></code></p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: dynamic scope [★★★]</strong></p>
+<p>Use dynamic scope to evaluate the following expression. You do not need to write
+down all of the evaluation steps unless you find it helpful. Compare your answer
+to the answer you would expect from a language with lexical scope.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">in</span>
+<span class="k">let</span> <span class="n">f</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">in</span>
+<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">4</span> <span class="k">in</span>
+<span class="n">f</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: more dynamic scope [★★★]</strong></p>
+<p>Use dynamic scope to evaluate the following expressions. Compare your answers to
+the answers you would expect from a language with lexical scope.</p>
+<p>Expression 1:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">in</span>
+<span class="k">let</span> <span class="n">f</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">in</span>
+<span class="k">let</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span> <span class="n">f</span> <span class="n">x</span> <span class="k">in</span>
+<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">4</span> <span class="k">in</span>
+<span class="n">g</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>Expression 2:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">in</span>
+<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span> <span class="k">in</span>
+<span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">4</span> <span class="k">in</span>
+<span class="n">f</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: constraints [★★]</strong></p>
+<p>Show the derivation of the <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">|-</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">-|</span> <span class="pre">C</span></code> relation for these expressions:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1. fun x -&gt; ( + ) 1 x
+2. fun b -&gt; if b then false else true
+3. fun x -&gt; fun y -&gt; if x &lt;= y then y else x
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: unify [★★]</strong></p>
+<p>Use the unification algorithm to solve the following system of constraints. Your
+answer should be a <em>substitution</em>, in the sense that the unification algorithm
+defines that term.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>X = int
+Y = X -&gt; X
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: unify more [★★★]</strong></p>
+<p>Use the unification algorithm to solve the following system of constraints. Your
+answer should be a <em>substitution</em>, in the sense that the unification algorithm
+defines that term.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>X -&gt; Y = Y -&gt; Z
+     Z = U -&gt; W
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: infer apply [★★★]</strong></p>
+<p>Using the HM type inference algorithm, infer the type of the following
+definition:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">apply</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">f</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Remember to go through these steps:</p>
+<ul class="simple">
+<li><p>desugar the definition entirely (i.e., construct an AST)</p></li>
+<li><p>collect constraints</p></li>
+<li><p>solve the constraints with unification</p></li>
+</ul>
+<p>□</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: infer double [★★★]</strong></p>
+<p>Using the HM type inference algorithm, infer the type of the following
+definition:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">double</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: infer S [★★★★]</strong></p>
+<p>Using the HM type inference algorithm, infer the type of the following
+definition:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">s</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="n">z</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/interp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="summary.html" title="previous page"><span class="section-number">9.6. </span>Summary</a>
+    <a class='right-next' id="next-link" href="../appendix/bigoh.html" title="next page">Big-Oh Notation</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

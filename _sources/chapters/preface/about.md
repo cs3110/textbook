@@ -30,7 +30,8 @@ Frequent comparisons are therefore made to those two languages. Readers who have
 studied similar languages should have no difficulty following along. The book
 does not assume any prior knowledge of functional programming, but it does
 assume that readers have prior experience programming in some mainstream
-imperative language.
+imperative language. Knowledge of discrete mathematics at the level of a
+standard first-semester CS course is also assumed.
 
 **Videos.** You will find about 200 YouTube videos embedded throughout this
 book. The videos usually provide an introduction to material, upon which the

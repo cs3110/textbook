@@ -1,0 +1,1823 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.5. Type Inference &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.6. Summary" href="summary.html" />
+    <link rel="prev" title="9.4. Type Checking" href="typecheck.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/intro.html">
+   8. Data Structures
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/amortized.html">
+     8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/sequence.html">
+     8.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/memoization.html">
+     8.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/promises.html">
+     8.6. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/monads.html">
+     8.7. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/summary.html">
+     8.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/exercises.html">
+     8.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Language Implementation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   9. Interpreters
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="parsing.html">
+     9.1. Parsing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="substitution.html">
+     9.2. Substitution Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="environment.html">
+     9.3. Environment Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="typecheck.html">
+     9.4. Type Checking
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.5. Type Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     9.6. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     9.7. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/interp/inference.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/inference.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/interp/inference.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ocaml-type-reconstruction">
+   9.5.1. OCaml Type Reconstruction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constraint-based-inference">
+   9.5.2. Constraint-Based Inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-constraints">
+   9.5.3. Solving Constraints
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finishing-type-inference">
+   9.5.4. Finishing Type Inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-polymorphism">
+   9.5.5. Let Polymorphism
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polymorphism-and-mutability">
+   9.5.6. Polymorphism and Mutability
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="type-inference">
+<h1><span class="section-number">9.5. </span>Type Inference<a class="headerlink" href="#type-inference" title="Permalink to this headline">¶</a></h1>
+<p>Java and OCaml are <em>statically typed</em> languages, meaning every binding has a
+type that is determined at <em>compile time</em>—that is, before any part of the
+program is executed. The type-checker is a compile-time procedure that either
+accepts or rejects a program. By contrast, JavaScript and Ruby are
+dynamically-typed languages; the type of a binding is not determined ahead of
+time. Computations like binding 42 to <code class="docutils literal notranslate"><span class="pre">x</span></code> and then treating <code class="docutils literal notranslate"><span class="pre">x</span></code> as a string
+therefore either result in run-time errors, or run-time conversion between
+types.</p>
+<p>Unlike Java, OCaml is <em>implicitly typed</em>, meaning programmers rarely need to
+write down the types of bindings. This is often convenient, especially with
+higher-order functions. (Although some people disagree as to whether it makes
+code easier or harder to read). But implicit typing in no way changes the fact
+that OCaml is statically typed. Rather, the type-checker has to be more
+sophisticated because it must infer what the <em>type annotations</em> “would have
+been” had the programmers written all of them. In principle, type inference and
+type checking could be separate procedures (the inferencer could figure out the
+types then the checker could determine whether the program is well-typed), but
+in practice they are often merged into a single procedure called <em>type
+reconstruction</em>.</p>
+<div class="section" id="ocaml-type-reconstruction">
+<h2><span class="section-number">9.5.1. </span>OCaml Type Reconstruction<a class="headerlink" href="#ocaml-type-reconstruction" title="Permalink to this headline">¶</a></h2>
+<p>At a very high level, OCaml’s type reconstruction algorithm works as follows:</p>
+<ul class="simple">
+<li><p>Determine the types of definitions in order, using the types of earlier
+definitions to infer the types of later ones. (Which is one reason you may not
+use a name before it is bound in an OCaml program.)</p></li>
+<li><p>For each <code class="docutils literal notranslate"><span class="pre">let</span></code> definition, analyze the definition to determine <em>constraints</em>
+about its type. For example, if the inferencer sees <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code>, it concludes that
+<code class="docutils literal notranslate"><span class="pre">x</span></code> must have type <code class="docutils literal notranslate"><span class="pre">int</span></code>. It gathers similar constraints for function
+applications, pattern matches, etc. Think of these constraints as a system of
+equations like you might have in algebra.</p></li>
+<li><p>Use that system of equations to solve for the type of the name begin defined.</p></li>
+</ul>
+<p>The OCaml type reconstruction algorithm attempts to never reject a program that
+could type check, if the programmer had written down types. It also attempts
+never to accept a program that cannot possibly type check. Some more obscure
+parts of the language can sometimes make type annotations either necessary or at
+least helpful (see <em>Real World OCaml</em> chapter 22, “Type inference”, for
+examples). But for most code you write, type annotations really are completely
+optional.</p>
+<p>Since it would be verbose to keep writing “the type reconstruction algorithm
+used by OCaml and other functional languages,” we’ll call the algorithm HM. That
+name is used throughout the programming languages literature, because the
+algorithm was independently invented by Roger <u>H</u>indley and Robin
+<u>M</u>ilner.</p>
+<p>HM has been rediscovered many times by many people. Curry used it informally in
+the 1950’s (perhaps even the 1930’s). He wrote it up formally in 1967 (published
+1969). Hindley discovered it independently in 1969; Morris in 1968; and Milner
+in 1978. In the realm of logic, similar ideas go back perhaps as far as Tarski
+in the 1920’s. Commenting on this history, Hindley wrote,</p>
+<blockquote>
+<div><p>There must be a moral to this story of continual re-discovery; perhaps someone
+along the line should have learned to read. Or someone else learn to write.</p>
+</div></blockquote>
+<p>Although we haven’t seen the HM algorithm yet, you probably won’t be surprised
+to learn that it’s usually very efficient—you’ve probably never had to
+wait for the toplevel to print the inferred types of your programs. In practice,
+it runs in approximately linear time. But in theory, there are some very strange
+programs that can cause its running-time to blow up. (Technically, it’s
+exponential time.) For fun, try typing the following code in utop:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">true</span><span class="o">;;</span>
+<span class="o">#</span> <span class="k">let</span> <span class="n">f0</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;;</span>
+<span class="o">#</span> <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">b</span> <span class="k">then</span> <span class="n">f0</span> <span class="k">else</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="n">y</span><span class="o">;;</span>
+<span class="o">#</span> <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">b</span> <span class="k">then</span> <span class="n">f</span> <span class="k">else</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="n">y</span><span class="o">;;</span>
+<span class="o">#</span> <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">b</span> <span class="k">then</span> <span class="n">f</span> <span class="k">else</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="n">y</span><span class="o">;;</span>
+<span class="c">(* keep repeating that last line *)</span>
+</pre></div>
+</div>
+<p>You’ll see the types get longer and longer, and eventually (around 20
+repetitions or so) type inference will cause a significant delay.</p>
+</div>
+<div class="section" id="constraint-based-inference">
+<h2><span class="section-number">9.5.2. </span>Constraint-Based Inference<a class="headerlink" href="#constraint-based-inference" title="Permalink to this headline">¶</a></h2>
+<p>Let’s build up to the HM type inference algorithm by starting with this little
+language:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
+    | if e1 then e2 else e3
+    | fun x -&gt; e
+    | e1 e2
+
+bop ::= + | * | &lt;=
+
+t ::= int | bool | t1 -&gt; t2
+</pre></div>
+</div>
+<p>That language is SimPL, plus the lambda calculus, minus <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions. It
+turns out <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions add a extra layer of complication, so we’ll come
+back to them later.</p>
+<p>Since anonymous functions in this language do not have type annotations, we have
+to infer the type of the argument <code class="docutils literal notranslate"><span class="pre">x</span></code>. For example,</p>
+<ul class="simple">
+<li><p>In <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code>, argument <code class="docutils literal notranslate"><span class="pre">x</span></code> must have type <code class="docutils literal notranslate"><span class="pre">int</span></code> hence the function has
+type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">if</span> <span class="pre">x</span> <span class="pre">then</span> <span class="pre">1</span> <span class="pre">else</span> <span class="pre">0</span></code>, argument <code class="docutils literal notranslate"><span class="pre">x</span></code> must have type <code class="docutils literal notranslate"><span class="pre">bool</span></code> hence the
+function has type <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p></li>
+<li><p>Function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">if</span> <span class="pre">x</span> <span class="pre">then</span> <span class="pre">x</span> <span class="pre">else</span> <span class="pre">0</span></code> is untypeable, because it would require
+<code class="docutils literal notranslate"><span class="pre">x</span></code> to have both type <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">bool</span></code>, which isn’t allowed.</p></li>
+</ul>
+<p><strong>A Syntactic Simplification.</strong> We can treat <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">bop</span> <span class="pre">e2</span></code> as syntactic sugar for
+<code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">bop</span> <span class="pre">)</span> <span class="pre">e1</span> <span class="pre">e2</span></code>. That is, we treat infix binary operators as prefix function
+application. Let’s introduce a new syntactic class <code class="docutils literal notranslate"><span class="pre">n</span></code> for <em>names</em>, which
+generalize identifiers and operators. That changes the syntax to:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= n | i | b
+    | if e1 then e2 else e3
+    | fun x -&gt; e
+    | e1 e2
+
+n ::= x | bop
+
+bop ::= ( + ) | ( * ) | ( &lt;= )
+
+t ::= int | bool | t1 -&gt; t2
+</pre></div>
+</div>
+<p>We already know the types of those built-in operators:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>( + ) : int -&gt; int -&gt; int
+( * ) : int -&gt; int -&gt; int
+( &lt;= ) : int -&gt; int -&gt; bool
+</pre></div>
+</div>
+<p>Those types are given; we don’t have to infer them. They are part of the initial
+static environment. In OCaml those operator names could later be shadowed by
+values with different types, but here we don’t have to worry about that because
+we don’t yet have <code class="docutils literal notranslate"><span class="pre">let</span></code>.</p>
+<p>How would <em>you</em> mentally infer the type of <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">x</span></code>, or rather,
+<code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span> <span class="pre">1</span> <span class="pre">x</span></code>? It’s automatic by now, but we could break it down into
+pieces:</p>
+<ul class="simple">
+<li><p>Start with <code class="docutils literal notranslate"><span class="pre">x</span></code> having some unknown type <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p></li>
+<li><p>Note that <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span></code> is known to have type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">(int</span> <span class="pre">-&gt;</span> <span class="pre">int)</span></code>.</p></li>
+<li><p>So its first argument must have type <code class="docutils literal notranslate"><span class="pre">int</span></code>.  Which <code class="docutils literal notranslate"><span class="pre">1</span></code> does.</p></li>
+<li><p>And its second argument must have type <code class="docutils literal notranslate"><span class="pre">int</span></code>, too. So <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">int</span></code>. That is a
+<em>constraint</em> on <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p></li>
+<li><p>Finally the body of the function must also have type <code class="docutils literal notranslate"><span class="pre">int</span></code>, since that’s the
+return type of <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span></code>.</p></li>
+<li><p>Therefore the type of the entire function must be <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p></li>
+<li><p>Since <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">int</span></code>, that type is <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p></li>
+</ul>
+<p>The type inference algorithm follows the same idea of generating unknown types,
+collecting constraints on them, and using the constraints to solve for the type
+of the expression.</p>
+<p>Let’s introduce a new quaternary relation <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">|-</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">-|</span> <span class="pre">C</span></code>, which should be
+read as follows: “in environment <code class="docutils literal notranslate"><span class="pre">env</span></code>, expression <code class="docutils literal notranslate"><span class="pre">e</span></code> is inferred to have type
+<code class="docutils literal notranslate"><span class="pre">t</span></code> and generates constraint set <code class="docutils literal notranslate"><span class="pre">C</span></code>.” A constraint is an equation of the form
+<code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span></code> for any types <code class="docutils literal notranslate"><span class="pre">t1</span></code> and <code class="docutils literal notranslate"><span class="pre">t2</span></code>.</p>
+<p>If we think of the relation as a type-inference function, the colon in the
+middle separates the input from the output. The inputs are <code class="docutils literal notranslate"><span class="pre">env</span></code> and <code class="docutils literal notranslate"><span class="pre">e</span></code>: we
+want to know what the type of <code class="docutils literal notranslate"><span class="pre">e</span></code> is in environment <code class="docutils literal notranslate"><span class="pre">env</span></code>. The function returns
+as output a type <code class="docutils literal notranslate"><span class="pre">t</span></code> and constraints <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">:</span> <span class="pre">t</span></code> in the middle of the relation is approximately what you see in the
+toplevel: you enter an expression, and it tells you the type. But around that is
+an environment and constraint set <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">|-</span> <span class="pre">...</span> <span class="pre">-|</span> <span class="pre">C</span></code> that is invisible to you.
+So, the turnstiles around the outside show the parts of type inference that the
+toplevel does not.</p>
+<p>The easiest parts of inference are constants:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- i : int -| {}
+
+env |- b : bool -| {}
+</pre></div>
+</div>
+<p>Any integer constant <code class="docutils literal notranslate"><span class="pre">i</span></code>, such as <code class="docutils literal notranslate"><span class="pre">42</span></code>, is known to have type <code class="docutils literal notranslate"><span class="pre">int</span></code>, and there
+are no constraints generated.  Likewise for Boolean constants.</p>
+<p>Inferring the type of a name requires looking it up in the environment:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- n : env(n) -| {}
+</pre></div>
+</div>
+<p>No constraints are generated.</p>
+<p>If the name is not bound in the environment, the expression cannot be typed.
+It’s an unbound name error.</p>
+<p>The remaining rules are at their core the same as the type-checking rules we saw
+previously, but they each generate a <em>type variable</em> and possibly some
+constraints on that type variable.</p>
+<p><strong>If.</strong> Here’s the <code class="docutils literal notranslate"><span class="pre">if</span></code> rule. We’ll explain it below.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- if e1 then e2 else e3 : &#39;t -| C1, C2, C3, t1 = bool, &#39;t = t2, &#39;t = t3
+  if fresh &#39;t
+  and env |- e1 : t1 -| C1
+  and env |- e2 : t2 -| C2
+  and env |- e3 : t3 -| C3
+</pre></div>
+</div>
+<p>To infer the type of an <code class="docutils literal notranslate"><span class="pre">if</span></code>, we infer the types <code class="docutils literal notranslate"><span class="pre">t1</span></code>, <code class="docutils literal notranslate"><span class="pre">t2</span></code>, and <code class="docutils literal notranslate"><span class="pre">t3</span></code> of each of
+its subexpressions, along with any constraints on them. We have no control over
+what those types might be; it depends on what the programmer wrote. But we do
+know that the type of the guard must be <code class="docutils literal notranslate"><span class="pre">bool</span></code>. So we generate a constraint that
+<code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">bool</span></code>.</p>
+<p>Furthermore, we know that both branches must have the same type—though, we
+don’t know in advance what that type might be. So, we invent a <em>fresh</em> type
+variable <code class="docutils literal notranslate"><span class="pre">'t</span></code> to stand for that type. A type variable is fresh if it has never
+been used elsewhere during type inference. So, picking a fresh type variable
+just means picking a new name that can’t possibly be confused with any other
+names in the program. We return <code class="docutils literal notranslate"><span class="pre">'t</span></code> as the type of the <code class="docutils literal notranslate"><span class="pre">if</span></code>, and we record two
+constraints <code class="docutils literal notranslate"><span class="pre">'t</span> <span class="pre">=</span> <span class="pre">t2</span></code> and <code class="docutils literal notranslate"><span class="pre">'t</span> <span class="pre">=</span> <span class="pre">t3</span></code> to say that both branches must have that
+type.</p>
+<p>We therefore need to add type variables to the syntax of types:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t ::= &#39;x | int | bool | t1 -&gt; t2
+</pre></div>
+</div>
+<p>Some example type variables include <code class="docutils literal notranslate"><span class="pre">'a</span></code>, <code class="docutils literal notranslate"><span class="pre">'foobar</span></code>, and <code class="docutils literal notranslate"><span class="pre">'t</span></code>. In the last, <code class="docutils literal notranslate"><span class="pre">t</span></code>
+is an identifier, not a meta-variable.</p>
+<p>Here’s an example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{} |- if true then 1 else 0 : &#39;t -| bool = bool, &#39;t = int
+  {} |- true : bool -| {}
+  {} |- 1 : int -| {}
+  {} |- 0 : int -| {}
+</pre></div>
+</div>
+<p>The full constraint set generated is
+<code class="docutils literal notranslate"><span class="pre">{},</span> <span class="pre">{},</span> <span class="pre">{},</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">bool,</span> <span class="pre">'t</span> <span class="pre">=</span> <span class="pre">int,</span> <span class="pre">'t</span> <span class="pre">=</span> <span class="pre">int</span></code>, but of course that simplifies to
+just <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">=</span> <span class="pre">bool,</span> <span class="pre">'t</span> <span class="pre">=</span> <span class="pre">int</span></code>. From that constraint set we can see that the type
+of <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">true</span> <span class="pre">then</span> <span class="pre">1</span> <span class="pre">else</span> <span class="pre">0</span></code> must be <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<p><strong>Anonymous functions.</strong> Since there is no type annotation on <code class="docutils literal notranslate"><span class="pre">x</span></code>, its type must
+be inferred:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- fun x -&gt; e : &#39;t1 -&gt; t2 -| C
+  if fresh &#39;t1
+  and env, x : &#39;t1 |- e : t2 -| C
+</pre></div>
+</div>
+<p>We introduce a fresh type variable <code class="docutils literal notranslate"><span class="pre">'t1</span></code> to stand for the type of <code class="docutils literal notranslate"><span class="pre">x</span></code>, and infer
+the type of body <code class="docutils literal notranslate"><span class="pre">e</span></code> under the environment in which <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">'t1</span></code>. Wherever <code class="docutils literal notranslate"><span class="pre">x</span></code> is
+used in <code class="docutils literal notranslate"><span class="pre">e</span></code>, that can cause constraints to be generated involving <code class="docutils literal notranslate"><span class="pre">'t1</span></code>. Those
+constraints will become part of <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+<p>Here’s a function where we can immediately see that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">bool</span></code>, but let’s work
+through the inference:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{} |- fun x -&gt; if x then 1 else 0 : &#39;t1 -&gt; &#39;t -| &#39;t1 = bool, &#39;t = int
+  {}, x : &#39;t1 |- if x then 1 else 0 : &#39;t -| &#39;t1 = bool, &#39;t = int
+    {}, x : &#39;t1 |- x : &#39;t1 -| {}
+    {}, x : &#39;t1 |- 1 : int -| {}
+    {}, x : &#39;t1 |- 0 : int -| {}
+</pre></div>
+</div>
+<p>The inferred type of the function is <code class="docutils literal notranslate"><span class="pre">'t1</span> <span class="pre">-&gt;</span> <span class="pre">'t</span></code>, with constraints <code class="docutils literal notranslate"><span class="pre">'t1</span> <span class="pre">=</span> <span class="pre">bool</span></code>
+and <code class="docutils literal notranslate"><span class="pre">'t</span> <span class="pre">=</span> <span class="pre">int</span></code>. Simplifying that, the function’s type is <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p>
+<p><strong>Function application.</strong> The type of the entire application must be inferred,
+because we don’t yet know anything about the types of either subexpression:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- e1 e2 : &#39;t -| C1, C2, t1 = t2 -&gt; &#39;t
+  if fresh &#39;t
+  and env |- e1 : t1 -| C1
+  and env |- e2 : t2 -| C2
+</pre></div>
+</div>
+<p>We introduce a fresh type variable <code class="docutils literal notranslate"><span class="pre">'t</span></code> for the type of the application
+expression. We use inference to determine the types of the subexpressions and
+any constraints they happen to generate. We add one new constraint,
+<code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">-&gt;</span> <span class="pre">'t</span></code>, which expresses that the type of the left-hand side <code class="docutils literal notranslate"><span class="pre">e1</span></code> must
+be a function that takes in an argument of type <code class="docutils literal notranslate"><span class="pre">t2</span></code> and returns a value of type
+<code class="docutils literal notranslate"><span class="pre">'t</span></code>.</p>
+<p>Let <code class="docutils literal notranslate"><span class="pre">I</span></code> be the <em>initial environment</em> that binds the boolean operators. Let’s
+infer the type of a partial application of <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- ( + ) 1 : &#39;t -| int -&gt; int -&gt; int = int -&gt; &#39;t
+  I |- ( + ) : int -&gt; int -&gt; int -| {}
+  I |- 1 : int -| {}
+</pre></div>
+</div>
+<p>From the resulting constraint, we see that</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>int -&gt; int -&gt; int
+=
+int -&gt; &#39;t
+</pre></div>
+</div>
+<p>Stripping the <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span></code> off the left-hand side of each of those function types,
+we are left with</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>int -&gt; int
+=
+&#39;t
+</pre></div>
+</div>
+<p>Hence the type of <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p>
+</div>
+<div class="section" id="solving-constraints">
+<h2><span class="section-number">9.5.3. </span>Solving Constraints<a class="headerlink" href="#solving-constraints" title="Permalink to this headline">¶</a></h2>
+<p>What does it mean to solve a set of constraints? Since constraints are equations
+on types, it’s much like solving a system of equations in algebra. We want to
+solve for the values of the variables appearing in those equations. By
+substituting those values for the variables, we should get equations that are
+identical on both sides. For example, in algebra we might have:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>5x + 2y =  9
+ x -  y = -1
+</pre></div>
+</div>
+<p>Solving that system, we’d get that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">2</span></code>.  If we substitute
+<code class="docutils literal notranslate"><span class="pre">1</span></code> for <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code> for <code class="docutils literal notranslate"><span class="pre">y</span></code>, we get:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>5(1) + 2(2) =  9
+  1  -   2  = -1
+</pre></div>
+</div>
+<p>which reduces to</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> 9 =  9
+-1 = -1
+</pre></div>
+</div>
+<p>In programming languages terminology (though perhaps not high-school algebra),
+we say that the substitutions <code class="docutils literal notranslate"><span class="pre">{1</span> <span class="pre">/</span> <span class="pre">x}</span></code> and <code class="docutils literal notranslate"><span class="pre">{2</span> <span class="pre">/</span> <span class="pre">y}</span></code> together <em>unify</em> that set
+of equations, because they make each equation “unite” such that its left side is
+identical to its right side.</p>
+<p>Solving systems of equations on types is similar. Just as we found numbers to
+substitute for variables above, we now want to find types to substitute for type
+variables, and thereby unify the set of equations.</p>
+<p>Much like the substitutions we defined before for the substitution model of
+evaluation, we’ll write <code class="docutils literal notranslate"><span class="pre">{t</span> <span class="pre">/</span> <span class="pre">'x}</span></code> for the <em>type substitution</em> that maps type
+variable <code class="docutils literal notranslate"><span class="pre">'x</span></code> to type <code class="docutils literal notranslate"><span class="pre">t</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">{t2/'x}</span> <span class="pre">t1</span></code> means type <code class="docutils literal notranslate"><span class="pre">t1</span></code> with <code class="docutils literal notranslate"><span class="pre">t2</span></code>
+substituted for <code class="docutils literal notranslate"><span class="pre">'x</span></code>.</p>
+<p>We can define substitution on types as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>int {t / &#39;x} = int
+bool {t / &#39;x} = bool
+&#39;x {t / &#39;x} = t
+&#39;y {t / &#39;x} = &#39;y
+(t1 -&gt; t2) {t / &#39;x} =  (t1 {t / &#39;x} ) -&gt; (t2 {t / &#39;x} )
+</pre></div>
+</div>
+<p>Given two substitutions <code class="docutils literal notranslate"><span class="pre">S1</span></code> and <code class="docutils literal notranslate"><span class="pre">S2</span></code>, we write <code class="docutils literal notranslate"><span class="pre">S1;</span> <span class="pre">S2</span></code> to mean the
+substitution that is their <em>sequential composition</em>, which is defined as
+follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t (S1; S2) = (t S1) S2
+</pre></div>
+</div>
+<p>The order matters. For example, <code class="docutils literal notranslate"><span class="pre">'x</span> <span class="pre">({('y</span> <span class="pre">-&gt;</span> <span class="pre">'y)</span> <span class="pre">/</span> <span class="pre">'x};</span> <span class="pre">{bool</span> <span class="pre">/</span> <span class="pre">'y})</span> </code> is
+<code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code>, not <code class="docutils literal notranslate"><span class="pre">'y</span> <span class="pre">-&gt;</span> <span class="pre">'y</span></code>. We can build up bigger and bigger substitutions
+this way.</p>
+<p>A substitution <code class="docutils literal notranslate"><span class="pre">S</span></code> can be applied to a constraint <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">t'</span></code>. The result
+<code class="docutils literal notranslate"><span class="pre">(t</span> <span class="pre">=</span> <span class="pre">t')</span> <span class="pre">S</span></code> is defined to be <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">S</span> <span class="pre">=</span> <span class="pre">t'</span> <span class="pre">S</span></code>. So we just apply the substitution on
+both sides of the constraint.</p>
+<p>Finally a substitution can be applied to a set <code class="docutils literal notranslate"><span class="pre">C</span></code> of constraints; the result
+<code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">S</span></code> is the result of applying <code class="docutils literal notranslate"><span class="pre">S</span></code> to each of the individual constraints in
+<code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+<p>A substitution <em>unifies</em> a constraint <code class="docutils literal notranslate"><span class="pre">t_1</span> <span class="pre">=</span> <span class="pre">t_2</span></code> if <code class="docutils literal notranslate"><span class="pre">t_1</span> <span class="pre">S</span></code> results in the same
+type as <code class="docutils literal notranslate"><span class="pre">t_2</span> <span class="pre">S</span></code>. For example, substitution <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">{int</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">/</span> <span class="pre">'y};</span> <span class="pre">{int</span> <span class="pre">/</span> <span class="pre">'x}</span></code>
+unifies constraint <code class="docutils literal notranslate"><span class="pre">'x</span> <span class="pre">-&gt;</span> <span class="pre">('x</span> <span class="pre">-&gt;</span> <span class="pre">int)</span> <span class="pre">=</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">'y</span></code>, because</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(&#39;x -&gt; (&#39;x -&gt; int)) S
+=
+int -&gt; (int -&gt; int)
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(int -&gt; &#39;y) S
+=
+int -&gt; (int -&gt; int)
+</pre></div>
+</div>
+<p>A substitution <code class="docutils literal notranslate"><span class="pre">S</span></code> unifies a set <code class="docutils literal notranslate"><span class="pre">C</span></code> of constraints if <code class="docutils literal notranslate"><span class="pre">S</span></code> unifies every
+constraint in <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
+<p>At last we can precisely say what it means to solve a set of constraints: we
+must find a substitution that unifies the set. That is, we need to find a
+sequence of maps from type variables to types, such that the sequence causes
+each equation in the constraint set to “unite”, meaning that its left-hand side
+and right-hand side become the same.</p>
+<p>To find a substitution that unifies constraint set <code class="docutils literal notranslate"><span class="pre">C</span></code>, we use an algorithm
+<code class="docutils literal notranslate"><span class="pre">unify</span></code>, which is defined as follows:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">C</span></code> is the empty set, then <code class="docutils literal notranslate"><span class="pre">unify(C)</span></code> is the empty substitution.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">C</span></code> contains at least one constraint <code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span></code> and possibly some other
+constraints <code class="docutils literal notranslate"><span class="pre">C'</span></code>, then <code class="docutils literal notranslate"><span class="pre">unify(C)</span></code> is defined as follows:</p>
+<ul>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">t1</span></code> and <code class="docutils literal notranslate"><span class="pre">t2</span></code> are both the same simple type—i.e. both the same
+type variable <code class="docutils literal notranslate"><span class="pre">'x</span></code>, or both <code class="docutils literal notranslate"><span class="pre">int</span></code> or both <code class="docutils literal notranslate"><span class="pre">bool</span></code>— then return
+<code class="docutils literal notranslate"><span class="pre">unify(C')</span></code>. <em>In this case, the constraint contained no useful
+information, so we’re tossing it out and continuing.</em></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">t1</span></code> is a type variable <code class="docutils literal notranslate"><span class="pre">'x</span></code> and <code class="docutils literal notranslate"><span class="pre">'x</span></code> does not occur in <code class="docutils literal notranslate"><span class="pre">t2</span></code>, then let
+<code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">{t2</span> <span class="pre">/</span> <span class="pre">'x}</span></code>, and return <code class="docutils literal notranslate"><span class="pre">S;</span> <span class="pre">unify(C'</span> <span class="pre">S)</span></code>. <em>In this case, we are
+eliminating the variable <code class="docutils literal notranslate"><span class="pre">'x</span></code> from the system of equations, much like
+Gaussian elimination in solving algebraic equations.</em></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">t2</span></code> is a type variable <code class="docutils literal notranslate"><span class="pre">'x</span></code> and <code class="docutils literal notranslate"><span class="pre">'x</span></code> does not occur in <code class="docutils literal notranslate"><span class="pre">t1</span></code>, then let
+<code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">{t1</span> <span class="pre">/</span> <span class="pre">'x}</span></code>, and return <code class="docutils literal notranslate"><span class="pre">S';</span> <span class="pre">unify(C'</span> <span class="pre">S)</span></code>. <em>This is an elimination
+like the previous case.</em></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">i1</span> <span class="pre">-&gt;</span> <span class="pre">o1</span></code> and <code class="docutils literal notranslate"><span class="pre">t2</span> <span class="pre">=</span> <span class="pre">i2</span> <span class="pre">-&gt;</span> <span class="pre">o2</span></code>, where <code class="docutils literal notranslate"><span class="pre">i1</span></code>, <code class="docutils literal notranslate"><span class="pre">i2</span></code>, <code class="docutils literal notranslate"><span class="pre">o1</span></code>, and <code class="docutils literal notranslate"><span class="pre">o2</span></code>
+are types, then <code class="docutils literal notranslate"><span class="pre">unify(i1</span> <span class="pre">=</span> <span class="pre">i2,</span> <span class="pre">o1</span> <span class="pre">=</span> <span class="pre">o2,</span> <span class="pre">C')</span></code>. <em>In this case, we break one
+constraint down into two smaller constraints and add those constraints
+back in to be further unified.</em></p></li>
+<li><p>Otherwise, fail. There is no possible unifier.</p></li>
+</ul>
+</li>
+</ul>
+<!--
+    - if `t = t0 * t1` and `t' = t'0 * t'1`,
+      then let `C''` be the union of `C'` with the constraints
+      `t0 = t'0` and `t1 = t'1`, and return `unify(C'')`.
+
+    - if `t = (t0, ..., tn) tc` and `t' = (t'0, ..., t'n) tc` for some
+      type constructor `tc`,
+      then let `C''` be the union of `C'` with the constraints
+      `ti = t'i`, and return `unify(C'')`.
+-->
+<p>In the second and third sub-cases, the check that <code class="docutils literal notranslate"><span class="pre">'x</span></code> should not occur in the
+type ensures that the algorithm is actually eliminating the variable. Otherwise,
+the algorithm could end up re-introducing the variable instead of eliminating
+it.</p>
+<p>It’s possible to prove that the unification algorithm always terminates, and
+that it produces a result if and only a unifier actually exists—that is,
+if and only if the set of constraints has a solution. Moreover, the solution the
+algorithm produces is the <em>most general unifier</em>, in the sense that if
+<code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">unify(C)</span></code> and <code class="docutils literal notranslate"><span class="pre">S'</span></code> also unifies <code class="docutils literal notranslate"><span class="pre">C</span></code>, then there must exist some <code class="docutils literal notranslate"><span class="pre">S''</span></code> such
+that <code class="docutils literal notranslate"><span class="pre">S'</span> <span class="pre">=</span> <span class="pre">S;</span> <span class="pre">S''</span></code>. Such an <code class="docutils literal notranslate"><span class="pre">S'</span></code> is less general than <code class="docutils literal notranslate"><span class="pre">S</span></code> because it contains
+the additional substitutions of <code class="docutils literal notranslate"><span class="pre">S''</span></code>.</p>
+</div>
+<div class="section" id="finishing-type-inference">
+<h2><span class="section-number">9.5.4. </span>Finishing Type Inference<a class="headerlink" href="#finishing-type-inference" title="Permalink to this headline">¶</a></h2>
+<p>Let’s review what we’ve done so far. We started with this language:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= n | i | b
+    | if e1 then e2 else e3
+    | fun x -&gt; e
+    | e1 e2
+
+n ::= x | bop
+
+bop ::= ( + ) | ( * ) | ( &lt;= )
+
+t ::= int | bool | t1 -&gt; t2
+</pre></div>
+</div>
+<p>We then introduced an algorithm for inferring a type of an expression. That type
+came along with a set of constraints. The algorithm was expressed in the form of
+a relation <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">|-</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">-|</span> <span class="pre">C</span></code>.</p>
+<p>Next, we introduced the unification algorithm for solving constraint sets. That
+algorithm produces as output a sequence <code class="docutils literal notranslate"><span class="pre">S</span></code> of substitutions, or it fails. If it
+fails, then <code class="docutils literal notranslate"><span class="pre">e</span></code> is not typeable.</p>
+<p>To finish type inference and reconstruct the type of <code class="docutils literal notranslate"><span class="pre">e</span></code>, we just compute <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">S</span></code>.
+That is, we apply the solution to the constraints to the type <code class="docutils literal notranslate"><span class="pre">t</span></code> produced by
+constraint generation.</p>
+<p>Let <code class="docutils literal notranslate"><span class="pre">p</span></code> be that type. That is, <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">t</span> <span class="pre">S</span></code>. It’s possible to prove <code class="docutils literal notranslate"><span class="pre">p</span></code> is the
+<em>principal</em> type for the expression, meaning that if <code class="docutils literal notranslate"><span class="pre">e</span></code> also has type <code class="docutils literal notranslate"><span class="pre">t</span></code> for
+any other <code class="docutils literal notranslate"><span class="pre">t</span></code>, then there exists a substitution <code class="docutils literal notranslate"><span class="pre">S</span></code> such that <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">=</span> <span class="pre">p</span> <span class="pre">S</span></code>.</p>
+<p>For example, the principal type of the identity function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x</span></code> would be
+<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>. But you could also give that function the less helpful type
+<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>. What we’re saying is that HM will produce <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>, not
+<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>. So in a sense, HM actually infers the most “lenient” type that is
+possible for an expression.</p>
+<p><strong>A Worked Example.</strong> Let’s infer the type of the following expression:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="o">((</span> <span class="o">+</span> <span class="o">)</span> <span class="n">x</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>It’s not much code, but this will get quite involved!</p>
+<p>We start in the initial environment <code class="docutils literal notranslate"><span class="pre">I</span></code> that, among other things, maps <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span></code>
+to <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+</pre></div>
+</div>
+<p>For now we leave off the <code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">t</span> <span class="pre">-|</span> <span class="pre">C</span></code>, because that’s the output of constraint
+generation. We haven’t figure out the output yet! Since we have a function, we
+use the function rule for inference to proceed by introducing a fresh type
+variable for the argument:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)  &lt;-- Here
+</pre></div>
+</div>
+<p>Again we have a function, hence a fresh type variable:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1)  &lt;-- Here
+</pre></div>
+</div>
+<p>Now we have an application expression. Before dealing with it, we need to
+descend into its subexpressions. The first one is easy. It’s just a variable. So
+we finally can finish a judgment with the variable’s type from the environment,
+and an empty constraint set.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1)
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}  &lt;-- Here
+</pre></div>
+</div>
+<p>Next is the second subexpression.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1)
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+      I, f : &#39;a, x : &#39;b |- ( + ) x 1  &lt;-- Here
+</pre></div>
+</div>
+<p>That is another application, so we need to handle its subexpressions. Recall
+that <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span> <span class="pre">x</span> <span class="pre">1</span></code> is parsed as <code class="docutils literal notranslate"><span class="pre">((</span> <span class="pre">+</span> <span class="pre">)</span> <span class="pre">x)</span> <span class="pre">1</span></code>. So the first subexpression is the
+complicated one to handle.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1)
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+      I, f : &#39;a, x : &#39;b |- ( + ) x 1
+        I, f : &#39;a, x : &#39;b |- ( + ) x  &lt;-- Here
+</pre></div>
+</div>
+<p>Yet another application.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1)
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+      I, f : &#39;a, x : &#39;b |- ( + ) x 1
+        I, f : &#39;a, x : &#39;b |- ( + ) x
+          I, f : &#39;a, x : &#39;b |- ( + ) : int -&gt; int -&gt; int -| {}  &lt;-- Here
+</pre></div>
+</div>
+<p>That one was easy, because we just had to look up the name <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span></code> in the
+environment. The next is also easy, because we just look up <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1)
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+      I, f : &#39;a, x : &#39;b |- ( + ) x 1
+        I, f : &#39;a, x : &#39;b |- ( + ) x
+          I, f : &#39;a, x : &#39;b |- ( + ) : int -&gt; int -&gt; int -| {}
+          I, f : &#39;a, x : &#39;b |- x : &#39;b -| {}  &lt;-- Here
+</pre></div>
+</div>
+<p>At last, we’re ready to resolve a function application! We introduce a fresh
+type variable and add a constraint. The constraint is that the inferred type
+<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> of the left-hand subexpression must equal the inferred type
+<code class="docutils literal notranslate"><span class="pre">'b</span></code> of the right-hand subexpression arrow the fresh type variable <code class="docutils literal notranslate"><span class="pre">'c</span></code>, that
+is, <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">-&gt;</span> <span class="pre">'c</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1)
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+      I, f : &#39;a, x : &#39;b |- ( + ) x 1
+        I, f : &#39;a, x : &#39;b |- ( + ) x : &#39;c -| int -&gt; int -&gt; int = &#39;b -&gt; &#39;c  &lt;-- Here
+          I, f : &#39;a, x : &#39;b |- ( + ) : int -&gt; int -&gt; int -| {}
+          I, f : &#39;a, x : &#39;b |- x : &#39;b -| {}
+</pre></div>
+</div>
+<p>Now we’re ready for the argument being passed to that function.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1)
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+      I, f : &#39;a, x : &#39;b |- ( + ) x 1
+        I, f : &#39;a, x : &#39;b |- ( + ) x : &#39;c -| int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+          I, f : &#39;a, x : &#39;b |- ( + ) : int -&gt; int -&gt; int -| {}
+          I, f : &#39;a, x : &#39;b |- x : &#39;b -| {}
+        I, f : &#39;a, x : &#39;b |- 1 : int -| {}  &lt;-- Here
+</pre></div>
+</div>
+<p>Again we can resolve a function application with a new type variable
+and constraint.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1)
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+      I, f : &#39;a, x : &#39;b |- ( + ) x 1 : &#39;d -| &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c  &lt;-- Here
+        I, f : &#39;a, x : &#39;b |- ( + ) x : &#39;c -| int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+          I, f : &#39;a, x : &#39;b |- ( + ) : int -&gt; int -&gt; int -| {}
+          I, f : &#39;a, x : &#39;b |- x : &#39;b -| {}
+        I, f : &#39;a, x : &#39;b |- 1 : int -| {}
+</pre></div>
+</div>
+<p>And once more, a function application, so a new type variable and a new
+constraint.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1)
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1) : &#39;e -| &#39;a = &#39;d -&gt; &#39;e, &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c   &lt;-- Here
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+      I, f : &#39;a, x : &#39;b |- ( + ) x 1 : &#39;d -| &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+        I, f : &#39;a, x : &#39;b |- ( + ) x : &#39;c -| int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+          I, f : &#39;a, x : &#39;b |- ( + ) : int -&gt; int -&gt; int -| {}
+          I, f : &#39;a, x : &#39;b |- x : &#39;b -| {}
+        I, f : &#39;a, x : &#39;b |- 1 : int -| {}
+</pre></div>
+</div>
+<p>Now we finally get to finish off an anonymous function.  Its inferred type
+is the fresh type variable <code class="docutils literal notranslate"><span class="pre">'b</span></code> of its parameter <code class="docutils literal notranslate"><span class="pre">x</span></code>, arrow the inferred
+type <code class="docutils literal notranslate"><span class="pre">e</span></code> of its body.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1) : &#39;b -&gt; &#39;e -| &#39;a = &#39;d -&gt; &#39;e, &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c   &lt;-- Here
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1) : &#39;e -| &#39;a = &#39;d -&gt; &#39;e, &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+      I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+      I, f : &#39;a, x : &#39;b |- ( + ) x 1 : &#39;d -| &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+        I, f : &#39;a, x : &#39;b |- ( + ) x : &#39;c -| int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+          I, f : &#39;a, x : &#39;b |- ( + ) : int -&gt; int -&gt; int -| {}
+          I, f : &#39;a, x : &#39;b |- x : &#39;b -| {}
+        I, f : &#39;a, x : &#39;b |- 1 : int -| {}
+</pre></div>
+</div>
+<p>And the last anonymous function can now be complete in the same way:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1) : &#39;a -&gt; &#39;b -&gt; &#39;e -| &#39;a = &#39;d -&gt; &#39;e, &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c  &lt;-- Here
+  I, f : &#39;a |- fun x -&gt; f (( + ) x 1) : &#39;b -&gt; &#39;e -| &#39;a = &#39;d -&gt; &#39;e, &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+    I, f : &#39;a, x : &#39;b |- f (( + ) x 1) : &#39;e -| &#39;a = &#39;d -&gt; &#39;e, &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+       I, f : &#39;a, x : &#39;b |- f : &#39;a -| {}
+       I, f : &#39;a, x : &#39;b |- ( + ) x 1 : &#39;d -| &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+         I, f : &#39;a, x : &#39;b |- ( + ) x : &#39;c -| int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+           I, f : &#39;a, x : &#39;b |- ( + ) : int -&gt; int -&gt; int -| {}
+           I, f : &#39;a, x : &#39;b |- x : &#39;b -| {}
+         I, f : &#39;a, x : &#39;b |- 1 : int -| {}
+</pre></div>
+</div>
+<p>As a result of constraint generation, we know that the type of the expression is
+<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'b</span> <span class="pre">-&gt;</span> <span class="pre">'e</span></code>, where</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&#39;a = &#39;d -&gt; &#39;e
+&#39;c = int -&gt; &#39;d
+int -&gt; int -&gt; int = &#39;b -&gt; &#39;c
+</pre></div>
+</div>
+<p>To solve that system of equations, we use the unification algorithm:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>unify(&#39;a = &#39;d -&gt; &#39;e, &#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c)
+</pre></div>
+</div>
+<p>The first constraint yields a substitution <code class="docutils literal notranslate"><span class="pre">{('d</span> <span class="pre">-&gt;</span> <span class="pre">'e)</span> <span class="pre">/</span> <span class="pre">'a}</span></code>, which we record
+as part of the solution, and also apply it to the remaining constraints:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>...
+=
+{(&#39;d -&gt; &#39;e) / &#39;a}; unify((&#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c) {(&#39;d -&gt; &#39;e) / &#39;a}
+=
+{(&#39;d -&gt; &#39;e) / &#39;a}; unify(&#39;c = int -&gt; &#39;d, int -&gt; int -&gt; int = &#39;b -&gt; &#39;c)
+</pre></div>
+</div>
+<p>The second constraint behaves similarly to the first:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>...
+=
+{(&#39;d -&gt; &#39;e) / &#39;a}; {(int -&gt; &#39;d) / &#39;c}; unify((int -&gt; int -&gt; int = &#39;b -&gt; &#39;c) {(int -&gt; &#39;d) / &#39;c})
+=
+{(&#39;d -&gt; &#39;e) / &#39;a}; {(int -&gt; &#39;d) / &#39;c}; unify(int -&gt; int -&gt; int = &#39;b -&gt; int -&gt; &#39;d)
+</pre></div>
+</div>
+<p>The function constraint breaks down into two smaller constraints:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>...
+=
+{(&#39;d -&gt; &#39;e) / &#39;a}; {(int -&gt; &#39;d) / &#39;c}; unify(int = &#39;b, int -&gt; int = int -&gt; &#39;d)
+</pre></div>
+</div>
+<p>We get another substitution:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>...
+=
+{(&#39;d -&gt; &#39;e) / &#39;a}; {(int -&gt; &#39;d) / &#39;c}; {int / &#39;b}; unify((int -&gt; int = int -&gt; &#39;d) {int / &#39;b})
+=
+{(&#39;d -&gt; &#39;e) / &#39;a}; {(int -&gt; &#39;d) / &#39;c}; {int / &#39;b}; unify(int -&gt; int = int -&gt; &#39;d)
+</pre></div>
+</div>
+<p>Then we get to break down another function constraint:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>...
+=
+{(&#39;d -&gt; &#39;e) / &#39;a}; {(int -&gt; &#39;d) / &#39;c}; {int / &#39;b}; unify(int = int, int = &#39;d)
+</pre></div>
+</div>
+<p>The first of the resulting new constraints is trivial and just gets dropped:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>...
+=
+{(&#39;d -&gt; &#39;e) / &#39;a}; {(int -&gt; &#39;d) / &#39;c}; {int / &#39;b}; unify(int = &#39;d)
+</pre></div>
+</div>
+<p>The very last constraint gives us one more substitution:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>=
+{(&#39;d -&gt; &#39;e) / &#39;a}; {(int -&gt; &#39;d) / &#39;c}; {int / &#39;b}; {int / &#39;d}
+</pre></div>
+</div>
+<p>To finish, we apply the substitution output by unification to the type inferred
+by constraint generation:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(&#39;a -&gt; &#39;b -&gt; &#39;e) {(&#39;d -&gt; &#39;e) / &#39;a}; {(int -&gt; &#39;d) / &#39;c}; {int / &#39;b}; {int / &#39;d}
+=
+((&#39;d -&gt; &#39;e) -&gt; &#39;b -&gt; &#39;e) {(int -&gt; &#39;d) / &#39;c}; {int / &#39;b}; {int / &#39;d}
+=
+((&#39;d -&gt; &#39;e) -&gt; &#39;b -&gt; &#39;e) {int / &#39;b}; {int / &#39;d}
+=
+((&#39;d -&gt; &#39;e) -&gt; int -&gt; &#39;e) {int / &#39;d}
+=
+(int -&gt; &#39;e) -&gt; int -&gt; &#39;e
+</pre></div>
+</div>
+<p>And indeed that is the same type that OCaml would infer for the original
+expression:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="o">((</span> <span class="o">+</span> <span class="o">)</span> <span class="n">x</span> <span class="mi">1</span><span class="o">);;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="o">(</span><span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="o">&lt;</span><span class="k">fun</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Except that OCaml uses a different type variable identifier. OCaml is nice to us
+and “lowers” the type variables down to smaller letters of the alphabet. We
+could do that too with a little extra work.</p>
+<p><strong>Type Errors.</strong> In reality there is yet another piece to type inference. If
+unification fails, the compiler or interpreter needs to produce a helpful error
+message. That’s an important engineering challenge that we won’t address here.
+It requires keeping track of more than just constraints: we need to know why a
+constraint was introduced, and the ramification of its violation. We also need
+to track the constraint back to the lexical piece of code that produced it, so
+that programmers can see where the problem occurs. And since it’s possible that
+constraints can be processed in many different orders, there are many possible
+error messages that could be produced. Figuring out which one will lead the
+programmer to the root cause of an error, instead of some downstream consequence
+of it, is an area of ongoing research.</p>
+</div>
+<div class="section" id="let-polymorphism">
+<h2><span class="section-number">9.5.5. </span>Let Polymorphism<a class="headerlink" href="#let-polymorphism" title="Permalink to this headline">¶</a></h2>
+<p>Now we’ll add <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions to our little language:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
+    | if e1 then e2 else e3
+    | fun x -&gt; e
+    | e1 e2
+    | let x = e1 in e2   (* new *)
+</pre></div>
+</div>
+<p>It turns out type inference for them is considerably trickier than might be
+expected. The naive approach would be to add this constraint generation rule:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- let x = e1 in e2 : t2 -| C1, C2
+  if env |- e1 : t1 -| C1
+  and env, x : t1 |- e2 : t2 -| C2
+</pre></div>
+</div>
+<p>From the type-checking perspective, that’s the same rule we’ve always used.
+And for many <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions it works perfectly fine. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{} |- let x = 42 in x : int -| {}
+  {} |- 42 : int -| {}
+  x : int |- x : int -| {}
+</pre></div>
+</div>
+<p>The problem is that when the value being bound is a polymorphic function, that
+rule generates constraints that are too restrictive. For example, consider the
+identity function:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="k">in</span>
+<span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="n">id</span> <span class="mi">0</span> <span class="k">in</span>
+<span class="n">id</span> <span class="bp">true</span>
+</pre></div>
+</div>
+<p>OCaml has no trouble inferring the type of <code class="docutils literal notranslate"><span class="pre">id</span></code> as <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> and permitting it
+to be applied both to an <code class="docutils literal notranslate"><span class="pre">int</span></code> and a <code class="docutils literal notranslate"><span class="pre">bool</span></code>. But the rule above isn’t so
+permissive about application to both types. When we use it, we generate the
+following types and constraints:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{} |- let id = fun x -&gt; x in (let a = id 0 in id true) : &#39;c -| &#39;a -&gt; &#39;a = int -&gt; &#39;b, &#39;a -&gt; &#39;a = bool -&gt; &#39;c
+  {} |- fun x -&gt; x : &#39;a -| {}
+    x : &#39;a |- x : &#39;a -| {}
+  id : &#39;a -&gt; &#39;a |- let a = id 0 in id true : &#39;c -| &#39;a -&gt; &#39;a = int -&gt; &#39;b, &#39;a -&gt; &#39;a = bool -&gt; &#39;c   &lt;--- POINT 1
+    id : &#39;a -&gt; &#39;a |- id 0 : &#39;b -| &#39;a -&gt; &#39;a = int -&gt; &#39;b
+      id : &#39;a -&gt; &#39;a |- id : &#39;a -&gt; &#39;a -| {}
+      id : &#39;a -&gt; &#39;a |- 0 : int -| {}
+    id : &#39;a -&gt; &#39;a, a : &#39;b |- id true : &#39;c -| &#39;a -&gt; &#39;a = bool -&gt; &#39;c   &lt;--- POINT 2
+      id : &#39;a -&gt; &#39;a, a : &#39;b |- id : &#39;a -&gt; &#39;a -| {}
+      id : &#39;a -&gt; &#39;a, a : &#39;b |- true : bool -| {}
+</pre></div>
+</div>
+<p>Notice that we do infer a type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> for <code class="docutils literal notranslate"><span class="pre">id</span></code>, which you can see in the
+environment in later lines of the example. But, at Point 1, we infer a
+constraint <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">=</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">'b</span></code>, and at Point 2, we infer
+<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">=</span> <span class="pre">bool</span> <span class="pre">-&gt;</span> <span class="pre">'c</span></code>. When the unification algorithm encounters those
+constraints, it will break them down into <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">=</span> <span class="pre">int</span></code>, ‘<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">'b</span></code>, <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">=</span> <span class="pre">bool</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">=</span> <span class="pre">'c</span></code>. The first and third of those are contradictory, because we can’t
+have <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">=</span> <span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">=</span> <span class="pre">bool</span></code>. One or the other will be substituted away
+during unification, leaving an unsatisfiable constraint <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">=</span> <span class="pre">bool</span></code>. At that
+point unification will fail, declaring the program to be ill typed.</p>
+<p>The problem is that the <code class="docutils literal notranslate"><span class="pre">'a</span></code> type variable in the inferred type of <code class="docutils literal notranslate"><span class="pre">id</span></code> stands
+for an unknown but <strong>fixed</strong> type. At each application of <code class="docutils literal notranslate"><span class="pre">id</span></code>, we want to let
+<code class="docutils literal notranslate"><span class="pre">'a</span></code> become a <strong>different</strong> type, instead of forcing it to always be the same
+type.</p>
+<p>The solution to the problem of polymorphism for <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions is not simple.
+It requires us to introduce a new kind of type: a <em>type scheme</em>. Type schemes
+resemble <em>universal quantification</em> from mathematical logic. For example, in
+logic you might write, “for all natural numbers <span class="math notranslate nohighlight">\(x\)</span>, it holds that <span class="math notranslate nohighlight">\(0 \cdot x
+= 0\)</span>”. The “for all” is the universal quantification: it abstracts away from a
+particular <span class="math notranslate nohighlight">\(x\)</span> and states a property that is true of all natural numbers.</p>
+<p>A type scheme is written <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">.</span> <span class="pre">t</span></code>, where <code class="docutils literal notranslate"><span class="pre">'a</span></code> is a type variable and <code class="docutils literal notranslate"><span class="pre">t</span></code> is a
+type in which <code class="docutils literal notranslate"><span class="pre">'a</span></code> may appear. For example, <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">.</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> is a type scheme. It
+is the type of a function that takes in a value of type <code class="docutils literal notranslate"><span class="pre">'a</span></code> and returns a value
+of type <code class="docutils literal notranslate"><span class="pre">'a</span></code>, for all <code class="docutils literal notranslate"><span class="pre">'a</span></code>. Thus, it is the type of the polymorphic identity
+function.</p>
+<p>We can also have many type variables to the left of the dot in a type scheme.
+For example, <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">'b</span> <span class="pre">.</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'b</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> is the type of a function that takes in
+two arguments and returns the first. In OCaml, we could write that as
+<code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">x</span></code>. Note that utop infers the type of it as we would expect:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">;;</span>
+<span class="k">val</span> <span class="n">f</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="o">&lt;</span><span class="k">fun</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>But we could actually manually write down an annotation with a type scheme:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">let</span> <span class="n">f</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="k">&#39;</span><span class="n">b</span> <span class="o">.</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">;;</span>
+<span class="k">val</span> <span class="n">f</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="o">&lt;</span><span class="k">fun</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note that OCaml accepts our manual type annotation but doesn’t include the
+<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">'b</span> <span class="pre">.</span></code> part of it in its output. <strong>But it’s implicitly there and always has
+been.</strong> In general, anytime OCaml has inferred a type <code class="docutils literal notranslate"><span class="pre">t</span></code> and that type has had
+type variables in it, in reality it’s a type scheme. For example, the type of
+<code class="docutils literal notranslate"><span class="pre">List.length</span></code> is really a type scheme:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">let</span> <span class="n">mylen</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">.</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span><span class="o">;;</span>
+<span class="k">val</span> <span class="n">mylen</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="o">&lt;</span><span class="k">fun</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>OCaml just doesn’t bother outputting the list of type variables that are to the
+left of the dot in the type scheme. Really they’d just clutter the output, and
+many programmers never need to know about them. But now that you’re learning
+type inference, it’s time for you to know.</p>
+<p>Now that we have type schemes, we’ll have static environments map names to type
+schemes. We can think of types as being special cases of type schemes in which
+the list of type variables is empty. With type schemes, the <code class="docutils literal notranslate"><span class="pre">let</span></code> rule changes
+in only one way from the naive rule above, which is the <code class="docutils literal notranslate"><span class="pre">generalize</span></code> on the last
+line:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- let x = e1 in e2 : t2 -| C1, C2
+  if env |- e1 : t1 -| C1
+  and generalize(C1, env, x : t1) |- e2 : t2 -| C2
+</pre></div>
+</div>
+<p>The job of <code class="docutils literal notranslate"><span class="pre">generalize</span></code> is to take a type like <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> and <em>generalize</em> it
+into a type scheme like <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">.</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> in an environment <code class="docutils literal notranslate"><span class="pre">env</span></code> against
+constraints <code class="docutils literal notranslate"><span class="pre">C1</span></code>. Let’s come back to how it works in a minute. Before that,
+there’s one other rule that needs to change, which is the name rule:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- n : instantiate(env(t)) -| {}
+</pre></div>
+</div>
+<p>The only thing that changes there is that use of <code class="docutils literal notranslate"><span class="pre">instantiate</span></code>. Its job is to
+take a type scheme like <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">.</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> and <em>instantiate</em> it into a new type
+(and here we strictly mean a type, not a type scheme) with fresh type variables.
+For example, <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">.</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> could be instantiated as <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">-&gt;</span> <span class="pre">'b</span></code>, if ‘<code class="docutils literal notranslate"><span class="pre">b</span></code> isn’t
+yet in use anywhere else as a type variable.</p>
+<p>Here’s how those two revised rules work together to get our earlier example with
+the identify function right:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{} |- let id = fun x -&gt; x in (let a = id 0 in id true)
+  {} |- fun x -&gt; x : &#39;a -&gt; &#39;a -| {}
+    x : &#39;a |- x : &#39;a -| {}
+  id : &#39;a . &#39;a -&gt; &#39;a |- let a = id 0 in id true   &lt;--- POINT 1
+</pre></div>
+</div>
+<p>Let’s pause there at Point 1. When <code class="docutils literal notranslate"><span class="pre">id</span></code> is put into the environment by the <code class="docutils literal notranslate"><span class="pre">let</span></code>
+rule, its type is generalized from <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> to <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">.</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>; that is, from
+a type to a type scheme. That records the fact that each application of <code class="docutils literal notranslate"><span class="pre">id</span></code>
+should get to use its own value for <code class="docutils literal notranslate"><span class="pre">'a</span></code>. Going on:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{} |- let id = fun x -&gt; x in (let a = id 0 in id true)
+  {} |- fun x -&gt; x : &#39;a -&gt; &#39;a -| {}
+    x : &#39;a |- x : &#39;a -| {}
+  id : &#39;a . &#39;a -&gt; &#39;a |- let a = id 0 in id true   &lt;--- POINT 1
+    id : &#39;a . &#39;a -&gt; &#39;a |- id 0
+      id : &#39;a . &#39;a -&gt; &#39;a |- id : &#39;b -&gt; &#39;b -| {}   &lt;--- POINT 3
+</pre></div>
+</div>
+<p>Pausing here at Point 3, when <code class="docutils literal notranslate"><span class="pre">id</span></code> is applied to <code class="docutils literal notranslate"><span class="pre">0</span></code>, we instantiate its type
+variable <code class="docutils literal notranslate"><span class="pre">'a</span></code> with a fresh type variable <code class="docutils literal notranslate"><span class="pre">'b</span></code>. Let’s finish:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{} |- let id = fun x -&gt; x in (let a = id 0 in id true) : &#39;e -| &#39;b -&gt; &#39;b = int -&gt; &#39;c, &#39;d -&gt; &#39;d = bool -&gt; &#39;e
+  {} |- fun x -&gt; x : &#39;a -&gt; &#39;a -| {}
+    x : &#39;a |- x : &#39;a -| {}
+  id : &#39;a . &#39;a -&gt; &#39;a |- let a = id 0 in id true : &#39;e -| &#39;b -&gt; &#39;b = int -&gt; &#39;c, &#39;d -&gt; &#39;d = bool -&gt; &#39;e   &lt;--- POINT 1
+    id : &#39;a . &#39;a -&gt; &#39;a |- id 0 : &#39;c -| &#39;b -&gt; &#39;b = int -&gt; &#39;c
+      id : &#39;a . &#39;a -&gt; &#39;a |- id : &#39;b -&gt; &#39;b -| {}   &lt;--- POINT 3
+      id : &#39;a . &#39;a -&gt; &#39;a |- 0 : int -| {}
+    id : &#39;a . &#39;a -&gt; &#39;a, a : &#39;b |- id true : &#39;e -| &#39;d -&gt; &#39;d = bool -&gt; &#39;e   &lt;--- POINT 2
+      id : &#39;a . &#39;a -&gt; &#39;a, a : &#39;b |- id : &#39;d -&gt; &#39;d -| {}   &lt;--- POINT 4
+      id : &#39;a . &#39;a -&gt; &#39;a, a : &#39;b |- true : bool -| {}
+</pre></div>
+</div>
+<p>At Point 4, when <code class="docutils literal notranslate"><span class="pre">id</span></code> is applied to <code class="docutils literal notranslate"><span class="pre">true</span></code>, we again instantiate its type
+variable <code class="docutils literal notranslate"><span class="pre">'a</span></code> with a fresh type variable, this time <code class="docutils literal notranslate"><span class="pre">'d</span></code>. So the constraints
+collected at Points 1 and 2 are no longer contradictory, because they are
+talking about different type variables. Those constraints are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&#39;b -&gt; &#39;b = int -&gt; &#39;c
+&#39;d -&gt; &#39;d = bool -&gt; &#39;e
+</pre></div>
+</div>
+<p>The unification algorithm will therefore conclude:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&#39;b = int
+&#39;c = int
+&#39;d = bool
+&#39;e = bool
+</pre></div>
+</div>
+<p>So the entire expression is successfully inferred to have type <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
+<p><strong>Instantiation and Generalization.</strong> We used two new functions, <code class="docutils literal notranslate"><span class="pre">instantiate</span></code>
+and <code class="docutils literal notranslate"><span class="pre">generalize</span></code>, to define type inference for <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions. We need to
+define those functions.</p>
+<p>The easy one is <code class="docutils literal notranslate"><span class="pre">instantiate</span></code>.  Given a type scheme <code class="docutils literal notranslate"><span class="pre">'a1</span> <span class="pre">'a2</span> <span class="pre">...</span> <span class="pre">'an</span> <span class="pre">.</span> <span class="pre">t</span></code>,
+we instantiate it by:</p>
+<ul class="simple">
+<li><p>choosing <code class="docutils literal notranslate"><span class="pre">n</span></code> fresh type variables, and</p></li>
+<li><p>substituting each of those for <code class="docutils literal notranslate"><span class="pre">'a1</span></code> through <code class="docutils literal notranslate"><span class="pre">'an</span></code> in <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p></li>
+</ul>
+<p>Substitution is uncomplicated here, compared to how it was for evaluation in
+thee substitution model, because there is nothing in a type that can bind
+variable names.</p>
+<p>But <code class="docutils literal notranslate"><span class="pre">generalize</span></code> requires more work.  Here’s the <code class="docutils literal notranslate"><span class="pre">let</span></code> rule again:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- let x = e1 in e2 : t2 -| C1, C2
+  if env |- e1 : t1 -| C1
+  and generalize (C1, env, x : t1) |- e2 : t2 -| C2
+</pre></div>
+</div>
+<p>To generalize <code class="docutils literal notranslate"><span class="pre">t1</span></code>, we do the following.</p>
+<p>First, we pretend like <code class="docutils literal notranslate"><span class="pre">e1</span></code> is all that matters, and that the rest of the <code class="docutils literal notranslate"><span class="pre">let</span></code>
+expression doesn’t exist. If <code class="docutils literal notranslate"><span class="pre">e1</span></code> were the entire program, how would we finish
+type inference? We’d run the unification algorithm on <code class="docutils literal notranslate"><span class="pre">C1</span></code>, get a substitution
+<code class="docutils literal notranslate"><span class="pre">S</span></code>, and return <code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">S</span></code> as the inferred type of <code class="docutils literal notranslate"><span class="pre">e1</span></code>. So, do that now. Let’s call
+that inferred type <code class="docutils literal notranslate"><span class="pre">u1</span></code>. Let’s also apply <code class="docutils literal notranslate"><span class="pre">S</span></code> to <code class="docutils literal notranslate"><span class="pre">env</span></code> to get a new environment
+<code class="docutils literal notranslate"><span class="pre">env1</span></code>, which now reflects all the type information we’ve gleaned from <code class="docutils literal notranslate"><span class="pre">e1</span></code>.</p>
+<p>Second, we figure out which type variables in <code class="docutils literal notranslate"><span class="pre">u1</span></code> should be generalized. Why
+not all of them? Because some type variables could have been introduced by code
+that surrounds the <code class="docutils literal notranslate"><span class="pre">let</span></code> expression, e.g.,</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span>
+  <span class="o">(</span><span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">e1</span> <span class="k">in</span> <span class="n">e2</span><span class="o">)</span> <span class="o">(</span><span class="k">let</span> <span class="n">z</span> <span class="o">=</span> <span class="n">e3</span> <span class="k">in</span> <span class="n">e4</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>The type variable for <code class="docutils literal notranslate"><span class="pre">x</span></code> should not be generalized in inferring the type of
+either <code class="docutils literal notranslate"><span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">z</span></code>, because <code class="docutils literal notranslate"><span class="pre">x</span></code> has to have the same type in all four
+subexpressions, <code class="docutils literal notranslate"><span class="pre">e1</span></code> through <code class="docutils literal notranslate"><span class="pre">e4</span></code>. Generalizing could mistakenly allow <code class="docutils literal notranslate"><span class="pre">x</span></code> to
+have one type in <code class="docutils literal notranslate"><span class="pre">e1</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span></code>, but a different type in <code class="docutils literal notranslate"><span class="pre">e3</span></code> and <code class="docutils literal notranslate"><span class="pre">e4</span></code>.</p>
+<p>So instead we generalize only variables that <strong>are</strong> in <code class="docutils literal notranslate"><span class="pre">u1</span></code> but are <strong>not</strong> in
+<code class="docutils literal notranslate"><span class="pre">env1</span></code>. That way we generalize only the type variables from <code class="docutils literal notranslate"><span class="pre">e1</span></code>, not variables
+that were already in the environment when we started inferring the <code class="docutils literal notranslate"><span class="pre">let</span></code>
+expression’s type. Suppose those variables are <code class="docutils literal notranslate"><span class="pre">'a1</span> <span class="pre">...</span> <span class="pre">'an</span></code>. The type scheme we
+give to <code class="docutils literal notranslate"><span class="pre">x</span></code> is then <code class="docutils literal notranslate"><span class="pre">'a1</span> <span class="pre">...</span> <span class="pre">'an</span> <span class="pre">.</span> <span class="pre">u1</span></code>.</p>
+<p>Putting all that together, we end up with:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>generalize(C1, env, x : t1) =
+  env1, x : &#39;a1 ... &#39;an . u1
+</pre></div>
+</div>
+<p>Returning to our example with the identify function from above, we had
+<code class="docutils literal notranslate"><span class="pre">generalize({},</span> <span class="pre">{},</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a)</span></code>. In that rather simple case, <code class="docutils literal notranslate"><span class="pre">unify</span></code>
+discovers no new equalities from the environment, so <code class="docutils literal notranslate"><span class="pre">u1</span> <span class="pre">=</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> and
+<code class="docutils literal notranslate"><span class="pre">env1</span> <span class="pre">=</span> <span class="pre">{}</span></code>. The only type variable in <code class="docutils literal notranslate"><span class="pre">u1</span></code> is <code class="docutils literal notranslate"><span class="pre">'a</span></code>, and it doesn’t appear in
+<code class="docutils literal notranslate"><span class="pre">env1</span></code>. So <code class="docutils literal notranslate"><span class="pre">'a</span></code> is generalized, yielding <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">.</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> as the type scheme for
+<code class="docutils literal notranslate"><span class="pre">id</span></code>.</p>
+</div>
+<div class="section" id="polymorphism-and-mutability">
+<h2><span class="section-number">9.5.6. </span>Polymorphism and Mutability<a class="headerlink" href="#polymorphism-and-mutability" title="Permalink to this headline">¶</a></h2>
+<p>There is yet one more complication to type inference for <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions. It
+appears when we add mutable references to the language. Consider this example
+code, which does not type check in OCaml:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">succ</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">1</span> <span class="n">x</span><span class="o">;;</span>
+<span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">;;</span>
+<span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ref</span> <span class="n">id</span><span class="o">;;</span>
+<span class="n">r</span> <span class="o">:=</span> <span class="n">succ</span><span class="o">;;</span>
+<span class="o">!</span><span class="n">r</span> <span class="bp">true</span><span class="o">;;</span>  <span class="c">(* error *)</span>
+</pre></div>
+</div>
+<p>It’s clear we should infer <code class="docutils literal notranslate"><span class="pre">succ</span> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">.</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>. But
+what should the type of <code class="docutils literal notranslate"><span class="pre">r</span></code> be? It’s tempting to say we should infer
+<code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">.</span> <span class="pre">('a</span> <span class="pre">-&gt;</span> <span class="pre">'a)</span> <span class="pre">ref</span></code>. That would let us instantiate the type of <code class="docutils literal notranslate"><span class="pre">r</span></code> to be
+<code class="docutils literal notranslate"><span class="pre">(int</span> <span class="pre">-&gt;</span> <span class="pre">int)</span> <span class="pre">ref</span></code> on line 4 and store <code class="docutils literal notranslate"><span class="pre">succ</span></code> in <code class="docutils literal notranslate"><span class="pre">r</span></code>. But it also would let us
+instantiate the type of <code class="docutils literal notranslate"><span class="pre">r</span></code> to be <code class="docutils literal notranslate"><span class="pre">(bool</span> <span class="pre">-&gt;</span> <span class="pre">bool)</span> <span class="pre">ref</span></code> on line 5. That’s a
+disaster: it causes the application of <code class="docutils literal notranslate"><span class="pre">succ</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>, which is not type safe.</p>
+<p>The solution adopted by OCaml and related languages is called the <em>value
+restriction:</em> the type system is designed to prevent a polymorphic mutable value
+from ever holding more than one type. Let’s redo some of that example again,
+pausing to look at the toplevel output:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">;;</span>
+<span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="o">&lt;</span><span class="k">fun</span><span class="o">&gt;</span>   <span class="c">(* as expected *)</span>
+
+<span class="o">#</span> <span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ref</span> <span class="n">id</span><span class="o">;;</span>
+<span class="k">val</span> <span class="n">r</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="o">_</span><span class="n">weak1</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="o">_</span><span class="n">weak1</span><span class="o">)</span> <span class="n">ref</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>   <span class="c">(* what is _weak? *)</span>
+
+<span class="o">#</span> <span class="n">r</span><span class="o">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="o">_</span><span class="n">weak1</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="o">_</span><span class="n">weak1</span><span class="o">)</span> <span class="n">ref</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>   <span class="c">(* it&#39;s consistent at least *)</span>
+
+<span class="o">#</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">succ</span><span class="o">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">=</span> <span class="bp">()</span>
+
+<span class="o">#</span> <span class="n">r</span><span class="o">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="o">(</span><span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">)</span> <span class="n">ref</span> <span class="o">=</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>   <span class="c">(* did r just change type ?! *)</span>
+</pre></div>
+</div>
+<p>When the type of <code class="docutils literal notranslate"><span class="pre">r</span></code> is inferred, OCaml gives it a type involving a <em>weak</em> type
+variable. All such variables have a name starting with <code class="docutils literal notranslate"><span class="pre">'_weak</span></code>. A weak type
+variable is one that has not been generalized hence cannot be instantiated on
+multiple types. Rather, it indicates a single type that is not yet known. Think
+of it as type inference for that variable is not yet finished: OCaml is waiting
+for more information to pin down precisely what it is. When <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">:=</span> <span class="pre">succ</span></code> is
+executed, that information finally becomes available. OCaml infers that
+<code class="docutils literal notranslate"><span class="pre">'_weak1</span> <span class="pre">=</span> <span class="pre">int</span></code> from the type of <code class="docutils literal notranslate"><span class="pre">succ</span></code>. Then OCaml replaces <code class="docutils literal notranslate"><span class="pre">'_weak1</span></code> with
+<code class="docutils literal notranslate"><span class="pre">int</span></code> everywhere. That’s what yields an error on the final line:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># !r true;;
+Error: This expression has type bool but an expression was expected of type int
+</pre></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">:</span> <span class="pre">(int</span> <span class="pre">-&gt;</span> <span class="pre">int)</span> <span class="pre">ref</span></code>, we cannot apply <code class="docutils literal notranslate"><span class="pre">!r</span></code> to a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
+<p>We won’t cover the implementation of weak type variables here.</p>
+<p>But, let’s not leave this topic of the interaction between polymorphic types and
+mutability yet. You might be tempted to think that it’s a phenomenon that
+affects only OCaml. But indeed, even Java suffers.</p>
+<p>Consider the following class hierarchy:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Animal</span> <span class="p">{</span> <span class="p">}</span>
+<span class="kd">class</span> <span class="nc">Elephant</span> <span class="kd">extends</span> <span class="n">Animal</span> <span class="p">{</span> <span class="p">}</span>
+<span class="kd">class</span> <span class="nc">Rabbit</span> <span class="kd">extends</span> <span class="n">Animal</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Now suppose we create an array of animals:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Animal</span><span class="o">[]</span> <span class="n">a</span><span class="o">=</span> <span class="k">new</span> <span class="n">Rabbit</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Here we are using <em>subtype polymorphism</em> to assign an array of <code class="docutils literal notranslate"><span class="pre">Rabbit</span></code> objects
+to an <code class="docutils literal notranslate"><span class="pre">Animal[]</span></code> reference. That’s not the same as <em>parametric polymorphism</em> as
+we’ve been using in OCaml, but it’s nonetheless polymorphism.</p>
+<p>What if we try this?</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]=</span> <span class="k">new</span> <span class="n">Elephant</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">a</span></code> is typed as an <code class="docutils literal notranslate"><span class="pre">Animal</span></code> array, it stands to reason that we could
+assign an elephant object into it, just as we could assign a rabbit object. And
+indeed that code is fine according to the Java compiler. But Java gives us a
+runtime error if we run that code!</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Exception</span> <span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">ArrayStoreException</span>
+</pre></div>
+</div>
+<p>The problem is that mutating the first array element to be a rabbit would leave
+us with a <code class="docutils literal notranslate"><span class="pre">Rabbit</span></code> array in which one element is a <code class="docutils literal notranslate"><span class="pre">Elephant</span></code>. (Ouch! An
+elephant would sit on a rabbit. Poor bun bun.) But in Java, the type of every
+object of an array is supposed to be a property of the array as a whole. Every
+element of the array created by <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Rabbit[2]</span></code> therefore must be a <code class="docutils literal notranslate"><span class="pre">Rabbit</span></code>. So
+Java prevents the assignment above by detecting the error at run time and
+raising an exception.</p>
+<p>This is really the value restriction in another guise! The type of a value
+stored in a mutable location may not change, according to the value restriction.
+With arrays, Java implements that with a run-time check, instead of rejecting
+the program at compile time. This strikes a balance between soundness
+(preventing errors from happening) and expressivity (allowing more error-free
+programs to type check).</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "jupyter",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/interp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="typecheck.html" title="previous page"><span class="section-number">9.4. </span>Type Checking</a>
+    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">9.6. </span>Summary</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
