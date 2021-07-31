@@ -797,6 +797,7 @@
                 
   <div class="section" id="red-black-trees">
 <h1><span class="section-number">8.3. </span>Red-Black Trees<a class="headerlink" href="#red-black-trees" title="Permalink to this headline">¶</a></h1>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/uOKHuYloCsI" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>As we’ve now seen, hash tables are an efficient data structure for implementing
 a map ADT. They offer amortized, expected constant-time performance—which
 is a subtle guarantee because of those “amortized” and “expected” qualifiers we
@@ -811,6 +812,7 @@ on the other hand we don’t have to qualify the performance with words like
 even very large workloads. And, we get to avoid mutability!</p>
 <div class="section" id="binary-search-trees">
 <h2><span class="section-number">8.3.1. </span>Binary Search Trees<a class="headerlink" href="#binary-search-trees" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/Xx9V5vrkjJA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>A <strong>binary search tree</strong> (BST) is a binary tree with the following
 representation invariant:</p>
 <blockquote>
@@ -856,6 +858,7 @@ than <em>n</em>’s value.</p>
 </div>
 <p>What is the running time of those operations? Since <code class="docutils literal notranslate"><span class="pre">insert</span></code> is just a <code class="docutils literal notranslate"><span class="pre">mem</span></code>
 with an extra constant-time node creation, we focus on the <code class="docutils literal notranslate"><span class="pre">mem</span></code> operation.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/pFUJgaYUH6o" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The running time of <code class="docutils literal notranslate"><span class="pre">mem</span></code> is <span class="math notranslate nohighlight">\(O(h)\)</span>, where <span class="math notranslate nohighlight">\(h\)</span> is the height of the tree,
 because every recursive call descends one level in the tree. What’s the
 worst-case height of a tree? It occurs with a tree of <span class="math notranslate nohighlight">\(n\)</span> nodes all in a single
@@ -867,11 +870,12 @@ binary tree</em> has the largest number of nodes <span class="math notranslate n
 is <span class="math notranslate nohighlight">\(n = 2^{h+1} - 1\)</span>. Therefore <span class="math notranslate nohighlight">\(h = \log(n+1) - 1\)</span>, which is <span class="math notranslate nohighlight">\(O(\log n)\)</span>.</p>
 <p>If a tree with <span class="math notranslate nohighlight">\(n\)</span> nodes is kept balanced, its height is <span class="math notranslate nohighlight">\(O(\log n)\)</span>, which
 leads to a lookup operation running in time <span class="math notranslate nohighlight">\(O(\log n)\)</span>.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/BGkipOJdH3U" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>How can we keep a tree balanced? It can become unbalanced during element
 insertion or deletion. Most balanced tree schemes involve adding or deleting an
 element just like in a normal binary search tree, followed by some kind of <em>tree
 surgery</em> to rebalance the tree. Some examples of balanced binary search tree
-data structures include</p>
+data structures include:</p>
 <ul class="simple">
 <li><p>AVL trees (1962)</p></li>
 <li><p>2-3 trees (1970’s)</p></li>
@@ -882,6 +886,7 @@ on the data structure than just the binary search tree invariant.</p>
 </div>
 <div class="section" id="id1">
 <h2><span class="section-number">8.3.2. </span>Red-Black Trees<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/JzhG0jDxGqg" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Red-black trees are relatively simple balanced binary tree data structure. The
 idea is to strengthen the representation invariant so a tree has height
 logarithmic in the number of nodes <span class="math notranslate nohighlight">\(n\)</span>. To help enforce the invariant, we color
@@ -906,9 +911,9 @@ color of an empty tree to be black.</p>
 <p>Here are the new conditions we add to the binary search tree representation
 invariant:</p>
 <ol class="simple">
-<li><p>There are no two adjacent red nodes along any path.</p></li>
-<li><p>Every path from the root to a leaf has the same number of black nodes. This
-number is called the <em>black height</em> (BH) of the tree.</p></li>
+<li><p><strong>Local Invariant:</strong> There are no two adjacent red nodes along any path.</p></li>
+<li><p><strong>Global Invariant:</strong> Every path from the root to a leaf has the same number
+of black nodes. This number is called the <em>black height</em> (BH) of the tree.</p></li>
 </ol>
 <p>If a tree satisfies these two conditions, it must also be the case that every
 subtree of the tree also satisfies the conditions. If a subtree violated either
@@ -922,6 +927,7 @@ path cannot have a length greater than twice the length of the paths in a
 perfect binary tree, which is <span class="math notranslate nohighlight">\(O(\log n)\)</span>. Therefore, the tree has height
 <span class="math notranslate nohighlight">\(O(\log n)\)</span> and the operations are all asymptotically logarithmic in the number
 of nodes.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/gDTCRj2-bCU" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>How do we check for membership in red-black trees? Exactly the same way as for
 general binary trees.</p>
 <div class="cell docutils container">
@@ -941,13 +947,29 @@ general binary trees.</p>
 </div>
 </div>
 </div>
-<p>More interesting is the <code class="docutils literal notranslate"><span class="pre">insert</span></code> operation. As with standard binary trees, we
-add a node by replacing the leaf found by the search procedure. We also color
-the new node red to ensure that invariant 2 is preserved. However, this may
-destroy invariant 1 by producing two adjacent red nodes. In order to restore the
-invariant, we consider not only the new red node and its red parent, but also
-its (black) grandparent. The next figure shows the four possible cases that can
-arise.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/dCBAhbIEoYM" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p><strong>Okasaki’s Algorithm.</strong> More interesting is the <code class="docutils literal notranslate"><span class="pre">insert</span></code> operation. As with
+standard binary trees, we add a node by replacing the leaf found by the search
+procedure. But what can we color that node?</p>
+<ul class="simple">
+<li><p>Coloring it black could increase the black height of that path, violating the
+Global Invariant.</p></li>
+<li><p>Coloring it red could make it adjacent to another red node, violating the
+Local Invariant.</p></li>
+</ul>
+<p>So neither choice is safe in general. Chris Okasaki (<em>Purely Functional Data
+Structures</em>, 1999) gives an elegant algorithm that solves the problem by opting
+to violate the Local Invariant, then walk up the tree to repair the violation.
+Here’s how it works.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/dCBAhbIEoYM" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>We always color the new node red to ensure that the Global Invariant is
+preserved. However, this may destroy the Local Invariant by producing two
+adjacent red nodes. In order to restore the invariant, we consider not only the
+new red node and its red parent, but also its (black) grandparent.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/igUOhpGICgA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>The next figure shows the four possible cases that can arise. In it, <code class="docutils literal notranslate"><span class="pre">a</span></code>-<code class="docutils literal notranslate"><span class="pre">d</span></code> are
+possibly empty subtrees, and <code class="docutils literal notranslate"><span class="pre">x</span></code>-<code class="docutils literal notranslate"><span class="pre">z</span></code> are values stored at a node. The nodes
+colors are indicated with <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>           1             2             3             4
 
            Bz            Bz            Bx            Bx
@@ -959,10 +981,25 @@ arise.</p>
     a    b             b    c        b   c              c    d
 </pre></div>
 </div>
-<p>Notice that in each of these trees, the values of the nodes in <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">d</span></code> must have the same relative ordering with respect to <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code>:
-<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">b</span> <span class="pre">&lt;</span> <span class="pre">y</span> <span class="pre">&lt;</span> <span class="pre">c</span> <span class="pre">&lt;</span> <span class="pre">z</span> <span class="pre">&lt;</span> <span class="pre">d</span></code>. Therefore, we can transform the tree to restore the
-invariant locally by replacing any of the above four cases with:</p>
+<p>Notice that in each of these trees, we’ve carefully labeled the values and nodes
+such that the binary search tree invariant ensures the following ordering:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">all</span> <span class="n">nodes</span> <span class="ow">in</span> <span class="n">a</span>
+ <span class="o">&lt;</span>
+  <span class="n">x</span>
+   <span class="o">&lt;</span>
+    <span class="nb">all</span> <span class="n">nodes</span> <span class="ow">in</span> <span class="n">b</span>
+     <span class="o">&lt;</span>
+      <span class="n">y</span>
+       <span class="o">&lt;</span>
+        <span class="nb">all</span> <span class="n">nodes</span> <span class="ow">in</span> <span class="n">c</span>
+         <span class="o">&lt;</span>
+          <span class="n">z</span>
+           <span class="o">&lt;</span>
+            <span class="nb">all</span> <span class="n">nodes</span> <span class="ow">in</span> <span class="n">d</span>
+</pre></div>
+</div>
+<p>Therefore, we can transform the tree to restore the invariant locally by
+replacing any of the above four cases with:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>         Ry
         /  \
       Bx    Bz
@@ -970,6 +1007,14 @@ invariant locally by replacing any of the above four cases with:</p>
     a   b c   d
 </pre></div>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To really understand Okasaki’s algorithm, ensure that the last three diagrams
+make sense. The choice of which labels are placed where in the first diagram is
+crucial. That’s what guarantees the ordering holds, hence that the final tree is
+the same in all four cases.</p>
+</div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/D4FJMJUIMSw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>This balance function can be written simply and concisely using pattern
 matching, where each of the four input cases is mapped to the same output case.
 In addition, there is the case where the tree is left unchanged locally.</p>
@@ -991,12 +1036,13 @@ In addition, there is the case where the tree is left unchanged locally.</p>
 </div>
 </div>
 </div>
-<p>This balancing transformation possibly breaks invariant 1 one level up in the
-tree, but it can be restored again at that level in the same way, and so on up
-the tree. In the worst case, the process cascades all the way up to the root,
-resulting in two adjacent red nodes, one of them the root. But if this happens,
-we can just recolor the root black, which increases the BH by one. The amount of
-work is <span class="math notranslate nohighlight">\(O(\log n)\)</span>. The <code class="docutils literal notranslate"><span class="pre">insert</span></code> code using <code class="docutils literal notranslate"><span class="pre">balance</span></code> is as follows:</p>
+<p>This balancing transformation possibly breaks the Local Invariant one level up
+in the tree, but it can be restored again at that level in the same way, and so
+on up the tree. In the worst case, the process cascades all the way up to the
+root, resulting in two adjacent red nodes, one of them the root. But if this
+happens, we can just recolor the root black, which increases the black height by
+one. The amount of work is <span class="math notranslate nohighlight">\(O(\log n)\)</span>. The <code class="docutils literal notranslate"><span class="pre">insert</span></code> code using <code class="docutils literal notranslate"><span class="pre">balance</span></code> is as
+follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">insert</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span>
@@ -1020,22 +1066,23 @@ work is <span class="math notranslate nohighlight">\(O(\log n)\)</span>. The <co
 </div>
 </div>
 </div>
-<p>Removing an element from a red-black tree works analogously. We start with BST
-element removal and then do rebalancing. When an interior (nonleaf) node is
-removed, we simply splice it out if it has fewer than two nonleaf children; if
-it has two nonleaf children, we find the next value in the tree, which must be
-found inside its right child.</p>
-<p>Balancing the trees during removal from red-black tree requires considering more
-cases. Deleting a black element from the tree creates the possibility that some
-path in the tree has too few black nodes, breaking the black-height invariant 2.
-The solution is to consider that path to contain a “doubly-black” node. A series
-of tree rotations can then eliminate the doubly-black node by propagating the
-“blackness” up until a red node can be converted to a black node, or until the
-root is reached and it can be changed from doubly-black to black without
-breaking the invariant.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/giSzhfuTMMA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p><strong>The remove operation.</strong> Removing an element from a red-black tree works
+analogously. We start with a BST element removal and then do rebalancing. When
+an interior (nonleaf) node is removed, we simply splice it out if it has fewer
+than two nonleaf children; if it has two nonleaf children, we find the next
+value in the tree, which must be found inside its right child.</p>
+<p>But, balancing the trees during removal from red-black tree requires considering
+more cases. Deleting a black element from the tree creates the possibility that
+some path in the tree has too few black nodes, breaking the Global Invariant.</p>
+<p>Germane and Might invented an elegant algorithm to handle that rebalancing Their
+solution is to create “doubly-black” nodes that count twice in determining the
+black height. For more, read their paper: [<em>Deletion: The Curse of the Red-Black
+Tree</em> <em>Journal of Functional Programming</em>], volume 24, issue 4, July 2014.</p>
 </div>
 <div class="section" id="maps-and-sets-from-bsts">
 <h2><span class="section-number">8.3.3. </span>Maps and Sets from BSTs<a class="headerlink" href="#maps-and-sets-from-bsts" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/B_e8Qr4nl4A" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>It’s easy to use a BST to implement either a map or a set ADT:</p>
 <ul class="simple">
 <li><p>For a map, just store a binding at each node. The nodes are ordered by the

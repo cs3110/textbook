@@ -15,6 +15,8 @@ kernelspec:
 
 # Red-Black Trees
 
+{{ video_embed | replace("%%VID%%", "uOKHuYloCsI")}}
+
 As we've now seen, hash tables are an efficient data structure for implementing
 a map ADT. They offer amortized, expected constant-time performance&mdash;which
 is a subtle guarantee because of those "amortized" and "expected" qualifiers we
@@ -30,6 +32,8 @@ on the other hand we don't have to qualify the performance with words like
 even very large workloads. And, we get to avoid mutability!
 
 ## Binary Search Trees
+
+{{ video_embed | replace("%%VID%%", "Xx9V5vrkjJA")}}
 
 A **binary search tree** (BST) is a binary tree with the following
 representation invariant:
@@ -65,6 +69,8 @@ let rec insert x = function
 What is the running time of those operations? Since `insert` is just a `mem`
 with an extra constant-time node creation, we focus on the `mem` operation.
 
+{{ video_embed | replace("%%VID%%", "pFUJgaYUH6o")}}
+
 The running time of `mem` is $O(h)$, where $h$ is the height of the tree,
 because every recursive call descends one level in the tree. What's the
 worst-case height of a tree? It occurs with a tree of $n$ nodes all in a single
@@ -79,20 +85,24 @@ is $n = 2^{h+1} - 1$. Therefore $h = \log(n+1) - 1$, which is $O(\log n)$.
 If a tree with $n$ nodes is kept balanced, its height is $O(\log n)$, which
 leads to a lookup operation running in time $O(\log n)$.
 
+{{ video_embed | replace("%%VID%%", "BGkipOJdH3U")}}
+
 How can we keep a tree balanced? It can become unbalanced during element
 insertion or deletion. Most balanced tree schemes involve adding or deleting an
 element just like in a normal binary search tree, followed by some kind of *tree
 surgery* to rebalance the tree. Some examples of balanced binary search tree
-data structures include
+data structures include:
 
--   AVL trees (1962)
--   2-3 trees (1970's)
--   Red-black trees (1970's)
+- AVL trees (1962)
+- 2-3 trees (1970's)
+- Red-black trees (1970's)
 
 Each of these ensures $O(\log n)$ running time by enforcing a stronger invariant
 on the data structure than just the binary search tree invariant.
 
 ## Red-Black Trees
+
+{{ video_embed | replace("%%VID%%", "JzhG0jDxGqg")}}
 
 Red-black trees are relatively simple balanced binary tree data structure. The
 idea is to strengthen the representation invariant so a tree has height
@@ -108,10 +118,10 @@ type 'a rbtree = Leaf | Node of color * 'a * 'a rbtree * 'a rbtree
 Here are the new conditions we add to the binary search tree representation
 invariant:
 
-1.  There are no two adjacent red nodes along any path.
+1. **Local Invariant:** There are no two adjacent red nodes along any path.
 
-2.  Every path from the root to a leaf has the same number of black nodes. This
-    number is called the *black height* (BH) of the tree.
+2. **Global Invariant:** Every path from the root to a leaf has the same number
+   of black nodes. This number is called the *black height* (BH) of the tree.
 
 If a tree satisfies these two conditions, it must also be the case that every
 subtree of the tree also satisfies the conditions. If a subtree violated either
@@ -128,6 +138,8 @@ perfect binary tree, which is $O(\log n)$. Therefore, the tree has height
 $O(\log n)$ and the operations are all asymptotically logarithmic in the number
 of nodes.
 
+{{ video_embed | replace("%%VID%%", "gDTCRj2-bCU")}}
+
 How do we check for membership in red-black trees? Exactly the same way as for
 general binary trees.
 
@@ -140,13 +152,35 @@ let rec mem x = function
     else true
 ```
 
-More interesting is the `insert` operation. As with standard binary trees, we
-add a node by replacing the leaf found by the search procedure. We also color
-the new node red to ensure that invariant 2 is preserved. However, this may
-destroy invariant 1 by producing two adjacent red nodes. In order to restore the
-invariant, we consider not only the new red node and its red parent, but also
-its (black) grandparent. The next figure shows the four possible cases that can
-arise.
+{{ video_embed | replace("%%VID%%", "dCBAhbIEoYM")}}
+
+**Okasaki's Algorithm.** More interesting is the `insert` operation. As with
+standard binary trees, we add a node by replacing the leaf found by the search
+procedure. But what can we color that node?
+
+- Coloring it black could increase the black height of that path, violating the
+  Global Invariant.
+
+- Coloring it red could make it adjacent to another red node, violating the
+  Local Invariant.
+
+So neither choice is safe in general. Chris Okasaki (*Purely Functional Data
+Structures*, 1999) gives an elegant algorithm that solves the problem by opting
+to violate the Local Invariant, then walk up the tree to repair the violation.
+Here's how it works.
+
+{{ video_embed | replace("%%VID%%", "dCBAhbIEoYM")}}
+
+We always color the new node red to ensure that the Global Invariant is
+preserved. However, this may destroy the Local Invariant by producing two
+adjacent red nodes. In order to restore the invariant, we consider not only the
+new red node and its red parent, but also its (black) grandparent.
+
+{{ video_embed | replace("%%VID%%", "igUOhpGICgA")}}
+
+The next figure shows the four possible cases that can arise. In it, `a`-`d` are
+possibly empty subtrees, and `x`-`z` are values stored at a node. The nodes
+colors are indicated with `R` and `B`.
 
 ```text
            1             2             3             4
@@ -160,10 +194,27 @@ arise.
     a    b             b    c        b   c              c    d
 ```
 
-Notice that in each of these trees, the values of the nodes in `a`, `b`, `c`,
-and `d` must have the same relative ordering with respect to `x`, `y`, and `z`:
-`a < x < b < y < c < z < d`. Therefore, we can transform the tree to restore the
-invariant locally by replacing any of the above four cases with:
+Notice that in each of these trees, we've carefully labeled the values and nodes
+such that the binary search tree invariant ensures the following ordering:
+
+```
+all nodes in a
+ <
+  x
+   <
+    all nodes in b
+     <
+      y
+       <
+        all nodes in c
+         <
+          z
+           <
+            all nodes in d
+```
+
+Therefore, we can transform the tree to restore the invariant locally by
+replacing any of the above four cases with:
 
 ```text
          Ry
@@ -172,6 +223,15 @@ invariant locally by replacing any of the above four cases with:
      / \   / \
     a   b c   d
 ```
+
+```{tip}
+To really understand Okasaki's algorithm, ensure that the last three diagrams
+make sense. The choice of which labels are placed where in the first diagram is
+crucial. That's what guarantees the ordering holds, hence that the final tree is
+the same in all four cases.
+```
+
+{{ video_embed | replace("%%VID%%", "D4FJMJUIMSw")}}
 
 This balance function can be written simply and concisely using pattern
 matching, where each of the four input cases is mapped to the same output case.
@@ -187,12 +247,13 @@ let balance = function
   | a, b, c, d -> Node (a, b, c, d)
 ```
 
-This balancing transformation possibly breaks invariant 1 one level up in the
-tree, but it can be restored again at that level in the same way, and so on up
-the tree. In the worst case, the process cascades all the way up to the root,
-resulting in two adjacent red nodes, one of them the root. But if this happens,
-we can just recolor the root black, which increases the BH by one. The amount of
-work is $O(\log n)$. The `insert` code using `balance` is as follows:
+This balancing transformation possibly breaks the Local Invariant one level up
+in the tree, but it can be restored again at that level in the same way, and so
+on up the tree. In the worst case, the process cascades all the way up to the
+root, resulting in two adjacent red nodes, one of them the root. But if this
+happens, we can just recolor the root black, which increases the black height by
+one. The amount of work is $O(\log n)$. The `insert` code using `balance` is as
+follows:
 
 ```{code-cell} ocaml
 let insert x s =
@@ -209,22 +270,28 @@ let insert x s =
     failwith "RBT insert failed with ins returning leaf"
 ```
 
-Removing an element from a red-black tree works analogously. We start with BST
-element removal and then do rebalancing. When an interior (nonleaf) node is
-removed, we simply splice it out if it has fewer than two nonleaf children; if
-it has two nonleaf children, we find the next value in the tree, which must be
-found inside its right child.
+{{ video_embed | replace("%%VID%%", "giSzhfuTMMA")}}
 
-Balancing the trees during removal from red-black tree requires considering more
-cases. Deleting a black element from the tree creates the possibility that some
-path in the tree has too few black nodes, breaking the black-height invariant 2.
-The solution is to consider that path to contain a "doubly-black" node. A series
-of tree rotations can then eliminate the doubly-black node by propagating the
-"blackness" up until a red node can be converted to a black node, or until the
-root is reached and it can be changed from doubly-black to black without
-breaking the invariant.
+**The remove operation.** Removing an element from a red-black tree works
+analogously. We start with a BST element removal and then do rebalancing. When
+an interior (nonleaf) node is removed, we simply splice it out if it has fewer
+than two nonleaf children; if it has two nonleaf children, we find the next
+value in the tree, which must be found inside its right child.
+
+But, balancing the trees during removal from red-black tree requires considering
+more cases. Deleting a black element from the tree creates the possibility that
+some path in the tree has too few black nodes, breaking the Global Invariant.
+
+Germane and Might invented an elegant algorithm to handle that rebalancing Their
+solution is to create "doubly-black" nodes that count twice in determining the
+black height. For more, read their paper: [*Deletion: The Curse of the Red-Black
+Tree* *Journal of Functional Programming*], volume 24, issue 4, July 2014.
+
+[gm]: https://doi.org/10.1017/S0956796814000227
 
 ## Maps and Sets from BSTs
+
+{{ video_embed | replace("%%VID%%", "B_e8Qr4nl4A")}}
 
 It's easy to use a BST to implement either a map or a set ADT:
 
