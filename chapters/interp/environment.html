@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9.3. Environment Model &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>9.4. Environment Model &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -53,8 +53,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9.4. Type Checking" href="typecheck.html" />
-    <link rel="prev" title="9.2. Substitution Model" href="substitution.html" />
+    <link rel="next" title="9.5. Type Checking" href="typecheck.html" />
+    <link rel="prev" title="9.3. Substitution Model" href="substitution.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -595,38 +595,43 @@
   </label>
   <ul class="current">
    <li class="toctree-l2">
+    <a class="reference internal" href="calculator.html">
+     9.1. Example: Calculator
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="parsing.html">
-     9.1. Parsing
+     9.2. Parsing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="substitution.html">
-     9.2. Substitution Model
+     9.3. Substitution Model
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     9.3. Environment Model
+     9.4. Environment Model
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="typecheck.html">
-     9.4. Type Checking
+     9.5. Type Checking
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="inference.html">
-     9.5. Type Inference
+     9.6. Type Inference
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
-     9.6. Summary
+     9.7. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercises.html">
-     9.7. Exercises
+     9.8. Exercises
     </a>
    </li>
   </ul>
@@ -746,27 +751,27 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#evaluating-the-lambda-calculus-in-the-environment-model">
-   9.3.1. Evaluating the Lambda Calculus in the Environment Model
+   9.4.1. Evaluating the Lambda Calculus in the Environment Model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dynamic-vs-static-scope">
-   9.3.2. Dynamic vs. Static Scope
+   9.4.2. Dynamic vs. Static Scope
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">
-   9.3.3. A Second Attempt at Evaluating the Lambda Calculus in the Environment Model
+   9.4.3. A Second Attempt at Evaluating the Lambda Calculus in the Environment Model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#an-implementation-of-simpl-in-the-environment-model">
-   9.3.4. An Implementation of SimPL in the Environment Model
+   9.4.4. An Implementation of SimPL in the Environment Model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-environment-model">
-   9.3.5. Evaluating Core OCaml in the Environment Model
+   9.4.5. Evaluating Core OCaml in the Environment Model
   </a>
  </li>
 </ul>
@@ -781,7 +786,7 @@
               <div>
                 
   <div class="section" id="environment-model">
-<h1><span class="section-number">9.3. </span>Environment Model<a class="headerlink" href="#environment-model" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">9.4. </span>Environment Model<a class="headerlink" href="#environment-model" title="Permalink to this headline">¶</a></h1>
 <p>So far we’ve been using the substitution model to evaluate programs. It’s a
 great mental model for evaluation, and it’s commonly used in programming
 languages theory.</p>
@@ -820,7 +825,7 @@ additionally bound to the value <code class="docutils literal notranslate"><span
 environment model. It would of course be possible to define a small-step
 version, too.</p>
 <div class="section" id="evaluating-the-lambda-calculus-in-the-environment-model">
-<h2><span class="section-number">9.3.1. </span>Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.4.1. </span>Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
 <p>Recall that the lambda calculus is the fragment of a functional language
 involving functions and application:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | e1 e2 | fun x -&gt; e
@@ -904,7 +909,7 @@ the binding of <code class="docutils literal notranslate"><span class="pre">x</s
 <p>What went wrong??  It has to do with scope.</p>
 </div>
 <div class="section" id="dynamic-vs-static-scope">
-<h2><span class="section-number">9.3.2. </span>Dynamic vs. Static Scope<a class="headerlink" href="#dynamic-vs-static-scope" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.4.2. </span>Dynamic vs. Static Scope<a class="headerlink" href="#dynamic-vs-static-scope" title="Permalink to this headline">¶</a></h2>
 <p>There are two different ways to understand the scope of a variable: variables
 can be <em>dynamically</em> scoped or <em>lexically</em> scoped. It all comes down to the
 environment that is used when a function body is being evaluated:</p>
@@ -952,7 +957,7 @@ exception handler, just like how dynamic scope uses the “most recent” bindin
 variable.</p>
 </div>
 <div class="section" id="a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">
-<h2><span class="section-number">9.3.3. </span>A Second Attempt at Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.4.3. </span>A Second Attempt at Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
 <p>The question then becomes, how do we implement lexical scope? It seems to
 require time travel, because function bodies need to be evaluated in old dynamic
 environment that have long since disappeared.</p>
@@ -998,13 +1003,13 @@ suggest the “defining environment”) to evaluate the function body <code clas
 current environment <code class="docutils literal notranslate"><span class="pre">env</span></code> when the let expression is being evaluated.</p>
 </div>
 <div class="section" id="an-implementation-of-simpl-in-the-environment-model">
-<h2><span class="section-number">9.3.4. </span>An Implementation of SimPL in the Environment Model<a class="headerlink" href="#an-implementation-of-simpl-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.4.4. </span>An Implementation of SimPL in the Environment Model<a class="headerlink" href="#an-implementation-of-simpl-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
 <p>You can download a complete implementation of the two semantics above: <a href="../../code/lambda-env.zip">lambda-env.zip</a> In <code class="docutils literal notranslate"><span class="pre">main.ml</span></code>, there is a
 definition named <code class="docutils literal notranslate"><span class="pre">scope</span></code> that you can use to switch between lexical and dynamic
 scope.</p>
 </div>
 <div class="section" id="evaluating-core-ocaml-in-the-environment-model">
-<h2><span class="section-number">9.3.5. </span>Evaluating Core OCaml in the Environment Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.4.5. </span>Evaluating Core OCaml in the Environment Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-environment-model" title="Permalink to this headline">¶</a></h2>
 <p>There isn’t anything new in the (big step) environment model semantics of Core
 OCaml, now that we know about closures, but for sake of completeness let’s state
 it anyway.</p>
@@ -1112,8 +1117,8 @@ and let expression) extends the environment with a new binding:</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="substitution.html" title="previous page"><span class="section-number">9.2. </span>Substitution Model</a>
-    <a class='right-next' id="next-link" href="typecheck.html" title="next page"><span class="section-number">9.4. </span>Type Checking</a>
+    <a class='left-prev' id="prev-link" href="substitution.html" title="previous page"><span class="section-number">9.3. </span>Substitution Model</a>
+    <a class='right-next' id="next-link" href="typecheck.html" title="next page"><span class="section-number">9.5. </span>Type Checking</a>
 
         </div>
         

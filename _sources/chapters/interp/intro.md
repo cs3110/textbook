@@ -1,5 +1,7 @@
 # Interpreters
 
+{{ video_embed | replace("%%VID%%", "OKcCiMV2dQA")}}
+
 A skilled artisan must understand the tools with which they work. A carpenter
 needs to understand saws and planes. A chef needs to understand knives and pots.
 A programmer, among other tools, needs to understand the compilers that
@@ -45,6 +47,8 @@ notices that a piece of bytecode is being interpreted frequently, it uses the
 compiler to translate that bytecode into the language of the machine (e.g., x86)
 on which the machine is running. This is called *just-in-time compilation*
 (JIT), because code is being compiled just before it is executed.
+
+{{ video_embed | replace("%%VID%%", "ei5hwusIV-8")}}
 
 A compiler goes through several phases as it translates a program:
 

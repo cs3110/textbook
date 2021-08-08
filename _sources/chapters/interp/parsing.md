@@ -73,6 +73,8 @@ upon the AST type.
 
 ## Backus-Naur Form
 
+{{ video_embed | replace("%%VID%%", "NQacOvZbbX4")}}
+
 The standard way to describe the syntax of a language is with a mathematical
 notation called *Backus-Naur form* (BNF), named for its inventors, John Backus
 and Peter Naur. There are many variants of BNF. Here, we won't be too picky
@@ -157,6 +159,8 @@ Or, just follow along as we build each piece of it.
 
 ### The AST
 
+{{ video_embed | replace("%%VID%%", "duTIBuK_fdw")}}
+
 Since the AST is the most important data structure in an interpreter, let's
 design it first. We'll put this code in a file named `ast.ml`:
 
@@ -195,6 +199,8 @@ But by factoring out the `bop` type we will be able to avoid a lot of code
 duplication later in our implementation.
 
 ### The Menhir Parser
+
+{{ video_embed | replace("%%VID%%", "-BBbgVhj66s")}}
 
 Let's start with parsing, then return to lexing later. We'll put all the Menhir
 code we write below in a file named `parser.mly`. The `.mly` extension indicates

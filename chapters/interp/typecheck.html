@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9.4. Type Checking &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>9.5. Type Checking &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9.5. Type Inference" href="inference.html" />
-    <link rel="prev" title="9.3. Environment Model" href="environment.html" />
+    <link rel="next" title="9.6. Type Inference" href="inference.html" />
+    <link rel="prev" title="9.4. Environment Model" href="environment.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -597,38 +597,43 @@
   </label>
   <ul class="current">
    <li class="toctree-l2">
+    <a class="reference internal" href="calculator.html">
+     9.1. Example: Calculator
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="parsing.html">
-     9.1. Parsing
+     9.2. Parsing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="substitution.html">
-     9.2. Substitution Model
+     9.3. Substitution Model
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="environment.html">
-     9.3. Environment Model
+     9.4. Environment Model
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     9.4. Type Checking
+     9.5. Type Checking
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="inference.html">
-     9.5. Type Inference
+     9.6. Type Inference
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
-     9.6. Summary
+     9.7. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercises.html">
-     9.7. Exercises
+     9.8. Exercises
     </a>
    </li>
   </ul>
@@ -748,17 +753,17 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-type-system-for-simpl">
-   9.4.1. A Type System for SimPL
+   9.5.1. A Type System for SimPL
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-type-checker-for-simpl">
-   9.4.2. A Type Checker for SimPL
+   9.5.2. A Type Checker for SimPL
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#type-safety">
-   9.4.3. Type Safety
+   9.5.3. Type Safety
   </a>
  </li>
 </ul>
@@ -773,7 +778,7 @@
               <div>
                 
   <div class="section" id="type-checking">
-<h1><span class="section-number">9.4. </span>Type Checking<a class="headerlink" href="#type-checking" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">9.5. </span>Type Checking<a class="headerlink" href="#type-checking" title="Permalink to this headline">¶</a></h1>
 <p>Earlier, we skipped over the type checking phase. Let’s come back to that now.
 After lexing and parsing, the next phase of compilation is semantic analysis,
 and the primary task of semantic analysis is type checking.</p>
@@ -809,7 +814,7 @@ it’s rare that a language truly uses the empty context to determine whether a
 program is well typed. In OCaml, for example, there are many built-in
 identifiers that are always in scope, such as everything in the <code class="docutils literal notranslate"><span class="pre">Stdlib</span></code> module.</p>
 <div class="section" id="a-type-system-for-simpl">
-<h2><span class="section-number">9.4.1. </span>A Type System for SimPL<a class="headerlink" href="#a-type-system-for-simpl" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.5.1. </span>A Type System for SimPL<a class="headerlink" href="#a-type-system-for-simpl" title="Permalink to this headline">¶</a></h2>
 <p>Recall the syntax of SimPL:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
     | if e1 then e2 else e3
@@ -869,7 +874,7 @@ branches must have the same type.</p>
 </div>
 </div>
 <div class="section" id="a-type-checker-for-simpl">
-<h2><span class="section-number">9.4.2. </span>A Type Checker for SimPL<a class="headerlink" href="#a-type-checker-for-simpl" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.5.2. </span>A Type Checker for SimPL<a class="headerlink" href="#a-type-checker-for-simpl" title="Permalink to this headline">¶</a></h2>
 <p>Let’s implement a type checker for SimPL, based on the type system we defined in
 the previous section. You can download the completed type checker as part of the
 SimPL interpreter: <a href="../../code/simpl.zip">simpl.zip</a></p>
@@ -994,7 +999,7 @@ typed:</p>
 </div>
 </div>
 <div class="section" id="type-safety">
-<h2><span class="section-number">9.4.3. </span>Type Safety<a class="headerlink" href="#type-safety" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.5.3. </span>Type Safety<a class="headerlink" href="#type-safety" title="Permalink to this headline">¶</a></h2>
 <p>What is the purpose of a type system? There might be many, but one of the
 primary purposes is to ensure that certain run-time errors don’t occur. Now that
 we know how to formalize type systems with the <code class="docutils literal notranslate"><span class="pre">|-</span></code> relation and evaluation with
@@ -1049,8 +1054,8 @@ the type system guarantees those exceptions will never occur.</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="environment.html" title="previous page"><span class="section-number">9.3. </span>Environment Model</a>
-    <a class='right-next' id="next-link" href="inference.html" title="next page"><span class="section-number">9.5. </span>Type Inference</a>
+    <a class='left-prev' id="prev-link" href="environment.html" title="previous page"><span class="section-number">9.4. </span>Environment Model</a>
+    <a class='right-next' id="next-link" href="inference.html" title="next page"><span class="section-number">9.6. </span>Type Inference</a>
 
         </div>
         

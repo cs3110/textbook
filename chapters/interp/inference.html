@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9.5. Type Inference &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>9.6. Type Inference &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -55,8 +55,8 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9.6. Summary" href="summary.html" />
-    <link rel="prev" title="9.4. Type Checking" href="typecheck.html" />
+    <link rel="next" title="9.7. Summary" href="summary.html" />
+    <link rel="prev" title="9.5. Type Checking" href="typecheck.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -597,38 +597,43 @@
   </label>
   <ul class="current">
    <li class="toctree-l2">
+    <a class="reference internal" href="calculator.html">
+     9.1. Example: Calculator
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="parsing.html">
-     9.1. Parsing
+     9.2. Parsing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="substitution.html">
-     9.2. Substitution Model
+     9.3. Substitution Model
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="environment.html">
-     9.3. Environment Model
+     9.4. Environment Model
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="typecheck.html">
-     9.4. Type Checking
+     9.5. Type Checking
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     9.5. Type Inference
+     9.6. Type Inference
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="summary.html">
-     9.6. Summary
+     9.7. Summary
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="exercises.html">
-     9.7. Exercises
+     9.8. Exercises
     </a>
    </li>
   </ul>
@@ -748,32 +753,32 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ocaml-type-reconstruction">
-   9.5.1. OCaml Type Reconstruction
+   9.6.1. OCaml Type Reconstruction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#constraint-based-inference">
-   9.5.2. Constraint-Based Inference
+   9.6.2. Constraint-Based Inference
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solving-constraints">
-   9.5.3. Solving Constraints
+   9.6.3. Solving Constraints
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#finishing-type-inference">
-   9.5.4. Finishing Type Inference
+   9.6.4. Finishing Type Inference
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#let-polymorphism">
-   9.5.5. Let Polymorphism
+   9.6.5. Let Polymorphism
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#polymorphism-and-mutability">
-   9.5.6. Polymorphism and Mutability
+   9.6.6. Polymorphism and Mutability
   </a>
  </li>
 </ul>
@@ -788,7 +793,7 @@
               <div>
                 
   <div class="section" id="type-inference">
-<h1><span class="section-number">9.5. </span>Type Inference<a class="headerlink" href="#type-inference" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">9.6. </span>Type Inference<a class="headerlink" href="#type-inference" title="Permalink to this headline">¶</a></h1>
 <p>Java and OCaml are <em>statically typed</em> languages, meaning every binding has a
 type that is determined at <em>compile time</em>—that is, before any part of the
 program is executed. The type-checker is a compile-time procedure that either
@@ -809,7 +814,7 @@ types then the checker could determine whether the program is well-typed), but
 in practice they are often merged into a single procedure called <em>type
 reconstruction</em>.</p>
 <div class="section" id="ocaml-type-reconstruction">
-<h2><span class="section-number">9.5.1. </span>OCaml Type Reconstruction<a class="headerlink" href="#ocaml-type-reconstruction" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.6.1. </span>OCaml Type Reconstruction<a class="headerlink" href="#ocaml-type-reconstruction" title="Permalink to this headline">¶</a></h2>
 <p>At a very high level, OCaml’s type reconstruction algorithm works as follows:</p>
 <ul class="simple">
 <li><p>Determine the types of definitions in order, using the types of earlier
@@ -861,7 +866,7 @@ exponential time.) For fun, try typing the following code in utop:</p>
 repetitions or so) type inference will cause a significant delay.</p>
 </div>
 <div class="section" id="constraint-based-inference">
-<h2><span class="section-number">9.5.2. </span>Constraint-Based Inference<a class="headerlink" href="#constraint-based-inference" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.6.2. </span>Constraint-Based Inference<a class="headerlink" href="#constraint-based-inference" title="Permalink to this headline">¶</a></h2>
 <p>Let’s build up to the HM type inference algorithm by starting with this little
 language:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
@@ -1058,7 +1063,7 @@ we are left with</p>
 <p>Hence the type of <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p>
 </div>
 <div class="section" id="solving-constraints">
-<h2><span class="section-number">9.5.3. </span>Solving Constraints<a class="headerlink" href="#solving-constraints" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.6.3. </span>Solving Constraints<a class="headerlink" href="#solving-constraints" title="Permalink to this headline">¶</a></h2>
 <p>What does it mean to solve a set of constraints? Since constraints are equations
 on types, it’s much like solving a system of equations in algebra. We want to
 solve for the values of the variables appearing in those equations. By
@@ -1183,7 +1188,7 @@ that <code class="docutils literal notranslate"><span class="pre">S'</span> <spa
 the additional substitutions of <code class="docutils literal notranslate"><span class="pre">S''</span></code>.</p>
 </div>
 <div class="section" id="finishing-type-inference">
-<h2><span class="section-number">9.5.4. </span>Finishing Type Inference<a class="headerlink" href="#finishing-type-inference" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.6.4. </span>Finishing Type Inference<a class="headerlink" href="#finishing-type-inference" title="Permalink to this headline">¶</a></h2>
 <p>Let’s review what we’ve done so far. We started with this language:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= n | i | b
     | if e1 then e2 else e3
@@ -1462,7 +1467,7 @@ programmer to the root cause of an error, instead of some downstream consequence
 of it, is an area of ongoing research.</p>
 </div>
 <div class="section" id="let-polymorphism">
-<h2><span class="section-number">9.5.5. </span>Let Polymorphism<a class="headerlink" href="#let-polymorphism" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.6.5. </span>Let Polymorphism<a class="headerlink" href="#let-polymorphism" title="Permalink to this headline">¶</a></h2>
 <p>Now we’ll add <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions to our little language:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
     | if e1 then e2 else e3
@@ -1685,7 +1690,7 @@ discovers no new equalities from the environment, so <code class="docutils liter
 <code class="docutils literal notranslate"><span class="pre">id</span></code>.</p>
 </div>
 <div class="section" id="polymorphism-and-mutability">
-<h2><span class="section-number">9.5.6. </span>Polymorphism and Mutability<a class="headerlink" href="#polymorphism-and-mutability" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">9.6.6. </span>Polymorphism and Mutability<a class="headerlink" href="#polymorphism-and-mutability" title="Permalink to this headline">¶</a></h2>
 <p>There is yet one more complication to type inference for <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions. It
 appears when we add mutable references to the language. Consider this example
 code, which does not type check in OCaml:</p>
@@ -1805,8 +1810,8 @@ programs to type check).</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="typecheck.html" title="previous page"><span class="section-number">9.4. </span>Type Checking</a>
-    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">9.6. </span>Summary</a>
+    <a class='left-prev' id="prev-link" href="typecheck.html" title="previous page"><span class="section-number">9.5. </span>Type Checking</a>
+    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">9.7. </span>Summary</a>
 
         </div>
         
