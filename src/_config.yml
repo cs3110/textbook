@@ -1,0 +1,90 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: 'OCaml Programming: Correct + Efficient + Beautiful'
+author: Michael R. Clarkson et al.
+copyright: "2021"
+logo: lambda-light.png
+only_build_toc_files: true
+
+sphinx:
+  config:
+    # Specifying the language can improve accessibility in screen readers
+    # and translators
+    language: en
+    # All files from these paths will be included in the generated
+    # HTML output, even if they are not linked from any page
+    html_extra_path: ['assets']
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: cache
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/cs3110/textbook # Online location of your book
+  path_to_book: src  # Optional path to your book, relative to the repository root
+  branch: jupyter  # Which branch of the repository should be used when creating links (optional)
+
+launch_buttons:
+  thebe: true
+  # To disable Binder launch, comment out the Thebe line above and uncomment
+  # the binderhub_url line below.
+  # binderhub_url: ""
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  home_page_in_navbar: false
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+  comments:
+    hypothesis: true
+
+parse:
+  myst_substitutions:
+    # The video_embed substitution below is essentially a macro to avoid
+    # repeating all of the YouTube embed code for each video in the book.
+    # The %%VID%% part of the src attribute is replaced by the YouTube video
+    # id at each place where a video is linked in the textbook source.
+    video_embed: '<div class="container16x9"><iframe src="https://www.youtube.com/embed/%%VID%%" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+    # Macros for exercises. It's tricky to get these to work for both HTML
+    # and PDF. If you make any changes, be sure to check both outputs. If you
+    # change the star symbol, make sure to change it at the end of chapter 1,
+    # too.
+    ex: |
+      ---
+      **Exercise: %%_NAME%% [%%STARS%%]**
+    ex1: '{{ ex | replace("%%STARS%%", "&starf;") | replace("%%_NAME%%", "%%NAME%%")}}'
+    ex2: '{{ ex | replace("%%STARS%%", "&starf;&starf;") | replace("%%_NAME%%", "%%NAME%%")}}'
+    ex3: '{{ ex | replace("%%STARS%%", "&starf;&starf;&starf;") | replace("%%_NAME%%", "%%NAME%%")}}'
+    ex4: '{{ ex | replace("%%STARS%%", "&starf;&starf;&starf;&starf;") | replace("%%_NAME%%", "%%NAME%%")}}'
+    solutions: |
+      Solutions to exercises are available to students in Cornell's CS 3110.
+      Instructors at other institutions are welcome to contact Michael Clarkson
+      for access.
+    code_link: '<a href="../../code/%%NAME%%">%%NAME%%</a>'
+  # Extensions to enable in the myst parser. See
+  # https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+  myst_enable_extensions:
+    - amsmath
+    - colon_fence
+    # - deflist
+    - dollarmath
+    # - html_admonition
+    # - html_image
+    - linkify
+    # - replacements
+    # - smartquotes
+    - substitution
