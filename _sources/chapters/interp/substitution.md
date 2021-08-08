@@ -103,6 +103,8 @@ define the relations for SimPL.
 
 ## Evaluating SimPL in the Substitution Model
 
+{{ video_embed | replace("%%VID%%", "J-DkHQ37kaM")}}
+
 Let's begin by defining a small-step substitution-model semantics for SimPL.
 That is, we're going to define a relation `-->` that represents how an
 expression take a single step at a time, and we'll implement variables using
@@ -283,6 +285,8 @@ For now, we can add this rule:
 let x = v1 in e2 --> e2{v1/x}
 ```
 
+{{ video_embed | replace("%%VID%%", "c_11LeMoPtk")}}
+
 **Variables.** Note how the let expression rule eliminates a variable from
 showing up in the body expression: the variable's name is replaced by the value
 that variable should have. So, we should *never* reach the point of attempting
@@ -386,6 +390,8 @@ let rec eval_small (e : expr) : expr =
 ```
 
 ## Defining the Big-Step Relation
+
+{{ video_embed | replace("%%VID%%", "P456qGgeoYs")}}
 
 Recall that our goal in defining the big-step relation `==>` is to make sure it
 agrees with the multistep relation `-->*`.
@@ -574,6 +580,8 @@ going inside the body, we'd get a different result:
   = 5
 ```
 
+{{ video_embed | replace("%%VID%%", "4eywIvwhTfs")}}
+
 **Example 1:**
 
 ```text
@@ -607,7 +615,11 @@ let x = 2 in x + 1
 --> 1
 ```
 
+{{ video_embed | replace("%%VID%%", "lBqdzVTSdCc")}}
+
 ## Implementing Substitution
+
+{{ video_embed | replace("%%VID%%", "gttjeAd5IS0")}}
 
 The definitions above are easy to turn into OCaml code. Note that, although we
 write `v` below, the function is actually able to substitute any expression for
@@ -638,7 +650,13 @@ interpreter can be downloaded here: {{ code_link | replace("%%NAME%%",
 "simpl.zip") }}. It includes some rudimentary test cases, as well as makefile
 targets that you will find helpful.
 
+{{ video_embed | replace("%%VID%%", "348PIgywcss")}}
+
+{{ video_embed | replace("%%VID%%", "Y2hiUqlfW8U")}}
+
 ## Capture-Avoiding Substitution
+
+{{ video_embed | replace("%%VID%%", "WrHrKnbRc1w")}}
 
 The definition of substitution for SimPL was a little tricky but not too
 complicated. It turns out, though, that for other languages, the definition gets
@@ -862,6 +880,8 @@ also missing; core OCaml does not have any type checking. Nonetheless, there is
 enough in this core language to keep us entertained.
 
 ## Evaluating Core OCaml in the Substitution Model
+
+{{ video_embed | replace("%%VID%%", "ozocssmPMFY")}}
 
 Let's define the small and big step relations for Core OCaml. To be honest,
 there won't be much that's surprising at this point; we've seen just about

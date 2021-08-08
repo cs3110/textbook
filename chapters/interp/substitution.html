@@ -907,6 +907,7 @@ tends to be more similar to how an interpreter is implemented.</p>
 define the relations for SimPL.</p>
 <div class="section" id="evaluating-simpl-in-the-substitution-model">
 <h2><span class="section-number">9.3.1. </span>Evaluating SimPL in the Substitution Model<a class="headerlink" href="#evaluating-simpl-in-the-substitution-model" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/J-DkHQ37kaM" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s begin by defining a small-step substitution-model semantics for SimPL.
 That is, we’re going to define a relation <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> that represents how an
 expression take a single step at a time, and we’ll implement variables using
@@ -1046,6 +1047,7 @@ definition.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = v1 in e2 --&gt; e2{v1/x}
 </pre></div>
 </div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/c_11LeMoPtk" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p><strong>Variables.</strong> Note how the let expression rule eliminates a variable from
 showing up in the body expression: the variable’s name is replaced by the value
 that variable should have. So, we should <em>never</em> reach the point of attempting
@@ -1141,6 +1143,7 @@ which the right-hand side is a value. That’s easy to implement:</p>
 </div>
 <div class="section" id="defining-the-big-step-relation">
 <h2><span class="section-number">9.3.4. </span>Defining the Big-Step Relation<a class="headerlink" href="#defining-the-big-step-relation" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/P456qGgeoYs" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Recall that our goal in defining the big-step relation <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code> is to make sure it
 agrees with the multistep relation <code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code>.</p>
 <p>Constants are easy, because they big-step to themselves:</p>
@@ -1296,6 +1299,7 @@ going inside the body, we’d get a different result:</p>
   = 5
 </pre></div>
 </div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/4eywIvwhTfs" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p><strong>Example 1:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x = 2 in x + 1
 --&gt; (x + 1){2/x}
@@ -1323,9 +1327,11 @@ going inside the body, we’d get a different result:</p>
 --&gt; 1
 </pre></div>
 </div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/lBqdzVTSdCc" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </div>
 <div class="section" id="implementing-substitution">
 <h2><span class="section-number">9.3.7. </span>Implementing Substitution<a class="headerlink" href="#implementing-substitution" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/gttjeAd5IS0" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The definitions above are easy to turn into OCaml code. Note that, although we
 write <code class="docutils literal notranslate"><span class="pre">v</span></code> below, the function is actually able to substitute any expression for
 a variable, not just a value. The interpreter will only ever call this function
@@ -1352,9 +1358,12 @@ on a value, though.</p>
 <p>We’ve completed developing our SimPL interpreter. Recall that the finished
 interpreter can be downloaded here: <a href="../../code/simpl.zip">simpl.zip</a>. It includes some rudimentary test cases, as well as makefile
 targets that you will find helpful.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/348PIgywcss" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/Y2hiUqlfW8U" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </div>
 <div class="section" id="capture-avoiding-substitution">
 <h2><span class="section-number">9.3.9. </span>Capture-Avoiding Substitution<a class="headerlink" href="#capture-avoiding-substitution" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/WrHrKnbRc1w" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The definition of substitution for SimPL was a little tricky but not too
 complicated. It turns out, though, that for other languages, the definition gets
 more complicated.</p>
@@ -1539,6 +1548,7 @@ enough in this core language to keep us entertained.</p>
 </div>
 <div class="section" id="evaluating-core-ocaml-in-the-substitution-model">
 <h2><span class="section-number">9.3.11. </span>Evaluating Core OCaml in the Substitution Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-substitution-model" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/ozocssmPMFY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s define the small and big step relations for Core OCaml. To be honest,
 there won’t be much that’s surprising at this point; we’ve seen just about
 everything already in SimPL and in the lambda calculus.</p>

@@ -1,5 +1,7 @@
 # Environment Model
 
+{{ video_embed | replace("%%VID%%", "cYnSVZIczJE")}}
+
 So far we've been using the substitution model to evaluate programs. It's a
 great mental model for evaluation, and it's commonly used in programming
 languages theory.
@@ -46,7 +48,13 @@ We'll concentrate in the rest of this chapter on the big-step version of the
 environment model. It would of course be possible to define a small-step
 version, too.
 
+{{ video_embed | replace("%%VID%%", "93CN7gV_G2w")}}
+
+{{ video_embed | replace("%%VID%%", "YZO-vQohBYA")}}
+
 ## Evaluating the Lambda Calculus in the Environment Model
+
+{{ video_embed | replace("%%VID%%", "l0Db3KW5X_U")}}
 
 Recall that the lambda calculus is the fragment of a functional language
 involving functions and application:
@@ -148,7 +156,9 @@ And the result is therefore `1`. Obviously, `1` and `2` are different answers!
 
 What went wrong??  It has to do with scope.
 
-## Dynamic vs. Static Scope
+## Lexical vs. Dynamic Scope
+
+{{ video_embed | replace("%%VID%%", "s9kiXx0cSb4")}}
 
 There are two different ways to understand the scope of a variable: variables
 can be *dynamically* scoped or *lexically* scoped. It all comes down to the
@@ -206,6 +216,8 @@ exception handler, just like how dynamic scope uses the "most recent" binding of
 variable.
 
 ## A Second Attempt at Evaluating the Lambda Calculus in the Environment Model
+
+{{ video_embed | replace("%%VID%%", "Y0V_92x5J-Q")}}
 
 The question then becomes, how do we implement lexical scope? It seems to
 require time travel, because function bodies need to be evaluated in old dynamic
@@ -273,6 +285,8 @@ definition named `scope` that you can use to switch between lexical and dynamic
 scope.
 
 ## Evaluating Core OCaml in the Environment Model
+
+{{ video_embed | replace("%%VID%%", "z2ktAgYTCRw")}}
 
 There isn't anything new in the (big step) environment model semantics of Core
 OCaml, now that we know about closures, but for sake of completeness let's state
@@ -364,3 +378,5 @@ and let expression) extends the environment with a new binding:
   if  <env, e1> ==> v1
   and <env[x -> v1], e2> ==> v2
 ```
+
+{{ video_embed | replace("%%VID%%", "VZTrEYb6PPk")}}
