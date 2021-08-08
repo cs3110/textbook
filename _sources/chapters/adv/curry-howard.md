@@ -16,11 +16,15 @@ kernelspec:
 # The Curry-Howard Correspondence
 
 ```{note}
-A *lagniappe* is a small and unexpected gift. Please enjoy this little chapter,
-which contains one of the most beautiful results in the entire book. It is based
-on the paper [Propositions as Types][pat] by Philip Wadler. You can watch an
-entertaining [recorded lecture][pat-lambda-days] lecture by Prof. Wadler on it.
+A *lagniappe* is a small and unexpected gift &mdash; a little "something extra".
+Please enjoy this little chapter, which contains one of the most beautiful
+results in the entire book. It is based on the paper
+[Propositions as Types][pat] by Philip Wadler. You can watch an entertaining
+[recorded lecture][pat-lambda-days] lecture by Prof. Wadler on it, in addition
+to our lecture below.
 ```
+
+{{ video_embed | replace("%%VID%%", "GdcOy6zVFC4")}}
 
 As we observed long ago, OCaml is a language in the ML family, and ML was
 originally designed as the <u>m</u>eta <u>l</u>anguage for a theorem

@@ -1,5 +1,7 @@
 # Type Checking
 
+{{ video_embed | replace("%%VID%%", "_whuqDIWiO0")}}
+
 Earlier, we skipped over the type checking phase. Let's come back to that now.
 After lexing and parsing, the next phase of compilation is semantic analysis,
 and the primary task of semantic analysis is type checking.
@@ -42,6 +44,8 @@ program is well typed. In OCaml, for example, there are many built-in
 identifiers that are always in scope, such as everything in the `Stdlib` module.
 
 ## A Type System for SimPL
+
+{{ video_embed | replace("%%VID%%", "9Lxz8qS3uQ8")}}
 
 Recall the syntax of SimPL:
 
@@ -117,6 +121,8 @@ ctx |- if e1 then e2 else e3 : t
 
 ## A Type Checker for SimPL
 
+{{ video_embed | replace("%%VID%%", "BN_nIMgFZ_o")}}
+
 Let's implement a type checker for SimPL, based on the type system we defined in
 the previous section. You can download the completed type checker as part of the
 SimPL interpreter: {{ code_link | replace("%%NAME%%", "simpl.zip") }}
@@ -179,6 +185,8 @@ and only if `ctx |- e : t`. Note that the `typeof` function produces the type as
 output, so the function is actually inferring the type! That inference is easy
 for SimPL; it would be considerably harder for larger languages.
 
+{{ video_embed | replace("%%VID%%", "m3bt3BYB0vQ")}}
+
 Let's start with the base cases:
 
 ```ocaml
@@ -207,6 +215,8 @@ checker, on the other hand, needs to take action and report ill typed programs.
 Our `typeof` function does that by raising exceptions. The `lookup` function, in
 particular, will raise an exception if we attempt to lookup a variable that
 hasn't been bound in the context.
+
+{{ video_embed | replace("%%VID%%", "TiKPU5rYeF8")}}
 
 Let's continue with the recursive cases:
 
@@ -259,6 +269,8 @@ let typecheck e =
 ```
 
 ## Type Safety
+
+{{ video_embed | replace("%%VID%%", "MrmEIbDOfnk")}}
 
 What is the purpose of a type system? There might be many, but one of the
 primary purposes is to ensure that certain run-time errors don't occur. Now that

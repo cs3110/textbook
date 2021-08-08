@@ -779,6 +779,7 @@
                 
   <div class="section" id="type-checking">
 <h1><span class="section-number">9.5. </span>Type Checking<a class="headerlink" href="#type-checking" title="Permalink to this headline">¶</a></h1>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/_whuqDIWiO0" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Earlier, we skipped over the type checking phase. Let’s come back to that now.
 After lexing and parsing, the next phase of compilation is semantic analysis,
 and the primary task of semantic analysis is type checking.</p>
@@ -815,6 +816,7 @@ program is well typed. In OCaml, for example, there are many built-in
 identifiers that are always in scope, such as everything in the <code class="docutils literal notranslate"><span class="pre">Stdlib</span></code> module.</p>
 <div class="section" id="a-type-system-for-simpl">
 <h2><span class="section-number">9.5.1. </span>A Type System for SimPL<a class="headerlink" href="#a-type-system-for-simpl" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/9Lxz8qS3uQ8" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Recall the syntax of SimPL:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
     | if e1 then e2 else e3
@@ -875,6 +877,7 @@ branches must have the same type.</p>
 </div>
 <div class="section" id="a-type-checker-for-simpl">
 <h2><span class="section-number">9.5.2. </span>A Type Checker for SimPL<a class="headerlink" href="#a-type-checker-for-simpl" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/BN_nIMgFZ_o" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s implement a type checker for SimPL, based on the type system we defined in
 the previous section. You can download the completed type checker as part of the
 SimPL interpreter: <a href="../../code/simpl.zip">simpl.zip</a></p>
@@ -928,6 +931,7 @@ function <code class="docutils literal notranslate"><span class="pre">typeof</sp
 and only if <code class="docutils literal notranslate"><span class="pre">ctx</span> <span class="pre">|-</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">t</span></code>. Note that the <code class="docutils literal notranslate"><span class="pre">typeof</span></code> function produces the type as
 output, so the function is actually inferring the type! That inference is easy
 for SimPL; it would be considerably harder for larger languages.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/m3bt3BYB0vQ" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s start with the base cases:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Context</span>
 
@@ -954,6 +958,7 @@ checker, on the other hand, needs to take action and report ill typed programs.
 Our <code class="docutils literal notranslate"><span class="pre">typeof</span></code> function does that by raising exceptions. The <code class="docutils literal notranslate"><span class="pre">lookup</span></code> function, in
 particular, will raise an exception if we attempt to lookup a variable that
 hasn’t been bound in the context.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/TiKPU5rYeF8" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s continue with the recursive cases:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="o">...</span>
   <span class="o">|</span> <span class="nc">Let</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">e1</span><span class="o">,</span> <span class="n">e2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">typeof_let</span> <span class="n">ctx</span> <span class="n">x</span> <span class="n">e1</span> <span class="n">e2</span>
@@ -1000,6 +1005,7 @@ typed:</p>
 </div>
 <div class="section" id="type-safety">
 <h2><span class="section-number">9.5.3. </span>Type Safety<a class="headerlink" href="#type-safety" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/MrmEIbDOfnk" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>What is the purpose of a type system? There might be many, but one of the
 primary purposes is to ensure that certain run-time errors don’t occur. Now that
 we know how to formalize type systems with the <code class="docutils literal notranslate"><span class="pre">|-</span></code> relation and evaluation with

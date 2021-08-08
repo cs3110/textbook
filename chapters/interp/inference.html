@@ -794,7 +794,7 @@
                 
   <div class="section" id="type-inference">
 <h1><span class="section-number">9.6. </span>Type Inference<a class="headerlink" href="#type-inference" title="Permalink to this headline">¶</a></h1>
-<p>Java and OCaml are <em>statically typed</em> languages, meaning every binding has a
+<p>OCaml and Java are <em>statically typed</em> languages, meaning every binding has a
 type that is determined at <em>compile time</em>—that is, before any part of the
 program is executed. The type-checker is a compile-time procedure that either
 accepts or rejects a program. By contrast, JavaScript and Ruby are
@@ -815,6 +815,7 @@ in practice they are often merged into a single procedure called <em>type
 reconstruction</em>.</p>
 <div class="section" id="ocaml-type-reconstruction">
 <h2><span class="section-number">9.6.1. </span>OCaml Type Reconstruction<a class="headerlink" href="#ocaml-type-reconstruction" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/_yDo9Q9EOHY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>At a very high level, OCaml’s type reconstruction algorithm works as follows:</p>
 <ul class="simple">
 <li><p>Determine the types of definitions in order, using the types of earlier
@@ -935,6 +936,7 @@ return type of <code class="docutils literal notranslate"><span class="pre">(</s
 <p>The type inference algorithm follows the same idea of generating unknown types,
 collecting constraints on them, and using the constraints to solve for the type
 of the expression.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/hrl9Q68dIfQ" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s introduce a new quaternary relation <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">|-</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">-|</span> <span class="pre">C</span></code>, which should be
 read as follows: “in environment <code class="docutils literal notranslate"><span class="pre">env</span></code>, expression <code class="docutils literal notranslate"><span class="pre">e</span></code> is inferred to have type
 <code class="docutils literal notranslate"><span class="pre">t</span></code> and generates constraint set <code class="docutils literal notranslate"><span class="pre">C</span></code>.” A constraint is an equation of the form
@@ -948,6 +950,7 @@ toplevel: you enter an expression, and it tells you the type. But around that is
 an environment and constraint set <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">|-</span> <span class="pre">...</span> <span class="pre">-|</span> <span class="pre">C</span></code> that is invisible to you.
 So, the turnstiles around the outside show the parts of type inference that the
 toplevel does not.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/NkAt9eApGSw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The easiest parts of inference are constants:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- i : int -| {}
 
@@ -966,7 +969,9 @@ It’s an unbound name error.</p>
 <p>The remaining rules are at their core the same as the type-checking rules we saw
 previously, but they each generate a <em>type variable</em> and possibly some
 constraints on that type variable.</p>
-<p><strong>If.</strong> Here’s the <code class="docutils literal notranslate"><span class="pre">if</span></code> rule. We’ll explain it below.</p>
+<p><strong>If.</strong></p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/0EHUTbWnYWw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>Here’s the rule for <code class="docutils literal notranslate"><span class="pre">if</span></code> expressions:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- if e1 then e2 else e3 : &#39;t -| C1, C2, C3, t1 = bool, &#39;t = t2, &#39;t = t3
   if fresh &#39;t
   and env |- e1 : t1 -| C1
@@ -1004,8 +1009,9 @@ is an identifier, not a meta-variable.</p>
 <code class="docutils literal notranslate"><span class="pre">{},</span> <span class="pre">{},</span> <span class="pre">{},</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">bool,</span> <span class="pre">'t</span> <span class="pre">=</span> <span class="pre">int,</span> <span class="pre">'t</span> <span class="pre">=</span> <span class="pre">int</span></code>, but of course that simplifies to
 just <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">=</span> <span class="pre">bool,</span> <span class="pre">'t</span> <span class="pre">=</span> <span class="pre">int</span></code>. From that constraint set we can see that the type
 of <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">true</span> <span class="pre">then</span> <span class="pre">1</span> <span class="pre">else</span> <span class="pre">0</span></code> must be <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
-<p><strong>Anonymous functions.</strong> Since there is no type annotation on <code class="docutils literal notranslate"><span class="pre">x</span></code>, its type must
-be inferred:</p>
+<p><strong>Anonymous functions.</strong></p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/y2Y2aRnxncE" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>Since there is no type annotation on <code class="docutils literal notranslate"><span class="pre">x</span></code>, its type must be inferred:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- fun x -&gt; e : &#39;t1 -&gt; t2 -| C
   if fresh &#39;t1
   and env, x : &#39;t1 |- e : t2 -| C
@@ -1026,8 +1032,10 @@ through the inference:</p>
 </div>
 <p>The inferred type of the function is <code class="docutils literal notranslate"><span class="pre">'t1</span> <span class="pre">-&gt;</span> <span class="pre">'t</span></code>, with constraints <code class="docutils literal notranslate"><span class="pre">'t1</span> <span class="pre">=</span> <span class="pre">bool</span></code>
 and <code class="docutils literal notranslate"><span class="pre">'t</span> <span class="pre">=</span> <span class="pre">int</span></code>. Simplifying that, the function’s type is <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p>
-<p><strong>Function application.</strong> The type of the entire application must be inferred,
-because we don’t yet know anything about the types of either subexpression:</p>
+<p><strong>Function application.</strong></p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/2HRcvmQBWIM" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p>The type of the entire application must be inferred, because we don’t yet know
+anything about the types of either subexpression:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- e1 e2 : &#39;t -| C1, C2, t1 = t2 -&gt; &#39;t
   if fresh &#39;t
   and env |- e1 : t1 -| C1
@@ -1064,6 +1072,7 @@ we are left with</p>
 </div>
 <div class="section" id="solving-constraints">
 <h2><span class="section-number">9.6.3. </span>Solving Constraints<a class="headerlink" href="#solving-constraints" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/o1wT8FC9hpE" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>What does it mean to solve a set of constraints? Since constraints are equations
 on types, it’s much like solving a system of equations in algebra. We want to
 solve for the values of the variables appearing in those equations. By
@@ -1088,6 +1097,7 @@ identical on both sides. For example, in algebra we might have:</p>
 we say that the substitutions <code class="docutils literal notranslate"><span class="pre">{1</span> <span class="pre">/</span> <span class="pre">x}</span></code> and <code class="docutils literal notranslate"><span class="pre">{2</span> <span class="pre">/</span> <span class="pre">y}</span></code> together <em>unify</em> that set
 of equations, because they make each equation “unite” such that its left side is
 identical to its right side.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/cNqPY5MSutM" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Solving systems of equations on types is similar. Just as we found numbers to
 substitute for variables above, we now want to find types to substitute for type
 variables, and thereby unify the set of equations.</p>
@@ -1224,6 +1234,7 @@ possible for an expression.</p>
 </pre></div>
 </div>
 <p>It’s not much code, but this will get quite involved!</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/trmq3wYcUxU" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We start in the initial environment <code class="docutils literal notranslate"><span class="pre">I</span></code> that, among other things, maps <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span></code>
 to <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I |- fun f -&gt; fun x -&gt; f (( + ) x 1)
@@ -1465,6 +1476,7 @@ constraints can be processed in many different orders, there are many possible
 error messages that could be produced. Figuring out which one will lead the
 programmer to the root cause of an error, instead of some downstream consequence
 of it, is an area of ongoing research.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/1jjGyPA9o1g" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </div>
 <div class="section" id="let-polymorphism">
 <h2><span class="section-number">9.6.5. </span>Let Polymorphism<a class="headerlink" href="#let-polymorphism" title="Permalink to this headline">¶</a></h2>
@@ -1476,6 +1488,7 @@ of it, is an area of ongoing research.</p>
     | let x = e1 in e2   (* new *)
 </pre></div>
 </div>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/tB8sDHFT54I" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>It turns out type inference for them is considerably trickier than might be
 expected. The naive approach would be to add this constraint generation rule:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- let x = e1 in e2 : t2 -| C1, C2
@@ -1527,6 +1540,7 @@ point unification will fail, declaring the program to be ill typed.</p>
 for an unknown but <strong>fixed</strong> type. At each application of <code class="docutils literal notranslate"><span class="pre">id</span></code>, we want to let
 <code class="docutils literal notranslate"><span class="pre">'a</span></code> become a <strong>different</strong> type, instead of forcing it to always be the same
 type.</p>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/me-Ll7mjNh8" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The solution to the problem of polymorphism for <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions is not simple.
 It requires us to introduce a new kind of type: a <em>type scheme</em>. Type schemes
 resemble <em>universal quantification</em> from mathematical logic. For example, in
@@ -1691,6 +1705,7 @@ discovers no new equalities from the environment, so <code class="docutils liter
 </div>
 <div class="section" id="polymorphism-and-mutability">
 <h2><span class="section-number">9.6.6. </span>Polymorphism and Mutability<a class="headerlink" href="#polymorphism-and-mutability" title="Permalink to this headline">¶</a></h2>
+<div class="container16x9"><iframe src="https://www.youtube.com/embed/6tj9WrRqPeU" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>There is yet one more complication to type inference for <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions. It
 appears when we add mutable references to the language. Consider this example
 code, which does not type check in OCaml:</p>

@@ -1,6 +1,6 @@
 # Type Inference
 
-Java and OCaml are *statically typed* languages, meaning every binding has a
+OCaml and Java are *statically typed* languages, meaning every binding has a
 type that is determined at *compile time*&mdash;that is, before any part of the
 program is executed. The type-checker is a compile-time procedure that either
 accepts or rejects a program. By contrast, JavaScript and Ruby are
@@ -22,6 +22,8 @@ in practice they are often merged into a single procedure called *type
 reconstruction*.
 
 ## OCaml Type Reconstruction
+
+{{ video_embed | replace("%%VID%%", "_yDo9Q9EOHY")}}
 
 At a very high level, OCaml's type reconstruction algorithm works as follows:
 
@@ -160,6 +162,8 @@ The type inference algorithm follows the same idea of generating unknown types,
 collecting constraints on them, and using the constraints to solve for the type
 of the expression.
 
+{{ video_embed | replace("%%VID%%", "hrl9Q68dIfQ")}}
+
 Let's introduce a new quaternary relation `env |- e : t -| C`, which should be
 read as follows: "in environment `env`, expression `e` is inferred to have type
 `t` and generates constraint set `C`." A constraint is an equation of the form
@@ -175,6 +179,8 @@ toplevel: you enter an expression, and it tells you the type. But around that is
 an environment and constraint set `env |- ... -| C` that is invisible to you.
 So, the turnstiles around the outside show the parts of type inference that the
 toplevel does not.
+
+{{ video_embed | replace("%%VID%%", "NkAt9eApGSw")}}
 
 The easiest parts of inference are constants:
 
@@ -202,7 +208,11 @@ The remaining rules are at their core the same as the type-checking rules we saw
 previously, but they each generate a _type variable_ and possibly some
 constraints on that type variable.
 
-**If.** Here's the `if` rule. We'll explain it below.
+**If.**
+
+{{ video_embed | replace("%%VID%%", "0EHUTbWnYWw")}}
+
+Here's the rule for `if` expressions:
 
 ```text
 env |- if e1 then e2 else e3 : 't -| C1, C2, C3, t1 = bool, 't = t2, 't = t3
@@ -250,8 +260,11 @@ The full constraint set generated is
 just `bool = bool, 't = int`. From that constraint set we can see that the type
 of `if true then 1 else 0` must be `int`.
 
-**Anonymous functions.** Since there is no type annotation on `x`, its type must
-be inferred:
+**Anonymous functions.**
+
+{{ video_embed | replace("%%VID%%", "y2Y2aRnxncE")}}
+
+Since there is no type annotation on `x`, its type must be inferred:
 
 ```text
 env |- fun x -> e : 't1 -> t2 -| C
@@ -278,8 +291,12 @@ through the inference:
 The inferred type of the function is `'t1 -> 't`, with constraints `'t1 = bool`
 and `'t = int`. Simplifying that, the function's type is `bool -> int`.
 
-**Function application.** The type of the entire application must be inferred,
-because we don't yet know anything about the types of either subexpression:
+**Function application.**
+
+{{ video_embed | replace("%%VID%%", "2HRcvmQBWIM")}}
+
+The type of the entire application must be inferred, because we don't yet know
+anything about the types of either subexpression:
 
 ```text
 env |- e1 e2 : 't -| C1, C2, t1 = t2 -> 't
@@ -325,6 +342,8 @@ Hence the type of `( + ) 1` is `int -> int`.
 
 ## Solving Constraints
 
+{{ video_embed | replace("%%VID%%", "o1wT8FC9hpE")}}
+
 What does it mean to solve a set of constraints? Since constraints are equations
 on types, it's much like solving a system of equations in algebra. We want to
 solve for the values of the variables appearing in those equations. By
@@ -355,6 +374,8 @@ In programming languages terminology (though perhaps not high-school algebra),
 we say that the substitutions `{1 / x}` and `{2 / y}` together *unify* that set
 of equations, because they make each equation "unite" such that its left side is
 identical to its right side.
+
+{{ video_embed | replace("%%VID%%", "cNqPY5MSutM")}}
 
 Solving systems of equations on types is similar. Just as we found numbers to
 substitute for variables above, we now want to find types to substitute for type
@@ -521,6 +542,8 @@ fun f -> fun x -> f (( + ) x 1)
 ```
 
 It's not much code, but this will get quite involved!
+
+{{ video_embed | replace("%%VID%%", "trmq3wYcUxU")}}
 
 We start in the initial environment `I` that, among other things, maps `( + )`
 to `int -> int -> int`.
@@ -813,6 +836,8 @@ error messages that could be produced. Figuring out which one will lead the
 programmer to the root cause of an error, instead of some downstream consequence
 of it, is an area of ongoing research.
 
+{{ video_embed | replace("%%VID%%", "1jjGyPA9o1g")}}
+
 ## Let Polymorphism
 
 Now we'll add `let` expressions to our little language:
@@ -824,6 +849,8 @@ e ::= x | i | b | e1 bop e2
     | e1 e2
     | let x = e1 in e2   (* new *)
 ```
+
+{{ video_embed | replace("%%VID%%", "tB8sDHFT54I")}}
 
 It turns out type inference for them is considerably trickier than might be
 expected. The naive approach would be to add this constraint generation rule:
@@ -885,6 +912,8 @@ The problem is that the `'a` type variable in the inferred type of `id` stands
 for an unknown but **fixed** type. At each application of `id`, we want to let
 `'a` become a **different** type, instead of forcing it to always be the same
 type.
+
+{{ video_embed | replace("%%VID%%", "me-Ll7mjNh8")}}
 
 The solution to the problem of polymorphism for `let` expressions is not simple.
 It requires us to introduce a new kind of type: a *type scheme*. Type schemes
@@ -1086,6 +1115,8 @@ discovers no new equalities from the environment, so `u1 = 'a -> 'a` and
 `id`.
 
 ## Polymorphism and Mutability
+
+{{ video_embed | replace("%%VID%%", "6tj9WrRqPeU")}}
 
 There is yet one more complication to type inference for `let` expressions. It
 appears when we add mutable references to the language. Consider this example
