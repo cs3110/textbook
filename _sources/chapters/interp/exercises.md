@@ -23,15 +23,17 @@ each one is an error, and whether the error occurs during parsing or lexing.
 * `parse "3+"`
 
 <!--------------------------------------------------------------------------->
-{{ ex1 | replace("%%NAME%%", "parser.ml and lexer.ml")}}
+{{ ex1 | replace("%%NAME%%", "generated parser and lexer")}}
 
-Open `_build/parser.ml`, which is the module generated automatically by menhir
-from `parser.mly`. Skim through the file to appreciate not having to write the
-parser yourself.
+Run OCamlbuild to generate the parser and lexer in the `_build` directory.
 
-Also open `_build/lexer.ml`, which is the module generated automatically by
-ocamllex from `lexer.mll`. Skim through the file to appreciate not having to
-write the lexer yourself.
+Open `parser.ml`, which is the module generated automatically by menhir from
+`parser.mly`. Skim through the file to appreciate not having to write the parser
+yourself.
+
+Also open `lexer.ml`, which is the module generated automatically by ocamllex
+from `lexer.mll`. Skim through the file to appreciate not having to write the
+lexer yourself.
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "simpl ids")}}

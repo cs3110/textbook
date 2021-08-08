@@ -726,7 +726,7 @@
             href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/exercises.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/jupyter/src/chapters/interp/exercises.md"><button
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/master/src/chapters/interp/exercises.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -780,13 +780,14 @@ each one is an error, and whether the error occurs during parsing or lexing.</p>
 </ul>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
-<p><strong>Exercise: <a class="reference external" href="http://parser.ml">parser.ml</a> and <a class="reference external" href="http://lexer.ml">lexer.ml</a> [★]</strong></p>
-<p>Open <code class="docutils literal notranslate"><span class="pre">_build/parser.ml</span></code>, which is the module generated automatically by menhir
-from <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code>. Skim through the file to appreciate not having to write the
-parser yourself.</p>
-<p>Also open <code class="docutils literal notranslate"><span class="pre">_build/lexer.ml</span></code>, which is the module generated automatically by
-ocamllex from <code class="docutils literal notranslate"><span class="pre">lexer.mll</span></code>. Skim through the file to appreciate not having to
-write the lexer yourself.</p>
+<p><strong>Exercise: generated parser and lexer [★]</strong></p>
+<p>Run OCamlbuild to generate the parser and lexer in the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">parser.ml</span></code>, which is the module generated automatically by menhir from
+<code class="docutils literal notranslate"><span class="pre">parser.mly</span></code>. Skim through the file to appreciate not having to write the parser
+yourself.</p>
+<p>Also open <code class="docutils literal notranslate"><span class="pre">lexer.ml</span></code>, which is the module generated automatically by ocamllex
+from <code class="docutils literal notranslate"><span class="pre">lexer.mll</span></code>. Skim through the file to appreciate not having to write the
+lexer yourself.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: simpl ids [★★]</strong></p>
@@ -1313,7 +1314,7 @@ definition:</p>
         requestKernel: true,
         binderOptions: {
             repo: "cs3110/textbook",
-            ref: "jupyter",
+            ref: "master",
         },
         codeMirrorConfig: {
             theme: "abcdef",

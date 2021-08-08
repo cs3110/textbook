@@ -5,18 +5,8 @@ emphasis on semantics and software engineering. This book is the textbook for CS
 3110 Data Structures and Functional Programming at Cornell University. A past
 title of this book was "Functional Programming in OCaml".
 
-**THIS EDITION IS IN PROGRESS AND INCOMPLETE.** If you have stumbled across this
-during Summer 2021, please know that I'm in the middle of converting from an
-[old version][old] that used Gitbook to this new version based on Jupyter Book.
-I'm porting each chapter in order, so it will become more complete as the summer
-goes on.
-
-[old]: https://www.cs.cornell.edu/courses/cs3110/2021sp/textbook/
-
-<!--
 **Fall 2021 Edition.** For the most recent version of this work, see the most
 recent [CS 3110 course website](https://www.cs.cornell.edu/courses/cs3110).
--->
 
 **Authors.** This book is based on courses taught by Michael R. Clarkson, Robert
 L. Constable, Nate Foster, Michael D. George, Dan Grossman, Daniel P.

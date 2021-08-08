@@ -116,7 +116,7 @@ seen that representation twice so far [[1]][assoc-list] [[2]][map-module]. Here
 is an implementation of `Map` using it:
 
 [assoc-list]: ../data/assoc_list
-[map-module]: ../modules/functional_data_structures.html#maps
+[map-module]: ../modules/functional_data_structures
 
 ```{code-cell} ocaml
 :tags: ["hide-output"]

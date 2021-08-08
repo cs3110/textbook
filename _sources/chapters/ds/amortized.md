@@ -179,7 +179,7 @@ making the `dequeue` operation sometimes take more than constant time: whenever
 the front became empty, the back had to be reversed, which required an
 additional linear-time operation.
 
-[bq]: ../modules/functional_data_structures#queues
+[bq]: ../modules/functional_data_structures
 
 As we observed then, the reversal is relatively rare. It happens only when the
 front gets exhausted. Amortized analysis gives us a way to account for that. We
