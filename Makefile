@@ -1,45 +1,45 @@
-# REMOTE is the name of the git remote that hosts
-# https://github.com/cs3110/textbook. The gh-pages branch there is
-# automatically served by https://cs3110.github.io/textbook.
-REMOTE=public
+.PHONY: help notebooks stage deploy
 
-BOOK=src
-HTML=${BOOK}/_build/html
-LATEX=${BOOK}/_build/latex
-PDF_NAME=ocaml_programming.pdf
+BLUE=\033[0;34m
+NOCOLOR=\033[0m
 
-default: html
+help:
+	@echo "Please use 'make <target>' where <target> is one of:"
+	@echo "  install       to install the plugins needed to build the book."
+	@echo "  build         to build locally."
+	@echo "  serve         to serve locally."
+	@echo "  deploy        to deploy the book to the course website."
+	@echo "  clean         to remove all generated files."
 
 clean:
-	jupyter-book clean ${BOOK}
+	rm -rf _book
 
-html:
-	jupyter-book build ${BOOK}
+install:
+	gitbook install
 
-html-strict:
-	jupyter-book build -W ${BOOK}
-
-linkcheck:
-	jupyter-book build ${BOOK} --builder linkcheck
-
-view:
-	open ${HTML}/index.html
+build:
+	gitbook build
+	
+ebook: pdf epub mobi
 
 pdf:
-	jupyter-book build src --builder pdflatex
+	gitbook pdf . 3110.pdf
+	
+epub:
+	gitbook epub . 3110.epub
+	
+mobi:
+	gitbook mobi . 3110.mobi
 
-view-pdf:
-	open ${LATEX}/book.pdf
+serve:
+	sleep 10 && open http://127.0.0.1:4000/ &
+	gitbook serve
 
-deploy: html pdf
-	cp ${LATEX}/book.pdf ${HTML}/${PDF_NAME} \
-	  && ghp-import -n -p -f ${HTML} -r ${REMOTE} -m "Update textbook"
-
-wc:
-	find src/chapters -type f -name "*.md" -exec cat {} \; | pandoc -f commonmark -t plain | wc -w
-
-wcl:
-	find -E src/chapters -type f -name "*.md" -exec pandoc --lua-filter wordcount.lua {} \; | awk '{s+=$$1} END {print s}'
-
-ccl:
-	find -E src/chapters -type f -name "*.md" -exec pandoc --lua-filter codecount.lua {} \; | awk '{s+=$$1} END {print s}'
+deploy:
+	@echo "${BLUE}REMINDER: always 'make build' or 'make serve' before deploying.${NOCOLOR}"
+	@echo ""
+	@echo "${BLUE}Deploying book to course website.${NOCOLOR}"
+	@echo "${BLUE}=================================${NOCOLOR}"
+	./deploy.sh
+	@echo ""
+	@echo "${BLUE}    Done."
