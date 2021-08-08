@@ -1,7 +1,7 @@
 # REMOTE is the name of the git remote that hosts
 # https://github.com/cs3110/textbook. The gh-pages branch there is
 # automatically served by https://cs3110.github.io/textbook.
-REMOTE=public
+REMOTE=origin
 
 BOOK=src
 HTML=${BOOK}/_build/html
