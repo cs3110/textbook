@@ -1,0 +1,1166 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Installing OCaml &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1. Better Programming Through OCaml" href="../intro/intro.html" />
+    <link rel="prev" title="About This Book" href="about.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about.html">
+   About This Book
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Installing OCaml
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hop/intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/summary.html">
+     4.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hop/exercises.html">
+     4.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.5. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.6. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.7. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   6. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     6.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     6.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     6.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     6.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     6.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     6.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     6.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     6.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/alg_spec.html">
+     6.9. Algebraic Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     6.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     6.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   7. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     7.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     7.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     7.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     7.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     7.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/intro.html">
+   8. Data Structures
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/hash_tables.html">
+     8.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/amortized.html">
+     8.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/rb.html">
+     8.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/sequence.html">
+     8.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/memoization.html">
+     8.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/promises.html">
+     8.6. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/monads.html">
+     8.7. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/summary.html">
+     8.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/exercises.html">
+     8.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Language Implementation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../interp/intro.html">
+   9. Interpreters
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/calculator.html">
+     9.1. Example: Calculator
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/parsing.html">
+     9.2. Parsing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/substitution.html">
+     9.3. Substitution Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/environment.html">
+     9.4. Environment Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/typecheck.html">
+     9.5. Type Checking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/inference.html">
+     9.6. Type Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/summary.html">
+     9.7. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/exercises.html">
+     9.8. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Lagniappe
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../adv/curry-howard.html">
+   The Curry-Howard Correspondence
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/preface/install.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/preface/install.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/preface/install.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unix-development-environment">
+   Unix Development Environment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-opam">
+   Install OPAM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initialize-opam">
+   Initialize OPAM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-an-opam-switch">
+   Create an OPAM Switch
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#double-check-ocaml">
+   Double Check OCaml
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visual-studio-code">
+   Visual Studio Code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#double-check-vs-code">
+   Double Check VS Code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vs-code-settings">
+   VS Code Settings
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="installing-ocaml">
+<h1>Installing OCaml<a class="headerlink" href="#installing-ocaml" title="Permalink to this headline">¶</a></h1>
+<p>If all you need is a way to follow along with the code examples in this book,
+you don’t actually have to install OCaml! The code on each page is executable in
+your browser, as described earlier in this <a class="reference internal" href="about.html"><span class="doc std std-doc">Preface</span></a>.</p>
+<p>But if you want to do OCaml development on your own, you’ll need to install it
+on your machine. There’s no universally “right” way to do that. The instructions
+below are for Cornell’s CS 3110 course, which has goals and needs beyond just
+OCaml. Nonetheless, you might find them to be useful even if you’re not a
+student in the course.</p>
+<p>Here’s what we’re going to install:</p>
+<ul class="simple">
+<li><p>A Unix development environment</p></li>
+<li><p>OPAM, the OCaml Package Manager</p></li>
+<li><p>An OPAM <em>switch</em> with the OCaml compiler and some packages</p></li>
+<li><p>The Visual Studio Code editor, with OCaml support</p></li>
+</ul>
+<p>The installation process will rely heavily on the <em>terminal</em>, or text interface
+to your computer.  If you’re not too familiar with it, you might want to
+brush up with a <a class="reference external" href="https://ubuntu.com/tutorials/command-line-for-beginners">terminal tutorial</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If this is your first time installing development software, it’s worth pointing
+out that “close doesn’t count”: trying to proceed past an error usually just
+leads to worse errors, and sadness. That’s because we’re installing a kind of
+“tower” of software, with each level of the tower building on the previous. If
+you’re not building on a solid foundation, the whole thing might collapse. The
+good news is that if you do get an error, you’re probably not alone. A quick
+google search will often turn up solutions that others have discovered. Of
+course, do think critically about suggestions made by random strangers on the
+internet.</p>
+</div>
+<p>Let’s get started!</p>
+<div class="section" id="unix-development-environment">
+<h2>Unix Development Environment<a class="headerlink" href="#unix-development-environment" title="Permalink to this headline">¶</a></h2>
+<p><strong>First, upgrade your OS.</strong> If you’ve been intending to make any major OS
+upgrades, do them now. Otherwise when you do get around to upgrading, you might
+have to repeat some or all of this installation process. Better to get it out of
+the way beforehand.</p>
+<p><strong>Linux.</strong> If you’re already running Linux, you’re done with this step. Proceed
+to OPAM, below.</p>
+<p><strong>Mac.</strong> Beneath the surface, macOS is already a Unix-based OS. But you’re going
+to need some developer tools and a Unix package manager. There are two to pick
+from: <a class="reference external" href="https://brew.sh/">Homebrew</a> and <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a>. From the perspective of
+this textbook and CS 3110, it doesn’t matter which you choose. So if you’re
+already accustomed to one, feel free to keep using it. Otherwise, pick one and
+follow the installation instructions on its website. The installation process
+for Homebrew is typically easier and faster, which might nudge you in that
+direction. If you do choose MacPorts, make sure to follow <em>all</em> the detailed
+instructions on its page, including XCode and an X11 server. <strong>Do not install
+both Homebrew and MacPorts</strong>; they aren’t meant to co-exist. If you change your
+mind later, make sure to uninstall one before installing the other. After you’ve
+finished installing either Homebrew or MacPorts, you can proceed to OPAM, below.</p>
+<p><strong>Windows.</strong> Unix development in Windows 10 is made possible by the Windows
+Subsystem for Linux (WSL). Follow <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Microsoft’s install instructions for
+WSL</a>. From the perspective of this textbook and CS 3110, it doesn’t matter
+whether you join Windows Insider. But WSL2 is preferred over WSL1 by OCaml (and
+WSL2 offers performance and functionality improvements), so install WSL2 if you
+can. Here are a few notes on Microsoft’s instructions:</p>
+<ul class="simple">
+<li><p>To open Windows PowerShell as Administrator, click Start, type PowerShell,
+and it should come up as the best match.  Click “Run as Administrator”,
+and click Yes to allow changes.</p></li>
+<li><p>To use WSL2 (rather than WSL1) you might need to enable virtualization in your
+machine’s BIOS; some laptop manufacturers disable it before shipping machines
+from the factory. The instructions for that are dependent on the manufacturer
+of your machine. Try googling “enable virtualization <manufacturer> <model>”,
+substituting for the manufacturer and model of your machine. This
+<a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios">Red Hat Linux</a> page might also help.</p></li>
+<li><p>These instructions assume that you install Ubuntu (20.04) as the Linux
+distribution from the Microsoft Store. In principle other distributions should
+work, but might require different commands from this point forward.</p></li>
+<li><p>You will be prompted to create a Unix username and password. You can use any
+username and password you wish. It has no bearing on your Windows username and
+password (though you are free to re-use those). Do not put a space in your
+username. Do not forget your password. You will need it in the future.</p></li>
+<li><p>To enable copy-and-paste, click on the icon on the top left of the shell
+window, click Properties, and make sure “Use Ctrl+Shift+C/V as Copy/Paste” is
+checked. Now Ctrl+Shift+C will copy and Ctrl+Shift+V will paste into the
+terminal. Note that you have to include Shift as part of that keystroke.</p></li>
+</ul>
+<p>When you’ve finished installing WSL, open the Ubuntu app.  You will be at
+the <em>Bash prompt</em>, which looks something like this:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@machine:$</span>
+</pre></div>
+</div>
+<p>From now on we’ll just write <code class="docutils literal notranslate"><span class="pre">$</span></code> to indicate that prompt. Run the following
+command to update the <em>APT package manager</em>, which is what helps to install Unix
+packages:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt update
+</pre></div>
+</div>
+<p>You will be prompted for the Unix password you chose. The prefix <code class="docutils literal notranslate"><span class="pre">sudo</span></code> means to
+run the command as the administrator, aka “super user”. In other words, do this
+command as super user, hence, “sudo”.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Running commands with <code class="docutils literal notranslate"><span class="pre">sudo</span></code> is potentially dangerous and should not be done
+lightly. Do not get into the habit of putting <code class="docutils literal notranslate"><span class="pre">sudo</span></code> in front of commands, and
+do not randomly try it without reason.</p>
+</div>
+<p>Now run this command to upgrade all the APT software packages:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt upgrade -y
+</pre></div>
+</div>
+<p>WSL has its own filesystem that is distinct from the Windows filesystem, though
+there are ways to access each from the other. This is a potentially tricky
+concept to master.</p>
+<ul class="simple">
+<li><p>When you launch Ubuntu and get the $ prompt, you are in the WSL filesystem.
+Your home directory there is named <code class="docutils literal notranslate"><span class="pre">~</span></code>, which is a built-in alias for
+<code class="docutils literal notranslate"><span class="pre">/home/your_user_name</span></code>.</p></li>
+<li><p>When you use Windows, you are in the Windows filesystem. <a class="reference external" href="https://devblogs.microsoft.com/commandline/do-not-change-linux-files-using-windows-apps-and-tools/">Microsoft issued one
+hard-and-fast rule</a>: “Do not under any circumstances access
+[WSL filesystem] files using Windows.” You can corrupt the files.</p></li>
+</ul>
+<p>We recommend storing your OCaml development work in the WSL filesystem, not the
+Windows filesystem.</p>
+</div>
+<div class="section" id="install-opam">
+<h2>Install OPAM<a class="headerlink" href="#install-opam" title="Permalink to this headline">¶</a></h2>
+<p><strong>Linux.</strong> Follow the <a class="reference external" href="https://opam.ocaml.org/doc/Install.html">instructions for your distribution</a>.</p>
+<p><strong>Mac.</strong> If you’re using Homebrew, run these commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew install gpatch
+<span class="gp">$ </span>brew install opam
+</pre></div>
+</div>
+<p>If you’re using MacPorts, run this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>port install opam
+</pre></div>
+</div>
+<p><strong>Windows.</strong> Run this command from Ubuntu:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt install -y m4 zip unzip bubblewrap build-essential opam
+</pre></div>
+</div>
+</div>
+<div class="section" id="initialize-opam">
+<h2>Initialize OPAM<a class="headerlink" href="#initialize-opam" title="Permalink to this headline">¶</a></h2>
+<p><strong>Linux, Mac, and WSL2.</strong>  Run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>opam init --bare -a -y
+</pre></div>
+</div>
+<p><strong>WSL1.</strong>  Run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>opam init --bare -a -y --disable-sandboxing
+</pre></div>
+</div>
+<p>It is necessary to disable sandboxing because of an <a class="reference external" href="https://github.com/ocaml/opam-repository/issues/12050">issue involving OPAM and
+WSL1</a>.</p>
+</div>
+<div class="section" id="create-an-opam-switch">
+<h2>Create an OPAM Switch<a class="headerlink" href="#create-an-opam-switch" title="Permalink to this headline">¶</a></h2>
+<p>A <em>switch</em> is a named installation of OCaml with a particular compiler version
+and set of packages. You can have many switches and, well, switch between them
+—whence the name. Create a switch for this semester’s CS 3110 by running
+this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>opam switch create cs3110-2021fa ocaml-base-compiler.4.12.0
+</pre></div>
+</div>
+<p>You might be prompted to run the next command.  If so, do it. If not, don’t.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">eval</span> <span class="k">$(</span>opam env<span class="k">)</span>
+</pre></div>
+</div>
+<p>Regardless, continue:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>opam install -y utop ounit qcheck ocaml-lsp-server ocamlformat yojson ansiterminal csv bisect_ppx-ocamlbuild menhir
+</pre></div>
+</div>
+<p>You should now be able to launch utop, the OCaml Universal Toplevel.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>utop
+</pre></div>
+</div>
+<p>Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="mi">3110</span><span class="o">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">3110</span>
+</pre></div>
+</div>
+<p>Stop to appreciate how lovely <code class="docutils literal notranslate"><span class="pre">3110</span></code> is. Then quit utop. Note that you must
+enter the extra # before the quit directive.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">quit</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="double-check-ocaml">
+<h2>Double Check OCaml<a class="headerlink" href="#double-check-ocaml" title="Permalink to this headline">¶</a></h2>
+<p>Let’s pause to double check whether your installation has been successful. It’s
+worth the effort!</p>
+<p>First, <strong>reboot your computer</strong>. (Really! No matter how silly it might seem, we
+want a clean slate for this test.) Second, run utop, and make sure it still
+works. If it does not, here are some common issues:</p>
+<ul class="simple">
+<li><p><strong>Are you in the right Unix prompt?</strong> On Mac, make sure you are in whatever
+Unix shell is the default for your Terminal: don’t run bash or zsh or anything
+else manually to change the shell. On Windows, make sure you are in the Ubuntu
+app, not PowerShell or Cmd.</p></li>
+<li><p><strong>Is the OPAM environment set?</strong> Run <code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">$(opam</span> <span class="pre">env)</span></code> then try running utop
+again. If that works, the problem is that your login shell is somehow not
+running the right commands to activate the OPAM environment when you login to
+your Unix prompt. The <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">init</span></code> command is what puts those commands in the
+right place. Follow the “redo” instructions below.</p></li>
+<li><p><strong>Is your switch listed?</strong> Run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">list</span></code> and make sure a switch named
+<code class="docutils literal notranslate"><span class="pre">cs3110-2021fa</span></code> is listed, that it has the 4.12.0 compiler, and that it is the
+active switch (which is indicated with an arrow beside it). If that switch is
+present but not active, run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">cs3110-2021fa</span></code> then see whether utop
+works. If that switch is not present, follow the “redo” instructions below.</p></li>
+</ul>
+<p><strong>Redo Instructions:</strong> Remove the OPAM directory by running <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">~/.opam</span></code>,
+then re-run the OPAM initialization command for your OS (given above), then
+re-run the switch creation and package installation commands above. Finally,
+redo the double check: reboot and see whether utop still works. You want to get
+to the point where utop “just works” after a reboot.</p>
+</div>
+<div class="section" id="visual-studio-code">
+<h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">¶</a></h2>
+<p>Visual Studio Code is a great choice as a code editor for OCaml. (Though if you
+are already a power user of Emacs or Vim those are great, too.)</p>
+<ul class="simple">
+<li><p>Download and install <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> (henceforth, VS Code).
+Launch VS Code. Find the extensions pane, either by going to View -&gt;
+Extensions, or by clicking on the icon for it in the column of icons on the
+left.</p></li>
+<li><p><strong>Windows only:</strong> Install the “Remote - WSL” extension, which VS Code should
+actually suggest on the first launch after you install WSL. Second, open a WSL
+window by using the command “Remote-WSL: New Window” or by running <code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">.</span></code> in
+Ubuntu. Either way, make sure you see the green “WSL” indicator in the
+bottom-left of the VS Code window. Follow the rest of the instructions in that
+window.</p></li>
+<li><p><strong>Mac only:</strong> Open the Command Palette and type “shell command” to find the
+“Shell Command: Install ‘code’ command in PATH” command. Run it. Then close
+any open terminals to let the new path settings take effect.</p></li>
+<li><p>In the extensions pane, search for and install the “OCaml Platform” extension.
+Be careful to use the extension with exactly the right name. The extensions
+named simply “OCaml” or “OCaml and Reason IDE” are not the right ones. (They
+are both old and no longer maintained by their developers.) <strong>Windows only:</strong>
+make sure you install the extension with the button that says “Install on WSL:
+Ubuntu-20.04”, not with a button that says only “Install”. The latter will not
+work.</p></li>
+</ul>
+</div>
+<div class="section" id="double-check-vs-code">
+<h2>Double Check VS Code<a class="headerlink" href="#double-check-vs-code" title="Permalink to this headline">¶</a></h2>
+<p>Let’s make sure VS Code’s OCaml support is working.</p>
+<ul>
+<li><p>Reboot your computer again. (Yeah, that really shouldn’t be necessary. But it
+will detect so many potential mistakes now that it’s worth the effort.)</p></li>
+<li><p>Open a fresh new Unix shell. <strong>Windows</strong>: remember that’s the Ubuntu, not
+PowerShell or Cmd. <strong>Mac</strong>: remember that you shouldn’t be manually switching
+to a different shell.</p></li>
+<li><p>Navigate to a directory of your choice, preferably a subdirectory of your home
+directory. For example, you might create a directory for your 3110 work inside
+your home directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir ~/3110
+<span class="gp">$ </span><span class="nb">cd</span> ~/3110
+</pre></div>
+</div>
+<p>In that directory open VS Code by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>code .
+</pre></div>
+</div>
+<p>Go to File -&gt; New File. Save the file with the name <code class="docutils literal notranslate"><span class="pre">test.ml</span></code>. VS Code should
+give it an orange camel icon.</p>
+</li>
+<li><p>Type the following OCaml code then press Return:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">3110</span>
+</pre></div>
+</div>
+<p>As you type, VS Code should colorize the syntax, suggest some completions, and
+add a little annotation above the line of code. Try changing the <code class="docutils literal notranslate"><span class="pre">int</span></code> you
+typed to <code class="docutils literal notranslate"><span class="pre">string</span></code>. A squiggle should appear under <code class="docutils literal notranslate"><span class="pre">3110</span></code>. Hover over it to see
+the error message. Go to View -&gt; Problems to see it there, too. Add double
+quotes around the integer to make it a string, and the problem will go away.</p>
+</li>
+</ul>
+<p><strong>If you don’t observe those behaviors,</strong> something is wrong with your install.
+The most common issue is that the OCaml pluging in VS Code complains “Unable to
+read the current switch”. Here’s how to proceed:</p>
+<ul class="simple">
+<li><p>First, do not try to hardcode any paths in the VS Code settings file.
+Hardcoding the path is a bandaid, not a cure. Something else is the root
+cause, and you need to fix it.</p></li>
+<li><p>Make sure that, from the same Unix prompt as which you launched VS Code, you
+can successfully complete the double-check instructions for your OPAM switch:
+can you run utop? is the right switch active? If not, that’s the problem you
+need to solve first. Then return to the VS Code issue. It might be fixed now.</p></li>
+<li><p>If you still have an issue even though the OPAM double-check succeeds, try
+uninstalling VS Code, rebooting, and re-doing all the install instructions
+above from scratch. This time make sure you’re following them to the letter
+and that there are no warnings or errors at any point.</p></li>
+</ul>
+</div>
+<div class="section" id="vs-code-settings">
+<h2>VS Code Settings<a class="headerlink" href="#vs-code-settings" title="Permalink to this headline">¶</a></h2>
+<p>We recommend tweaking a few editor settings. Open the user settings JSON file by
+(i) going to View → Command Palette, (ii) typing “settings json”, and (iii)
+selecting Open Settings (JSON). Copy and paste these settings into the window:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">80</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Save the file and close the tab.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/preface"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="about.html" title="previous page">About This Book</a>
+    <a class='right-next' id="next-link" href="../intro/intro.html" title="next page"><span class="section-number">1. </span>Better Programming Through OCaml</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
