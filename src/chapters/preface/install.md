@@ -65,10 +65,13 @@ finished installing either Homebrew or MacPorts, you can proceed to OPAM, below.
 
 **Windows.** Unix development in Windows 10 is made possible by the Windows
 Subsystem for Linux (WSL). Follow [Microsoft's install instructions for
-WSL][wsl]. From the perspective of this textbook and CS 3110, it doesn't matter
-whether you join Windows Insider. But WSL2 is preferred over WSL1 by OCaml (and
-WSL2 offers performance and functionality improvements), so install WSL2 if you
-can. Here are a few notes on Microsoft's instructions:
+WSL][wsl]. Here are a few notes on Microsoft's instructions:
+
+- From the perspective of this textbook and CS 3110, it doesn't matter whether
+  you join Windows Insider.
+
+- WSL2 is preferred over WSL1 by OCaml (and WSL2 offers performance and
+  functionality improvements), so install WSL2 if you can.
 
 - To open Windows PowerShell as Administrator, click Start, type PowerShell,
   and it should come up as the best match.  Click "Run as Administrator",
@@ -105,12 +108,11 @@ the *Bash prompt*, which looks something like this:
 user@machine:$
 ```
 
-From now on we'll just write `$` to indicate that prompt. Run the following
-command to update the *APT package manager*, which is what helps to install Unix
-packages:
+Run the following command to update the *APT package manager*, which is what
+helps to install Unix packages:
 
 ```console
-$ sudo apt update
+sudo apt update
 ```
 
 You will be prompted for the Unix password you chose. The prefix `sudo` means to
@@ -126,7 +128,7 @@ do not randomly try it without reason.
 Now run this command to upgrade all the APT software packages:
 
 ```console
-$ sudo apt upgrade -y
+sudo apt upgrade -y
 ```
 
 WSL has its own filesystem that is distinct from the Windows filesystem, though
@@ -153,14 +155,14 @@ Windows filesystem.
 **Mac.** If you're using Homebrew, run these commands:
 
 ```console
-$ brew install gpatch
-$ brew install opam
+brew install gpatch
+brew install opam
 ```
 
 If you're using MacPorts, run this command:
 
 ```console
-$ port install opam
+sudo port install opam
 ```
 
 [opam-install]: https://opam.ocaml.org/doc/Install.html
@@ -168,7 +170,7 @@ $ port install opam
 **Windows.** Run this command from Ubuntu:
 
 ```console
-$ sudo apt install -y m4 zip unzip bubblewrap build-essential opam
+sudo apt install -y m4 zip unzip bubblewrap build-essential opam
 ```
 
 ## Initialize OPAM
@@ -176,13 +178,13 @@ $ sudo apt install -y m4 zip unzip bubblewrap build-essential opam
 **Linux, Mac, and WSL2.**  Run:
 
 ```console
-$ opam init --bare -a -y
+opam init --bare -a -y
 ```
 
 **WSL1.**  Run:
 
 ```console
-$ opam init --bare -a -y --disable-sandboxing
+opam init --bare -a -y --disable-sandboxing
 ```
 
 It is necessary to disable sandboxing because of an [issue involving OPAM and
@@ -198,25 +200,25 @@ and set of packages. You can have many switches and, well, switch between them
 this command:
 
 ```console
-$ opam switch create cs3110-2021fa ocaml-base-compiler.4.12.0
+opam switch create cs3110-2021fa ocaml-base-compiler.4.12.0
 ```
 
 You might be prompted to run the next command.  If so, do it. If not, don't.
 
 ```console
-$ eval $(opam env)
+eval $(opam env)
 ```
 
 Regardless, continue:
 
 ```console
-$ opam install -y utop ounit qcheck ocaml-lsp-server ocamlformat yojson ansiterminal csv bisect_ppx-ocamlbuild menhir
+opam install -y utop ounit qcheck ocaml-lsp-server ocamlformat yojson ansiterminal csv bisect_ppx-ocamlbuild menhir
 ```
 
 You should now be able to launch utop, the OCaml Universal Toplevel.
 
 ```console
-$ utop
+utop
 ```
 
 Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt.
@@ -311,12 +313,12 @@ Let's make sure VS Code's OCaml support is working.
   directory. For example, you might create a directory for your 3110 work inside
   your home directory:
   ```console
-  $ mkdir ~/3110
-  $ cd ~/3110
+  mkdir ~/3110
+  cd ~/3110
   ```
   In that directory open VS Code by running:
   ```console
-  $ code .
+  code .
   ```
   Go to File -> New File. Save the file with the name `test.ml`. VS Code should
   give it an orange camel icon.
