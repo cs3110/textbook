@@ -212,7 +212,9 @@ eval $(opam env)
 Regardless, continue:
 
 ```console
-opam install -y utop ounit qcheck ocaml-lsp-server ocamlformat yojson ansiterminal csv bisect_ppx-ocamlbuild menhir
+opam install -y utop ounit qcheck ocaml-lsp-server \
+  ocamlformat yojson ansiterminal csv \
+  bisect_ppx-ocamlbuild menhir
 ```
 
 You should now be able to launch utop, the OCaml Universal Toplevel.
@@ -277,8 +279,7 @@ are already a power user of Emacs or Vim those are great, too.)
   Extensions, or by clicking on the icon for it in the column of icons on the
   left.
 
-- **Windows only:** Install the "Remote - WSL" extension, which VS Code should
-  actually suggest on the first launch after you install WSL. Second, open a WSL
+- **Windows only:** Install the "Remote - WSL" extension. Second, open a WSL
   window by using the command "Remote-WSL: New Window" or by running `code .` in
   Ubuntu. Either way, make sure you see the green "WSL" indicator in the
   bottom-left of the VS Code window. Follow the rest of the instructions in that
@@ -293,7 +294,7 @@ are already a power user of Emacs or Vim those are great, too.)
   named simply "OCaml" or "OCaml and Reason IDE" are not the right ones. (They
   are both old and no longer maintained by their developers.) **Windows only:**
   make sure you install the extension with the button that says "Install on WSL:
-  Ubuntu-20.04", not with a button that says only "Install". The latter will not
+  ...", not with a button that says only "Install". The latter will not
   work.
 
 [vscode]: https://code.visualstudio.com/
@@ -334,22 +335,27 @@ Let's make sure VS Code's OCaml support is working.
   quotes around the integer to make it a string, and the problem will go away.
 
 **If you don't observe those behaviors,** something is wrong with your install.
-The most common issue is that the OCaml pluging in VS Code complains "Unable to
-read the current switch". Here's how to proceed:
+Here's how to proceed:
 
-- First, do not try to hardcode any paths in the VS Code settings file.
-  Hardcoding the path is a bandaid, not a cure. Something else is the root
-  cause, and you need to fix it.
+- Do not hardcode any paths in the VS Code settings file, despite any advice you
+  might find online.  That is a bandaid, not a cure of whatever the underlying
+  problem really is.
 
 - Make sure that, from the same Unix prompt as which you launched VS Code, you
   can successfully complete the double-check instructions for your OPAM switch:
   can you run utop? is the right switch active? If not, that's the problem you
   need to solve first. Then return to the VS Code issue. It might be fixed now.
 
-- If you still have an issue even though the OPAM double-check succeeds, try
-  uninstalling VS Code, rebooting, and re-doing all the install instructions
-  above from scratch. This time make sure you're following them to the letter
-  and that there are no warnings or errors at any point.
+- If you're on WSL and VS Code does add syntax highlighting but does not add
+  squiggles as described above, double-check that you see a green "WSL"
+  indicator in the bottom left of the VS Code window. If you do not, make sure
+  you installed the "Remote - WSL" extension as described above, and that you
+  are launching VS Code from Ubuntu rather than PowerShell or from the Windows
+  GUI.
+
+**If you're still stuck with an issue,** try uninstalling VS Code, rebooting,
+and re-doing all the install instructions above from scratch. Pay close
+attention to any warnings or errors.
 
 ## VS Code Settings
 
