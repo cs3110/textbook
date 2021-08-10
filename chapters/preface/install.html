@@ -860,11 +860,12 @@ mind later, make sure to uninstall one before installing the other. After you’
 finished installing either Homebrew or MacPorts, you can proceed to OPAM, below.</p>
 <p><strong>Windows.</strong> Unix development in Windows 10 is made possible by the Windows
 Subsystem for Linux (WSL). Follow <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Microsoft’s install instructions for
-WSL</a>. From the perspective of this textbook and CS 3110, it doesn’t matter
-whether you join Windows Insider. But WSL2 is preferred over WSL1 by OCaml (and
-WSL2 offers performance and functionality improvements), so install WSL2 if you
-can. Here are a few notes on Microsoft’s instructions:</p>
+WSL</a>. Here are a few notes on Microsoft’s instructions:</p>
 <ul class="simple">
+<li><p>From the perspective of this textbook and CS 3110, it doesn’t matter whether
+you join Windows Insider.</p></li>
+<li><p>WSL2 is preferred over WSL1 by OCaml (and WSL2 offers performance and
+functionality improvements), so install WSL2 if you can.</p></li>
 <li><p>To open Windows PowerShell as Administrator, click Start, type PowerShell,
 and it should come up as the best match.  Click “Run as Administrator”,
 and click Yes to allow changes.</p></li>
@@ -891,10 +892,9 @@ the <em>Bash prompt</em>, which looks something like this:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@machine:$</span>
 </pre></div>
 </div>
-<p>From now on we’ll just write <code class="docutils literal notranslate"><span class="pre">$</span></code> to indicate that prompt. Run the following
-command to update the <em>APT package manager</em>, which is what helps to install Unix
-packages:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt update
+<p>Run the following command to update the <em>APT package manager</em>, which is what
+helps to install Unix packages:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt update</span>
 </pre></div>
 </div>
 <p>You will be prompted for the Unix password you chose. The prefix <code class="docutils literal notranslate"><span class="pre">sudo</span></code> means to
@@ -907,7 +907,7 @@ lightly. Do not get into the habit of putting <code class="docutils literal notr
 do not randomly try it without reason.</p>
 </div>
 <p>Now run this command to upgrade all the APT software packages:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt upgrade -y
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt upgrade -y</span>
 </pre></div>
 </div>
 <p>WSL has its own filesystem that is distinct from the Windows filesystem, though
@@ -928,27 +928,27 @@ Windows filesystem.</p>
 <h2>Install OPAM<a class="headerlink" href="#install-opam" title="Permalink to this headline">¶</a></h2>
 <p><strong>Linux.</strong> Follow the <a class="reference external" href="https://opam.ocaml.org/doc/Install.html">instructions for your distribution</a>.</p>
 <p><strong>Mac.</strong> If you’re using Homebrew, run these commands:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew install gpatch
-<span class="gp">$ </span>brew install opam
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">brew install gpatch</span>
+<span class="go">brew install opam</span>
 </pre></div>
 </div>
 <p>If you’re using MacPorts, run this command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>port install opam
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo port install opam</span>
 </pre></div>
 </div>
 <p><strong>Windows.</strong> Run this command from Ubuntu:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt install -y m4 zip unzip bubblewrap build-essential opam
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt install -y m4 zip unzip bubblewrap build-essential opam</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="initialize-opam">
 <h2>Initialize OPAM<a class="headerlink" href="#initialize-opam" title="Permalink to this headline">¶</a></h2>
 <p><strong>Linux, Mac, and WSL2.</strong>  Run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>opam init --bare -a -y
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam init --bare -a -y</span>
 </pre></div>
 </div>
 <p><strong>WSL1.</strong>  Run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>opam init --bare -a -y --disable-sandboxing
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam init --bare -a -y --disable-sandboxing</span>
 </pre></div>
 </div>
 <p>It is necessary to disable sandboxing because of an <a class="reference external" href="https://github.com/ocaml/opam-repository/issues/12050">issue involving OPAM and
@@ -960,19 +960,19 @@ WSL1</a>.</p>
 and set of packages. You can have many switches and, well, switch between them
 —whence the name. Create a switch for this semester’s CS 3110 by running
 this command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>opam switch create cs3110-2021fa ocaml-base-compiler.4.12.0
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam switch create cs3110-2021fa ocaml-base-compiler.4.12.0</span>
 </pre></div>
 </div>
 <p>You might be prompted to run the next command.  If so, do it. If not, don’t.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">eval</span> <span class="k">$(</span>opam env<span class="k">)</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">eval $(opam env)</span>
 </pre></div>
 </div>
 <p>Regardless, continue:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>opam install -y utop ounit qcheck ocaml-lsp-server ocamlformat yojson ansiterminal csv bisect_ppx-ocamlbuild menhir
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam install -y utop ounit qcheck ocaml-lsp-server ocamlformat yojson ansiterminal csv bisect_ppx-ocamlbuild menhir</span>
 </pre></div>
 </div>
 <p>You should now be able to launch utop, the OCaml Universal Toplevel.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>utop
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">utop</span>
 </pre></div>
 </div>
 <p>Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt.</p>
@@ -1054,12 +1054,12 @@ to a different shell.</p></li>
 <li><p>Navigate to a directory of your choice, preferably a subdirectory of your home
 directory. For example, you might create a directory for your 3110 work inside
 your home directory:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir ~/3110
-<span class="gp">$ </span><span class="nb">cd</span> ~/3110
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mkdir ~/3110</span>
+<span class="go">cd ~/3110</span>
 </pre></div>
 </div>
 <p>In that directory open VS Code by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>code .
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">code .</span>
 </pre></div>
 </div>
 <p>Go to File -&gt; New File. Save the file with the name <code class="docutils literal notranslate"><span class="pre">test.ml</span></code>. VS Code should
