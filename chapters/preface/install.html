@@ -968,7 +968,9 @@ this command:</p>
 </pre></div>
 </div>
 <p>Regardless, continue:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam install -y utop ounit qcheck ocaml-lsp-server ocamlformat yojson ansiterminal csv bisect_ppx-ocamlbuild menhir</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam install -y utop ounit qcheck ocaml-lsp-server \</span>
+<span class="go">  ocamlformat yojson ansiterminal csv \</span>
+<span class="go">  bisect_ppx-ocamlbuild menhir</span>
 </pre></div>
 </div>
 <p>You should now be able to launch utop, the OCaml Universal Toplevel.</p>
@@ -1024,8 +1026,7 @@ are already a power user of Emacs or Vim those are great, too.)</p>
 Launch VS Code. Find the extensions pane, either by going to View -&gt;
 Extensions, or by clicking on the icon for it in the column of icons on the
 left.</p></li>
-<li><p><strong>Windows only:</strong> Install the “Remote - WSL” extension, which VS Code should
-actually suggest on the first launch after you install WSL. Second, open a WSL
+<li><p><strong>Windows only:</strong> Install the “Remote - WSL” extension. Second, open a WSL
 window by using the command “Remote-WSL: New Window” or by running <code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">.</span></code> in
 Ubuntu. Either way, make sure you see the green “WSL” indicator in the
 bottom-left of the VS Code window. Follow the rest of the instructions in that
@@ -1038,7 +1039,7 @@ Be careful to use the extension with exactly the right name. The extensions
 named simply “OCaml” or “OCaml and Reason IDE” are not the right ones. (They
 are both old and no longer maintained by their developers.) <strong>Windows only:</strong>
 make sure you install the extension with the button that says “Install on WSL:
-Ubuntu-20.04”, not with a button that says only “Install”. The latter will not
+…”, not with a button that says only “Install”. The latter will not
 work.</p></li>
 </ul>
 </div>
@@ -1077,21 +1078,25 @@ quotes around the integer to make it a string, and the problem will go away.</p>
 </li>
 </ul>
 <p><strong>If you don’t observe those behaviors,</strong> something is wrong with your install.
-The most common issue is that the OCaml pluging in VS Code complains “Unable to
-read the current switch”. Here’s how to proceed:</p>
+Here’s how to proceed:</p>
 <ul class="simple">
-<li><p>First, do not try to hardcode any paths in the VS Code settings file.
-Hardcoding the path is a bandaid, not a cure. Something else is the root
-cause, and you need to fix it.</p></li>
+<li><p>Do not hardcode any paths in the VS Code settings file, despite any advice you
+might find online.  That is a bandaid, not a cure of whatever the underlying
+problem really is.</p></li>
 <li><p>Make sure that, from the same Unix prompt as which you launched VS Code, you
 can successfully complete the double-check instructions for your OPAM switch:
 can you run utop? is the right switch active? If not, that’s the problem you
 need to solve first. Then return to the VS Code issue. It might be fixed now.</p></li>
-<li><p>If you still have an issue even though the OPAM double-check succeeds, try
-uninstalling VS Code, rebooting, and re-doing all the install instructions
-above from scratch. This time make sure you’re following them to the letter
-and that there are no warnings or errors at any point.</p></li>
+<li><p>If you’re on WSL and VS Code does add syntax highlighting but does not add
+squiggles as described above, double-check that you see a green “WSL”
+indicator in the bottom left of the VS Code window. If you do not, make sure
+you installed the “Remote - WSL” extension as described above, and that you
+are launching VS Code from Ubuntu rather than PowerShell or from the Windows
+GUI.</p></li>
 </ul>
+<p><strong>If you’re still stuck with an issue,</strong> try uninstalling VS Code, rebooting,
+and re-doing all the install instructions above from scratch. Pay close
+attention to any warnings or errors.</p>
 </div>
 <div class="section" id="vs-code-settings">
 <h2>VS Code Settings<a class="headerlink" href="#vs-code-settings" title="Permalink to this headline">¶</a></h2>
