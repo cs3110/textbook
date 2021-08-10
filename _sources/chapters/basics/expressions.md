@@ -564,6 +564,7 @@ that:
 An incorrect annotation will produce a compile-time error:
 
 ```{code-cell} ocaml
+:tags: ["raises-exception"]
 (5 : float)
 ```
 
@@ -571,18 +572,20 @@ And that example shows why you might use manual type annotations during
 debugging.  Perhaps you had forgotten that `5` cannot be treated as a `float`,
 and you tried to write:
 
-```{code-cell} ocaml
+```ocaml
 5 +. 1.1
 ```
 
 You might try manually specifying that `5` was supposed to be a `float`:
 
 ```{code-cell} ocaml
+:tags: ["raises-exception"]
 (5 : float) +. 1.1
 ```
 
-Although that might seem silly for this tiny program, you might find this
-technique to be effective as programs get larger.
+It's clear that the type annotation has failed. Although that might seem silly
+for this tiny program, you might find this technique to be effective as programs
+get larger.
 
 ```{important}
 Type annotations are **not** *type casts*, such as might be found in C or Java.
