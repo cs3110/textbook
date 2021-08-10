@@ -780,28 +780,38 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#assertions">
-   2.3.1. Assertions
+  <a class="reference internal nav-link" href="#primitive-types-and-values">
+   2.3.1. Primitive Types and Values
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#operators">
-   2.3.2. Operators
+  <a class="reference internal nav-link" href="#more-operators">
+   2.3.2. More Operators
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assertions">
+   2.3.3. Assertions
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#if-expressions">
-   2.3.3. If Expressions
+   2.3.4. If Expressions
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#let-expressions">
-   2.3.4. Let Expressions
+   2.3.5. Let Expressions
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scope">
-   2.3.5. Scope
+   2.3.6. Scope
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#type-annotations">
+   2.3.7. Type Annotations
   </a>
  </li>
 </ul>
@@ -839,30 +849,191 @@ that might happen:</p>
 <li><p>Evaluation of the expression never terminates (e.g., it enters an “infinite
 loop”).</p></li>
 </ol>
-<div class="section" id="assertions">
-<h2><span class="section-number">2.3.1. </span>Assertions<a class="headerlink" href="#assertions" title="Permalink to this headline">¶</a></h2>
-<p>The expression <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">e</span></code> evaluates <code class="docutils literal notranslate"><span class="pre">e</span></code>. If the result is <code class="docutils literal notranslate"><span class="pre">true</span></code>, nothing more
-happens, and the entire expression evaluates to a special value called <em>unit</em>.
-The unit value is written <code class="docutils literal notranslate"><span class="pre">()</span></code> and its type is <code class="docutils literal notranslate"><span class="pre">unit</span></code>. But if the result is
-<code class="docutils literal notranslate"><span class="pre">false</span></code>, an exception is raised.</p>
+<div class="section" id="primitive-types-and-values">
+<h2><span class="section-number">2.3.1. </span>Primitive Types and Values<a class="headerlink" href="#primitive-types-and-values" title="Permalink to this headline">¶</a></h2>
+<p>The <em>primitive</em> types are the built-in and most basic types: integers,
+floating-point numbers, characters, strings, and booleans. They will be
+recognizable as similar to primitive types from other programming languages.</p>
+<p><strong>Type <code class="docutils literal notranslate"><span class="pre">int</span></code>: Integers.</strong> OCaml integers are written as usual: <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, etc.
+The usual operators are available: <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, and <code class="docutils literal notranslate"><span class="pre">mod</span></code>. The latter
+two are integer division and modulus:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">65</span> <span class="o">/</span> <span class="mi">60</span>
+</pre></div>
 </div>
-<div class="section" id="operators">
-<h2><span class="section-number">2.3.2. </span>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
-<p>Operators can be used to form expressions. OCaml has more or less all the usual
-operators you would expect in a language from the C or Java family of languages.
-See the <a class="reference external" href="https://ocaml.org/manual/expr.html#ss%3Aexpr-operators">table of all operators in the OCaml manual</a> for details.</p>
-<p>Here are two things to watch out for as you begin:</p>
-<ul class="simple">
-<li><p>OCaml deliberately does not support operator overloading. As a consequence,
-the integer and floating-point operators are distinct. E.g., to add integers,
-use <code class="docutils literal notranslate"><span class="pre">+</span></code>. To add floating-point numbers, use <code class="docutils literal notranslate"><span class="pre">+.</span></code>.</p></li>
-<li><p>There are two equality operators in OCaml, <code class="docutils literal notranslate"><span class="pre">=</span></code> and <code class="docutils literal notranslate"><span class="pre">==</span></code>, with corresponding
-inequality operators <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code>. Operators <code class="docutils literal notranslate"><span class="pre">=</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> examine
-<em>structural</em> equality whereas <code class="docutils literal notranslate"><span class="pre">==</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code> examine <em>physical</em> equality. Until
-we’ve studied the imperative features of OCaml, the difference between them
-will be tricky to explain. See the <a class="reference external" href="https://ocaml.org/api/Stdlib.html">documentation</a> of <code class="docutils literal notranslate"><span class="pre">Stdlib.(==)</span></code>
-if you’re curious now.</p></li>
-</ul>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">65</span> <span class="n">mod</span> <span class="mi">60</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">65</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>OCaml integers range from <span class="math notranslate nohighlight">\(-2^{62}\)</span> to <span class="math notranslate nohighlight">\(2^{62}-1\)</span> on modern platforms. They are
+implemented with 64-bit machine <em>words</em>, which is the size of a register on
+64-bit processor. But one of those bits is “stolen” by the OCaml implementation,
+leading to a 63-bit representation. That bit is used at run time to distinguish
+integers from pointers. For applications that need true 64-bit integers, there
+is an <a class="reference external" href="https://ocaml.org/api/Int64.html"><code class="docutils literal notranslate"><span class="pre">Int64</span></code> module</a> in the standard library. And for applications that
+need arbitrary-precision integers, there is a separate <a class="reference external" href="https://github.com/ocaml/Zarith"><code class="docutils literal notranslate"><span class="pre">Zarith</span></code></a>
+library. But for most purposes, the built-in <code class="docutils literal notranslate"><span class="pre">int</span></code> type suffices and offers the
+best performance.</p>
+<p><strong>Type <code class="docutils literal notranslate"><span class="pre">float</span></code>: Floating-point numbers.</strong> OCaml floats are <a class="reference external" href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">IEEE 754
+double-precision floating-point numbers</a>. Syntactically, they must
+always contain a dot—for example, <code class="docutils literal notranslate"><span class="pre">3.14</span></code> or <code class="docutils literal notranslate"><span class="pre">3.0</span></code> or even <code class="docutils literal notranslate"><span class="pre">3.</span></code>.  The last
+is a <code class="docutils literal notranslate"><span class="pre">float</span></code>; if you write it as <code class="docutils literal notranslate"><span class="pre">3</span></code>, it is instead an <code class="docutils literal notranslate"><span class="pre">int</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>OCaml deliberately does not support operator overloading, Arithmetic operations
+on floats are written with a dot after them. For example, floating-point
+multiplication is written <code class="docutils literal notranslate"><span class="pre">*.</span></code> not <code class="docutils literal notranslate"><span class="pre">*</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span> <span class="o">*.</span> <span class="mf">2.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span> <span class="o">*</span> <span class="mf">2.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>OCaml will not automatically convert between <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">float</span></code>. If you want to
+convert, there are two built-in functions for that purpose: <code class="docutils literal notranslate"><span class="pre">int_of_float</span></code> and
+<code class="docutils literal notranslate"><span class="pre">float_of_int</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span> <span class="o">*.</span> <span class="p">(</span><span class="n">float_of_int</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As in any language, the floating-point representation is approximate. That can
+lead to rounding errors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.1</span> <span class="o">+.</span> <span class="mf">0.2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The same behavior can be observed in Python and Java, too.  If you haven’t
+encountered this phenomenon before, here’s a <a class="reference external" href="https://floating-point-gui.de/basic/">basic guide to floating-point
+representation</a> that you might enjoy reading.</p>
+<p><strong>Type <code class="docutils literal notranslate"><span class="pre">bool</span></code>: Booleans.</strong> The boolean values are written <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>.
+The usual short-circuit conjunction <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> and disjunction <code class="docutils literal notranslate"><span class="pre">||</span></code> operators are
+available.</p>
+<p><strong>Type <code class="docutils literal notranslate"><span class="pre">char</span></code>: Characters.</strong> Characters are written with single quotes, such as
+<code class="docutils literal notranslate"><span class="pre">'a'</span></code>, <code class="docutils literal notranslate"><span class="pre">'b</span></code>, and <code class="docutils literal notranslate"><span class="pre">'c'</span></code>. They are represented as bytes —that is, 8-bit
+integers— in the ISO 9958-1 “Latin-1” encoding. The first half of the
+characters in that range are the standard ASCII characters. You can convert
+characters to and from integers with <code class="docutils literal notranslate"><span class="pre">char_of_int</span></code> and <code class="docutils literal notranslate"><span class="pre">int_of_char</span></code>.</p>
+<p><strong>Type <code class="docutils literal notranslate"><span class="pre">string</span></code>: Strings.</strong> Strings are sequences of characters. They are
+written with double quotes, such as <code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;</span></code>.  The string concatenation operator
+is <code class="docutils literal notranslate"><span class="pre">^</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span> <span class="o">^</span> <span class="s2">&quot;def&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Object-oriented languages often provide an overridable method for converting
+objects to strings, such as <code class="docutils literal notranslate"><span class="pre">toString()</span></code> in Java or <code class="docutils literal notranslate"><span class="pre">__str__()</span></code> in Python. But
+most OCaml values are not objects, so another means is required to convert to
+strings. For three of the primitive types, there are built-in functions:
+<code class="docutils literal notranslate"><span class="pre">string_of_int</span></code>, <code class="docutils literal notranslate"><span class="pre">string_of_float</span></code>, <code class="docutils literal notranslate"><span class="pre">string_of_bool</span></code>.  Strangely,
+there is no <code class="docutils literal notranslate"><span class="pre">string_of_char</span></code>, but the library function <code class="docutils literal notranslate"><span class="pre">String.make</span></code> can
+be used to accomplish the same goal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">string_of_int</span> <span class="mi">42</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="o">.</span><span class="n">make</span> <span class="mi">1</span> <span class="s1">&#39;z&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Likewise, for the same three primitive types, there are built-in functions to
+convert from a string if possible: <code class="docutils literal notranslate"><span class="pre">int_of_string</span></code>, <code class="docutils literal notranslate"><span class="pre">float_of_string</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">bool_of_string</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">int_of_string</span> <span class="s2">&quot;123&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">int_of_string</span> <span class="s2">&quot;not an int&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is no <code class="docutils literal notranslate"><span class="pre">char_of_string</span></code>, but the individual characters of a string can be
+accessed by a 0-based index. The indexing operator is written with a dot and
+square brackets:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span><span class="o">.</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span><span class="o">.</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span><span class="o">.</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="more-operators">
+<h2><span class="section-number">2.3.2. </span>More Operators<a class="headerlink" href="#more-operators" title="Permalink to this headline">¶</a></h2>
+<p>We’ve covered most of the built-in operators above, but there are a few more
+that you can see in the <a class="reference external" href="https://ocaml.org/manual/expr.html#ss%3Aexpr-operators">OCaml manual</a>.</p>
+<p>There are two equality operators in OCaml, <code class="docutils literal notranslate"><span class="pre">=</span></code> and <code class="docutils literal notranslate"><span class="pre">==</span></code>, with corresponding
+inequality operators <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code>. Operators <code class="docutils literal notranslate"><span class="pre">=</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> examine <em>structural</em>
+equality whereas <code class="docutils literal notranslate"><span class="pre">==</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code> examine <em>physical</em> equality. Until we’ve studied
+the imperative features of OCaml, the difference between them will be tricky to
+explain. See the <a class="reference external" href="https://ocaml.org/api/Stdlib.html">documentation</a> of <code class="docutils literal notranslate"><span class="pre">Stdlib.(==)</span></code> if you’re curious now.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Start training yourself now to use <code class="docutils literal notranslate"><span class="pre">=</span></code> and not to use <code class="docutils literal notranslate"><span class="pre">==</span></code>. This will be
@@ -870,19 +1041,21 @@ difficult if you’re coming from a language like Java where <code class="docuti
 equality operator.</p>
 </div>
 </div>
+<div class="section" id="assertions">
+<h2><span class="section-number">2.3.3. </span>Assertions<a class="headerlink" href="#assertions" title="Permalink to this headline">¶</a></h2>
+<p>The expression <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">e</span></code> evaluates <code class="docutils literal notranslate"><span class="pre">e</span></code>. If the result is <code class="docutils literal notranslate"><span class="pre">true</span></code>, nothing more
+happens, and the entire expression evaluates to a special value called <em>unit</em>.
+The unit value is written <code class="docutils literal notranslate"><span class="pre">()</span></code> and its type is <code class="docutils literal notranslate"><span class="pre">unit</span></code>. But if the result is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>, an exception is raised.</p>
+</div>
 <div class="section" id="if-expressions">
-<h2><span class="section-number">2.3.3. </span>If Expressions<a class="headerlink" href="#if-expressions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3.4. </span>If Expressions<a class="headerlink" href="#if-expressions" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/XJ6QPtlPD7s" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The expression <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">e1</span> <span class="pre">then</span> <span class="pre">e2</span> <span class="pre">else</span> <span class="pre">e3</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">e2</span></code> if <code class="docutils literal notranslate"><span class="pre">e1</span></code> evaluates to
 <code class="docutils literal notranslate"><span class="pre">true</span></code>, and to <code class="docutils literal notranslate"><span class="pre">e3</span></code> otherwise. We call <code class="docutils literal notranslate"><span class="pre">e1</span></code> the <em>guard</em> of the <code class="docutils literal notranslate"><span class="pre">if</span></code> expression.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">then</span> <span class="s2">&quot;yay!&quot;</span> <span class="k">else</span> <span class="s2">&quot;boo!&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;yay!&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="n">then</span> <span class="s2">&quot;yay!&quot;</span> <span class="k">else</span> <span class="s2">&quot;boo!&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -894,12 +1067,7 @@ similar to the ternary operator <code class="docutils literal notranslate"><span
 languages.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">4</span> <span class="o">+</span> <span class="o">(</span><span class="k">if</span> <span class="sc">&#39;a&#39;</span> <span class="o">=</span> <span class="sc">&#39;b&#39;</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 6
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">4</span> <span class="o">+</span> <span class="p">(</span><span class="k">if</span> <span class="s1">&#39;a&#39;</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span> <span class="n">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -917,17 +1085,7 @@ writing a single <code class="docutils literal notranslate"><span class="pre">if
 omit it you’ll likely get an error message that, for now, is inscrutable:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">then</span> <span class="mi">5</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[3]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">14</span><span class="o">-</span><span class="mi">15</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="n">then</span> <span class="mi">5</span>
-                  <span class="o">^</span>
-<span class="ne">Error</span>: This expression has type int but an expression was expected of type
-         <span class="n">unit</span>
-       <span class="n">because</span> <span class="n">it</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">result</span> <span class="n">of</span> <span class="n">a</span> <span class="n">conditional</span> <span class="k">with</span> <span class="n">no</span> <span class="k">else</span> <span class="n">branch</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="n">then</span> <span class="mi">5</span>
 </pre></div>
 </div>
 </div>
@@ -973,12 +1131,7 @@ notation for it. Whenever we would write “<code class="docutils literal notran
 with how the toplevel responds after it evaluates an expression that you enter:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val x : int = 42
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
 </pre></div>
 </div>
 </div>
@@ -987,18 +1140,13 @@ with how the toplevel responds after it evaluates an expression that you enter:<
 indicates.</p>
 </div>
 <div class="section" id="let-expressions">
-<h2><span class="section-number">2.3.4. </span>Let Expressions<a class="headerlink" href="#let-expressions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3.5. </span>Let Expressions<a class="headerlink" href="#let-expressions" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/ug3L97FXC6A" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>In our use of the word <code class="docutils literal notranslate"><span class="pre">let</span></code> thus far, we’ve been making definitions in the
 toplevel and in <code class="docutils literal notranslate"><span class="pre">.ml</span></code> files. For example,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val x : int = 42
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1008,12 +1156,7 @@ toplevel. We’ll call this use of <code class="docutils literal notranslate"><s
 <p>There’s another use of <code class="docutils literal notranslate"><span class="pre">let</span></code> which is as an expression:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="k">in</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 43
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="ow">in</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1025,15 +1168,7 @@ definitions, which themselves do not evaluate to any value. You can see that if
 you try putting a let definition in place of where an expression is expected:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[7]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">11</span><span class="o">-</span><span class="mi">12</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="p">(</span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-               <span class="o">^</span>
-<span class="ne">Error</span>: Syntax error: operator expected.
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1043,12 +1178,7 @@ you try putting a let definition in place of where an expression is expected:</p
 to values. On the other hand, a <code class="docutils literal notranslate"><span class="pre">let</span></code> expression would work fine:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="k">in</span> <span class="n">x</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 43
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1113,7 +1243,7 @@ explicitly annotate it with this syntax:</p>
 </div>
 </div>
 <div class="section" id="scope">
-<h2><span class="section-number">2.3.5. </span>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3.6. </span>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/_TpTC6eo34M" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p><code class="docutils literal notranslate"><span class="pre">Let</span></code> bindings are in effect only in the block of code in which they occur. This
 is exactly what you’re used to from nearly any modern programming language. For
@@ -1233,6 +1363,63 @@ temporarily shadows the old one. But the old variable is still around, and its
 value is immutable: it never, ever changes. So even though <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions
 might superficially look like assignment statements from imperative languages,
 they are actually quite different.</p>
+</div>
+<div class="section" id="type-annotations">
+<h2><span class="section-number">2.3.7. </span>Type Annotations<a class="headerlink" href="#type-annotations" title="Permalink to this headline">¶</a></h2>
+<p>OCaml automatically infers the type of every expression, with no need for the
+programmer to write it manually. Nonetheless, it can sometimes to useful to
+manually specify the desired type of an expression. A <em>type annotation</em> does
+that:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">5</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>An incorrect annotation will produce a compile-time error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">5</span> <span class="p">:</span> <span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And that example shows why you might use manual type annotations during
+debugging.  Perhaps you had forgotten that <code class="docutils literal notranslate"><span class="pre">5</span></code> cannot be treated as a <code class="docutils literal notranslate"><span class="pre">float</span></code>,
+and you tried to write:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="o">+.</span> <span class="mf">1.1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You might try manually specifying that <code class="docutils literal notranslate"><span class="pre">5</span></code> was supposed to be a <code class="docutils literal notranslate"><span class="pre">float</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">5</span> <span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">+.</span> <span class="mf">1.1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Although that might seem silly for this tiny program, you might find this
+technique to be effective as programs get larger.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Type annotations are <strong>not</strong> <em>type casts</em>, such as might be found in C or Java.
+They do not indicate a conversion from one type to another. Rather they indicate
+a check that the expression really does have the given type.</p>
+</div>
+<p><strong>Syntax.</strong> The syntax of a type annotation:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">t</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Note that the parentheses are required.</p>
+<p><strong>Dynamic semantics.</strong> There is no run-time meaning for a type annotation.
+It goes away during compilation, because it indicates a compile-time check.
+There is no run-time conversion.</p>
+<p><strong>Static semantics.</strong>  If <code class="docutils literal notranslate"><span class="pre">e</span></code> has type <code class="docutils literal notranslate"><span class="pre">t</span></code> then <code class="docutils literal notranslate"><span class="pre">(e</span> <span class="pre">:</span> <span class="pre">t)</span></code> has type <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
 </div>
 </div>
 

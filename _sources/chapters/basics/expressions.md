@@ -45,31 +45,164 @@ that might happen:
 2. Evaluation of the expression never terminates (e.g., it enters an "infinite
    loop").
 
-## Assertions
+## Primitive Types and Values
 
-The expression `assert e` evaluates `e`. If the result is `true`, nothing more
-happens, and the entire expression evaluates to a special value called *unit*.
-The unit value is written `()` and its type is `unit`. But if the result is
-`false`, an exception is raised.
+The *primitive* types are the built-in and most basic types: integers,
+floating-point numbers, characters, strings, and booleans. They will be
+recognizable as similar to primitive types from other programming languages.
 
-## Operators
+**Type `int`: Integers.** OCaml integers are written as usual: `1`, `2`, etc.
+The usual operators are available: `+`, `-`, `*`, `/`, and `mod`. The latter
+two are integer division and modulus:
 
-Operators can be used to form expressions. OCaml has more or less all the usual
-operators you would expect in a language from the C or Java family of languages.
-See the [table of all operators in the OCaml manual][ops] for details.
+```{code-cell} ocaml
+65 / 60
+```
 
-Here are two things to watch out for as you begin:
+```{code-cell} ocaml
+65 mod 60
+```
 
-* OCaml deliberately does not support operator overloading. As a consequence,
-  the integer and floating-point operators are distinct. E.g., to add integers,
-  use `+`. To add floating-point numbers, use `+.`.
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+65 / 0
+```
 
-* There are two equality operators in OCaml, `=` and `==`, with corresponding
-  inequality operators `<>` and `!=`. Operators `=` and `<>` examine
-  *structural* equality whereas `==` and `!=` examine *physical* equality. Until
-  we've studied the imperative features of OCaml, the difference between them
-  will be tricky to explain. See the [documentation][stdlib] of `Stdlib.(==)`
-  if you're curious now.
+OCaml integers range from $-2^{62}$ to $2^{62}-1$ on modern platforms. They are
+implemented with 64-bit machine *words*, which is the size of a register on
+64-bit processor. But one of those bits is "stolen" by the OCaml implementation,
+leading to a 63-bit representation. That bit is used at run time to distinguish
+integers from pointers. For applications that need true 64-bit integers, there
+is an [`Int64` module][int64] in the standard library. And for applications that
+need arbitrary-precision integers, there is a separate [`Zarith`][zarith]
+library. But for most purposes, the built-in `int` type suffices and offers the
+best performance.
+
+[int64]: https://ocaml.org/api/Int64.html
+[zarith]: https://github.com/ocaml/Zarith
+
+**Type `float`: Floating-point numbers.** OCaml floats are [IEEE 754
+double-precision floating-point numbers][binary64]. Syntactically, they must
+always contain a dot&mdash;for example, `3.14` or `3.0` or even `3.`.  The last
+is a `float`; if you write it as `3`, it is instead an `int`:
+
+```{code-cell} ocaml
+3.
+```
+
+```{code-cell} ocaml
+3
+```
+
+OCaml deliberately does not support operator overloading, Arithmetic operations
+on floats are written with a dot after them. For example, floating-point
+multiplication is written `*.` not `*`:
+
+```{code-cell} ocaml
+3.14 *. 2.
+```
+
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+3.14 * 2.
+```
+
+OCaml will not automatically convert between `int` and `float`. If you want to
+convert, there are two built-in functions for that purpose: `int_of_float` and
+`float_of_int`.
+
+```{code-cell} ocaml
+3.14 *. (float_of_int 2)
+```
+
+As in any language, the floating-point representation is approximate. That can
+lead to rounding errors:
+
+```{code-cell} ocaml
+0.1 +. 0.2
+```
+
+The same behavior can be observed in Python and Java, too.  If you haven't
+encountered this phenomenon before, here's a [basic guide to floating-point
+representation][fp-guide] that you might enjoy reading.
+
+[binary64]: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
+[fp-guide]: https://floating-point-gui.de/basic/
+
+**Type `bool`: Booleans.** The boolean values are written `true` and `false`.
+The usual short-circuit conjunction `&&` and disjunction `||` operators are
+available.
+
+**Type `char`: Characters.** Characters are written with single quotes, such as
+`'a'`, `'b`, and `'c'`. They are represented as bytes &mdash;that is, 8-bit
+integers&mdash; in the ISO 9958-1 "Latin-1" encoding. The first half of the
+characters in that range are the standard ASCII characters. You can convert
+characters to and from integers with `char_of_int` and `int_of_char`.
+
+**Type `string`: Strings.** Strings are sequences of characters. They are
+written with double quotes, such as `"abc"`.  The string concatenation operator
+is `^`:
+
+```{code-cell} ocaml
+"abc" ^ "def"
+```
+
+Object-oriented languages often provide an overridable method for converting
+objects to strings, such as `toString()` in Java or `__str__()` in Python. But
+most OCaml values are not objects, so another means is required to convert to
+strings. For three of the primitive types, there are built-in functions:
+`string_of_int`, `string_of_float`, `string_of_bool`.  Strangely,
+there is no `string_of_char`, but the library function `String.make` can
+be used to accomplish the same goal.
+
+```{code-cell} ocaml
+string_of_int 42
+```
+
+```{code-cell} ocaml
+String.make 1 'z'
+```
+
+Likewise, for the same three primitive types, there are built-in functions to
+convert from a string if possible: `int_of_string`, `float_of_string`, and
+`bool_of_string`.
+
+```{code-cell} ocaml
+int_of_string "123"
+```
+
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+int_of_string "not an int"
+```
+
+There is no `char_of_string`, but the individual characters of a string can be
+accessed by a 0-based index. The indexing operator is written with a dot and
+square brackets:
+
+```{code-cell} ocaml
+"abc".[0]
+```
+
+```{code-cell} ocaml
+"abc".[1]
+```
+
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+"abc".[3]
+```
+
+## More Operators
+
+We've covered most of the built-in operators above, but there are a few more
+that you can see in the [OCaml manual][ops].
+
+There are two equality operators in OCaml, `=` and `==`, with corresponding
+inequality operators `<>` and `!=`. Operators `=` and `<>` examine *structural*
+equality whereas `==` and `!=` examine *physical* equality. Until we've studied
+the imperative features of OCaml, the difference between them will be tricky to
+explain. See the [documentation][stdlib] of `Stdlib.(==)` if you're curious now.
 
 ```{important}
 Start training yourself now to use `=` and not to use `==`. This will be
@@ -79,6 +212,13 @@ equality operator.
 
 [ops]: https://ocaml.org/manual/expr.html#ss%3Aexpr-operators
 [stdlib]: https://ocaml.org/api/Stdlib.html
+
+## Assertions
+
+The expression `assert e` evaluates `e`. If the result is `true`, nothing more
+happens, and the entire expression evaluates to a special value called *unit*.
+The unit value is written `()` and its type is `unit`. But if the result is
+`false`, an exception is raised.
 
 ## If Expressions
 
@@ -409,3 +549,57 @@ temporarily shadows the old one. But the old variable is still around, and its
 value is immutable: it never, ever changes. So even though `let` expressions
 might superficially look like assignment statements from imperative languages,
 they are actually quite different.
+
+## Type Annotations
+
+OCaml automatically infers the type of every expression, with no need for the
+programmer to write it manually. Nonetheless, it can sometimes to useful to
+manually specify the desired type of an expression. A *type annotation* does
+that:
+
+```{code-cell} ocaml
+(5 : int)
+```
+
+An incorrect annotation will produce a compile-time error:
+
+```{code-cell} ocaml
+(5 : float)
+```
+
+And that example shows why you might use manual type annotations during
+debugging.  Perhaps you had forgotten that `5` cannot be treated as a `float`,
+and you tried to write:
+
+```{code-cell} ocaml
+5 +. 1.1
+```
+
+You might try manually specifying that `5` was supposed to be a `float`:
+
+```{code-cell} ocaml
+(5 : float) +. 1.1
+```
+
+Although that might seem silly for this tiny program, you might find this
+technique to be effective as programs get larger.
+
+```{important}
+Type annotations are **not** *type casts*, such as might be found in C or Java.
+They do not indicate a conversion from one type to another. Rather they indicate
+a check that the expression really does have the given type.
+```
+
+**Syntax.** The syntax of a type annotation:
+
+```ocaml
+(e : t)
+```
+
+Note that the parentheses are required.
+
+**Dynamic semantics.** There is no run-time meaning for a type annotation.
+It goes away during compilation, because it indicates a compile-time check.
+There is no run-time conversion.
+
+**Static semantics.**  If `e` has type `t` then `(e : t)` has type `t`.
