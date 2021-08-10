@@ -338,7 +338,7 @@ Let's make sure VS Code's OCaml support is working.
 Here's how to proceed:
 
 - Do not hardcode any paths in the VS Code settings file, despite any advice you
-  might find online.  That is a bandaid, not a cure of whatever the underlying
+  might find online.  That is a band-aid, not a cure of whatever the underlying
   problem really is.
 
 - Make sure that, from the same Unix prompt as which you launched VS Code, you
