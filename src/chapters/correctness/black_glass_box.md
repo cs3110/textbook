@@ -369,73 +369,59 @@ report to confirm that the code really did get executed.
 
 **Bisect Tutorial.**
 
-Download the file {{ code_link | replace("%%NAME%%", "sorts.ml") }}. You will
-find an implementation of insertion sort and merge sort.
+1. Download the file {{ code_link | replace("%%NAME%%", "sorts.ml") }}. You will
+   find an implementation of insertion sort and merge sort.
 
-Create a file in the same directory called `myocamlbuild.ml`. That file name is
-actually mandatory, despite the customary use of "my" in CS demos to indicate a
-name that you could choose yourself. Put this code in it:
+2. Download the file {{ code_link | replace("%%NAME%%", "test_sorts.ml") }}. It
+   has the skeleton for an OUnit test suite.
 
-```ocaml
-open Ocamlbuild_plugin
-let () = dispatch Bisect_ppx_plugin.dispatch
-```
+3. Create a `dune` file to execute `test_sorts`:
+   ```text
+   (executable
+    (name test_sorts)
+    (libraries ounit2)
+    (instrumentation
+     (backend bisect_ppx)))
+   ```
 
-Create a `_tags` file in the same directory, and put the following in it:
+4. Run:
+   ```console
+   $ dune exec --instrument-with bisect_ppx ./test_sorts.exe
+   ```
+   That will execute the test suite with Bisect coverage enabled, causing some
+   files named `bisectNNNN.coverage` to be produced.
 
-```
-<sorts.ml>: coverage
-<test_sorts.{byte,native}>: coverage
-true: package(ounit2), package(bisect_ppx)
-```
+5. Run:
+   ```console
+   $ bisect-ppx-report html
+   ```
+   to generate the Bisect report from your test suite execution.  The report
+   is in a newly-created directory named `_coverage`.
 
-Download the file {{ code_link | replace("%%NAME%%", "test_sorts.ml") }}. It has
-the skeleton for an OUnit test suite.
+6. Open the file `_coverage/index.html` in a web browser. Look at the per-file
+   coverage; you'll see we've managed to test a few percent of `sorts.ml` with
+   our test suite so far. Click on the link in that report for `sorts.ml`.
+   You'll see that we've managed to cover only one line of the source code.
 
-Run
+7. There are some additional tests in the test file. Try un-commenting those, as
+   documented in the test file, and increasing your code coverage. Between each
+   run, you will need to delete the `bisectNNNN.coverage` files, otherwise
+   the report will contain information from those previous runs:
+   ```console
+   $ rm bisect*.coverage
+   ```
+  By the time you're done un-commenting the provided tests, you should be at 25%
+  coverage, including all of the insertion sort implementation. For fun, try
+  adding more tests to get 100% coverage of merge sort.
+
+**Parallelism.** OUnit will by default attempt to run some of the tests in
+parallel, which reduces the time it takes to run a large test suite, at the
+tradeoff of making it nondeterministic in what order the tests run. It's
+possible for that to affect coverage if you are testing imperative code. To make
+the tests run one at a time, in order, you can pass the flag
+`-runner sequential` to the executable. OUnit will see that flag and cease
+parallelization:
 
 ```console
-$ BISECT_COVERAGE=YES ocamlbuild -use-ocamlfind -plugin-tag 'package(bisect_ppx-ocamlbuild)' test_sorts.byte
+$ dune exec --instrument-with bisect_ppx ./test_sorts.exe -- -runner sequential
 ```
-
-to build the test suite, and
-
-```console
-$ ./test_sorts.byte
-```
-
-to run it. OUnit will by default attempt to run some of the tests in parallel,
-which reduces the time it takes to run a large test suite, at the tradeoff of
-making it nondeterministic in what order the tests run.  If you want you can
-instead add a flag:
-
-```console
-$ ./test_sorts.byte -runner sequential
-```
-
-That makes the tests run one at a time in order.
-
-Running the suite will cause a file named `bisectNNNN.coverage` to be produced.
-Next run
-
-```console
-$ bisect-ppx-report html
-```
-
-to generate the Bisect report from your test suite execution.
-
-Open the file `_coverage/index.html` in a web browser. Look at the per-file
-coverage; you'll see we've managed to test only 10% of `sorts.ml` with our test
-suite so far. Click on the link in that report for `sorts.ml`. You'll see that
-we've managed to cover a couple lines of the source code so far with our test
-suite.
-
-There are some additional tests in the test file. Try uncommenting those, as
-documented in the test file, and increasing your code coverage. Between each
-run, you will need to delete the report file, recompile, rerun OUnit, and rerun
-the Bisect report tool. (Obviously, a Makefile would be a good thing to
-construct.)
-
-By the time you're done uncommenting the provided tests, you should be at 30%
-coverage, including all of the insertion sort implementation. For fun, try
-adding more tests to get 100% coverage of merge sort.

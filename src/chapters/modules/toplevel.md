@@ -15,6 +15,12 @@ kernelspec:
 
 # Modules and the Toplevel
 
+```{note}
+The video below uses the legacy build system, ocamlbuild, rather than the new
+build system, dune. Some of the details change with dune, as described in the
+text below.
+```
+
 {{ video_embed | replace("%%VID%%", "4yo-04VVzIw")}}
 
 There are several pragmatics involving modules and the toplevel that are
@@ -40,24 +46,20 @@ end
 Note that there is no `module Mods = struct ... end` around that. The code is at
 the topmost level of the file, as it were.
 
-Then suppose you type `ocamlbuild mods.byte` to compile it. Inside the `_build`
-directory you will now find the files that `ocamlbuild` produced. One of them is
-`mods.cmo`: this is a <u>c</u>ompiled <u>m</u>odule <u>o</u>bject file, aka
-bytecode.
+Then suppose you type `ocamlc mods.ml` to compile it. One of the newly-created
+files is `mods.cmo`: this is a <u>c</u>ompiled <u>m</u>odule <u>o</u>bject file,
+aka bytecode.
 
 You can make this bytecode available for use in the toplevel with the following
 directives. Recall that the `#` character is required in front of a directive.
 It is not part of the prompt.
 
 ```ocaml
-# #directory "_build";;
 # #load "mods.cmo";;
 ```
 
-The first directive tells utop to add the `_build` directory to the path in
-which it looks for compiled (and source) files. The second directive loads the
-bytecode found in `mods.cmo`, thus making a module named `Mods` available to be
-used.  It exactly as if you had entered this code:
+That directive loads the bytecode found in `mods.cmo`, thus making a module
+named `Mods` available to be used. It exactly as if you had entered this code:
 
 ```{code-cell} ocaml
 module Mods = struct
@@ -94,12 +96,39 @@ open Mods;;
 inc;;
 ```
 
+## Dune
+
+Dune provides a command to make it easier to start utop with libraries already
+loaded. Suppose we add this dune file to the same directory as `mods.ml`:
+
+```text
+(library
+ (name mods))
+```
+
+That tells dune to build a library named `Mods` out of `mods.ml` (and any other
+files in the same directory, if they existed).  Then we can run this command
+to launch utop with that library already loaded:
+
+```console
+$ dune utop
+```
+
+Now right away we can access components of `Mods` without having to issue
+a `#load` directive:
+```{code-cell} ocaml
+Mods.inc
+```
+
+The `dune utop` command accepts a directory name as an argument if you want to
+load libraries in a particular subdirectory of your source code.
+
 ## Initializing the Toplevel
 
 If you are doing a lot of testing of a particular module, it can be annoying to
-have to type those directives (`#directory` and `#load`) every time you start
-utop. You really want to initialize the toplevel with some code as it launches,
-so that you don't have to keep typing that code.
+have to type directives every time you start utop. You really want to initialize
+the toplevel with some code as it launches, so that you don't have to keep
+typing that code.
 
 The solution is to create a file in the working directory and call that file
 `.ocamlinit`. Note that the `.` at the front of that filename is required and
@@ -113,13 +142,11 @@ For example, suppose you create a file named `.ocamlinit` in the same directory
 as `mods.ml`, and in that file put the following code:
 
 ```ocaml
-#directory "_build";;
-#load "mods.cmo";;
-open Mods
+open Mods;;
 ```
 
-Now restart utop. All the names defined in `Mods` will already be in scope. For
-example, these will both succeed:
+Now restart utop with `dune utop`. All the names defined in `Mods` will already
+be in scope. For example, these will both succeed:
 
 ```{code-cell} ocaml
 inc;;
@@ -128,40 +155,34 @@ M.y;;
 
 ## Requiring Libraries
 
-Suppose you were to add the following lines to the end of `mods.ml`:
+Suppose you wanted to experiment with some OUnit code in utop. You can't
+actually open it:
 
-```ocaml
-open OUnit2
-let test = "testb" >:: (fun _ -> assert_equal "bigred" b)
-```
-
-If you try to recompile the module with `ocamlbuild mods.byte`, it will fail.
-The problem is that you need to tell the build system to include the third-party
-library OUnit. Recompiling with `ocamlbuild -pkg ounit2 mods.byte` will, as
-usual, succeed.
-
-But if you restart utop, there will be an error message:
-
-```text
-File ".ocamlinit", line 1:
-Error: Reference to undefined global `OUnit2'
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+open OUnit2;;
 ```
 
 The problem is that the OUnit library hasn't been loaded into utop yet. It can
 be with the following directive:
 
-```ocaml
+```{code-cell} ocaml
 #require "ounit2";;
 ```
 
 Now you can successfully load your own module without getting an error.
 
 ```ocaml
-#load "mods.cmo";;
+open OUnit2;;
 ```
 
-Moreover, if you add that `#require` directive to `.ocamlinit` anywhere before
-the `#load` directive, the "undefined global" error will go away.
+<!--
+MRC 8/12/21: I don't think we need this section anymore.  `dune utop` takes
+  care of recursive loads automatically, and none of the assignments needs
+  this functionality.  Moreover, we can't actually demo this easily without
+  ocamlbuild.  We'd have to use ocamlc or set up a kind of strange dune
+  hierarchy.  So I'm commenting out now, with the intent of deleting in a year
+  or so if all is going well.
 
 ## Dependencies
 
@@ -213,6 +234,7 @@ to load everything it depends on:
 ```
 
 And that is probably the better solution.
+-->
 
 ## Load vs Use
 

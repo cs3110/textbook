@@ -1,11 +1,12 @@
-default: build
-	utop
-
 build:
-	ocamlbuild -use-ocamlfind main.byte
+	dune build
 
+utop:
+	dune utop src
+
+.PHONY: test
 test:
-	ocamlbuild -use-ocamlfind test.byte && ./test.byte
+	dune exec test/main.exe
 
 clean:
-	ocamlbuild -clean
+	dune clean

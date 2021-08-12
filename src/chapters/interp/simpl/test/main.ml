@@ -1,4 +1,5 @@
 open OUnit2
+open Interp
 open Ast
 open Main
 

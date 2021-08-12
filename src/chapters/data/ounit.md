@@ -19,11 +19,10 @@ HUnit in Haskell, etc. The basic workflow for using OUnit is as follows:
 * Write a function in a file `f.ml`. There could be many other functions in that
   file too.
 
-* Write unit tests for that function in a separate file `f_test.ml`. That exact
-  name, with an underscore and "test" is not actually essential, but is a
-  convention we'll often follow.
+* Write unit tests for that function in a separate file `test.ml`. That exact
+  name is not actually essential.
 
-* Build and run `f_test` to execute the unit tests.
+* Build and run `test` to execute the unit tests.
 
 The [OUnit documentation][ounitdoc] is available on Github.
 
@@ -42,7 +41,7 @@ let rec sum = function
   | x :: xs -> x + sum xs
 ```
 
-Now create a second file named `sum_test.ml`, and put this code into it:
+Now create a second file named `test.ml`, and put this code into it:
 ```ocaml
 open OUnit2
 open Sum
@@ -57,36 +56,34 @@ let _ = run_test_tt_main tests
 ```
 
 Depending on your editor and its configuration, you probably now see some
-"Unbound module" errors about OUnit2 and Sum. Your code is actually correct, but
-your editor doesn't know how to understand it yet. To fix that, create a file in
-the same directory and name it `.merlin`. (Note the leading dot in that
-filename.) In that file put the following:
-```
-B _build
-PKG ounit2
-```
-The first line tells Merlin to look for compiled code from other source files
-inside the `_build` directory, which is where OCamlbuild places compiled code.
-The second line tells Merlin to look for the OUnit2 package.
+"Unbound module" errors about OUnit2 and Sum. Don't worry; the code is actually
+correct. We just need to set up dune and tell it to link OUnit. Create a `dune`
+file and put this in it:
 
-After you save the `.merlin` file, the error about `OUnit2` should be gone,
-though you might need to cause your editor to re-check the `sum_test.ml` file to
-get rid of it. You can close and re-open the window, or make a trivial change in
-the file (e.g., add then delete a space) to make that tappen.
+```text
+(executable
+ (name test)
+ (libraries ounit2))
+```
 
-But the error about `Sum` will still be there, because you haven't yet compiled
-that file. To do that, run this command:
+Now build the test suite:
+
 ```console
-$ ocamlbuild -pkgs ounit2 sum_test.byte
+$ dune build test.exe
 ```
-Now the error about `Sum` should be gone, though again you might need to
-convince your editor to re-check the file.
+
+Go back to your editor and do anything that will cause it to revisit `test.ml`.
+You can close and re-open the window, or make a trivial change in the file
+(e.g., add then delete a space). Now the errors should all disappear.
 
 Finally, you can run the test suite:
+
 ```console
-$ ./sum_test.byte
+$ dune exec ./test.exe
 ```
+
 You will get a response something like this:
+
 ```text
 ...
 Ran: 3 tests in: 0.12 seconds.
@@ -101,7 +98,7 @@ let rec sum = function
   | x :: xs -> x + sum xs
 ```
 
-If rebuild and re-execute `sum_test.byte`, all test cases now fail. The output
+If rebuild and re-execute the test suite, all test cases now fail. The output
 tells us the names of the failing cases. Here's the beginning of the output, in
 which we've replaced some strings that will be dependent on your own local
 computer with `...`:
@@ -110,10 +107,11 @@ FFF
 ==============================================================================
 Error: test suite for sum:2:two_elements.
 
-File ".../_build/oUnit-test suite for sum-...#01.log", line 8, characters 1-1:
+File ".../_build/oUnit-test suite for sum-...#01.log", line 9, characters 1-1:
 Error: test suite for sum:2:two_elements (in the log).
 
-Called from unknown location
+Raised at OUnitAssert.assert_failure in file "src/lib/ounit2/advanced/oUnitAssert.ml", line 45, characters 2-27
+Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
 
 not equal
 ------------------------------------------------------------------------------
@@ -156,12 +154,12 @@ framework.  Let's look at the first function from above:
 ```
 fun _ -> assert_equal 0 (sum [])
 ```
-Every test case function receives as input a parameter that OUnit calls a *test context*.
-Here (and in many of the test cases we write) we don't actually need to worry about
-the context, so we use the underscore to indicate that the function ignores its input.
-The function then calls `assert_equal`, which is a function provided by OUnit that
-checks to see whether its two arguments are equal.  If so the test case succeeds.
-If not, the test case fails.
+Every test case function receives as input a parameter that OUnit calls a *test
+context*. Here (and in many of the test cases we write) we don't actually need
+to worry about the context, so we use the underscore to indicate that the
+function ignores its input. The function then calls `assert_equal`, which is a
+function provided by OUnit that checks to see whether its two arguments are
+equal. If so the test case succeeds. If not, the test case fails.
 
 Then we created a test suite:
 ```ocaml
@@ -185,27 +183,6 @@ prints the results of which test cases passed vs. which failed to standard
 output. The use of `let _ = ` here indicates that we don't care what value the
 function returns; it just gets discarded.
 
-Finally, when we compiled the test file, we linked in the OUnit2 package:
-```
-$ ocamlbuild -pkgs ounit2 sum_test.byte
-```
-If you get tired of typing the `pkgs ounit2` part of that, you can instead
-create a file named `_tags` (note the underscore) in the same directory and put
-the following into it:
-```
-true: package(ounit2)
-```
-Now Ocamlbuild will automatically link in OUnit2 everytime you compile in this
-directory, without you having to give the `pkgs` flag. The tradeoff is that you
-now have to pass a different flag to Ocamlbuild:
-```
-$ ocamlbuild -use-ocamlfind sum_test.byte
-```
-And you will continue having to pass that flag as long as the `_tags` file
-exists. Why is this any better? If there are many packages you want to link,
-with the tags file you end up having to pass only one option on the command
-line, instead of many.
-
 ## Improving OUnit Output
 
 In our example with the buggy implementation of `sum`, we got the following
@@ -214,54 +191,10 @@ output:
 ```
 ==============================================================================
 Error: test suite for sum:2:two_elements.
-
-File ".../_build/oUnit-test suite for sum-...#01.log", line 8, characters 1-1:
-Error: test suite for sum:2:two_elements (in the log).
-
-Called from unknown location
-
+...
 not equal
 ------------------------------------------------------------------------------
 ```
-
-Let's see how to improve that output to be a little more informative.
-
-### Stack Traces
-
-The `Called from an unknown location` indicates OCaml was unable to provide a
-stack trace. That happened because, by default, stack traces are disabled. We
-can enable them by compiling the code with the debug tag:
-
-```
-$ ocamlbuild -pkgs ounit2 -tag debug sum_test.byte
-$ ./sum_test.byte
-
-==============================================================================
-Error: test suite for sum:2:two_elements.
-
-File "/Users/clarkson/tmp/sum/_build/oUnit-test suite for sum-...#01.log", line 9, characters 1-1:
-Error: test suite for sum:2:two_elements (in the log).
-
-Raised at file "src/oUnitAssert.ml", line 45, characters 8-27
-Called from file "src/oUnitRunner.ml", line 46, characters 13-26
-
-not equal
-------------------------------------------------------------------------------
-```
-
-Now we see the stack trace that resulted from `assert_equal` raising an
-exception. You'll probably agree that stack trace isn't very informative though:
-what matters is which test case fails, not which files in the implementation of
-OUnit were involved in raising the exception. And we could already identify the
-failing test case from the first line of output. (It's the test case named
-`two_elements`, which at position 2 in the test suite named
-`test suite for sum`.)
-
-So we don't usually bother enabling stack traces for OUnit test suites.
-Nonetheless, it could occasionally be useful if your *own* code is raising
-exceptions that you want to track down.
-
-### Output Values
 
 The `not equal` in the OUnit output means that `assert_equal` discovered the two
 values passed to it in that test case were not equal. That's not so informative:
@@ -284,12 +217,7 @@ And now we get more informative output:
 ```
 ==============================================================================
 Error: test suite for sum:2:two_elements.
-
-File "/Users/clarkson/tmp/sum/_build/oUnit-test suite for sum-sauternes#01.log", line 8, characters 1-1:
-Error: test suite for sum:2:two_elements (in the log).
-
-Called from unknown location
-
+...
 expected: 3 but got: 4
 ------------------------------------------------------------------------------
 ```

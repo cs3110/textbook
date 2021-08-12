@@ -8,32 +8,19 @@ download it here: {{ code_link | replace("%%NAME%%", "simpl.zip") }}.
 <!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "parse")}}
 
-Run `make` in the SimPL interpreter implementation. It will compile the
+Run `make utop` in the SimPL interpreter implementation. It will compile the
 interpreter and launch utop. Evaluate the following expressions. Note what each
 returns.
 
 * `parse "22"`
-* `parse "1+2+3"`
-* `parse "let x = 2 in 20+x"`
+* `parse "1 + 2 + 3"`
+* `parse "let x = 2 in 20 + x"`
 
 Also evaluate these expressions, which will raise exceptions.  Explain why
 each one is an error, and whether the error occurs during parsing or lexing.
 
 * `parse "3.14"`
 * `parse "3+"`
-
-<!--------------------------------------------------------------------------->
-{{ ex1 | replace("%%NAME%%", "generated parser and lexer")}}
-
-Run OCamlbuild to generate the parser and lexer in the `_build` directory.
-
-Open `parser.ml`, which is the module generated automatically by menhir from
-`parser.mly`. Skim through the file to appreciate not having to write the parser
-yourself.
-
-Also open `lexer.ml`, which is the module generated automatically by ocamllex
-from `lexer.mll`. Skim through the file to appreciate not having to write the
-lexer yourself.
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "simpl ids")}}
