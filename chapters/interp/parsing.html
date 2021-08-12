@@ -1237,26 +1237,37 @@ names rather than the <code class="docutils literal notranslate"><span class="pr
 <h3><span class="section-number">9.2.4.4. </span>Generating the Parser and Lexer<a class="headerlink" href="#generating-the-parser-and-lexer" title="Permalink to this headline">¶</a></h3>
 <p>Now that we have completed parser and lexer definitions in <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code> and
 <code class="docutils literal notranslate"><span class="pre">lexer.mll</span></code>, we can run Menhir and ocamllex to generate the parser and lexer
-from them. Ocamlbuild already knows how to run those tools. For example:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild lexer.ml
+from them. Let’s organize our code like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- &lt;some root folder&gt;
+  - dune-project
+  - src
+    - ast.ml
+    - dune
+    - lexer.mll
+    - parser.mly
 </pre></div>
 </div>
-<p>will generate <code class="docutils literal notranslate"><span class="pre">_build/lexer.ml</span></code> from <code class="docutils literal notranslate"><span class="pre">lexer.mll</span></code>, and</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild -use-menhir parser.ml
+<p>In <code class="docutils literal notranslate"><span class="pre">src/dune</span></code>, write the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(library
+ (name interp))
+
+(menhir
+ (modules parser))
+
+(ocamllex lexer)
 </pre></div>
 </div>
-<p>will generate <code class="docutils literal notranslate"><span class="pre">_build/parser.ml</span></code> from <code class="docutils literal notranslate"><span class="pre">parser.mly</span></code>.</p>
-<p>The flag <code class="docutils literal notranslate"><span class="pre">-use-menhir</span></code> alerts ocamlbuild to use Menhir instead of ocamlyacc for
-files with the <code class="docutils literal notranslate"><span class="pre">.mly</span></code> extension. You can instead put that into your <code class="docutils literal notranslate"><span class="pre">_tags</span></code>
-file:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>true: use_menhir
-</pre></div>
-</div>
+<p>That organizes the entire <code class="docutils literal notranslate"><span class="pre">src</span></code> folder into a <em>library</em> named <code class="docutils literal notranslate"><span class="pre">Interp</span></code>. The
+parser and lexer will be modules <code class="docutils literal notranslate"><span class="pre">Interp.Parser</span></code> and <code class="docutils literal notranslate"><span class="pre">Interp.Lexer</span></code> in that
+library.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">dune</span> <span class="pre">build</span></code> to compile the code, thus generating the parser and lexer. If
+you want to see the generated code, look in <code class="docutils literal notranslate"><span class="pre">_build/default/src/</span></code> for
+<code class="docutils literal notranslate"><span class="pre">parser.ml</span></code> and <code class="docutils literal notranslate"><span class="pre">lexer.ml</span></code>.</p>
 </div>
 <div class="section" id="the-driver">
 <h3><span class="section-number">9.2.4.5. </span>The Driver<a class="headerlink" href="#the-driver" title="Permalink to this headline">¶</a></h3>
 <p>Finally, we can pull together the lexer and parser to transform a string into an
-AST. Put this code into a file named <code class="docutils literal notranslate"><span class="pre">main.ml</span></code>:</p>
+AST. Put this code into a file named <code class="docutils literal notranslate"><span class="pre">src/main.ml</span></code>:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Ast</span>
 
 <span class="k">let</span> <span class="n">parse</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="kt">string</span><span class="o">)</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">=</span>
@@ -1273,9 +1284,16 @@ and <code class="docutils literal notranslate"><span class="pre">Parser.prog</sp
 <code class="docutils literal notranslate"><span class="pre">prog</span></code> in our parser definition.</p>
 <p>Note how this code runs the lexer on a string; there is a corresponding function
 <code class="docutils literal notranslate"><span class="pre">from_channel</span></code> to read from a file.</p>
-<p>We could now use <code class="docutils literal notranslate"><span class="pre">parse</span></code> interactively to parse some strings.  For example:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">parse</span> <span class="s2">&quot;let x = 3110 in x + x&quot;</span><span class="o">;;</span>
-<span class="o">-</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">=</span> <span class="nc">Let</span> <span class="o">(</span><span class="s2">&quot;x&quot;</span><span class="o">,</span> <span class="nc">Int</span> <span class="mi">3110</span><span class="o">,</span> <span class="nc">Binop</span> <span class="o">(</span><span class="nc">Add</span><span class="o">,</span> <span class="nc">Var</span> <span class="s2">&quot;x&quot;</span><span class="o">,</span> <span class="nc">Var</span> <span class="s2">&quot;x&quot;</span><span class="o">))</span>
+<p>We could now use <code class="docutils literal notranslate"><span class="pre">parse</span></code> interactively to parse some strings.  Start utop
+and load the library declared in <code class="docutils literal notranslate"><span class="pre">src</span></code> with this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune utop src
+</pre></div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">Interp.Main.parse</span></code> is available for use:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="nn">Interp</span><span class="p">.</span><span class="nn">Main</span><span class="p">.</span><span class="n">parse</span> <span class="s2">&quot;let x = 3110 in x + x&quot;</span><span class="o">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="nn">Interp</span><span class="p">.</span><span class="nn">Ast</span><span class="p">.</span><span class="n">expr</span> <span class="o">=</span>
+<span class="nn">Interp</span><span class="p">.</span><span class="nn">Ast</span><span class="p">.</span><span class="nc">Let</span> <span class="o">(</span><span class="s2">&quot;x&quot;</span><span class="o">,</span> <span class="nn">Interp</span><span class="p">.</span><span class="nn">Ast</span><span class="p">.</span><span class="nc">Int</span> <span class="mi">3110</span><span class="o">,</span>
+ <span class="nn">Interp</span><span class="p">.</span><span class="nn">Ast</span><span class="p">.</span><span class="nc">Binop</span> <span class="o">(</span><span class="nn">Interp</span><span class="p">.</span><span class="nn">Ast</span><span class="p">.</span><span class="nc">Add</span><span class="o">,</span> <span class="nn">Interp</span><span class="p">.</span><span class="nn">Ast</span><span class="p">.</span><span class="nc">Var</span> <span class="s2">&quot;x&quot;</span><span class="o">,</span> <span class="nn">Interp</span><span class="p">.</span><span class="nn">Ast</span><span class="p">.</span><span class="nc">Var</span> <span class="s2">&quot;x&quot;</span><span class="o">))</span>
 </pre></div>
 </div>
 <p>That completes lexing and parsing for SimPL.</p>

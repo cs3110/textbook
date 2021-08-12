@@ -1355,6 +1355,7 @@ restricted to any particular type of value.</p>
     val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b t
     val mapi : (key -&gt; &#39;a -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b t
     val to_seq : &#39;a t -&gt; (key * &#39;a) Seq.t
+    val to_rev_seq : &#39;a t -&gt; (key * &#39;a) Seq.t
     val to_seq_from : key -&gt; &#39;a t -&gt; (key * &#39;a) Seq.t
     val add_seq : (key * &#39;a) Seq.t -&gt; &#39;a t -&gt; &#39;a t
     val of_seq : (key * &#39;a) Seq.t -&gt; &#39;a t
@@ -1415,8 +1416,10 @@ type as a key.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Not_found.
-<span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib__map</span><span class="o">.</span><span class="n">Make</span><span class="o">.</span><span class="n">find</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;map.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">136</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">10</span><span class="o">-</span><span class="mi">25</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">17</span><span class="o">-</span><span class="mi">27</span>
+<span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib__map</span><span class="o">.</span><span class="n">Make</span><span class="o">.</span><span class="n">find</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;map.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">137</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">10</span><span class="o">-</span><span class="mi">25</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
 </pre></div>
 </div>
 </div>
@@ -1602,6 +1605,7 @@ compare records that way:</p>
     val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b t
     val mapi : (key -&gt; &#39;a -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b t
     val to_seq : &#39;a t -&gt; (key * &#39;a) Seq.t
+    val to_rev_seq : &#39;a t -&gt; (key * &#39;a) Seq.t
     val to_seq_from : key -&gt; &#39;a t -&gt; (key * &#39;a) Seq.t
     val add_seq : (key * &#39;a) Seq.t -&gt; &#39;a t -&gt; &#39;a t
     val of_seq : (key * &#39;a) Seq.t -&gt; &#39;a t

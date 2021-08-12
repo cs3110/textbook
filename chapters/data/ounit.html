@@ -768,18 +768,6 @@
   <a class="reference internal nav-link" href="#improving-ounit-output">
    3.3.3. Improving OUnit Output
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stack-traces">
-     3.3.3.1. Stack Traces
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#output-values">
-     3.3.3.2. Output Values
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#testing-for-exceptions">
@@ -821,10 +809,9 @@ HUnit in Haskell, etc. The basic workflow for using OUnit is as follows:</p>
 <ul class="simple">
 <li><p>Write a function in a file <code class="docutils literal notranslate"><span class="pre">f.ml</span></code>. There could be many other functions in that
 file too.</p></li>
-<li><p>Write unit tests for that function in a separate file <code class="docutils literal notranslate"><span class="pre">f_test.ml</span></code>. That exact
-name, with an underscore and “test” is not actually essential, but is a
-convention we’ll often follow.</p></li>
-<li><p>Build and run <code class="docutils literal notranslate"><span class="pre">f_test</span></code> to execute the unit tests.</p></li>
+<li><p>Write unit tests for that function in a separate file <code class="docutils literal notranslate"><span class="pre">test.ml</span></code>. That exact
+name is not actually essential.</p></li>
+<li><p>Build and run <code class="docutils literal notranslate"><span class="pre">test</span></code> to execute the unit tests.</p></li>
 </ul>
 <p>The <a class="reference external" href="https://gildor478.github.io/ounit/ounit2/index.html">OUnit documentation</a> is available on Github.</p>
 <div class="section" id="an-example-of-ounit">
@@ -838,7 +825,7 @@ discussed in the next section.</p>
   <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">xs</span>
 </pre></div>
 </div>
-<p>Now create a second file named <code class="docutils literal notranslate"><span class="pre">sum_test.ml</span></code>, and put this code into it:</p>
+<p>Now create a second file named <code class="docutils literal notranslate"><span class="pre">test.ml</span></code>, and put this code into it:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">OUnit2</span>
 <span class="k">open</span> <span class="nc">Sum</span>
 
@@ -852,30 +839,23 @@ discussed in the next section.</p>
 </pre></div>
 </div>
 <p>Depending on your editor and its configuration, you probably now see some
-“Unbound module” errors about OUnit2 and Sum. Your code is actually correct, but
-your editor doesn’t know how to understand it yet. To fix that, create a file in
-the same directory and name it <code class="docutils literal notranslate"><span class="pre">.merlin</span></code>. (Note the leading dot in that
-filename.) In that file put the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="n">_build</span>
-<span class="n">PKG</span> <span class="n">ounit2</span>
+“Unbound module” errors about OUnit2 and Sum. Don’t worry; the code is actually
+correct. We just need to set up dune and tell it to link OUnit. Create a <code class="docutils literal notranslate"><span class="pre">dune</span></code>
+file and put this in it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(executable
+ (name test)
+ (libraries ounit2))
 </pre></div>
 </div>
-<p>The first line tells Merlin to look for compiled code from other source files
-inside the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory, which is where OCamlbuild places compiled code.
-The second line tells Merlin to look for the OUnit2 package.</p>
-<p>After you save the <code class="docutils literal notranslate"><span class="pre">.merlin</span></code> file, the error about <code class="docutils literal notranslate"><span class="pre">OUnit2</span></code> should be gone,
-though you might need to cause your editor to re-check the <code class="docutils literal notranslate"><span class="pre">sum_test.ml</span></code> file to
-get rid of it. You can close and re-open the window, or make a trivial change in
-the file (e.g., add then delete a space) to make that tappen.</p>
-<p>But the error about <code class="docutils literal notranslate"><span class="pre">Sum</span></code> will still be there, because you haven’t yet compiled
-that file. To do that, run this command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild -pkgs ounit2 sum_test.byte
+<p>Now build the test suite:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune build test.exe
 </pre></div>
 </div>
-<p>Now the error about <code class="docutils literal notranslate"><span class="pre">Sum</span></code> should be gone, though again you might need to
-convince your editor to re-check the file.</p>
+<p>Go back to your editor and do anything that will cause it to revisit <code class="docutils literal notranslate"><span class="pre">test.ml</span></code>.
+You can close and re-open the window, or make a trivial change in the file
+(e.g., add then delete a space). Now the errors should all disappear.</p>
 <p>Finally, you can run the test suite:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./sum_test.byte
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune <span class="nb">exec</span> ./test.exe
 </pre></div>
 </div>
 <p>You will get a response something like this:</p>
@@ -891,7 +871,7 @@ in it to the following:</p>
   <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="n">xs</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">xs</span>
 </pre></div>
 </div>
-<p>If rebuild and re-execute <code class="docutils literal notranslate"><span class="pre">sum_test.byte</span></code>, all test cases now fail. The output
+<p>If rebuild and re-execute the test suite, all test cases now fail. The output
 tells us the names of the failing cases. Here’s the beginning of the output, in
 which we’ve replaced some strings that will be dependent on your own local
 computer with <code class="docutils literal notranslate"><span class="pre">...</span></code>:</p>
@@ -899,10 +879,11 @@ computer with <code class="docutils literal notranslate"><span class="pre">...</
 <span class="o">==============================================================================</span>
 <span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span><span class="o">.</span>
 
-<span class="n">File</span> <span class="s2">&quot;.../_build/oUnit-test suite for sum-...#01.log&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="n">File</span> <span class="s2">&quot;.../_build/oUnit-test suite for sum-...#01.log&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">9</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
 <span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">log</span><span class="p">)</span><span class="o">.</span>
 
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">unknown</span> <span class="n">location</span>
+<span class="n">Raised</span> <span class="n">at</span> <span class="n">OUnitAssert</span><span class="o">.</span><span class="n">assert_failure</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;src/lib/ounit2/advanced/oUnitAssert.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">45</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">2</span><span class="o">-</span><span class="mi">27</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">OUnitRunner.run_one_test.</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;src/lib/ounit2/advanced/oUnitRunner.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">83</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">13</span><span class="o">-</span><span class="mi">26</span>
 
 <span class="ow">not</span> <span class="n">equal</span>
 <span class="o">------------------------------------------------------------------------------</span>
@@ -943,12 +924,12 @@ framework.  Let’s look at the first function from above:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fun</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">0</span> <span class="p">(</span><span class="nb">sum</span> <span class="p">[])</span>
 </pre></div>
 </div>
-<p>Every test case function receives as input a parameter that OUnit calls a <em>test context</em>.
-Here (and in many of the test cases we write) we don’t actually need to worry about
-the context, so we use the underscore to indicate that the function ignores its input.
-The function then calls <code class="docutils literal notranslate"><span class="pre">assert_equal</span></code>, which is a function provided by OUnit that
-checks to see whether its two arguments are equal.  If so the test case succeeds.
-If not, the test case fails.</p>
+<p>Every test case function receives as input a parameter that OUnit calls a <em>test
+context</em>. Here (and in many of the test cases we write) we don’t actually need
+to worry about the context, so we use the underscore to indicate that the
+function ignores its input. The function then calls <code class="docutils literal notranslate"><span class="pre">assert_equal</span></code>, which is a
+function provided by OUnit that checks to see whether its two arguments are
+equal. If so the test case succeeds. If not, the test case fails.</p>
 <p>Then we created a test suite:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">tests</span> <span class="o">=</span> <span class="s2">&quot;test suite for sum&quot;</span> <span class="o">&gt;:::</span> <span class="o">[</span>
   <span class="s2">&quot;empty&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="mi">0</span> <span class="o">(</span><span class="n">sum</span> <span class="bp">[]</span><span class="o">));</span>
@@ -967,26 +948,6 @@ of the test suite and the list of test cases in that suite.</p>
 prints the results of which test cases passed vs. which failed to standard
 output. The use of <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">_</span> <span class="pre">=</span> </code> here indicates that we don’t care what value the
 function returns; it just gets discarded.</p>
-<p>Finally, when we compiled the test file, we linked in the OUnit2 package:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ocamlbuild -pkgs ounit2 sum_test.byte
-</pre></div>
-</div>
-<p>If you get tired of typing the <code class="docutils literal notranslate"><span class="pre">pkgs</span> <span class="pre">ounit2</span></code> part of that, you can instead
-create a file named <code class="docutils literal notranslate"><span class="pre">_tags</span></code> (note the underscore) in the same directory and put
-the following into it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">true</span><span class="p">:</span> <span class="n">package</span><span class="p">(</span><span class="n">ounit2</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Now Ocamlbuild will automatically link in OUnit2 everytime you compile in this
-directory, without you having to give the <code class="docutils literal notranslate"><span class="pre">pkgs</span></code> flag. The tradeoff is that you
-now have to pass a different flag to Ocamlbuild:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ocamlbuild -use-ocamlfind sum_test.byte
-</pre></div>
-</div>
-<p>And you will continue having to pass that flag as long as the <code class="docutils literal notranslate"><span class="pre">_tags</span></code> file
-exists. Why is this any better? If there are many packages you want to link,
-with the tags file you end up having to pass only one option on the command
-line, instead of many.</p>
 </div>
 <div class="section" id="improving-ounit-output">
 <h2><span class="section-number">3.3.3. </span>Improving OUnit Output<a class="headerlink" href="#improving-ounit-output" title="Permalink to this headline">¶</a></h2>
@@ -994,51 +955,11 @@ line, instead of many.</p>
 output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==============================================================================</span>
 <span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span><span class="o">.</span>
-
-<span class="n">File</span> <span class="s2">&quot;.../_build/oUnit-test suite for sum-...#01.log&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-<span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">log</span><span class="p">)</span><span class="o">.</span>
-
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">unknown</span> <span class="n">location</span>
-
+<span class="o">...</span>
 <span class="ow">not</span> <span class="n">equal</span>
 <span class="o">------------------------------------------------------------------------------</span>
 </pre></div>
 </div>
-<p>Let’s see how to improve that output to be a little more informative.</p>
-<div class="section" id="stack-traces">
-<h3><span class="section-number">3.3.3.1. </span>Stack Traces<a class="headerlink" href="#stack-traces" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">Called</span> <span class="pre">from</span> <span class="pre">an</span> <span class="pre">unknown</span> <span class="pre">location</span></code> indicates OCaml was unable to provide a
-stack trace. That happened because, by default, stack traces are disabled. We
-can enable them by compiling the code with the debug tag:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ocamlbuild -pkgs ounit2 -tag debug sum_test.byte
-$ ./sum_test.byte
-
-==============================================================================
-Error: test suite for sum:2:two_elements.
-
-File &quot;/Users/clarkson/tmp/sum/_build/oUnit-test suite for sum-...#01.log&quot;, line 9, characters 1-1:
-Error: test suite for sum:2:two_elements (in the log).
-
-Raised at file &quot;src/oUnitAssert.ml&quot;, line 45, characters 8-27
-Called from file &quot;src/oUnitRunner.ml&quot;, line 46, characters 13-26
-
-not equal
-------------------------------------------------------------------------------
-</pre></div>
-</div>
-<p>Now we see the stack trace that resulted from <code class="docutils literal notranslate"><span class="pre">assert_equal</span></code> raising an
-exception. You’ll probably agree that stack trace isn’t very informative though:
-what matters is which test case fails, not which files in the implementation of
-OUnit were involved in raising the exception. And we could already identify the
-failing test case from the first line of output. (It’s the test case named
-<code class="docutils literal notranslate"><span class="pre">two_elements</span></code>, which at position 2 in the test suite named
-<code class="docutils literal notranslate"><span class="pre">test</span> <span class="pre">suite</span> <span class="pre">for</span> <span class="pre">sum</span></code>.)</p>
-<p>So we don’t usually bother enabling stack traces for OUnit test suites.
-Nonetheless, it could occasionally be useful if your <em>own</em> code is raising
-exceptions that you want to track down.</p>
-</div>
-<div class="section" id="output-values">
-<h3><span class="section-number">3.3.3.2. </span>Output Values<a class="headerlink" href="#output-values" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">equal</span></code> in the OUnit output means that <code class="docutils literal notranslate"><span class="pre">assert_equal</span></code> discovered the two
 values passed to it in that test case were not equal. That’s not so informative:
 we’d like to know <em>why</em> they’re not equal. In particular, we’d like to know what
@@ -1057,12 +978,7 @@ will suffice. We modify the test suite as follows:</p>
 <p>And now we get more informative output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==============================================================================</span>
 <span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span><span class="o">.</span>
-
-<span class="n">File</span> <span class="s2">&quot;/Users/clarkson/tmp/sum/_build/oUnit-test suite for sum-sauternes#01.log&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">8</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-<span class="n">Error</span><span class="p">:</span> <span class="n">test</span> <span class="n">suite</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">two_elements</span> <span class="p">(</span><span class="ow">in</span> <span class="n">the</span> <span class="n">log</span><span class="p">)</span><span class="o">.</span>
-
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">unknown</span> <span class="n">location</span>
-
+<span class="o">...</span>
 <span class="n">expected</span><span class="p">:</span> <span class="mi">3</span> <span class="n">but</span> <span class="n">got</span><span class="p">:</span> <span class="mi">4</span>
 <span class="o">------------------------------------------------------------------------------</span>
 </pre></div>
@@ -1091,7 +1007,6 @@ needing to write your own functions to pass to <code class="docutils literal not
 writing <code class="docutils literal notranslate"><span class="pre">toString()</span></code> methods in Java: for complicated types you invent yourself,
 the language doesn’t know how to render them as strings. You have to provide the
 code that does it.</p>
-</div>
 </div>
 <div class="section" id="testing-for-exceptions">
 <h2><span class="section-number">3.3.4. </span>Testing for Exceptions<a class="headerlink" href="#testing-for-exceptions" title="Permalink to this headline">¶</a></h2>

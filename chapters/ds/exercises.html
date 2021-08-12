@@ -1229,12 +1229,19 @@ any exceptions.</p>
 </div>
 <p>Complete <code class="docutils literal notranslate"><span class="pre">loop</span></code> and <code class="docutils literal notranslate"><span class="pre">handler</span></code>. You might find the
 <a class="reference external" href="https://ocsigen.org/lwt/">Lwt manual</a> to be useful.</p>
-<p>To compile your code, put it in a file named <code class="docutils literal notranslate"><span class="pre">monitor.ml</span></code> and run</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild -use-ocamlfind -pkg lwt.unix -tag thread monitor.byte
+<p>To compile your code, put it in a file named <code class="docutils literal notranslate"><span class="pre">monitor.ml</span></code>. Create a dune file
+for it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(executable
+ (name monitor)
+ (libraries lwt.unix))
 </pre></div>
 </div>
-<p>To simulate a file to which lines are being added over time,
-open a new terminal window and enter the following commands:</p>
+<p>And run it as usual:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune <span class="nb">exec</span> ./monitor.exe
+</pre></div>
+</div>
+<p>To simulate a file to which lines are being added over time, open a new terminal
+window and enter the following commands:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkfifo log
 <span class="gp">$ </span>cat &gt;log
 </pre></div>

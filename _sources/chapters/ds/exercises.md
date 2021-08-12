@@ -542,14 +542,22 @@ let _ = Lwt_main.run (main ())
 Complete `loop` and `handler`. You might find the
 [Lwt manual](https://ocsigen.org/lwt/) to be useful.
 
-To compile your code, put it in a file named `monitor.ml` and run
-
-```console
-$ ocamlbuild -use-ocamlfind -pkg lwt.unix -tag thread monitor.byte
+To compile your code, put it in a file named `monitor.ml`. Create a dune file
+for it:
+```text
+(executable
+ (name monitor)
+ (libraries lwt.unix))
 ```
 
-To simulate a file to which lines are being added over time,
-open a new terminal window and enter the following commands:
+And run it as usual:
+
+```console
+$ dune exec ./monitor.exe
+```
+
+To simulate a file to which lines are being added over time, open a new terminal
+window and enter the following commands:
 
 ```console
 $ mkfifo log

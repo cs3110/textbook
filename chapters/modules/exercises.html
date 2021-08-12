@@ -1051,16 +1051,16 @@ derived from the <code class="docutils literal notranslate"><span class="pre">Pr
 <span class="k">let</span> <span class="n">to_string</span> <span class="n">d</span> <span class="o">=</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="o">)</span> <span class="o">^</span> <span class="s2">&quot;/&quot;</span> <span class="o">^</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">d</span><span class="o">.</span><span class="n">day</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>Compile that file to bytecode:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild date.cmo
+<p>Also create a dune file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(library
+ (name date))
 </pre></div>
 </div>
-<p>Now start utop and type the following to use the module you’ve just created:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">directory</span> <span class="s2">&quot;_build&quot;</span><span class="o">;;</span>
-<span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;date.cmo&quot;</span><span class="o">;;</span>
+<p>Load the library into utop:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune utop
 </pre></div>
 </div>
-<p>Finally, create a date, access its day, and convert it to a string.</p>
+<p>In utop, open <code class="docutils literal notranslate"><span class="pre">Date</span></code>, create a date, access its day, and convert it to a string.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: implementation with interface [★]</strong></p>
@@ -1073,11 +1073,7 @@ put the following code:</p>
 <span class="k">val</span> <span class="n">to_string</span> <span class="o">:</span> <span class="n">date</span> <span class="o">-&gt;</span> <span class="kt">string</span>
 </pre></div>
 </div>
-<p>Recompile <code class="docutils literal notranslate"><span class="pre">date.ml</span></code> to bytecode:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild date.cmo
-</pre></div>
-</div>
-<p>Restart utop and re-issue the same phrases as before.</p>
+<p>Then re-do the same work as before in utop.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: implementation with abstracted interface [★]</strong></p>
@@ -1086,9 +1082,8 @@ declaration in it to the following:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">date</span>
 </pre></div>
 </div>
-<p>The type <code class="docutils literal notranslate"><span class="pre">date</span></code> is now abstract. Recompile <code class="docutils literal notranslate"><span class="pre">date.ml</span></code> to bytecode, restart utop,
-and re-issue the same phrases as before. The responses to two of them will
-change. Explain in your own words those changes.</p>
+<p>The type <code class="docutils literal notranslate"><span class="pre">date</span></code> is now abstract. Again re-do the same work in utop. Some of the
+responses will change. Explain in your own words those changes.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: printer for dat [★★★]</strong></p>

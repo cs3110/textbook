@@ -279,11 +279,12 @@ let tests = (* code that constructs a [QCheck.Test.t list] *)
 let _ = QCheck_runner.run_tests_main tests
 ```
 
-If that code is in a file `test_x.ml`, you can compile and run it as follows:
+To compile QCheck code, just add the `qcheck` library to your `dune` file:
 
 ```console
-$ ocamlbuild -pkg qcheck test_x.byte
-$ ./test_x.byte
+(executable
+ ...
+ (libraries ... qcheck))
 ```
 
 QCheck tests can be converted to OUnit tests and included in the usual kind of

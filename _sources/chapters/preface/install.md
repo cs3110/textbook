@@ -212,9 +212,8 @@ eval $(opam env)
 Regardless, continue:
 
 ```console
-opam install -y utop ounit qcheck ocaml-lsp-server \
-  ocamlformat yojson ansiterminal csv \
-  bisect_ppx-ocamlbuild menhir
+opam install -y utop ounit2 qcheck bisect_ppx menhir \
+  ocaml-lsp-server ocamlformat
 ```
 
 You should now be able to launch utop, the OCaml Universal Toplevel.

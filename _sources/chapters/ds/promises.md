@@ -691,7 +691,7 @@ open Lwt_io
 let p =
   Lwt.bind (read_line stdin) (fun s1 ->
     Lwt.bind (read_line stdin) (fun s2 ->
-      Lwt_io.printf "%s\n" (s1^s2))))
+      Lwt_io.printf "%s\n" (s1^s2)))
 
 let _ = Lwt_main.run p
 ```
@@ -700,18 +700,25 @@ We've added one new function: `Lwt_main.run : 'a Lwt.t -> 'a`. It waits for its
 input promise to be resolved, then returns the contents. Typically this function
 is called only once in an entire program, near the end of the main file; and the
 input to it is typically a promise whose resolution indicates that all execution
-is finished. Without that function, the program above would immediately
-terminate. (Try it yourself to see.)
+is finished.
 
-Now compile the file, linking the `Lwt_unix` package, and run the program:
+Create a dune file:
+```text
+(executable
+ (name read2)
+ (libraries lwt.unix))
+```
 
+And run the program, entering a couple strings:
 ```console
-$ ocamlbuild -pkg lwt.unix read2.byte
-$ ./read2.byte
+dune exec ./read2.exe
 My first string
 My second string
 My first stringMy second string
 ```
+
+Now try removing the last line of `read2.ml`.  You'll see that the program
+exits immediately, without waiting for you to type.
 
 **Bind as an Operator.** There is another syntax for bind that is used far more
 frequently than what we have seen so far. The `Lwt.Infix` module defines an
@@ -756,8 +763,7 @@ With that extension, you can use a specialized `let` expression written
 `e1 >>= fun x -> e2`. We can rewrite our running example as follows:
 
 ```ocaml
-(* compile with:
-   ocamlbuild -use-ocamlfind -pkgs lwt.unix,lwt_ppx -tag thread read2.byte *)
+(* to compile, add lwt_ppx to the libraries in the dune file *)
 open Lwt_io
 
 let p =

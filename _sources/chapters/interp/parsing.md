@@ -502,32 +502,40 @@ names rather than the `TRUE` and `IF` tokens.
 
 Now that we have completed parser and lexer definitions in `parser.mly` and
 `lexer.mll`, we can run Menhir and ocamllex to generate the parser and lexer
-from them. Ocamlbuild already knows how to run those tools. For example:
-
-```console
-$ ocamlbuild lexer.ml
-```
-
-will generate `_build/lexer.ml` from `lexer.mll`, and
-
-```console
-$ ocamlbuild -use-menhir parser.ml
-```
-
-will generate `_build/parser.ml` from `parser.mly`.
-
-The flag `-use-menhir` alerts ocamlbuild to use Menhir instead of ocamlyacc for
-files with the `.mly` extension. You can instead put that into your `_tags`
-file:
-
+from them. Let's organize our code like this:
 ```text
-true: use_menhir
+- <some root folder>
+  - dune-project
+  - src
+    - ast.ml
+    - dune
+    - lexer.mll
+    - parser.mly
 ```
+
+In `src/dune`, write the following:
+```text
+(library
+ (name interp))
+
+(menhir
+ (modules parser))
+
+(ocamllex lexer)
+```
+
+That organizes the entire `src` folder into a *library* named `Interp`. The
+parser and lexer will be modules `Interp.Parser` and `Interp.Lexer` in that
+library.
+
+Run `dune build` to compile the code, thus generating the parser and lexer. If
+you want to see the generated code, look in `_build/default/src/` for
+`parser.ml` and `lexer.ml`.
 
 ### The Driver
 
 Finally, we can pull together the lexer and parser to transform a string into an
-AST. Put this code into a file named `main.ml`:
+AST. Put this code into a file named `src/main.ml`:
 
 ```ocaml
 open Ast
@@ -548,11 +556,20 @@ and `Parser.prog`. The function `Lexer.read` corresponds to the rule named
 Note how this code runs the lexer on a string; there is a corresponding function
 `from_channel` to read from a file.
 
-We could now use `parse` interactively to parse some strings.  For example:
+We could now use `parse` interactively to parse some strings.  Start utop
+and load the library declared in `src` with this command:
+
+```console
+$ dune utop src
+```
+
+Now `Interp.Main.parse` is available for use:
 
 ```ocaml
-# parse "let x = 3110 in x + x";;
-- : expr = Let ("x", Int 3110, Binop (Add, Var "x", Var "x"))
+# Interp.Main.parse "let x = 3110 in x + x";;
+- : Interp.Ast.expr =
+Interp.Ast.Let ("x", Interp.Ast.Int 3110,
+ Interp.Ast.Binop (Interp.Ast.Add, Interp.Ast.Var "x", Interp.Ast.Var "x"))
 ```
 
 That completes lexing and parsing for SimPL.

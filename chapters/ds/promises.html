@@ -1301,7 +1301,9 @@ val r : int Lwt.u = &lt;abstr&gt;
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Invalid_argument &quot;Lwt.wakeup&quot;.
 <span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">invalid_arg</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;stdlib.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">30</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">20</span><span class="o">-</span><span class="mi">45</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">17</span><span class="o">-</span><span class="mi">27</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
 </pre></div>
 </div>
 </div>
@@ -1586,7 +1588,7 @@ command line.</p>
 <span class="k">let</span> <span class="n">p</span> <span class="o">=</span>
   <span class="nn">Lwt</span><span class="p">.</span><span class="n">bind</span> <span class="o">(</span><span class="n">read_line</span> <span class="n">stdin</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="n">s1</span> <span class="o">-&gt;</span>
     <span class="nn">Lwt</span><span class="p">.</span><span class="n">bind</span> <span class="o">(</span><span class="n">read_line</span> <span class="n">stdin</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="n">s2</span> <span class="o">-&gt;</span>
-      <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span><span class="o">^</span><span class="n">s2</span><span class="o">))))</span>
+      <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span><span class="o">^</span><span class="n">s2</span><span class="o">)))</span>
 
 <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="n">p</span>
 </pre></div>
@@ -1595,16 +1597,22 @@ command line.</p>
 input promise to be resolved, then returns the contents. Typically this function
 is called only once in an entire program, near the end of the main file; and the
 input to it is typically a promise whose resolution indicates that all execution
-is finished. Without that function, the program above would immediately
-terminate. (Try it yourself to see.)</p>
-<p>Now compile the file, linking the <code class="docutils literal notranslate"><span class="pre">Lwt_unix</span></code> package, and run the program:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild -pkg lwt.unix read2.byte
-<span class="gp">$ </span>./read2.byte
+is finished.</p>
+<p>Create a dune file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(executable
+ (name read2)
+ (libraries lwt.unix))
+</pre></div>
+</div>
+<p>And run the program, entering a couple strings:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">dune exec ./read2.exe</span>
 <span class="go">My first string</span>
 <span class="go">My second string</span>
 <span class="go">My first stringMy second string</span>
 </pre></div>
 </div>
+<p>Now try removing the last line of <code class="docutils literal notranslate"><span class="pre">read2.ml</span></code>.  You’ll see that the program
+exits immediately, without waiting for you to type.</p>
 <p><strong>Bind as an Operator.</strong> There is another syntax for bind that is used far more
 frequently than what we have seen so far. The <code class="docutils literal notranslate"><span class="pre">Lwt.Infix</span></code> module defines an
 infix operator written <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> that is the same as <code class="docutils literal notranslate"><span class="pre">bind</span></code>. That is, instead of
@@ -1639,8 +1647,7 @@ extension, run the following command:</p>
 <p>With that extension, you can use a specialized <code class="docutils literal notranslate"><span class="pre">let</span></code> expression written
 <code class="docutils literal notranslate"><span class="pre">let%lwt</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">e1</span> <span class="pre">in</span> <span class="pre">e2</span></code>, which is equivalent to <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">e1</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e2)</span></code> or
 <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">&gt;&gt;=</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e2</span></code>. We can rewrite our running example as follows:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* compile with:</span>
-<span class="c">   ocamlbuild -use-ocamlfind -pkgs lwt.unix,lwt_ppx -tag thread read2.byte *)</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* to compile, add lwt_ppx to the libraries in the dune file *)</span>
 <span class="k">open</span> <span class="nc">Lwt_io</span>
 
 <span class="k">let</span> <span class="n">p</span> <span class="o">=</span>

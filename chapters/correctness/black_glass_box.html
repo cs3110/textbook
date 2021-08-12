@@ -1154,58 +1154,60 @@ exactly what code that is. You can then design new glass-box test cases to cause
 that code to execute, add them to your OUnit suite, and create a new Bisect
 report to confirm that the code really did get executed.</p>
 <p><strong>Bisect Tutorial.</strong></p>
-<p>Download the file <a href="../../code/sorts.ml">sorts.ml</a>. You will
-find an implementation of insertion sort and merge sort.</p>
-<p>Create a file in the same directory called <code class="docutils literal notranslate"><span class="pre">myocamlbuild.ml</span></code>. That file name is
-actually mandatory, despite the customary use of “my” in CS demos to indicate a
-name that you could choose yourself. Put this code in it:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Ocamlbuild_plugin</span>
-<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">dispatch</span> <span class="nn">Bisect_ppx_plugin</span><span class="p">.</span><span class="n">dispatch</span>
+<ol>
+<li><p>Download the file <a href="../../code/sorts.ml">sorts.ml</a>. You will
+find an implementation of insertion sort and merge sort.</p></li>
+<li><p>Download the file <a href="../../code/test_sorts.ml">test_sorts.ml</a>. It
+has the skeleton for an OUnit test suite.</p></li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">dune</span></code> file to execute <code class="docutils literal notranslate"><span class="pre">test_sorts</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(executable
+ (name test_sorts)
+ (libraries ounit2)
+ (instrumentation
+  (backend bisect_ppx)))
 </pre></div>
 </div>
-<p>Create a <code class="docutils literal notranslate"><span class="pre">_tags</span></code> file in the same directory, and put the following in it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">sorts</span><span class="o">.</span><span class="n">ml</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">coverage</span>
-<span class="o">&lt;</span><span class="n">test_sorts</span><span class="o">.</span><span class="p">{</span><span class="n">byte</span><span class="p">,</span><span class="n">native</span><span class="p">}</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">coverage</span>
-<span class="n">true</span><span class="p">:</span> <span class="n">package</span><span class="p">(</span><span class="n">ounit2</span><span class="p">),</span> <span class="n">package</span><span class="p">(</span><span class="n">bisect_ppx</span><span class="p">)</span>
+</li>
+<li><p>Run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune <span class="nb">exec</span> --instrument-with bisect_ppx ./test_sorts.exe
 </pre></div>
 </div>
-<p>Download the file <a href="../../code/test_sorts.ml">test_sorts.ml</a>. It has
-the skeleton for an OUnit test suite.</p>
-<p>Run</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">BISECT_COVERAGE</span><span class="o">=</span>YES ocamlbuild -use-ocamlfind -plugin-tag <span class="s1">&#39;package(bisect_ppx-ocamlbuild)&#39;</span> test_sorts.byte
-</pre></div>
-</div>
-<p>to build the test suite, and</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./test_sorts.byte
-</pre></div>
-</div>
-<p>to run it. OUnit will by default attempt to run some of the tests in parallel,
-which reduces the time it takes to run a large test suite, at the tradeoff of
-making it nondeterministic in what order the tests run.  If you want you can
-instead add a flag:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./test_sorts.byte -runner sequential
-</pre></div>
-</div>
-<p>That makes the tests run one at a time in order.</p>
-<p>Running the suite will cause a file named <code class="docutils literal notranslate"><span class="pre">bisectNNNN.coverage</span></code> to be produced.
-Next run</p>
+<p>That will execute the test suite with Bisect coverage enabled, causing some
+files named <code class="docutils literal notranslate"><span class="pre">bisectNNNN.coverage</span></code> to be produced.</p>
+</li>
+<li><p>Run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bisect-ppx-report html
 </pre></div>
 </div>
-<p>to generate the Bisect report from your test suite execution.</p>
-<p>Open the file <code class="docutils literal notranslate"><span class="pre">_coverage/index.html</span></code> in a web browser. Look at the per-file
-coverage; you’ll see we’ve managed to test only 10% of <code class="docutils literal notranslate"><span class="pre">sorts.ml</span></code> with our test
-suite so far. Click on the link in that report for <code class="docutils literal notranslate"><span class="pre">sorts.ml</span></code>. You’ll see that
-we’ve managed to cover a couple lines of the source code so far with our test
-suite.</p>
-<p>There are some additional tests in the test file. Try uncommenting those, as
+<p>to generate the Bisect report from your test suite execution.  The report
+is in a newly-created directory named <code class="docutils literal notranslate"><span class="pre">_coverage</span></code>.</p>
+</li>
+<li><p>Open the file <code class="docutils literal notranslate"><span class="pre">_coverage/index.html</span></code> in a web browser. Look at the per-file
+coverage; you’ll see we’ve managed to test a few percent of <code class="docutils literal notranslate"><span class="pre">sorts.ml</span></code> with
+our test suite so far. Click on the link in that report for <code class="docutils literal notranslate"><span class="pre">sorts.ml</span></code>.
+You’ll see that we’ve managed to cover only one line of the source code.</p></li>
+<li><p>There are some additional tests in the test file. Try un-commenting those, as
 documented in the test file, and increasing your code coverage. Between each
-run, you will need to delete the report file, recompile, rerun OUnit, and rerun
-the Bisect report tool. (Obviously, a Makefile would be a good thing to
-construct.)</p>
-<p>By the time you’re done uncommenting the provided tests, you should be at 30%
+run, you will need to delete the <code class="docutils literal notranslate"><span class="pre">bisectNNNN.coverage</span></code> files, otherwise
+the report will contain information from those previous runs:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rm bisect*.coverage
+</pre></div>
+</div>
+</li>
+</ol>
+<p>By the time you’re done un-commenting the provided tests, you should be at 25%
 coverage, including all of the insertion sort implementation. For fun, try
 adding more tests to get 100% coverage of merge sort.</p>
+<p><strong>Parallelism.</strong> OUnit will by default attempt to run some of the tests in
+parallel, which reduces the time it takes to run a large test suite, at the
+tradeoff of making it nondeterministic in what order the tests run. It’s
+possible for that to affect coverage if you are testing imperative code. To make
+the tests run one at a time, in order, you can pass the flag
+<code class="docutils literal notranslate"><span class="pre">-runner</span> <span class="pre">sequential</span></code> to the executable. OUnit will see that flag and cease
+parallelization:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune <span class="nb">exec</span> --instrument-with bisect_ppx ./test_sorts.exe -- -runner sequential
+</pre></div>
+</div>
 </div>
 </div>
 

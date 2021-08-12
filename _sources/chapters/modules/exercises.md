@@ -353,20 +353,20 @@ let get_day d = d.day
 let to_string d = (string_of_int d.month) ^ "/" ^ (string_of_int d.day)
 ```
 
-Compile that file to bytecode:
+Also create a dune file:
+
+```text
+(library
+ (name date))
+```
+
+Load the library into utop:
 
 ```console
-$ ocamlbuild date.cmo
+$ dune utop
 ```
 
-Now start utop and type the following to use the module you've just created:
-
-```ocaml
-# #directory "_build";;
-# #load "date.cmo";;
-```
-
-Finally, create a date, access its day, and convert it to a string.
+In utop, open `Date`, create a date, access its day, and convert it to a string.
 
 <!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "implementation with interface")}}
@@ -382,14 +382,7 @@ val get_day : date -> int
 val to_string : date -> string
 ```
 
-Recompile `date.ml` to bytecode:
-
-```console
-$ ocamlbuild date.cmo
-```
-
-Restart utop and re-issue the same phrases as before.
-
+Then re-do the same work as before in utop.
 
 <!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "implementation with abstracted interface")}}
@@ -401,9 +394,8 @@ declaration in it to the following:
 type date
 ```
 
-The type `date` is now abstract. Recompile `date.ml` to bytecode, restart utop,
-and re-issue the same phrases as before. The responses to two of them will
-change. Explain in your own words those changes.
+The type `date` is now abstract. Again re-do the same work in utop. Some of the
+responses will change. Explain in your own words those changes.
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "printer for dat")}}

@@ -769,13 +769,13 @@ download it here: <a href="../../code/simpl.zip">simpl.zip</a>.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: parse [★]</strong></p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">make</span></code> in the SimPL interpreter implementation. It will compile the
+<p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">utop</span></code> in the SimPL interpreter implementation. It will compile the
 interpreter and launch utop. Evaluate the following expressions. Note what each
 returns.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;22&quot;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;1+2+3&quot;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">in</span> <span class="pre">20+x&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;1</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">3&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;let</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">in</span> <span class="pre">20</span> <span class="pre">+</span> <span class="pre">x&quot;</span></code></p></li>
 </ul>
 <p>Also evaluate these expressions, which will raise exceptions.  Explain why
 each one is an error, and whether the error occurs during parsing or lexing.</p>
@@ -783,16 +783,6 @@ each one is an error, and whether the error occurs during parsing or lexing.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;3.14&quot;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parse</span> <span class="pre">&quot;3+&quot;</span></code></p></li>
 </ul>
-<!--------------------------------------------------------------------------->
-<hr class="docutils" />
-<p><strong>Exercise: generated parser and lexer [★]</strong></p>
-<p>Run OCamlbuild to generate the parser and lexer in the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory.</p>
-<p>Open <code class="docutils literal notranslate"><span class="pre">parser.ml</span></code>, which is the module generated automatically by menhir from
-<code class="docutils literal notranslate"><span class="pre">parser.mly</span></code>. Skim through the file to appreciate not having to write the parser
-yourself.</p>
-<p>Also open <code class="docutils literal notranslate"><span class="pre">lexer.ml</span></code>, which is the module generated automatically by ocamllex
-from <code class="docutils literal notranslate"><span class="pre">lexer.mll</span></code>. Skim through the file to appreciate not having to write the
-lexer yourself.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: simpl ids [★★]</strong></p>

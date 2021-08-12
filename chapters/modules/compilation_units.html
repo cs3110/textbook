@@ -852,9 +852,8 @@ duplicated in the implementation file. One reason is that duplication inevitably
 leads to errors. Another reason is that OCamldoc has the ability to
 automatically inject the comments from the interface file into the generated
 HTML from the implementation file.</p>
-<p>In interface files —that is, <code class="docutils literal notranslate"><span class="pre">.mli</span></code> files— OCamldoc comments can be
-placed either before or after an element of the interface. For example, both of
-these placements are possible:</p>
+<p>OCamldoc comments can be placed either before or after an element of the
+interface. For example, both of these placements are possible:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** The mathematical constant 3.14... *)</span>
 <span class="k">val</span> <span class="n">pi</span> <span class="o">:</span> <span class="kt">float</span>
 </pre></div>
@@ -896,15 +895,17 @@ around it or any <code class="docutils literal notranslate"><span class="pre">mo
 <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
 </pre></div>
 </div>
-<p>Then from the command-line compile that source code.  Note that all we need is
-the <code class="docutils literal notranslate"><span class="pre">.cmo</span></code> file, so we request it to be built instead of the <code class="docutils literal notranslate"><span class="pre">.byte</span></code> file:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild mystack.cmo
+<p>Create a dune file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(library
+ (name mystack))
 </pre></div>
 </div>
-<p>Launch utop and load your compilation unit for use:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">directory</span> <span class="s2">&quot;_build&quot;</span><span class="o">;;</span>
-<span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mystack.cmo&quot;</span><span class="o">;;</span>
-<span class="o">#</span> <span class="nn">Mystack</span><span class="p">.</span><span class="n">empty</span><span class="o">;;</span>
+<p>Compile the code and launch utop:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune utop
+</pre></div>
+</div>
+<p>Your compilation unit is ready for use:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="nn">Mystack</span><span class="p">.</span><span class="n">empty</span><span class="o">;;</span>
 <span class="o">-</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="nn">Mystack</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">abstr</span><span class="o">&gt;</span>
 </pre></div>
 </div>

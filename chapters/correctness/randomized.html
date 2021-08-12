@@ -930,13 +930,13 @@ than the values below:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 42
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 5
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 54
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 56
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 32
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 55
 </pre></div>
 </div>
 </div>
@@ -1092,7 +1092,7 @@ generate at least one odd integer.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-random seed: 229099761
+random seed: 454334429
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1135,9 +1135,10 @@ file. For example:</p>
 <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">QCheck_runner</span><span class="p">.</span><span class="n">run_tests_main</span> <span class="n">tests</span>
 </pre></div>
 </div>
-<p>If that code is in a file <code class="docutils literal notranslate"><span class="pre">test_x.ml</span></code>, you can compile and run it as follows:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlbuild -pkg qcheck test_x.byte
-<span class="gp">$ </span>./test_x.byte
+<p>To compile QCheck code, just add the <code class="docutils literal notranslate"><span class="pre">qcheck</span></code> library to your <code class="docutils literal notranslate"><span class="pre">dune</span></code> file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">(executable</span>
+<span class="go"> ...</span>
+<span class="go"> (libraries ... qcheck))</span>
 </pre></div>
 </div>
 <p>QCheck tests can be converted to OUnit tests and included in the usual kind of
@@ -1237,13 +1238,13 @@ to the generators found in <code class="docutils literal notranslate"><span clas
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test my_test failed (93 shrink steps):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test my_test failed (81 shrink steps):
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
@@ -1363,7 +1364,7 @@ and biased toward being smaller numbers in that range.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_4 failed (9 shrink steps):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_4 failed (10 shrink steps):
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>

@@ -86,9 +86,8 @@ leads to errors. Another reason is that OCamldoc has the ability to
 automatically inject the comments from the interface file into the generated
 HTML from the implementation file.
 
-In interface files &mdash;that is, `.mli` files&mdash; OCamldoc comments can be
-placed either before or after an element of the interface. For example, both of
-these placements are possible:
+OCamldoc comments can be placed either before or after an element of the
+interface. For example, both of these placements are possible:
 
 ```ocaml
 (** The mathematical constant 3.14... *)
@@ -137,18 +136,22 @@ let peek = function [] -> raise Empty | x :: _ -> x
 let pop = function [] -> raise Empty | _ :: s -> s
 ```
 
-Then from the command-line compile that source code.  Note that all we need is
-the `.cmo` file, so we request it to be built instead of the `.byte` file:
+Create a dune file:
 
-```console
-$ ocamlbuild mystack.cmo
+```text
+(library
+ (name mystack))
 ```
 
-Launch utop and load your compilation unit for use:
+Compile the code and launch utop:
+
+```console
+$ dune utop
+```
+
+Your compilation unit is ready for use:
 
 ```ocaml
-# #directory "_build";;
-# #load "mystack.cmo";;
 # Mystack.empty;;
 - : 'a Mystack.t = <abstr>
 ```

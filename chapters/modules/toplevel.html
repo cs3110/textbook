@@ -783,18 +783,18 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dune">
+   5.3.2. Dune
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#initializing-the-toplevel">
-   5.3.2. Initializing the Toplevel
+   5.3.3. Initializing the Toplevel
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#requiring-libraries">
-   5.3.3. Requiring Libraries
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dependencies">
-   5.3.4. Dependencies
+   5.3.4. Requiring Libraries
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -815,6 +815,12 @@
                 
   <div class="section" id="modules-and-the-toplevel">
 <h1><span class="section-number">5.3. </span>Modules and the Toplevel<a class="headerlink" href="#modules-and-the-toplevel" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The video below uses the legacy build system, ocamlbuild, rather than the new
+build system, dune. Some of the details change with dune, as described in the
+text below.</p>
+</div>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/4yo-04VVzIw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>There are several pragmatics involving modules and the toplevel that are
 important to master to use the two together effectively.</p>
@@ -834,21 +840,17 @@ code in it:</p>
 </div>
 <p>Note that there is no <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">Mods</span> <span class="pre">=</span> <span class="pre">struct</span> <span class="pre">...</span> <span class="pre">end</span></code> around that. The code is at
 the topmost level of the file, as it were.</p>
-<p>Then suppose you type <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span> <span class="pre">mods.byte</span></code> to compile it. Inside the <code class="docutils literal notranslate"><span class="pre">_build</span></code>
-directory you will now find the files that <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span></code> produced. One of them is
-<code class="docutils literal notranslate"><span class="pre">mods.cmo</span></code>: this is a <u>c</u>ompiled <u>m</u>odule <u>o</u>bject file, aka
-bytecode.</p>
+<p>Then suppose you type <code class="docutils literal notranslate"><span class="pre">ocamlc</span> <span class="pre">mods.ml</span></code> to compile it. One of the newly-created
+files is <code class="docutils literal notranslate"><span class="pre">mods.cmo</span></code>: this is a <u>c</u>ompiled <u>m</u>odule <u>o</u>bject file,
+aka bytecode.</p>
 <p>You can make this bytecode available for use in the toplevel with the following
 directives. Recall that the <code class="docutils literal notranslate"><span class="pre">#</span></code> character is required in front of a directive.
 It is not part of the prompt.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">directory</span> <span class="s2">&quot;_build&quot;</span><span class="o">;;</span>
-<span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods.cmo&quot;</span><span class="o">;;</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods.cmo&quot;</span><span class="o">;;</span>
 </pre></div>
 </div>
-<p>The first directive tells utop to add the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory to the path in
-which it looks for compiled (and source) files. The second directive loads the
-bytecode found in <code class="docutils literal notranslate"><span class="pre">mods.cmo</span></code>, thus making a module named <code class="docutils literal notranslate"><span class="pre">Mods</span></code> available to be
-used.  It exactly as if you had entered this code:</p>
+<p>That directive loads the bytecode found in <code class="docutils literal notranslate"><span class="pre">mods.cmo</span></code>, thus making a module
+named <code class="docutils literal notranslate"><span class="pre">Mods</span></code> available to be used. It exactly as if you had entered this code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Mods</span> <span class="o">=</span> <span class="k">struct</span>
@@ -930,12 +932,43 @@ used.  It exactly as if you had entered this code:</p>
 </div>
 </div>
 </div>
+<div class="section" id="dune">
+<h2><span class="section-number">5.3.2. </span>Dune<a class="headerlink" href="#dune" title="Permalink to this headline">¶</a></h2>
+<p>Dune provides a command to make it easier to start utop with libraries already
+loaded. Suppose we add this dune file to the same directory as <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(library
+ (name mods))
+</pre></div>
+</div>
+<p>That tells dune to build a library named <code class="docutils literal notranslate"><span class="pre">Mods</span></code> out of <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code> (and any other
+files in the same directory, if they existed).  Then we can run this command
+to launch utop with that library already loaded:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune utop
+</pre></div>
+</div>
+<p>Now right away we can access components of <code class="docutils literal notranslate"><span class="pre">Mods</span></code> without having to issue
+a <code class="docutils literal notranslate"><span class="pre">#load</span></code> directive:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Mods</span><span class="p">.</span><span class="n">inc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">dune</span> <span class="pre">utop</span></code> command accepts a directory name as an argument if you want to
+load libraries in a particular subdirectory of your source code.</p>
+</div>
 <div class="section" id="initializing-the-toplevel">
-<h2><span class="section-number">5.3.2. </span>Initializing the Toplevel<a class="headerlink" href="#initializing-the-toplevel" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.3.3. </span>Initializing the Toplevel<a class="headerlink" href="#initializing-the-toplevel" title="Permalink to this headline">¶</a></h2>
 <p>If you are doing a lot of testing of a particular module, it can be annoying to
-have to type those directives (<code class="docutils literal notranslate"><span class="pre">#directory</span></code> and <code class="docutils literal notranslate"><span class="pre">#load</span></code>) every time you start
-utop. You really want to initialize the toplevel with some code as it launches,
-so that you don’t have to keep typing that code.</p>
+have to type directives every time you start utop. You really want to initialize
+the toplevel with some code as it launches, so that you don’t have to keep
+typing that code.</p>
 <p>The solution is to create a file in the working directory and call that file
 <code class="docutils literal notranslate"><span class="pre">.ocamlinit</span></code>. Note that the <code class="docutils literal notranslate"><span class="pre">.</span></code> at the front of that filename is required and
 makes it a <a class="reference external" href="https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory">hidden file</a> that won’t appear in directory listings unless
@@ -943,13 +976,11 @@ explicitly requested (e.g., with <code class="docutils literal notranslate"><spa
 processed by utop when it loads.</p>
 <p>For example, suppose you create a file named <code class="docutils literal notranslate"><span class="pre">.ocamlinit</span></code> in the same directory
 as <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code>, and in that file put the following code:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">directory</span> <span class="s2">&quot;_build&quot;</span><span class="o">;;</span>
-<span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods.cmo&quot;</span><span class="o">;;</span>
-<span class="k">open</span> <span class="nc">Mods</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Mods</span><span class="o">;;</span>
 </pre></div>
 </div>
-<p>Now restart utop. All the names defined in <code class="docutils literal notranslate"><span class="pre">Mods</span></code> will already be in scope. For
-example, these will both succeed:</p>
+<p>Now restart utop with <code class="docutils literal notranslate"><span class="pre">dune</span> <span class="pre">utop</span></code>. All the names defined in <code class="docutils literal notranslate"><span class="pre">Mods</span></code> will already
+be in scope. For example, these will both succeed:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">inc</span><span class="o">;;</span>
@@ -968,71 +999,97 @@ example, these will both succeed:</p>
 </div>
 </div>
 <div class="section" id="requiring-libraries">
-<h2><span class="section-number">5.3.3. </span>Requiring Libraries<a class="headerlink" href="#requiring-libraries" title="Permalink to this headline">¶</a></h2>
-<p>Suppose you were to add the following lines to the end of <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code>:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">OUnit2</span>
-<span class="k">let</span> <span class="n">test</span> <span class="o">=</span> <span class="s2">&quot;testb&quot;</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="s2">&quot;bigred&quot;</span> <span class="n">b</span><span class="o">)</span>
+<h2><span class="section-number">5.3.4. </span>Requiring Libraries<a class="headerlink" href="#requiring-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you wanted to experiment with some OUnit code in utop. You can’t
+actually open it:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">OUnit2</span><span class="o">;;</span>
 </pre></div>
 </div>
-<p>If you try to recompile the module with <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span> <span class="pre">mods.byte</span></code>, it will fail.
-The problem is that you need to tell the build system to include the third-party
-library OUnit. Recompiling with <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span> <span class="pre">-pkg</span> <span class="pre">ounit2</span> <span class="pre">mods.byte</span></code> will, as
-usual, succeed.</p>
-<p>But if you restart utop, there will be an error message:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>File &quot;.ocamlinit&quot;, line 1:
-Error: Reference to undefined global `OUnit2&#39;
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[8]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">5</span><span class="o">-</span><span class="mi">11</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="nb">open</span> <span class="n">OUnit2</span><span class="p">;;</span>
+         <span class="o">^^^^^^</span>
+<span class="ne">Error</span>: Unbound module OUnit2
+<span class="ne">Hint</span>: Did you mean Unit?
 </pre></div>
+</div>
+</div>
 </div>
 <p>The problem is that the OUnit library hasn’t been loaded into utop yet. It can
 be with the following directive:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">require</span> <span class="s2">&quot;ounit2&quot;</span><span class="o">;;</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">require</span> <span class="s2">&quot;ounit2&quot;</span><span class="o">;;</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Now you can successfully load your own module without getting an error.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods.cmo&quot;</span><span class="o">;;</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">OUnit2</span><span class="o">;;</span>
 </pre></div>
 </div>
-<p>Moreover, if you add that <code class="docutils literal notranslate"><span class="pre">#require</span></code> directive to <code class="docutils literal notranslate"><span class="pre">.ocamlinit</span></code> anywhere before
-the <code class="docutils literal notranslate"><span class="pre">#load</span></code> directive, the “undefined global” error will go away.</p>
-</div>
-<div class="section" id="dependencies">
-<h2><span class="section-number">5.3.4. </span>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>When compiling a file, the build system automatically figures out which other
+<!--
+MRC 8/12/21: I don't think we need this section anymore.  `dune utop` takes
+  care of recursive loads automatically, and none of the assignments needs
+  this functionality.  Moreover, we can't actually demo this easily without
+  ocamlbuild.  We'd have to use ocamlc or set up a kind of strange dune
+  hierarchy.  So I'm commenting out now, with the intent of deleting in a year
+  or so if all is going well.
+
+## Dependencies
+
+When compiling a file, the build system automatically figures out which other
 files it depends on and recompiles those as necessary. The toplevel, however, is
 not as sophisticated: you have to make sure to load all the dependencies of a
-file.</p>
-<p>Suppose you have a file named <code class="docutils literal notranslate"><span class="pre">mods2.ml</span></code> in the same directory as <code class="docutils literal notranslate"><span class="pre">mods.ml</span></code>
-from above, and <code class="docutils literal notranslate"><span class="pre">mods2.ml</span></code> contains this code:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Mods</span>
-<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">inc</span> <span class="mi">0</span>
-</pre></div>
-</div>
-<p>If you run <code class="docutils literal notranslate"><span class="pre">ocamlbuild</span> <span class="pre">-pkg</span> <span class="pre">ounit2</span> <span class="pre">mods2.byte</span></code>, the compilation will succeed.
-You don’t have to name <code class="docutils literal notranslate"><span class="pre">mods.byte</span></code> on the command line, even though <code class="docutils literal notranslate"><span class="pre">mods2.ml</span></code>
-depends on the module <code class="docutils literal notranslate"><span class="pre">Mod</span></code>. The build system is smart that way.</p>
-<p>Also suppose that <code class="docutils literal notranslate"><span class="pre">.ocamlinit</span></code> contains exactly the following:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">directory</span> <span class="s2">&quot;_build&quot;</span><span class="o">;;</span>
-<span class="o">#</span><span class="n">require</span> <span class="s2">&quot;ounit2&quot;</span><span class="o">;;</span>
-</pre></div>
-</div>
-<p>If you restart utop and try to load <code class="docutils literal notranslate"><span class="pre">mods2.cmo</span></code>, you will get an error:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># #load &quot;mods2.cmo&quot;;;
-Error: Reference to undefined global `Mods&#39;
-</pre></div>
-</div>
-<p>The problem is that the toplevel does not automatically load the modules that
-<code class="docutils literal notranslate"><span class="pre">Mods2</span></code> depends upon. There are two ways to solve this problem.
-First, you can manually load the dependencies, like this:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods.cmo&quot;</span><span class="o">;;</span>
-<span class="o">#</span> <span class="o">#</span><span class="n">load</span> <span class="s2">&quot;mods2.cmo&quot;</span><span class="o">;;</span>
-</pre></div>
-</div>
-<p>Second, you could instead tell the toplevel to load <code class="docutils literal notranslate"><span class="pre">Mods2</span></code> and recursively
-to load everything it depends on:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">load_rec</span> <span class="s2">&quot;mods2.cmo&quot;</span><span class="o">;;</span>
-</pre></div>
-</div>
-<p>And that is probably the better solution.</p>
+file.
+
+Suppose you have a file named `mods2.ml` in the same directory as `mods.ml`
+from above, and `mods2.ml` contains this code:
+
+```ocaml
+open Mods
+let x = inc 0
+```
+
+If you run `ocamlbuild -pkg ounit2 mods2.byte`, the compilation will succeed.
+You don't have to name `mods.byte` on the command line, even though `mods2.ml`
+depends on the module `Mod`. The build system is smart that way.
+
+Also suppose that `.ocamlinit` contains exactly the following:
+
+```ocaml
+#directory "_build";;
+#require "ounit2";;
+```
+
+If you restart utop and try to load `mods2.cmo`, you will get an error:
+
+```text
+# #load "mods2.cmo";;
+Error: Reference to undefined global `Mods'
+```
+
+The problem is that the toplevel does not automatically load the modules that
+`Mods2` depends upon. There are two ways to solve this problem.
+First, you can manually load the dependencies, like this:
+
+```ocaml
+# #load "mods.cmo";;
+# #load "mods2.cmo";;
+```
+
+Second, you could instead tell the toplevel to load `Mods2` and recursively
+to load everything it depends on:
+
+```ocaml
+# #load_rec "mods2.cmo";;
+```
+
+And that is probably the better solution.
+-->
 </div>
 <div class="section" id="load-vs-use">
 <h2><span class="section-number">5.3.5. </span>Load vs Use<a class="headerlink" href="#load-vs-use" title="Permalink to this headline">¶</a></h2>
