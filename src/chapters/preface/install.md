@@ -4,6 +4,10 @@ If all you need is a way to follow along with the code examples in this book,
 you don't actually have to install OCaml! The code on each page is executable in
 your browser, as described earlier in this [Preface](about).
 
+If you want to take it a step further but aren't ready to spend time installing
+OCaml yourself, we provide a [virtual machine](../appendix/vm) with OCaml
+pre-installed inside a Linux OS.
+
 But if you want to do OCaml development on your own, you'll need to install it
 on your machine. There's no universally "right" way to do that. The instructions
 below are for Cornell's CS 3110 course, which has goals and needs beyond just
@@ -27,7 +31,7 @@ brush up with a [terminal tutorial][terminal-tutorial].
 If this is your first time installing development software, it's worth pointing
 out that "close doesn't count": trying to proceed past an error usually just
 leads to worse errors, and sadness. That's because we're installing a kind of
-"tower" of software, with each level of the tower building on the previous. If
+tower of software, with each level of the tower building on the previous. If
 you're not building on a solid foundation, the whole thing might collapse. The
 good news is that if you do get an error, you're probably not alone. A quick
 google search will often turn up solutions that others have discovered. Of
