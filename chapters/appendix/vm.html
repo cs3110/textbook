@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7.3. Arrays and Loops &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>Virtual Machine &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -53,8 +53,7 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="7.4. Summary" href="summary.html" />
-    <link rel="prev" title="7.2. Mutable Fields" href="mutable_fields.html" />
+    <link rel="prev" title="Big-Oh Notation" href="bigoh.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -420,7 +419,7 @@
   Correctness and Efficiency
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../correctness/intro.html">
    6. Correctness
@@ -488,38 +487,38 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="intro.html">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
    7. Mutability
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="refs.html">
+    <a class="reference internal" href="../mut/refs.html">
      7.1. Refs
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="mutable_fields.html">
+    <a class="reference internal" href="../mut/mutable_fields.html">
      7.2. Mutable Fields
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
      7.3. Arrays and Loops
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="summary.html">
+    <a class="reference internal" href="../mut/summary.html">
      7.4. Summary
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="exercises.html">
+    <a class="reference internal" href="../mut/exercises.html">
      7.5. Exercises
     </a>
    </li>
@@ -659,14 +658,14 @@
   Appendix
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/bigoh.html">
+  <a class="reference internal" href="bigoh.html">
    Big-Oh Notation
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/vm.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Virtual Machine
   </a>
  </li>
@@ -709,12 +708,9 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../../_sources/chapters/mut/arrays.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
+        
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/chapters/mut/arrays.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/chapters/appendix/vm.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -734,10 +730,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/mut/arrays.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/appendix/vm.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/mut/arrays.md"><button
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/appendix/vm.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -752,31 +748,39 @@
 
             <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/main?urlpath=tree/src/chapters/mut/arrays.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <button type="button" class="btn btn-secondary topbarbtn"
-            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
-                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
-        
-    </div>
-</div>
-
         </div>
 
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-the-vm">
+   Installing the VM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#starting-the-vm">
+   Starting the VM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stopping-the-vm">
+   Stopping the VM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-vm">
+   Using the VM
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -785,101 +789,118 @@
         
               <div>
                 
-  <div class="section" id="arrays-and-loops">
-<h1><span class="section-number">7.3. </span>Arrays and Loops<a class="headerlink" href="#arrays-and-loops" title="Permalink to this headline">¶</a></h1>
-<div class="container16x9"><iframe src="https://www.youtube.com/embed/-k4rM1viJH4" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<p>Arrays are fixed-length mutable sequences with constant-time access and update.
-So they are similar in various ways to refs, lists, and tuples. Like refs, they
-are mutable. Like lists, they are (finite) sequences. Like tuples, their length
-is fixed in advance and cannot be resized.</p>
-<p>The syntax for arrays is similar to lists:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="o">[|</span><span class="mi">0</span><span class="o">.;</span> <span class="mi">1</span><span class="o">.|]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val v : float array = [|0.; 1.|]
-</pre></div>
-</div>
-</div>
-</div>
-<p>That code creates an array whose length is fixed to be 2 and whose contents are
-initialized to <code class="docutils literal notranslate"><span class="pre">0.</span></code> and <code class="docutils literal notranslate"><span class="pre">1.</span></code>. The keyword <code class="docutils literal notranslate"><span class="pre">array</span></code> is a type constructor, much
-like <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
-<p>Later those contents can be changed using the <code class="docutils literal notranslate"><span class="pre">&lt;-</span></code> operator:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="o">.(</span><span class="mi">0</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="mi">5</span><span class="o">.</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">v</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : float array = [|5.; 1.|]
-</pre></div>
-</div>
-</div>
-</div>
-<p>As you can see in that example, indexing into an array uses the syntax
-<code class="docutils literal notranslate"><span class="pre">array.(index)</span></code>, where the parentheses are mandatory.</p>
-<p>The <a class="reference external" href="https://ocaml.org/api/Array.html"><code class="docutils literal notranslate"><span class="pre">Array</span></code> module</a> has many useful functions on arrays.</p>
-<p><strong>Syntax.</strong></p>
+  <div class="section" id="virtual-machine">
+<h1>Virtual Machine<a class="headerlink" href="#virtual-machine" title="Permalink to this headline">¶</a></h1>
+<p>A <em>virtual machine</em> is what the name suggests: a machine running virtually
+inside another machine. With virtual machines, there are two operating systems
+involved: the <em>host</em> operating system (OS) and the <em>guest</em> OS. The host is your
+own native OS (maybe Windows). The guest is the OS that runs inside the host.</p>
+<p>The virtual machine (VM) we provide here has OCaml pre-installed in an Ubuntu
+guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
+“<a class="reference external" href="https://ubuntu.com/about">humanity to others</a>”. The process we use to create the VM is
+<a class="reference external" href="https://github.com/cs3110/vm">documented here</a>.</p>
+<div class="section" id="installing-the-vm">
+<h2>Installing the VM<a class="headerlink" href="#installing-the-vm" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Array creation: <code class="docutils literal notranslate"><span class="pre">[|e0;</span> <span class="pre">e1;</span> <span class="pre">...;</span> <span class="pre">en|]</span></code></p></li>
-<li><p>Array indexing: <code class="docutils literal notranslate"><span class="pre">e1.(e2)</span></code></p></li>
-<li><p>Array assignment: <code class="docutils literal notranslate"><span class="pre">e1.(e2)</span> <span class="pre">&lt;-</span> <span class="pre">e3</span></code></p></li>
+<li><p>Download and install Oracle’s free <a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> for your host OS.
+Or, if you already had it installed, make sure you update to the latest
+version of VirtualBox before proceeding.</p></li>
+<li><p>Download <a class="reference external" href="https://cornell.box.com/v/cs3110-2021fa-ubuntu">our VM</a>. Don’t worry about the “We’re sorry, the preview
+didn’t load” message you see. Just click the Download button and save the
+<code class="docutils literal notranslate"><span class="pre">.ova</span></code> file wherever you like. It’s about a 6GB file, so the download might
+take awhile.</p></li>
+<li><p>Launch VirtualBox, select File → Import Appliance, and choose the <code class="docutils literal notranslate"><span class="pre">.ova</span></code> file
+you just downloaded. Click Next, then Import.</p></li>
 </ul>
-<p><strong>Dynamic semantics.</strong></p>
-<ul class="simple">
-<li><p>To evaluate <code class="docutils literal notranslate"><span class="pre">[|e0;</span> <span class="pre">e1;</span> <span class="pre">...;</span> <span class="pre">en|]</span></code>, evaluate each <code class="docutils literal notranslate"><span class="pre">ei</span></code> to a value <code class="docutils literal notranslate"><span class="pre">vi</span></code>, create
-a new array of length <code class="docutils literal notranslate"><span class="pre">n+1</span></code>, and store each value in the array at its index.</p></li>
-<li><p>To evaluate <code class="docutils literal notranslate"><span class="pre">e1.(e2)</span></code>, evaluate <code class="docutils literal notranslate"><span class="pre">e1</span></code> to an array value <code class="docutils literal notranslate"><span class="pre">v1</span></code>, and <code class="docutils literal notranslate"><span class="pre">e2</span></code> to an
-integer <code class="docutils literal notranslate"><span class="pre">v2</span></code>. If <code class="docutils literal notranslate"><span class="pre">v2</span></code> is not within the bounds of the array (i.e., <code class="docutils literal notranslate"><span class="pre">0</span></code> to
-<code class="docutils literal notranslate"><span class="pre">n-1</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the length of the array), raise <code class="docutils literal notranslate"><span class="pre">Invalid_argument</span></code>.
-Otherwise, index into <code class="docutils literal notranslate"><span class="pre">v1</span></code> to get the value <code class="docutils literal notranslate"><span class="pre">v</span></code> at index <code class="docutils literal notranslate"><span class="pre">v2</span></code>, and return <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
-<li><p>To evaluate <code class="docutils literal notranslate"><span class="pre">e1.(e2)</span> <span class="pre">&lt;-</span> <span class="pre">e3</span></code>, evaluate each expression <code class="docutils literal notranslate"><span class="pre">ei</span></code> to a value <code class="docutils literal notranslate"><span class="pre">vi</span></code>.
-Check that <code class="docutils literal notranslate"><span class="pre">v2</span></code> is within bounds, as in the semantics of indexing. Mutate the
-element of <code class="docutils literal notranslate"><span class="pre">v1</span></code> at index <code class="docutils literal notranslate"><span class="pre">v2</span></code> to be <code class="docutils literal notranslate"><span class="pre">v3</span></code>.</p></li>
-</ul>
-<p><strong>Static semantics.</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[|e0;</span> <span class="pre">e1;</span> <span class="pre">...;</span> <span class="pre">en|]</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">array</span></code> if <code class="docutils literal notranslate"><span class="pre">ei</span> <span class="pre">:</span> <span class="pre">t</span></code> for all the <code class="docutils literal notranslate"><span class="pre">ei</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">e1.(e2)</span> <span class="pre">:</span> <span class="pre">t</span></code> if <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">array</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span> <span class="pre">:</span> <span class="pre">int</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">e1.(e2)</span> <span class="pre">&lt;-</span> <span class="pre">e3</span> <span class="pre">:</span> <span class="pre">unit</span></code> if <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">:</span> <span class="pre">t</span> <span class="pre">array</span></code> and <code class="docutils literal notranslate"><span class="pre">e2</span> <span class="pre">:</span> <span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">e3</span> <span class="pre">:</span> <span class="pre">t</span></code>.</p></li>
-</ul>
-<p><strong>Loops.</strong></p>
-<p>OCaml has while loops and for loops. Their syntax is as follows:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">e1</span> <span class="k">do</span> <span class="n">e2</span> <span class="k">done</span>
-<span class="k">for</span> <span class="n">x</span><span class="o">=</span><span class="n">e1</span> <span class="k">to</span> <span class="n">e2</span> <span class="k">do</span> <span class="n">e3</span> <span class="k">done</span>
-<span class="k">for</span> <span class="n">x</span><span class="o">=</span><span class="n">e1</span> <span class="k">downto</span> <span class="n">e2</span> <span class="k">do</span> <span class="n">e3</span> <span class="k">done</span>
-</pre></div>
 </div>
-<p>Each of these three expressions evaluates the expression between <code class="docutils literal notranslate"><span class="pre">do</span></code> and <code class="docutils literal notranslate"><span class="pre">done</span></code>
-for each iteration of the loop; <code class="docutils literal notranslate"><span class="pre">while</span></code> loops terminate when <code class="docutils literal notranslate"><span class="pre">e1</span></code> becomes false;
-<code class="docutils literal notranslate"><span class="pre">for</span></code> loops execute once for each integer from <code class="docutils literal notranslate"><span class="pre">e1</span></code> to <code class="docutils literal notranslate"><span class="pre">e2</span></code>; <code class="docutils literal notranslate"><span class="pre">for..to</span></code> loops
-evaluate starting at <code class="docutils literal notranslate"><span class="pre">e1</span></code> and incrementing <code class="docutils literal notranslate"><span class="pre">x</span></code> each iteration; <code class="docutils literal notranslate"><span class="pre">for..downto</span></code>
-loops evaluate starting at <code class="docutils literal notranslate"><span class="pre">e1</span></code> and decrementing <code class="docutils literal notranslate"><span class="pre">x</span></code> each iteration. All three
-expressions evaluate to <code class="docutils literal notranslate"><span class="pre">()</span></code> after the termination of the loop. Because they
-always evaluate to <code class="docutils literal notranslate"><span class="pre">()</span></code>, they are less general than folds, maps, or recursive
-functions.</p>
-<p>Loops are themselves not inherently mutable, but they are most often used in
-conjunction with mutable features like arrays—typically, the body of the
-loop causes side effects. We can also use functions like <code class="docutils literal notranslate"><span class="pre">Array.iter</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Array.map</span></code>, and <code class="docutils literal notranslate"><span class="pre">Array.fold_left</span></code> instead of loops.</p>
-<div class="container16x9"><iframe src="https://www.youtube.com/embed/GkIgGhqHI7M" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="section" id="starting-the-vm">
+<h2>Starting the VM<a class="headerlink" href="#starting-the-vm" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Select cs3110-2021fa-ubuntu from the list of machines in VirtualBox. Click
+Start. At this point various errors can occur that depend on your hardware,
+hence are hard to predict.</p>
+<ul>
+<li><p>If you get an error about “VT-x/AMD-V hardware acceleration”, you most
+likely need to access your computer’s BIOS settings and enable
+virtualization. The details of that will vary depending on the model and
+manufacturer of your computer. Try googling “enable virtualization
+<manufacturer> <model>”, substituting for the manufacturer and model of your
+machine. This <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios">Red Hat Linux</a> page might also help.</p></li>
+<li><p>If the machine just freezes or blacks out or aborts, you might need to
+adjust the memory provided to it by your host OS. Select the VM in Virtual
+Box, click Settings, and look at the System and Display settings. You might
+need to adjust the Base Memory (under System → Motherboard) or the Video
+Memory (under Display → Screen). Those sliders have color coding underneath
+them to indicate what good amounts might be on your computer. Make sure
+nothing is in the red zone, and try some lower or higher settings to see if
+they help. If the sliders are greyed out and won’t permit adjustment, it
+means the VM is still running: you can’t change the amount of memory while
+the guest OS is active; so, shut down the VM (see below) and try again.</p></li>
+<li><p>If you have a monitor with high pixel density (e.g., an Apple Retina
+display), the VM window might be incredibly tiny. In VirtualBox go to
+Settings → Display → Scale Factor and increase it as needed, perhaps to 200%.</p></li>
+</ul>
+</li>
+<li><p>The VM will log you in automatically. The username is <code class="docutils literal notranslate"><span class="pre">camel</span></code> and the password
+is <code class="docutils literal notranslate"><span class="pre">camel</span></code>. To change your password, run <code class="docutils literal notranslate"><span class="pre">passwd</span></code> from the terminal and follow
+the prompts. If you’d rather have your own username, you are welcome to go to
+Settings → Users to create a new account. Just be aware that OPAM and VS Code
+won’t be installed for that user. You’ll need to follow the
+<a class="reference internal" href="../preface/install.html"><span class="doc std std-doc">install instructions</span></a> to add them.</p></li>
+</ul>
+</div>
+<div class="section" id="stopping-the-vm">
+<h2>Stopping the VM<a class="headerlink" href="#stopping-the-vm" title="Permalink to this headline">¶</a></h2>
+<p>You can use Ubuntu’s own menus to safely shutdown or reboot the VM. But more
+often you will likely use VirtualBox to close the VM by clicking the VM window’s
+“X” icon in the host OS. Then you will be presented with three options that
+VirtualBox doesn’t explain very well:</p>
+<ul class="simple">
+<li><p><em>Save the machine state.</em> This option is what you normally want. It’s like
+closing the lid on your laptop: it puts it to sleep, and it can quickly wake.</p></li>
+<li><p><em>Send the shutdown signal.</em> This option is like shutting down a machine you
+don’t intend to use for a long time, or before unplugging a desktop machine
+from the wall. When you start the machine again later, it will have to boot
+from scratch, which takes longer.</p></li>
+<li><p><em>Power off the machine.</em> <strong>This option is dangerous.</strong> It is the equivalent of
+pulling the power cord of a desktop machine from the wall while the machine is
+still running: it causes the operating system to suddenly quit without doing
+any cleanup. Doing this even just a handful of times could cause the file
+system to become corrupted, which will cause you to lose all your work and
+have to reinstall the VM from scratch. You will be very unhappy. So, avoid
+this option.</p></li>
+</ul>
+</div>
+<div class="section" id="using-the-vm">
+<h2>Using the VM<a class="headerlink" href="#using-the-vm" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>There are <strong>icons</strong> provided for the terminal, VS Code, and the Firefox web
+browser. They are in the left-hand launcher bar.</p></li>
+<li><p>It can be helpful to set up a <strong>shared folder</strong> between the host and guest OS,
+so that you can easily copy files between them. With the VM shutdown (i.e.,
+select “send the shutdown signal”), click Settings, then click Shared Folders.
+Click the little icon on the right that looks like a folder with a plus sign.
+In the dialog box for Folder Path, select Other, then navigate to the folder
+on your host OS that you want to share with the guest OS. Let’s assume you
+created a new folder named <code class="docutils literal notranslate"><span class="pre">vmshared</span></code> inside your Documents folder, or
+wherever you like to keep files. The Folder Name in the dialog box will
+automatically be filled with <code class="docutils literal notranslate"><span class="pre">vmshared</span></code>. This is the name by which the guest
+OS will know the folder. You can change it if you like. Check Auto-mount; do
+not check Read-only. Make the Mount Point <code class="docutils literal notranslate"><span class="pre">/home/camel/vmshared</span></code>. Click OK,
+then click OK again. Start the VM again. You should now have a subdirectory
+named <code class="docutils literal notranslate"><span class="pre">vmshared</span></code> in your guest OS home directory that is shared between the
+host OS and the guest OS.</p></li>
+<li><p>You might be able to improve the <strong>performance</strong> of your VM by increasing the
+amount of memory or CPUs allocated to it, though it depends on how much your
+actual machine has available and what else you have running at the same time.
+With the VM shut down, try going in Virtual Box to Settings → System, and
+tinkering with the Base Memory slider on the Motherboard tab, and the
+Processors slider on the Processor tab. Then bring up the VM again and see how
+it does. You might have to play around to find a sweet spot. Later, after you
+are satisfied the VM is working properly hence you won’t have to re-import it,
+you can safely delete the <code class="docutils literal notranslate"><span class="pre">.ova</span></code> file you downloaded to free up some space.</p></li>
+</ul>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -891,24 +912,23 @@ loop causes side effects. We can also use functions like <code class="docutils l
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ocaml-jupyter"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "ocaml-jupyter",
-            path: "./chapters/mut"
+            kernelName: "python3",
+            path: "./chapters/appendix"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ocaml-jupyter'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="mutable_fields.html" title="previous page"><span class="section-number">7.2. </span>Mutable Fields</a>
-    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">7.4. </span>Summary</a>
+    <a class='left-prev' id="prev-link" href="bigoh.html" title="previous page">Big-Oh Notation</a>
 
         </div>
         

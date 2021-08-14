@@ -4,6 +4,10 @@ If all you need is a way to follow along with the code examples in this book,
 you don't actually have to install OCaml! The code on each page is executable in
 your browser, as described earlier in this [Preface](about).
 
+If you want to take it a step further but aren't ready to spend time installing
+OCaml yourself, we provide a [virtual machine](../appendix/vm) with OCaml
+pre-installed inside a Linux OS.
+
 But if you want to do OCaml development on your own, you'll need to install it
 on your machine. There's no universally "right" way to do that. The instructions
 below are for Cornell's CS 3110 course, which has goals and needs beyond just
@@ -27,7 +31,7 @@ brush up with a [terminal tutorial][terminal-tutorial].
 If this is your first time installing development software, it's worth pointing
 out that "close doesn't count": trying to proceed past an error usually just
 leads to worse errors, and sadness. That's because we're installing a kind of
-"tower" of software, with each level of the tower building on the previous. If
+tower of software, with each level of the tower building on the previous. If
 you're not building on a solid foundation, the whole thing might collapse. The
 good news is that if you do get an error, you're probably not alone. A quick
 google search will often turn up solutions that others have discovered. Of
@@ -373,3 +377,26 @@ selecting Open Settings (JSON). Copy and paste these settings into the window:
 ```
 
 Save the file and close the tab.
+
+## Using VS Code Collaboratively
+
+VS Code's [Live Share][liveshare] extension makes it easy and fun to collaborate
+on code with other humans.  You can edit code together like collaborating inside
+a Google Doc.  It even supports a shared voice channel, so there's no need to
+spin up a separate Zoom call.  To install Live Share:
+
+- Open the Extensions page in VS Code.  Search for "Live Share Extension Pack".
+  Install it.
+
+- The first time you use Live Share, you will be prompted to login. If you are a
+  Cornell student, choose to login with your Microsoft account, not Github.
+  Enter your Cornell NetID email, e.g., your_netid@cornell.edu. That will take
+  you to Cornell's login site. Use the password associated with your NetID.
+
+To collaborate with Live Share:
+
+- The *host* starts the Live Share session.  That generates a URL.  Send the
+  URL to the *guests* however you like (DM, email, etc.).
+
+- The guest puts that URL into a browser or directly into VS Code, and connects
+  to the shared programming session.

@@ -665,6 +665,11 @@
    Big-Oh Notation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/vm.html">
+   Virtual Machine
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -794,6 +799,11 @@
    VS Code Settings
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-vs-code-collaboratively">
+   Using VS Code Collaboratively
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -810,6 +820,9 @@
 <p>If all you need is a way to follow along with the code examples in this book,
 you don’t actually have to install OCaml! The code on each page is executable in
 your browser, as described earlier in this <a class="reference internal" href="about.html"><span class="doc std std-doc">Preface</span></a>.</p>
+<p>If you want to take it a step further but aren’t ready to spend time installing
+OCaml yourself, we provide a <a class="reference internal" href="../appendix/vm.html"><span class="doc std std-doc">virtual machine</span></a> with OCaml
+pre-installed inside a Linux OS.</p>
 <p>But if you want to do OCaml development on your own, you’ll need to install it
 on your machine. There’s no universally “right” way to do that. The instructions
 below are for Cornell’s CS 3110 course, which has goals and needs beyond just
@@ -830,7 +843,7 @@ brush up with a <a class="reference external" href="https://ubuntu.com/tutorials
 <p>If this is your first time installing development software, it’s worth pointing
 out that “close doesn’t count”: trying to proceed past an error usually just
 leads to worse errors, and sadness. That’s because we’re installing a kind of
-“tower” of software, with each level of the tower building on the previous. If
+tower of software, with each level of the tower building on the previous. If
 you’re not building on a solid foundation, the whole thing might collapse. The
 good news is that if you do get an error, you’re probably not alone. A quick
 google search will often turn up solutions that others have discovered. Of
@@ -1112,6 +1125,28 @@ selecting Open Settings (JSON). Copy and paste these settings into the window:</
 </pre></div>
 </div>
 <p>Save the file and close the tab.</p>
+</div>
+<div class="section" id="using-vs-code-collaboratively">
+<h2>Using VS Code Collaboratively<a class="headerlink" href="#using-vs-code-collaboratively" title="Permalink to this headline">¶</a></h2>
+<p>VS Code’s [Live Share][liveshare] extension makes it easy and fun to collaborate
+on code with other humans.  You can edit code together like collaborating inside
+a Google Doc.  It even supports a shared voice channel, so there’s no need to
+spin up a separate Zoom call.  To install Live Share:</p>
+<ul class="simple">
+<li><p>Open the Extensions page in VS Code.  Search for “Live Share Extension Pack”.
+Install it.</p></li>
+<li><p>The first time you use Live Share, you will be prompted to login. If you are a
+Cornell student, choose to login with your Microsoft account, not Github.
+Enter your Cornell NetID email, e.g., <a class="reference external" href="mailto:your_netid&#37;&#52;&#48;cornell&#46;edu">your_netid<span>&#64;</span>cornell<span>&#46;</span>edu</a>. That will take
+you to Cornell’s login site. Use the password associated with your NetID.</p></li>
+</ul>
+<p>To collaborate with Live Share:</p>
+<ul class="simple">
+<li><p>The <em>host</em> starts the Live Share session.  That generates a URL.  Send the
+URL to the <em>guests</em> however you like (DM, email, etc.).</p></li>
+<li><p>The guest puts that URL into a browser or directly into VS Code, and connects
+to the shared programming session.</p></li>
+</ul>
 </div>
 </div>
 
