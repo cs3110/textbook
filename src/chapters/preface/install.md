@@ -55,14 +55,17 @@ to OPAM, below.
 to need some developer tools and a Unix package manager. There are two to pick
 from: [Homebrew][homebrew] and [MacPorts][macports]. From the perspective of
 this textbook and CS 3110, it doesn't matter which you choose. So if you're
-already accustomed to one, feel free to keep using it. Otherwise, pick one and
-follow the installation instructions on its website. The installation process
-for Homebrew is typically easier and faster, which might nudge you in that
-direction. If you do choose MacPorts, make sure to follow *all* the detailed
-instructions on its page, including XCode and an X11 server. **Do not install
-both Homebrew and MacPorts**; they aren't meant to co-exist. If you change your
-mind later, make sure to uninstall one before installing the other. After you've
-finished installing either Homebrew or MacPorts, you can proceed to OPAM, below.
+already accustomed to one, feel free to keep using it. Make sure to run its
+update command before continuing with these instructions.
+
+Otherwise, pick one and follow the installation instructions on its website. The
+installation process for Homebrew is typically easier and faster, which might
+nudge you in that direction. If you do choose MacPorts, make sure to follow
+*all* the detailed instructions on its page, including XCode and an X11 server.
+**Do not install both Homebrew and MacPorts**; they aren't meant to co-exist. If
+you change your mind later, make sure to uninstall one before installing the
+other. After you've finished installing either Homebrew or MacPorts, you can
+proceed to OPAM, below.
 
 [homebrew]: https://brew.sh/
 [macports]: https://www.macports.org/install.php
