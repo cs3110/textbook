@@ -373,3 +373,26 @@ selecting Open Settings (JSON). Copy and paste these settings into the window:
 ```
 
 Save the file and close the tab.
+
+## Using VS Code Collaboratively
+
+VS Code's [Live Share][liveshare] extension makes it easy and fun to collaborate
+on code with other humans.  You can edit code together like collaborating inside
+a Google Doc.  It even supports a shared voice channel, so there's no need to
+spin up a separate Zoom call.  To install Live Share:
+
+- Open the Extensions page in VS Code.  Search for "Live Share Extension Pack".
+  Install it.
+
+- The first time you use Live Share, you will be prompted to login. If you are a
+  Cornell student, choose to login with your Microsoft account, not Github.
+  Enter your Cornell NetID email, e.g., your_netid@cornell.edu. That will take
+  you to Cornell's login site. Use the password associated with your NetID.
+
+To collaborate with Live Share:
+
+- The *host* starts the Live Share session.  That generates a URL.  Send the
+  URL to the *guests* however you like (DM, email, etc.).
+
+- The guest puts that URL into a browser or directly into VS Code, and connects
+  to the shared programming session.
