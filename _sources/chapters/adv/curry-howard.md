@@ -20,7 +20,7 @@ A *lagniappe* is a small and unexpected gift &mdash; a little "something extra".
 Please enjoy this little chapter, which contains one of the most beautiful
 results in the entire book. It is based on the paper
 [Propositions as Types][pat] by Philip Wadler. You can watch an entertaining
-[recorded lecture][pat-lambda-days] lecture by Prof. Wadler on it, in addition
+[recorded lecture][pat-lambda-days] by Prof. Wadler on it, in addition
 to our lecture below.
 ```
 
