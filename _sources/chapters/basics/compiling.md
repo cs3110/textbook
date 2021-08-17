@@ -53,6 +53,8 @@ Now let's clean up all those generated files:
 $ rm hello.byte hello.cmi hello.cmo
 ```
 
+## Dune
+
 In larger projects, we don't want to run the compiler or clean up manually.
 Instead, we want to use a *build system* to automatically find and link in
 libraries. OCaml has a legacy build system called ocamlbuild, and a newer build
