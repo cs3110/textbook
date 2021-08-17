@@ -403,3 +403,5 @@ To collaborate with Live Share:
 
 - The guest puts that URL into a browser or directly into VS Code, and connects
   to the shared programming session.
+  
+[liveshare]: https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack
