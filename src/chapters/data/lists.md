@@ -171,7 +171,7 @@ let rec length lst =
 ```
 That function is actually built-in as part of the OCaml standard library `List`
 module. Its name there is `List.length`. That "dot" notation indicates the
-function named `length` inside the module named `Length`, much like the dot
+function named `length` inside the module named `List`, much like the dot
 notation used in many other languages.
 
 And here's a third example that appends one list onto the beginning of
