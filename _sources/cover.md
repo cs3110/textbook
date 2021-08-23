@@ -8,6 +8,10 @@ title of this book was "Functional Programming in OCaml".
 **Fall 2021 Edition.** For the most recent version of this work, see the most
 recent [CS 3110 course website](https://www.cs.cornell.edu/courses/cs3110).
 
+**Videos.** There are over 200 YouTube videos embedded in this book.
+They can be watched independently of reading the book. Start with
+this [YouTube playlist][videos].
+
 **Authors.** This book is based on courses taught by Michael R. Clarkson, Robert
 L. Constable, Nate Foster, Michael D. George, Dan Grossman, Daniel P.
 Huttenlocher, Dexter Kozen, Greg Morrisett, Andrew C. Myers, Radu Rugina, and
@@ -24,3 +28,5 @@ Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
 <img alt="Creative Commons License" style="border-width:0"
 src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+
+[videos]: https://www.youtube.com/playlist?list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU
