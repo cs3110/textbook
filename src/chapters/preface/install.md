@@ -210,6 +210,12 @@ this command:
 opam switch create cs3110-2021fa ocaml-base-compiler.4.12.0
 ```
 
+```{tip}
+If that command fails saying that the 4.12.0 compiler can't be found, you
+probably installed OPAM sometime back in the past and now need to update it. Do
+so with `opam update`.
+```
+
 You might be prompted to run the next command.  If so, do it. If not, don't.
 
 ```console
