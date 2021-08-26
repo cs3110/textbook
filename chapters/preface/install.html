@@ -959,6 +959,11 @@ Windows filesystem.</p>
 </div>
 <div class="section" id="initialize-opam">
 <h2>Initialize OPAM<a class="headerlink" href="#initialize-opam" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not put <code class="docutils literal notranslate"><span class="pre">sudo</span></code> in front of any <code class="docutils literal notranslate"><span class="pre">opam</span></code> commands. That would break your OCaml
+installation.</p>
+</div>
 <p><strong>Linux, Mac, and WSL2.</strong>  Run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam init --bare -a -y</span>
 </pre></div>
@@ -990,10 +995,10 @@ so with <code class="docutils literal notranslate"><span class="pre">opam</span>
 </pre></div>
 </div>
 <p>Regardless, continue:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam install -y utop ounit2 qcheck bisect_ppx menhir \</span>
-<span class="go">  ocaml-lsp-server ocamlformat</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam install -y utop ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat</span>
 </pre></div>
 </div>
+<p>(Make sure to grab that whole line above when you copy it.)</p>
 <p>You should now be able to launch utop, the OCaml Universal Toplevel.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">utop</span>
 </pre></div>
@@ -1021,11 +1026,12 @@ works. If it does not, here are some common issues:</p>
 Unix shell is the default for your Terminal: don’t run bash or zsh or anything
 else manually to change the shell. On Windows, make sure you are in the Ubuntu
 app, not PowerShell or Cmd.</p></li>
-<li><p><strong>Is the OPAM environment set?</strong> Run <code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">$(opam</span> <span class="pre">env)</span></code> then try running utop
-again. If that works, the problem is that your login shell is somehow not
-running the right commands to activate the OPAM environment when you login to
-your Unix prompt. The <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">init</span></code> command is what puts those commands in the
-right place. Follow the “redo” instructions below.</p></li>
+<li><p><strong>Is the OPAM environment set?</strong> If utop isn’t a recognized command, run
+<code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">$(opam</span> <span class="pre">env)</span></code> then try running utop again. If utop now works, your login
+shell is somehow not running the right commands to automatically activate the
+OPAM environment; you shouldn’t have to manually activate the environment with
+the <code class="docutils literal notranslate"><span class="pre">eval</span></code> command. Probably something went wrong earlier when you ran the
+<code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">init</span></code> command. To fix it, follow the “redo” instructions below.</p></li>
 <li><p><strong>Is your switch listed?</strong> Run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">list</span></code> and make sure a switch named
 <code class="docutils literal notranslate"><span class="pre">cs3110-2021fa</span></code> is listed, that it has the 4.12.0 compiler, and that it is the
 active switch (which is indicated with an arrow beside it). If that switch is

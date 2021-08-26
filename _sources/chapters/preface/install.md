@@ -182,6 +182,11 @@ sudo apt install -y m4 zip unzip bubblewrap build-essential opam
 
 ## Initialize OPAM
 
+```{warning}
+Do not put `sudo` in front of any `opam` commands. That would break your OCaml
+installation.
+```
+
 **Linux, Mac, and WSL2.**  Run:
 
 ```console
@@ -225,9 +230,10 @@ eval $(opam env)
 Regardless, continue:
 
 ```console
-opam install -y utop ounit2 qcheck bisect_ppx menhir \
-  ocaml-lsp-server ocamlformat
+opam install -y utop ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat
 ```
+
+(Make sure to grab that whole line above when you copy it.)
 
 You should now be able to launch utop, the OCaml Universal Toplevel.
 
@@ -263,11 +269,12 @@ works. If it does not, here are some common issues:
   else manually to change the shell. On Windows, make sure you are in the Ubuntu
   app, not PowerShell or Cmd.
 
-- **Is the OPAM environment set?** Run `eval $(opam env)` then try running utop
-  again. If that works, the problem is that your login shell is somehow not
-  running the right commands to activate the OPAM environment when you login to
-  your Unix prompt. The `opam init` command is what puts those commands in the
-  right place. Follow the "redo" instructions below.
+- **Is the OPAM environment set?** If utop isn't a recognized command, run
+  `eval $(opam env)` then try running utop again. If utop now works, your login
+  shell is somehow not running the right commands to automatically activate the
+  OPAM environment; you shouldn't have to manually activate the environment with
+  the `eval` command. Probably something went wrong earlier when you ran the
+  `opam init` command. To fix it, follow the "redo" instructions below.
 
 - **Is your switch listed?** Run `opam switch list` and make sure a switch named
   `cs3110-2021fa` is listed, that it has the 4.12.0 compiler, and that it is the
