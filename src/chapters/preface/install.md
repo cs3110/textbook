@@ -203,7 +203,7 @@ WSL1][bwrap].
 
 A *switch* is a named installation of OCaml with a particular compiler version
 and set of packages. You can have many switches and, well, switch between them
-&mdash;whence the name. Create a switch for this semester's CS 3110 by running
+&mdash;hence the name. Create a switch for this semester's CS 3110 by running
 this command:
 
 ```console
