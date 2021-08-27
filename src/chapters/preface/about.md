@@ -105,8 +105,8 @@ How about: `"Camels are bae."`
 ```{tip}
 When you write "real" OCaml code, this is not the interface you'll be using.
 You'll write code in an editor such as Visual Studio Code or Emacs, and you'll
-compile it from a terminal. Binder and Live Code are just for interacting in a
-seamless with the textbook.
+compile it from a terminal. Binder and Live Code are just for interacting
+seamlessly with the textbook.
 ```
 
 **Downloadable Pages.** Each page of this book is downloadable in a variety of
