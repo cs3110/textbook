@@ -48,8 +48,7 @@ being bound to the name `x`. The OCaml manual describes
 [definitions][definitions] (see the third major grouping titled "*definition*"
 on that page), but that manual page is again primarily for reference not for
 study. Definitions are not expressions, nor are expressions
-definitions&mdash;they are distinct syntactic classes. But definitions can have
-expressions nested inside them, and vice-versa.
+definitions&mdash;they are distinct syntactic classes.
 
 [definitions]: https://ocaml.org/manual/modules.html
 
