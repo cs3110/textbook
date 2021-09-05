@@ -78,7 +78,7 @@ evaluates `e2`. So we could rewrite the above code as:
 ```{code-cell} ocaml
 print_endline "Camels";
 print_endline "are";
-print_endline "bae";
+print_endline "bae"
 ```
 
 That is more idiomatic OCaml code, and it also looks more natural to imperative
