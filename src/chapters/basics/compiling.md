@@ -6,8 +6,23 @@ files and compile them.
 
 ## Storing code in files
 
-Open a terminal and use a text editor to create a file called
-`hello.ml`.  Enter the following code into the file:
+Open a terminal, create a new directory, and open VS Code in that directory.
+For example, you could use the following commands:
+
+```console
+$ mkdir hello-world
+$ code hello-world
+```
+
+```{warning}
+Do not use the root of your Unix home directory as the place you store the file.
+The build system we are going to use very soon, dune, might not work right in
+the root of your home directory. Instead, you need to use a subdirectory of your
+home directory.
+```
+
+Use VS Code to create a new file named `hello.ml`. Enter the following code into
+the file:
 
 ```ocaml
 let _ = print_endline "Hello world!"
