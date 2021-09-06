@@ -34,7 +34,8 @@ The following example shows you how to create an OUnit test suite. There are
 some things in the example that might at first seem mysterious; they are
 discussed in the next section.
 
-Create a file named `sum.ml`, and put the following code into it:
+Create a new directory. In that directory, create a file named `sum.ml`, and put
+the following code into it:
 ```ocaml
 let rec sum = function
   | [] -> 0

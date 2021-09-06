@@ -793,8 +793,21 @@ very far with writing large programs that way. We instead need to store code in
 files and compile them.</p>
 <div class="section" id="storing-code-in-files">
 <h2><span class="section-number">2.2.1. </span>Storing code in files<a class="headerlink" href="#storing-code-in-files" title="Permalink to this headline">¶</a></h2>
-<p>Open a terminal and use a text editor to create a file called
-<code class="docutils literal notranslate"><span class="pre">hello.ml</span></code>.  Enter the following code into the file:</p>
+<p>Open a terminal, create a new directory, and open VS Code in that directory.
+For example, you could use the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir hello-world
+<span class="gp">$ </span>code hello-world
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not use the root of your Unix home directory as the place you store the file.
+The build system we are going to use very soon, dune, might not work right in
+the root of your home directory. Instead, you need to use a subdirectory of your
+home directory.</p>
+</div>
+<p>Use VS Code to create a new file named <code class="docutils literal notranslate"><span class="pre">hello.ml</span></code>. Enter the following code into
+the file:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;Hello world!&quot;</span>
 </pre></div>
 </div>
