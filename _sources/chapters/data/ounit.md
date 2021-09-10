@@ -291,7 +291,7 @@ the next weekday after Monday is Tuesday. So we add a test:
 
 ```ocaml
 let tests = "test suite for next_weekday" >::: [
-  "tue_after_mon"  >:: (fun _ -> assert_equal (next_weekday Monday) Tuesday);
+  "tue_after_mon"  >:: (fun _ -> assert_equal Tuesday (next_weekday Monday));
 ]
 ```
 
@@ -311,10 +311,10 @@ simplest remaining possibilities are tests involving just weekdays, rather than
 weekends. So let's add tests for weekdays.
 ```ocaml
 let tests = "test suite for next_weekday" >::: [
-  "tue_after_mon"  >:: (fun _ -> assert_equal (next_weekday Monday) Tuesday);
-  "wed_after_tue"  >:: (fun _ -> assert_equal (next_weekday Tuesday) Wednesday);
-  "thu_after_wed"  >:: (fun _ -> assert_equal (next_weekday Wednesday) Thursday);
-  "fri_after_thu"  >:: (fun _ -> assert_equal (next_weekday Thursday) Friday);
+  "tue_after_mon"  >:: (fun _ -> assert_equal Tuesday (next_weekday Monday));
+  "wed_after_tue"  >:: (fun _ -> assert_equal Wednesday (next_weekday Tuesday));
+  "thu_after_wed"  >:: (fun _ -> assert_equal Thursday(next_weekday Wednesday));
+  "fri_after_thu"  >:: (fun _ -> assert_equal Friday (next_weekday Thursday));
 ]
 ```
 
