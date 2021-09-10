@@ -132,8 +132,13 @@ values. The set of fields provided after the `with` does not have to be the full
 set of fields defined as part of the record's type. In the newly-copied record,
 any field not provided as part of the `with` is copied from the old record.
 
-The dynamic and static semantics of this are what you might expect, though they
-are tedious to write down mathematically.
+Record copy is syntactic sugar. It's equivalent to writing
+```ocaml
+{ f1 = e1;   ...; fn = en;
+  g1 = e.g1; ...; gn = e.gn }
+```
+where the set of `gi` is the set of all fields of the record's type minus the
+set of `fi`.
 
 **Pattern matching.**
 

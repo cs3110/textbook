@@ -964,8 +964,13 @@ defined as part of the record’s type (but see below regarding <em>record copy<
 values. The set of fields provided after the <code class="docutils literal notranslate"><span class="pre">with</span></code> does not have to be the full
 set of fields defined as part of the record’s type. In the newly-copied record,
 any field not provided as part of the <code class="docutils literal notranslate"><span class="pre">with</span></code> is copied from the old record.</p>
-<p>The dynamic and static semantics of this are what you might expect, though they
-are tedious to write down mathematically.</p>
+<p>Record copy is syntactic sugar. It’s equivalent to writing</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">{</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">e1</span><span class="o">;</span>   <span class="o">...;</span> <span class="n">fn</span> <span class="o">=</span> <span class="n">en</span><span class="o">;</span>
+  <span class="n">g1</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">g1</span><span class="o">;</span> <span class="o">...;</span> <span class="n">gn</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">gn</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p>where the set of <code class="docutils literal notranslate"><span class="pre">gi</span></code> is the set of all fields of the record’s type minus the
+set of <code class="docutils literal notranslate"><span class="pre">fi</span></code>.</p>
 <p><strong>Pattern matching.</strong></p>
 <p>We add the following new pattern form to the list of legal patterns:</p>
 <ul class="simple">
