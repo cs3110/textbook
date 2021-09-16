@@ -230,7 +230,7 @@ eval $(opam env)
 Regardless, continue:
 
 ```console
-opam install -y utop ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat
+opam install -y utop odoc ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat ocamlformat-rpc
 ```
 
 (Make sure to grab that whole line above when you copy it.)
