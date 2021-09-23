@@ -319,5 +319,5 @@ Unfortunately that does mean we've duplicated `Stack.S` in both the interface
 and implementation files. There's no way to automatically "import" an already
 declared module type from a `.mli` file into the corresponding `.ml` file.
 
-Code duplication naturally makes us unhappy. Is there a way to eliminate it?
-Keep reading the next section to find out.
+Code duplication naturally makes us unhappy. Later, with functors, we'll see
+how to eliminate it.
