@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5.5. Functional Data Structures &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>5.6. Functional Data Structures &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -56,8 +56,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.6. Module Type Constraints" href="module_type_constraints.html" />
-    <link rel="prev" title="5.4. Encapsulation" href="encapsulation.html" />
+    <link rel="next" title="5.7. Module Type Constraints" href="module_type_constraints.html" />
+    <link rel="prev" title="5.5. Compilation Units" href="compilation_units.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -380,19 +380,19 @@
      5.4. Encapsulation
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="compilation_units.html">
+     5.5. Compilation Units
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     5.5. Functional Data Structures
+     5.6. Functional Data Structures
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="module_type_constraints.html">
-     5.6. Module Type Constraints
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="compilation_units.html">
-     5.7. Compilation Units
+     5.7. Module Type Constraints
     </a>
    </li>
    <li class="toctree-l2">
@@ -787,32 +787,32 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lists">
-   5.5.1. Lists
+   5.6.1. Lists
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#stacks">
-   5.5.2. Stacks
+   5.6.2. Stacks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#options-vs-exceptions">
-   5.5.3. Options vs Exceptions
+   5.6.3. Options vs Exceptions
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#queues">
-   5.5.4. Queues
+   5.6.4. Queues
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#maps">
-   5.5.5. Maps
+   5.6.5. Maps
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sets">
-   5.5.6. Sets
+   5.6.6. Sets
   </a>
  </li>
 </ul>
@@ -827,7 +827,7 @@
               <div>
                 
   <div class="section" id="functional-data-structures">
-<h1><span class="section-number">5.5. </span>Functional Data Structures<a class="headerlink" href="#functional-data-structures" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">5.6. </span>Functional Data Structures<a class="headerlink" href="#functional-data-structures" title="Permalink to this headline">¶</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/CLeXXZDkkCI" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>A <em>functional data structure</em> is one that does not make use of any imperative
 features. That is, no operations of the data structure have any side effects.
@@ -844,7 +844,7 @@ structure is an <em>ephemeral</em> data structure: changes are destructive, so t
 only one version exists at any time. Both persistent and ephemeral data
 structures can be built in both functional and imperative languages.</p>
 <div class="section" id="lists">
-<h2><span class="section-number">5.5.1. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6.1. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
 <p>The built-in singly-linked <code class="docutils literal notranslate"><span class="pre">list</span></code> data structure in OCaml is functional. We know
 that, because we’ve seen how to implement it with algebraic data types. It’s
 also persistent, which we can demonstrate:</p>
@@ -872,7 +872,7 @@ also persistent, which we can demonstrate:</p>
 coexist without affecting one another.</p>
 </div>
 <div class="section" id="stacks">
-<h2><span class="section-number">5.5.2. </span>Stacks<a class="headerlink" href="#stacks" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6.2. </span>Stacks<a class="headerlink" href="#stacks" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/LWmGzSCpvVY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We implemented stacks earlier in this chapter. Here’s a terse variant of one of
 those implementations, in which add a <code class="docutils literal notranslate"><span class="pre">to_list</span></code> operation to make it easier to
@@ -965,7 +965,7 @@ for example, similar methods might have a <code class="docutils literal notransl
 OCaml would be returning <code class="docutils literal notranslate"><span class="pre">unit</span></code>.</p>
 </div>
 <div class="section" id="options-vs-exceptions">
-<h2><span class="section-number">5.5.3. </span>Options vs Exceptions<a class="headerlink" href="#options-vs-exceptions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6.3. </span>Options vs Exceptions<a class="headerlink" href="#options-vs-exceptions" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/tbMU_pv0p9o" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>All of our stack implementations so far have raised an exception whenever <code class="docutils literal notranslate"><span class="pre">peek</span></code>
 or <code class="docutils literal notranslate"><span class="pre">pop</span></code> is applied to the empty stack. Another possibility would be to use an
@@ -1155,7 +1155,7 @@ that <code class="docutils literal notranslate"><span class="pre">size</span></c
 stack at each node in the list.</p>
 </div>
 <div class="section" id="queues">
-<h2><span class="section-number">5.5.4. </span>Queues<a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6.4. </span>Queues<a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/rCiBfZO67A4" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Queues and stacks are fairly similar interfaces.  We’ll stick with exceptions
 instead of options for now.</p>
@@ -1360,7 +1360,7 @@ less clear that <code class="docutils literal notranslate"><span class="pre">Bat
 many paragraphs of writing it took to explain it above!</p>
 </div>
 <div class="section" id="maps">
-<h2><span class="section-number">5.5.5. </span>Maps<a class="headerlink" href="#maps" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6.5. </span>Maps<a class="headerlink" href="#maps" title="Permalink to this headline">¶</a></h2>
 <p>Recall that a <em>map</em> (aka <em>dictionary</em>) binds keys to values. Here is a module
 type for maps. There are many other operations a map might support, but
 these will suffice for now.</p>
@@ -1515,7 +1515,7 @@ lists, if we are willing to pay for a linear-time <code class="docutils literal 
 a new binding.</p>
 </div>
 <div class="section" id="sets">
-<h2><span class="section-number">5.5.6. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6.6. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h2>
 <p>Here is a module type for sets. There are many other operations a set data
 structure might be expected to support, but these will suffice for now.</p>
 <div class="cell docutils container">
@@ -1627,8 +1627,8 @@ tradeoff of <code class="docutils literal notranslate"><span class="pre">add</sp
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="encapsulation.html" title="previous page"><span class="section-number">5.4. </span>Encapsulation</a>
-    <a class='right-next' id="next-link" href="module_type_constraints.html" title="next page"><span class="section-number">5.6. </span>Module Type Constraints</a>
+    <a class='left-prev' id="prev-link" href="compilation_units.html" title="previous page"><span class="section-number">5.5. </span>Compilation Units</a>
+    <a class='right-next' id="next-link" href="module_type_constraints.html" title="next page"><span class="section-number">5.7. </span>Module Type Constraints</a>
 
         </div>
         

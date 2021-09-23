@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5.7. Compilation Units &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>5.5. Compilation Units &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -54,8 +54,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.8. Includes" href="includes.html" />
-    <link rel="prev" title="5.6. Module Type Constraints" href="module_type_constraints.html" />
+    <link rel="next" title="5.6. Functional Data Structures" href="functional_data_structures.html" />
+    <link rel="prev" title="5.4. Encapsulation" href="encapsulation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -378,19 +378,19 @@
      5.4. Encapsulation
     </a>
    </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.5. Compilation Units
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="functional_data_structures.html">
-     5.5. Functional Data Structures
+     5.6. Functional Data Structures
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="module_type_constraints.html">
-     5.6. Module Type Constraints
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     5.7. Compilation Units
+     5.7. Module Type Constraints
     </a>
    </li>
    <li class="toctree-l2">
@@ -762,17 +762,17 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#documentation-comments">
-   5.7.1. Documentation Comments
+   5.5.1. Documentation Comments
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#an-example-with-stacks">
-   5.7.2. An Example with Stacks
+   5.5.2. An Example with Stacks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#incomplete-compilation-units">
-   5.7.3. Incomplete Compilation Units
+   5.5.3. Incomplete Compilation Units
   </a>
  </li>
 </ul>
@@ -787,7 +787,7 @@
               <div>
                 
   <div class="section" id="compilation-units">
-<h1><span class="section-number">5.7. </span>Compilation Units<a class="headerlink" href="#compilation-units" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">5.5. </span>Compilation Units<a class="headerlink" href="#compilation-units" title="Permalink to this headline">¶</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/hjZ8FvMUw2k" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>A <em>compilation unit</em> is a pair of OCaml source files in the same
 directory. They share the same base name, call it <code class="docutils literal notranslate"><span class="pre">x</span></code>, but their
@@ -833,7 +833,7 @@ signature of <code class="docutils literal notranslate"><span class="pre">Foo</s
 have been using so far, like <code class="docutils literal notranslate"><span class="pre">List</span></code> and <code class="docutils literal notranslate"><span class="pre">String</span></code>. You can see that in the
 <a class="reference external" href="https://github.com/ocaml/ocaml/tree/trunk/stdlib">standard library source code</a>.</p>
 <div class="section" id="documentation-comments">
-<h2><span class="section-number">5.7.1. </span>Documentation Comments<a class="headerlink" href="#documentation-comments" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.5.1. </span>Documentation Comments<a class="headerlink" href="#documentation-comments" title="Permalink to this headline">¶</a></h2>
 <p>Some documentation comments belong in the interface file, whereas others belong
 in the implementation file:</p>
 <ul class="simple">
@@ -875,7 +875,7 @@ comment, and OCamlFormat seems to work better with that, too.</p>
 </div>
 </div>
 <div class="section" id="an-example-with-stacks">
-<h2><span class="section-number">5.7.2. </span>An Example with Stacks<a class="headerlink" href="#an-example-with-stacks" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.5.2. </span>An Example with Stacks<a class="headerlink" href="#an-example-with-stacks" title="Permalink to this headline">¶</a></h2>
 <p>Put this code in <code class="docutils literal notranslate"><span class="pre">mystack.mli</span></code>, noting that there is no <code class="docutils literal notranslate"><span class="pre">sig..end</span></code> around it or
 any <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">type</span></code>:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
@@ -917,7 +917,7 @@ around it or any <code class="docutils literal notranslate"><span class="pre">mo
 </div>
 </div>
 <div class="section" id="incomplete-compilation-units">
-<h2><span class="section-number">5.7.3. </span>Incomplete Compilation Units<a class="headerlink" href="#incomplete-compilation-units" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.5.3. </span>Incomplete Compilation Units<a class="headerlink" href="#incomplete-compilation-units" title="Permalink to this headline">¶</a></h2>
 <p>What if either the interface or implementation file is missing for a compilation
 unit?</p>
 <p><strong>Missing Interface Files.</strong> Actually this is exactly how we’ve normally been
@@ -1093,8 +1093,8 @@ how to eliminate it.</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="module_type_constraints.html" title="previous page"><span class="section-number">5.6. </span>Module Type Constraints</a>
-    <a class='right-next' id="next-link" href="includes.html" title="next page"><span class="section-number">5.8. </span>Includes</a>
+    <a class='left-prev' id="prev-link" href="encapsulation.html" title="previous page"><span class="section-number">5.4. </span>Encapsulation</a>
+    <a class='right-next' id="next-link" href="functional_data_structures.html" title="next page"><span class="section-number">5.6. </span>Functional Data Structures</a>
 
         </div>
         
