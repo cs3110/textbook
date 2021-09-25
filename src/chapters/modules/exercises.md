@@ -86,9 +86,9 @@ it has never had any elements dequeued. Explain in your own words why
 to the queue takes time that is linear in $n$.
 
 <!--------------------------------------------------------------------------->
-{{ ex3 | replace("%%NAME%%", "binary search tree dictionary")}}
+{{ ex3 | replace("%%NAME%%", "binary search tree map")}}
 
-Write a module `BstDict` that implements the `Dictionary` module type using the
+Write a module `BstMap` that implements the `Map` module type using the
 a binary search tree type.
 
 <!--------------------------------------------------------------------------->
