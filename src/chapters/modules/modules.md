@@ -897,7 +897,7 @@ annotations:
 
 The "sub" vs. "super" in the second rule is not a typo. Think about `T` as a set
 of module values. There could be many subtypes `S1`, `S2`, etc. of `T`, each of
-which is a set of module values, and each of those sets would be a subset of
+which is a set of module values, and each of those sets contains the module values of
 `T`. But, the way those sets differ from `T` and one another is by adding new
 definitions of their own. For example, a list-based stack might differ from
 `ListStack` by adding a value to keep track of the number of items on the stack.
