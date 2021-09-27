@@ -680,7 +680,7 @@ meets the specifications of module type `X`.
 
 **Dynamic semantics.**
 
-Since modules types are in fact types, they are not evaluated. They have no
+Since module types are in fact types, they are not evaluated. They have no
 dynamic semantics.
 
 **Static semantics.**
