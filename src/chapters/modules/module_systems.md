@@ -45,7 +45,7 @@ reassembled to form complex pieces of software. In Java, subtyping and
 inheritance provide code reuse. In OCaml, *functors* and *includes* enable code
 reuse. Functors are like functions, in that they produce new modules out of old
 modules. Includes are like an intelligent form of copy-paste: they include code
-from once part of a program in another.
+from one part of a program in another.
 
 ```{warning}
 These analogies between Java and OCaml are necessarily imperfect. You might
