@@ -88,8 +88,8 @@ to the queue takes time that is linear in $n$.
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "binary search tree map")}}
 
-Write a module `BstMap` that implements the `Map` module type using the
-a binary search tree type.
+Write a module `BstMap` that implements the `Map` module type using the binary
+search tree type.
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "fraction")}}
