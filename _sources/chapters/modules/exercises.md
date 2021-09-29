@@ -86,10 +86,20 @@ it has never had any elements dequeued. Explain in your own words why
 to the queue takes time that is linear in $n$.
 
 <!--------------------------------------------------------------------------->
-{{ ex3 | replace("%%NAME%%", "binary search tree map")}}
+{{ ex4 | replace("%%NAME%%", "binary search tree map")}}
 
-Write a module `BstMap` that implements the `Map` module type using the
-a binary search tree type.
+Write a module `BstMap` that implements the `Map` module type using the a binary
+search tree type. *Binary trees* were covered earlier when we discussed
+algebraic data types. A binary *search* tree (BST) is a binary tree that obeys
+the following *BST Invariant*:
+
+> For any node *n*, every node in the left subtree of *n* has a value less than
+> *n*'s value, and every node in the right subtree of *n* has a value greater
+> than *n*'s value.
+
+Your nodes should store pairs of keys and values. The keys should be ordered by
+the BST Invariant. Based on that invariant, you will always know whether to look
+left or right in a tree to find a particular key.
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "fraction")}}

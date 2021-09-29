@@ -59,7 +59,8 @@ It is not part of the prompt.
 ```
 
 That directive loads the bytecode found in `mods.cmo`, thus making a module
-named `Mods` available to be used. It exactly as if you had entered this code:
+named `Mods` available to be used. It is exactly as if you had entered this
+code:
 
 ```{code-cell} ocaml
 module Mods = struct

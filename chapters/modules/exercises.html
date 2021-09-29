@@ -843,9 +843,19 @@ it has never had any elements dequeued. Explain in your own words why
 to the queue takes time that is linear in <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
-<p><strong>Exercise: binary search tree map [★★★]</strong></p>
-<p>Write a module <code class="docutils literal notranslate"><span class="pre">BstMap</span></code> that implements the <code class="docutils literal notranslate"><span class="pre">Map</span></code> module type using the
-a binary search tree type.</p>
+<p><strong>Exercise: binary search tree map [★★★★]</strong></p>
+<p>Write a module <code class="docutils literal notranslate"><span class="pre">BstMap</span></code> that implements the <code class="docutils literal notranslate"><span class="pre">Map</span></code> module type using the a binary
+search tree type. <em>Binary trees</em> were covered earlier when we discussed
+algebraic data types. A binary <em>search</em> tree (BST) is a binary tree that obeys
+the following <em>BST Invariant</em>:</p>
+<blockquote>
+<div><p>For any node <em>n</em>, every node in the left subtree of <em>n</em> has a value less than
+<em>n</em>’s value, and every node in the right subtree of <em>n</em> has a value greater
+than <em>n</em>’s value.</p>
+</div></blockquote>
+<p>Your nodes should store pairs of keys and values. The keys should be ordered by
+the BST Invariant. Based on that invariant, you will always know whether to look
+left or right in a tree to find a particular key.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: fraction [★★★]</strong></p>
