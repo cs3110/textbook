@@ -809,23 +809,23 @@
 <p>We have extolled the virtues of encapsulation. Now we’re going to do something
 that might seem counter-intuitive: selectively violate encapsulation.</p>
 <p>As a motivating example, here is a module type that represents values that
-support the usual operations from arithmetic, or more precisely, a <em><a class="reference external" href="https://en.wikipedia.org/wiki/Field_(mathematics)">field</a></em>:</p>
+support the usual addition and multiplication operations from arithmetic, or more precisely, a <em><a class="reference external" href="https://en.wikipedia.org/wiki/Ring_(mathematics)">ring</a></em>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Field</span> <span class="o">=</span> <span class="k">sig</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Ring</span> <span class="o">=</span> <span class="k">sig</span>
   <span class="k">type</span> <span class="n">t</span>
   <span class="k">val</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">t</span>
   <span class="k">val</span> <span class="n">one</span> <span class="o">:</span> <span class="n">t</span>
   <span class="k">val</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
   <span class="k">val</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>  <span class="c">(* additive inverse *)</span>
   <span class="k">val</span> <span class="n">to_string</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Field =
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Ring =
   sig
     type t
     val zero : t
@@ -840,15 +840,15 @@ support the usual operations from arithmetic, or more precisely, a <em><a class=
 </div>
 </div>
 <p>Recall that we must write <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">*</span> <span class="pre">)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">(*)</span></code> because the latter would be
-parsed as beginning a comment. And we write the <code class="docutils literal notranslate"><span class="pre">~</span></code> in <code class="docutils literal notranslate"><span class="pre">(~-)</span></code> to indicate a
-<em>unary</em> negation operator.</p>
+parsed as beginning a comment. And we write the <code class="docutils literal notranslate"><span class="pre">~</span></code> in <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">~-</span> <span class="pre">)</span></code> to indicate a
+<em>unary</em> operator.</p>
 <p>This is a bit weird of an example. We don’t normally think of numbers as a data
 structure. But what is a data structure except for a set of values and
-operations on them? The <code class="docutils literal notranslate"><span class="pre">Field</span></code> module type makes it clear that’s what we have.</p>
+operations on them? The <code class="docutils literal notranslate"><span class="pre">Ring</span></code> module type makes it clear that’s what we have.</p>
 <p>Here is a module that implements that module type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntField</span> <span class="o">:</span> <span class="nc">Field</span> <span class="o">=</span> <span class="k">struct</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntRing</span> <span class="o">:</span> <span class="nc">Ring</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
   <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
   <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
@@ -861,7 +861,7 @@ operations on them? The <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntField : Field
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntRing : Ring
 </pre></div>
 </div>
 </div>
@@ -870,12 +870,12 @@ operations on them? The <code class="docutils literal notranslate"><span class="
 sum of one and one is:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntField.t = &lt;abstr&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntRing.t = &lt;abstr&gt;
 </pre></div>
 </div>
 </div>
@@ -883,7 +883,7 @@ sum of one and one is:</p>
 <p>But we could convert it to a string:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span> <span class="o">|&gt;</span> <span class="n">to_string</span><span class="o">)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span> <span class="o">|&gt;</span> <span class="n">to_string</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
@@ -897,28 +897,28 @@ sum of one and one is:</p>
 <code class="docutils literal notranslate"><span class="pre">to_string</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">pp_intfield</span> <span class="n">fmt</span> <span class="n">i</span> <span class="o">=</span>
-  <span class="nn">Format</span><span class="p">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;%s&quot;</span> <span class="o">(</span><span class="nn">IntField</span><span class="p">.</span><span class="n">to_string</span> <span class="n">i</span><span class="o">);;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">pp_intring</span> <span class="n">fmt</span> <span class="n">i</span> <span class="o">=</span>
+  <span class="nn">Format</span><span class="p">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;%s&quot;</span> <span class="o">(</span><span class="nn">IntRing</span><span class="p">.</span><span class="n">to_string</span> <span class="n">i</span><span class="o">);;</span>
 
-<span class="o">#</span><span class="n">install_printer</span> <span class="n">pp_intfield</span><span class="o">;;</span>
+<span class="o">#</span><span class="n">install_printer</span> <span class="n">pp_intring</span><span class="o">;;</span>
 
-<span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+<span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pp_intfield : Format.formatter -&gt; IntField.t -&gt; unit = &lt;fun&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pp_intring : Format.formatter -&gt; IntRing.t -&gt; unit = &lt;fun&gt;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntField.t = 2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntRing.t = 2
 </pre></div>
 </div>
 </div>
 </div>
-<p>We could implement other kinds of fields, too:</p>
+<p>We could implement other kinds of rings, too:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">FloatField</span> <span class="o">:</span> <span class="nc">Field</span> <span class="o">=</span> <span class="k">struct</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">FloatRing</span> <span class="o">:</span> <span class="nc">Ring</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
   <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
   <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
@@ -931,7 +931,7 @@ sum of one and one is:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatField : Field
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatRing : Ring
 </pre></div>
 </div>
 </div>
@@ -939,25 +939,25 @@ sum of one and one is:</p>
 <p>Then we’d have to install a printer for it, too:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">pp_floatfield</span> <span class="n">fmt</span> <span class="n">f</span> <span class="o">=</span>
-  <span class="nn">Format</span><span class="p">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;%s&quot;</span> <span class="o">(</span><span class="nn">FloatField</span><span class="p">.</span><span class="n">to_string</span> <span class="n">f</span><span class="o">);;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">pp_floatring</span> <span class="n">fmt</span> <span class="n">f</span> <span class="o">=</span>
+  <span class="nn">Format</span><span class="p">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;%s&quot;</span> <span class="o">(</span><span class="nn">FloatRing</span><span class="p">.</span><span class="n">to_string</span> <span class="n">f</span><span class="o">);;</span>
 
-<span class="o">#</span><span class="n">install_printer</span> <span class="n">pp_floatfield</span><span class="o">;;</span>
+<span class="o">#</span><span class="n">install_printer</span> <span class="n">pp_floatring</span><span class="o">;;</span>
 
-<span class="nn">FloatField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+<span class="nn">FloatRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pp_floatfield : Format.formatter -&gt; FloatField.t -&gt; unit = &lt;fun&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pp_floatring : Format.formatter -&gt; FloatRing.t -&gt; unit = &lt;fun&gt;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : FloatField.t = 2.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : FloatRing.t = 2.
 </pre></div>
 </div>
 </div>
 </div>
-<p>Was there really a need to make type <code class="docutils literal notranslate"><span class="pre">t</span></code> abstract in the field examples above?
+<p>Was there really a need to make type <code class="docutils literal notranslate"><span class="pre">t</span></code> abstract in the ring examples above?
 Arguably not. And if it were not abstract, we wouldn’t have to go to the trouble
 of converting abstract values into strings, or installing printers. Let’s pursue
 that idea, next.</p>
@@ -967,7 +967,7 @@ that idea, next.</p>
 then do a separate check to make sure the structure satisfies the signature:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntField</span> <span class="o">=</span> <span class="k">struct</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntRing</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
   <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
   <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
@@ -977,12 +977,12 @@ then do a separate check to make sure the structure satisfies the signature:</p>
   <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
 <span class="k">end</span>
 
-<span class="k">module</span> <span class="o">_</span> <span class="o">:</span> <span class="nc">Field</span> <span class="o">=</span> <span class="nc">IntField</span>
+<span class="k">module</span> <span class="o">_</span> <span class="o">:</span> <span class="nc">Ring</span> <span class="o">=</span> <span class="nc">IntRing</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntField :
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntRing :
   sig
     type t = int
     val zero : int
@@ -998,7 +998,7 @@ then do a separate check to make sure the structure satisfies the signature:</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
@@ -1009,16 +1009,16 @@ then do a separate check to make sure the structure satisfies the signature:</p>
 </div>
 </div>
 <p>There’s a more sophisticated way of accomplishing the same goal. We can
-specialize the <code class="docutils literal notranslate"><span class="pre">Field</span></code> module type to specify that <code class="docutils literal notranslate"><span class="pre">t</span></code> must be <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>.
+specialize the <code class="docutils literal notranslate"><span class="pre">Ring</span></code> module type to specify that <code class="docutils literal notranslate"><span class="pre">t</span></code> must be <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>.
 We do that by adding a <em>constraint</em> using the <code class="docutils literal notranslate"><span class="pre">with</span></code> keyword:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">INT_FIELD</span> <span class="o">=</span> <span class="nc">Field</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">INT_RING</span> <span class="o">=</span> <span class="nc">Ring</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type INT_FIELD =
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type INT_RING =
   sig
     type t = int
     val zero : t
@@ -1032,13 +1032,13 @@ We do that by adding a <em>constraint</em> using the <code class="docutils liter
 </div>
 </div>
 </div>
-<p>Note how the <code class="docutils literal notranslate"><span class="pre">INT_FIELD</span></code> module type now specifies that <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span></code> are the
+<p>Note how the <code class="docutils literal notranslate"><span class="pre">INT_RING</span></code> module type now specifies that <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span></code> are the
 same type. It exposes or <em>shares</em> that fact with the world, so we could
 call these “sharing constraints.”</p>
-<p>Now <code class="docutils literal notranslate"><span class="pre">IntField</span></code> can be given that module type:</p>
+<p>Now <code class="docutils literal notranslate"><span class="pre">IntRing</span></code> can be given that module type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntField</span> <span class="o">:</span> <span class="nc">INT_FIELD</span> <span class="o">=</span> <span class="k">struct</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntRing</span> <span class="o">:</span> <span class="nc">INT_RING</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
   <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
   <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1051,7 +1051,7 @@ call these “sharing constraints.”</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntField : INT_FIELD
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntRing : INT_RING
 </pre></div>
 </div>
 </div>
@@ -1060,26 +1060,26 @@ call these “sharing constraints.”</p>
 values of type <code class="docutils literal notranslate"><span class="pre">t</span></code> without any help needed from a pretty printer:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntField.t = 2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntRing.t = 2
 </pre></div>
 </div>
 </div>
 </div>
 <p>Programmers can even mix and match built-in <code class="docutils literal notranslate"><span class="pre">int</span></code> values with those provided
-by <code class="docutils literal notranslate"><span class="pre">IntField</span></code>:</p>
+by <code class="docutils literal notranslate"><span class="pre">IntRing</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntField</span><span class="p">.</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntField.t = 2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntRing.t = 2
 </pre></div>
 </div>
 </div>
@@ -1087,9 +1087,9 @@ by <code class="docutils literal notranslate"><span class="pre">IntField</span><
 <p>The same can be done for floats:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">FLOAT_FIELD</span> <span class="o">=</span> <span class="nc">Field</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">FLOAT_RING</span> <span class="o">=</span> <span class="nc">Ring</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
 
-<span class="k">module</span> <span class="nc">FloatField</span> <span class="o">:</span> <span class="nc">FLOAT_FIELD</span> <span class="o">=</span> <span class="k">struct</span>
+<span class="k">module</span> <span class="nc">FloatRing</span> <span class="o">:</span> <span class="nc">FLOAT_RING</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
   <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
   <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
@@ -1102,7 +1102,7 @@ by <code class="docutils literal notranslate"><span class="pre">IntField</span><
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type FLOAT_FIELD =
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type FLOAT_RING =
   sig
     type t = float
     val zero : t
@@ -1114,18 +1114,18 @@ by <code class="docutils literal notranslate"><span class="pre">IntField</span><
   end
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatField : FLOAT_FIELD
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatRing : FLOAT_RING
 </pre></div>
 </div>
 </div>
 </div>
-<p>It turns out there’s no need to separately define <code class="docutils literal notranslate"><span class="pre">INT_FIELD</span></code> and <code class="docutils literal notranslate"><span class="pre">FLOAT_FIELD</span></code>.
+<p>It turns out there’s no need to separately define <code class="docutils literal notranslate"><span class="pre">INT_RING</span></code> and <code class="docutils literal notranslate"><span class="pre">FLOAT_RING</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">with</span></code> keyword can be used as part of the <code class="docutils literal notranslate"><span class="pre">module</span></code> definition, though the
 syntax becomes a little harder to read because of the proximity of the two <code class="docutils literal notranslate"><span class="pre">=</span></code>
 signs:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">FloatField</span> <span class="o">:</span> <span class="nc">Field</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span> <span class="o">=</span> <span class="k">struct</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">FloatRing</span> <span class="o">:</span> <span class="nc">Ring</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
   <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
   <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
@@ -1138,7 +1138,7 @@ signs:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatField :
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatRing :
   sig
     type t = float
     val zero : t
@@ -1193,7 +1193,7 @@ compare the two signatures output below:</p>
 </div>
 <p>Likewise, <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">with</span> <span class="pre">module</span> <span class="pre">M</span> <span class="pre">=</span> <span class="pre">N</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">T</span></code>, except that the any
 declaration <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">x</span></code> inside the module type of <code class="docutils literal notranslate"><span class="pre">M</span></code> is replaced by
-<code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">N.X</span></code>. (And the same recursively for any nested modules.) It takes more
+<code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">N.x</span></code>. (And the same recursively for any nested modules.) It takes more
 work to give and understand this example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
