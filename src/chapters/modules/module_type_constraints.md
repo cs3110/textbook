@@ -19,34 +19,34 @@ We have extolled the virtues of encapsulation. Now we're going to do something
 that might seem counter-intuitive: selectively violate encapsulation.
 
 As a motivating example, here is a module type that represents values that
-support the usual operations from arithmetic, or more precisely, a *[field][]*:
+support the usual addition and multiplication operations from arithmetic, or more precisely, a *[ring][]*:
 
-[field]: https://en.wikipedia.org/wiki/Field_(mathematics)
+[ring]: https://en.wikipedia.org/wiki/Ring_(mathematics)
 
 ```{code-cell} ocaml
-module type Field = sig
+module type Ring = sig
   type t
   val zero : t
   val one : t
   val ( + ) : t -> t -> t
   val ( * ) : t -> t -> t
-  val ( ~- ) : t -> t
+  val ( ~- ) : t -> t  (* additive inverse *)
   val to_string : t -> string
 end
 ```
 
 Recall that we must write `( * )` instead of `(*)` because the latter would be
-parsed as beginning a comment. And we write the `~` in `(~-)` to indicate a
-*unary* negation operator.
+parsed as beginning a comment. And we write the `~` in `( ~- )` to indicate a
+*unary* operator.
 
 This is a bit weird of an example. We don't normally think of numbers as a data
 structure. But what is a data structure except for a set of values and
-operations on them? The `Field` module type makes it clear that's what we have.
+operations on them? The `Ring` module type makes it clear that's what we have.
 
 Here is a module that implements that module type:
 
 ```{code-cell} ocaml
-module IntField : Field = struct
+module IntRing : Ring = struct
   type t = int
   let zero = 0
   let one = 1
@@ -61,31 +61,31 @@ Because `t` is abstract, the toplevel can't give us good output about what the
 sum of one and one is:
 
 ```{code-cell} ocaml
-IntField.(one + one)
+IntRing.(one + one)
 ```
 
 But we could convert it to a string:
 
 ```{code-cell} ocaml
-IntField.(one + one |> to_string)
+IntRing.(one + one |> to_string)
 ```
 
 We could even install a pretty printer to avoid having to manually call
 `to_string`:
 
 ```{code-cell} ocaml
-let pp_intfield fmt i =
-  Format.fprintf fmt "%s" (IntField.to_string i);;
+let pp_intring fmt i =
+  Format.fprintf fmt "%s" (IntRing.to_string i);;
 
-#install_printer pp_intfield;;
+#install_printer pp_intring;;
 
-IntField.(one + one)
+IntRing.(one + one)
 ```
 
-We could implement other kinds of fields, too:
+We could implement other kinds of rings, too:
 
 ```{code-cell} ocaml
-module FloatField : Field = struct
+module FloatRing : Ring = struct
   type t = float
   let zero = 0.
   let one = 1.
@@ -99,15 +99,15 @@ end
 Then we'd have to install a printer for it, too:
 
 ```{code-cell} ocaml
-let pp_floatfield fmt f =
-  Format.fprintf fmt "%s" (FloatField.to_string f);;
+let pp_floatring fmt f =
+  Format.fprintf fmt "%s" (FloatRing.to_string f);;
 
-#install_printer pp_floatfield;;
+#install_printer pp_floatring;;
 
-FloatField.(one + one)
+FloatRing.(one + one)
 ```
 
-Was there really a need to make type `t` abstract in the field examples above?
+Was there really a need to make type `t` abstract in the ring examples above?
 Arguably not. And if it were not abstract, we wouldn't have to go to the trouble
 of converting abstract values into strings, or installing printers. Let's pursue
 that idea, next.
@@ -119,7 +119,7 @@ then do a separate check to make sure the structure satisfies the signature:
 
 ```{code-cell} ocaml
 :tags: ["hide-output"]
-module IntField = struct
+module IntRing = struct
   type t = int
   let zero = 0
   let one = 1
@@ -129,29 +129,29 @@ module IntField = struct
   let to_string = string_of_int
 end
 
-module _ : Field = IntField
+module _ : Ring = IntRing
 ```
 
 ```{code-cell} ocaml
-IntField.(one + one)
+IntRing.(one + one)
 ```
 
 There's a more sophisticated way of accomplishing the same goal. We can
-specialize the `Field` module type to specify that `t` must be `int` or `float`.
+specialize the `Ring` module type to specify that `t` must be `int` or `float`.
 We do that by adding a *constraint* using the `with` keyword:
 
 ```{code-cell} ocaml
-module type INT_FIELD = Field with type t = int
+module type INT_RING = Ring with type t = int
 ```
 
-Note how the `INT_FIELD` module type now specifies that `t` and `int` are the
+Note how the `INT_RING` module type now specifies that `t` and `int` are the
 same type. It exposes or *shares* that fact with the world, so we could
 call these "sharing constraints."
 
-Now `IntField` can be given that module type:
+Now `IntRing` can be given that module type:
 
 ```{code-cell} ocaml
-module IntField : INT_FIELD = struct
+module IntRing : INT_RING = struct
   type t = int
   let zero = 0
   let one = 1
@@ -166,22 +166,22 @@ And since the equality of `t` and `int` is exposed, the toplevel can print
 values of type `t` without any help needed from a pretty printer:
 
 ```{code-cell} ocaml
-IntField.(one + one)
+IntRing.(one + one)
 ```
 
 Programmers can even mix and match built-in `int` values with those provided
-by `IntField`:
+by `IntRing`:
 
 ```{code-cell} ocaml
-IntField.(1 + one)
+IntRing.(1 + one)
 ```
 
 The same can be done for floats:
 
 ```{code-cell} ocaml
-module type FLOAT_FIELD = Field with type t = float
+module type FLOAT_RING = Ring with type t = float
 
-module FloatField : FLOAT_FIELD = struct
+module FloatRing : FLOAT_RING = struct
   type t = float
   let zero = 0.
   let one = 1.
@@ -192,13 +192,13 @@ module FloatField : FLOAT_FIELD = struct
 end
 ```
 
-It turns out there's no need to separately define `INT_FIELD` and `FLOAT_FIELD`.
+It turns out there's no need to separately define `INT_RING` and `FLOAT_RING`.
 The `with` keyword can be used as part of the `module` definition, though the
 syntax becomes a little harder to read because of the proximity of the two `=`
 signs:
 
 ```{code-cell} ocaml
-module FloatField : Field with type t = float = struct
+module FloatRing : Ring with type t = float = struct
   type t = float
   let zero = 0.
   let one = 1.
@@ -241,7 +241,7 @@ module type U = T with type t = int
 
 Likewise, `T with module M = N` is the same as `T`, except that the any
 declaration `type x` inside the module type of `M` is replaced by
-`type x = N.X`. (And the same recursively for any nested modules.) It takes more
+`type x = N.x`. (And the same recursively for any nested modules.) It takes more
 work to give and understand this example:
 
 ```{code-cell} ocaml
