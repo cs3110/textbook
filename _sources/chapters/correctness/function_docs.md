@@ -24,7 +24,7 @@ A specification is written for humans to read, not machines. "Specs" can take
 time to write well, and it is time well spent. The main goal is clarity. It is
 also important to be concise, because client programmers will not always take
 the effort to read a long spec. As with anything we write, we need to be aware
-of your audience when writing specifications. Some readers may need a more
+of our audience when writing specifications. Some readers may need a more
 verbose specification than others.
 
 A well-written specification usually has several parts communicating different

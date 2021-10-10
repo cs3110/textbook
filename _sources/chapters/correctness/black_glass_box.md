@@ -202,7 +202,8 @@ operations interact with one another. It's useful to distinguish *consumer* and
 - A consumer is an operation that takes a value of the data abstraction as
   input.
 
-- A producer is an operation that a value of the data abstraction.
+- A producer is an operation that returns a value of the data abstraction
+  as output.
 
 For example, consider this set abstraction:
 
