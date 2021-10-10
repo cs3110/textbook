@@ -51,6 +51,8 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -804,8 +806,13 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-types-are-static">
+   5.2.5. Module Types are Static
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#first-class-modules">
-   5.2.5. First-Class Modules
+   5.2.6. First-Class Modules
   </a>
  </li>
 </ul>
@@ -1734,12 +1741,20 @@ be lengthy.</p>
 <div class="section" id="module-type-semantics">
 <h2><span class="section-number">5.2.4. </span>Module Type Semantics<a class="headerlink" href="#module-type-semantics" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/VprvFk7KKWk" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<p>The key question we have to answer is: what does a type annotation mean for
-modules? That is, what does it mean when we write the <code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">T</span></code> in
-<code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">M</span> <span class="pre">:</span> <span class="pre">T</span> <span class="pre">=</span> <span class="pre">...</span></code>?</p>
-<p>The answer turns out to involve <em>subtyping</em>, which is a concept you’ve probably
-seen before in an object-oriented language.  We’re going to take a brief detour
-into that realm now, then come back to OCaml and modules.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">M</span></code> is just a <code class="docutils literal notranslate"><span class="pre">struct</span></code> block, its module type is whatever signature the
+compiler infers for it. But that can be changed by module type annotations. The
+key question we have to answer is: what does a type annotation mean for modules?
+That is, what does it mean when we write the <code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">T</span></code> in <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">M</span> <span class="pre">:</span> <span class="pre">T</span> <span class="pre">=</span> <span class="pre">...</span></code>?</p>
+<p>There are two properties the compiler guarantees:</p>
+<ol class="simple">
+<li><p><em>Signature matching:</em> every name declared in <code class="docutils literal notranslate"><span class="pre">T</span></code> is defined in <code class="docutils literal notranslate"><span class="pre">M</span></code> at the
+same or a more general type.</p></li>
+<li><p><em>Opacity:</em> any name defined in <code class="docutils literal notranslate"><span class="pre">M</span></code> that does not appear in <code class="docutils literal notranslate"><span class="pre">T</span></code> is not
+visible to code outside of <code class="docutils literal notranslate"><span class="pre">M</span></code>.</p></li>
+</ol>
+<p>But a more complete answer turns out to involve <em>subtyping</em>, which is a concept
+you’ve probably seen before in an object-oriented language. We’re going to take
+a brief detour into that realm now, then come back to OCaml and modules.</p>
 <p>In Java, the <code class="docutils literal notranslate"><span class="pre">extends</span></code> keyword creates subtype relationships between classes:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">C</span> <span class="p">{</span> <span class="p">}</span>
 <span class="kd">class</span> <span class="nc">D</span> <span class="kd">extends</span> <span class="n">C</span> <span class="p">{</span> <span class="p">}</span>
@@ -1775,9 +1790,9 @@ through such uses of <code class="docutils literal notranslate"><span class="pre
 the same underlying intuition about the Liskov Substitution Principle. But OCaml
 uses a different flavor called <em>structural subtyping</em>. That is, it is based on
 the structure of modules rather than their names. “Structure” here simply means
-the definitions contained in the module. That structure is —i.e., those
-definitions are—what is used to determine whether <code class="docutils literal notranslate"><span class="pre">(M</span> <span class="pre">:</span> <span class="pre">T)</span></code> is acceptable
-as a type annotation, where <code class="docutils literal notranslate"><span class="pre">M</span></code> is a module and <code class="docutils literal notranslate"><span class="pre">T</span></code> is a module type.</p>
+the definitions contained in the module. Those definitions are used to determine
+whether <code class="docutils literal notranslate"><span class="pre">(M</span> <span class="pre">:</span> <span class="pre">T)</span></code> is acceptable as a type annotation, where <code class="docutils literal notranslate"><span class="pre">M</span></code> is a module and
+<code class="docutils literal notranslate"><span class="pre">T</span></code> is a module type.</p>
 <p>Let’s play with this idea of structure through several examples, starting with
 this module:</p>
 <div class="cell docutils container">
@@ -2013,24 +2028,78 @@ checking.</p></li>
 superset of those in <code class="docutils literal notranslate"><span class="pre">T</span></code>.  Definitions in <code class="docutils literal notranslate"><span class="pre">T</span></code> are permitted to instantiate
 type variables from <code class="docutils literal notranslate"><span class="pre">S</span></code>.</p></li>
 </ul>
-<p>The “sub” vs. “super” in the second rule is not a typo. Think about <code class="docutils literal notranslate"><span class="pre">T</span></code> as a set
-of module values. There could be many subtypes <code class="docutils literal notranslate"><span class="pre">S1</span></code>, <code class="docutils literal notranslate"><span class="pre">S2</span></code>, etc. of <code class="docutils literal notranslate"><span class="pre">T</span></code>, each of
-which is a set of module values, and each of those sets would be a subset of
-<code class="docutils literal notranslate"><span class="pre">T</span></code>. But, the way those sets differ from <code class="docutils literal notranslate"><span class="pre">T</span></code> and one another is by adding new
-definitions of their own. For example, a list-based stack might differ from
-<code class="docutils literal notranslate"><span class="pre">ListStack</span></code> by adding a value to keep track of the number of items on the stack.
-Another implementation might add a value to keep track of how many items have
-ever been pushed on the stack in its history. Those additional values inside the
-module make its set of definitions bigger, hence the use of “superset” in the
-rule.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">M</span></code> is just a plain old structure, its module type is whatever signature the
-compiler infers for it. But that can be restricted, as we saw above, by module
-type annotations. All of this is <em>static</em>, which is to say the decisions about
-validity are made at compile time rather than run time.</p>
+<p>The “sub” vs. “super” in the second rule is not a typo. Consider these module
+types and modules:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">val</span> <span class="n">a</span> <span class="o">:</span> <span class="kt">int</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="k">type</span> <span class="nc">S</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">val</span> <span class="n">a</span> <span class="o">:</span> <span class="kt">int</span>
+  <span class="k">val</span> <span class="n">b</span> <span class="o">:</span> <span class="kt">bool</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">A</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">AB</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">true</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">AC</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="sc">&#39;c&#39;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig val a : int end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type S = sig val a : int val b : bool end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module A : sig val a : int end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module AB : sig val a : int val b : bool end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module AC : sig val a : int val c : char end
+</pre></div>
+</div>
+</div>
+</div>
+<p>Module type <code class="docutils literal notranslate"><span class="pre">S</span></code> provides a <em>super</em>set of the definitions in <code class="docutils literal notranslate"><span class="pre">T</span></code>, because it adds
+a definition of <code class="docutils literal notranslate"><span class="pre">b</span></code>. So why is <code class="docutils literal notranslate"><span class="pre">S</span></code> called a <em>sub</em>type of <code class="docutils literal notranslate"><span class="pre">T</span></code>? Think about the
+set <span class="math notranslate nohighlight">\(\mathit{Type}(T)\)</span> of all module values <code class="docutils literal notranslate"><span class="pre">M</span></code> such that <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">:</span> <span class="pre">T</span></code>. That set
+contains <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">AB</span></code>, <code class="docutils literal notranslate"><span class="pre">AC</span></code>, and many others. Also think about the set
+<span class="math notranslate nohighlight">\(\mathit{Type}(S)\)</span> of all module values <code class="docutils literal notranslate"><span class="pre">M</span></code> such that <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">:</span> <span class="pre">S</span></code>. That set contains
+<code class="docutils literal notranslate"><span class="pre">AB</span></code> but not <code class="docutils literal notranslate"><span class="pre">A</span></code> nor <code class="docutils literal notranslate"><span class="pre">AC</span></code>. So <span class="math notranslate nohighlight">\(\mathit{Type}(S) \subset \mathit{Type}(T)\)</span>,
+because there are some module values that are in <span class="math notranslate nohighlight">\(\mathit{Type}(T)\)</span> but not in
+<span class="math notranslate nohighlight">\(\mathit{Type}(S)\)</span>.</p>
+<p>As another example, a module type <code class="docutils literal notranslate"><span class="pre">StackHistory</span></code> for stacks might customize our
+usual <code class="docutils literal notranslate"><span class="pre">Stack</span></code> signature by adding an operation <code class="docutils literal notranslate"><span class="pre">history</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">t</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> to return
+how many items have ever been pushed on the stack in its history. That <code class="docutils literal notranslate"><span class="pre">history</span></code>
+operation makes the set of definitions in <code class="docutils literal notranslate"><span class="pre">StackHistory</span></code> bigger than the set in
+<code class="docutils literal notranslate"><span class="pre">Stack</span></code>, hence the use of “superset” in the rule above. But the set of module
+values that implement <code class="docutils literal notranslate"><span class="pre">StackHistory</span></code> is smaller than the set of module values
+that implement <code class="docutils literal notranslate"><span class="pre">Stack</span></code>, hence the use of “subset”.</p>
+</div>
+<div class="section" id="module-types-are-static">
+<h2><span class="section-number">5.2.5. </span>Module Types are Static<a class="headerlink" href="#module-types-are-static" title="Permalink to this headline">¶</a></h2>
+<p>Decisions about validity of module type annotations are made at compile time
+rather than run time.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Module type annotations therefore offer potential confusion to programmers
 accustomed to object-oriented languages, in which subtyping works differently.</p>
+</div>
 <p>Python programmers, for example, are accustomed to so-called “duck typing”. They
 might expect <code class="docutils literal notranslate"><span class="pre">((M</span> <span class="pre">:</span> <span class="pre">X)</span> <span class="pre">:</span> <span class="pre">Z)</span></code> to be valid, because <code class="docutils literal notranslate"><span class="pre">z</span></code> does exist at run-time in
 <code class="docutils literal notranslate"><span class="pre">M</span></code>. But in OCaml, the compile-time type of <code class="docutils literal notranslate"><span class="pre">(M</span> <span class="pre">:</span> <span class="pre">X)</span></code> has hidden <code class="docutils literal notranslate"><span class="pre">z</span></code> from view
@@ -2047,25 +2116,15 @@ run-time errors</strong> of the kind that would occur in Java or Python, whether
 because of a run-time error from a cast, or a run-time error from a missing
 method.</p>
 </div>
-<p>In summary, if a module is given a module type, such as in
-<code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">M</span> <span class="pre">:</span> <span class="pre">T</span> <span class="pre">=</span> <span class="pre">struct</span> <span class="pre">...</span> <span class="pre">end</span></code>, then there are two properties the compiler
-guarantees:</p>
-<ol class="simple">
-<li><p><em>Signature matching:</em> every name declared in <code class="docutils literal notranslate"><span class="pre">T</span></code> is defined in <code class="docutils literal notranslate"><span class="pre">M</span></code> at the
-same or a more general type.</p></li>
-<li><p><em>Opacity:</em> any name defined in <code class="docutils literal notranslate"><span class="pre">M</span></code> that does not appear in <code class="docutils literal notranslate"><span class="pre">T</span></code> is not
-visible to code outside of <code class="docutils literal notranslate"><span class="pre">M</span></code>.</p></li>
-</ol>
-</div>
 <div class="section" id="first-class-modules">
-<h2><span class="section-number">5.2.5. </span>First-Class Modules<a class="headerlink" href="#first-class-modules" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.2.6. </span>First-Class Modules<a class="headerlink" href="#first-class-modules" title="Permalink to this headline">¶</a></h2>
 <p>Modules are not as first-class in OCaml as functions. But it is possible to
 <em>package</em> modules as first-class values. Briefly:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">(module</span> <span class="pre">M</span> <span class="pre">:</span> <span class="pre">T)</span></code> packages module <code class="docutils literal notranslate"><span class="pre">M</span></code> with module type <code class="docutils literal notranslate"><span class="pre">T</span></code> into a value.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">(val</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">T)</span></code> un-packages <code class="docutils literal notranslate"><span class="pre">e</span></code> into a module with type <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
 </ul>
-<p>We won’t cover this any further, but if you’re curious you can have a look at
+<p>We won’t cover this much further, but if you’re curious you can have a look at
 <a class="reference external" href="https://ocaml.org/manual/firstclassmodules.html">the manual</a>.</p>
 </div>
 </div>

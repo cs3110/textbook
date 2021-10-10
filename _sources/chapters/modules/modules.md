@@ -694,13 +694,22 @@ be lengthy.
 
 {{ video_embed | replace("%%VID%%", "VprvFk7KKWk")}}
 
-The key question we have to answer is: what does a type annotation mean for
-modules? That is, what does it mean when we write the `: T` in
-`module M : T = ...`?
+If `M` is just a `struct` block, its module type is whatever signature the
+compiler infers for it. But that can be changed by module type annotations. The
+key question we have to answer is: what does a type annotation mean for modules?
+That is, what does it mean when we write the `: T` in `module M : T = ...`?
 
-The answer turns out to involve *subtyping*, which is a concept you've probably
-seen before in an object-oriented language.  We're going to take a brief detour
-into that realm now, then come back to OCaml and modules.
+There are two properties the compiler guarantees:
+
+  1. *Signature matching:* every name declared in `T` is defined in `M` at the
+      same or a more general type.
+
+  2. *Opacity:* any name defined in `M` that does not appear in `T` is not
+     visible to code outside of `M`.
+
+But a more complete answer turns out to involve *subtyping*, which is a concept
+you've probably seen before in an object-oriented language. We're going to take
+a brief detour into that realm now, then come back to OCaml and modules.
 
 In Java, the `extends` keyword creates subtype relationships between classes:
 
@@ -742,9 +751,9 @@ Now it's time to return to OCaml. Its module system also uses subtyping, with
 the same underlying intuition about the Liskov Substitution Principle. But OCaml
 uses a different flavor called *structural subtyping*. That is, it is based on
 the structure of modules rather than their names. "Structure" here simply means
-the definitions contained in the module. That structure is &mdash;i.e., those
-definitions are&mdash;what is used to determine whether `(M : T)` is acceptable
-as a type annotation, where `M` is a module and `T` is a module type.
+the definitions contained in the module. Those definitions are used to determine
+whether `(M : T)` is acceptable as a type annotation, where `M` is a module and
+`T` is a module type.
 
 Let's play with this idea of structure through several examples, starting with
 this module:
@@ -895,25 +904,60 @@ annotations:
   superset of those in `T`.  Definitions in `T` are permitted to instantiate
   type variables from `S`.
 
-The "sub" vs. "super" in the second rule is not a typo. Think about `T` as a set
-of module values. There could be many subtypes `S1`, `S2`, etc. of `T`, each of
-which is a set of module values, and each of those sets would be a subset of
-`T`. But, the way those sets differ from `T` and one another is by adding new
-definitions of their own. For example, a list-based stack might differ from
-`ListStack` by adding a value to keep track of the number of items on the stack.
-Another implementation might add a value to keep track of how many items have
-ever been pushed on the stack in its history. Those additional values inside the
-module make its set of definitions bigger, hence the use of "superset" in the
-rule.
+The "sub" vs. "super" in the second rule is not a typo. Consider these module
+types and modules:
 
-If `M` is just a plain old structure, its module type is whatever signature the
-compiler infers for it. But that can be restricted, as we saw above, by module
-type annotations. All of this is *static*, which is to say the decisions about
-validity are made at compile time rather than run time.
+```{code-cell} ocaml
+module type T = sig
+  val a : int
+end
+
+module type S = sig
+  val a : int
+  val b : bool
+end
+
+module A = struct
+  let a = 0
+end
+
+module AB = struct
+  let a = 0
+  let b = true
+end
+
+module AC = struct
+  let a = 0
+  let c = 'c'
+end
+```
+
+Module type `S` provides a *super*set of the definitions in `T`, because it adds
+a definition of `b`. So why is `S` called a *sub*type of `T`? Think about the
+set $\mathit{Type}(T)$ of all module values `M` such that `M : T`. That set
+contains `A`, `AB`, `AC`, and many others. Also think about the set
+$\mathit{Type}(S)$ of all module values `M` such that `M : S`. That set contains
+`AB` but not `A` nor `AC`. So $\mathit{Type}(S) \subset \mathit{Type}(T)$,
+because there are some module values that are in $\mathit{Type}(T)$ but not in
+$\mathit{Type}(S)$.
+
+As another example, a module type `StackHistory` for stacks might customize our
+usual `Stack` signature by adding an operation `history : 'a t -> int` to return
+how many items have ever been pushed on the stack in its history. That `history`
+operation makes the set of definitions in `StackHistory` bigger than the set in
+`Stack`, hence the use of "superset" in the rule above. But the set of module
+values that implement `StackHistory` is smaller than the set of module values
+that implement `Stack`, hence the use of "subset".
+
+## Module Types are Static
+
+Decisions about validity of module type annotations are made at compile time
+rather than run time.
 
 ```{important}
 Module type annotations therefore offer potential confusion to programmers
 accustomed to object-oriented languages, in which subtyping works differently.
+```
 
 Python programmers, for example, are accustomed to so-called "duck typing". They
 might expect `((M : X) : Z)` to be valid, because `z` does exist at run-time in
@@ -932,17 +976,6 @@ in return for that restrictiveness, OCaml is guaranteeing an **absence of
 run-time errors** of the kind that would occur in Java or Python, whether
 because of a run-time error from a cast, or a run-time error from a missing
 method.
-```
-
-In summary, if a module is given a module type, such as in
-`module M : T = struct ... end`, then there are two properties the compiler
-guarantees:
-
-  1. *Signature matching:* every name declared in `T` is defined in `M` at the
-      same or a more general type.
-
-  2. *Opacity:* any name defined in `M` that does not appear in `T` is not
-     visible to code outside of `M`.
 
 ## First-Class Modules
 
@@ -952,7 +985,7 @@ Modules are not as first-class in OCaml as functions. But it is possible to
 - `(module M : T)` packages module `M` with module type `T` into a value.
 - `(val e : T)` un-packages `e` into a module with type `T`.
 
-We won't cover this any further, but if you're curious you can have a look at
+We won't cover this much further, but if you're curious you can have a look at
 [the manual][firstclassmodules].
 
 [firstclassmodules]: https://ocaml.org/manual/firstclassmodules.html
