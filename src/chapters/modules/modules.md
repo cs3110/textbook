@@ -735,7 +735,7 @@ For a language-independent notion, we turn to Barbara Liskov. She won the Turing
 Award in 2008 in part for her work on object-oriented language design. Twenty
 years before that, she invented what is now called the *Liskov Substitution
 Principle* to explain subtyping. It says that if `S` is a subtype of `T`, then
-substituting an object of type `T` for an object of type `S` should not change
+substituting an object of type `S` for an object of type `T` should not change
 any desirable behaviors of a program. You can see that at work in the Java
 example above, both in terms of what the language allows and what the programmer
 must guarantee.
