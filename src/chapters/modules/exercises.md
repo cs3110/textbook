@@ -309,7 +309,7 @@ Write a module type `ToString` that specifies a signature with an abstract type
 {{ ex2 | replace("%%NAME%%", "Print")}}
 
 Write a functor `Print` that takes as input a module named `M` of type
-`ToString`. The nidyke returned by your functor should have exactly one value in
+`ToString`. The module returned by your functor should have exactly one value in
 it, `print`, which is a function that takes a value of type `M.t` and prints a
 string representation of that value.
 
