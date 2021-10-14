@@ -1086,10 +1086,10 @@ before the recursive call:</p>
 </div>
 <p>Here’s why that works:</p>
 <ul class="simple">
-<li><p>Expression <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">p</span> <span class="pre">[1;</span> <span class="pre">2]</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">h'</span> <span class="pre">=</span> <span class="pre">p</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">h''</span> <span class="pre">::</span> <span class="pre">map</span> <span class="pre">p</span> <span class="pre">[2]</span></code>.</p></li>
+<li><p>Expression <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">p</span> <span class="pre">[1;</span> <span class="pre">2]</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">h'</span> <span class="pre">=</span> <span class="pre">p</span> <span class="pre">1</span> <span class="pre">in</span> <span class="pre">h'</span> <span class="pre">::</span> <span class="pre">map</span> <span class="pre">p</span> <span class="pre">[2]</span></code>.</p></li>
 <li><p>The binding expression <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">1</span></code> is evaluated, causing <code class="docutils literal notranslate"><span class="pre">1</span></code> to be printed
 and <code class="docutils literal notranslate"><span class="pre">h'</span></code> to be bound to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
-<li><p>The body expression <code class="docutils literal notranslate"><span class="pre">h''</span> <span class="pre">::</span> <span class="pre">map</span> <span class="pre">p</span> <span class="pre">[2]</span></code> is then evaluated, which
+<li><p>The body expression <code class="docutils literal notranslate"><span class="pre">h'</span> <span class="pre">::</span> <span class="pre">map</span> <span class="pre">p</span> <span class="pre">[2]</span></code> is then evaluated, which
 leads to <code class="docutils literal notranslate"><span class="pre">2</span></code> being printed next.</p></li>
 </ul>
 <p>So that’s how the standard library defines <code class="docutils literal notranslate"><span class="pre">List.map</span></code>. We should use it instead
