@@ -829,10 +829,12 @@
   <div class="section" id="functional-data-structures">
 <h1><span class="section-number">5.6. </span>Functional Data Structures<a class="headerlink" href="#functional-data-structures" title="Permalink to this headline">¶</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/CLeXXZDkkCI" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<p>A <em>functional data structure</em> is one that does not make use of any imperative
-features. That is, no operations of the data structure have any side effects.
+<p>A <em>functional data structure</em> is one that does not make use of mutability.
 It’s possible to build functional data structures both in functional languages
-and in imperative languages.</p>
+and in imperative languages. For example, you could build
+a Java equivalent to OCaml’s <code class="docutils literal notranslate"><span class="pre">list</span></code> type by creating a <code class="docutils literal notranslate"><span class="pre">Node</span></code>
+class whose fields are immutable by virtue of using
+the <code class="docutils literal notranslate"><span class="pre">const</span></code> keyword.</p>
 <p>Functional data structures have the property of being <em>persistent</em>: updating the
 data structure with one of its operations does not change the existing version
 of the data structure but instead produces a new version. Both exist and both

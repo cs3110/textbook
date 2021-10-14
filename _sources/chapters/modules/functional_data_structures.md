@@ -17,10 +17,12 @@ kernelspec:
 
 {{ video_embed | replace("%%VID%%", "CLeXXZDkkCI")}}
 
-A *functional data structure* is one that does not make use of any imperative
-features. That is, no operations of the data structure have any side effects.
+A *functional data structure* is one that does not make use of mutability.
 It's possible to build functional data structures both in functional languages
-and in imperative languages.
+and in imperative languages. For example, you could build
+a Java equivalent to OCaml's `list` type by creating a `Node`
+class whose fields are immutable by virtue of using
+the `const` keyword.
 
 Functional data structures have the property of being *persistent*: updating the
 data structure with one of its operations does not change the existing version
