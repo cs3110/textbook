@@ -186,10 +186,10 @@ let lst2 = map p [1; 2]
 
 Here's why that works:
 
-- Expression `map p [1; 2]` evaluates to `let h' = p 1 in h'' :: map p [2]`.
+- Expression `map p [1; 2]` evaluates to `let h' = p 1 in h' :: map p [2]`.
 - The binding expression `p 1` is evaluated, causing `1` to be printed
   and `h'` to be bound to `2`.
-- The body expression `h'' :: map p [2]` is then evaluated, which
+- The body expression `h' :: map p [2]` is then evaluated, which
   leads to `2` being printed next.
 
 So that's how the standard library defines `List.map`. We should use it instead
