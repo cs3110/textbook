@@ -193,14 +193,14 @@ module type Stack = sig
   (* etc. *)
 end
 
-module type ListStack : Stack = sig
+module type ListStack : Stack = struct
   type 'a t = 'a list
   let empty = []
   let push = List.cons
   (* etc. *)
 end
 
-module type CustomStack : Stack = sig
+module type CustomStack : Stack = struct
   (* omitted *)
 end
 ```
