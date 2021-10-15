@@ -44,7 +44,7 @@ also persistent, which we can demonstrate:
 ```{code-cell} ocaml
 let lst = [1; 2];;
 let lst' = List.tl lst;;
-lst';;
+lst;;
 ```
 
 Taking the tail of `lst` does not change the list. Both `lst` and `lst'`
