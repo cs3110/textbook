@@ -133,8 +133,6 @@ When you do discover the source of a fault, be extra careful in fixing it. It is
 tempting to slap a quick fix into the code and move on. This is quite dangerous.
 Far too often, fixing a fault just introduces a new (and unknown) fault! If a
 bug is difficult to find, it is often because the program logic is complex and
-hard to reason about. You should think carefully about why the bug happened in
-the first place and what the right solution to the problem is. *Regression
-testing* (i.e., recording only test cases that originally failed but now pass)
-is important whenever a bug fix is introduced, but nothing can replace careful
-thinking about the code.
+hard to reason about. Think carefully about why the fault could have been
+introduced in the first place, and about how you might prevent similar faults
+in the future.

@@ -105,7 +105,7 @@ So you've discovered a bug. What next?
     want the bug to creep back into your code base. So keep track of that small
     test case by keeping it as part of your unit tests. That way, any time you
     make future changes, you will automatically be guarding against that same
-    bug. Repeatedly running tests distilled from previous bugs is called
+    bug. Repeatedly running tests distilled from previous bugs is a part of
     *regression testing*.
 
 ## Debugging in OCaml
