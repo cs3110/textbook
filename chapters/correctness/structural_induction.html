@@ -1379,8 +1379,12 @@ hypothesis. For example:</p>
 data type.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Node</span></code> generated two IHs, because it carries two values of the data type.</p></li>
 </ul>
-<p>Suppose we have these types to represent the AST for expressions in a simple
-language with integers, Booleans, unary operators, and binary operators:</p>
+<p>As an example of an induction principle for a more complicated type, let’s
+consider a type that represents the syntax of a mathematical expression. You
+might recall from an earlier data structures course that trees can be used for
+that purpose.</p>
+<p>Suppose we have the following <code class="docutils literal notranslate"><span class="pre">expr</span></code> type, which is a kind of tree, to represent
+expressions with integers, Booleans, unary operators, and binary operators:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">uop</span> <span class="o">=</span>
@@ -1389,6 +1393,7 @@ language with integers, Booleans, unary operators, and binary operators:</p>
 <span class="k">type</span> <span class="n">bop</span> <span class="o">=</span>
   <span class="o">|</span> <span class="nc">BPlus</span>
   <span class="o">|</span> <span class="nc">BMinus</span>
+  <span class="o">|</span> <span class="nc">BLeq</span>
 
 <span class="k">type</span> <span class="n">expr</span> <span class="o">=</span>
   <span class="o">|</span> <span class="nc">Int</span> <span class="k">of</span> <span class="kt">int</span>
@@ -1402,7 +1407,7 @@ language with integers, Booleans, unary operators, and binary operators:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type uop = UMinus
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type bop = BPlus | BMinus
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type bop = BPlus | BMinus | BLeq
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type expr =
@@ -1414,6 +1419,9 @@ language with integers, Booleans, unary operators, and binary operators:</p>
 </div>
 </div>
 </div>
+<p>For example, the expression <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">&lt;</span> <span class="pre">6</span></code> would be represented as
+<code class="docutils literal notranslate"><span class="pre">Binop</span> <span class="pre">(BLeq,</span> <span class="pre">Int</span> <span class="pre">5,</span> <span class="pre">Int</span> <span class="pre">6)</span></code>. We’ll see more examples of this kind of
+representation later in the book when we study interpreters.</p>
 <p>The induction principle for <code class="docutils literal notranslate"><span class="pre">expr</span></code> is:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>forall properties P,
   if forall i, P(Int i)
