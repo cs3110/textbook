@@ -579,8 +579,13 @@ hypothesis. For example:
 
 - `Node` generated two IHs, because it carries two values of the data type.
 
-Suppose we have these types to represent the AST for expressions in a simple
-language with integers, Booleans, unary operators, and binary operators:
+As an example of an induction principle for a more complicated type, let's
+consider a type that represents the syntax of a mathematical expression. You
+might recall from an earlier data structures course that trees can be used for
+that purpose.
+
+Suppose we have the following `expr` type, which is a kind of tree, to represent
+expressions with integers, Booleans, unary operators, and binary operators:
 
 ```{code-cell} ocaml
 :tags: ["hide-output"]
@@ -590,6 +595,7 @@ type uop =
 type bop =
   | BPlus
   | BMinus
+  | BLeq
 
 type expr =
   | Int of int
@@ -597,6 +603,10 @@ type expr =
   | Unop of uop * expr
   | Binop of expr * bop * expr
 ```
+
+For example, the expression `5 < 6` would be represented as
+`Binop (BLeq, Int 5, Int 6)`. We'll see more examples of this kind of
+representation later in the book when we study interpreters.
 
 The induction principle for `expr` is:
 
