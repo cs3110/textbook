@@ -113,7 +113,7 @@ approach them as a scientist by employing the *scientific method:*
 
 * evaluate the data that are available;
 
-* formula a hypothesis that might explain the data;
+* formulate a hypothesis that might explain the data;
 
 * design a repeatable experiment to test that hypothesis; and
 

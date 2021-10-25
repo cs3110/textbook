@@ -204,7 +204,7 @@ hardcode the right outputs.
 So instead, QCheck allows us to check whether a *property* of each output holds.
 A property is a function of type `t -> bool`, for some type `t`, that tells use
 whether the value of type `t` exhibits some desired characteristic. Here, for
-example, here are two properties; one that determines whether an integer is
+example, are two properties; one that determines whether an integer is
 even, and another that determines whether a list is sorted in non-decreasing
 order according to the built-in `<=` operator:
 
