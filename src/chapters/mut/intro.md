@@ -13,7 +13,7 @@ that humans are not good at thinking about change. With immutable values, we're
 guaranteed that any fact we might establish about them can never change. But
 with mutable values, that's no longer true. "Change is hard," as they say.
 
-In this shorter chapter we'll cover the few mutable features of OCaml we've
+In this short chapter we'll cover the few mutable features of OCaml we've
 omitted so far, and we'll use them for some simple data structures. The real
 win, though, will come in the next chapter, where we put the features to more
 complicated uses.
