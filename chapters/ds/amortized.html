@@ -939,22 +939,22 @@ It’s what gives us the amortized constant-time performance.</p>
 efficient than the implementation with just one list, because it managed to
 achieve a constant time <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> operation. But, that came at the tradeoff of
 making the <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> operation sometimes take more than constant time: whenever
-the front became empty, the back had to be reversed, which required an
+the outbox became empty, the inbox had to be reversed, which required an
 additional linear-time operation.</p>
 <p>As we observed then, the reversal is relatively rare. It happens only when the
-front gets exhausted. Amortized analysis gives us a way to account for that. We
+outbox gets exhausted. Amortized analysis gives us a way to account for that. We
 can actually show that the <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> operation is amortized constant time.</p>
 <p>To keep the analysis simple at first, let’s assume the queue starts off with
 exactly one element <code class="docutils literal notranslate"><span class="pre">1</span></code> already enqueued, and that we do three <code class="docutils literal notranslate"><span class="pre">enqueue</span></code>
 operations of <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code>, then <code class="docutils literal notranslate"><span class="pre">4</span></code>, followed by a single <code class="docutils literal notranslate"><span class="pre">dequeue</span></code>. The single
-initial element had to be in the front of the queue. All three <code class="docutils literal notranslate"><span class="pre">enqueue</span></code>
-operations will cons an element onto the back. So just before the <code class="docutils literal notranslate"><span class="pre">dequeue</span></code>, the
-queue looks like:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">{</span><span class="n">front</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">];</span> <span class="n">back</span> <span class="o">=</span> <span class="o">[</span><span class="mi">4</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">2</span><span class="o">]}</span>
+initial element would end up in the outbox. All three <code class="docutils literal notranslate"><span class="pre">enqueue</span></code> operations would
+cons an element onto the inbox. So just before the <code class="docutils literal notranslate"><span class="pre">dequeue</span></code>, the queue looks
+like:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">];</span> <span class="n">i</span> <span class="o">=</span> <span class="o">[</span><span class="mi">4</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">2</span><span class="o">]}</span>
 </pre></div>
 </div>
 <p>and after the <code class="docutils literal notranslate"><span class="pre">dequeue</span></code>:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">{</span><span class="n">front</span> <span class="o">=</span> <span class="o">[</span><span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">];</span> <span class="n">back</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">{</span><span class="n">o</span> <span class="o">=</span> <span class="o">[</span><span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">];</span> <span class="n">i</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
 </pre></div>
 </div>
 <p>It required</p>
@@ -977,9 +977,9 @@ cons’d onto the reversed list.</p>
 pretending its cost is 2 instead of 1, it’s still the case that 2 is a constant.
 And the <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> operation is amortized constant time:</p>
 <ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> doesn’t need to reverse the back, it really does just constant
+<li><p>If <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> doesn’t need to reverse the inbox, it really does just constant
 work, and</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> does need to reverse a back list with <span class="math notranslate nohighlight">\(n\)</span> elements, it already
+<li><p>If <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> does need to reverse an inbox with <span class="math notranslate nohighlight">\(n\)</span> elements, it already
 has <span class="math notranslate nohighlight">\(n\)</span> units of work “saved up” from each of the enqueues of those <span class="math notranslate nohighlight">\(n\)</span>
 elements.</p></li>
 </ul>
