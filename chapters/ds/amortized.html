@@ -1026,7 +1026,7 @@ next rehash becomes necessary, the number of bindings has doubled. But since
 we’ve saved 2 credits at each insertion, every binding now has 1 credit in its
 account again. So we can pay for the rehash. The accounts never go negative,
 because they always have either 0 or 1 credit.</p></li>
-<li><p><strong>Banker’s method, two-list queues:</strong> When an element is added to the queue,
+<li><p><strong>Banker’s method, batched queues:</strong> When an element is added to the queue,
 save up 1 credit in its account. When the back must be reversed, use the
 credit in each element to pay for the cons onto the front. Since elements
 enter at the back and transition at most once to the front, every element will
@@ -1043,7 +1043,7 @@ negative. Each insertion increases the energy by 2 units. When the next rehash
 is needed after inserting <span class="math notranslate nohighlight">\(n\)</span> bindings, there will be <span class="math notranslate nohighlight">\(2n\)</span> bindings that need
 to be rehashed. Again, the amortized cost will be constant, because the actual
 cost of <span class="math notranslate nohighlight">\(2n\)</span> re-insertions is offset by the <span class="math notranslate nohighlight">\(2n\)</span> change in potential.</p></li>
-<li><p><strong>Physicist’s method, two-list queues:</strong> Define the potential energy of the
+<li><p><strong>Physicist’s method, batched queues:</strong> Define the potential energy of the
 queue to be the length of the back. It therefore will never be negative. When
 a <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> has to reverse a back list of length <span class="math notranslate nohighlight">\(n\)</span>, there is an actual cost
 of <span class="math notranslate nohighlight">\(n\)</span> but a change in potential of <span class="math notranslate nohighlight">\(n\)</span> too, which offsets the cost and makes
@@ -1066,7 +1066,7 @@ the data structures above, and your friend might have a different opinion.</p>
 <div class="section" id="amortized-analysis-and-persistence">
 <h2><span class="section-number">8.2.4. </span>Amortized Analysis and Persistence<a class="headerlink" href="#amortized-analysis-and-persistence" title="Permalink to this headline">¶</a></h2>
 <p>Amortized analysis breaks down as a technique when data structures are used
-persistently. For example, suppose we have a two-list queue <code class="docutils literal notranslate"><span class="pre">q</span></code> into which we’ve
+persistently. For example, suppose we have a batched queue <code class="docutils literal notranslate"><span class="pre">q</span></code> into which we’ve
 inserted <span class="math notranslate nohighlight">\(n+1\)</span> elements. One elements will be in the front, and the other <span class="math notranslate nohighlight">\(n\)</span>
 will be in the back. Now we do the following:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">let</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">dequeue</span> <span class="n">q</span>
