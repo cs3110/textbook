@@ -176,30 +176,30 @@ The implementation of [batched queues][bq] with two lists was in a way more
 efficient than the implementation with just one list, because it managed to
 achieve a constant time `enqueue` operation. But, that came at the tradeoff of
 making the `dequeue` operation sometimes take more than constant time: whenever
-the front became empty, the back had to be reversed, which required an
+the outbox became empty, the inbox had to be reversed, which required an
 additional linear-time operation.
 
 [bq]: ../modules/functional_data_structures
 
 As we observed then, the reversal is relatively rare. It happens only when the
-front gets exhausted. Amortized analysis gives us a way to account for that. We
+outbox gets exhausted. Amortized analysis gives us a way to account for that. We
 can actually show that the `dequeue` operation is amortized constant time.
 
 To keep the analysis simple at first, let's assume the queue starts off with
 exactly one element `1` already enqueued, and that we do three `enqueue`
 operations of `2`, `3`, then `4`, followed by a single `dequeue`. The single
-initial element had to be in the front of the queue. All three `enqueue`
-operations will cons an element onto the back. So just before the `dequeue`, the
-queue looks like:
+initial element would end up in the outbox. All three `enqueue` operations would
+cons an element onto the inbox. So just before the `dequeue`, the queue looks
+like:
 
 ```ocaml
-{front = [1]; back = [4; 3; 2]}
+{o = [1]; i = [4; 3; 2]}
 ```
 
 and after the `dequeue`:
 
 ```ocaml
-{front = [2; 3; 4]; back = []}
+{o = [2; 3; 4]; i = []}
 ```
 
 It required
@@ -225,10 +225,10 @@ The `enqueue` operation is still constant time, because even though we're now
 pretending its cost is 2 instead of 1, it's still the case that 2 is a constant.
 And the `dequeue` operation is amortized constant time:
 
-- If `dequeue` doesn't need to reverse the back, it really does just constant
+- If `dequeue` doesn't need to reverse the inbox, it really does just constant
   work, and
 
-- If `dequeue` does need to reverse a back list with $n$ elements, it already
+- If `dequeue` does need to reverse an inbox with $n$ elements, it already
   has $n$ units of work "saved up" from each of the enqueues of those $n$
   elements.
 
