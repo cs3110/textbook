@@ -280,7 +280,7 @@ examples so far to illustrate their use:
   account again. So we can pay for the rehash. The accounts never go negative,
   because they always have either 0 or 1 credit.
 
-- **Banker's method, two-list queues:** When an element is added to the queue,
+- **Banker's method, batched queues:** When an element is added to the queue,
   save up 1 credit in its account. When the back must be reversed, use the
   credit in each element to pay for the cons onto the front. Since elements
   enter at the back and transition at most once to the front, every element will
@@ -299,7 +299,7 @@ examples so far to illustrate their use:
   to be rehashed. Again, the amortized cost will be constant, because the actual
   cost of $2n$ re-insertions is offset by the $2n$ change in potential.
 
-- **Physicist's method, two-list queues:** Define the potential energy of the
+- **Physicist's method, batched queues:** Define the potential energy of the
   queue to be the length of the back. It therefore will never be negative. When
   a `dequeue` has to reverse a back list of length $n$, there is an actual cost
   of $n$ but a change in potential of $n$ too, which offsets the cost and makes
@@ -323,7 +323,7 @@ the data structures above, and your friend might have a different opinion.
 ## Amortized Analysis and Persistence
 
 Amortized analysis breaks down as a technique when data structures are used
-persistently. For example, suppose we have a two-list queue `q` into which we've
+persistently. For example, suppose we have a batched queue `q` into which we've
 inserted $n+1$ elements. One elements will be in the front, and the other $n$
 will be in the back. Now we do the following:
 
