@@ -1027,10 +1027,10 @@ we’ve saved 2 credits at each insertion, every binding now has 1 credit in its
 account again. So we can pay for the rehash. The accounts never go negative,
 because they always have either 0 or 1 credit.</p></li>
 <li><p><strong>Banker’s method, batched queues:</strong> When an element is added to the queue,
-save up 1 credit in its account. When the back must be reversed, use the
-credit in each element to pay for the cons onto the front. Since elements
-enter at the back and transition at most once to the front, every element will
-have 0 or 1 credits. So the accounts never go negative.</p></li>
+save up 1 credit in its account. When the inbox must be reversed, use the
+credit in each element to pay for the cons onto the outbox. Since elements
+enter at the inbox and transition at most once to the outbox, every element
+will have 0 or 1 credits. So the accounts never go negative.</p></li>
 <li><p><strong>Physicist’s method, hash tables:</strong> At first, define the potential energy of
 the table to be the number of bindings inserted. That energy will therefore
 never be negative. Each insertion increases the energy by 1 unit. When the
@@ -1044,10 +1044,10 @@ is needed after inserting <span class="math notranslate nohighlight">\(n\)</span
 to be rehashed. Again, the amortized cost will be constant, because the actual
 cost of <span class="math notranslate nohighlight">\(2n\)</span> re-insertions is offset by the <span class="math notranslate nohighlight">\(2n\)</span> change in potential.</p></li>
 <li><p><strong>Physicist’s method, batched queues:</strong> Define the potential energy of the
-queue to be the length of the back. It therefore will never be negative. When
-a <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> has to reverse a back list of length <span class="math notranslate nohighlight">\(n\)</span>, there is an actual cost
-of <span class="math notranslate nohighlight">\(n\)</span> but a change in potential of <span class="math notranslate nohighlight">\(n\)</span> too, which offsets the cost and makes
-it constant.</p></li>
+queue to be the length of the inbox. It therefore will never be negative. When
+a <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> has to reverse an inbox of length <span class="math notranslate nohighlight">\(n\)</span>, there is an actual cost of
+<span class="math notranslate nohighlight">\(n\)</span> but a change in potential of <span class="math notranslate nohighlight">\(n\)</span> too, which offsets the cost and makes it
+constant.</p></li>
 </ul>
 <p>The two methods are equivalent in their analytical power:</p>
 <ul class="simple">
@@ -1067,8 +1067,8 @@ the data structures above, and your friend might have a different opinion.</p>
 <h2><span class="section-number">8.2.4. </span>Amortized Analysis and Persistence<a class="headerlink" href="#amortized-analysis-and-persistence" title="Permalink to this headline">¶</a></h2>
 <p>Amortized analysis breaks down as a technique when data structures are used
 persistently. For example, suppose we have a batched queue <code class="docutils literal notranslate"><span class="pre">q</span></code> into which we’ve
-inserted <span class="math notranslate nohighlight">\(n+1\)</span> elements. One elements will be in the front, and the other <span class="math notranslate nohighlight">\(n\)</span>
-will be in the back. Now we do the following:</p>
+inserted <span class="math notranslate nohighlight">\(n+1\)</span> elements. One element will be in the outbox, and the other <span class="math notranslate nohighlight">\(n\)</span>
+will be in the inbox. Now we do the following:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="k">let</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">dequeue</span> <span class="n">q</span>
 <span class="o">#</span> <span class="k">let</span> <span class="n">q2</span> <span class="o">=</span> <span class="n">dequeue</span> <span class="n">q</span>
 <span class="o">...</span>
@@ -1076,7 +1076,7 @@ will be in the back. Now we do the following:</p>
 </pre></div>
 </div>
 <p>Each one of those <span class="math notranslate nohighlight">\(n\)</span> <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> operations requires an actual cost of <span class="math notranslate nohighlight">\(O(n)\)</span> to
-reverse the back list. So the entire series has an actual cost of <span class="math notranslate nohighlight">\(O(n^2)\)</span>. But
+reverse the inbox. So the entire series has an actual cost of <span class="math notranslate nohighlight">\(O(n^2)\)</span>. But
 the amortized analysis techniques only apply to the first <code class="docutils literal notranslate"><span class="pre">dequeue</span></code>. After that,
 all the the accounts are empty (banker’s method), or the potential is zero
 (physicist’s), which means the remaining operations can’t use them to pay for
@@ -1086,13 +1086,13 @@ n)\)</span>, which is <span class="math notranslate nohighlight">\(O(n^2)\)</spa
 amortized analysis that credits (or energy units) are spent only once. Every
 persistent copy of the data structure instead tries to spend them itself, not
 being aware of all the other copies.</p>
-<p>So we must be careful not to use functional data structures persistently if we
-want amortized analysis bounds to hold. There are more advanced techniques for
-amortized analysis that can account for persistence. Those techniques are based
-on the idea of accumulating debt that is later paid off, rather than
-accumulating savings that are later spent. The difference is that although our
-banks would never (financially speaking) allow us to spend money twice, they
-would be fine with us paying off our debt multiple times.</p>
+<p>There are more advanced techniques for amortized analysis that can account for
+persistence. Those techniques are based on the idea of accumulating <em>debt</em> that
+is later paid off, rather than accumulating savings that are later spent. The
+reason that debt ends up working as an analysis technique can be summed up as:
+although our banks would never (financially speaking) allow us to spend money
+twice, they would be fine with us paying off our debt multiple times. Consult
+Okasaki’s <em>Purely Functional Data Structures</em> to learn more.</p>
 </div>
 </div>
 
