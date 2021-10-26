@@ -281,10 +281,10 @@ examples so far to illustrate their use:
   because they always have either 0 or 1 credit.
 
 - **Banker's method, batched queues:** When an element is added to the queue,
-  save up 1 credit in its account. When the back must be reversed, use the
-  credit in each element to pay for the cons onto the front. Since elements
-  enter at the back and transition at most once to the front, every element will
-  have 0 or 1 credits. So the accounts never go negative.
+  save up 1 credit in its account. When the inbox must be reversed, use the
+  credit in each element to pay for the cons onto the outbox. Since elements
+  enter at the inbox and transition at most once to the outbox, every element
+  will have 0 or 1 credits. So the accounts never go negative.
 
 - **Physicist's method, hash tables:** At first, define the potential energy of
   the table to be the number of bindings inserted. That energy will therefore
@@ -300,10 +300,10 @@ examples so far to illustrate their use:
   cost of $2n$ re-insertions is offset by the $2n$ change in potential.
 
 - **Physicist's method, batched queues:** Define the potential energy of the
-  queue to be the length of the back. It therefore will never be negative. When
-  a `dequeue` has to reverse a back list of length $n$, there is an actual cost
-  of $n$ but a change in potential of $n$ too, which offsets the cost and makes
-  it constant.
+  queue to be the length of the inbox. It therefore will never be negative. When
+  a `dequeue` has to reverse an inbox of length $n$, there is an actual cost of
+  $n$ but a change in potential of $n$ too, which offsets the cost and makes it
+  constant.
 
 The two methods are equivalent in their analytical power:
 
@@ -324,8 +324,8 @@ the data structures above, and your friend might have a different opinion.
 
 Amortized analysis breaks down as a technique when data structures are used
 persistently. For example, suppose we have a batched queue `q` into which we've
-inserted $n+1$ elements. One elements will be in the front, and the other $n$
-will be in the back. Now we do the following:
+inserted $n+1$ elements. One element will be in the outbox, and the other $n$
+will be in the inbox. Now we do the following:
 
 ```ocaml
 # let q1 = dequeue q
@@ -335,7 +335,7 @@ will be in the back. Now we do the following:
 ```
 
 Each one of those $n$ `dequeue` operations requires an actual cost of $O(n)$ to
-reverse the back list. So the entire series has an actual cost of $O(n^2)$. But
+reverse the inbox. So the entire series has an actual cost of $O(n^2)$. But
 the amortized analysis techniques only apply to the first `dequeue`. After that,
 all the the accounts are empty (banker's method), or the potential is zero
 (physicist's), which means the remaining operations can't use them to pay for
@@ -347,10 +347,10 @@ amortized analysis that credits (or energy units) are spent only once. Every
 persistent copy of the data structure instead tries to spend them itself, not
 being aware of all the other copies.
 
-So we must be careful not to use functional data structures persistently if we
-want amortized analysis bounds to hold. There are more advanced techniques for
-amortized analysis that can account for persistence. Those techniques are based
-on the idea of accumulating debt that is later paid off, rather than
-accumulating savings that are later spent. The difference is that although our
-banks would never (financially speaking) allow us to spend money twice, they
-would be fine with us paying off our debt multiple times.
+There are more advanced techniques for amortized analysis that can account for
+persistence. Those techniques are based on the idea of accumulating *debt* that
+is later paid off, rather than accumulating savings that are later spent. The
+reason that debt ends up working as an analysis technique can be summed up as:
+although our banks would never (financially speaking) allow us to spend money
+twice, they would be fine with us paying off our debt multiple times. Consult
+Okasaki's *Purely Functional Data Structures* to learn more.
