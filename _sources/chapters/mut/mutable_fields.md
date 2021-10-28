@@ -186,7 +186,7 @@ Now let's implement the mutable stack with a mutable linked list.
 module MutableRecordStack : MutableStack = struct
   (** An ['a node] is a node of a mutable linked list.  It has
      a field [value] that contains the node's value, and
-     a mutable field [next] that is [Null] if the node has
+     a mutable field [next] that is [None] if the node has
      no successor, or [Some n] if the successor is [n]. *)
   type 'a node = {value : 'a; mutable next : 'a node option}
 

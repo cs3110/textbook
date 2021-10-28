@@ -1081,7 +1081,7 @@ implement mutable stacks.  Here is an interface:</p>
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">MutableRecordStack</span> <span class="o">:</span> <span class="nc">MutableStack</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="c">(** An [&#39;a node] is a node of a mutable linked list.  It has</span>
 <span class="c">     a field [value] that contains the node&#39;s value, and</span>
-<span class="c">     a mutable field [next] that is [Null] if the node has</span>
+<span class="c">     a mutable field [next] that is [None] if the node has</span>
 <span class="c">     no successor, or [Some n] if the successor is [n]. *)</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="o">=</span> <span class="o">{</span><span class="k">value</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span> <span class="k">mutable</span> <span class="n">next</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="o">}</span>
 

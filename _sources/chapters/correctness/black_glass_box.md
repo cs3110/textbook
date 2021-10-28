@@ -303,7 +303,7 @@ example, here is a broken implementation of `max3`:
 let max3 x y z = x
 ```
 
-The test `max 2 1 1` is path complete, but doesn't reveal the error.
+The test `max3 2 1 1` is path complete, but doesn't reveal the error.
 
 ## Glass-box Testing of Data Abstractions
 
