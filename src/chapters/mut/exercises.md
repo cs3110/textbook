@@ -48,7 +48,7 @@ And here's an example usage:
 ```ocaml
 # let x = ref 0;;
 # x +:= 3110;;
-# !x
+# !x;;
 - : int = 3110
 ```
 
@@ -68,7 +68,7 @@ Predict the value of the following series of expressions:
 # x == z;;
 # x = y;;
 # x = z;;
-# x := 1;
+# x := 1;;
 # x = y;;
 # x = z;;
 ```
