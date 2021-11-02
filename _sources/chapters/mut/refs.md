@@ -715,9 +715,8 @@ might seem as though we could define it more simply as follows:
 let empty = ref None
 ```
 
-But that would be committing the same mistake as when we broke the counter
-above.  Now there is only ever *one* ref that gets created, hence there
-is only one list ever in existence:
+But now there is only ever *one* ref that gets created, hence there is only one
+list ever in existence:
 
 ```{code-cell} ocaml
 let lst2 = empty;;
