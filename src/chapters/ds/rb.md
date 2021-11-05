@@ -169,8 +169,6 @@ Structures*, 1999) gives an elegant algorithm that solves the problem by opting
 to violate the Local Invariant, then walk up the tree to repair the violation.
 Here's how it works.
 
-{{ video_embed | replace("%%VID%%", "dCBAhbIEoYM")}}
-
 We always color the new node red to ensure that the Global Invariant is
 preserved. However, this may destroy the Local Invariant by producing two
 adjacent red nodes. In order to restore the invariant, we consider not only the
