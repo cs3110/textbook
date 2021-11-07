@@ -441,7 +441,7 @@ op = ( * )
 Such a function can be made tail recursive by rewriting it as follows:
 
 ```ocaml
-let f_i acc n =
+let rec f_i acc n =
   if n = 0 then acc
   else f_i (op acc n) (n - 1)
 

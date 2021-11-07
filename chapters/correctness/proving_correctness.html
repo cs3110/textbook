@@ -1238,7 +1238,7 @@ function, we have:</p>
 </pre></div>
 </div>
 <p>Such a function can be made tail recursive by rewriting it as follows:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f_i</span> <span class="n">acc</span> <span class="n">n</span> <span class="o">=</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">f_i</span> <span class="n">acc</span> <span class="n">n</span> <span class="o">=</span>
   <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span>
   <span class="k">else</span> <span class="n">f_i</span> <span class="o">(</span><span class="n">op</span> <span class="n">acc</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
 
