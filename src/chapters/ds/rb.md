@@ -152,8 +152,6 @@ let rec mem x = function
     else true
 ```
 
-{{ video_embed | replace("%%VID%%", "dCBAhbIEoYM")}}
-
 **Okasaki's Algorithm.** More interesting is the `insert` operation. As with
 standard binary trees, we add a node by replacing the leaf found by the search
 procedure. But what can we color that node?
@@ -168,6 +166,8 @@ So neither choice is safe in general. Chris Okasaki (*Purely Functional Data
 Structures*, 1999) gives an elegant algorithm that solves the problem by opting
 to violate the Local Invariant, then walk up the tree to repair the violation.
 Here's how it works.
+
+{{ video_embed | replace("%%VID%%", "dCBAhbIEoYM")}}
 
 We always color the new node red to ensure that the Global Invariant is
 preserved. However, this may destroy the Local Invariant by producing two
