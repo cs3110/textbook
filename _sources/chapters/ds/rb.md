@@ -152,8 +152,6 @@ let rec mem x = function
     else true
 ```
 
-{{ video_embed | replace("%%VID%%", "dCBAhbIEoYM")}}
-
 **Okasaki's Algorithm.** More interesting is the `insert` operation. As with
 standard binary trees, we add a node by replacing the leaf found by the search
 procedure. But what can we color that node?
