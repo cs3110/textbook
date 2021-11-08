@@ -7,7 +7,7 @@ to learn a functional language, OCaml.
 {{ video_embed | replace("%%VID%%", "MUcka_SvhLw")}}
 
 Functional programming provides a different perspective on programming than what
-you have experienced so far. Adapating to that perspective requires letting go
+you have experienced so far. Adapting to that perspective requires letting go
 of old ideas: assignment statements, loops, classes and objects, among others.
 That won't be easy.
 
