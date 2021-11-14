@@ -558,7 +558,7 @@ This kind of use case is why module type constraints are quite important in
 effective programming with the OCaml module system. Often it is necessary to
 specialize the output type of a functor to show a relationship between a type in
 it and a type in one of the functor's inputs. Thinking through exactly what
-constraint is necessary can challenging, though!
+constraint is necessary can be challenging, though!
 
 ## Using Functors
 
