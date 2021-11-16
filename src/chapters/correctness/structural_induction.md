@@ -567,7 +567,7 @@ proof notation, and it isn't hard at all.
 We've now seen induction principles for `nat`, `list`, and `tree`. Generalizing
 from what we've seen, each constructor of a variant either generates a base case
 for the inductive proof, or an inductive case. And, if a constructor itself
-carries values of that data type, each of those values generates in inductive
+carries values of that data type, each of those values generates an inductive
 hypothesis. For example:
 
 - `Z`, `[]`, and `Leaf` all generated base cases.
