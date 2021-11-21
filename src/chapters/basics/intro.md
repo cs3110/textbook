@@ -74,7 +74,7 @@ works with many languages, and that Java can be used without Eclipse.
 
 [tryapl]: http://tryapl.org/
 [whitespace]: https://web.archive.org/web/20151108084710/http://compsoc.dur.ac.uk/whitespace/tutorial.html
-[lazy]: http://threevirtues.com/
+[lazy]: https://web.archive.org/web/20211014194234/http://threevirtues.com/
 
 When it comes to learning OCaml in this book, our focus is primarily on
 semantics and idioms. We'll have to learn syntax along the way, of course, but
