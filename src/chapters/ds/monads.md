@@ -64,7 +64,7 @@ used a similar box metaphor for both options and promises. That was no accident:
 options and promises are both examples of monads, as we will see in detail,
 below.
 
-**Return.**The `return` operation metaphorically puts a value into a box. You
+**Return.** The `return` operation metaphorically puts a value into a box. You
 can see that in its type: the input is of type `'a`, and the output is of type
 `'a t`.
 
