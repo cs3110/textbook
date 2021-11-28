@@ -1140,10 +1140,10 @@ e --&gt;* e&#39;&#39;
   if e --&gt; e&#39; and e&#39; --&gt;* e&#39;&#39;
 </pre></div>
 </div>
-<p>Of course, in implementing an interpreter, what we really want is to take
-multiple steps until the expression reaches a value. That is, we want to take as
-many steps as possible. So, we’re interested in the sub-relation <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">--&gt;*</span> <span class="pre">v</span></code> in
-which the right-hand side is a value. That’s easy to implement:</p>
+<p>Of course, in implementing an interpreter, what we really want is to take as
+many steps as possible until the expression reaches a value. That is, we’re
+interested in the sub-relation <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">--&gt;*</span> <span class="pre">v</span></code> in which the right-hand side is a not
+just an expression, but a value. That’s easy to implement:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [eval_small e] is the [e --&gt;* v] relation.  That is,</span>
 <span class="c">    keep applying [step] until a value is produced.  *)</span>
 <span class="k">let</span> <span class="k">rec</span> <span class="n">eval_small</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">=</span>
