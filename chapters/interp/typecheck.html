@@ -820,7 +820,10 @@ bound to <code class="docutils literal notranslate"><span class="pre">t</span></
 identifier at most once. We’ll write <code class="docutils literal notranslate"><span class="pre">env[x</span> <span class="pre">-&gt;</span> <span class="pre">t]</span></code> to mean a static environment
 that contains all the bindings of <code class="docutils literal notranslate"><span class="pre">env</span></code>, and also binds <code class="docutils literal notranslate"><span class="pre">x</span></code> to <code class="docutils literal notranslate"><span class="pre">t</span></code>. If <code class="docutils literal notranslate"><span class="pre">x</span></code> was
 already bound in <code class="docutils literal notranslate"><span class="pre">env</span></code>, then that old binding is replaced by the new binding to
-<code class="docutils literal notranslate"><span class="pre">t</span></code> in <code class="docutils literal notranslate"><span class="pre">env[x</span> <span class="pre">-&gt;</span> <span class="pre">t]</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">t</span></code> in <code class="docutils literal notranslate"><span class="pre">env[x</span> <span class="pre">-&gt;</span> <span class="pre">t]</span></code>. As with dynamic environments, if we wanted a more
+mathematical notation we would write <span class="math notranslate nohighlight">\(\mapsto\)</span> instead of <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> in
+<code class="docutils literal notranslate"><span class="pre">env[x</span> <span class="pre">-&gt;</span> <span class="pre">v]</span></code>, but we’re aiming for notation that is easily typed on a standard
+keyboard.</p>
 <p>With all that machinery, we can at last define what it means to be well typed:
 An expression <code class="docutils literal notranslate"><span class="pre">e</span></code> is <strong>well typed</strong> in static environment <code class="docutils literal notranslate"><span class="pre">env</span></code> if there exists
 a type <code class="docutils literal notranslate"><span class="pre">t</span></code> for which <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">|-</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">t</span></code>. The goal of a type checker is thus to find

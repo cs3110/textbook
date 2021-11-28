@@ -51,6 +51,8 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -833,6 +835,9 @@ binding of variables to values), and <code class="docutils literal notranslate">
 additionally bound to the value <code class="docutils literal notranslate"><span class="pre">v</span></code>, and</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">env(x)</span></code> represent the binding of <code class="docutils literal notranslate"><span class="pre">x</span></code> in <code class="docutils literal notranslate"><span class="pre">env</span></code>.</p></li>
 </ul>
+<p>If we wanted a more mathematical notation we would write <span class="math notranslate nohighlight">\(\mapsto\)</span> instead of
+<code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> in <code class="docutils literal notranslate"><span class="pre">env[x</span> <span class="pre">-&gt;</span> <span class="pre">v]</span></code>, but we’re aiming for notation that is easily typed on a
+standard keyboard.</p>
 <p>We’ll concentrate in the rest of this chapter on the big-step version of the
 environment model. It would of course be possible to define a small-step
 version, too.</p>

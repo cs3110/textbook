@@ -44,6 +44,10 @@ As notation, let:
 
 * `env(x)` represent the binding of `x` in `env`.
 
+If we wanted a more mathematical notation we would write $\mapsto$ instead of
+`->` in `env[x -> v]`, but we're aiming for notation that is easily typed on a
+standard keyboard.
+
 We'll concentrate in the rest of this chapter on the big-step version of the
 environment model. It would of course be possible to define a small-step
 version, too.
