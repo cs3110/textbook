@@ -36,7 +36,10 @@ bound to `t`. So, `{foo:int, bar:bool}` would be the static environment is which
 identifier at most once. We'll write `env[x -> t]` to mean a static environment
 that contains all the bindings of `env`, and also binds `x` to `t`. If `x` was
 already bound in `env`, then that old binding is replaced by the new binding to
-`t` in `env[x -> t]`.
+`t` in `env[x -> t]`. As with dynamic environments, if we wanted a more
+mathematical notation we would write $\mapsto$ instead of `->` in
+`env[x -> v]`, but we're aiming for notation that is easily typed on a standard
+keyboard.
 
 With all that machinery, we can at last define what it means to be well typed:
 An expression `e` is **well typed** in static environment `env` if there exists
