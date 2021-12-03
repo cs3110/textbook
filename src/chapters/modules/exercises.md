@@ -265,7 +265,7 @@ entries in it, such as birthdays or anniversaries.
 {{ ex2 | replace("%%NAME%%", "print calendar")}}
 
 Write a function `print_calendar : calendar -> unit` that prints each entry in a
-calendar in a format similar the inspiring examples in the previous exercise.
+calendar in a format similar to the inspiring examples in the previous exercise.
 *Hint: use `DateMap.iter`, which is documented in the
 [`Map.S` signature][map.s].*
 
