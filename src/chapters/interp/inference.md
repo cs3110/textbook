@@ -979,7 +979,7 @@ constraints `C1`. Let's come back to how it works in a minute. Before that,
 there's one other rule that needs to change, which is the name rule:
 
 ```text
-env |- n : instantiate(env(t)) -| {}
+env |- n : instantiate(env(n)) -| {}
 ```
 
 The only thing that changes there is that use of `instantiate`. Its job is to
