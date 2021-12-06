@@ -1603,7 +1603,7 @@ line:</p>
 into a type scheme like <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">.</span> <span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> in an environment <code class="docutils literal notranslate"><span class="pre">env</span></code> against
 constraints <code class="docutils literal notranslate"><span class="pre">C1</span></code>. Let’s come back to how it works in a minute. Before that,
 there’s one other rule that needs to change, which is the name rule:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- n : instantiate(env(t)) -| {}
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env |- n : instantiate(env(n)) -| {}
 </pre></div>
 </div>
 <p>The only thing that changes there is that use of <code class="docutils literal notranslate"><span class="pre">instantiate</span></code>. Its job is to
