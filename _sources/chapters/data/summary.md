@@ -87,7 +87,6 @@ exceptions.
 * triple
 * tuple
 * type constructor
-* type constructor
 * type synonym
 * variant
 * wildcard
