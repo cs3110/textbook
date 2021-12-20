@@ -1087,10 +1087,10 @@ computing term <span class="math notranslate nohighlight">\(k\)</span> you alrea
 multiplication and division.</em></p>
 <p>Also, you could improve the test that <code class="docutils literal notranslate"><span class="pre">within</span></code> uses to determine whether two
 values are close. A good one for determining whether <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are close might
-be:</p>
+be <a class="reference external" href="https://www.boost.org/doc/libs/1_77_0/libs/math/doc/html/math_toolkit/float_comparison.html"><em>relative distance</em></a>:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{|a - b|}{\frac{|a| + |b|}{2} + 1} &lt; \epsilon.
+\left|\frac{a - b}{\mathit{min}(a, b)}\right| &lt; \epsilon.
 \]</div>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
