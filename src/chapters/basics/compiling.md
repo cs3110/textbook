@@ -68,13 +68,40 @@ Now let's clean up all those generated files:
 $ rm hello.byte hello.cmi hello.cmo
 ```
 
+
+## What about Main?
+
+Unlike C or Java, OCaml programs do not need to have a special function named
+`main` that is invoked to start the program. The usual idiom is just to have the
+very last definition in a file serve as the main function that kicks off
+whatever computation is to be done.
+
 ## Dune
 
 In larger projects, we don't want to run the compiler or clean up manually.
 Instead, we want to use a *build system* to automatically find and link in
 libraries. OCaml has a legacy build system called ocamlbuild, and a newer build
-system called dune. Let's try using the latter. In the same directory as
-`hello.ml`, create a file named `dune` and put the following in it:
+system called Dune. Similar systems include `make`, which has long been used in
+the Unix world for C and other languages; and Gradle, Maven, and Ant, which are
+used with Java.
+
+A Dune *project* is a directory (and its subdirectories) that contain OCaml code
+you want to compile. The *root* of a project is the highest directory in its
+hierarchy. A project might rely on external *packages* providing additional code
+that is already compiled. Usually, packages are installed with OPAM, the OCaml
+Package Manager.
+
+Each directory in your project can contain a file named `dune`. That file
+describes to Dune how you want the code in that directory (and subdirectories)
+to be compiled. Dune files use a functional-programming syntax descended from
+LISP called *s-expressions*, in which parentheses are used to show nested data
+that form a tree, much like HTML tags do. The syntax of Dune files is documented
+in the [Dune manual][dune-man].
+
+[dune-man]: https://dune.readthedocs.io/en/stable/dune-files.html
+
+Here is a small example of how to use Dune. In the same directory as `hello.ml`,
+create a file named `dune` and put the following in it:
 
 ```text
 (executable
@@ -127,10 +154,3 @@ When dune compiles your program, it caches a copy of your source files in
 of a source file, you might be able to recover it from inside `_build`. Of
 course, using source control like git is also advisable.
 ```
-
-## What about Main?
-
-Unlike C or Java, OCaml programs do not need to have a special function named
-`main` that is invoked to start the program. The usual idiom is just to have the
-very last definition in a file serve as the main function that kicks off
-whatever computation is to be done.
