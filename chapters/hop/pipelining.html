@@ -798,11 +798,11 @@ the most efficient way would be a closed-form formula:</p>
 \frac{n (n+1) (2n+1)}{6}
 \]</div>
 <p>But let’s imagine you’ve forgotten that formula. In an imperative language you
-might use a for loop:</p>
+might use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python</span>
 <span class="k">def</span> <span class="nf">sum_sq</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 	<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
 		<span class="nb">sum</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span>
 	<span class="k">return</span> <span class="nb">sum</span>
 </pre></div>
