@@ -553,7 +553,7 @@ they are actually quite different.
 ## Type Annotations
 
 OCaml automatically infers the type of every expression, with no need for the
-programmer to write it manually. Nonetheless, it can sometimes to useful to
+programmer to write it manually. Nonetheless, it can sometimes be useful to
 manually specify the desired type of an expression. A *type annotation* does
 that:
 
