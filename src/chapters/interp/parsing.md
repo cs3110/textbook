@@ -378,7 +378,7 @@ expr:
 The final production might be surprising, because it was not included in the BNF
 we wrote for SimPL. That BNF was intended to describe the *abstract syntax* of
 the language, so it did not include the concrete details of how expressions can
-be grouped with parentheses. But the grammer definition we've been writing does
+be grouped with parentheses. But the grammar definition we've been writing does
 have to describe the *concrete syntax*, including details like parentheses.
 
 There can also be a *trailer* section after the rules, which like the header is

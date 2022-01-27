@@ -462,7 +462,7 @@ To find a substitution that unifies constraint set `C`, we use an algorithm
       Gaussian elimination in solving algebraic equations.*
 
     - If `t2` is a type variable `'x` and `'x` does not occur in `t1`, then let
-      `S = {t1 / 'x}`, and return `S'; unify(C' S)`. *This is an elimination
+      `S = {t1 / 'x}`, and return `S; unify(C' S)`. *This is an elimination
       like the previous case.*
 
     - If `t1 = i1 -> o1` and `t2 = i2 -> o2`, where `i1`, `i2`, `o1`, and `o2`
@@ -489,7 +489,7 @@ the algorithm could end up re-introducing the variable instead of eliminating
 it.
 
 It's possible to prove that the unification algorithm always terminates, and
-that it produces a result if and only a unifier actually exists&mdash;that is,
+that it produces a result if and only if a unifier actually exists&mdash;that is,
 if and only if the set of constraints has a solution. Moreover, the solution the
 algorithm produces is the *most general unifier*, in the sense that if
 `S = unify(C)` and `S'` also unifies `C`, then there must exist some `S''` such
@@ -961,11 +961,11 @@ left of the dot in the type scheme. Really they'd just clutter the output, and
 many programmers never need to know about them. But now that you're learning
 type inference, it's time for you to know.
 
-Now that we have type schemes, we'll have static environments map names to type
-schemes. We can think of types as being special cases of type schemes in which
-the list of type variables is empty. With type schemes, the `let` rule changes
-in only one way from the naive rule above, which is the `generalize` on the last
-line:
+Now that we have type schemes, we'll have static environments that map names to
+type schemes. We can think of types as being special cases of type schemes in
+which the list of type variables is empty. With type schemes, the `let` rule
+changes in only one way from the naive rule above, which is the `generalize` on
+the last line:
 
 ```text
 env |- let x = e1 in e2 : t2 -| C1, C2
@@ -1060,7 +1060,7 @@ we instantiate it by:
 - substituting each of those for `'a1` through `'an` in `t`.
 
 Substitution is uncomplicated here, compared to how it was for evaluation in
-thee substitution model, because there is nothing in a type that can bind
+the substitution model, because there is nothing in a type that can bind
 variable names.
 
 But `generalize` requires more work.  Here's the `let` rule again:

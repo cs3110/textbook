@@ -300,7 +300,7 @@ properties, which establish a relationship between `|-` and `-->`, both hold:
   "for all `e` and `t` such that `{} |- e : t`, if there exists an `e'` such
   that `e --> e'`, then `{} |- e' : t`."
 
-Put together, progress plus preservation imply that that evaluation of a
+Put together, progress plus preservation imply that evaluation of a
 well-typed expression can never *get stuck*, meaning it reaches a non-value that
 cannot take a step. This property is known as *type safety*.
 

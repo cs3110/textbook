@@ -139,7 +139,7 @@ let f1 = failwith "oops"
 ```
 
 ```{code-cell} ocaml
-let f2 = fun x -> failwith "oops";;
+let f2 = fun x -> failwith "oops"
 ```
 
 ```{code-cell} ocaml
@@ -170,8 +170,8 @@ type 'a sequence = Cons of 'a * (unit -> 'a sequence)
 This definition turns out to work quite well.  We can define `nats`, at last:
 
 ```{code-cell} ocaml
-let rec from n = Cons (n, fun () -> from (n + 1));;
-let nats = from 0;;
+let rec from n = Cons (n, fun () -> from (n + 1))
+let nats = from 0
 ```
 
 We do not get an infinite loop or a stack overflow. The evaluation of `nats` has

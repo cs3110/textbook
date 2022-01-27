@@ -833,7 +833,7 @@ else, that is, how to pick a *fresh* name. Here are three strategies:
 There is a complete implementation of an interpreter for the lambda calculus,
 including capture-avoiding substitution, that you can download: {{ code_link |
 replace("%%NAME%%", "lambda-subst.zip") }}. It uses the `gensym` strategy from
-above the generate fresh names. There is a definition named `strategy` in
+above to generate fresh names. There is a definition named `strategy` in
 `main.ml` that you can use to switch between call-by-value and call-by-name.
 
 ## Core OCaml
@@ -936,9 +936,9 @@ component, then their second component:
 (v1, e2) --> (v1, e2')
 	if e2 --> e2'
 
-fst (v1,v2) --> v1
+fst (v1, v2) --> v1
 
-snd (v1,v2) --> v2
+snd (v1, v2) --> v2
 ```
 
 **Constructors** evaluate the expression they carry:

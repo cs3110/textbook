@@ -140,7 +140,7 @@ time. Then we'd be in real trouble as the number of bindings continued to grow:
   insertions. There are now 600 bindings and 400 buckets. The load factor is
   3/2, not 1.
 
-- The average cost of each insert is now 100+200+200+400+200+600 / 500 = 3.2.
+- The average cost of each insert is now 100+200+200+400+200+600 / 500 = 3.4.
   It's going up.
 
 - **Round 4.** Insert 200 more bindings. There are now 800 bindings and 400
@@ -151,7 +151,7 @@ time. Then we'd be in real trouble as the number of bindings continued to grow:
   8/5, not 1.
 
 - The average cost of each insert is now 100+200+200+400+200+600+200+800 / 700 =
-  3.7. It's continuing to go up, not staying constant.
+  3.9. It's continuing to go up, not staying constant.
 
 After $k$ rounds we have $200k$ bindings and $100k$ buckets. We have called
 `insert` to insert $100+200k$ bindings, but all the rehashing has caused us to

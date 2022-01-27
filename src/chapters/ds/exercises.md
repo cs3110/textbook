@@ -27,10 +27,10 @@ remove) change?
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "hash values")}}
 
-Use `Hashtbl.hash : 'a -> int to hash several values of different types. Make
+Use `Hashtbl.hash : 'a -> int` to hash several values of different types. Make
 sure to try at least `()`, `false`, `true`, `0`, `1`, `""`, and `[]`, as well as
 several "larger" values of each type. We saw that lists quickly can create
-collisions. Try creating binary trees and finding a collision.&square;
+collisions. Try creating binary trees and finding a collision.
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "hashtbl usage")}}

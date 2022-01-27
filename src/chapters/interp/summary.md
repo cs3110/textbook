@@ -95,7 +95,7 @@ kind studied in discrete mathematics or theory of computation courses.
 * *Automata and Computability* by Dexter C. Kozen, chapters 1-27.
 * *Real World OCaml* has a
   [chapter on the OCaml frontend](https://dev.realworldocaml.org/compiler-frontend.html).
-* This [webpage](http://okmij.org/ftp/ML/generalization.html) documents how some
+* This [webpage](http://okmij.org/ftp/ML/generalization.html) documents some
   of the internals of the OCaml type checker and inferencer.
 * The OCaml VM aka the Zinc Machine is described in these papers:
   [1](http://cadmium.x9c.fr/distrib/caml-instructions.pdf),
