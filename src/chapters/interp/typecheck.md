@@ -27,7 +27,7 @@ Let's make that notation a little friendlier by eliminating the Greek and the
 math typesetting. We'll just write `ctx |- e : t` to mean that typing context
 `ctx` shows that `e` has type `t`. Let's write `{}` for the empty context, and
 `x:t` to mean that `x` is bound to `t`. So, `{foo:int, bar:bool}` would be the
-context is which `foo` has type `int` and `bar` has type `bool`. A context may
+context where `foo` has type `int` and `bar` has type `bool`. A context may
 bind an identifier at most once. We'll write `ctx[x -> t]` to mean a context
 that contains all the bindings of `ctx`, and also binds `x` to `t`. If `x` was
 already bound in `ctx`, then that old binding is replaced by the new binding to
@@ -290,7 +290,7 @@ properties, which establish a relationship between `|-` and `-->`, both hold:
   "for all `e` and `t` such that `{} |- e : t`, if there exists an `e'` such
   that `e --> e'`, then `{} |- e' : t`."
 
-Put together, progress plus preservation imply that that evaluation of a
+Put together, progress plus preservation imply that evaluation of a
 well-typed expression can never *get stuck*, meaning it reaches a non-value that
 cannot take a step. This property is known as *type safety*.
 

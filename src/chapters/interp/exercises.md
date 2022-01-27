@@ -219,7 +219,7 @@ function behaves properly on these test cases:
  - `not_empty [1]`
 
 <!--------------------------------------------------------------------------->
-{{ ex4 | replace("%%NAME%%", "list not empty")}}
+{{ ex4 | replace("%%NAME%%", "generalize patterns")}}
 
 In core OCaml, there are only two patterns: `Left x` and `Right x`,
 where `x` is a variable name.  But in full OCaml, patterns are far more
@@ -503,7 +503,7 @@ Evaluate these:
  - `let x = 2 + 2 in x + x`
  - `let x = 1 in let x = x + x in x + x`
  - `let f = fun x -> fun y -> x + y in let g = f 3 in g 2`
- - `let f = fst (let x = 3 in fun y -> x, 2) in f 0`
+ - `let f = fst ((let x = 3 in fun y -> x), 2) in f 0`
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "dynamic scope")}}
@@ -594,8 +594,6 @@ Remember to go through these steps:
 * desugar the definition entirely (i.e., construct an AST)
 * collect constraints
 * solve the constraints with unification
-
-&square;
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "infer double")}}

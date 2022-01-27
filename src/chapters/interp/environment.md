@@ -137,8 +137,8 @@ According to our semantics thus far, it would evaluate as follows:
   <{x:2, f:(fun y -> x)}, f 0> ==> 2
 	because <{x:2, f:(fun y -> x)}, f> ==> fun y -> x
 	and <{x:2, f:(fun y -> x)}, 0> ==> 0
-	and <{x:2, f:(fun y -> x)}[y -> 0], x> ==> 2`
-	  because <{x:2, f:(fun y -> x), y:0}, x> ==> 2`
+	and <{x:2, f:(fun y -> x)}[y -> 0], x> ==> 2
+	  because <{x:2, f:(fun y -> x), y:0}, x> ==> 2
   ```
 * The result is therefore `2`.
 
