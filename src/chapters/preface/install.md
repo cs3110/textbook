@@ -309,15 +309,11 @@ are already a power user of Emacs or Vim those are great, too.)
   any open terminals to let the new path settings take effect.
 
 - **For everyone:** In the extensions pane, search for and install the "OCaml Platform" extension.
-  Be careful to use the extension with exactly the right name. **Windows only:**
+  Be careful to use the extension with _exactly the right name_ - the correct extension will also have an icon of a camel on a black background, as opposed to a red or orange background. **Windows only:**
   make sure you install the extension with the button that says "Install on WSL:
   ...", not with a button that says only "Install". The latter will not
   work.
-  
-  The correct extension should look like this.
-  
-  ![OCaml Platform](https://i.imgur.com/khTNJIT.png)
-  
+   
 ```{warning}
 The extensions named simply "OCaml" or "OCaml and Reason IDE" are not the right ones. (They
 are both old and no longer maintained by their developers.)
