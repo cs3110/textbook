@@ -105,7 +105,7 @@ WSL][wsl]. Here are a few notes on Microsoft's instructions:
   checked. Now Ctrl+Shift+C will copy and Ctrl+Shift+V will paste into the
   terminal. Note that you have to include Shift as part of that keystroke.
 
-[wsl]: https://docs.microsoft.com/en-us/windows/wsl/install-win10
+[wsl]: https://docs.microsoft.com/en-us/windows/wsl/install-manual
 [rh-virt]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios
 
 When you've finished installing WSL, open the Ubuntu app.  You will be at

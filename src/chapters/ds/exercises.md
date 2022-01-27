@@ -373,11 +373,13 @@ multiplication and division.*
 
 Also, you could improve the test that `within` uses to determine whether two
 values are close. A good one for determining whether $a$ and $b$ are close might
-be:
+be [*relative distance*][boost-rel-dist]:
 
 $$
-\frac{|a - b|}{\frac{|a| + |b|}{2} + 1} < \epsilon.
+\left|\frac{a - b}{\mathit{min}(a, b)}\right| < \epsilon.
 $$
+
+[boost-rel-dist]: https://www.boost.org/doc/libs/1_77_0/libs/math/doc/html/math_toolkit/float_comparison.html
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "different sequence rep")}}

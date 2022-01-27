@@ -13,35 +13,44 @@ system, i.e., that implements the static semantics of the language.
 
 Commonly, a type system is formulated as a ternary relation
 $\mathit{HasType}(\Gamma, e, t)$, which means that expression $e$ has type $t$
-in typing context $\Gamma$. A *typing context*, aka *typing environment*, is a
-map from identifiers to types. The context is used to record what variables are
-in scope, and what their types are. The use of the Greek letter $\Gamma$ for
-contexts is traditional.
+in static environment $\Gamma$. A *static environment*, aka *typing context*, is
+a map from identifiers to types. The static environment is used to record what
+variables are in scope, and what their types are. The use of the Greek letter
+$\Gamma$ for static environments is traditional.
 
 That ternary relation $\mathit{HasType}$ is typically written with infix
 notation, though, as $\Gamma \vdash e : t$. You can read the turnstile symbol
-$\vdash$ as "proves" or "shows", i.e., the context $\Gamma$ shows that $e$ has
-type $t$.
+$\vdash$ as "proves" or "shows", i.e., the static environment $\Gamma$ shows
+that $e$ has type $t$.
 
 Let's make that notation a little friendlier by eliminating the Greek and the
-math typesetting. We'll just write `ctx |- e : t` to mean that typing context
-`ctx` shows that `e` has type `t`. Let's write `{}` for the empty context, and
-`x:t` to mean that `x` is bound to `t`. So, `{foo:int, bar:bool}` would be the
-context where `foo` has type `int` and `bar` has type `bool`. A context may
-bind an identifier at most once. We'll write `ctx[x -> t]` to mean a context
-that contains all the bindings of `ctx`, and also binds `x` to `t`. If `x` was
-already bound in `ctx`, then that old binding is replaced by the new binding to
-`t` in `ctx[x -> t]`.
+math typesetting. We'll just write `env |- e : t` to mean that static
+environment `env` shows that `e` has type `t`. We previously used `env` to mean
+a dynamic environment in the big-step relation `==>`. Since it's always possible
+to see whether we're using the `==>` or `|-` relation, the meaning of `env` as
+either a dynamic or static environment is always discernible.
+
+Let's write `{}` for the empty static environment, and `x:t` to mean that `x` is
+bound to `t`. So, `{foo:int, bar:bool}` would be the static environment is which
+`foo` has type `int` and `bar` has type `bool`. A static environment may bind an
+identifier at most once. We'll write `env[x -> t]` to mean a static environment
+that contains all the bindings of `env`, and also binds `x` to `t`. If `x` was
+already bound in `env`, then that old binding is replaced by the new binding to
+`t` in `env[x -> t]`. As with dynamic environments, if we wanted a more
+mathematical notation we would write $\mapsto$ instead of `->` in
+`env[x -> v]`, but we're aiming for notation that is easily typed on a standard
+keyboard.
 
 With all that machinery, we can at last define what it means to be well typed:
-An expression `e` is **well typed** in context `ctx` if there exists a type `t`
-for which `ctx |- e : t`. The goal of a type checker is thus to find such a type
-`t`, starting from some initial context.
+An expression `e` is **well typed** in static environment `env` if there exists
+a type `t` for which `env |- e : t`. The goal of a type checker is thus to find
+such a type `t`, starting from some initial static environment.
 
-It's convenient to pretend that the initial context is empty. But in practice,
-it's rare that a language truly uses the empty context to determine whether a
-program is well typed. In OCaml, for example, there are many built-in
-identifiers that are always in scope, such as everything in the `Stdlib` module.
+It's convenient to pretend that the initial static environment is empty. But in
+practice, it's rare that a language truly uses the empty static environment to
+determine whether a program is well typed. In OCaml, for example, there are many
+built-in identifiers that are always in scope, such as everything in the
+`Stdlib` module.
 
 ## A Type System for SimPL
 
@@ -57,7 +66,7 @@ e ::= x | i | b | e1 bop e2
 bop ::= + | * | <=
 ```
 
-Let's define a type system `ctx |- e : t` for SimPL. The only types in SimPL are
+Let's define a type system `env |- e : t` for SimPL. The only types in SimPL are
 integers and booleans:
 
 ```text
@@ -69,14 +78,14 @@ of an expression is based on the types of its subexpressions. In other words,
 `|-` is an *inductively-defined relation*, as can be learned about in a discrete
 math course. So, it has some base cases, and some inductive cases.
 
-For the base cases, an integer constant has type `int` in any context
+For the base cases, an integer constant has type `int` in any static environment
 whatsoever, a Boolean constant likewise always has type `bool`, and a variable
-has whatever type the context says it should have. Here are the typing rules
-that express those ideas:
+has whatever type the static environment says it should have. Here are the
+typing rules that express those ideas:
 
 ```text
-ctx |- i : int
-ctx |- b : bool
+env |- i : int
+env |- b : bool
 {x : t, ...} |- x : t
 ```
 
@@ -86,37 +95,37 @@ The remaining syntactic forms are inductive cases.
 expression using a scope that is extended with a new binding.
 
 ```text
-ctx |- let x = e1 in e2 : t2
-  if ctx |- e1 : t1
-  and ctx[x -> t1] |- e2 : t2
+env |- let x = e1 in e2 : t2
+  if env |- e1 : t1
+  and env[x -> t1] |- e2 : t2
 ```
 
-The rule says that `let x = e1 in e2` has type `t2` in context `ctx`, but only
-if certain conditions hold. The first condition is that `e1` has type `t1` in
-`ctx`. The second is that `e2` has type `t2` in a new context, which is `ctx`
-extended to bind `x` to `t1`.
+The rule says that `let x = e1 in e2` has type `t2` in static environment `env`,
+but only if certain conditions hold. The first condition is that `e1` has type
+`t1` in `env`. The second is that `e2` has type `t2` in a new static
+environment, which is `env` extended to bind `x` to `t1`.
 
 **Binary operators.** We'll need a couple different rules for binary operators.
 
 ```text
-ctx |- e1 bop e2 : int
+env |- e1 bop e2 : int
   if bop is + or *
-  and ctx |- e1 : int
-  and ctx |- e2 : int
+  and env |- e1 : int
+  and env |- e2 : int
 
-ctx |- e1 <= e2 : bool
-  if ctx |- e1 : int
-  and ctx |- e2 : int
+env |- e1 <= e2 : bool
+  if env |- e1 : int
+  and env |- e2 : int
 ```
 
 **If.** Just like OCaml, an if expression must have a Boolean guard, and its two
 branches must have the same type.
 
 ```text
-ctx |- if e1 then e2 else e3 : t
-  if ctx |- e1 : bool
-  and ctx |- e2 : t
-  and ctx |- e3 : t
+env |- if e1 then e2 else e3 : t
+  if env |- e1 : bool
+  and env |- e2 : t
+  and env |- e3 : t
 ```
 
 ## A Type Checker for SimPL
@@ -140,23 +149,23 @@ but the former is already a keyword in OCaml. We have to prefix the constructors
 with "T" to disambiguate them from the constructors of the `expr` type, which
 include `Int` and `Bool`.
 
-Let's introduce a small signature for typing contexts, based on the abstractions
-we've introduced so far: the empty context, looking up a variable, and extending
-a context.
+Let's introduce a small signature for static environments, based on the
+abstractions we've introduced so far: the empty static environment, looking up a
+variable, and extending a static environment.
 
 ```ocaml
-module type Context = sig
-  (** [t] is the type of a context. *)
+module type StaticEnvironment = sig
+  (** [t] is the type of a static environment. *)
   type t
 
-  (** [empty] is the empty context. *)
+  (** [empty] is the empty static environment. *)
   val empty : t
 
-  (** [lookup ctx x] gets the binding of [x] in [ctx].
-      Raises: [Failure] if [x] is not bound in [ctx]. *)
+  (** [lookup env x] gets the binding of [x] in [env].
+      Raises: [Failure] if [x] is not bound in [env]. *)
   val lookup : t -> string -> typ
 
-  (** [extend ctx x ty] is [ctx] extended with a binding
+  (** [extend env x ty] is [env] extended with a binding
       of [x] to [ty]. *)
   val extend : t -> string -> typ -> t
 end
@@ -165,39 +174,40 @@ end
 It's easy to implement that signature with an association list.
 
 ```ocaml
-module Context : Context = struct
+module StaticEnvironment : StaticEnvironment = struct
   type t = (string * typ) list
 
   let empty = []
 
-  let lookup ctx x =
-    try List.assoc x ctx
+  let lookup env x =
+    try List.assoc x env
     with Not_found -> failwith "Unbound variable"
 
-  let extend ctx x ty =
-    (x, ty) :: ctx
+  let extend env x ty =
+    (x, ty) :: env
 end
 ```
 
 Now we can implement the typing relation `|-`. We'll do that by writing a
-function `typeof : Context.t -> expr -> typ`, such that `typeof ctx e = t` if
-and only if `ctx |- e : t`. Note that the `typeof` function produces the type as
-output, so the function is actually inferring the type! That inference is easy
-for SimPL; it would be considerably harder for larger languages.
+function `typeof : StaticEnvironment.t -> expr -> typ`, such that
+`typeof env e = t` if and only if `env |- e : t`. Note that the `typeof`
+function produces the type as output, so the function is actually inferring the
+type! That inference is easy for SimPL; it would be considerably harder for
+larger languages.
 
 {{ video_embed | replace("%%VID%%", "m3bt3BYB0vQ")}}
 
 Let's start with the base cases:
 
 ```ocaml
-open Context
+open StaticEnvironment
 
-(** [typeof ctx e] is the type of [e] in context [ctx].
-    Raises: [Failure] if [e] is not well typed in [ctx]. *)
-let rec typeof ctx = function
+(** [typeof env e] is the type of [e] in static environment [env].
+    Raises: [Failure] if [e] is not well typed in [env]. *)
+let rec typeof env = function
   | Int _ -> TInt
   | Bool _ -> TBool
-  | Var x -> lookup ctx x
+  | Var x -> lookup env x
   ...
 ```
 
@@ -214,7 +224,7 @@ errors; rather, it just defined what it meant to be well typed. The type
 checker, on the other hand, needs to take action and report ill typed programs.
 Our `typeof` function does that by raising exceptions. The `lookup` function, in
 particular, will raise an exception if we attempt to lookup a variable that
-hasn't been bound in the context.
+hasn't been bound in the static environment.
 
 {{ video_embed | replace("%%VID%%", "TiKPU5rYeF8")}}
 
@@ -222,9 +232,9 @@ Let's continue with the recursive cases:
 
 ```ocaml
   ...
-  | Let (x, e1, e2) -> typeof_let ctx x e1 e2
-  | Binop (bop, e1, e2) -> typeof_bop ctx bop e1 e2
-  | If (e1, e2, e3) -> typeof_if ctx e1 e2 e3
+  | Let (x, e1, e2) -> typeof_let env x e1 e2
+  | Binop (bop, e1, e2) -> typeof_bop env bop e1 e2
+  | If (e1, e2, e3) -> typeof_if env e1 e2 e3
 ```
 
 We're factoring out a helper function for each branch for the sake of keeping
@@ -232,24 +242,24 @@ the pattern match readable. Each of the helpers directly encodes the ideas of
 the `|-` rules, with error handling added.
 
 ```ocaml
-and typeof_let ctx x e1 e2 =
-  let t1 = typeof ctx e1 in
-  let ctx' = extend ctx x t1 in
-  typeof ctx' e2
+and typeof_let env x e1 e2 =
+  let t1 = typeof env e1 in
+  let env' = extend env x t1 in
+  typeof env' e2
 
-and typeof_bop ctx bop e1 e2 =
-  let t1, t2 = typeof ctx e1, typeof ctx e2 in
+and typeof_bop env bop e1 e2 =
+  let t1, t2 = typeof env e1, typeof env e2 in
   match bop, t1, t2 with
   | Add, TInt, TInt
   | Mult, TInt, TInt -> TInt
   | Leq, TInt, TInt -> TBool
   | _ -> failwith "Operator and operand type mismatch"
 
-and typeof_if ctx e1 e2 e3 =
-  if typeof ctx e1 = TBool
+and typeof_if env e1 e2 e3 =
+  if typeof env e1 = TBool
   then begin
-    let t2 = typeof ctx e2 in
-    if t2 = typeof ctx e3 then t2
+    let t2 = typeof env e2 in
+    if t2 = typeof env e3 then t2
     else failwith "Branches of if must have same type"
   end
   else failwith "Guard of if must have type bool"
@@ -263,7 +273,7 @@ typed:
 
 ```ocaml
 (** [typecheck e] checks whether [e] is well typed in
-    the empty context. Raises: [Failure] if not. *)
+    the empty static environment. Raises: [Failure] if not. *)
 let typecheck e =
   ignore (typeof empty e)
 ```

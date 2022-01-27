@@ -24,7 +24,7 @@ type ptype = TNormal | TFire | TWater
 
 type peff = ENormal | ENotVery | Esuper
 ```
-But variants are far more powerful that this.
+But variants are far more powerful than this.
 
 ## Variants that Carry Data
 

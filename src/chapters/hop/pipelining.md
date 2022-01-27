@@ -24,13 +24,13 @@ $$
 $$
 
 But let's imagine you've forgotten that formula. In an imperative language you
-might use a for loop:
+might use a `for` loop:
 
 ```python
 # Python
 def sum_sq(n):
 	sum = 0
-	for i in range(0, n):
+	for i in range(0, n+1):
 		sum += i * i
 	return sum
 ```

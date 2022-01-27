@@ -376,10 +376,10 @@ e -->* e''
   if e --> e' and e' -->* e''
 ```
 
-Of course, in implementing an interpreter, what we really want is to take
-multiple steps until the expression reaches a value. That is, we want to take as
-many steps as possible. So, we're interested in the sub-relation `e -->* v` in
-which the right-hand side is a value. That's easy to implement:
+Of course, in implementing an interpreter, what we really want is to take as
+many steps as possible until the expression reaches a value. That is, we're
+interested in the sub-relation `e -->* v` in which the right-hand side is a not
+just an expression, but a value. That's easy to implement:
 
 ```ocaml
 (** [eval_small e] is the [e -->* v] relation.  That is,
