@@ -547,7 +547,7 @@ module HashMap : TableMap = struct
       likely land in different buckets.
       Efficiency: O(n), where n is the number of bindings. *)
   let rehash tab new_capacity =
-    (* insert (k, v) into [tab] *)
+    (* insert [(k, v)] into [tab] *)
     let rehash_binding (k, v) =
       insert_no_resize k v tab
     in
