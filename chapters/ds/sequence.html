@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>8.4. Sequences &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,7 +57,10 @@
     <link rel="next" title="8.5. Memoization" href="memoization.html" />
     <link rel="prev" title="8.3. Red-Black Trees" href="rb.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -74,6 +77,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -83,9 +90,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -102,7 +109,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -203,7 +210,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -416,7 +423,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -584,7 +591,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -643,7 +650,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -655,7 +662,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -720,7 +727,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -776,12 +783,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-not-to-define-a-sequence">
@@ -818,10 +825,55 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Sequences</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-not-to-define-a-sequence">
+   8.4.1. How Not to Define a Sequence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-correctly-define-a-sequence">
+   8.4.2. How to Correctly Define a Sequence
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#programming-with-sequences">
+   8.4.3. Programming with Sequences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#laziness">
+   8.4.4. Laziness
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lazy-sequences">
+     8.4.4.1. Lazy Sequences
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="sequences">
+  <div class="tex2jax_ignore mathjax_ignore section" id="sequences">
 <h1><span class="section-number">8.4. </span>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">¶</a></h1>
 <p>A <em>sequence</em> is an infinite list. For example, the infinite list of all natural
 numbers would be a sequence. So would the list of all primes, or all Fibonacci
@@ -832,25 +884,14 @@ is, functions defined in terms of themselves. It turns out we can define other
 values in terms of themselves, too.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">ones</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="n">ones</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ones : int list = [1; &lt;cycle&gt;]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">ones</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">::</span> <span class="n">ones</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">::</span> <span class="n">b</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="n">a</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val a : int list = [0; 1; &lt;cycle&gt;]
-val b : int list = [1; 0; &lt;cycle&gt;]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">::</span> <span class="n">b</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">::</span> <span class="n">a</span>
 </pre></div>
 </div>
 </div>
@@ -882,13 +923,8 @@ infinite.</p></li>
 natural numbers. Some of the obvious things we might try simply don’t work:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [from n] is the infinite list [[n; n + 1; n + 2; ...]]. *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">from</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">::</span> <span class="n">from</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val from : int -&gt; int list = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="kn">from</span> <span class="nn">n</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">infinite</span> <span class="nb">list</span> <span class="p">[[</span><span class="n">n</span><span class="p">;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="o">...</span><span class="p">]]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="kn">from</span> <span class="nn">n</span> <span class="o">=</span> <span class="n">n</span> <span class="p">::</span> <span class="kn">from</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -907,15 +943,7 @@ infinite loop.</p>
 <p>Here’s another attempt, using what we discovered above about recursive values:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">nats</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">::</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">nats</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[4]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">15</span><span class="o">-</span><span class="mi">50</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="n">let</span> <span class="n">rec</span> <span class="n">nats</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">::</span> <span class="n">List</span><span class="o">.</span><span class="n">map</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">nats</span>
-                   <span class="o">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-<span class="ne">Error</span>: This kind of expression is not allowed as right-hand side of `let rec&#39;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">nats</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">::</span> <span class="n">List</span><span class="o">.</span><span class="n">map</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">nats</span>
 </pre></div>
 </div>
 </div>
@@ -932,12 +960,7 @@ of defining <code class="docutils literal notranslate"><span class="pre">nats</s
 Recall that definition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mylist</span> <span class="o">=</span> <span class="nc">Nil</span> <span class="o">|</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mylist</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a mylist = Nil | Cons of &#39;a * &#39;a mylist
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="s1">&#39;a mylist = Nil | Cons of &#39;</span><span class="n">a</span> <span class="o">*</span> <span class="s1">&#39;a mylist</span>
 </pre></div>
 </div>
 </div>
@@ -945,12 +968,7 @@ Recall that definition:</p>
 <p>We could try to convert that into a definition for sequences:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a sequence = Cons of &#39;a * &#39;a sequence
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="s1">&#39;a sequence = Cons of &#39;</span><span class="n">a</span> <span class="o">*</span> <span class="s1">&#39;a sequence</span>
 </pre></div>
 </div>
 </div>
@@ -961,12 +979,7 @@ but we want only infinite lists.</p>
 list in OCaml, in that we still can’t define <code class="docutils literal notranslate"><span class="pre">nats</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">from</span> <span class="n">n</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="n">from</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val from : int -&gt; int sequence = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="kn">from</span> <span class="nn">n</span> <span class="o">=</span> <span class="n">Cons</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="kn">from</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -985,45 +998,21 @@ we already know how to do that!</p>
 <p>Consider the following definitions:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">failwith</span> <span class="s2">&quot;oops&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Failure &quot;oops&quot;.
-<span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">failwith</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;stdlib.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">29</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">17</span><span class="o">-</span><span class="mi">33</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">unknown</span> <span class="n">location</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">failwith</span> <span class="s2">&quot;oops&quot;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f2</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;oops&quot;</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val f2 : &#39;a -&gt; &#39;b = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;oops&quot;</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span> <span class="bp">()</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Failure &quot;oops&quot;.
-<span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">failwith</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;stdlib.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">29</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">17</span><span class="o">-</span><span class="mi">33</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span> <span class="p">();;</span>
 </pre></div>
 </div>
 </div>
@@ -1041,15 +1030,10 @@ delay computation, and in particular one that takes unit as input, is called a
 <em>thunk</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** An [&#39;a sequence] is an infinite list of values of type [&#39;a].</span>
-<span class="c">    AF: [Cons (x, f)] is the sequence whose head is [x] and tail is [f ()].</span>
-<span class="c">    RI: none. *)</span>
-<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="o">(</span><span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a sequence = Cons of &#39;a * (unit -&gt; &#39;a sequence)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="n">An</span> <span class="p">[</span><span class="s1">&#39;a sequence] is an infinite list of values of type [&#39;</span><span class="n">a</span><span class="p">]</span><span class="o">.</span>
+    <span class="n">AF</span><span class="p">:</span> <span class="p">[</span><span class="n">Cons</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">)]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">sequence</span> <span class="n">whose</span> <span class="n">head</span> <span class="ow">is</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="ow">and</span> <span class="n">tail</span> <span class="ow">is</span> <span class="p">[</span><span class="n">f</span> <span class="p">()]</span><span class="o">.</span>
+    <span class="n">RI</span><span class="p">:</span> <span class="n">none</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="nb">type</span> <span class="s1">&#39;a sequence = Cons of &#39;</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">unit</span> <span class="o">-&gt;</span> <span class="s1">&#39;a sequence)</span>
 </pre></div>
 </div>
 </div>
@@ -1057,16 +1041,8 @@ delay computation, and in particular one that takes unit as input, is called a
 <p>This definition turns out to work quite well.  We can define <code class="docutils literal notranslate"><span class="pre">nats</span></code>, at last:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">from</span> <span class="n">n</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">from</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">));;</span>
-<span class="k">let</span> <span class="n">nats</span> <span class="o">=</span> <span class="n">from</span> <span class="mi">0</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val from : int -&gt; int sequence = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val nats : int sequence = Cons (0, &lt;fun&gt;)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="kn">from</span> <span class="nn">n</span> <span class="o">=</span> <span class="n">Cons</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kn">from</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));;</span>
+<span class="n">let</span> <span class="n">nats</span> <span class="o">=</span> <span class="kn">from</span> <span class="mi">0</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1078,26 +1054,16 @@ define functions to access parts of a sequence, similarly to how we can access
 parts of a list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [hd s] is the head of [s] *)</span>
-<span class="k">let</span> <span class="n">hd</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="o">_))</span> <span class="o">=</span> <span class="n">h</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val hd : &#39;a sequence -&gt; &#39;a = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">hd</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">head</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">hd</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">_</span><span class="p">))</span> <span class="o">=</span> <span class="n">h</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [tl s] is the tail of [s] *)</span>
-<span class="k">let</span> <span class="n">tl</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(_,</span> <span class="n">t</span><span class="o">))</span> <span class="o">=</span> <span class="n">t</span> <span class="bp">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val tl : &#39;a sequence -&gt; &#39;a sequence = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">tl</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">tail</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">tl</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span> <span class="o">=</span> <span class="n">t</span> <span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1109,21 +1075,13 @@ at that point, rather than continue to delay its computation.</p>
 to take or drop some finite prefix of a sequence:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [take n s] is the list of the first [n] elements of [s] *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">take</span> <span class="n">n</span> <span class="n">s</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="bp">[]</span> <span class="k">else</span> <span class="n">hd</span> <span class="n">s</span> <span class="o">::</span> <span class="n">take</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">tl</span> <span class="n">s</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">take</span> <span class="n">n</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">the</span> <span class="n">first</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="n">elements</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">take</span> <span class="n">n</span> <span class="n">s</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="p">[]</span> <span class="k">else</span> <span class="n">hd</span> <span class="n">s</span> <span class="p">::</span> <span class="n">take</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">tl</span> <span class="n">s</span><span class="p">)</span>
 
-<span class="c">(** [drop n s] is all but the first [n] elements of [s] *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">drop</span> <span class="n">n</span> <span class="n">s</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">s</span> <span class="k">else</span> <span class="n">drop</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">tl</span> <span class="n">s</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val take : int -&gt; &#39;a sequence -&gt; &#39;a list = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val drop : int -&gt; &#39;a sequence -&gt; &#39;a sequence = &lt;fun&gt;
+<span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">drop</span> <span class="n">n</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="nb">all</span> <span class="n">but</span> <span class="n">the</span> <span class="n">first</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="n">elements</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">drop</span> <span class="n">n</span> <span class="n">s</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">s</span> <span class="k">else</span> <span class="n">drop</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">tl</span> <span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1131,12 +1089,7 @@ to take or drop some finite prefix of a sequence:</p>
 <p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">take</span> <span class="mi">10</span> <span class="n">nats</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list = [0; 1; 2; 3; 4; 5; 6; 7; 8; 9]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">take</span> <span class="mi">10</span> <span class="n">nats</span>
 </pre></div>
 </div>
 </div>
@@ -1151,22 +1104,14 @@ its head, followed by infinitely many other elements.</p>
 <p>Here are functions to square a sequence, and to sum two sequences:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [square &lt;a; b; c; ...&gt;] is [&lt;a * a; b * b; c * c; ...]. *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">square</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">t</span><span class="o">))</span> <span class="o">=</span>
-  <span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">h</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">square</span> <span class="o">(</span><span class="n">t</span> <span class="bp">()</span><span class="o">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">square</span> <span class="o">&lt;</span><span class="n">a</span><span class="p">;</span> <span class="n">b</span><span class="p">;</span> <span class="n">c</span><span class="p">;</span> <span class="o">...&gt;</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">a</span> <span class="o">*</span> <span class="n">a</span><span class="p">;</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span> <span class="n">c</span> <span class="o">*</span> <span class="n">c</span><span class="p">;</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">square</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span> <span class="o">=</span>
+  <span class="n">Cons</span> <span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">h</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="n">square</span> <span class="p">(</span><span class="n">t</span> <span class="p">()))</span>
 
-<span class="c">(** [sum &lt;a1; a2; a3; ...&gt; &lt;b1; b2; b3; ...&gt;] is</span>
-<span class="c">    [&lt;a1 + b1; a2 + b2; a3 + b3; ...&gt;] *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h1</span><span class="o">,</span> <span class="n">t1</span><span class="o">))</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h2</span><span class="o">,</span> <span class="n">t2</span><span class="o">))</span> <span class="o">=</span>
-  <span class="nc">Cons</span> <span class="o">(</span><span class="n">h1</span> <span class="o">+</span> <span class="n">h2</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">sum</span> <span class="o">(</span><span class="n">t1</span> <span class="bp">()</span><span class="o">)</span> <span class="o">(</span><span class="n">t2</span> <span class="bp">()</span><span class="o">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val square : int sequence -&gt; int sequence = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int sequence -&gt; int sequence -&gt; int sequence = &lt;fun&gt;
+<span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="nb">sum</span> <span class="o">&lt;</span><span class="n">a1</span><span class="p">;</span> <span class="n">a2</span><span class="p">;</span> <span class="n">a3</span><span class="p">;</span> <span class="o">...&gt;</span> <span class="o">&lt;</span><span class="n">b1</span><span class="p">;</span> <span class="n">b2</span><span class="p">;</span> <span class="n">b3</span><span class="p">;</span> <span class="o">...&gt;</span><span class="p">]</span> <span class="ow">is</span>
+    <span class="p">[</span><span class="o">&lt;</span><span class="n">a1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">;</span> <span class="n">a2</span> <span class="o">+</span> <span class="n">b2</span><span class="p">;</span> <span class="n">a3</span> <span class="o">+</span> <span class="n">b3</span><span class="p">;</span> <span class="o">...&gt;</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="nb">sum</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h1</span><span class="p">,</span> <span class="n">t1</span><span class="p">))</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h2</span><span class="p">,</span> <span class="n">t2</span><span class="p">))</span> <span class="o">=</span>
+  <span class="n">Cons</span> <span class="p">(</span><span class="n">h1</span> <span class="o">+</span> <span class="n">h2</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">sum</span> <span class="p">(</span><span class="n">t1</span> <span class="p">())</span> <span class="p">(</span><span class="n">t2</span> <span class="p">()))</span>
 </pre></div>
 </div>
 </div>
@@ -1187,32 +1132,17 @@ across a sequence or sequences. That suggests we could write a higher-order map
 function, much like for lists:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [map f &lt;a; b; c; ...&gt;] is [&lt;f a; f b; f c; ...&gt;] *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">t</span><span class="o">))</span> <span class="o">=</span>
-  <span class="nc">Cons</span> <span class="o">(</span><span class="n">f</span> <span class="n">h</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">t</span> <span class="bp">()</span><span class="o">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="nb">map</span> <span class="n">f</span> <span class="o">&lt;</span><span class="n">a</span><span class="p">;</span> <span class="n">b</span><span class="p">;</span> <span class="n">c</span><span class="p">;</span> <span class="o">...&gt;</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">f</span> <span class="n">a</span><span class="p">;</span> <span class="n">f</span> <span class="n">b</span><span class="p">;</span> <span class="n">f</span> <span class="n">c</span><span class="p">;</span> <span class="o">...&gt;</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="nb">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span> <span class="o">=</span>
+  <span class="n">Cons</span> <span class="p">(</span><span class="n">f</span> <span class="n">h</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">map</span> <span class="n">f</span> <span class="p">(</span><span class="n">t</span> <span class="p">()))</span>
 
-<span class="c">(** [map2 f &lt;a1; b1; c1;...&gt; &lt;a2; b2; c2; ...&gt;] is</span>
-<span class="c">    [&lt;f a1 b1; f a2 b2; f a3 b3; ...&gt;] *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">map2</span> <span class="n">f</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h1</span><span class="o">,</span> <span class="n">t1</span><span class="o">))</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h2</span><span class="o">,</span> <span class="n">t2</span><span class="o">))</span> <span class="o">=</span>
-  <span class="nc">Cons</span> <span class="o">(</span><span class="n">f</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">map2</span> <span class="n">f</span> <span class="o">(</span><span class="n">t1</span> <span class="bp">()</span><span class="o">)</span> <span class="o">(</span><span class="n">t2</span> <span class="bp">()</span><span class="o">))</span>
+<span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">map2</span> <span class="n">f</span> <span class="o">&lt;</span><span class="n">a1</span><span class="p">;</span> <span class="n">b1</span><span class="p">;</span> <span class="n">c1</span><span class="p">;</span><span class="o">...&gt;</span> <span class="o">&lt;</span><span class="n">a2</span><span class="p">;</span> <span class="n">b2</span><span class="p">;</span> <span class="n">c2</span><span class="p">;</span> <span class="o">...&gt;</span><span class="p">]</span> <span class="ow">is</span>
+    <span class="p">[</span><span class="o">&lt;</span><span class="n">f</span> <span class="n">a1</span> <span class="n">b1</span><span class="p">;</span> <span class="n">f</span> <span class="n">a2</span> <span class="n">b2</span><span class="p">;</span> <span class="n">f</span> <span class="n">a3</span> <span class="n">b3</span><span class="p">;</span> <span class="o">...&gt;</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">map2</span> <span class="n">f</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h1</span><span class="p">,</span> <span class="n">t1</span><span class="p">))</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h2</span><span class="p">,</span> <span class="n">t2</span><span class="p">))</span> <span class="o">=</span>
+  <span class="n">Cons</span> <span class="p">(</span><span class="n">f</span> <span class="n">h1</span> <span class="n">h2</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="n">map2</span> <span class="n">f</span> <span class="p">(</span><span class="n">t1</span> <span class="p">())</span> <span class="p">(</span><span class="n">t2</span> <span class="p">()))</span>
 
-<span class="k">let</span> <span class="n">square&#39;</span> <span class="o">=</span> <span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span><span class="o">)</span>
-<span class="k">let</span> <span class="n">sum&#39;</span> <span class="o">=</span> <span class="n">map2</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a sequence -&gt; &#39;b sequence = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map2 : (&#39;a -&gt; &#39;b -&gt; &#39;c) -&gt; &#39;a sequence -&gt; &#39;b sequence -&gt; &#39;c sequence =
-  &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val square&#39; : int sequence -&gt; int sequence = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum&#39; : int sequence -&gt; int sequence -&gt; int sequence = &lt;fun&gt;
+<span class="n">let</span> <span class="n">square</span><span class="s1">&#39; = map (fun n -&gt; n * n)</span>
+<span class="n">let</span> <span class="nb">sum</span><span class="s1">&#39; = map2 ( + )</span>
 </pre></div>
 </div>
 </div>
@@ -1221,24 +1151,14 @@ function, much like for lists:</p>
 in one of the clever ways we originally attempted:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">nats</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">nats</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val nats : int sequence = Cons (0, &lt;fun&gt;)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">nats</span> <span class="o">=</span> <span class="n">Cons</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">map</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">nats</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">take</span> <span class="mi">10</span> <span class="n">nats</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list = [0; 1; 2; 3; 4; 5; 6; 7; 8; 9]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">take</span> <span class="mi">10</span> <span class="n">nats</span>
 </pre></div>
 </div>
 </div>
@@ -1257,15 +1177,10 @@ the Fibonacci sequence. So if we were to prepend <code class="docutils literal n
 actual Fibonacci sequence. That’s the intuition behind this definition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fibs</span> <span class="o">=</span>
-  <span class="nc">Cons</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-    <span class="nc">Cons</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-      <span class="n">sum</span> <span class="n">fibs</span> <span class="o">(</span><span class="n">tl</span> <span class="n">fibs</span><span class="o">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fibs : int sequence = Cons (1, &lt;fun&gt;)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">fibs</span> <span class="o">=</span>
+  <span class="n">Cons</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span>
+    <span class="n">Cons</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="nb">sum</span> <span class="n">fibs</span> <span class="p">(</span><span class="n">tl</span> <span class="n">fibs</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -1273,12 +1188,7 @@ actual Fibonacci sequence. That’s the intuition behind this definition:</p>
 <p>And it works!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">take</span> <span class="mi">10</span> <span class="n">fibs</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list = [1; 1; 2; 3; 5; 8; 13; 21; 34; 55]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">take</span> <span class="mi">10</span> <span class="n">fibs</span>
 </pre></div>
 </div>
 </div>
@@ -1345,15 +1255,10 @@ effects.</p>
 number using this definition of <code class="docutils literal notranslate"><span class="pre">fibs</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fibs</span> <span class="o">=</span>
-  <span class="nc">Cons</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-    <span class="nc">Cons</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-      <span class="n">sum</span> <span class="n">fibs</span> <span class="o">(</span><span class="n">tl</span> <span class="n">fibs</span><span class="o">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fibs : int sequence = Cons (1, &lt;fun&gt;)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">fibs</span> <span class="o">=</span>
+  <span class="n">Cons</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span>
+    <span class="n">Cons</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="nb">sum</span> <span class="n">fibs</span> <span class="p">(</span><span class="n">tl</span> <span class="n">fibs</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -1366,12 +1271,7 @@ rather than just reading this page.</p>
 <p>If we try to get the 30th Fibonacci number, it will take a long time to compute:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fib30long</span> <span class="o">=</span> <span class="n">take</span> <span class="mi">30</span> <span class="n">fibs</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">hd</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fib30long : int = 832040
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">fib30long</span> <span class="o">=</span> <span class="n">take</span> <span class="mi">30</span> <span class="n">fibs</span> <span class="o">|&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">rev</span> <span class="o">|&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">hd</span>
 </pre></div>
 </div>
 </div>
@@ -1380,12 +1280,7 @@ rather than just reading this page.</p>
 because the evaluation of that number has been suspended:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fib30lazy</span> <span class="o">=</span> <span class="k">lazy</span> <span class="o">(</span><span class="n">take</span> <span class="mi">30</span> <span class="n">fibs</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">hd</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fib30lazy : int lazy_t = &lt;lazy&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">fib30lazy</span> <span class="o">=</span> <span class="n">lazy</span> <span class="p">(</span><span class="n">take</span> <span class="mi">30</span> <span class="n">fibs</span> <span class="o">|&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">rev</span> <span class="o">|&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">hd</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1394,12 +1289,7 @@ because the evaluation of that number has been suspended:</p>
 long time to compute, as did <code class="docutils literal notranslate"><span class="pre">fib30long</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fib30</span> <span class="o">=</span> <span class="nn">Lazy</span><span class="p">.</span><span class="n">force</span> <span class="n">fib30lazy</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fib30 : int = 832040
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">fib30</span> <span class="o">=</span> <span class="n">Lazy</span><span class="o">.</span><span class="n">force</span> <span class="n">fib30lazy</span>
 </pre></div>
 </div>
 </div>
@@ -1408,12 +1298,7 @@ long time to compute, as did <code class="docutils literal notranslate"><span cl
 immediately, because the result has been memoized:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fib30fast</span> <span class="o">=</span> <span class="nn">Lazy</span><span class="p">.</span><span class="n">force</span> <span class="n">fib30lazy</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fib30fast : int = 832040
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">fib30fast</span> <span class="o">=</span> <span class="n">Lazy</span><span class="o">.</span><span class="n">force</span> <span class="n">fib30lazy</span>
 </pre></div>
 </div>
 </div>
@@ -1423,12 +1308,7 @@ the 30th Fibonacci number has been memoized, but if we later define some other
 computation of another it won’t be sped up the first time it’s computed:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fib29</span> <span class="o">=</span> <span class="n">take</span> <span class="mi">29</span> <span class="n">fibs</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">hd</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fib29 : int = 514229
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">fib29</span> <span class="o">=</span> <span class="n">take</span> <span class="mi">29</span> <span class="n">fibs</span> <span class="o">|&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">rev</span> <span class="o">|&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">hd</span>
 </pre></div>
 </div>
 </div>
@@ -1440,12 +1320,7 @@ use of lazy values.</p>
 <p>Here’s a representation for infinite lists using lazy values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="nn">Lazy</span><span class="p">.</span><span class="n">t</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a lazysequence = Cons of &#39;a * &#39;a lazysequence Lazy.t
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="s1">&#39;a lazysequence = Cons of &#39;</span><span class="n">a</span> <span class="o">*</span> <span class="s1">&#39;a lazysequence Lazy.t</span>
 </pre></div>
 </div>
 </div>
@@ -1458,101 +1333,71 @@ Fibonacci number with both modules, and you’ll see that the lazy-sequence
 implementation is much faster than the standard-sequence implementation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">SequenceFibs</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="o">(</span><span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">SequenceFibs</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a sequence = Cons of &#39;</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">unit</span> <span class="o">-&gt;</span> <span class="s1">&#39;a sequence)</span>
 
-  <span class="k">let</span> <span class="n">hd</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="o">_))</span> <span class="o">-&gt;</span> <span class="n">h</span>
+  <span class="n">let</span> <span class="n">hd</span> <span class="p">:</span> <span class="s1">&#39;a sequence -&gt; &#39;</span><span class="n">a</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">_</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">h</span>
 
-  <span class="k">let</span> <span class="n">tl</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(_,</span> <span class="n">t</span><span class="o">))</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="bp">()</span>
+  <span class="n">let</span> <span class="n">tl</span> <span class="p">:</span> <span class="s1">&#39;a sequence -&gt; &#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="p">()</span>
 
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">take_aux</span> <span class="n">n</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">t</span><span class="o">))</span> <span class="n">lst</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">lst</span>
-    <span class="k">else</span> <span class="n">take_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">t</span> <span class="bp">()</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">::</span> <span class="n">lst</span><span class="o">)</span>
+  <span class="n">let</span> <span class="n">rec</span> <span class="n">take_aux</span> <span class="n">n</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span> <span class="n">lst</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">lst</span>
+    <span class="k">else</span> <span class="n">take_aux</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">t</span> <span class="p">())</span> <span class="p">(</span><span class="n">h</span> <span class="p">::</span> <span class="n">lst</span><span class="p">)</span>
 
-  <span class="k">let</span> <span class="n">take</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="n">n</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="o">(</span><span class="n">take_aux</span> <span class="n">n</span> <span class="n">s</span> <span class="bp">[]</span><span class="o">)</span>
+  <span class="n">let</span> <span class="n">take</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;a sequence -&gt; &#39;</span><span class="n">a</span> <span class="nb">list</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="n">n</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">rev</span> <span class="p">(</span><span class="n">take_aux</span> <span class="n">n</span> <span class="n">s</span> <span class="p">[])</span>
 
-  <span class="k">let</span> <span class="n">nth</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">sequence</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="n">n</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">hd</span> <span class="o">(</span><span class="n">take_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">s</span> <span class="bp">[]</span><span class="o">)</span>
+  <span class="n">let</span> <span class="n">nth</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;a sequence -&gt; &#39;</span><span class="n">a</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="n">n</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">hd</span> <span class="p">(</span><span class="n">take_aux</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">s</span> <span class="p">[])</span>
 
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">sequence</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">sequence</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">sequence</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h_a</span><span class="o">,</span> <span class="n">t_a</span><span class="o">))</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h_b</span><span class="o">,</span> <span class="n">t_b</span><span class="o">))</span> <span class="o">-&gt;</span>
-      <span class="nc">Cons</span> <span class="o">(</span><span class="n">h_a</span> <span class="o">+</span> <span class="n">h_b</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">sum</span> <span class="o">(</span><span class="n">t_a</span> <span class="bp">()</span><span class="o">)</span> <span class="o">(</span><span class="n">t_b</span> <span class="bp">()</span><span class="o">))</span>
+  <span class="n">let</span> <span class="n">rec</span> <span class="nb">sum</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">sequence</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">sequence</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">sequence</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h_a</span><span class="p">,</span> <span class="n">t_a</span><span class="p">))</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h_b</span><span class="p">,</span> <span class="n">t_b</span><span class="p">))</span> <span class="o">-&gt;</span>
+      <span class="n">Cons</span> <span class="p">(</span><span class="n">h_a</span> <span class="o">+</span> <span class="n">h_b</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">sum</span> <span class="p">(</span><span class="n">t_a</span> <span class="p">())</span> <span class="p">(</span><span class="n">t_b</span> <span class="p">()))</span>
 
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">fibs</span> <span class="o">=</span>
-    <span class="nc">Cons</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-      <span class="nc">Cons</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-        <span class="n">sum</span> <span class="o">(</span><span class="n">tl</span> <span class="n">fibs</span><span class="o">)</span> <span class="n">fibs</span><span class="o">))</span>
+  <span class="n">let</span> <span class="n">rec</span> <span class="n">fibs</span> <span class="o">=</span>
+    <span class="n">Cons</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="n">Cons</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fun</span> <span class="p">()</span> <span class="o">-&gt;</span>
+        <span class="nb">sum</span> <span class="p">(</span><span class="n">tl</span> <span class="n">fibs</span><span class="p">)</span> <span class="n">fibs</span><span class="p">))</span>
 
-  <span class="k">let</span> <span class="n">nth_fib</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="n">let</span> <span class="n">nth_fib</span> <span class="n">n</span> <span class="o">=</span>
     <span class="n">nth</span> <span class="n">n</span> <span class="n">fibs</span>
 
-<span class="k">end</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">LazyFibs</span> <span class="o">=</span> <span class="k">struct</span>
+<span class="n">module</span> <span class="n">LazyFibs</span> <span class="o">=</span> <span class="n">struct</span>
 
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="nn">Lazy</span><span class="p">.</span><span class="n">t</span>
+  <span class="nb">type</span> <span class="s1">&#39;a lazysequence = Cons of &#39;</span><span class="n">a</span> <span class="o">*</span> <span class="s1">&#39;a lazysequence Lazy.t</span>
 
-  <span class="k">let</span> <span class="n">hd</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="o">_))</span> <span class="o">-&gt;</span> <span class="n">h</span>
+  <span class="n">let</span> <span class="n">hd</span> <span class="p">:</span> <span class="s1">&#39;a lazysequence -&gt; &#39;</span><span class="n">a</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">_</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">h</span>
 
-  <span class="k">let</span> <span class="n">tl</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(_,</span> <span class="n">t</span><span class="o">))</span> <span class="o">-&gt;</span> <span class="nn">Lazy</span><span class="p">.</span><span class="n">force</span> <span class="n">t</span>
+  <span class="n">let</span> <span class="n">tl</span> <span class="p">:</span> <span class="s1">&#39;a lazysequence -&gt; &#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">Lazy</span><span class="o">.</span><span class="n">force</span> <span class="n">t</span>
 
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">take_aux</span> <span class="n">n</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">t</span><span class="o">))</span> <span class="n">lst</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">lst</span> <span class="k">else</span>
-      <span class="n">take_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="nn">Lazy</span><span class="p">.</span><span class="n">force</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">::</span> <span class="n">lst</span><span class="o">)</span>
+  <span class="n">let</span> <span class="n">rec</span> <span class="n">take_aux</span> <span class="n">n</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span> <span class="n">lst</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">lst</span> <span class="k">else</span>
+      <span class="n">take_aux</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">Lazy</span><span class="o">.</span><span class="n">force</span> <span class="n">t</span><span class="p">)</span> <span class="p">(</span><span class="n">h</span> <span class="p">::</span> <span class="n">lst</span><span class="p">)</span>
 
-  <span class="k">let</span> <span class="n">take</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="n">n</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="o">(</span><span class="n">take_aux</span> <span class="n">n</span> <span class="n">s</span> <span class="bp">[]</span><span class="o">)</span>
+  <span class="n">let</span> <span class="n">take</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;a lazysequence -&gt; &#39;</span><span class="n">a</span> <span class="nb">list</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="n">n</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">rev</span> <span class="p">(</span><span class="n">take_aux</span> <span class="n">n</span> <span class="n">s</span> <span class="p">[])</span>
 
-  <span class="k">let</span> <span class="n">nth</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">lazysequence</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="n">n</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">hd</span> <span class="o">(</span><span class="n">take_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">s</span> <span class="bp">[]</span><span class="o">)</span>
+  <span class="n">let</span> <span class="n">nth</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;a lazysequence -&gt; &#39;</span><span class="n">a</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="n">n</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">hd</span> <span class="p">(</span><span class="n">take_aux</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">s</span> <span class="p">[])</span>
 
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">lazysequence</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">lazysequence</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">lazysequence</span> <span class="o">=</span>
-    <span class="k">fun</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h_a</span><span class="o">,</span> <span class="n">t_a</span><span class="o">))</span> <span class="o">(</span><span class="nc">Cons</span> <span class="o">(</span><span class="n">h_b</span><span class="o">,</span> <span class="n">t_b</span><span class="o">))</span> <span class="o">-&gt;</span>
-      <span class="nc">Cons</span> <span class="o">(</span><span class="n">h_a</span> <span class="o">+</span> <span class="n">h_b</span><span class="o">,</span> <span class="k">lazy</span> <span class="o">(</span><span class="n">sum</span> <span class="o">(</span><span class="nn">Lazy</span><span class="p">.</span><span class="n">force</span> <span class="n">t_a</span><span class="o">)</span> <span class="o">(</span><span class="nn">Lazy</span><span class="p">.</span><span class="n">force</span> <span class="n">t_b</span><span class="o">)))</span>
+  <span class="n">let</span> <span class="n">rec</span> <span class="nb">sum</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">lazysequence</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">lazysequence</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">lazysequence</span> <span class="o">=</span>
+    <span class="n">fun</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h_a</span><span class="p">,</span> <span class="n">t_a</span><span class="p">))</span> <span class="p">(</span><span class="n">Cons</span> <span class="p">(</span><span class="n">h_b</span><span class="p">,</span> <span class="n">t_b</span><span class="p">))</span> <span class="o">-&gt;</span>
+      <span class="n">Cons</span> <span class="p">(</span><span class="n">h_a</span> <span class="o">+</span> <span class="n">h_b</span><span class="p">,</span> <span class="n">lazy</span> <span class="p">(</span><span class="nb">sum</span> <span class="p">(</span><span class="n">Lazy</span><span class="o">.</span><span class="n">force</span> <span class="n">t_a</span><span class="p">)</span> <span class="p">(</span><span class="n">Lazy</span><span class="o">.</span><span class="n">force</span> <span class="n">t_b</span><span class="p">)))</span>
 
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">fibs</span> <span class="o">=</span>
-    <span class="nc">Cons</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">lazy</span> <span class="o">(</span>
-      <span class="nc">Cons</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">lazy</span> <span class="o">(</span>
-        <span class="n">sum</span> <span class="o">(</span><span class="n">tl</span> <span class="n">fibs</span><span class="o">)</span> <span class="n">fibs</span><span class="o">))))</span>
+  <span class="n">let</span> <span class="n">rec</span> <span class="n">fibs</span> <span class="o">=</span>
+    <span class="n">Cons</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">lazy</span> <span class="p">(</span>
+      <span class="n">Cons</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">lazy</span> <span class="p">(</span>
+        <span class="nb">sum</span> <span class="p">(</span><span class="n">tl</span> <span class="n">fibs</span><span class="p">)</span> <span class="n">fibs</span><span class="p">))))</span>
 
-  <span class="k">let</span> <span class="n">nth_fib</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="n">let</span> <span class="n">nth_fib</span> <span class="n">n</span> <span class="o">=</span>
     <span class="n">nth</span> <span class="n">n</span> <span class="n">fibs</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module SequenceFibs :
-  sig
-    type &#39;a sequence = Cons of &#39;a * (unit -&gt; &#39;a sequence)
-    val hd : &#39;a sequence -&gt; &#39;a
-    val tl : &#39;a sequence -&gt; &#39;a sequence
-    val take_aux : int -&gt; &#39;a sequence -&gt; &#39;a list -&gt; &#39;a list
-    val take : int -&gt; &#39;a sequence -&gt; &#39;a list
-    val nth : int -&gt; &#39;a sequence -&gt; &#39;a
-    val sum : int sequence -&gt; int sequence -&gt; int sequence
-    val fibs : int sequence
-    val nth_fib : int -&gt; int
-  end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module LazyFibs :
-  sig
-    type &#39;a lazysequence = Cons of &#39;a * &#39;a lazysequence Lazy.t
-    val hd : &#39;a lazysequence -&gt; &#39;a
-    val tl : &#39;a lazysequence -&gt; &#39;a lazysequence
-    val take_aux : int -&gt; &#39;a lazysequence -&gt; &#39;a list -&gt; &#39;a list
-    val take : int -&gt; &#39;a lazysequence -&gt; &#39;a list
-    val nth : int -&gt; &#39;a lazysequence -&gt; &#39;a
-    val sum : int lazysequence -&gt; int lazysequence -&gt; int lazysequence
-    val fibs : int lazysequence
-    val nth_fib : int -&gt; int
-  end
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1583,34 +1428,42 @@ implementation is much faster than the standard-sequence implementation.</p>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="rb.html" title="previous page"><span class="section-number">8.3. </span>Red-Black Trees</a>
-    <a class='right-next' id="next-link" href="memoization.html" title="next page"><span class="section-number">8.5. </span>Memoization</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="rb.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">8.3. </span>Red-Black Trees</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="memoization.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8.5. </span>Memoization</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

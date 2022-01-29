@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.6. Printing &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,7 +57,10 @@
     <link rel="next" title="2.7. Debugging" href="debugging.html" />
     <link rel="prev" title="2.5. Documentation" href="documentation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -74,6 +77,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -83,9 +90,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -102,7 +109,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -203,7 +210,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -416,7 +423,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -584,7 +591,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -643,7 +650,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -655,7 +662,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -720,7 +727,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -776,12 +783,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#unit">
@@ -811,10 +818,48 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Printing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unit">
+   2.6.1. Unit
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#semicolon">
+   2.6.2. Semicolon
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ignore">
+   2.6.3. Ignore
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#printf">
+   2.6.4. Printf
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="printing">
+  <div class="tex2jax_ignore mathjax_ignore section" id="printing">
 <h1><span class="section-number">2.6. </span>Printing<a class="headerlink" href="#printing" title="Permalink to this headline">¶</a></h1>
 <p>OCaml has built-in printing functions for a few of the built-in primitive
 types: <code class="docutils literal notranslate"><span class="pre">print_char</span></code>, <code class="docutils literal notranslate"><span class="pre">print_string</span></code>, <code class="docutils literal notranslate"><span class="pre">print_int</span></code>, and <code class="docutils literal notranslate"><span class="pre">print_float</span></code>. There’s
@@ -822,15 +867,7 @@ also a <code class="docutils literal notranslate"><span class="pre">print_endlin
 a newline.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span> <span class="s2">&quot;Camels are bae&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Camels are bae
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span> <span class="s2">&quot;Camels are bae&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -840,24 +877,14 @@ a newline.</p>
 <p>Let’s look at the types of a couple of those functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string -&gt; unit = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_string</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string -&gt; unit = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">print_string</span>
 </pre></div>
 </div>
 </div>
@@ -878,23 +905,9 @@ the world and can’t be undone.</p>
 functions using nested <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;Camels&quot;</span> <span class="k">in</span>
-<span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;are&quot;</span> <span class="k">in</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">_</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;Camels&quot;</span> <span class="ow">in</span>
+<span class="n">let</span> <span class="n">_</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;are&quot;</span> <span class="ow">in</span>
 <span class="n">print_endline</span> <span class="s2">&quot;bae&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Camels
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>are
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bae
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
 </div>
@@ -906,23 +919,9 @@ no good reason to bind it to a variable name.  We could also write <code class="
 to indicate we know it’s just a unit value that we don’t care about:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;Camels&quot;</span> <span class="k">in</span>
-<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;are&quot;</span> <span class="k">in</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">()</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;Camels&quot;</span> <span class="ow">in</span>
+<span class="n">let</span> <span class="p">()</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="s2">&quot;are&quot;</span> <span class="ow">in</span>
 <span class="n">print_endline</span> <span class="s2">&quot;bae&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Camels
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>are
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bae
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
 </div>
@@ -934,23 +933,9 @@ evaluates <code class="docutils literal notranslate"><span class="pre">e1</span>
 evaluates <code class="docutils literal notranslate"><span class="pre">e2</span></code>. So we could rewrite the above code as:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span> <span class="s2">&quot;Camels&quot;</span><span class="o">;</span>
-<span class="n">print_endline</span> <span class="s2">&quot;are&quot;</span><span class="o">;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">print_endline</span> <span class="s2">&quot;Camels&quot;</span><span class="p">;</span>
+<span class="n">print_endline</span> <span class="s2">&quot;are&quot;</span><span class="p">;</span>
 <span class="n">print_endline</span> <span class="s2">&quot;bae&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Camels
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>are
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bae
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
 </div>
@@ -974,12 +959,7 @@ can call the built-in function <code class="docutils literal notranslate"><span 
 <code class="docutils literal notranslate"><span class="pre">()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="n">ignore</span> <span class="mi">3</span><span class="o">);</span> <span class="mi">5</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 5
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ignore</span> <span class="mi">3</span><span class="p">);</span> <span class="mi">5</span>
 </pre></div>
 </div>
 </div>
@@ -987,12 +967,7 @@ can call the built-in function <code class="docutils literal notranslate"><span 
 <p>Actually <code class="docutils literal notranslate"><span class="pre">ignore</span></code> is easy to implement yourself:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">ignore</span> <span class="n">x</span> <span class="o">=</span> <span class="bp">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ignore : &#39;a -&gt; unit = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">ignore</span> <span class="n">x</span> <span class="o">=</span> <span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1002,12 +977,7 @@ does not bind that value to a name. That means the function can never use that
 value in its body. But that’s okay: we want to ignore it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">ignore</span> <span class="o">_</span> <span class="o">=</span> <span class="bp">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ignore : &#39;a -&gt; unit = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">ignore</span> <span class="n">_</span> <span class="o">=</span> <span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1020,32 +990,19 @@ printing quickly becomes tedious. For example, suppose you wanted to write a
 function to print a statistic:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [print_stat name num] prints [name: num]. *)</span>
-<span class="k">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
-  <span class="n">print_string</span> <span class="n">name</span><span class="o">;</span>
-  <span class="n">print_string</span> <span class="s2">&quot;: &quot;</span><span class="o">;</span>
-  <span class="n">print_float</span> <span class="n">num</span><span class="o">;</span>
-  <span class="n">print_newline</span> <span class="bp">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val print_stat : string -&gt; float -&gt; unit = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span><span class="p">]</span> <span class="n">prints</span> <span class="p">[</span><span class="n">name</span><span class="p">:</span> <span class="n">num</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
+  <span class="n">print_string</span> <span class="n">name</span><span class="p">;</span>
+  <span class="n">print_string</span> <span class="s2">&quot;: &quot;</span><span class="p">;</span>
+  <span class="n">print_float</span> <span class="n">num</span><span class="p">;</span>
+  <span class="n">print_newline</span> <span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_stat</span> <span class="s2">&quot;mean&quot;</span> <span class="mi">84</span><span class="o">.</span><span class="mi">39</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean: 84.39
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">print_stat</span> <span class="s2">&quot;mean&quot;</span> <span class="mf">84.39</span>
 </pre></div>
 </div>
 </div>
@@ -1069,28 +1026,15 @@ use that name, including OCaml’s <code class="docutils literal notranslate"><s
 <p>Here’s how we’d use <code class="docutils literal notranslate"><span class="pre">printf</span></code> to re-implement <code class="docutils literal notranslate"><span class="pre">print_stat</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
-  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s: %F</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val print_stat : string -&gt; float -&gt; unit = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
+  <span class="n">Printf</span><span class="o">.</span><span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%F</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">print_stat</span> <span class="s2">&quot;mean&quot;</span> <span class="mi">84</span><span class="o">.</span><span class="mi">39</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean: 84.39
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">print_stat</span> <span class="s2">&quot;mean&quot;</span> <span class="mf">84.39</span>
 </pre></div>
 </div>
 </div>
@@ -1128,17 +1072,8 @@ OCaml will detect that.  Let’s add a type annotation to force <code class="doc
 <code class="docutils literal notranslate"><span class="pre">int</span></code>, and see what happens with the float conversion specifier <code class="docutils literal notranslate"><span class="pre">%F</span></code>:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="o">(</span><span class="n">num</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">=</span>
-  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s: %F</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[14]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">34</span><span class="o">-</span><span class="mi">37</span><span class="p">:</span>
-<span class="mi">2</span> <span class="o">|</span>   <span class="n">Printf</span><span class="o">.</span><span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%F</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
-                                      <span class="o">^^^</span>
-<span class="ne">Error</span>: This expression has type int but an expression was expected of type
-         <span class="nb">float</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="p">(</span><span class="n">num</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">=</span>
+  <span class="n">Printf</span><span class="o">.</span><span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%F</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
 </pre></div>
 </div>
 </div>
@@ -1146,13 +1081,8 @@ OCaml will detect that.  Let’s add a type annotation to force <code class="doc
 <p>To fix that, we can change to the conversion specifier for <code class="docutils literal notranslate"><span class="pre">int</span></code>, which is <code class="docutils literal notranslate"><span class="pre">%i</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
-  <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s: %i</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val print_stat : string -&gt; int -&gt; unit = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">print_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
+  <span class="n">Printf</span><span class="o">.</span><span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%i</span><span class="se">\n</span><span class="s2">%!&quot;</span> <span class="n">name</span> <span class="n">num</span>
 </pre></div>
 </div>
 </div>
@@ -1161,25 +1091,15 @@ OCaml will detect that.  Let’s add a type annotation to force <code class="doc
 in string instead of printing it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">string_of_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
-  <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;%s: %F&quot;</span> <span class="n">name</span> <span class="n">num</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val string_of_stat : string -&gt; float -&gt; string = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">string_of_stat</span> <span class="n">name</span> <span class="n">num</span> <span class="o">=</span>
+  <span class="n">Printf</span><span class="o">.</span><span class="n">sprintf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%F</span><span class="s2">&quot;</span> <span class="n">name</span> <span class="n">num</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">string_of_stat</span> <span class="s2">&quot;mean&quot;</span> <span class="mi">84</span><span class="o">.</span><span class="mi">39</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;mean: 84.39&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">string_of_stat</span> <span class="s2">&quot;mean&quot;</span> <span class="mf">84.39</span>
 </pre></div>
 </div>
 </div>
@@ -1209,34 +1129,42 @@ in string instead of printing it:</p>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="documentation.html" title="previous page"><span class="section-number">2.5. </span>Documentation</a>
-    <a class='right-next' id="next-link" href="debugging.html" title="next page"><span class="section-number">2.7. </span>Debugging</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="documentation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2.5. </span>Documentation</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="debugging.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.7. </span>Debugging</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>5.4. Encapsulation &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,7 +57,10 @@
     <link rel="next" title="5.5. Compilation Units" href="compilation_units.html" />
     <link rel="prev" title="5.3. Modules and the Toplevel" href="toplevel.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -74,6 +77,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -83,9 +90,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -102,7 +109,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -203,7 +210,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -416,7 +423,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -584,7 +591,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -643,7 +650,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -655,7 +662,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -720,7 +727,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -776,12 +783,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#opacity">
@@ -806,10 +813,43 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Encapsulation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opacity">
+   5.4.1. Opacity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#abstract-types">
+   5.4.2. Abstract Types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pretty-printing">
+   5.4.3. Pretty Printing
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="encapsulation">
+  <div class="tex2jax_ignore mathjax_ignore section" id="encapsulation">
 <h1><span class="section-number">5.4. </span>Encapsulation<a class="headerlink" href="#encapsulation" title="Permalink to this headline">¶</a></h1>
 <p>One of the main concerns of a module system is to provide <em>encapsulation</em>: the
 hiding of information about implementation behind an interface. OCaml’s module
@@ -823,19 +863,14 @@ don’t want to expose to clients of the module.  For example, maybe you’re
 implementing a math module that provides a tail-recursive factorial function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Math</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="c">(** [fact_aux n acc] is [n! * acc]. *)</span>
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">fact_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">acc</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module Math = struct
+  (** [fact_aux n acc] is [n! * acc]. *)
+  let rec fact_aux n acc =
+    if n = 0 then acc else fact_aux (n - 1) (n * acc)
 
-  <span class="c">(** [fact n] is [n!]. *)</span>
-  <span class="k">let</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="mi">1</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Math : sig val fact_aux : int -&gt; int -&gt; int val fact : int -&gt; int end
+  (** [fact n] is [n!]. *)
+  let fact n = fact_aux n 1
+end
 </pre></div>
 </div>
 </div>
@@ -846,20 +881,15 @@ visible in the signature inferred for <code class="docutils literal notranslate"
 nest <code class="docutils literal notranslate"><span class="pre">fact_aux</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Math</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="c">(** [fact n] is [n!]. *)</span>
-  <span class="k">let</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span>
-    <span class="c">(** [fact_aux n acc] is [n! * acc]. *)</span>
-    <span class="k">let</span> <span class="k">rec</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
-      <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">fact_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">acc</span><span class="o">)</span>
-    <span class="k">in</span>
-    <span class="n">fact_aux</span> <span class="n">n</span> <span class="mi">1</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Math : sig val fact : int -&gt; int end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module Math = struct
+  (** [fact n] is [n!]. *)
+  let fact n =
+    (** [fact_aux n acc] is [n! * acc]. *)
+    let rec fact_aux n acc =
+      if n = 0 then acc else fact_aux (n - 1) (n * acc)
+    in
+    fact_aux n 1
+end
 </pre></div>
 </div>
 </div>
@@ -874,26 +904,18 @@ available for implementers of <code class="docutils literal notranslate"><span c
 those names that clients should see:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">MATH</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="c">(** [fact n] is [n!]. *)</span>
-  <span class="k">val</span> <span class="n">fact</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module type MATH = sig
+  (** [fact n] is [n!]. *)
+  val fact : int -&gt; int
+end
 
-<span class="k">module</span> <span class="nc">Math</span> <span class="o">:</span> <span class="nc">MATH</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="c">(** [fact_aux n acc] is [n! * acc]. *)</span>
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">fact_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">acc</span><span class="o">)</span>
+module Math : MATH = struct
+  (** [fact_aux n acc] is [n! * acc]. *)
+  let rec fact_aux n acc =
+    if n = 0 then acc else fact_aux (n - 1) (n * acc)
 
-  <span class="k">let</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="mi">1</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type MATH = sig val fact : int -&gt; int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Math : MATH
+  let fact n = fact_aux n 1
+end
 </pre></div>
 </div>
 </div>
@@ -902,15 +924,7 @@ those names that clients should see:</p>
 <code class="docutils literal notranslate"><span class="pre">Math</span> <span class="pre">:</span> <span class="pre">MATH</span></code> causes <code class="docutils literal notranslate"><span class="pre">fact_aux</span></code> to be hidden:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Math</span><span class="p">.</span><span class="n">fact_aux</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[4]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">13</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="n">Math</span><span class="o">.</span><span class="n">fact_aux</span>
-    <span class="o">^^^^^^^^^^^^^</span>
-<span class="ne">Error</span>: Unbound value Math.fact_aux
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Math</span><span class="o">.</span><span class="n">fact_aux</span>
 </pre></div>
 </div>
 </div>
@@ -927,31 +941,20 @@ see whether a module defines certain items. The annotations also hide items.</p>
 Then don’t supply the annotation at the time of module definition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">MATH</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="c">(** [fact n] is [n!]. *)</span>
-  <span class="k">val</span> <span class="n">fact</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module type MATH = sig
+  (** [fact n] is [n!]. *)
+  val fact : int -&gt; int
+end
 
-<span class="k">module</span> <span class="nc">Math</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="c">(** [fact_aux n acc] is [n! * acc]. *)</span>
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">fact_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">acc</span><span class="o">)</span>
+module Math = struct
+  (** [fact_aux n acc] is [n! * acc]. *)
+  let rec fact_aux n acc =
+    if n = 0 then acc else fact_aux (n - 1) (n * acc)
 
-  <span class="k">let</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="mi">1</span>
-<span class="k">end</span>
+  let fact n = fact_aux n 1
+end
 
-<span class="k">module</span> <span class="nc">MathCheck</span> <span class="o">:</span> <span class="nc">MATH</span> <span class="o">=</span> <span class="nc">Math</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type MATH = sig val fact : int -&gt; int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Math : sig val fact_aux : int -&gt; int -&gt; int val fact : int -&gt; int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module MathCheck : MATH
+module MathCheck : MATH = Math
 </pre></div>
 </div>
 </div>
@@ -959,27 +962,14 @@ Then don’t supply the annotation at the time of module definition:</p>
 <p>Now <code class="docutils literal notranslate"><span class="pre">Math.fact_aux</span></code> is visible, but <code class="docutils literal notranslate"><span class="pre">MathCheck.fact_aux</span></code> is not:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Math</span><span class="p">.</span><span class="n">fact_aux</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int -&gt; int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Math</span><span class="o">.</span><span class="n">fact_aux</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">MathCheck</span><span class="p">.</span><span class="n">fact_aux</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[7]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">18</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="n">MathCheck</span><span class="o">.</span><span class="n">fact_aux</span>
-    <span class="o">^^^^^^^^^^^^^^^^^^</span>
-<span class="ne">Error</span>: Unbound value MathCheck.fact_aux
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MathCheck</span><span class="o">.</span><span class="n">fact_aux</span>
 </pre></div>
 </div>
 </div>
@@ -988,7 +978,7 @@ Then don’t supply the annotation at the time of module definition:</p>
 never intend to access it; you could instead leave it anonymous:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="o">_</span> <span class="o">:</span> <span class="nc">MATH</span> <span class="o">=</span> <span class="nc">Math</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">_</span> <span class="p">:</span> <span class="n">MATH</span> <span class="o">=</span> <span class="n">Math</span>
 </pre></div>
 </div>
 </div>
@@ -1007,27 +997,16 @@ simultaneously define multiple signatures.</p>
 <p>An analogy to it in OCaml would be the following modules and types:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">C_PUBLIC</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">C_PUBLIC</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">y</span> <span class="p">:</span> <span class="nb">int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">CPrivate</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="n">CPrivate</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">C</span> <span class="o">:</span> <span class="nc">C_PUBLIC</span> <span class="o">=</span> <span class="nc">CPrivate</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type C_PUBLIC = sig val y : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module CPrivate : sig val x : int val y : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module C : C_PUBLIC
+<span class="n">module</span> <span class="n">C</span> <span class="p">:</span> <span class="n">C_PUBLIC</span> <span class="o">=</span> <span class="n">CPrivate</span>
 </pre></div>
 </div>
 </div>
@@ -1047,53 +1026,37 @@ visibility in OO languages at first.</p>
 module and type:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="c">(** [Empty] is raised when an operation cannot be applied</span>
-<span class="c">      to an empty stack. *)</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="ow">is</span> <span class="n">raised</span> <span class="n">when</span> <span class="n">an</span> <span class="n">operation</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">applied</span>
+      <span class="n">to</span> <span class="n">an</span> <span class="n">empty</span> <span class="n">stack</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
 
-  <span class="c">(** [empty] is the empty stack. *)</span>
-  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">empty</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">empty</span> <span class="n">stack</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a list</span>
 
-  <span class="c">(** [is_empty s] is whether [s] is empty. *)</span>
-  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">is_empty</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">whether</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">is_empty</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; bool</span>
 
-  <span class="c">(** [push x s] pushes [x] onto the top of [s]. *)</span>
-  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">push</span> <span class="n">x</span> <span class="n">s</span><span class="p">]</span> <span class="n">pushes</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">onto</span> <span class="n">the</span> <span class="n">top</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">push</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="nb">list</span> <span class="o">-&gt;</span> <span class="s1">&#39;a list</span>
 
-  <span class="c">(** [peek s] is the top element of [s].</span>
-<span class="c">      Raises [Empty] if [s] is empty. *)</span>
-  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">peek</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">top</span> <span class="n">element</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span>
+      <span class="n">Raises</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">peek</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; &#39;</span><span class="n">a</span>
 
-  <span class="c">(** [pop s] is all but the top element of [s].</span>
-<span class="c">      Raises [Empty] if [s] is empty. *)</span>
-  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-<span class="k">end</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">pop</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="nb">all</span> <span class="n">but</span> <span class="n">the</span> <span class="n">top</span> <span class="n">element</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span>
+      <span class="n">Raises</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">pop</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; &#39;</span><span class="n">a</span> <span class="nb">list</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type LIST_STACK =
-  sig
-    exception Empty
-    val empty : &#39;a list
-    val is_empty : &#39;a list -&gt; bool
-    val push : &#39;a -&gt; &#39;a list -&gt; &#39;a list
-    val peek : &#39;a list -&gt; &#39;a
-    val pop : &#39;a list -&gt; &#39;a list
-  end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack : LIST_STACK
+<span class="n">module</span> <span class="n">ListStack</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1120,29 +1083,16 @@ first component of the pair is the same list as before, and the second component
 of the pair is the size of the stack:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStackCachedSize</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="o">(</span><span class="bp">[]</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="o">(</span><span class="bp">[]</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="o">(</span><span class="n">stack</span><span class="o">,</span> <span class="n">size</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">stack</span><span class="o">,</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="o">(</span><span class="bp">[]</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="o">_,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="n">x</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="o">(</span><span class="bp">[]</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
-    <span class="o">|</span> <span class="o">(_</span> <span class="o">::</span> <span class="n">stack</span><span class="o">,</span> <span class="n">size</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">stack</span><span class="o">,</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStackCachedSize :
-  sig
-    exception Empty
-    val empty : &#39;a list * int
-    val is_empty : &#39;a list * &#39;b -&gt; bool
-    val push : &#39;a -&gt; &#39;a list * int -&gt; &#39;a list * int
-    val peek : &#39;a list * &#39;b -&gt; &#39;a
-    val pop : &#39;a list * int -&gt; &#39;a list * int
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListStackCachedSize</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">([],</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">([],</span> <span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="p">::</span> <span class="n">stack</span><span class="p">,</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="p">([],</span> <span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="p">::</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span>
+    <span class="o">|</span> <span class="p">([],</span> <span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
+    <span class="o">|</span> <span class="p">(</span><span class="n">_</span> <span class="p">::</span> <span class="n">stack</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1152,22 +1102,7 @@ of the pair is the size of the stack:</p>
 throughout it to represent the stack—not <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">list</span> <span class="pre">*</span> <span class="pre">int</span></code>.</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">CheckListStackCachedSize</span> <span class="o">:</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="nc">ListStackCachedSize</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[12]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">47</span><span class="o">-</span><span class="mi">66</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="n">module</span> <span class="n">CheckListStackCachedSize</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">ListStackCachedSize</span>
-                                                   <span class="o">^^^^^^^^^^^^^^^^^^^</span>
-<span class="ne">Error</span>: Signature mismatch:
-       <span class="o">...</span>
-       <span class="n">Values</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
-         <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a list * int</span>
-       <span class="ow">is</span> <span class="ow">not</span> <span class="n">included</span> <span class="ow">in</span>
-         <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a list</span>
-       <span class="n">File</span> <span class="s2">&quot;[10]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">7</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">2</span><span class="o">-</span><span class="mi">21</span><span class="p">:</span> <span class="n">Expected</span> <span class="n">declaration</span>
-       <span class="n">File</span> <span class="s2">&quot;[11]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">11</span><span class="p">:</span> <span class="n">Actual</span> <span class="n">declaration</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">CheckListStackCachedSize</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">ListStackCachedSize</span>
 </pre></div>
 </div>
 </div>
@@ -1199,12 +1134,7 @@ that the type <code class="docutils literal notranslate"><span class="pre">'a</s
 <code class="docutils literal notranslate"><span class="pre">ListStackCachedSize</span></code>, e.g. in <code class="docutils literal notranslate"><span class="pre">push</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStackCachedSize</span><span class="p">.</span><span class="n">push</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : &#39;a -&gt; &#39;a list * int -&gt; &#39;a list * int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListStackCachedSize</span><span class="o">.</span><span class="n">push</span>
 </pre></div>
 </div>
 </div>
@@ -1219,31 +1149,16 @@ Let’s see an example of this feature.</p>
 keep the example shorter. And while we’re at it, let’s add the <code class="docutils literal notranslate"><span class="pre">size</span></code> operation.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span>
-  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
-  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span>
-  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
-  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span>
-  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="kt">int</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type LIST_STACK =
-  sig
-    type &#39;a stack
-    exception Empty
-    val empty : &#39;a stack
-    val is_empty : &#39;a stack -&gt; bool
-    val push : &#39;a -&gt; &#39;a stack -&gt; &#39;a stack
-    val peek : &#39;a stack -&gt; &#39;a
-    val pop : &#39;a stack -&gt; &#39;a stack
-    val size : &#39;a stack -&gt; int
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="s1">&#39;a stack</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a stack</span>
+  <span class="n">val</span> <span class="n">is_empty</span> <span class="p">:</span> <span class="s1">&#39;a stack -&gt; bool</span>
+  <span class="n">val</span> <span class="n">push</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="s1">&#39;a stack</span>
+  <span class="n">val</span> <span class="n">peek</span> <span class="p">:</span> <span class="s1">&#39;a stack -&gt; &#39;</span><span class="n">a</span>
+  <span class="n">val</span> <span class="n">pop</span> <span class="p">:</span> <span class="s1">&#39;a stack -&gt; &#39;</span><span class="n">a</span> <span class="n">stack</span>
+  <span class="n">val</span> <span class="n">size</span> <span class="p">:</span> <span class="s1">&#39;a stack -&gt; int</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1257,23 +1172,18 @@ of just one line of code: the first line of the structure, which defines
 <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">stack</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStackCachedSize</span> <span class="o">:</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">*</span> <span class="kt">int</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="o">(</span><span class="bp">[]</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="o">(</span><span class="bp">[]</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="o">(</span><span class="n">stack</span><span class="o">,</span> <span class="n">size</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">stack</span><span class="o">,</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="o">(</span><span class="bp">[]</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="o">_,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="n">x</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="o">(</span><span class="bp">[]</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
-    <span class="o">|</span> <span class="o">(_</span> <span class="o">::</span> <span class="n">stack</span><span class="o">,</span> <span class="n">size</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">stack</span><span class="o">,</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">snd</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStackCachedSize : LIST_STACK
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListStackCachedSize</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a stack = &#39;</span><span class="n">a</span> <span class="nb">list</span> <span class="o">*</span> <span class="nb">int</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">([],</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">([],</span> <span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="p">::</span> <span class="n">stack</span><span class="p">,</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="p">([],</span> <span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="p">::</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span>
+    <span class="o">|</span> <span class="p">([],</span> <span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
+    <span class="o">|</span> <span class="p">(</span><span class="n">_</span> <span class="p">::</span> <span class="n">stack</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">snd</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1287,21 +1197,16 @@ because the type is abstract.)</p>
 the module type.  We just have to add a line to define <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">stack</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack : LIST_STACK
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListStack</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a stack = &#39;</span><span class="n">a</span> <span class="nb">list</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">length</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1311,35 +1216,16 @@ we had failed to define <code class="docutils literal notranslate"><span class="
 the module type:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="c">(* type &#39;a stack = &#39;a list *)</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[17]&quot;, lines 1-10, characters 32-3:
- 1 | ................................struct
- 2 |   (* type &#39;a stack = &#39;a list *)
- 3 |   exception Empty
- 4 |   let empty = []
- 5 |   let is_empty = function [] -&gt; true | _ -&gt; false
- 6 |   let push x s = x :: s
- 7 |   let peek = function [] -&gt; raise Empty | x :: _ -&gt; x
- 8 |   let pop = function [] -&gt; raise Empty | _ :: s -&gt; s
- 9 |   let size = List.length
-10 | end
-Error: Signature mismatch:
-       ...
-       The type `stack&#39; is required but not provided
-       File &quot;[14]&quot;, line 2, characters 2-15: Expected declaration
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListStack</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="p">(</span><span class="o">*</span> <span class="nb">type</span> <span class="s1">&#39;a stack = &#39;</span><span class="n">a</span> <span class="nb">list</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">length</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1349,22 +1235,17 @@ overly-complicated, in part to illustrate how the abstract type can hide
 implementation details that are better not revealed to clients:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">CustomStack</span> <span class="o">:</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">entry</span> <span class="o">=</span> <span class="o">{</span><span class="n">top</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span> <span class="n">rest</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span><span class="o">;</span> <span class="n">size</span> <span class="o">:</span> <span class="kt">int</span><span class="o">}</span>
-  <span class="ow">and</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">=</span> <span class="nc">S</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">entry</span> <span class="n">option</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="nc">S</span> <span class="nc">None</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="nc">S</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="k">function</span> <span class="nc">S</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="mi">0</span> <span class="o">|</span> <span class="nc">S</span> <span class="o">(</span><span class="nc">Some</span> <span class="o">{</span><span class="n">size</span><span class="o">})</span> <span class="o">-&gt;</span> <span class="n">size</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="nc">S</span> <span class="o">(</span><span class="nc">Some</span> <span class="o">{</span><span class="n">top</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span> <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="o">})</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="nc">S</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="nc">S</span> <span class="o">(</span><span class="nc">Some</span> <span class="o">{</span><span class="n">top</span><span class="o">})</span> <span class="o">-&gt;</span> <span class="n">top</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="nc">S</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="nc">S</span> <span class="o">(</span><span class="nc">Some</span> <span class="o">{</span><span class="n">rest</span><span class="o">})</span> <span class="o">-&gt;</span> <span class="n">rest</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module CustomStack : LIST_STACK
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">CustomStack</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a entry = {top : &#39;</span><span class="n">a</span><span class="p">;</span> <span class="n">rest</span> <span class="p">:</span> <span class="s1">&#39;a stack; size : int}</span>
+  <span class="ow">and</span> <span class="s1">&#39;a stack = S of &#39;</span><span class="n">a</span> <span class="n">entry</span> <span class="n">option</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="n">S</span> <span class="kc">None</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="n">S</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">function</span> <span class="n">S</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">S</span> <span class="p">(</span><span class="n">Some</span> <span class="p">{</span><span class="n">size</span><span class="p">})</span> <span class="o">-&gt;</span> <span class="n">size</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">S</span> <span class="p">(</span><span class="n">Some</span> <span class="p">{</span><span class="n">top</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span> <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">})</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="n">S</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">S</span> <span class="p">(</span><span class="n">Some</span> <span class="p">{</span><span class="n">top</span><span class="p">})</span> <span class="o">-&gt;</span> <span class="n">top</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span> <span class="n">S</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">S</span> <span class="p">(</span><span class="n">Some</span> <span class="p">{</span><span class="n">rest</span><span class="p">})</span> <span class="o">-&gt;</span> <span class="n">rest</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1378,45 +1259,27 @@ name, since there is no module named <code class="docutils literal notranslate">
 confused with it. That avoids the all-caps look of our code shouting at us.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span>
-  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
-  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span>
-  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
-  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span>
-  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Stack</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="s1">&#39;a stack</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a stack</span>
+  <span class="n">val</span> <span class="n">is_empty</span> <span class="p">:</span> <span class="s1">&#39;a stack -&gt; bool</span>
+  <span class="n">val</span> <span class="n">push</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">-&gt;</span> <span class="s1">&#39;a stack</span>
+  <span class="n">val</span> <span class="n">peek</span> <span class="p">:</span> <span class="s1">&#39;a stack -&gt; &#39;</span><span class="n">a</span>
+  <span class="n">val</span> <span class="n">pop</span> <span class="p">:</span> <span class="s1">&#39;a stack -&gt; &#39;</span><span class="n">a</span> <span class="n">stack</span>
+  <span class="n">val</span> <span class="n">size</span> <span class="p">:</span> <span class="s1">&#39;a stack -&gt; int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Stack =
-  sig
-    type &#39;a stack
-    exception Empty
-    val empty : &#39;a stack
-    val is_empty : &#39;a stack -&gt; bool
-    val push : &#39;a -&gt; &#39;a stack -&gt; &#39;a stack
-    val peek : &#39;a stack -&gt; &#39;a
-    val pop : &#39;a stack -&gt; &#39;a stack
-    val size : &#39;a stack -&gt; int
-  end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack : Stack
+<span class="n">module</span> <span class="n">ListStack</span> <span class="p">:</span> <span class="n">Stack</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a stack = &#39;</span><span class="n">a</span> <span class="nb">list</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">length</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1426,12 +1289,7 @@ confused with it. That avoids the all-caps look of our code shouting at us.</p>
 back to it):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="n">empty</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : &#39;a ListStack.stack = &lt;abstr&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">.</span><span class="n">empty</span>
 </pre></div>
 </div>
 </div>
@@ -1443,60 +1301,39 @@ idiomatically use a standard name, <code class="docutils literal notranslate"><s
 name:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
-  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
-  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Stack</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a t</span>
+  <span class="n">val</span> <span class="n">is_empty</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; bool</span>
+  <span class="n">val</span> <span class="n">push</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="s1">&#39;a t</span>
+  <span class="n">val</span> <span class="n">peek</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; &#39;</span><span class="n">a</span>
+  <span class="n">val</span> <span class="n">pop</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="n">size</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="n">ListStack</span> <span class="p">:</span> <span class="n">Stack</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t = &#39;</span><span class="n">a</span> <span class="nb">list</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">length</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">CustomStack</span> <span class="o">:</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">entry</span> <span class="o">=</span> <span class="o">{</span><span class="n">top</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span> <span class="n">rest</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">;</span> <span class="n">size</span> <span class="o">:</span> <span class="kt">int</span><span class="o">}</span>
-  <span class="ow">and</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="nc">S</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">entry</span> <span class="n">option</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="nc">S</span> <span class="nc">None</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="nc">S</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="k">function</span> <span class="nc">S</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="mi">0</span> <span class="o">|</span> <span class="nc">S</span> <span class="o">(</span><span class="nc">Some</span> <span class="o">{</span><span class="n">size</span><span class="o">})</span> <span class="o">-&gt;</span> <span class="n">size</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="nc">S</span> <span class="o">(</span><span class="nc">Some</span> <span class="o">{</span><span class="n">top</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span> <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="o">})</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="nc">S</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="nc">S</span> <span class="o">(</span><span class="nc">Some</span> <span class="o">{</span><span class="n">top</span><span class="o">})</span> <span class="o">-&gt;</span> <span class="n">top</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="nc">S</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="nc">S</span> <span class="o">(</span><span class="nc">Some</span> <span class="o">{</span><span class="n">rest</span><span class="o">})</span> <span class="o">-&gt;</span> <span class="n">rest</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Stack =
-  sig
-    type &#39;a t
-    exception Empty
-    val empty : &#39;a t
-    val is_empty : &#39;a t -&gt; bool
-    val push : &#39;a -&gt; &#39;a t -&gt; &#39;a t
-    val peek : &#39;a t -&gt; &#39;a
-    val pop : &#39;a t -&gt; &#39;a t
-    val size : &#39;a t -&gt; int
-  end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack : Stack
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module CustomStack : Stack
+<span class="n">module</span> <span class="n">CustomStack</span> <span class="p">:</span> <span class="n">Stack</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a entry = {top : &#39;</span><span class="n">a</span><span class="p">;</span> <span class="n">rest</span> <span class="p">:</span> <span class="s1">&#39;a t; size : int}</span>
+  <span class="ow">and</span> <span class="s1">&#39;a t = S of &#39;</span><span class="n">a</span> <span class="n">entry</span> <span class="n">option</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="n">S</span> <span class="kc">None</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="n">S</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">function</span> <span class="n">S</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">S</span> <span class="p">(</span><span class="n">Some</span> <span class="p">{</span><span class="n">size</span><span class="p">})</span> <span class="o">-&gt;</span> <span class="n">size</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">S</span> <span class="p">(</span><span class="n">Some</span> <span class="p">{</span><span class="n">top</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span> <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">})</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="n">S</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">S</span> <span class="p">(</span><span class="n">Some</span> <span class="p">{</span><span class="n">top</span><span class="p">})</span> <span class="o">-&gt;</span> <span class="n">top</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span> <span class="n">S</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">S</span> <span class="p">(</span><span class="n">Some</span> <span class="p">{</span><span class="n">rest</span><span class="p">})</span> <span class="o">-&gt;</span> <span class="n">rest</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1504,16 +1341,8 @@ name:</p>
 <p>Now the type of stacks is simpler:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="n">empty</span><span class="o">;;</span>
-<span class="nn">CustomStack</span><span class="p">.</span><span class="n">empty</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : &#39;a ListStack.t = &lt;abstr&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : &#39;a CustomStack.t = &lt;abstr&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">.</span><span class="n">empty</span><span class="p">;;</span>
+<span class="n">CustomStack</span><span class="o">.</span><span class="n">empty</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1528,28 +1357,17 @@ t” part. For example, we might say “alpha ListStack”, simply ignoring the
 can expose the definition of a type in a signature if you want to:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
-  <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="n">t</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">T</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span>
+  <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="n">t</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">M</span> <span class="o">:</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
-  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="n">M</span> <span class="p">:</span> <span class="n">T</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span>
+  <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">end</span>
 
-<span class="k">let</span> <span class="n">a</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="nn">M</span><span class="p">.</span><span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig type t = int val x : t end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : T
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val a : int = 42
+<span class="n">let</span> <span class="n">a</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1559,32 +1377,17 @@ the equality of types <code class="docutils literal notranslate"><span class="pr
 But if we kept <code class="docutils literal notranslate"><span class="pre">t</span></code> abstract, the same usage would fail:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="c">(* = int *)</span>
-  <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="n">t</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">T</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="p">(</span><span class="o">*</span> <span class="o">=</span> <span class="nb">int</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="n">t</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">M</span> <span class="o">:</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
-  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="n">M</span> <span class="p">:</span> <span class="n">T</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span>
+  <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">end</span>
 
-<span class="k">let</span> <span class="n">a</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="nn">M</span><span class="p">.</span><span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig type t val x : t end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : T
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[24]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">11</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">14</span><span class="o">-</span><span class="mi">17</span><span class="p">:</span>
-<span class="mi">11</span> <span class="o">|</span> <span class="n">let</span> <span class="n">a</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">x</span>
-                   <span class="o">^^^</span>
-<span class="ne">Error</span>: This expression has type M.t but an expression was expected of type
-         <span class="nb">int</span>
+<span class="n">let</span> <span class="n">a</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1599,16 +1402,8 @@ detail hidden.</p>
 <code class="docutils literal notranslate"><span class="pre">&lt;abstr&gt;</span></code> in place of the actual contents of a value whose type is abstract:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="n">empty</span><span class="o">;;</span>
-<span class="nn">ListStack</span><span class="p">.</span><span class="o">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">2</span><span class="o">);;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : &#39;a ListStack.t = &lt;abstr&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int ListStack.t = &lt;abstr&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">.</span><span class="n">empty</span><span class="p">;;</span>
+<span class="n">ListStack</span><span class="o">.</span><span class="p">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">2</span><span class="p">);;</span>
 </pre></div>
 </div>
 </div>
@@ -1617,12 +1412,7 @@ detail hidden.</p>
 unprintable value. We’ve encountered that before with functions and <code class="docutils literal notranslate"><span class="pre">&lt;fun&gt;</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : &#39;a -&gt; &#39;a = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1654,19 +1444,7 @@ large outputs.</p>
 <p>Consider the output from this expression, which creates nested lists:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">List</span><span class="p">.</span><span class="n">init</span> <span class="mi">15</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">init</span> <span class="n">n</span> <span class="o">(</span><span class="nn">Fun</span><span class="p">.</span><span class="n">const</span> <span class="n">n</span><span class="o">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list list =
-[[]; [1]; [2; 2]; [3; 3; 3]; [4; 4; 4; 4]; [5; 5; 5; 5; 5];
- [6; 6; 6; 6; 6; 6]; [7; 7; 7; 7; 7; 7; 7]; [8; 8; 8; 8; 8; 8; 8; 8];
- [9; 9; 9; 9; 9; 9; 9; 9; 9]; [10; 10; 10; 10; 10; 10; 10; 10; 10; 10];
- [11; 11; 11; 11; 11; 11; 11; 11; 11; 11; 11];
- [12; 12; 12; 12; 12; 12; 12; 12; 12; 12; 12; 12];
- [13; 13; 13; 13; 13; 13; 13; 13; 13; 13; 13; 13; 13];
- [14; 14; 14; 14; 14; 14; 14; 14; 14; 14; 14; 14; 14; 14]]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">.</span><span class="n">init</span> <span class="mi">15</span> <span class="p">(</span><span class="n">fun</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">init</span> <span class="n">n</span> <span class="p">(</span><span class="n">Fun</span><span class="o">.</span><span class="n">const</span> <span class="n">n</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1685,13 +1463,8 @@ toplevel and add ” kupo” to the end of each string. Here’s code that would
 it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">kupo_pp</span> <span class="n">fmt</span> <span class="n">s</span> <span class="o">=</span> <span class="nn">Format</span><span class="p">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;%s kupo&quot;</span> <span class="n">s</span><span class="o">;;</span>
-<span class="o">#</span><span class="n">install_printer</span> <span class="n">kupo_pp</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val kupo_pp : Format.formatter -&gt; string -&gt; unit = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">kupo_pp</span> <span class="n">fmt</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Format</span><span class="o">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> kupo&quot;</span> <span class="n">s</span><span class="p">;;</span>
+<span class="c1">#install_printer kupo_pp;;</span>
 </pre></div>
 </div>
 </div>
@@ -1700,16 +1473,8 @@ it:</p>
 even though it’s not actual a part of the original string:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">h</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
-<span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="nn">String</span><span class="p">.</span><span class="n">length</span> <span class="n">h</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val h : string = Hello kupo
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s : int = 5
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">h</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
+<span class="n">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="n">length</span> <span class="n">h</span>
 </pre></div>
 </div>
 </div>
@@ -1718,7 +1483,7 @@ even though it’s not actual a part of the original string:</p>
 section, let’s uninstall that pretty printer before going on:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">remove_printer</span> <span class="n">kupo_pp</span><span class="o">;;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#remove_printer kupo_pp;;</span>
 </pre></div>
 </div>
 </div>
@@ -1726,35 +1491,18 @@ section, let’s uninstall that pretty printer before going on:</p>
 <p>As a bigger example, let’s add pretty printing to <code class="docutils literal notranslate"><span class="pre">ListStack</span></code>:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
-  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
-  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
-  <span class="k">val</span> <span class="n">pp</span> <span class="o">:</span>
-    <span class="o">(</span><span class="nn">Format</span><span class="p">.</span><span class="n">formatter</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nn">Format</span><span class="p">.</span><span class="n">formatter</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Stack =
-  sig
-    type &#39;a t
-    exception Empty
-    val empty : &#39;a t
-    val is_empty : &#39;a t -&gt; bool
-    val push : &#39;a -&gt; &#39;a t -&gt; &#39;a t
-    val peek : &#39;a t -&gt; &#39;a
-    val pop : &#39;a t -&gt; &#39;a t
-    val size : &#39;a t -&gt; int
-    val pp :
-      (Format.formatter -&gt; &#39;a -&gt; unit) -&gt; Format.formatter -&gt; &#39;a t -&gt; unit
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Stack</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a t</span>
+  <span class="n">val</span> <span class="n">is_empty</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; bool</span>
+  <span class="n">val</span> <span class="n">push</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="s1">&#39;a t</span>
+  <span class="n">val</span> <span class="n">peek</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; &#39;</span><span class="n">a</span>
+  <span class="n">val</span> <span class="n">pop</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="n">size</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; int</span>
+  <span class="n">val</span> <span class="n">pp</span> <span class="p">:</span>
+    <span class="p">(</span><span class="n">Format</span><span class="o">.</span><span class="n">formatter</span> <span class="o">-&gt;</span> <span class="s1">&#39;a -&gt; unit) -&gt; Format.formatter -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">unit</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1767,28 +1515,23 @@ for type <code class="docutils literal notranslate"><span class="pre">'a</span><
 to be able to pretty print the values of type <code class="docutils literal notranslate"><span class="pre">'a</span></code>.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span> <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
-  <span class="k">let</span> <span class="n">size</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">length</span>
-  <span class="k">let</span> <span class="n">pp</span> <span class="n">pp_val</span> <span class="n">fmt</span> <span class="n">s</span> <span class="o">=</span>
-    <span class="k">let</span> <span class="k">open</span> <span class="nc">Format</span> <span class="k">in</span>
-    <span class="k">let</span> <span class="n">pp_break</span> <span class="n">fmt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;@,&quot;</span> <span class="k">in</span>
-    <span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;@[&lt;v 0&gt;top of stack&quot;</span><span class="o">;</span>
-    <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;&gt;</span> <span class="bp">[]</span> <span class="k">then</span> <span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;@,&quot;</span><span class="o">;</span>
-    <span class="n">pp_print_list</span> <span class="o">~</span><span class="n">pp_sep</span><span class="o">:</span><span class="n">pp_break</span> <span class="n">pp_val</span> <span class="n">fmt</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="n">s</span><span class="o">);</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListStack</span> <span class="p">:</span> <span class="n">Stack</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t = &#39;</span><span class="n">a</span> <span class="nb">list</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">length</span>
+  <span class="n">let</span> <span class="n">pp</span> <span class="n">pp_val</span> <span class="n">fmt</span> <span class="n">s</span> <span class="o">=</span>
+    <span class="n">let</span> <span class="nb">open</span> <span class="n">Format</span> <span class="ow">in</span>
+    <span class="n">let</span> <span class="n">pp_break</span> <span class="n">fmt</span> <span class="p">()</span> <span class="o">=</span> <span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;@,&quot;</span> <span class="ow">in</span>
+    <span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;@[&lt;v 0&gt;top of stack&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;&gt;</span> <span class="p">[]</span> <span class="n">then</span> <span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;@,&quot;</span><span class="p">;</span>
+    <span class="n">pp_print_list</span> <span class="o">~</span><span class="n">pp_sep</span><span class="p">:</span><span class="n">pp_break</span> <span class="n">pp_val</span> <span class="n">fmt</span> <span class="p">(</span><span class="n">List</span><span class="o">.</span><span class="n">rev</span> <span class="n">s</span><span class="p">);</span>
     <span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;@,bottom of stack@]&quot;</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack : Stack
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1799,35 +1542,21 @@ of the stack. The rest of the code handles the indentation and line breaks.
 Here’s the result:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">install_printer</span> <span class="nn">ListStack</span><span class="p">.</span><span class="n">pp</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#install_printer ListStack.pp</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="n">empty</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : &#39;a ListStack.t = top of stack
-                     bottom of stack
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">.</span><span class="n">empty</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="o">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">2</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int ListStack.t = top of stack
-                      1
-                      2
-                      bottom of stack
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">.</span><span class="p">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1862,34 +1591,42 @@ polymorphic types.</p>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="toplevel.html" title="previous page"><span class="section-number">5.3. </span>Modules and the Toplevel</a>
-    <a class='right-next' id="next-link" href="compilation_units.html" title="next page"><span class="section-number">5.5. </span>Compilation Units</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="toplevel.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">5.3. </span>Modules and the Toplevel</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="compilation_units.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.5. </span>Compilation Units</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

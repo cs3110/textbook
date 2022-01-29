@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>6.8. Structural Induction &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,7 +57,10 @@
     <link rel="next" title="6.9. Algebraic Specification" href="alg_spec.html" />
     <link rel="prev" title="6.7. Proving Correctness" href="proving_correctness.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -74,6 +77,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -83,9 +90,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -102,7 +109,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -203,7 +210,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -416,7 +423,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -584,7 +591,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -643,7 +650,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -655,7 +662,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -720,7 +727,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -776,12 +783,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#induction-on-naturals">
@@ -821,10 +828,58 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Structural Induction</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-on-naturals">
+   6.8.1. Induction on Naturals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-on-lists">
+   6.8.2. Induction on Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-theorem-about-folding">
+   6.8.3. A Theorem about Folding
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-on-trees">
+   6.8.4. Induction on Trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-principles-for-all-variants">
+   6.8.5. Induction Principles for All Variants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#induction-and-recursion">
+   6.8.6. Induction and Recursion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="structural-induction">
+  <div class="tex2jax_ignore mathjax_ignore section" id="structural-induction">
 <h1><span class="section-number">6.8. </span>Structural Induction<a class="headerlink" href="#structural-induction" title="Permalink to this headline">¶</a></h1>
 <p>So far we’ve proved the correctness of recursive functions on natural numbers.
 We can do correctness proofs about recursive functions on variant types, too.
@@ -844,12 +899,7 @@ and there is an upper bound to what natural numbers we can represent with <code 
 numbers:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">nat</span> <span class="o">=</span> <span class="nc">Z</span> <span class="o">|</span> <span class="nc">S</span> <span class="k">of</span> <span class="n">nat</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type nat = Z | S of nat
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">nat</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">|</span> <span class="n">S</span> <span class="n">of</span> <span class="n">nat</span>
 </pre></div>
 </div>
 </div>
@@ -868,15 +918,10 @@ representation of the natural numbers: the number of times <code class="docutils
 <p>We can define addition on natural numbers with the following function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">plus</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">plus</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span>
   <span class="k">match</span> <span class="n">a</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="nc">Z</span> <span class="o">-&gt;</span> <span class="n">b</span>
-  <span class="o">|</span> <span class="nc">S</span> <span class="n">k</span> <span class="o">-&gt;</span> <span class="nc">S</span> <span class="o">(</span><span class="n">plus</span> <span class="n">k</span> <span class="n">b</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val plus : nat -&gt; nat -&gt; nat = &lt;fun&gt;
+  <span class="o">|</span> <span class="n">Z</span> <span class="o">-&gt;</span> <span class="n">b</span>
+  <span class="o">|</span> <span class="n">S</span> <span class="n">k</span> <span class="o">-&gt;</span> <span class="n">S</span> <span class="p">(</span><span class="n">plus</span> <span class="n">k</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1010,20 +1055,12 @@ Show: P(h :: t)
 operator:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">append</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">append</span> <span class="n">lst1</span> <span class="n">lst2</span> <span class="o">=</span>
   <span class="k">match</span> <span class="n">lst1</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">lst2</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">::</span> <span class="n">append</span> <span class="n">t</span> <span class="n">lst2</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">lst2</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="p">::</span> <span class="n">append</span> <span class="n">t</span> <span class="n">lst2</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">@</span> <span class="o">)</span> <span class="o">=</span> <span class="n">append</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val append : &#39;a list -&gt; &#39;a list -&gt; &#39;a list = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( @ ) : &#39;a list -&gt; &#39;a list -&gt; &#39;a list = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">@</span> <span class="p">)</span> <span class="o">=</span> <span class="n">append</span>
 </pre></div>
 </div>
 </div>
@@ -1090,23 +1127,15 @@ fold functions get the same answer. Let’s prove it!</p>
 <p>First, recall the definitions of the fold functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">lst</span> <span class="o">=</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">lst</span> <span class="o">=</span>
   <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">acc</span> <span class="n">h</span><span class="o">)</span> <span class="n">t</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="n">acc</span> <span class="n">h</span><span class="p">)</span> <span class="n">t</span>
 
-<span class="k">let</span> <span class="k">rec</span> <span class="n">fold_right</span> <span class="n">f</span> <span class="n">lst</span> <span class="n">acc</span> <span class="o">=</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">fold_right</span> <span class="n">f</span> <span class="n">lst</span> <span class="n">acc</span> <span class="o">=</span>
   <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">(</span><span class="n">fold_right</span> <span class="n">f</span> <span class="n">t</span> <span class="n">acc</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fold_left : (&#39;a -&gt; &#39;b -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;b list -&gt; &#39;a = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fold_right : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b -&gt; &#39;b = &lt;fun&gt;
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="p">(</span><span class="n">fold_right</span> <span class="n">f</span> <span class="n">t</span> <span class="n">acc</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1259,16 +1288,8 @@ associative operator causes <code class="docutils literal notranslate"><span cla
 definitions of both, aligned for comparison:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">=</span> <span class="bp">[]</span>   <span class="o">|</span> <span class="o">(</span> <span class="o">::</span> <span class="o">)</span> <span class="k">of</span>           <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">tree</span> <span class="o">=</span> <span class="nc">Leaf</span> <span class="o">|</span> <span class="nc">Node</span>   <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">tree</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">tree</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a list = [] | (::) of &#39;a * &#39;a list
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a tree = Leaf | Node of &#39;a tree * &#39;a * &#39;a tree
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="s1">&#39;a list = []   | ( :: ) of           &#39;</span><span class="n">a</span> <span class="o">*</span> <span class="s1">&#39;a list</span>
+<span class="nb">type</span> <span class="s1">&#39;a tree = Leaf | Node   of &#39;</span><span class="n">a</span> <span class="n">tree</span> <span class="o">*</span> <span class="s1">&#39;a * &#39;</span><span class="n">a</span> <span class="n">tree</span>
 </pre></div>
 </div>
 </div>
@@ -1303,14 +1324,9 @@ Show: P(Node (l, v, r))
 mirror image of a tree, swapping its left and right subtrees at all levels:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">reflect</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="nc">Leaf</span>
-  <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">l</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">reflect</span> <span class="n">r</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">reflect</span> <span class="n">l</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val reflect : &#39;a tree -&gt; &#39;a tree = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">reflect</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="n">Leaf</span> <span class="o">-&gt;</span> <span class="n">Leaf</span>
+  <span class="o">|</span> <span class="n">Node</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span> <span class="p">(</span><span class="n">reflect</span> <span class="n">r</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">reflect</span> <span class="n">l</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1387,34 +1403,19 @@ that purpose.</p>
 expressions with integers, Booleans, unary operators, and binary operators:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">uop</span> <span class="o">=</span>
-  <span class="o">|</span> <span class="nc">UMinus</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">uop</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="n">UMinus</span>
 
-<span class="k">type</span> <span class="n">bop</span> <span class="o">=</span>
-  <span class="o">|</span> <span class="nc">BPlus</span>
-  <span class="o">|</span> <span class="nc">BMinus</span>
-  <span class="o">|</span> <span class="nc">BLeq</span>
+<span class="nb">type</span> <span class="n">bop</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="n">BPlus</span>
+  <span class="o">|</span> <span class="n">BMinus</span>
+  <span class="o">|</span> <span class="n">BLeq</span>
 
-<span class="k">type</span> <span class="n">expr</span> <span class="o">=</span>
-  <span class="o">|</span> <span class="nc">Int</span> <span class="k">of</span> <span class="kt">int</span>
-  <span class="o">|</span> <span class="nc">Bool</span> <span class="k">of</span> <span class="kt">bool</span>
-  <span class="o">|</span> <span class="nc">Unop</span> <span class="k">of</span> <span class="n">uop</span> <span class="o">*</span> <span class="n">expr</span>
-  <span class="o">|</span> <span class="nc">Binop</span> <span class="k">of</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">bop</span> <span class="o">*</span> <span class="n">expr</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type uop = UMinus
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type bop = BPlus | BMinus | BLeq
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type expr =
-    Int of int
-  | Bool of bool
-  | Unop of uop * expr
-  | Binop of expr * bop * expr
+<span class="nb">type</span> <span class="n">expr</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="n">Int</span> <span class="n">of</span> <span class="nb">int</span>
+  <span class="o">|</span> <span class="n">Bool</span> <span class="n">of</span> <span class="nb">bool</span>
+  <span class="o">|</span> <span class="n">Unop</span> <span class="n">of</span> <span class="n">uop</span> <span class="o">*</span> <span class="n">expr</span>
+  <span class="o">|</span> <span class="n">Binop</span> <span class="n">of</span> <span class="n">expr</span> <span class="o">*</span> <span class="n">bop</span> <span class="o">*</span> <span class="n">expr</span>
 </pre></div>
 </div>
 </div>
@@ -1480,34 +1481,42 @@ recurse on the smaller value.</p></li>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="proving_correctness.html" title="previous page"><span class="section-number">6.7. </span>Proving Correctness</a>
-    <a class='right-next' id="next-link" href="alg_spec.html" title="next page"><span class="section-number">6.9. </span>Algebraic Specification</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="proving_correctness.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.7. </span>Proving Correctness</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="alg_spec.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.9. </span>Algebraic Specification</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

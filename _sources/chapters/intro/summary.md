@@ -37,9 +37,6 @@ of beauty.
 * [The value of values](https://www.infoq.com/presentations/Value-Values): a lecture
   by the designer of Clojure (a modern dialect of Lisp) on how the time of
   imperative programming has passed
-* [The perils of JavaSchools](https://www.joelonsoftware.com/2005/12/29/the-perils-of-javaschools-2/):
-  an essay by the CEO of Stack Overflow on why (my words here) CS 2110 is not enough,
-  and why you need both CS 3110 and CS 3410.
 * [Teach yourself programming in 10 years](http://norvig.com/21-days.html):
   an essay by a Director of Research at Google that puts the
   time required to become an educated programmer into perspective

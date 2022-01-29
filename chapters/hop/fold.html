@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>4.4. Fold &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,7 +57,10 @@
     <link rel="next" title="4.5. Beyond Lists" href="beyond_lists.html" />
     <link rel="prev" title="4.3. Filter" href="filter.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -74,6 +77,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -83,9 +90,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -102,7 +109,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -203,7 +210,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -416,7 +423,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -584,7 +591,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -643,7 +650,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -655,7 +662,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -720,7 +727,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -776,12 +783,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#combine">
@@ -831,10 +838,68 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Fold</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combine">
+   4.4.1. Combine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fold-right">
+   4.4.2. Fold Right
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tail-recursion-and-combine">
+   4.4.3. Tail Recursion and Combine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fold-left">
+   4.4.4. Fold Left
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fold-left-vs-fold-right">
+   4.4.5. Fold Left vs. Fold Right
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-digression-on-labeled-arguments-and-fold">
+   4.4.6. A Digression on Labeled Arguments and Fold
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-fold-to-implement-other-functions">
+   4.4.7. Using Fold to Implement Other Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fold-vs-recursive-vs-library">
+   4.4.8. Fold vs. Recursive vs. Library
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="fold">
+  <div class="tex2jax_ignore mathjax_ignore section" id="fold">
 <h1><span class="section-number">4.4. </span>Fold<a class="headerlink" href="#fold" title="Permalink to this headline">¶</a></h1>
 <p>The map functional gives us a way to individually transform each element of a
 list. The filter functional gives us a way to individually decide whether to
@@ -850,40 +915,24 @@ library—that we call <em>combine</em>.</p>
 <p>Once more, let’s write two functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [sum lst] is the sum of all the elements of [lst]. *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="nb">sum</span> <span class="n">lst</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">sum</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">elements</span> <span class="n">of</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="nb">sum</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="nb">sum</span> <span class="n">t</span>
 
-<span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s : int = 6
+<span class="n">let</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [concat lst] is the concatenation of all the elements of [lst]. *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">concat</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="s2">&quot;&quot;</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">^</span> <span class="n">concat</span> <span class="n">t</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">concat</span> <span class="n">lst</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">concatenation</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">elements</span> <span class="n">of</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">concat</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="s2">&quot;&quot;</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">^</span> <span class="n">concat</span> <span class="n">t</span>
 
-<span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="n">concat</span> <span class="o">[</span><span class="s2">&quot;a&quot;</span><span class="o">;</span> <span class="s2">&quot;b&quot;</span><span class="o">;</span> <span class="s2">&quot;c&quot;</span><span class="o">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat : string list -&gt; string = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val c : string = &quot;abc&quot;
+<span class="n">let</span> <span class="n">c</span> <span class="o">=</span> <span class="n">concat</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">;</span> <span class="s2">&quot;b&quot;</span><span class="p">;</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -900,31 +949,17 @@ factor out <em>two</em> arguments: one for each of those two differences.</p>
 <p>To start, let’s factor out only the initial value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">sum&#39;</span> <span class="n">init</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">init</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="n">sum&#39;</span> <span class="n">init</span> <span class="n">t</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="nb">sum</span><span class="s1">&#39; init = function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">init</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="nb">sum</span><span class="s1">&#39; init t</span>
 
-<span class="k">let</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">sum&#39;</span> <span class="mi">0</span>
+<span class="n">let</span> <span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span><span class="s1">&#39; 0</span>
 
-<span class="k">let</span> <span class="k">rec</span> <span class="n">concat&#39;</span> <span class="n">init</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">init</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">^</span> <span class="n">concat&#39;</span> <span class="n">init</span> <span class="n">t</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">concat</span><span class="s1">&#39; init = function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">init</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">^</span> <span class="n">concat</span><span class="s1">&#39; init t</span>
 
-<span class="k">let</span> <span class="n">concat</span> <span class="o">=</span> <span class="n">concat&#39;</span> <span class="s2">&quot;&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum&#39; : int -&gt; int list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat&#39; : string -&gt; string list -&gt; string = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat : string list -&gt; string = &lt;fun&gt;
+<span class="n">let</span> <span class="n">concat</span> <span class="o">=</span> <span class="n">concat</span><span class="s1">&#39; &quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -934,23 +969,12 @@ used to combine the head with the recursive call on the tail. That operator can
 also become an argument to a unified function we call <code class="docutils literal notranslate"><span class="pre">combine</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">combine</span> <span class="n">op</span> <span class="n">init</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">init</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">op</span> <span class="n">h</span> <span class="o">(</span><span class="n">combine</span> <span class="n">op</span> <span class="n">init</span> <span class="n">t</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">combine</span> <span class="n">op</span> <span class="n">init</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">init</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">op</span> <span class="n">h</span> <span class="p">(</span><span class="n">combine</span> <span class="n">op</span> <span class="n">init</span> <span class="n">t</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">combine</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">0</span>
-<span class="k">let</span> <span class="n">concat</span> <span class="o">=</span> <span class="n">combine</span> <span class="o">(</span> <span class="o">^</span> <span class="o">)</span> <span class="s2">&quot;&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val combine : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a list -&gt; &#39;b = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat : string list -&gt; string = &lt;fun&gt;
+<span class="n">let</span> <span class="nb">sum</span> <span class="o">=</span> <span class="n">combine</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="mi">0</span>
+<span class="n">let</span> <span class="n">concat</span> <span class="o">=</span> <span class="n">combine</span> <span class="p">(</span> <span class="o">^</span> <span class="p">)</span> <span class="s2">&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -978,14 +1002,9 @@ that really we could pass in any function, not just a built-in operator like
 That yields:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">combine</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">(</span><span class="n">combine</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">t</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val combine : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a list -&gt; &#39;b = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">combine</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="p">(</span><span class="n">combine</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -994,23 +1013,12 @@ That yields:</p>
 implicit list argument to <code class="docutils literal notranslate"><span class="pre">combine</span></code> with the <code class="docutils literal notranslate"><span class="pre">init</span></code> argument:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">combine&#39;</span> <span class="n">f</span> <span class="n">lst</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">(</span><span class="n">combine&#39;</span> <span class="n">f</span> <span class="n">t</span> <span class="n">acc</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">combine</span><span class="s1">&#39; f lst acc = match lst with</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="p">(</span><span class="n">combine</span><span class="s1">&#39; f t acc)</span>
 
-<span class="k">let</span> <span class="n">sum</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">combine&#39;</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="n">lst</span> <span class="mi">0</span>
-<span class="k">let</span> <span class="n">concat</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">combine&#39;</span> <span class="o">(</span> <span class="o">^</span> <span class="o">)</span> <span class="n">lst</span> <span class="s2">&quot;&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val combine&#39; : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b -&gt; &#39;b = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat : string list -&gt; string = &lt;fun&gt;
+<span class="n">let</span> <span class="nb">sum</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">combine</span><span class="s1">&#39; ( + ) lst 0</span>
+<span class="n">let</span> <span class="n">concat</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">combine</span><span class="s1">&#39; ( ^ ) lst &quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1022,14 +1030,9 @@ application in defining <code class="docutils literal notranslate"><span class="
 <code class="docutils literal notranslate"><span class="pre">List.fold_right</span></code>. All we have left to do is change the function name:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fold_right</span> <span class="n">f</span> <span class="n">lst</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="o">(</span><span class="n">fold_right</span> <span class="n">f</span> <span class="n">t</span> <span class="n">acc</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fold_right : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b -&gt; &#39;b = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">fold_right</span> <span class="n">f</span> <span class="n">lst</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">match</span> <span class="n">lst</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">h</span> <span class="p">(</span><span class="n">fold_right</span> <span class="n">f</span> <span class="n">t</span> <span class="n">acc</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1048,14 +1051,9 @@ returns, there is still work to be done in applying the function argument <code 
 requires is to change the cons branch:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">combine_tr</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">combine_tr</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">acc</span> <span class="n">h</span><span class="o">)</span> <span class="n">t</span>  <span class="c">(* only real change *)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val combine_tr : (&#39;a -&gt; &#39;b -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;b list -&gt; &#39;a = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">combine_tr</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">combine_tr</span> <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="n">acc</span> <span class="n">h</span><span class="p">)</span> <span class="n">t</span>  <span class="p">(</span><span class="o">*</span> <span class="n">only</span> <span class="n">real</span> <span class="n">change</span> <span class="o">*</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1068,25 +1066,17 @@ remaining to be done after the call returns.  If that seems a little mysterious,
 here’s a rewriting of the two functions that might help:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">combine</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span>
-    <span class="k">let</span> <span class="n">acc&#39;</span> <span class="o">=</span> <span class="n">combine</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">t</span> <span class="k">in</span>
-    <span class="n">f</span> <span class="n">h</span> <span class="n">acc&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">combine</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span>
+    <span class="n">let</span> <span class="n">acc</span><span class="s1">&#39; = combine f acc t in</span>
+    <span class="n">f</span> <span class="n">h</span> <span class="n">acc</span><span class="s1">&#39;</span>
 
-<span class="k">let</span> <span class="k">rec</span> <span class="n">combine_tr</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span>
-    <span class="k">let</span> <span class="n">acc&#39;</span> <span class="o">=</span> <span class="n">f</span> <span class="n">acc</span> <span class="n">h</span> <span class="k">in</span>
-    <span class="n">combine_tr</span> <span class="n">f</span> <span class="n">acc&#39;</span> <span class="n">t</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val combine : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a list -&gt; &#39;b = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val combine_tr : (&#39;a -&gt; &#39;b -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;b list -&gt; &#39;a = &lt;fun&gt;
+<span class="n">let</span> <span class="n">rec</span> <span class="n">combine_tr</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span>
+    <span class="n">let</span> <span class="n">acc</span><span class="s1">&#39; = f acc h in</span>
+    <span class="n">combine_tr</span> <span class="n">f</span> <span class="n">acc</span><span class="s1">&#39; t</span>
 </pre></div>
 </div>
 </div>
@@ -1109,16 +1099,8 @@ elements. So at each recursive invocation, the value passed as the argument
 concatenation, which we elide):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">combine_tr</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">0</span>
-<span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s : int = 6
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="nb">sum</span> <span class="o">=</span> <span class="n">combine_tr</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="mi">0</span>
+<span class="n">let</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1126,25 +1108,11 @@ concatenation, which we elide):</p>
 <p>But something possibly surprising happens with subtraction:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">combine</span> <span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="mi">0</span>
-<span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">sub</span> <span class="o">[</span><span class="mi">3</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">1</span><span class="o">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">combine</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="mi">0</span>
+<span class="n">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">sub</span> <span class="p">[</span><span class="mi">3</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">1</span><span class="p">]</span>
 
-<span class="k">let</span> <span class="n">sub_tr</span> <span class="o">=</span> <span class="n">combine_tr</span> <span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="mi">0</span>
-<span class="k">let</span> <span class="n">s&#39;</span> <span class="o">=</span> <span class="n">sub_tr</span> <span class="o">[</span><span class="mi">3</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">1</span><span class="o">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sub : int list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s : int = 2
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sub_tr : int list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s&#39; : int = -6
+<span class="n">let</span> <span class="n">sub_tr</span> <span class="o">=</span> <span class="n">combine_tr</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="mi">0</span>
+<span class="n">let</span> <span class="n">s</span><span class="s1">&#39; = sub_tr [3; 2; 1]</span>
 </pre></div>
 </div>
 </div>
@@ -1171,23 +1139,12 @@ same function. That’s what happened here.</p>
 <code class="docutils literal notranslate"><span class="pre">List.fold_left</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">acc</span> <span class="n">h</span><span class="o">)</span> <span class="n">t</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fold_left</span> <span class="n">f</span> <span class="p">(</span><span class="n">f</span> <span class="n">acc</span> <span class="n">h</span><span class="p">)</span> <span class="n">t</span>
 
-<span class="k">let</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">fold_left</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">0</span>
-<span class="k">let</span> <span class="n">concat</span> <span class="o">=</span> <span class="n">fold_left</span> <span class="o">(</span> <span class="o">^</span> <span class="o">)</span> <span class="s2">&quot;&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fold_left : (&#39;a -&gt; &#39;b -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;b list -&gt; &#39;a = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val concat : string list -&gt; string = &lt;fun&gt;
+<span class="n">let</span> <span class="nb">sum</span> <span class="o">=</span> <span class="n">fold_left</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="mi">0</span>
+<span class="n">let</span> <span class="n">concat</span> <span class="o">=</span> <span class="n">fold_left</span> <span class="p">(</span> <span class="o">^</span> <span class="p">)</span> <span class="s2">&quot;&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1209,16 +1166,8 @@ not.</p></li>
 Luckily we can always ask the toplevel:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span><span class="o">;;</span>
-<span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : (&#39;a -&gt; &#39;b -&gt; &#39;a) -&gt; &#39;a -&gt; &#39;b list -&gt; &#39;a = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b -&gt; &#39;b = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">.</span><span class="n">fold_left</span><span class="p">;;</span>
+<span class="n">List</span><span class="o">.</span><span class="n">fold_right</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1259,32 +1208,16 @@ and the initial accumulator value (which it calls <code class="docutils literal 
 implementation is actually identical to the <code class="docutils literal notranslate"><span class="pre">List</span></code> module.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListLabels</span><span class="p">.</span><span class="n">fold_left</span><span class="o">;;</span>
-<span class="nn">ListLabels</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">~</span><span class="n">f</span><span class="o">:(</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">)</span> <span class="o">~</span><span class="n">init</span><span class="o">:</span><span class="mi">0</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">];;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : f:(&#39;a -&gt; &#39;b -&gt; &#39;a) -&gt; init:&#39;a -&gt; &#39;b list -&gt; &#39;a = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = -6
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListLabels</span><span class="o">.</span><span class="n">fold_left</span><span class="p">;;</span>
+<span class="n">ListLabels</span><span class="o">.</span><span class="n">fold_left</span> <span class="o">~</span><span class="n">f</span><span class="p">:(</span><span class="n">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">~</span><span class="n">init</span><span class="p">:</span><span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">];;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListLabels</span><span class="p">.</span><span class="n">fold_right</span><span class="o">;;</span>
-<span class="nn">ListLabels</span><span class="p">.</span><span class="n">fold_right</span> <span class="o">~</span><span class="n">f</span><span class="o">:(</span><span class="k">fun</span> <span class="n">y</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="o">)</span> <span class="o">~</span><span class="n">init</span><span class="o">:</span><span class="mi">0</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">];;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : f:(&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;a list -&gt; init:&#39;b -&gt; &#39;b = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = -6
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListLabels</span><span class="o">.</span><span class="n">fold_right</span><span class="p">;;</span>
+<span class="n">ListLabels</span><span class="o">.</span><span class="n">fold_right</span> <span class="o">~</span><span class="n">f</span><span class="p">:(</span><span class="n">fun</span> <span class="n">y</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">~</span><span class="n">init</span><span class="p">:</span><span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">];;</span>
 </pre></div>
 </div>
 </div>
@@ -1301,25 +1234,15 @@ the arguments to the combining operator, so we don’t even have to remember the
 order:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fold_left</span> <span class="o">~</span><span class="n">op</span><span class="o">:(</span><span class="n">f</span><span class="o">:</span> <span class="n">acc</span><span class="o">:</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">elt</span><span class="o">:</span><span class="k">&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">~</span><span class="n">init</span><span class="o">:</span><span class="n">acc</span> <span class="n">lst</span> <span class="o">=</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">fold_left</span> <span class="o">~</span><span class="n">op</span><span class="p">:(</span><span class="n">f</span><span class="p">:</span> <span class="n">acc</span><span class="p">:</span><span class="s1">&#39;a -&gt; elt:&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="s1">&#39;a) ~init:acc lst =</span>
   <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fold_left</span> <span class="o">~</span><span class="n">op</span><span class="o">:</span><span class="n">f</span> <span class="o">~</span><span class="n">init</span><span class="o">:(</span><span class="n">f</span> <span class="o">~</span><span class="n">acc</span><span class="o">:</span><span class="n">acc</span> <span class="o">~</span><span class="n">elt</span><span class="o">:</span><span class="n">h</span><span class="o">)</span> <span class="n">t</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fold_left</span> <span class="o">~</span><span class="n">op</span><span class="p">:</span><span class="n">f</span> <span class="o">~</span><span class="n">init</span><span class="p">:(</span><span class="n">f</span> <span class="o">~</span><span class="n">acc</span><span class="p">:</span><span class="n">acc</span> <span class="o">~</span><span class="n">elt</span><span class="p">:</span><span class="n">h</span><span class="p">)</span> <span class="n">t</span>
 
-<span class="k">let</span> <span class="k">rec</span> <span class="n">fold_right</span> <span class="o">~</span><span class="n">op</span><span class="o">:(</span><span class="n">f</span><span class="o">:</span> <span class="n">elt</span><span class="o">:</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">acc</span><span class="o">:</span><span class="k">&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span><span class="o">)</span> <span class="n">lst</span> <span class="o">~</span><span class="n">init</span><span class="o">:</span><span class="n">acc</span> <span class="o">=</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">fold_right</span> <span class="o">~</span><span class="n">op</span><span class="p">:(</span><span class="n">f</span><span class="p">:</span> <span class="n">elt</span><span class="p">:</span><span class="s1">&#39;a -&gt; acc:&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="s1">&#39;b) lst ~init:acc =</span>
   <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="o">~</span><span class="n">elt</span><span class="o">:</span><span class="n">h</span> <span class="o">~</span><span class="n">acc</span><span class="o">:(</span><span class="n">fold_right</span> <span class="o">~</span><span class="n">op</span><span class="o">:</span><span class="n">f</span> <span class="n">t</span> <span class="o">~</span><span class="n">init</span><span class="o">:</span><span class="n">acc</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fold_left : op:(acc:&#39;a -&gt; elt:&#39;b -&gt; &#39;a) -&gt; init:&#39;a -&gt; &#39;b list -&gt; &#39;a =
-  &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fold_right : op:(elt:&#39;a -&gt; acc:&#39;b -&gt; &#39;b) -&gt; &#39;a list -&gt; init:&#39;b -&gt; &#39;b =
-  &lt;fun&gt;
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="o">~</span><span class="n">elt</span><span class="p">:</span><span class="n">h</span> <span class="o">~</span><span class="n">acc</span><span class="p">:(</span><span class="n">fold_right</span> <span class="o">~</span><span class="n">op</span><span class="p">:</span><span class="n">f</span> <span class="n">t</span> <span class="o">~</span><span class="n">init</span><span class="p">:</span><span class="n">acc</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1327,16 +1250,7 @@ order:</p>
 <p>But those functions aren’t as useful as they might seem:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">fold_left</span> <span class="o">~</span><span class="n">op</span><span class="o">:(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">~</span><span class="n">init</span><span class="o">:</span><span class="mi">0</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[17]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">22</span><span class="o">-</span><span class="mi">27</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="n">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">fold_left</span> <span class="o">~</span><span class="n">op</span><span class="p">:(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">~</span><span class="n">init</span><span class="p">:</span><span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">]</span>
-                          <span class="o">^^^^^</span>
-<span class="ne">Error</span>: This expression has type int -&gt; int -&gt; int
-       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="n">acc</span><span class="p">:</span><span class="s1">&#39;a -&gt; elt:&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="s1">&#39;a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">fold_left</span> <span class="o">~</span><span class="n">op</span><span class="p">:(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">~</span><span class="n">init</span><span class="p">:</span><span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1358,31 +1272,17 @@ over what we had to remember to begin with.</p>
 <code class="docutils literal notranslate"><span class="pre">fold_left</span></code> or <code class="docutils literal notranslate"><span class="pre">fold_right</span></code>. For example,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">length</span> <span class="n">lst</span> <span class="o">=</span>
-  <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">(</span><span class="k">fun</span> <span class="n">acc</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">acc</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">0</span> <span class="n">lst</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">length</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="n">List</span><span class="o">.</span><span class="n">fold_left</span> <span class="p">(</span><span class="n">fun</span> <span class="n">acc</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">acc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">0</span> <span class="n">lst</span>
 
-<span class="k">let</span> <span class="n">rev</span> <span class="n">lst</span> <span class="o">=</span>
-  <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">(</span><span class="k">fun</span> <span class="n">acc</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">::</span> <span class="n">acc</span><span class="o">)</span> <span class="bp">[]</span> <span class="n">lst</span>
+<span class="n">let</span> <span class="n">rev</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="n">List</span><span class="o">.</span><span class="n">fold_left</span> <span class="p">(</span><span class="n">fun</span> <span class="n">acc</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="p">::</span> <span class="n">acc</span><span class="p">)</span> <span class="p">[]</span> <span class="n">lst</span>
 
-<span class="k">let</span> <span class="n">map</span> <span class="n">f</span> <span class="n">lst</span> <span class="o">=</span>
-  <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="n">acc</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="o">::</span> <span class="n">acc</span><span class="o">)</span> <span class="n">lst</span> <span class="bp">[]</span>
+<span class="n">let</span> <span class="nb">map</span> <span class="n">f</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="n">List</span><span class="o">.</span><span class="n">fold_right</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="n">acc</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="p">::</span> <span class="n">acc</span><span class="p">)</span> <span class="n">lst</span> <span class="p">[]</span>
 
-<span class="k">let</span> <span class="n">filter</span> <span class="n">f</span> <span class="n">lst</span> <span class="o">=</span>
-  <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="n">acc</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">f</span> <span class="n">x</span> <span class="k">then</span> <span class="n">x</span> <span class="o">::</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">acc</span><span class="o">)</span> <span class="n">lst</span> <span class="bp">[]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length : &#39;a list -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val rev : &#39;a list -&gt; &#39;a list = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val filter : (&#39;a -&gt; bool) -&gt; &#39;a list -&gt; &#39;a list = &lt;fun&gt;
+<span class="n">let</span> <span class="nb">filter</span> <span class="n">f</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="n">List</span><span class="o">.</span><span class="n">fold_right</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="n">acc</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">f</span> <span class="n">x</span> <span class="n">then</span> <span class="n">x</span> <span class="p">::</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">acc</span><span class="p">)</span> <span class="n">lst</span> <span class="p">[]</span>
 </pre></div>
 </div>
 </div>
@@ -1417,26 +1317,15 @@ empty list, it evaluates to <code class="docutils literal notranslate"><span cla
 slightly different function name for clarity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">lst_and_rec</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span>
-  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">&amp;&amp;</span> <span class="n">lst_and_rec</span> <span class="n">t</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">lst_and_rec</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="p">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">&amp;&amp;</span> <span class="n">lst_and_rec</span> <span class="n">t</span>
 
-<span class="k">let</span> <span class="n">lst_and_fold</span> <span class="o">=</span>
-	<span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">(</span><span class="k">fun</span> <span class="n">acc</span> <span class="n">elt</span> <span class="o">-&gt;</span> <span class="n">acc</span> <span class="o">&amp;&amp;</span> <span class="n">elt</span><span class="o">)</span> <span class="bp">true</span>
+<span class="n">let</span> <span class="n">lst_and_fold</span> <span class="o">=</span>
+	<span class="n">List</span><span class="o">.</span><span class="n">fold_left</span> <span class="p">(</span><span class="n">fun</span> <span class="n">acc</span> <span class="n">elt</span> <span class="o">-&gt;</span> <span class="n">acc</span> <span class="o">&amp;&amp;</span> <span class="n">elt</span><span class="p">)</span> <span class="n">true</span>
 
-<span class="k">let</span> <span class="n">lst_and_lib</span> <span class="o">=</span>
-	<span class="nn">List</span><span class="p">.</span><span class="n">for_all</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst_and_rec : bool list -&gt; bool = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst_and_fold : bool list -&gt; bool = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst_and_lib : bool list -&gt; bool = &lt;fun&gt;
+<span class="n">let</span> <span class="n">lst_and_lib</span> <span class="o">=</span>
+	<span class="n">List</span><span class="o">.</span><span class="n">for_all</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1478,34 +1367,42 @@ list.</p></li>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="filter.html" title="previous page"><span class="section-number">4.3. </span>Filter</a>
-    <a class='right-next' id="next-link" href="beyond_lists.html" title="next page"><span class="section-number">4.5. </span>Beyond Lists</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="filter.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.3. </span>Filter</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="beyond_lists.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.5. </span>Beyond Lists</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

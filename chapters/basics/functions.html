@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.4. Functions &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,24 +42,27 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="2.5. Documentation" href="documentation.html" />
     <link rel="prev" title="2.3. Expressions" href="expressions.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -76,6 +79,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -85,9 +92,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -104,7 +111,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -205,7 +212,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -418,7 +425,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -586,7 +593,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -645,7 +652,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -657,7 +664,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -722,7 +729,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -778,12 +785,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#function-definitions">
@@ -843,10 +850,78 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Functions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-definitions">
+   2.4.1. Function Definitions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anonymous-functions">
+   2.4.2. Anonymous Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-application">
+   2.4.3. Function Application
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pipeline">
+   2.4.4. Pipeline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polymorphic-functions">
+   2.4.5. Polymorphic Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#labeled-and-optional-arguments">
+   2.4.6. Labeled and Optional Arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partial-application">
+   2.4.7. Partial Application
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-associativity">
+   2.4.8. Function Associativity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operators-as-functions">
+   2.4.9. Operators as Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tail-recursion">
+   2.4.10. Tail Recursion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="functions">
+  <div class="tex2jax_ignore mathjax_ignore section" id="functions">
 <h1><span class="section-number">2.4. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
 <p>Since OCaml is a functional language, there’s a lot to cover about functions.
 Let’s get started.</p>
@@ -896,14 +971,9 @@ though. (Nor does the Scheme family of languages.)</p>
 it can be written as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [fact n] is [n]!.</span>
-<span class="c">    Requires: [n &gt;= 0]. *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span> <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fact</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fact : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(** [fact n] is [n]!.
+    Requires: [n &gt;= 0]. *)
+let rec fact n = if n = 0 then 1 else n * fact (n - 1)
 </pre></div>
 </div>
 </div>
@@ -923,14 +993,9 @@ integer or a pointer.)</p>
 <p>Here’s another recursive function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [pow x y] is [x] to the power of [y].</span>
-<span class="c">     Requires: [y &gt;= 0]. *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">pow</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="k">if</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">x</span> <span class="o">*</span> <span class="n">pow</span> <span class="n">x</span> <span class="o">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pow : int -&gt; int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="nb">pow</span> <span class="n">x</span> <span class="n">y</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">to</span> <span class="n">the</span> <span class="n">power</span> <span class="n">of</span> <span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">.</span>
+     <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="nb">pow</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="k">if</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">x</span> <span class="o">*</span> <span class="nb">pow</span> <span class="n">x</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -981,21 +1046,15 @@ version will help us focus.</p>
 <p>For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [even n] is whether [n] is even.</span>
-<span class="c">    Requires: [n &gt;= 0]. *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">even</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">odd</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">even</span> <span class="n">n</span><span class="p">]</span> <span class="ow">is</span> <span class="n">whether</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="ow">is</span> <span class="n">even</span><span class="o">.</span>
+    <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">even</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">odd</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="c">(** [odd n] is whether [n] is odd.</span>
-<span class="c">    Requires: [n &gt;= 0]. *)</span>
+<span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">odd</span> <span class="n">n</span><span class="p">]</span> <span class="ow">is</span> <span class="n">whether</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="ow">is</span> <span class="n">odd</span><span class="o">.</span>
+    <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
 <span class="ow">and</span> <span class="n">odd</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="n">n</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">even</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val even : int -&gt; bool = &lt;fun&gt;
-val odd : int -&gt; bool = &lt;fun&gt;
+  <span class="n">n</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">even</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);;</span>
 </pre></div>
 </div>
 </div>
@@ -1038,12 +1097,7 @@ The integer <code class="docutils literal notranslate"><span class="pre">42</spa
 giving it a name:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">42</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 42
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">42</span>
 </pre></div>
 </div>
 </div>
@@ -1051,12 +1105,7 @@ giving it a name:</p>
 <p>Or we can bind it to a name:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val x : int = 42
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
 </pre></div>
 </div>
 </div>
@@ -1068,16 +1117,8 @@ is the argument, and <code class="docutils literal notranslate"><span class="pre
 <p>We now have two ways we could write an increment function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="k">let</span> <span class="n">inc</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val inc : int -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val inc : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">let</span> <span class="n">inc</span> <span class="o">=</span> <span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1157,12 +1198,7 @@ left to right. For example, suppose we have the increment function <code class="
 above as well as a function <code class="docutils literal notranslate"><span class="pre">square</span></code> that squares its input:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">square</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val square : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">square</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1170,16 +1206,8 @@ above as well as a function <code class="docutils literal notranslate"><span cla
 <p>Here are two equivalent ways of squaring <code class="docutils literal notranslate"><span class="pre">6</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">square</span> <span class="o">(</span><span class="n">inc</span> <span class="mi">5</span><span class="o">);;</span>
-<span class="mi">5</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 36
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 36
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">square</span> <span class="p">(</span><span class="n">inc</span> <span class="mi">5</span><span class="p">);;</span>
+<span class="mi">5</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1193,16 +1221,8 @@ way scales up nicely when the number of functions being applied grows, where as
 the former way requires more and more parentheses:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span><span class="o">;;</span>
-<span class="n">square</span> <span class="o">(</span><span class="n">inc</span> <span class="o">(</span><span class="n">inc</span> <span class="o">(</span><span class="n">square</span> <span class="o">(</span><span class="n">inc</span> <span class="mi">5</span><span class="o">))));;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 1444
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 1444
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">square</span><span class="p">;;</span>
+<span class="n">square</span> <span class="p">(</span><span class="n">inc</span> <span class="p">(</span><span class="n">inc</span> <span class="p">(</span><span class="n">square</span> <span class="p">(</span><span class="n">inc</span> <span class="mi">5</span><span class="p">))));;</span>
 </pre></div>
 </div>
 </div>
@@ -1221,12 +1241,7 @@ semantically equivalent.</p>
 <p>The <em>identity</em> function is the function that simply returns its input:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : &#39;a -&gt; &#39;a = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="nb">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1234,12 +1249,7 @@ semantically equivalent.</p>
 <p>Or equivalently as an anonymous function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : &#39;a -&gt; &#39;a = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1251,20 +1261,9 @@ OCaml programmers typically pronounce in Greek: alpha, beta, and gamma.</p>
 <p>We can apply the identity function to any type of value we like:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">id</span> <span class="mi">42</span><span class="o">;;</span>
-<span class="n">id</span> <span class="bp">true</span><span class="o">;;</span>
-<span class="n">id</span> <span class="s2">&quot;bigred&quot;</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 42
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : bool = true
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;bigred&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">id</span> <span class="mi">42</span><span class="p">;;</span>
+<span class="nb">id</span> <span class="n">true</span><span class="p">;;</span>
+<span class="nb">id</span> <span class="s2">&quot;bigred&quot;</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1276,12 +1275,7 @@ to a polymorphic function than the type the compiler automatically infers.
 For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id_int</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id_int : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">id_int</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1290,16 +1284,7 @@ For example:</p>
 Because of those, we cannot apply <code class="docutils literal notranslate"><span class="pre">id_int</span></code> to a bool like we did <code class="docutils literal notranslate"><span class="pre">id</span></code>:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">id_int</span> <span class="bp">true</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[14]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">7</span><span class="o">-</span><span class="mi">11</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="n">id_int</span> <span class="n">true</span>
-           <span class="o">^^^^</span>
-<span class="ne">Error</span>: This expression has type bool but an expression was expected of type
-         <span class="nb">int</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">id_int</span> <span class="n">true</span>
 </pre></div>
 </div>
 </div>
@@ -1307,12 +1292,7 @@ Because of those, we cannot apply <code class="docutils literal notranslate"><sp
 <p>Another way of writing <code class="docutils literal notranslate"><span class="pre">id_int</span></code> would be in terms of <code class="docutils literal notranslate"><span class="pre">id</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id_int&#39;</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="n">id</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id_int&#39; : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">id_int</span><span class="s1">&#39; : int -&gt; int = id</span>
 </pre></div>
 </div>
 </div>
@@ -1336,16 +1316,8 @@ passed an input of e.g. type <code class="docutils literal notranslate"><span cl
 of course do not compile:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id&#39;</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;;</span>
-<span class="k">let</span> <span class="n">id&#39;&#39;</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="n">id_int</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id&#39; : int -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id&#39;&#39; : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="nb">id</span><span class="s1">&#39; : &#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="s1">&#39;a = fun x -&gt; x + 1;;</span>
+<span class="n">let</span> <span class="nb">id</span><span class="s1">&#39;&#39;</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="o">=</span> <span class="n">id_int</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1369,12 +1341,7 @@ is applied to arguments: when evaluating the application <code class="docutils l
 being instantiated with type <code class="docutils literal notranslate"><span class="pre">int</span></code> at that application. So if we write</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id_int&#39;</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="n">id</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id_int&#39; : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">id_int</span><span class="s1">&#39; : int -&gt; int = id</span>
 </pre></div>
 </div>
 </div>
@@ -1397,25 +1364,9 @@ and instantiate it at type <code class="docutils literal notranslate"><span clas
 <code class="docutils literal notranslate"><span class="pre">'a</span></code> is not the same type in each of the two places it occurred:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">first</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">;;</span>
-<span class="k">let</span> <span class="n">first_int</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">=</span> <span class="n">first</span><span class="o">;;</span>
-<span class="k">let</span> <span class="n">bad_first</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="o">=</span> <span class="n">first</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val first : &#39;a -&gt; &#39;b -&gt; &#39;a = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val first_int : int -&gt; &#39;b -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[18]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">38</span><span class="o">-</span><span class="mi">43</span><span class="p">:</span>
-<span class="mi">3</span> <span class="o">|</span> <span class="n">let</span> <span class="n">bad_first</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;b -&gt; string = first;;</span>
-                                          <span class="o">^^^^^</span>
-<span class="ne">Error</span>: This expression has type int -&gt; &#39;b -&gt; int
-       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;b -&gt; string</span>
-       <span class="n">Type</span> <span class="nb">int</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">compatible</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">string</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">first</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">;;</span>
+<span class="n">let</span> <span class="n">first_int</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;b -&gt; int = first;;</span>
+<span class="n">let</span> <span class="n">bad_first</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;b -&gt; string = first;;</span>
 </pre></div>
 </div>
 </div>
@@ -1431,12 +1382,7 @@ string (and you would be correct). You could type in <code class="docutils liter
 type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">String</span><span class="p">.</span><span class="n">sub</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string -&gt; int -&gt; int -&gt; string = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="o">.</span><span class="n">sub</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1447,12 +1393,7 @@ the documentation.</p>
 function using the following syntax:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f</span> <span class="o">~</span><span class="n">name1</span><span class="o">:</span><span class="n">arg1</span> <span class="o">~</span><span class="n">name2</span><span class="o">:</span><span class="n">arg2</span> <span class="o">=</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val f : name1:int -&gt; name2:int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">f</span> <span class="o">~</span><span class="n">name1</span><span class="p">:</span><span class="n">arg1</span> <span class="o">~</span><span class="n">name2</span><span class="p">:</span><span class="n">arg2</span> <span class="o">=</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1479,12 +1420,7 @@ optional argument, a default value will be provided. To declare such a function,
 use the following syntax:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">f</span> <span class="o">?</span><span class="n">name</span><span class="o">:(</span><span class="n">arg1</span><span class="o">=</span><span class="mi">8</span><span class="o">)</span> <span class="n">arg2</span> <span class="o">=</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val f : ?name:int -&gt; int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>let f ?name:(arg1=8) arg2 = arg1 + arg2
 </pre></div>
 </div>
 </div>
@@ -1492,24 +1428,14 @@ use the following syntax:</p>
 <p>You can then call a function with or without the argument:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">~</span><span class="n">name</span><span class="o">:</span><span class="mi">2</span> <span class="mi">7</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 9
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">~</span><span class="n">name</span><span class="p">:</span><span class="mi">2</span> <span class="mi">7</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="mi">7</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 15
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="mi">7</span>
 </pre></div>
 </div>
 </div>
@@ -1521,12 +1447,7 @@ use the following syntax:</p>
 <p>We could define an addition function as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add : int -&gt; int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
@@ -1534,12 +1455,7 @@ use the following syntax:</p>
 <p>Here’s a rather similar function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">addx</span> <span class="n">x</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val addx : int -&gt; int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">addx</span> <span class="n">x</span> <span class="o">=</span> <span class="n">fun</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
@@ -1552,24 +1468,14 @@ function. But the form of <code class="docutils literal notranslate"><span class
 to just a single argument.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">add5</span> <span class="o">=</span> <span class="n">addx</span> <span class="mi">5</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add5 : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">add5</span> <span class="o">=</span> <span class="n">addx</span> <span class="mi">5</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">add5</span> <span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 7
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add5</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -1577,24 +1483,14 @@ to just a single argument.</p>
 <p>It turns out the same can be done with <code class="docutils literal notranslate"><span class="pre">add</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">add5</span> <span class="o">=</span> <span class="n">add</span> <span class="mi">5</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add5 : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">add5</span> <span class="o">=</span> <span class="n">add</span> <span class="mi">5</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">add5</span> <span class="mi">2</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 7
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add5</span> <span class="mi">2</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -1665,48 +1561,28 @@ expression to its right as its single argument.</p>
 <em>prefix</em> operator:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int -&gt; int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span> <span class="o">+</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">3</span> <span class="mi">4</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 7
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">add3</span> <span class="o">=</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">3</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add3 : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">add3</span> <span class="o">=</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">add3</span> <span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 5
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add3</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -1730,15 +1606,10 @@ will be parsed. So be careful with this usage.</p>
 <code class="docutils literal notranslate"><span class="pre">n</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [count n] is [n], computed by adding 1 to itself [n] times.  That is,</span>
-<span class="c">    this function counts up from 1 to [n]. *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">count</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">count</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val count : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">count</span> <span class="n">n</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">computed</span> <span class="n">by</span> <span class="n">adding</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">itself</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="n">times</span><span class="o">.</span>  <span class="n">That</span> <span class="ow">is</span><span class="p">,</span>
+    <span class="n">this</span> <span class="n">function</span> <span class="n">counts</span> <span class="n">up</span> <span class="kn">from</span> <span class="mi">1</span> <span class="n">to</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">count</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">count</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1746,12 +1617,7 @@ will be parsed. So be careful with this usage.</p>
 <p>Counting to 10 is no problem:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="mi">10</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 10
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="mi">10</span>
 </pre></div>
 </div>
 </div>
@@ -1759,12 +1625,7 @@ will be parsed. So be careful with this usage.</p>
 <p>Counting to 100,000 is no problem either:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="mi">100_000</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 100000
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="mi">100_000</span>
 </pre></div>
 </div>
 </div>
@@ -1792,12 +1653,7 @@ computer, thus harming other programs running on the same computer. The <code cl
 function isn’t likely to do that, but this function would:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">count_forever</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">count_forever</span> <span class="n">n</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val count_forever : &#39;a -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">count_forever</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">count_forever</span> <span class="n">n</span>
 </pre></div>
 </div>
 </div>
@@ -1817,13 +1673,8 @@ compiler then notices and applies an optimization. Let’s see how it works.</p>
 that recursive call. Our <code class="docutils literal notranslate"><span class="pre">count</span></code> function does <em>not</em> do that:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">count</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">count</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val count : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">count</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">count</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1835,18 +1686,10 @@ need to do any additional computation after the recursive call. The trick is
 to create a helper function with an extra parameter:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">count_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">count_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">acc</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">count_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">count_aux</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">acc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="n">count_tr</span> <span class="n">n</span> <span class="o">=</span> <span class="n">count_aux</span> <span class="n">n</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val count_aux : int -&gt; int -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val count_tr : int -&gt; int = &lt;fun&gt;
+<span class="n">let</span> <span class="n">count_tr</span> <span class="n">n</span> <span class="o">=</span> <span class="n">count_aux</span> <span class="n">n</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </div>
@@ -1874,11 +1717,11 @@ the recursive call to <code class="docutils literal notranslate"><span class="pr
 them:</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">count</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">count</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">count</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">count</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="k">rec</span> <span class="n">count_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">count_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">acc</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">count_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">count_aux</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">acc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1900,12 +1743,7 @@ over and over again for each recursive call. And that means <code class="docutil
 can count to 1,000,000:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">count_tr</span> <span class="mi">1_000_000</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 1000000
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">count_tr</span> <span class="mi">1_000_000</span>
 </pre></div>
 </div>
 </div>
@@ -1943,14 +1781,9 @@ step that requires much ingenuity.</p></li>
 tail recursive:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* [fact n] is [n] factorial *)</span>
-<span class="k">let</span> <span class="k">rec</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fact</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fact : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">fact</span> <span class="n">n</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="n">factorial</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fact</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1975,18 +1808,10 @@ base case as the accumulator:</p>
 <p>Putting it all together, we have:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">fact_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">acc</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">fact_aux</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">acc</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="n">fact_tr</span> <span class="n">n</span> <span class="o">=</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fact_aux : int -&gt; int -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val fact_tr : int -&gt; int = &lt;fun&gt;
+<span class="n">let</span> <span class="n">fact_tr</span> <span class="n">n</span> <span class="o">=</span> <span class="n">fact_aux</span> <span class="n">n</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1995,12 +1820,7 @@ base case as the accumulator:</p>
 stack space, the computation suffers from integer overflow:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">fact</span> <span class="mi">50</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = -3258495067890909184
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fact</span> <span class="mi">50</span>
 </pre></div>
 </div>
 </div>
@@ -2010,25 +1830,14 @@ stack space, the computation suffers from integer overflow:</p>
 we’ve seen so far, but hopefully nothing terribly surprising.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">require</span> <span class="s2">&quot;zarith.top&quot;</span><span class="o">;;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#require &quot;zarith.top&quot;;;</span>
 
-<span class="k">let</span> <span class="k">rec</span> <span class="n">zfact_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="nn">Z</span><span class="p">.</span><span class="n">equal</span> <span class="n">n</span> <span class="nn">Z</span><span class="p">.</span><span class="n">zero</span> <span class="k">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">zfact_aux</span> <span class="o">(</span><span class="nn">Z</span><span class="p">.</span><span class="n">pred</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="nn">Z</span><span class="p">.</span><span class="n">mul</span> <span class="n">acc</span> <span class="n">n</span><span class="o">);;</span>
+<span class="n">let</span> <span class="n">rec</span> <span class="n">zfact_aux</span> <span class="n">n</span> <span class="n">acc</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">Z</span><span class="o">.</span><span class="n">equal</span> <span class="n">n</span> <span class="n">Z</span><span class="o">.</span><span class="n">zero</span> <span class="n">then</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">zfact_aux</span> <span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">pred</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">mul</span> <span class="n">acc</span> <span class="n">n</span><span class="p">);;</span>
 
-<span class="k">let</span> <span class="n">zfact_tr</span> <span class="n">n</span> <span class="o">=</span> <span class="n">zfact_aux</span> <span class="n">n</span> <span class="nn">Z</span><span class="p">.</span><span class="n">one</span><span class="o">;;</span>
+<span class="n">let</span> <span class="n">zfact_tr</span> <span class="n">n</span> <span class="o">=</span> <span class="n">zfact_aux</span> <span class="n">n</span> <span class="n">Z</span><span class="o">.</span><span class="n">one</span><span class="p">;;</span>
 
-<span class="n">zfact_tr</span> <span class="o">(</span><span class="nn">Z</span><span class="p">.</span><span class="n">of_int</span> <span class="mi">50</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val zfact_aux : Z.t -&gt; Z.t -&gt; Z.t = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val zfact_tr : Z.t -&gt; Z.t = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : Z.t = 30414093201713378043612608166064768844377641568960512000000000000
+<span class="n">zfact_tr</span> <span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">of_int</span> <span class="mi">50</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2071,34 +1880,42 @@ but for now:</p>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="expressions.html" title="previous page"><span class="section-number">2.3. </span>Expressions</a>
-    <a class='right-next' id="next-link" href="documentation.html" title="next page"><span class="section-number">2.5. </span>Documentation</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="expressions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2.3. </span>Expressions</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="documentation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.5. </span>Documentation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

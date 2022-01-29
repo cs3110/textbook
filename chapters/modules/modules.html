@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>5.2. Modules &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,24 +42,27 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="5.3. Modules and the Toplevel" href="toplevel.html" />
     <link rel="prev" title="5.1. Module Systems" href="module_systems.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -76,6 +79,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -85,9 +92,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -104,7 +111,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -205,7 +212,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -418,7 +425,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -586,7 +593,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -645,7 +652,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -657,7 +664,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -722,7 +729,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -778,12 +785,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#module-definitions">
@@ -823,10 +830,58 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Modules</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-definitions">
+   5.2.1. Module Definitions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scope-and-open">
+   5.2.2. Scope and Open
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-type-definitions">
+   5.2.3. Module Type Definitions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-type-semantics">
+   5.2.4. Module Type Semantics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-types-are-static">
+   5.2.5. Module Types are Static
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-class-modules">
+   5.2.6. First-Class Modules
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="modules">
+  <div class="tex2jax_ignore mathjax_ignore section" id="modules">
 <h1><span class="section-number">5.2. </span>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/hIUSrPxCdHc" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We begin with a couple of examples of the OCaml module system before diving
@@ -848,21 +903,11 @@ that code in utop, or pass that structure to a function, etc. What you can do is
 bind the structure to a name:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">MyModule</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-  <span class="k">type</span> <span class="n">primary_color</span> <span class="o">=</span> <span class="nc">Red</span> <span class="o">|</span> <span class="nc">Green</span> <span class="o">|</span> <span class="nc">Blue</span>
-  <span class="k">exception</span> <span class="nc">Oops</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module MyModule :
-  sig
-    val inc : int -&gt; int
-    type primary_color = Red | Green | Blue
-    exception Oops
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">MyModule</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="nb">type</span> <span class="n">primary_color</span> <span class="o">=</span> <span class="n">Red</span> <span class="o">|</span> <span class="n">Green</span> <span class="o">|</span> <span class="n">Blue</span>
+  <span class="n">exception</span> <span class="n">Oops</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -900,45 +945,32 @@ the word.</p>
 is a module for stacks implemented as linked lists:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStack</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="c">(** [empty] is the empty stack. *)</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListStack</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">empty</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">empty</span> <span class="n">stack</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
 
-  <span class="c">(** [is_empty s] is whether [s] is empty. *)</span>
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">is_empty</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">whether</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
 
-  <span class="c">(** [push x s] pushes [x] onto the top of [s]. *)</span>
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">push</span> <span class="n">x</span> <span class="n">s</span><span class="p">]</span> <span class="n">pushes</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">onto</span> <span class="n">the</span> <span class="n">top</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
 
-  <span class="c">(** [Empty] is raised when an operation cannot be applied</span>
-<span class="c">      to an empty stack. *)</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="ow">is</span> <span class="n">raised</span> <span class="n">when</span> <span class="n">an</span> <span class="n">operation</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">applied</span>
+      <span class="n">to</span> <span class="n">an</span> <span class="n">empty</span> <span class="n">stack</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
 
-  <span class="c">(** [peek s] is the top element of [s].</span>
-<span class="c">      Raises [Empty] if [s] is empty. *)</span>
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
-    <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">peek</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">top</span> <span class="n">element</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span>
+      <span class="n">Raises</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span>
+    <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
+    <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
 
-  <span class="c">(** [pop s] is all but the top element of [s].</span>
-<span class="c">      Raises [Empty] if [s] is empty. *)</span>
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
-    <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack :
-  sig
-    val empty : &#39;a list
-    val is_empty : &#39;a list -&gt; bool
-    val push : &#39;a -&gt; &#39;a list -&gt; &#39;a list
-    exception Empty
-    val peek : &#39;a list -&gt; &#39;a
-    val pop : &#39;a list -&gt; &#39;a list
-  end
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">pop</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="nb">all</span> <span class="n">but</span> <span class="n">the</span> <span class="n">top</span> <span class="n">element</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span>
+      <span class="n">Raises</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span>
+    <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
+    <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -952,12 +984,7 @@ element.</p>
 <p>We can then use that module to manipulate a stack:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="n">push</span> <span class="mi">2</span> <span class="o">(</span><span class="nn">ListStack</span><span class="p">.</span><span class="n">push</span> <span class="mi">1</span> <span class="nn">ListStack</span><span class="p">.</span><span class="n">empty</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list = [2; 1]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">.</span><span class="n">push</span> <span class="mi">2</span> <span class="p">(</span><span class="n">ListStack</span><span class="o">.</span><span class="n">push</span> <span class="mi">1</span> <span class="n">ListStack</span><span class="o">.</span><span class="n">empty</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -977,12 +1004,7 @@ object of the method call.</p>
 problem, but for now here’s one:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="o">(</span><span class="n">push</span> <span class="mi">2</span> <span class="o">(</span><span class="n">push</span> <span class="mi">1</span> <span class="n">empty</span><span class="o">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list = [2; 1]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">.</span><span class="p">(</span><span class="n">push</span> <span class="mi">2</span> <span class="p">(</span><span class="n">push</span> <span class="mi">1</span> <span class="n">empty</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -992,12 +1014,7 @@ without needing to write the prefix <code class="docutils literal notranslate"><
 could be using the pipeline operator:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">ListStack</span><span class="p">.</span><span class="o">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">2</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int list = [2; 1]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">.</span><span class="p">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1025,16 +1042,8 @@ functions—<code class="docutils literal notranslate"><span class="pre">push</s
 <p>In OCaml the same stacks could be created as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">s1</span> <span class="o">=</span> <span class="nn">ListStack</span><span class="p">.</span><span class="o">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">2</span><span class="o">)</span>
-<span class="k">let</span> <span class="n">s2</span> <span class="o">=</span> <span class="nn">ListStack</span><span class="p">.</span><span class="o">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">3</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s1 : int list = [2; 1]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s2 : int list = [3]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">ListStack</span><span class="o">.</span><span class="p">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">ListStack</span><span class="o">.</span><span class="p">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">push</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1073,15 +1082,10 @@ module expressions later in this section and chapter.</p>
 the toplevel:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;;</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span><span class="o">;;</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val x : int type t = int end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;;</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span><span class="p">;;</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1094,15 +1098,10 @@ though, you can remove the <code class="docutils literal notranslate"><span clas
 module:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;;</span>
-  <span class="k">assert</span> <span class="o">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">);;</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val x : int end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;;</span>
+  <span class="k">assert</span> <span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);;</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1110,15 +1109,10 @@ module:</p>
 <p>But that can be rewritten without <code class="docutils literal notranslate"><span class="pre">;;</span></code> as:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val x : int end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">let</span> <span class="n">_</span> <span class="o">=</span> <span class="k">assert</span> <span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1127,16 +1121,8 @@ module:</p>
 items for readability:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">N</span> <span class="o">=</span> <span class="k">struct</span> <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">end</span>
-<span class="k">module</span> <span class="nc">O</span> <span class="o">=</span> <span class="k">struct</span> <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;;</span> <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module N : sig val x : int val y : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module O : sig val x : int val y : int end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">N</span> <span class="o">=</span> <span class="n">struct</span> <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">end</span>
+<span class="n">module</span> <span class="n">O</span> <span class="o">=</span> <span class="n">struct</span> <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;;</span> <span class="n">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1144,12 +1130,7 @@ items for readability:</p>
 <p>An empty structure is permitted:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">E</span> <span class="o">=</span> <span class="k">struct</span> <span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module E : sig end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">E</span> <span class="o">=</span> <span class="n">struct</span> <span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1164,15 +1145,10 @@ earlier definitions are therefore in scope in later definitions, but not vice
 versa. So this module is fine:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val x : int val y : int end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">let</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1181,18 +1157,10 @@ versa. So this module is fine:</p>
 being evaluated, <code class="docutils literal notranslate"><span class="pre">y</span></code> has not yet been bound:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
-  <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[13]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">10</span><span class="o">-</span><span class="mi">11</span><span class="p">:</span>
-<span class="mi">2</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
-              <span class="o">^</span>
-<span class="ne">Error</span>: Unbound value y
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
+  <span class="n">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1200,15 +1168,10 @@ being evaluated, <code class="docutils literal notranslate"><span class="pre">y<
 <p>Of course, mutual recursion can be used if desired:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">even</span> <span class="o">=</span> <span class="k">function</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">odd</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-  <span class="ow">and</span> <span class="n">odd</span> <span class="o">=</span> <span class="k">function</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">even</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val even : int -&gt; bool val odd : int -&gt; bool end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">rec</span> <span class="n">even</span> <span class="o">=</span> <span class="n">function</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">odd</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="ow">and</span> <span class="n">odd</span> <span class="o">=</span> <span class="n">function</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">even</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1227,24 +1190,14 @@ to first talk about scope.</p>
 the dot operator. For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span> <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val x : int end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span> <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="n">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">M</span><span class="p">.</span><span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 42
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1252,15 +1205,7 @@ the dot operator. For example:</p>
 <p>Of course from outside the module the name <code class="docutils literal notranslate"><span class="pre">x</span></code> by itself is not meaningful:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[17]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="n">x</span>
-    <span class="o">^</span>
-<span class="ne">Error</span>: Unbound value x
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1269,19 +1214,14 @@ the dot operator. For example:</p>
 using <code class="docutils literal notranslate"><span class="pre">open</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">M</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="n">M</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 42
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1310,17 +1250,12 @@ An <code class="docutils literal notranslate"><span class="pre">open</span></cod
 another:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">open</span> <span class="nc">List</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">open</span> <span class="n">List</span>
 
-  <span class="c">(** [uppercase_all lst] upper-cases all the elements of [lst]. *)</span>
-  <span class="k">let</span> <span class="n">uppercase_all</span> <span class="o">=</span> <span class="n">map</span> <span class="nn">String</span><span class="p">.</span><span class="n">uppercase_ascii</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val uppercase_all : string list -&gt; string list end
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">uppercase_all</span> <span class="n">lst</span><span class="p">]</span> <span class="n">upper</span><span class="o">-</span><span class="n">cases</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">elements</span> <span class="n">of</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">uppercase_all</span> <span class="o">=</span> <span class="nb">map</span> <span class="n">String</span><span class="o">.</span><span class="n">uppercase_ascii</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1329,23 +1264,13 @@ another:</p>
 to get rid of the <code class="docutils literal notranslate"><span class="pre">String.</span></code> as well?</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">open</span> <span class="nc">List</span>
-  <span class="k">open</span> <span class="nc">String</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">open</span> <span class="n">List</span>
+  <span class="nb">open</span> <span class="n">String</span>
 
-  <span class="c">(** [uppercase_all lst] upper-cases all the elements of [lst]. *)</span>
-  <span class="k">let</span> <span class="n">uppercase_all</span> <span class="o">=</span> <span class="n">map</span> <span class="n">uppercase_ascii</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[21]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">6</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">26</span><span class="o">-</span><span class="mi">41</span><span class="p">:</span>
-<span class="mi">6</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">uppercase_all</span> <span class="o">=</span> <span class="nb">map</span> <span class="n">uppercase_ascii</span>
-                              <span class="o">^^^^^^^^^^^^^^^</span>
-<span class="ne">Error</span>: This expression has type string -&gt; string
-       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="n">char</span> <span class="o">-&gt;</span> <span class="n">char</span>
-       <span class="n">Type</span> <span class="n">string</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">compatible</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">char</span> 
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">uppercase_all</span> <span class="n">lst</span><span class="p">]</span> <span class="n">upper</span><span class="o">-</span><span class="n">cases</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">elements</span> <span class="n">of</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">uppercase_all</span> <span class="o">=</span> <span class="nb">map</span> <span class="n">uppercase_ascii</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1370,21 +1295,10 @@ all the names from module <code class="docutils literal notranslate"><span class
 in a short expression:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* remove surrounding whitespace from [s] and convert it to lower case *)</span>
-<span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;BigRed &quot;</span>
-<span class="k">let</span> <span class="n">s&#39;</span> <span class="o">=</span> <span class="n">s</span> <span class="o">|&gt;</span> <span class="nn">String</span><span class="p">.</span><span class="n">trim</span> <span class="o">|&gt;</span> <span class="nn">String</span><span class="p">.</span><span class="n">lowercase_ascii</span> <span class="c">(* long way *)</span>
-<span class="k">let</span> <span class="n">s&#39;&#39;</span> <span class="o">=</span> <span class="nn">String</span><span class="p">.</span><span class="o">(</span><span class="n">s</span> <span class="o">|&gt;</span> <span class="n">trim</span> <span class="o">|&gt;</span> <span class="n">lowercase_ascii</span><span class="o">)</span> <span class="c">(* short way *)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s : string = &quot;BigRed &quot;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s&#39; : string = &quot;bigred&quot;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s&#39;&#39; : string = &quot;bigred&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span> <span class="n">remove</span> <span class="n">surrounding</span> <span class="n">whitespace</span> <span class="kn">from</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">and</span> <span class="n">convert</span> <span class="n">it</span> <span class="n">to</span> <span class="n">lower</span> <span class="n">case</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;BigRed &quot;</span>
+<span class="n">let</span> <span class="n">s</span><span class="s1">&#39; = s |&gt; String.trim |&gt; String.lowercase_ascii (* long way *)</span>
+<span class="n">let</span> <span class="n">s</span><span class="s1">&#39;&#39;</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="p">(</span><span class="n">s</span> <span class="o">|&gt;</span> <span class="n">trim</span> <span class="o">|&gt;</span> <span class="n">lowercase_ascii</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span> <span class="n">short</span> <span class="n">way</span> <span class="o">*</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1395,15 +1309,10 @@ some other large block of code? The (admittedly strange) syntax for that is
 example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [lower_trim s] is [s] in lower case with whitespace removed. *)</span>
-<span class="k">let</span> <span class="n">lower_trim</span> <span class="n">s</span> <span class="o">=</span>
-  <span class="k">let</span> <span class="k">open</span> <span class="nc">String</span> <span class="k">in</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">lower_trim</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">in</span> <span class="n">lower</span> <span class="n">case</span> <span class="k">with</span> <span class="n">whitespace</span> <span class="n">removed</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">lower_trim</span> <span class="n">s</span> <span class="o">=</span>
+  <span class="n">let</span> <span class="nb">open</span> <span class="n">String</span> <span class="ow">in</span>
   <span class="n">s</span> <span class="o">|&gt;</span> <span class="n">trim</span> <span class="o">|&gt;</span> <span class="n">lowercase_ascii</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lower_trim : string -&gt; string = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
@@ -1412,15 +1321,10 @@ example:</p>
 of opening and simply to be explicit about which module we are using where:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="c">(** [uppercase_all lst] upper-cases all the elements of [lst]. *)</span>
-  <span class="k">let</span> <span class="n">uppercase_all</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="nn">String</span><span class="p">.</span><span class="n">uppercase_ascii</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val uppercase_all : string list -&gt; string list end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">uppercase_all</span> <span class="n">lst</span><span class="p">]</span> <span class="n">upper</span><span class="o">-</span><span class="n">cases</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">elements</span> <span class="n">of</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">let</span> <span class="n">uppercase_all</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">map</span> <span class="n">String</span><span class="o">.</span><span class="n">uppercase_ascii</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1434,27 +1338,14 @@ Let’s now see how to write those modules types ourselves. As an example, here 
 a module type for our list-based stacks:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
-  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
-  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
-  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type LIST_STACK =
-  sig
-    exception Empty
-    val empty : &#39;a list
-    val is_empty : &#39;a list -&gt; bool
-    val push : &#39;a -&gt; &#39;a list -&gt; &#39;a list
-    val peek : &#39;a list -&gt; &#39;a
-    val pop : &#39;a list -&gt; &#39;a list
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a list</span>
+  <span class="n">val</span> <span class="n">is_empty</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; bool</span>
+  <span class="n">val</span> <span class="n">push</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="nb">list</span> <span class="o">-&gt;</span> <span class="s1">&#39;a list</span>
+  <span class="n">val</span> <span class="n">peek</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; &#39;</span><span class="n">a</span>
+  <span class="n">val</span> <span class="n">pop</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; &#39;</span><span class="n">a</span> <span class="nb">list</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1466,70 +1357,46 @@ signature. They specify behavior, thus augmenting the specification of types
 provided by the <code class="docutils literal notranslate"><span class="pre">val</span></code> declarations.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="c">(** [Empty] is raised when an operation cannot be applied</span>
-<span class="c">      to an empty stack. *)</span>
-  <span class="k">exception</span> <span class="nc">Empty</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="ow">is</span> <span class="n">raised</span> <span class="n">when</span> <span class="n">an</span> <span class="n">operation</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">applied</span>
+      <span class="n">to</span> <span class="n">an</span> <span class="n">empty</span> <span class="n">stack</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
 
-  <span class="c">(** [empty] is the empty stack. *)</span>
-  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">empty</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">empty</span> <span class="n">stack</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a list</span>
 
-  <span class="c">(** [is_empty s] is whether [s] is empty. *)</span>
-  <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">is_empty</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">whether</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">is_empty</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; bool</span>
 
-  <span class="c">(** [push x s] pushes [x] onto the top of [s]. *)</span>
-  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">push</span> <span class="n">x</span> <span class="n">s</span><span class="p">]</span> <span class="n">pushes</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">onto</span> <span class="n">the</span> <span class="n">top</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">push</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="nb">list</span> <span class="o">-&gt;</span> <span class="s1">&#39;a list</span>
 
-  <span class="c">(** [peek s] is the top element of [s].</span>
-<span class="c">      Raises [Empty] if [s] is empty. *)</span>
-  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">peek</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">top</span> <span class="n">element</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span>
+      <span class="n">Raises</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">peek</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; &#39;</span><span class="n">a</span>
 
-  <span class="c">(** [pop s] is all but the top element of [s].</span>
-<span class="c">      Raises [Empty] if [s] is empty. *)</span>
-  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
-<span class="k">end</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">pop</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="nb">all</span> <span class="n">but</span> <span class="n">the</span> <span class="n">top</span> <span class="n">element</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span>
+      <span class="n">Raises</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">pop</span> <span class="p">:</span> <span class="s1">&#39;a list -&gt; &#39;</span><span class="n">a</span> <span class="nb">list</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">ListStack</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+<span class="n">module</span> <span class="n">ListStack</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
 
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
 
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
 
-  <span class="k">exception</span> <span class="nc">Empty</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
 
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
-    <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span>
+    <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
+    <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
 
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
-    <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type LIST_STACK =
-  sig
-    exception Empty
-    val empty : &#39;a list
-    val is_empty : &#39;a list -&gt; bool
-    val push : &#39;a -&gt; &#39;a list -&gt; &#39;a list
-    val peek : &#39;a list -&gt; &#39;a
-    val pop : &#39;a list -&gt; &#39;a list
-  end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack :
-  sig
-    val empty : &#39;a list
-    val is_empty : &#39;a list -&gt; bool
-    val push : &#39;a -&gt; &#39;a list -&gt; &#39;a list
-    exception Empty
-    val peek : &#39;a list -&gt; &#39;a
-    val pop : &#39;a list -&gt; &#39;a list
-  end
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span>
+    <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
+    <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1540,28 +1407,23 @@ does have the module type specified by <code class="docutils literal notranslate
 annotation in the first line of the <code class="docutils literal notranslate"><span class="pre">module</span></code> definition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListStack</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
 
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
 
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
 
-  <span class="k">exception</span> <span class="nc">Empty</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
 
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
-    <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span>
+    <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
+    <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
 
-  <span class="k">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
-    <span class="o">|</span> <span class="o">_</span> <span class="o">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStack : LIST_STACK
+  <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span>
+    <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
+    <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1571,40 +1433,21 @@ specified by <code class="docutils literal notranslate"><span class="pre">LIST_S
 omitted some item, the type annotation would have been rejected:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListStack</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
 
-  <span class="k">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="k">function</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+  <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
 
-  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">::</span> <span class="n">s</span>
+  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
 
-  <span class="k">exception</span> <span class="nc">Empty</span>
+  <span class="n">exception</span> <span class="n">Empty</span>
 
-  <span class="k">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
-    <span class="o">|</span> <span class="n">x</span> <span class="o">::</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span>
+    <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
+    <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
 
-  <span class="c">(* [pop] is missing *)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[28]&quot;, lines 1-15, characters 32-3:
- 1 | ................................struct
- 2 |   let empty = []
- 3 | 
- 4 |   let is_empty = function [] -&gt; true | _ -&gt; false
- 5 | 
-...
-12 |     | x :: _ -&gt; x
-13 | 
-14 |   (* [pop] is missing *)
-15 | end
-Error: Signature mismatch:
-       ...
-       The value `pop&#39; is required but not provided
-       File &quot;[26]&quot;, line 21, characters 2-30: Expected declaration
+  <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">pop</span><span class="p">]</span> <span class="ow">is</span> <span class="n">missing</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1668,27 +1511,13 @@ type <code class="docutils literal notranslate"><span class="pre">t</span></code
 <p>Here are a few examples to show how that syntax can be used:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListStackAlias</span> <span class="o">:</span> <span class="nc">LIST_STACK</span> <span class="o">=</span> <span class="nc">ListStack</span>
-<span class="c">(* equivalently *)</span>
-<span class="k">module</span> <span class="nc">ListStackAlias</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ListStack</span> <span class="o">:</span> <span class="nc">LIST_STACK</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListStackAlias</span> <span class="p">:</span> <span class="n">LIST_STACK</span> <span class="o">=</span> <span class="n">ListStack</span>
+<span class="p">(</span><span class="o">*</span> <span class="n">equivalently</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">module</span> <span class="n">ListStackAlias</span> <span class="o">=</span> <span class="p">(</span><span class="n">ListStack</span> <span class="p">:</span> <span class="n">LIST_STACK</span><span class="p">)</span>
 
-<span class="k">module</span> <span class="nc">M</span> <span class="o">:</span> <span class="k">sig</span> <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="k">end</span> <span class="o">=</span> <span class="k">struct</span> <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="k">end</span>
-<span class="c">(* equivalently *)</span>
-<span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="o">(</span><span class="k">struct</span> <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="k">end</span> <span class="o">:</span> <span class="k">sig</span> <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="k">end</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStackAlias : LIST_STACK
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListStackAlias : LIST_STACK
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val x : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val x : int end
+<span class="n">module</span> <span class="n">M</span> <span class="p">:</span> <span class="n">sig</span> <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">end</span> <span class="o">=</span> <span class="n">struct</span> <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="n">end</span>
+<span class="p">(</span><span class="o">*</span> <span class="n">equivalently</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="p">(</span><span class="n">struct</span> <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="n">end</span> <span class="p">:</span> <span class="n">sig</span> <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">end</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1696,30 +1525,19 @@ type <code class="docutils literal notranslate"><span class="pre">t</span></code
 <p>And, module types can include nested module specifications:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">X</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">X</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="k">type</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">module</span> <span class="nc">Inner</span> <span class="o">:</span> <span class="nc">X</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="nb">type</span> <span class="n">T</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">module</span> <span class="n">Inner</span> <span class="p">:</span> <span class="n">X</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">M</span> <span class="o">:</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">module</span> <span class="nc">Inner</span> <span class="o">:</span> <span class="nc">X</span> <span class="o">=</span> <span class="k">struct</span>
-    <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type X = sig val x : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig module Inner : X end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : T
+<span class="n">module</span> <span class="n">M</span> <span class="p">:</span> <span class="n">T</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">module</span> <span class="n">Inner</span> <span class="p">:</span> <span class="n">X</span> <span class="o">=</span> <span class="n">struct</span>
+    <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+  <span class="n">end</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1797,15 +1615,10 @@ whether <code class="docutils literal notranslate"><span class="pre">(M</span> <
 this module:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">let</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module M : sig val x : int val z : int end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">M</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">let</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1815,19 +1628,11 @@ the module that OCaml outputs: it contains <code class="docutils literal notrans
 of the former, the module type annotation below is accepted:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">X</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">X</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">MX</span> <span class="o">=</span> <span class="o">(</span><span class="nc">M</span> <span class="o">:</span> <span class="nc">X</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type X = sig val x : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module MX : X
+<span class="n">module</span> <span class="n">MX</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="p">:</span> <span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1837,19 +1642,11 @@ does contain such an item.  So <code class="docutils literal notranslate"><span 
 for <code class="docutils literal notranslate"><span class="pre">z</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Z</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">z</span> <span class="o">:</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">z</span> <span class="p">:</span> <span class="nb">int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">MZ</span> <span class="o">=</span> <span class="o">(</span><span class="nc">M</span> <span class="o">:</span> <span class="nc">Z</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Z = sig val z : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module MZ : Z
+<span class="n">module</span> <span class="n">MZ</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="p">:</span> <span class="n">Z</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1857,20 +1654,12 @@ for <code class="docutils literal notranslate"><span class="pre">z</span></code>
 <p>Or for both <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">XZ</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span>
-  <span class="k">val</span> <span class="n">z</span> <span class="o">:</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">XZ</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">int</span>
+  <span class="n">val</span> <span class="n">z</span> <span class="p">:</span> <span class="nb">int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">MXZ</span> <span class="o">=</span> <span class="o">(</span><span class="nc">M</span> <span class="o">:</span> <span class="nc">XZ</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type XZ = sig val x : int val z : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module MXZ : XZ
+<span class="n">module</span> <span class="n">MXZ</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="p">:</span> <span class="n">XZ</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1878,28 +1667,11 @@ for <code class="docutils literal notranslate"><span class="pre">z</span></code>
 <p>But not for <code class="docutils literal notranslate"><span class="pre">y</span></code>, because <code class="docutils literal notranslate"><span class="pre">M</span></code> contains no such item:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Y</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">y</span> <span class="p">:</span> <span class="nb">int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">MY</span> <span class="o">=</span> <span class="o">(</span><span class="nc">M</span> <span class="o">:</span> <span class="nc">Y</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Y = sig val y : int end
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[35]&quot;, line 5, characters 13-14:
-5 | module MY = (M : Y)
-                 ^
-Error: Signature mismatch:
-       Modules do not match:
-         sig val x : int val z : int end
-       is not included in
-         Y
-       The value `y&#39; is required but not provided
-       File &quot;[35]&quot;, line 2, characters 2-13: Expected declaration
+<span class="n">module</span> <span class="n">MY</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="p">:</span> <span class="n">Y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1921,29 +1693,11 @@ compares that signature to <code class="docutils literal notranslate"><span clas
 <p>Here’s another error message to practice reading:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Xstring</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">string</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Xstring</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="n">string</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">MXstring</span> <span class="o">=</span> <span class="o">(</span><span class="nc">M</span> <span class="o">:</span> <span class="nc">Xstring</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Xstring = sig val x : string end
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[36]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">5</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">19</span><span class="o">-</span><span class="mi">20</span><span class="p">:</span>
-<span class="mi">5</span> <span class="o">|</span> <span class="n">module</span> <span class="n">MXstring</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="p">:</span> <span class="n">Xstring</span><span class="p">)</span>
-                       <span class="o">^</span>
-<span class="ne">Error</span>: Signature mismatch:
-       <span class="n">Modules</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
-         <span class="n">sig</span> <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">val</span> <span class="n">z</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">end</span>
-       <span class="ow">is</span> <span class="ow">not</span> <span class="n">included</span> <span class="ow">in</span>
-         <span class="n">Xstring</span>
-       <span class="n">Values</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span> <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">included</span> <span class="ow">in</span> <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="n">string</span>
-       <span class="n">File</span> <span class="s2">&quot;[36]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">2</span><span class="o">-</span><span class="mi">16</span><span class="p">:</span> <span class="n">Expected</span> <span class="n">declaration</span>
-       <span class="n">File</span> <span class="s2">&quot;[31]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">7</span><span class="p">:</span> <span class="n">Actual</span> <span class="n">declaration</span>
+<span class="n">module</span> <span class="n">MXstring</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="p">:</span> <span class="n">Xstring</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1962,26 +1716,15 @@ type to be an instantiation of that polymorphic type.</p>
 structure to provide a value of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">IntFun</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">f</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">IntFun</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">f</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">IdFun</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="n">IdFun</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">Iid</span> <span class="o">=</span> <span class="o">(</span><span class="nc">IdFun</span> <span class="o">:</span> <span class="nc">IntFun</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type IntFun = sig val f : int -&gt; int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IdFun : sig val f : &#39;a -&gt; &#39;a end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Iid : IntFun
+<span class="n">module</span> <span class="n">Iid</span> <span class="o">=</span> <span class="p">(</span><span class="n">IdFun</span> <span class="p">:</span> <span class="n">IntFun</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1991,18 +1734,7 @@ required by a signature to the definitions provided by a structure. But here’s
 an example that might be surprising:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">MXZ&#39;</span> <span class="o">=</span> <span class="o">((</span><span class="nc">M</span> <span class="o">:</span> <span class="nc">X</span><span class="o">)</span> <span class="o">:</span> <span class="nc">Z</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[38]&quot;, line 1, characters 15-22:
-1 | module MXZ&#39; = ((M : X) : Z)
-                   ^^^^^^^
-Error: Signature mismatch:
-       Modules do not match: X is not included in Z
-       The value `z&#39; is required but not provided
-       File &quot;[33]&quot;, line 2, characters 2-13: Expected declaration
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">MXZ</span><span class="s1">&#39; = ((M : X) : Z)</span>
 </pre></div>
 </div>
 </div>
@@ -2032,45 +1764,28 @@ type variables from <code class="docutils literal notranslate"><span class="pre"
 types and modules:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">a</span> <span class="o">:</span> <span class="kt">int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">T</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">a</span> <span class="p">:</span> <span class="nb">int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="k">type</span> <span class="nc">S</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">val</span> <span class="n">a</span> <span class="o">:</span> <span class="kt">int</span>
-  <span class="k">val</span> <span class="n">b</span> <span class="o">:</span> <span class="kt">bool</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="nb">type</span> <span class="n">S</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">val</span> <span class="n">a</span> <span class="p">:</span> <span class="nb">int</span>
+  <span class="n">val</span> <span class="n">b</span> <span class="p">:</span> <span class="nb">bool</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">A</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="n">A</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">AB</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">true</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="n">AB</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">AC</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="sc">&#39;c&#39;</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig val a : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type S = sig val a : int val b : bool end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module A : sig val a : int end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module AB : sig val a : int val b : bool end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module AC : sig val a : int val c : char end
+<span class="n">module</span> <span class="n">AC</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">let</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -2151,34 +1866,42 @@ method.</p>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="module_systems.html" title="previous page"><span class="section-number">5.1. </span>Module Systems</a>
-    <a class='right-next' id="next-link" href="toplevel.html" title="next page"><span class="section-number">5.3. </span>Modules and the Toplevel</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="module_systems.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">5.1. </span>Module Systems</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="toplevel.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.3. </span>Modules and the Toplevel</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

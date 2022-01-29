@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>5.7. Module Type Constraints &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,7 +57,10 @@
     <link rel="next" title="5.8. Includes" href="includes.html" />
     <link rel="prev" title="5.6. Functional Data Structures" href="functional_data_structures.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -74,6 +77,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -83,9 +90,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -102,7 +109,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -203,7 +210,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -416,7 +423,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -584,7 +591,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -643,7 +650,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -655,7 +662,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -720,7 +727,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -776,12 +783,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#specializing-module-types">
@@ -801,10 +808,38 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Module Type Constraints</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#specializing-module-types">
+   5.7.1. Specializing Module Types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constraints">
+   5.7.2. Constraints
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="module-type-constraints">
+  <div class="tex2jax_ignore mathjax_ignore section" id="module-type-constraints">
 <h1><span class="section-number">5.7. </span>Module Type Constraints<a class="headerlink" href="#module-type-constraints" title="Permalink to this headline">¶</a></h1>
 <p>We have extolled the virtues of encapsulation. Now we’re going to do something
 that might seem counter-intuitive: selectively violate encapsulation.</p>
@@ -812,29 +847,15 @@ that might seem counter-intuitive: selectively violate encapsulation.</p>
 support the usual addition and multiplication operations from arithmetic, or more precisely, a <em><a class="reference external" href="https://en.wikipedia.org/wiki/Ring_(mathematics)">ring</a></em>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Ring</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">one</span> <span class="o">:</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>  <span class="c">(* additive inverse *)</span>
-  <span class="k">val</span> <span class="n">to_string</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Ring =
-  sig
-    type t
-    val zero : t
-    val one : t
-    val ( + ) : t -&gt; t -&gt; t
-    val ( * ) : t -&gt; t -&gt; t
-    val ( ~- ) : t -&gt; t
-    val to_string : t -&gt; string
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Ring</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="n">zero</span> <span class="p">:</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="n">one</span> <span class="p">:</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="p">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="p">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="p">(</span> <span class="o">~-</span> <span class="p">)</span> <span class="p">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>  <span class="p">(</span><span class="o">*</span> <span class="n">additive</span> <span class="n">inverse</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">to_string</span> <span class="p">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">string</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -848,20 +869,15 @@ operations on them? The <code class="docutils literal notranslate"><span class="
 <p>Here is a module that implements that module type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntRing</span> <span class="o">:</span> <span class="nc">Ring</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
-  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntRing : Ring
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">IntRing</span> <span class="p">:</span> <span class="n">Ring</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span>
+  <span class="n">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">~-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">~-</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -870,12 +886,7 @@ operations on them? The <code class="docutils literal notranslate"><span class="
 sum of one and one is:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntRing.t = &lt;abstr&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IntRing</span><span class="o">.</span><span class="p">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -883,12 +894,7 @@ sum of one and one is:</p>
 <p>But we could convert it to a string:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span> <span class="o">|&gt;</span> <span class="n">to_string</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;2&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IntRing</span><span class="o">.</span><span class="p">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span> <span class="o">|&gt;</span> <span class="n">to_string</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -897,20 +903,12 @@ sum of one and one is:</p>
 <code class="docutils literal notranslate"><span class="pre">to_string</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">pp_intring</span> <span class="n">fmt</span> <span class="n">i</span> <span class="o">=</span>
-  <span class="nn">Format</span><span class="p">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;%s&quot;</span> <span class="o">(</span><span class="nn">IntRing</span><span class="p">.</span><span class="n">to_string</span> <span class="n">i</span><span class="o">);;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">pp_intring</span> <span class="n">fmt</span> <span class="n">i</span> <span class="o">=</span>
+  <span class="n">Format</span><span class="o">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="p">(</span><span class="n">IntRing</span><span class="o">.</span><span class="n">to_string</span> <span class="n">i</span><span class="p">);;</span>
 
-<span class="o">#</span><span class="n">install_printer</span> <span class="n">pp_intring</span><span class="o">;;</span>
+<span class="c1">#install_printer pp_intring;;</span>
 
-<span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pp_intring : Format.formatter -&gt; IntRing.t -&gt; unit = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntRing.t = 2
+<span class="n">IntRing</span><span class="o">.</span><span class="p">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -918,20 +916,15 @@ sum of one and one is:</p>
 <p>We could implement other kinds of rings, too:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">FloatRing</span> <span class="o">:</span> <span class="nc">Ring</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
-  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
-  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+.</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*.</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-.</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_float</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatRing : Ring
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">FloatRing</span> <span class="p">:</span> <span class="n">Ring</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">float</span>
+  <span class="n">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mf">0.</span>
+  <span class="n">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mf">1.</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+.</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*.</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">~-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">~-.</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_float</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -939,20 +932,12 @@ sum of one and one is:</p>
 <p>Then we’d have to install a printer for it, too:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">pp_floatring</span> <span class="n">fmt</span> <span class="n">f</span> <span class="o">=</span>
-  <span class="nn">Format</span><span class="p">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;%s&quot;</span> <span class="o">(</span><span class="nn">FloatRing</span><span class="p">.</span><span class="n">to_string</span> <span class="n">f</span><span class="o">);;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">pp_floatring</span> <span class="n">fmt</span> <span class="n">f</span> <span class="o">=</span>
+  <span class="n">Format</span><span class="o">.</span><span class="n">fprintf</span> <span class="n">fmt</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="p">(</span><span class="n">FloatRing</span><span class="o">.</span><span class="n">to_string</span> <span class="n">f</span><span class="p">);;</span>
 
-<span class="o">#</span><span class="n">install_printer</span> <span class="n">pp_floatring</span><span class="o">;;</span>
+<span class="c1">#install_printer pp_floatring;;</span>
 
-<span class="nn">FloatRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val pp_floatring : Format.formatter -&gt; FloatRing.t -&gt; unit = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : FloatRing.t = 2.
+<span class="n">FloatRing</span><span class="o">.</span><span class="p">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -967,43 +952,24 @@ that idea, next.</p>
 then do a separate check to make sure the structure satisfies the signature:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntRing</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
-  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">IntRing</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span>
+  <span class="n">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">~-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">~-</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="o">_</span> <span class="o">:</span> <span class="nc">Ring</span> <span class="o">=</span> <span class="nc">IntRing</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntRing :
-  sig
-    type t = int
-    val zero : int
-    val one : int
-    val ( + ) : int -&gt; int -&gt; int
-    val ( * ) : int -&gt; int -&gt; int
-    val ( ~- ) : int -&gt; int
-    val to_string : int -&gt; string
-  end
+<span class="n">module</span> <span class="n">_</span> <span class="p">:</span> <span class="n">Ring</span> <span class="o">=</span> <span class="n">IntRing</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 2
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IntRing</span><span class="o">.</span><span class="p">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1013,21 +979,7 @@ specialize the <code class="docutils literal notranslate"><span class="pre">Ring
 We do that by adding a <em>constraint</em> using the <code class="docutils literal notranslate"><span class="pre">with</span></code> keyword:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">INT_RING</span> <span class="o">=</span> <span class="nc">Ring</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type INT_RING =
-  sig
-    type t = int
-    val zero : t
-    val one : t
-    val ( + ) : t -&gt; t -&gt; t
-    val ( * ) : t -&gt; t -&gt; t
-    val ( ~- ) : t -&gt; t
-    val to_string : t -&gt; string
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">INT_RING</span> <span class="o">=</span> <span class="n">Ring</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span>
 </pre></div>
 </div>
 </div>
@@ -1038,20 +990,15 @@ call these “sharing constraints.”</p>
 <p>Now <code class="docutils literal notranslate"><span class="pre">IntRing</span></code> can be given that module type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">IntRing</span> <span class="o">:</span> <span class="nc">INT_RING</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
-  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IntRing : INT_RING
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">IntRing</span> <span class="p">:</span> <span class="n">INT_RING</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span>
+  <span class="n">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">~-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">~-</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_int</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1060,12 +1007,7 @@ call these “sharing constraints.”</p>
 values of type <code class="docutils literal notranslate"><span class="pre">t</span></code> without any help needed from a pretty printer:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntRing.t = 2
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IntRing</span><span class="o">.</span><span class="p">(</span><span class="n">one</span> <span class="o">+</span> <span class="n">one</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1074,12 +1016,7 @@ values of type <code class="docutils literal notranslate"><span class="pre">t</s
 by <code class="docutils literal notranslate"><span class="pre">IntRing</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">IntRing</span><span class="p">.</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">one</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : IntRing.t = 2
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IntRing</span><span class="o">.</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">one</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1087,34 +1024,17 @@ by <code class="docutils literal notranslate"><span class="pre">IntRing</span></
 <p>The same can be done for floats:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">FLOAT_RING</span> <span class="o">=</span> <span class="nc">Ring</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">FLOAT_RING</span> <span class="o">=</span> <span class="n">Ring</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">float</span>
 
-<span class="k">module</span> <span class="nc">FloatRing</span> <span class="o">:</span> <span class="nc">FLOAT_RING</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
-  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
-  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+.</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*.</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-.</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_float</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type FLOAT_RING =
-  sig
-    type t = float
-    val zero : t
-    val one : t
-    val ( + ) : t -&gt; t -&gt; t
-    val ( * ) : t -&gt; t -&gt; t
-    val ( ~- ) : t -&gt; t
-    val to_string : t -&gt; string
-  end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatRing : FLOAT_RING
+<span class="n">module</span> <span class="n">FloatRing</span> <span class="p">:</span> <span class="n">FLOAT_RING</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">float</span>
+  <span class="n">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mf">0.</span>
+  <span class="n">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mf">1.</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+.</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*.</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">~-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">~-.</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_float</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1125,29 +1045,15 @@ syntax becomes a little harder to read because of the proximity of the two <code
 signs:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">FloatRing</span> <span class="o">:</span> <span class="nc">Ring</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
-  <span class="k">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
-  <span class="k">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+.</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*.</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="o">(</span> <span class="o">~-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">~-.</span> <span class="o">)</span>
-  <span class="k">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_float</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module FloatRing :
-  sig
-    type t = float
-    val zero : t
-    val one : t
-    val ( + ) : t -&gt; t -&gt; t
-    val ( * ) : t -&gt; t -&gt; t
-    val ( ~- ) : t -&gt; t
-    val to_string : t -&gt; string
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">FloatRing</span> <span class="p">:</span> <span class="n">Ring</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">float</span>
+  <span class="n">let</span> <span class="n">zero</span> <span class="o">=</span> <span class="mf">0.</span>
+  <span class="n">let</span> <span class="n">one</span> <span class="o">=</span> <span class="mf">1.</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+.</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*.</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="p">(</span> <span class="o">~-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">~-.</span> <span class="p">)</span>
+  <span class="n">let</span> <span class="n">to_string</span> <span class="o">=</span> <span class="n">string_of_float</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1177,16 +1083,8 @@ the declaration of <code class="docutils literal notranslate"><span class="pre">
 compare the two signatures output below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">sig</span> <span class="k">type</span> <span class="n">t</span> <span class="k">end</span>
-<span class="k">module</span> <span class="k">type</span> <span class="nc">U</span> <span class="o">=</span> <span class="nc">T</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig type t end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type U = sig type t = int end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">T</span> <span class="o">=</span> <span class="n">sig</span> <span class="nb">type</span> <span class="n">t</span> <span class="n">end</span>
+<span class="n">module</span> <span class="nb">type</span> <span class="n">U</span> <span class="o">=</span> <span class="n">T</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span>
 </pre></div>
 </div>
 </div>
@@ -1197,46 +1095,29 @@ declaration <code class="docutils literal notranslate"><span class="pre">type</s
 work to give and understand this example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">XY</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="n">x</span>
-  <span class="k">type</span> <span class="n">y</span>
-<span class="k">end</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">XY</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="n">x</span>
+  <span class="nb">type</span> <span class="n">y</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="k">type</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">module</span> <span class="nc">A</span> <span class="o">:</span> <span class="nc">XY</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="nb">type</span> <span class="n">T</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="n">module</span> <span class="n">A</span> <span class="p">:</span> <span class="n">XY</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">B</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="n">x</span> <span class="o">=</span> <span class="kt">int</span>
-  <span class="k">type</span> <span class="n">y</span> <span class="o">=</span> <span class="kt">float</span>
-<span class="k">end</span>
+<span class="n">module</span> <span class="n">B</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span>
+  <span class="nb">type</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="k">type</span> <span class="nc">U</span> <span class="o">=</span> <span class="nc">T</span> <span class="k">with</span> <span class="k">module</span> <span class="nc">A</span> <span class="o">=</span> <span class="nc">B</span>
+<span class="n">module</span> <span class="nb">type</span> <span class="n">U</span> <span class="o">=</span> <span class="n">T</span> <span class="k">with</span> <span class="n">module</span> <span class="n">A</span> <span class="o">=</span> <span class="n">B</span>
 
-<span class="k">module</span> <span class="nc">C</span> <span class="o">:</span> <span class="nc">U</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">module</span> <span class="nc">A</span> <span class="o">=</span> <span class="k">struct</span>
-    <span class="k">type</span> <span class="n">x</span> <span class="o">=</span> <span class="kt">int</span>
-    <span class="k">type</span> <span class="n">y</span> <span class="o">=</span> <span class="kt">float</span>
-    <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type XY = sig type x type y end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig module A : XY end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module B : sig type x = int type y = float end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type U = sig module A : sig type x = int type y = float end end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module C : U
+<span class="n">module</span> <span class="n">C</span> <span class="p">:</span> <span class="n">U</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="n">module</span> <span class="n">A</span> <span class="o">=</span> <span class="n">struct</span>
+    <span class="nb">type</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span>
+    <span class="nb">type</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span>
+    <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+  <span class="n">end</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1275,34 +1156,42 @@ checking.</p>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="functional_data_structures.html" title="previous page"><span class="section-number">5.6. </span>Functional Data Structures</a>
-    <a class='right-next' id="next-link" href="includes.html" title="next page"><span class="section-number">5.8. </span>Includes</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="functional_data_structures.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">5.6. </span>Functional Data Structures</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="includes.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.8. </span>Includes</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>6.5. Black-box and Glass-box Testing &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,24 +42,27 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="6.6. Randomized Testing with QCheck" href="randomized.html" />
     <link rel="prev" title="6.4. Testing and Debugging" href="test_debug.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -76,6 +79,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -85,9 +92,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -104,7 +111,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -205,7 +212,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -418,7 +425,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -586,7 +593,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -645,7 +652,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -657,7 +664,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -722,7 +729,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -778,12 +785,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#black-box-testing">
@@ -823,10 +830,58 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Black-box and Glass-box Testing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#black-box-testing">
+   6.5.1. Black-box Testing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#black-box-testing-of-data-abstractions">
+   6.5.2. Black-box Testing of Data Abstractions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glass-box-testing">
+   6.5.3. Glass-box Testing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glass-box-testing-of-data-abstractions">
+   6.5.4. Glass-box Testing of Data Abstractions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#black-box-vs-glass-box">
+   6.5.5. Black-box vs. Glass-box
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bisect">
+   6.5.6. Bisect
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="black-box-and-glass-box-testing">
+  <div class="tex2jax_ignore mathjax_ignore section" id="black-box-and-glass-box-testing">
 <h1><span class="section-number">6.5. </span>Black-box and Glass-box Testing<a class="headerlink" href="#black-box-and-glass-box-testing" title="Permalink to this headline">¶</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/W8FEhZIpYCg" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We would like to know that a program works on all possible inputs. The problem
@@ -836,38 +891,29 @@ data type for rational numbers. One of its operations might be an addition
 function <code class="docutils literal notranslate"><span class="pre">plus</span></code>, e.g.:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">RATIONAL</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="c">(** A [t] is a rational. *)</span>
-  <span class="k">type</span> <span class="n">t</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">RATIONAL</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="p">(</span><span class="o">**</span> <span class="n">A</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">rational</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="nb">type</span> <span class="n">t</span>
 
-  <span class="c">(** [create p q] is the rational number [p/q].</span>
-<span class="c">      Raises: [Invalid_argument &quot;0&quot;] if [q] is 0. *)</span>
-  <span class="k">val</span> <span class="n">create</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">t</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">create</span> <span class="n">p</span> <span class="n">q</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">rational</span> <span class="n">number</span> <span class="p">[</span><span class="n">p</span><span class="o">/</span><span class="n">q</span><span class="p">]</span><span class="o">.</span>
+      <span class="n">Raises</span><span class="p">:</span> <span class="p">[</span><span class="n">Invalid_argument</span> <span class="s2">&quot;0&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="ow">is</span> <span class="mf">0.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">create</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="n">t</span>
 
-  <span class="c">(** [plus r1 r2] is [r1 + r2] *)</span>
-  <span class="k">val</span> <span class="n">plus</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
-<span class="k">end</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">plus</span> <span class="n">r1</span> <span class="n">r2</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">r1</span> <span class="o">+</span> <span class="n">r2</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">plus</span> <span class="p">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+<span class="n">end</span>
 
-<span class="k">module</span> <span class="nc">Rational</span> <span class="o">:</span> <span class="nc">RATIONAL</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="c">(** AF: [(p, q)] represents the rational number [p/q]</span>
-<span class="c">      RI: [q] is not 0. *)</span>
-  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">int</span>
+<span class="n">module</span> <span class="n">Rational</span> <span class="p">:</span> <span class="n">RATIONAL</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="p">(</span><span class="o">**</span> <span class="n">AF</span><span class="p">:</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)]</span> <span class="n">represents</span> <span class="n">the</span> <span class="n">rational</span> <span class="n">number</span> <span class="p">[</span><span class="n">p</span><span class="o">/</span><span class="n">q</span><span class="p">]</span>
+      <span class="n">RI</span><span class="p">:</span> <span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mf">0.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span> <span class="o">*</span> <span class="nb">int</span>
 
-  <span class="k">let</span> <span class="n">create</span> <span class="n">p</span> <span class="n">q</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">invalid_arg</span> <span class="s2">&quot;0&quot;</span> <span class="k">else</span> <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">q</span><span class="o">)</span>
+  <span class="n">let</span> <span class="n">create</span> <span class="n">p</span> <span class="n">q</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="n">invalid_arg</span> <span class="s2">&quot;0&quot;</span> <span class="k">else</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 
-  <span class="k">let</span> <span class="n">plus</span> <span class="o">(</span><span class="n">p1</span><span class="o">,</span> <span class="n">q1</span><span class="o">)</span> <span class="o">(</span><span class="n">p2</span><span class="o">,</span> <span class="n">q2</span><span class="o">)</span> <span class="o">=</span>
-    <span class="o">(</span><span class="n">p1</span> <span class="o">*</span> <span class="n">q2</span> <span class="o">+</span> <span class="n">p2</span> <span class="o">*</span> <span class="n">q1</span><span class="o">,</span> <span class="n">q1</span> <span class="o">*</span> <span class="n">q2</span><span class="o">)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type RATIONAL =
-  sig type t val create : int -&gt; int -&gt; t val plus : t -&gt; t -&gt; t end
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Rational : RATIONAL
+  <span class="n">let</span> <span class="n">plus</span> <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span> <span class="p">(</span><span class="n">p2</span><span class="p">,</span> <span class="n">q2</span><span class="p">)</span> <span class="o">=</span>
+    <span class="p">(</span><span class="n">p1</span> <span class="o">*</span> <span class="n">q2</span> <span class="o">+</span> <span class="n">p2</span> <span class="o">*</span> <span class="n">q1</span><span class="p">,</span> <span class="n">q1</span> <span class="o">*</span> <span class="n">q2</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -998,38 +1044,26 @@ as output.</p></li>
 <p>For example, consider this set abstraction:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">sig</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Set</span> <span class="o">=</span> <span class="n">sig</span>
 
-  <span class="c">(** [&#39;a t] is the type of a set whose elements have type [&#39;a]. *)</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="s1">&#39;a t] is the type of a set whose elements have type [&#39;</span><span class="n">a</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t</span>
 
-  <span class="c">(** [empty] is the empty set. *)</span>
-  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">empty</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">empty</span> <span class="nb">set</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="s1">&#39;a t</span>
 
-  <span class="c">(** [size s] is the number of elements in [s]. *</span>
-<span class="c">      [size empty] is [0]. *)</span>
-  <span class="k">val</span> <span class="n">size</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">size</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">elements</span> <span class="ow">in</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span>
+      <span class="p">[</span><span class="n">size</span> <span class="n">empty</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">size</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; int</span>
 
-  <span class="c">(** [add x s] is a set containing all the elements of</span>
-<span class="c">      [s] as well as element [x]. *)</span>
-  <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">add</span> <span class="n">x</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="nb">set</span> <span class="n">containing</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">elements</span> <span class="n">of</span>
+      <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">as</span> <span class="n">well</span> <span class="k">as</span> <span class="n">element</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">add</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="s1">&#39;a t</span>
 
-  <span class="c">(** [mem x s] is [true] iff [x] is an element of [s]. *)</span>
-  <span class="k">val</span> <span class="n">mem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">mem</span> <span class="n">x</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">true</span><span class="p">]</span> <span class="n">iff</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">element</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
+  <span class="n">val</span> <span class="n">mem</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Set =
-  sig
-    type &#39;a t
-    val empty : &#39;a t
-    val size : &#39;a t -&gt; int
-    val add : &#39;a -&gt; &#39;a t -&gt; &#39;a t
-    val mem : &#39;a -&gt; &#39;a t -&gt; bool
-  end
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1073,16 +1107,11 @@ identify boundary cases within this space that are worth testing.</p>
 maximum of its three arguments:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">max3</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span> <span class="k">then</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">z</span> <span class="k">then</span> <span class="n">x</span> <span class="k">else</span> <span class="n">z</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">max3</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span> <span class="n">then</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">z</span> <span class="n">then</span> <span class="n">x</span> <span class="k">else</span> <span class="n">z</span>
   <span class="k">else</span>
-    <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="n">z</span> <span class="k">then</span> <span class="n">y</span> <span class="k">else</span> <span class="n">z</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val max3 : &#39;a -&gt; &#39;a -&gt; &#39;a -&gt; &#39;a = &lt;fun&gt;
+    <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="n">z</span> <span class="n">then</span> <span class="n">y</span> <span class="k">else</span> <span class="n">z</span>
 </pre></div>
 </div>
 </div>
@@ -1240,34 +1269,42 @@ parallelization:</p>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="test_debug.html" title="previous page"><span class="section-number">6.4. </span>Testing and Debugging</a>
-    <a class='right-next' id="next-link" href="randomized.html" title="next page"><span class="section-number">6.6. </span>Randomized Testing with QCheck</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="test_debug.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.4. </span>Testing and Debugging</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="randomized.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.6. </span>Randomized Testing with QCheck</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>6.6. Randomized Testing with QCheck &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,24 +42,27 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="6.7. Proving Correctness" href="proving_correctness.html" />
     <link rel="prev" title="6.5. Black-box and Glass-box Testing" href="black_glass_box.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -76,6 +79,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -85,9 +92,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -104,7 +111,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -205,7 +212,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -418,7 +425,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -586,7 +593,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -645,7 +652,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -657,7 +664,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -722,7 +729,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -778,12 +785,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#random-number-generation">
@@ -818,10 +825,53 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Randomized Testing with QCheck</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-number-generation">
+   6.6.1. Random Number Generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#qcheck-abstractions">
+   6.6.2. QCheck Abstractions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-properties">
+   6.6.3. Testing Properties
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#informative-output-from-qcheck">
+   6.6.4. Informative Output from QCheck
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-functions-with-qcheck">
+   6.6.5. Testing Functions with QCheck
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="randomized-testing-with-qcheck">
+  <div class="tex2jax_ignore mathjax_ignore section" id="randomized-testing-with-qcheck">
 <h1><span class="section-number">6.6. </span>Randomized Testing with QCheck<a class="headerlink" href="#randomized-testing-with-qcheck" title="Permalink to this headline">¶</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/62SYeSlSCNM" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p><em>Randomized testing</em> aka <em>fuzz testing</em> is the process of generating random
@@ -872,20 +922,9 @@ installation is somehow different than that used to produce this book, you will
 get the same numbers as those below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Random</span><span class="p">.</span><span class="n">int</span> <span class="mi">100</span><span class="o">;;</span>
-<span class="nn">Random</span><span class="p">.</span><span class="n">int</span> <span class="mi">100</span><span class="o">;;</span>
-<span class="nn">Random</span><span class="p">.</span><span class="n">int</span> <span class="mi">100</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 44
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 85
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 82
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">int</span> <span class="mi">100</span><span class="p">;;</span>
+<span class="n">Random</span><span class="o">.</span><span class="n">int</span> <span class="mi">100</span><span class="p">;;</span>
+<span class="n">Random</span><span class="o">.</span><span class="n">int</span> <span class="mi">100</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -925,24 +964,10 @@ sequence of values.  With high probability, what you get will be different
 than the values below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Random</span><span class="p">.</span><span class="n">self_init</span> <span class="bp">()</span><span class="o">;;</span>
-<span class="nn">Random</span><span class="p">.</span><span class="n">int</span> <span class="mi">100</span><span class="o">;;</span>
-<span class="nn">Random</span><span class="p">.</span><span class="n">int</span> <span class="mi">100</span><span class="o">;;</span>
-<span class="nn">Random</span><span class="p">.</span><span class="n">int</span> <span class="mi">100</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 5
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 56
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 55
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Random</span><span class="o">.</span><span class="n">self_init</span> <span class="p">();;</span>
+<span class="n">Random</span><span class="o">.</span><span class="n">int</span> <span class="mi">100</span><span class="p">;;</span>
+<span class="n">Random</span><span class="o">.</span><span class="n">int</span> <span class="mi">100</span><span class="p">;;</span>
+<span class="n">Random</span><span class="o">.</span><span class="n">int</span> <span class="mi">100</span><span class="p">;;</span>
 </pre></div>
 </div>
 </div>
@@ -955,7 +980,7 @@ generators, properties, and arbitraries.  If you want to follow along in
 utop, load QCheck with this directive:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">require</span> <span class="s2">&quot;qcheck&quot;</span><span class="o">;;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#require &quot;qcheck&quot;;;</span>
 </pre></div>
 </div>
 </div>
@@ -1017,20 +1042,12 @@ even, and another that determines whether a list is sorted in non-decreasing
 order according to the built-in <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code> operator:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">is_even</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="ow">mod</span> <span class="mi">2</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">is_even</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="n">mod</span> <span class="mi">2</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">let</span> <span class="k">rec</span> <span class="n">is_sorted</span> <span class="o">=</span> <span class="k">function</span>
-  <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span>
-  <span class="o">|</span> <span class="o">[</span> <span class="n">h</span> <span class="o">]</span> <span class="o">-&gt;</span> <span class="bp">true</span>
-  <span class="o">|</span> <span class="n">h1</span> <span class="o">::</span> <span class="o">(</span><span class="n">h2</span> <span class="o">::</span> <span class="n">t</span> <span class="k">as</span> <span class="n">t&#39;</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">h1</span> <span class="o">&lt;=</span> <span class="n">h2</span> <span class="o">&amp;&amp;</span> <span class="n">is_sorted</span> <span class="n">t&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val is_even : int -&gt; bool = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val is_sorted : &#39;a list -&gt; bool = &lt;fun&gt;
+<span class="n">let</span> <span class="n">rec</span> <span class="n">is_sorted</span> <span class="o">=</span> <span class="n">function</span>
+  <span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span>
+  <span class="o">|</span> <span class="p">[</span> <span class="n">h</span> <span class="p">]</span> <span class="o">-&gt;</span> <span class="n">true</span>
+  <span class="o">|</span> <span class="n">h1</span> <span class="p">::</span> <span class="p">(</span><span class="n">h2</span> <span class="p">::</span> <span class="n">t</span> <span class="k">as</span> <span class="n">t</span><span class="s1">&#39;) -&gt; h1 &lt;= h2 &amp;&amp; is_sorted t&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -1047,14 +1064,7 @@ understand them; we’ll get to the normal way in a little while. For example, t
 following expression represents an arbitrary integer:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">QCheck</span><span class="p">.</span><span class="n">make</span> <span class="nn">QCheck</span><span class="p">.</span><span class="nn">Gen</span><span class="p">.</span><span class="n">int</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int QCheck.arbitrary =
-{QCheck.gen = &lt;fun&gt;; print = None; small = None; shrink = None;
- collect = None; stats = []}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">QCheck</span><span class="o">.</span><span class="n">make</span> <span class="n">QCheck</span><span class="o">.</span><span class="n">Gen</span><span class="o">.</span><span class="n">int</span>
 </pre></div>
 </div>
 </div>
@@ -1073,12 +1083,7 @@ property holds of each of them. For example, the following code creates a QCheck
 test that checks whether an arbitrary integer is even:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">QCheck</span><span class="p">.</span><span class="nn">Test</span><span class="p">.</span><span class="n">make</span> <span class="o">(</span><span class="nn">QCheck</span><span class="p">.</span><span class="n">make</span> <span class="nn">QCheck</span><span class="p">.</span><span class="nn">Gen</span><span class="p">.</span><span class="n">int</span><span class="o">)</span> <span class="n">is_even</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val t : QCheck.Test.t = QCheck.Test.Test &lt;abstr&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">t</span> <span class="o">=</span> <span class="n">QCheck</span><span class="o">.</span><span class="n">Test</span><span class="o">.</span><span class="n">make</span> <span class="p">(</span><span class="n">QCheck</span><span class="o">.</span><span class="n">make</span> <span class="n">QCheck</span><span class="o">.</span><span class="n">Gen</span><span class="o">.</span><span class="n">int</span><span class="p">)</span> <span class="n">is_even</span>
 </pre></div>
 </div>
 </div>
@@ -1092,40 +1097,7 @@ the test above, running it will output 1 with high probability, because it will
 generate at least one odd integer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">QCheck_runner</span><span class="p">.</span><span class="n">run_tests</span> <span class="o">[</span><span class="n">t</span><span class="o">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-random seed: 454334429
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- <span class=" -Color -Color-Bold -Color-Bold-Red">Failure</span> --------------------------------------------------------------------
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_1 failed (0 shrink steps):
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;no printer&gt;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Red">failure</span> (1 tests failed, 0 tests errored, ran 1 tests)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 1
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">QCheck_runner</span><span class="o">.</span><span class="n">run_tests</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1151,12 +1123,7 @@ file. For example:</p>
 OUnit test suite we’ve been writing all along. The function that does this is:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">QCheck_runner</span><span class="p">.</span><span class="n">to_ounit2_test</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : ?rand:Random.State.t -&gt; QCheck.Test.t -&gt; OUnit2.test = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">QCheck_runner</span><span class="o">.</span><span class="n">to_ounit2_test</span>
 </pre></div>
 </div>
 </div>
@@ -1173,33 +1140,7 @@ know how to print values of the generator, and a few other things as well. You
 can see that in the definition of <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">QCheck.arbitrary</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">show</span> <span class="nn">QCheck</span><span class="p">.</span><span class="n">arbitrary</span><span class="o">;;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type nonrec &#39;a arbitrary = private {
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  gen : &#39;a QCheck.Gen.t;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  print : (&#39;a -&gt; string) option;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  small : (&#39;a -&gt; int) option;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  shrink : &#39;a QCheck.Shrink.t option;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  collect : (&#39;a -&gt; string) option;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  stats : &#39;a QCheck.stat list;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#show QCheck.arbitrary;;</span>
 </pre></div>
 </div>
 </div>
@@ -1226,40 +1167,8 @@ to the generators found in <code class="docutils literal notranslate"><span clas
 <p>Using those arbitraries, we can get improved error messages:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">QCheck</span><span class="p">.</span><span class="nn">Test</span><span class="p">.</span><span class="n">make</span> <span class="o">~</span><span class="n">name</span><span class="o">:</span><span class="s2">&quot;my_test&quot;</span> <span class="nn">QCheck</span><span class="p">.</span><span class="n">int</span> <span class="n">is_even</span><span class="o">;;</span>
-<span class="nn">QCheck_runner</span><span class="p">.</span><span class="n">run_tests</span> <span class="o">[</span><span class="n">t</span><span class="o">];;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val t : QCheck.Test.t = QCheck.Test.Test &lt;abstr&gt;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- <span class=" -Color -Color-Bold -Color-Bold-Red">Failure</span> --------------------------------------------------------------------
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test my_test failed (81 shrink steps):
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Red">failure</span> (1 tests failed, 0 tests errored, ran 1 tests)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 1
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">t</span> <span class="o">=</span> <span class="n">QCheck</span><span class="o">.</span><span class="n">Test</span><span class="o">.</span><span class="n">make</span> <span class="o">~</span><span class="n">name</span><span class="p">:</span><span class="s2">&quot;my_test&quot;</span> <span class="n">QCheck</span><span class="o">.</span><span class="n">int</span> <span class="n">is_even</span><span class="p">;;</span>
+<span class="n">QCheck_runner</span><span class="o">.</span><span class="n">run_tests</span> <span class="p">[</span><span class="n">t</span><span class="p">];;</span>
 </pre></div>
 </div>
 </div>
@@ -1274,30 +1183,10 @@ test whether a function’s output satisfies some property. For example, here is
 QCheck test to see whether the output of <code class="docutils literal notranslate"><span class="pre">double</span></code> is correct:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">double</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="o">;;</span>
-<span class="k">let</span> <span class="n">double_check</span> <span class="n">x</span> <span class="o">=</span> <span class="n">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">;;</span>
-<span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">QCheck</span><span class="p">.</span><span class="nn">Test</span><span class="p">.</span><span class="n">make</span> <span class="o">~</span><span class="n">count</span><span class="o">:</span><span class="mi">1000</span> <span class="nn">QCheck</span><span class="p">.</span><span class="n">int</span> <span class="n">double_check</span><span class="o">;;</span>
-<span class="nn">QCheck_runner</span><span class="p">.</span><span class="n">run_tests</span> <span class="o">[</span><span class="n">t</span><span class="o">];;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val double : int -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val double_check : int -&gt; bool = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val t : QCheck.Test.t = QCheck.Test.Test &lt;abstr&gt;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">success</span> (ran 1 tests)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 0
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">double</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">;;</span>
+<span class="n">let</span> <span class="n">double_check</span> <span class="n">x</span> <span class="o">=</span> <span class="n">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">;;</span>
+<span class="n">let</span> <span class="n">t</span> <span class="o">=</span> <span class="n">QCheck</span><span class="o">.</span><span class="n">Test</span><span class="o">.</span><span class="n">make</span> <span class="o">~</span><span class="n">count</span><span class="p">:</span><span class="mi">1000</span> <span class="n">QCheck</span><span class="o">.</span><span class="n">int</span> <span class="n">double_check</span><span class="p">;;</span>
+<span class="n">QCheck_runner</span><span class="o">.</span><span class="n">run_tests</span> <span class="p">[</span><span class="n">t</span><span class="p">];;</span>
 </pre></div>
 </div>
 </div>
@@ -1312,26 +1201,9 @@ twice brings you back to the original list.  That is a property that should
 hold of a correct implementation of list reversal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">rev_involutive</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="o">(</span><span class="n">lst</span> <span class="o">|&gt;</span> <span class="n">rev</span> <span class="o">|&gt;</span> <span class="n">rev</span> <span class="o">=</span> <span class="n">lst</span><span class="o">);;</span>
-<span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">QCheck</span><span class="p">.</span><span class="o">(</span><span class="nn">Test</span><span class="p">.</span><span class="n">make</span> <span class="o">~</span><span class="n">count</span><span class="o">:</span><span class="mi">1000</span> <span class="o">(</span><span class="kt">list</span> <span class="kt">int</span><span class="o">)</span> <span class="n">rev_involutive</span><span class="o">);;</span>
-<span class="nn">QCheck_runner</span><span class="p">.</span><span class="n">run_tests</span> <span class="o">[</span><span class="n">t</span><span class="o">];;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val rev_involutive : &#39;a list -&gt; bool = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val t : QCheck.Test.t = QCheck.Test.Test &lt;abstr&gt;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">success</span> (ran 1 tests)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 0
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rev_involutive</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="p">(</span><span class="n">lst</span> <span class="o">|&gt;</span> <span class="n">rev</span> <span class="o">|&gt;</span> <span class="n">rev</span> <span class="o">=</span> <span class="n">lst</span><span class="p">);;</span>
+<span class="n">let</span> <span class="n">t</span> <span class="o">=</span> <span class="n">QCheck</span><span class="o">.</span><span class="p">(</span><span class="n">Test</span><span class="o">.</span><span class="n">make</span> <span class="o">~</span><span class="n">count</span><span class="p">:</span><span class="mi">1000</span> <span class="p">(</span><span class="nb">list</span> <span class="nb">int</span><span class="p">)</span> <span class="n">rev_involutive</span><span class="p">);;</span>
+<span class="n">QCheck_runner</span><span class="o">.</span><span class="n">run_tests</span> <span class="p">[</span><span class="n">t</span><span class="p">];;</span>
 </pre></div>
 </div>
 </div>
@@ -1348,44 +1220,9 @@ and biased toward being smaller numbers in that range.</p>
 <em>are</em> sorted!  So we should expect this test to fail.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">is_sorted</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span> <span class="n">lst</span><span class="o">;;</span>
-<span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="nn">QCheck</span><span class="p">.</span><span class="o">(</span><span class="nn">Test</span><span class="p">.</span><span class="n">make</span> <span class="o">~</span><span class="n">count</span><span class="o">:</span><span class="mi">1000</span> <span class="o">(</span><span class="kt">list</span> <span class="n">small_nat</span><span class="o">)</span> <span class="n">is_sorted</span><span class="o">);;</span>
-<span class="nn">QCheck_runner</span><span class="p">.</span><span class="n">run_tests</span> <span class="o">[</span><span class="n">t</span><span class="o">];;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val is_sorted : &#39;a list -&gt; bool = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val t : QCheck.Test.t = QCheck.Test.Test &lt;abstr&gt;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- <span class=" -Color -Color-Bold -Color-Bold-Red">Failure</span> --------------------------------------------------------------------
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_4 failed (10 shrink steps):
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1; 0]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Red">failure</span> (1 tests failed, 0 tests errored, ran 1 tests)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 1
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">is_sorted</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">sort</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">compare</span> <span class="n">lst</span><span class="p">;;</span>
+<span class="n">let</span> <span class="n">t</span> <span class="o">=</span> <span class="n">QCheck</span><span class="o">.</span><span class="p">(</span><span class="n">Test</span><span class="o">.</span><span class="n">make</span> <span class="o">~</span><span class="n">count</span><span class="p">:</span><span class="mi">1000</span> <span class="p">(</span><span class="nb">list</span> <span class="n">small_nat</span><span class="p">)</span> <span class="n">is_sorted</span><span class="p">);;</span>
+<span class="n">QCheck_runner</span><span class="o">.</span><span class="n">run_tests</span> <span class="p">[</span><span class="n">t</span><span class="p">];;</span>
 </pre></div>
 </div>
 </div>
@@ -1417,34 +1254,42 @@ property. Generator <code class="docutils literal notranslate"><span class="pre"
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="black_glass_box.html" title="previous page"><span class="section-number">6.5. </span>Black-box and Glass-box Testing</a>
-    <a class='right-next' id="next-link" href="proving_correctness.html" title="next page"><span class="section-number">6.7. </span>Proving Correctness</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="black_glass_box.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.5. </span>Black-box and Glass-box Testing</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="proving_correctness.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.7. </span>Proving Correctness</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

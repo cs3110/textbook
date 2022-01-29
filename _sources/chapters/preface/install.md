@@ -105,7 +105,7 @@ WSL][wsl]. Here are a few notes on Microsoft's instructions:
   checked. Now Ctrl+Shift+C will copy and Ctrl+Shift+V will paste into the
   terminal. Note that you have to include Shift as part of that keystroke.
 
-[wsl]: https://docs.microsoft.com/en-us/windows/wsl/install-win10
+[wsl]: https://docs.microsoft.com/en-us/windows/wsl/install-manual
 [rh-virt]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios
 
 When you've finished installing WSL, open the Ubuntu app.  You will be at
@@ -308,13 +308,16 @@ are already a power user of Emacs or Vim those are great, too.)
   "Shell Command: Install 'code' command in PATH" command. Run it. Then close
   any open terminals to let the new path settings take effect.
 
-- In the extensions pane, search for and install the "OCaml Platform" extension.
-  Be careful to use the extension with exactly the right name. The extensions
-  named simply "OCaml" or "OCaml and Reason IDE" are not the right ones. (They
-  are both old and no longer maintained by their developers.) **Windows only:**
+- **For everyone:** In the extensions pane, search for and install the "OCaml Platform" extension.
+  Be careful to use the extension with _exactly the right name_ - the correct extension will also have an icon of a camel on a black background, as opposed to a red or orange background. **Windows only:**
   make sure you install the extension with the button that says "Install on WSL:
   ...", not with a button that says only "Install". The latter will not
   work.
+   
+```{warning}
+The extensions named simply "OCaml" or "OCaml and Reason IDE" are not the right ones. (They
+are both old and no longer maintained by their developers.)
+``` 
 
 [vscode]: https://code.visualstudio.com/
 

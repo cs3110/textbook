@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>8.7. Monads &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,7 +57,10 @@
     <link rel="next" title="8.8. Summary" href="summary.html" />
     <link rel="prev" title="8.6. Promises" href="promises.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -74,6 +77,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -83,9 +90,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -102,7 +109,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -203,7 +210,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -416,7 +423,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -584,7 +591,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -643,7 +650,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -655,7 +662,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -720,7 +727,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -776,12 +783,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-monad-signature">
@@ -821,10 +828,58 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Monads</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-monad-signature">
+   8.7.1. The Monad Signature
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-maybe-monad">
+   8.7.2. The Maybe Monad
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-the-writer-monad">
+   8.7.3. Example: The Writer Monad
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-the-lwt-monad">
+   8.7.4. Example: The Lwt Monad
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monad-laws">
+   8.7.5. Monad Laws
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composition-and-monad-laws">
+   8.7.6. Composition and Monad Laws
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="monads">
+  <div class="tex2jax_ignore mathjax_ignore section" id="monads">
 <h1><span class="section-number">8.7. </span>Monads<a class="headerlink" href="#monads" title="Permalink to this headline">¶</a></h1>
 <p>A <em>monad</em> is more of a design pattern than a data structure. That is, there are
 many data structures that, if you look at them in the right way, turn out to be
@@ -854,21 +909,11 @@ a controlled order.</p>
 it must match the following signature:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Monad</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">bind</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Monad =
-  sig
-    type &#39;a t
-    val return : &#39;a -&gt; &#39;a t
-    val bind : &#39;a t -&gt; (&#39;a -&gt; &#39;b t) -&gt; &#39;b t
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Monad</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t</span>
+  <span class="n">val</span> <span class="k">return</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="n">bind</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; (&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="s1">&#39;b t) -&gt; &#39;</span><span class="n">b</span> <span class="n">t</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -903,21 +948,11 @@ printing happens in the correct order.</p>
 pronounced “bind”. So let’s revise our signature for monads:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Monad</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Monad =
-  sig
-    type &#39;a t
-    val return : &#39;a -&gt; &#39;a t
-    val ( &gt;&gt;= ) : &#39;a t -&gt; (&#39;a -&gt; &#39;b t) -&gt; &#39;b t
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Monad</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t</span>
+  <span class="n">val</span> <span class="k">return</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="p">(</span> <span class="o">&gt;&gt;=</span> <span class="p">)</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; (&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="s1">&#39;b t) -&gt; &#39;</span><span class="n">b</span> <span class="n">t</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -955,41 +990,21 @@ division to be an option, you lose that <em>compositionality</em>.</p>
 <p>Here’s some code to make that idea concrete:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* works fine *)</span>
-<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">(</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val x : int = 3
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span> <span class="n">works</span> <span class="n">fine</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">div</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span><span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="nc">None</span> <span class="k">else</span> <span class="nc">Some</span> <span class="o">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">div</span> <span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">Some</span> <span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="o">=</span> <span class="n">div</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="o">=</span> <span class="n">div</span>
 
-<span class="c">(* won&#39;t type check *)</span>
-<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">(</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val div : int -&gt; int -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( / ) : int -&gt; int -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[4]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">7</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">12</span><span class="o">-</span><span class="mi">19</span><span class="p">:</span>
-<span class="mi">7</span> <span class="o">|</span> <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="o">^^^^^^^</span>
-<span class="ne">Error</span>: This expression has type int option
-       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span>
+<span class="p">(</span><span class="o">*</span> <span class="n">won</span><span class="s1">&#39;t type check *)</span>
+<span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1001,73 +1016,42 @@ operator returns a value of type <code class="docutils literal notranslate"><spa
 accept <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">option</span></code> as input.  For example,</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">plus_opt</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span><span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="k">match</span> <span class="n">x</span><span class="o">,</span><span class="n">y</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="nc">None</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
-  <span class="o">|</span> <span class="nc">Some</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="o">(</span><span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">plus_opt</span> <span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span><span class="p">:</span><span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span> <span class="o">|</span> <span class="n">_</span><span class="p">,</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+  <span class="o">|</span> <span class="n">Some</span> <span class="n">a</span><span class="p">,</span> <span class="n">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">Some</span> <span class="p">(</span><span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="n">plus_opt</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">plus_opt</span>
 
-<span class="k">let</span> <span class="n">minus_opt</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span><span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="k">match</span> <span class="n">x</span><span class="o">,</span><span class="n">y</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="nc">None</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
-  <span class="o">|</span> <span class="nc">Some</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="o">(</span><span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+<span class="n">let</span> <span class="n">minus_opt</span> <span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span><span class="p">:</span><span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span> <span class="o">|</span> <span class="n">_</span><span class="p">,</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+  <span class="o">|</span> <span class="n">Some</span> <span class="n">a</span><span class="p">,</span> <span class="n">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">Some</span> <span class="p">(</span><span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="o">=</span> <span class="n">minus_opt</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">minus_opt</span>
 
-<span class="k">let</span> <span class="n">mult_opt</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span><span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="k">match</span> <span class="n">x</span><span class="o">,</span><span class="n">y</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="nc">None</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
-  <span class="o">|</span> <span class="nc">Some</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="o">(</span><span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+<span class="n">let</span> <span class="n">mult_opt</span> <span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span><span class="p">:</span><span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span> <span class="o">|</span> <span class="n">_</span><span class="p">,</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+  <span class="o">|</span> <span class="n">Some</span> <span class="n">a</span><span class="p">,</span> <span class="n">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">Some</span> <span class="p">(</span><span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="n">mult_opt</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">mult_opt</span>
 
-<span class="k">let</span> <span class="n">div_opt</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span><span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="k">match</span> <span class="n">x</span><span class="o">,</span><span class="n">y</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="nc">None</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
-  <span class="o">|</span> <span class="nc">Some</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">b</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span> <span class="k">then</span> <span class="nc">None</span> <span class="k">else</span> <span class="nc">Some</span> <span class="o">(</span><span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+<span class="n">let</span> <span class="n">div_opt</span> <span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span><span class="p">:</span><span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span> <span class="o">|</span> <span class="n">_</span><span class="p">,</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+  <span class="o">|</span> <span class="n">Some</span> <span class="n">a</span><span class="p">,</span> <span class="n">Some</span> <span class="n">b</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span> <span class="n">then</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">Some</span> <span class="p">(</span><span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="o">=</span> <span class="n">div_opt</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val plus_opt : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( + ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val minus_opt : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( - ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val mult_opt : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( * ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val div_opt : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( / ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="o">=</span> <span class="n">div_opt</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* does type check *)</span>
-<span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Some</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">(</span><span class="nc">Some</span> <span class="mi">4</span> <span class="o">/</span> <span class="nc">Some</span> <span class="mi">2</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val x : int option = Some 3
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span> <span class="n">does</span> <span class="nb">type</span> <span class="n">check</span> <span class="o">*</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Some</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">Some</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">Some</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1078,29 +1062,14 @@ handled by abstracting a function that just does some pattern matching to
 propagate <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">propagate_none</span> <span class="o">(</span><span class="n">op</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">=</span>
-  <span class="k">match</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="nc">None</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
-  <span class="o">|</span> <span class="nc">Some</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nc">Some</span> <span class="o">(</span><span class="n">op</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">propagate_none</span> <span class="p">(</span><span class="n">op</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span> <span class="o">|</span> <span class="n">_</span><span class="p">,</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+  <span class="o">|</span> <span class="n">Some</span> <span class="n">a</span><span class="p">,</span> <span class="n">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">Some</span> <span class="p">(</span><span class="n">op</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">-</span> <span class="o">)</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val propagate_none :
-  (int -&gt; int -&gt; int) -&gt; int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( + ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( - ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( * ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+</span> <span class="p">)</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">-</span> <span class="p">)</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1114,24 +1083,14 @@ type of <code class="docutils literal notranslate"><span class="pre">div</span><
 <code class="docutils literal notranslate"><span class="pre">div</span></code>, which makes it easy to implement division:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">propagate_none</span>
-  <span class="o">(</span><span class="n">op</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">propagate_none</span>
+  <span class="p">(</span><span class="n">op</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span>
 <span class="o">=</span>
-  <span class="k">match</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="nc">None</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
-  <span class="o">|</span> <span class="nc">Some</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">op</span> <span class="n">a</span> <span class="n">b</span>
+  <span class="k">match</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span> <span class="o">|</span> <span class="n">_</span><span class="p">,</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+  <span class="o">|</span> <span class="n">Some</span> <span class="n">a</span><span class="p">,</span> <span class="n">Some</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">op</span> <span class="n">a</span> <span class="n">b</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="n">div</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val propagate_none :
-  (int -&gt; int -&gt; int option) -&gt; int option -&gt; int option -&gt; int option =
-  &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( / ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="n">div</span>
 </pre></div>
 </div>
 </div>
@@ -1141,26 +1100,12 @@ their return type is <code class="docutils literal notranslate"><span class="pre
 with <code class="docutils literal notranslate"><span class="pre">Some</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">wrap_output</span> <span class="o">(</span><span class="n">op</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="nc">Some</span> <span class="o">(</span><span class="n">op</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">wrap_output</span> <span class="p">(</span><span class="n">op</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="n">Some</span> <span class="p">(</span><span class="n">op</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="o">(</span><span class="n">wrap_output</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">))</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="o">(</span><span class="n">wrap_output</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">-</span> <span class="o">))</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="o">(</span><span class="n">wrap_output</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val wrap_output : (int -&gt; int -&gt; int) -&gt; int -&gt; int -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( + ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( - ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( * ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="p">(</span><span class="n">wrap_output</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+</span> <span class="p">))</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="p">(</span><span class="n">wrap_output</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">-</span> <span class="p">))</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="p">(</span><span class="n">wrap_output</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*</span> <span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1168,18 +1113,10 @@ with <code class="docutils literal notranslate"><span class="pre">Some</span></c
 <p>Finally, we could re-implement <code class="docutils literal notranslate"><span class="pre">div</span></code> to use <code class="docutils literal notranslate"><span class="pre">wrap_output</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">div</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="k">if</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="nc">None</span> <span class="k">else</span> <span class="n">wrap_output</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="n">x</span> <span class="n">y</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">div</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">wrap_output</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="n">x</span> <span class="n">y</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="n">div</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val div : int -&gt; int -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( / ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="o">=</span> <span class="n">propagate_none</span> <span class="n">div</span>
 </pre></div>
 </div>
 </div>
@@ -1198,12 +1135,7 @@ does. We could expose that idea even more clearly by defining the following
 function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">return</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="nc">Some</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val return : int -&gt; int option = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span> <span class="n">Some</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1216,20 +1148,12 @@ instead accept inputs of type <code class="docutils literal notranslate"><span c
 own function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">bind</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">op</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">bind</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">op</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
   <span class="k">match</span> <span class="n">x</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
-  <span class="o">|</span> <span class="nc">Some</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">op</span> <span class="n">a</span>
+  <span class="o">|</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+  <span class="o">|</span> <span class="n">Some</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">op</span> <span class="n">a</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">=</span> <span class="n">bind</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val bind : int option -&gt; (int -&gt; int option) -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &gt;&gt;= ) : int option -&gt; (int -&gt; int option) -&gt; int option = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">&gt;&gt;=</span> <span class="p">)</span> <span class="o">=</span> <span class="n">bind</span>
 </pre></div>
 </div>
 </div>
@@ -1240,13 +1164,8 @@ from a function that accepts an <code class="docutils literal notranslate"><span
 upgrading for us using <code class="docutils literal notranslate"><span class="pre">bind</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">upgrade</span> <span class="o">:</span> <span class="o">(</span><span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="kt">int</span> <span class="n">option</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">=</span>
-  <span class="k">fun</span> <span class="o">(</span><span class="n">op</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">op</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val upgrade : (int -&gt; int option) -&gt; int option -&gt; int option = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">upgrade</span> <span class="p">:</span> <span class="p">(</span><span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">int</span> <span class="n">option</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="o">=</span>
+  <span class="n">fun</span> <span class="p">(</span><span class="n">op</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">op</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1255,12 +1174,7 @@ upgrading for us using <code class="docutils literal notranslate"><span class="p
 the function.  Of course, it could be written much more simply as:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">upgrade</span> <span class="n">op</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">op</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val upgrade : (int -&gt; int option) -&gt; int option -&gt; int option = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">upgrade</span> <span class="n">op</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">op</span>
 </pre></div>
 </div>
 </div>
@@ -1269,39 +1183,25 @@ the function.  Of course, it could be written much more simply as:</p>
 arithmetic operations from above:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
-  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
-  <span class="n">return</span> <span class="o">(</span><span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
+  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
-  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
-  <span class="n">return</span> <span class="o">(</span><span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
+  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
-  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
-  <span class="n">return</span> <span class="o">(</span><span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
+  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span>
-  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
-  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="nc">None</span> <span class="k">else</span> <span class="n">return</span> <span class="o">(</span><span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( + ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( - ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( * ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( / ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span>
+  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
+  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
+  <span class="k">if</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">then</span> <span class="kc">None</span> <span class="k">else</span> <span class="k">return</span> <span class="p">(</span><span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1317,39 +1217,17 @@ should be parsed by your eye as</p>
 de-duplicate by using the same techniques as we did before:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">upgrade_binary</span> <span class="n">op</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span>
-  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
-  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">upgrade_binary</span> <span class="n">op</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span>
+  <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">a</span> <span class="o">-&gt;</span>
+  <span class="n">y</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">b</span> <span class="o">-&gt;</span>
   <span class="n">op</span> <span class="n">a</span> <span class="n">b</span>
 
-<span class="k">let</span> <span class="n">return_binary</span> <span class="n">op</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">return</span> <span class="o">(</span><span class="n">op</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+<span class="n">let</span> <span class="n">return_binary</span> <span class="n">op</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="k">return</span> <span class="p">(</span><span class="n">op</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="n">upgrade_binary</span> <span class="o">(</span><span class="n">return_binary</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">))</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="o">=</span> <span class="n">upgrade_binary</span> <span class="o">(</span><span class="n">return_binary</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">-</span> <span class="o">))</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="n">upgrade_binary</span> <span class="o">(</span><span class="n">return_binary</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">))</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="o">=</span> <span class="n">upgrade_binary</span> <span class="n">div</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val upgrade_binary :
-  (int -&gt; int -&gt; int option) -&gt; int option -&gt; int option -&gt; int option =
-  &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val return_binary : (&#39;a -&gt; &#39;b -&gt; int) -&gt; &#39;a -&gt; &#39;b -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( + ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( - ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( * ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( / ) : int option -&gt; int option -&gt; int option = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">upgrade_binary</span> <span class="p">(</span><span class="n">return_binary</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+</span> <span class="p">))</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">upgrade_binary</span> <span class="p">(</span><span class="n">return_binary</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">-</span> <span class="p">))</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">upgrade_binary</span> <span class="p">(</span><span class="n">return_binary</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*</span> <span class="p">))</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="o">=</span> <span class="n">upgrade_binary</span> <span class="n">div</span>
 </pre></div>
 </div>
 </div>
@@ -1363,21 +1241,16 @@ represent multiple kinds of errors rather than just collapse them all to
 <p>Here’s an implementation of the monad signature for the maybe monad:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Maybe</span> <span class="o">:</span> <span class="nc">Monad</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">option</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">Maybe</span> <span class="p">:</span> <span class="n">Monad</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t = &#39;</span><span class="n">a</span> <span class="n">option</span>
 
-  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Some</span> <span class="n">x</span>
+  <span class="n">let</span> <span class="k">return</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Some</span> <span class="n">x</span>
 
-  <span class="k">let</span> <span class="o">(&gt;&gt;=)</span> <span class="n">m</span> <span class="n">f</span> <span class="o">=</span>
+  <span class="n">let</span> <span class="p">(</span><span class="o">&gt;&gt;=</span><span class="p">)</span> <span class="n">m</span> <span class="n">f</span> <span class="o">=</span>
     <span class="k">match</span> <span class="n">m</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
-    <span class="o">|</span> <span class="nc">Some</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">x</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Maybe : Monad
+    <span class="o">|</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+    <span class="o">|</span> <span class="n">Some</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">x</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1398,24 +1271,10 @@ operator) is easier to read and easier to maintain.</p>
 their original meaning for the rest of this file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">+</span> <span class="o">)</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">-</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">-</span> <span class="o">)</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">*</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">*</span> <span class="o">)</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">/</span> <span class="o">)</span> <span class="o">=</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="o">(</span> <span class="o">/</span> <span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( + ) : int -&gt; int -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( - ) : int -&gt; int -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( * ) : int -&gt; int -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( / ) : int -&gt; int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">+</span> <span class="p">)</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">-</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">-</span> <span class="p">)</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">*</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">*</span> <span class="p">)</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">/</span> <span class="p">)</span> <span class="o">=</span> <span class="n">Stdlib</span><span class="o">.</span><span class="p">(</span> <span class="o">/</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1430,16 +1289,8 @@ would be helpful.</p>
 For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="k">let</span> <span class="n">dec</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val inc : int -&gt; int = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val dec : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">let</span> <span class="n">dec</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1452,16 +1303,8 @@ return a pair: the integer value the function would normally return, as well as
 a string containing a log message. For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc_log</span> <span class="n">x</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;Called inc on %i; &quot;</span> <span class="n">x</span><span class="o">)</span>
-<span class="k">let</span> <span class="n">dec_log</span> <span class="n">x</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;Called dec on %i; &quot;</span> <span class="n">x</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val inc_log : int -&gt; int * string = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val dec_log : int -&gt; int * string = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">inc_log</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Printf</span><span class="o">.</span><span class="n">sprintf</span> <span class="s2">&quot;Called inc on </span><span class="si">%i</span><span class="s2">; &quot;</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">dec_log</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Printf</span><span class="o">.</span><span class="n">sprintf</span> <span class="s2">&quot;Called dec on </span><span class="si">%i</span><span class="s2">; &quot;</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1470,12 +1313,7 @@ a string containing a log message. For example:</p>
 <em>compose</em> the functions. Previously, we could have written code such as</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">dec</span> <span class="o">(</span><span class="n">inc</span> <span class="n">x</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="nb">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">dec</span> <span class="p">(</span><span class="n">inc</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1483,12 +1321,7 @@ a string containing a log message. For example:</p>
 <p>or even better</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">dec</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="nb">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">|&gt;</span> <span class="n">inc</span> <span class="o">|&gt;</span> <span class="n">dec</span>
 </pre></div>
 </div>
 </div>
@@ -1496,16 +1329,8 @@ a string containing a log message. For example:</p>
 <p>or even better still, using the <em>composition operator</em> <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;</span> <span class="o">)</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">|&gt;</span> <span class="n">f</span> <span class="o">|&gt;</span> <span class="n">g</span>
-<span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="n">inc</span> <span class="o">&gt;&gt;</span> <span class="n">dec</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &gt;&gt; ) : (&#39;a -&gt; &#39;b) -&gt; (&#39;b -&gt; &#39;c) -&gt; &#39;a -&gt; &#39;c = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : int -&gt; int = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">(</span> <span class="o">&gt;&gt;</span> <span class="p">)</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">|&gt;</span> <span class="n">f</span> <span class="o">|&gt;</span> <span class="n">g</span>
+<span class="n">let</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">inc</span> <span class="o">&gt;&gt;</span> <span class="n">dec</span>
 </pre></div>
 </div>
 </div>
@@ -1514,17 +1339,7 @@ a string containing a log message. For example:</p>
 loggable versions of the functions produces a type-checking error:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="n">inc_log</span> <span class="o">&gt;&gt;</span> <span class="n">dec_log</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[24]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">20</span><span class="o">-</span><span class="mi">27</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="n">let</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">inc_log</span> <span class="o">&gt;&gt;</span> <span class="n">dec_log</span>
-                        <span class="o">^^^^^^^</span>
-<span class="ne">Error</span>: This expression has type int -&gt; int * string
-       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span> <span class="o">-&gt;</span> <span class="s1">&#39;a</span>
-       <span class="n">Type</span> <span class="nb">int</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">compatible</span> <span class="k">with</span> <span class="nb">type</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">inc_log</span> <span class="o">&gt;&gt;</span> <span class="n">dec_log</span>
 </pre></div>
 </div>
 </div>
@@ -1535,18 +1350,10 @@ integer as input.</p>
 input:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">dec_log_upgraded</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">s</span><span class="o">)</span> <span class="o">=</span>
-  <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;%s; Called dec on %i; &quot;</span> <span class="n">s</span> <span class="n">x</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">dec_log_upgraded</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span>
+  <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Printf</span><span class="o">.</span><span class="n">sprintf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">; Called dec on </span><span class="si">%i</span><span class="s2">; &quot;</span> <span class="n">s</span> <span class="n">x</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="n">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">|&gt;</span> <span class="n">inc_log</span> <span class="o">|&gt;</span> <span class="n">dec_log_upgraded</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val dec_log_upgraded : int * string -&gt; int * string = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : int -&gt; int * string = &lt;fun&gt;
+<span class="n">let</span> <span class="nb">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">|&gt;</span> <span class="n">inc_log</span> <span class="o">|&gt;</span> <span class="n">dec_log_upgraded</span>
 </pre></div>
 </div>
 </div>
@@ -1556,18 +1363,10 @@ input:</p>
 <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">id</span> <span class="pre">=</span> <span class="pre">dec_log</span> <span class="pre">&gt;&gt;</span> <span class="pre">inc_log</span></code>. So we have to write:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc_log_upgraded</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">s</span><span class="o">)</span> <span class="o">=</span>
-  <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;%s; Called inc on %i; &quot;</span> <span class="n">s</span> <span class="n">x</span><span class="o">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">inc_log_upgraded</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span>
+  <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Printf</span><span class="o">.</span><span class="n">sprintf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">; Called inc on </span><span class="si">%i</span><span class="s2">; &quot;</span> <span class="n">s</span> <span class="n">x</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="n">dec_log</span> <span class="o">&gt;&gt;</span> <span class="n">inc_log_upgraded</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val inc_log_upgraded : int * string -&gt; int * string = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : int -&gt; int * string = &lt;fun&gt;
+<span class="n">let</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">dec_log</span> <span class="o">&gt;&gt;</span> <span class="n">inc_log_upgraded</span>
 </pre></div>
 </div>
 </div>
@@ -1581,13 +1380,8 @@ make loggable, the worse this duplication is going to become!</p>
 calls a function and produces a log message:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">log</span> <span class="o">(</span><span class="n">name</span> <span class="o">:</span> <span class="kt">string</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">=</span>
-  <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;Called %s on %i; &quot;</span> <span class="n">name</span> <span class="n">x</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val log : string -&gt; (int -&gt; int) -&gt; int -&gt; int * string = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">log</span> <span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">string</span><span class="p">)</span> <span class="p">(</span><span class="n">f</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span> <span class="o">=</span>
+  <span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">f</span> <span class="n">x</span><span class="p">,</span> <span class="n">Printf</span><span class="o">.</span><span class="n">sprintf</span> <span class="s2">&quot;Called </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%i</span><span class="s2">; &quot;</span> <span class="n">name</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1596,15 +1390,10 @@ calls a function and produces a log message:</p>
 <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">*</span> <span class="pre">string</span> <span class="pre">-&gt;</span> <span class="pre">'b</span> <span class="pre">*</span> <span class="pre">string</span></code> out of a non-loggable function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">loggable</span> <span class="o">(</span><span class="n">name</span> <span class="o">:</span> <span class="kt">string</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">=</span>
-  <span class="k">fun</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">s1</span><span class="o">)</span> <span class="o">-&gt;</span>
-    <span class="k">let</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">s2</span><span class="o">)</span> <span class="o">=</span> <span class="n">log</span> <span class="n">name</span> <span class="n">f</span> <span class="n">x</span> <span class="k">in</span>
-    <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">s1</span> <span class="o">^</span> <span class="n">s2</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val loggable : string -&gt; (int -&gt; int) -&gt; int * string -&gt; int * string = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">loggable</span> <span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">string</span><span class="p">)</span> <span class="p">(</span><span class="n">f</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span> <span class="o">=</span>
+  <span class="n">fun</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="n">let</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">=</span> <span class="n">log</span> <span class="n">name</span> <span class="n">f</span> <span class="n">x</span> <span class="ow">in</span>
+    <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">s1</span> <span class="o">^</span> <span class="n">s2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1614,25 +1403,14 @@ without any duplication of code involving pairs or pattern matching or string
 concatenation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc&#39;</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">=</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">inc</span><span class="s1">&#39; : int * string -&gt; int * string =</span>
   <span class="n">loggable</span> <span class="s2">&quot;inc&quot;</span> <span class="n">inc</span>
 
-<span class="k">let</span> <span class="n">dec&#39;</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">=</span>
+<span class="n">let</span> <span class="n">dec</span><span class="s1">&#39; : int * string -&gt; int * string =</span>
   <span class="n">loggable</span> <span class="s2">&quot;dec&quot;</span> <span class="n">dec</span>
 
-<span class="k">let</span> <span class="n">id&#39;</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">=</span>
-  <span class="n">inc&#39;</span> <span class="o">&gt;&gt;</span> <span class="n">dec&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val inc&#39; : int * string -&gt; int * string = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val dec&#39; : int * string -&gt; int * string = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id&#39; : int * string -&gt; int * string = &lt;fun&gt;
+<span class="n">let</span> <span class="nb">id</span><span class="s1">&#39; : int * string -&gt; int * string =</span>
+  <span class="n">inc</span><span class="s1">&#39; &gt;&gt; dec&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -1640,12 +1418,7 @@ concatenation:</p>
 <p>Here’s an example usage:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">id&#39;</span> <span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="s2">&quot;&quot;</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int * string = (5, &quot;Called inc on 5; Called dec on 6; &quot;)
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">id</span><span class="s1">&#39; (5, &quot;&quot;)</span>
 </pre></div>
 </div>
 </div>
@@ -1655,12 +1428,7 @@ we have to pair the integer with a string. So let’s write one more function to
 help with that by pairing an integer with the <em>empty</em> log:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">e</span> <span class="n">x</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="s2">&quot;&quot;</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val e : &#39;a -&gt; &#39;a * string = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">e</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1677,12 +1445,7 @@ the monad operations of <code class="docutils literal notranslate"><span class="
 the empty string. That’s what <code class="docutils literal notranslate"><span class="pre">e</span></code> does. We could rename it <code class="docutils literal notranslate"><span class="pre">return</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">return</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="s2">&quot;&quot;</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val return : int -&gt; int * string = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1693,15 +1456,10 @@ box along with the empty log message.</p>
 and string concatenation. Here’s that idea expressed as its own function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">=</span>
-  <span class="k">let</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">s1</span><span class="o">)</span> <span class="o">=</span> <span class="n">m</span> <span class="k">in</span>
-  <span class="k">let</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">s2</span><span class="o">)</span> <span class="o">=</span> <span class="n">f</span> <span class="n">x</span> <span class="k">in</span>
-  <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">s1</span> <span class="o">^</span> <span class="n">s2</span><span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &gt;&gt;= ) : int * string -&gt; (int -&gt; int * string) -&gt; int * string = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">(</span> <span class="o">&gt;&gt;=</span> <span class="p">)</span> <span class="p">(</span><span class="n">m</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span><span class="p">)</span> <span class="p">(</span><span class="n">f</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span> <span class="o">=</span>
+  <span class="n">let</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span> <span class="ow">in</span>
+  <span class="n">let</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span> <span class="n">x</span> <span class="ow">in</span>
+  <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">s1</span> <span class="o">^</span> <span class="n">s2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1710,16 +1468,11 @@ and string concatenation. Here’s that idea expressed as its own function:</p>
 or pattern matching are ever used in its body:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">loggable</span> <span class="o">(</span><span class="n">name</span> <span class="o">:</span> <span class="kt">string</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">=</span>
-  <span class="k">fun</span> <span class="n">m</span> <span class="o">-&gt;</span>
-    <span class="n">m</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span>
-    <span class="n">log</span> <span class="n">name</span> <span class="n">f</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span>
-    <span class="n">return</span> <span class="n">y</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val loggable : string -&gt; (int -&gt; int) -&gt; int * string -&gt; int * string = &lt;fun&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">loggable</span> <span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">string</span><span class="p">)</span> <span class="p">(</span><span class="n">f</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">*</span> <span class="n">string</span> <span class="o">=</span>
+  <span class="n">fun</span> <span class="n">m</span> <span class="o">-&gt;</span>
+    <span class="n">m</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span>
+    <span class="n">log</span> <span class="n">name</span> <span class="n">f</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">y</span> <span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
@@ -1729,21 +1482,16 @@ monad</em> (as in, “additionally writing to a log or string”). Here’s an
 implementation of the monad signature for it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Writer</span> <span class="o">:</span> <span class="nc">Monad</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="kt">string</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">Writer</span> <span class="p">:</span> <span class="n">Monad</span> <span class="o">=</span> <span class="n">struct</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t = &#39;</span><span class="n">a</span> <span class="o">*</span> <span class="n">string</span>
 
-  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="s2">&quot;&quot;</span><span class="o">)</span>
+  <span class="n">let</span> <span class="k">return</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-  <span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="n">m</span> <span class="n">f</span> <span class="o">=</span>
-    <span class="k">let</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">s1</span><span class="o">)</span> <span class="o">=</span> <span class="n">m</span> <span class="k">in</span>
-    <span class="k">let</span> <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">s2</span><span class="o">)</span> <span class="o">=</span> <span class="n">f</span> <span class="n">x</span> <span class="k">in</span>
-    <span class="o">(</span><span class="n">y</span><span class="o">,</span> <span class="n">s1</span> <span class="o">^</span> <span class="n">s2</span><span class="o">)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Writer : Monad
+  <span class="n">let</span> <span class="p">(</span> <span class="o">&gt;&gt;=</span> <span class="p">)</span> <span class="n">m</span> <span class="n">f</span> <span class="o">=</span>
+    <span class="n">let</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span> <span class="ow">in</span>
+    <span class="n">let</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span> <span class="n">x</span> <span class="ow">in</span>
+    <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">s1</span> <span class="o">^</span> <span class="n">s2</span><span class="p">)</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1851,21 +1599,11 @@ are just a bit more abstract hence harder to understand at first.</p>
 signature:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Monad</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
-  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">t</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Monad =
-  sig
-    type &#39;a t
-    val return : &#39;a -&gt; &#39;a t
-    val ( &gt;&gt;= ) : &#39;a t -&gt; (&#39;a -&gt; &#39;b t) -&gt; &#39;b t
-  end
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Monad</span> <span class="o">=</span> <span class="n">sig</span>
+  <span class="nb">type</span> <span class="s1">&#39;a t</span>
+  <span class="n">val</span> <span class="k">return</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="n">val</span> <span class="p">(</span> <span class="o">&gt;&gt;=</span> <span class="p">)</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; (&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="s1">&#39;b t) -&gt; &#39;</span><span class="n">b</span> <span class="n">t</span>
+<span class="n">end</span>
 </pre></div>
 </div>
 </div>
@@ -1924,21 +1662,11 @@ the <code class="docutils literal notranslate"><span class="pre">'b</span></code
 the inner workings of the monad:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">compose</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span>
-  <span class="n">f</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">compose</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span>
+  <span class="n">f</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">y</span> <span class="o">-&gt;</span>
   <span class="n">g</span> <span class="n">y</span>
 
-<span class="k">let</span> <span class="o">(</span> <span class="o">&gt;=&gt;</span> <span class="o">)</span> <span class="o">=</span> <span class="n">compose</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val compose :
-  (&#39;a -&gt; int * string) -&gt; (int -&gt; int * string) -&gt; &#39;a -&gt; int * string = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &gt;=&gt; ) :
-  (&#39;a -&gt; int * string) -&gt; (int -&gt; int * string) -&gt; &#39;a -&gt; int * string = &lt;fun&gt;
+<span class="n">let</span> <span class="p">(</span> <span class="o">&gt;=&gt;</span> <span class="p">)</span> <span class="o">=</span> <span class="n">compose</span>
 </pre></div>
 </div>
 </div>
@@ -1949,23 +1677,12 @@ the inner workings of the monad:</p>
 imagine that we have increment and decrement functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">inc</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="nc">Some</span> <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
-<span class="k">let</span> <span class="n">dec</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="nc">Some</span> <span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-<span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="n">x</span> <span class="n">op</span> <span class="o">=</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">inc</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span> <span class="n">Some</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">let</span> <span class="n">dec</span> <span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span> <span class="n">Some</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">let</span> <span class="p">(</span> <span class="o">&gt;&gt;=</span> <span class="p">)</span> <span class="n">x</span> <span class="n">op</span> <span class="o">=</span>
   <span class="k">match</span> <span class="n">x</span> <span class="k">with</span>
-  <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="nc">None</span>
-  <span class="o">|</span> <span class="nc">Some</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">op</span> <span class="n">a</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val inc : int -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val dec : int -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &gt;&gt;= ) : &#39;a option -&gt; (&#39;a -&gt; &#39;b option) -&gt; &#39;b option = &lt;fun&gt;
+  <span class="o">|</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+  <span class="o">|</span> <span class="n">Some</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">op</span> <span class="n">a</span>
 </pre></div>
 </div>
 </div>
@@ -1974,20 +1691,11 @@ imagine that we have increment and decrement functions:</p>
 an identity function without having to write any additional code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">&gt;=&gt;</span> <span class="o">)</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span>
-  <span class="n">f</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">(</span> <span class="o">&gt;=&gt;</span> <span class="p">)</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span>
+  <span class="n">f</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">fun</span> <span class="n">y</span> <span class="o">-&gt;</span>
   <span class="n">g</span> <span class="n">y</span>
 
-<span class="k">let</span> <span class="n">id</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="n">option</span> <span class="o">=</span> <span class="n">inc</span> <span class="o">&gt;=&gt;</span> <span class="n">dec</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &gt;=&gt; ) : (&#39;a -&gt; &#39;b option) -&gt; (&#39;b -&gt; &#39;c option) -&gt; &#39;a -&gt; &#39;c option =
-  &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : int -&gt; int option = &lt;fun&gt;
+<span class="n">let</span> <span class="nb">id</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="n">option</span> <span class="o">=</span> <span class="n">inc</span> <span class="o">&gt;=&gt;</span> <span class="n">dec</span>
 </pre></div>
 </div>
 </div>
@@ -2026,34 +1734,42 @@ right identity, and that composition is associative.</p>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="promises.html" title="previous page"><span class="section-number">8.6. </span>Promises</a>
-    <a class='right-next' id="next-link" href="summary.html" title="next page"><span class="section-number">8.8. </span>Summary</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="promises.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">8.6. </span>Promises</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="summary.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8.8. </span>Summary</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
