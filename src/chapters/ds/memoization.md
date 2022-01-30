@@ -103,7 +103,7 @@ convert to a single argument function).
 
 ```{code-cell} ocaml
 let memo f =
-  let h = Hashtbl.create 16 in
+  let h = Hashtbl.create 11 in
   fun x ->
     try Hashtbl.find h x
     with Not_found ->
