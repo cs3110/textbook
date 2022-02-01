@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3.8. Association Lists &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,10 +57,7 @@
     <link rel="next" title="3.9. Algebraic Data Types" href="algebraic_data_types.html" />
     <link rel="prev" title="3.7. Options" href="options.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -77,10 +74,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -90,9 +83,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -109,7 +102,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -210,7 +203,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -423,7 +416,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -591,7 +584,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -650,7 +643,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -662,7 +655,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -727,7 +720,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -783,27 +776,17 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+        <div class="d-none d-md-block col-md-2 bd-toc show">
             
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Association Lists</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                    </div>
-                </div>
-            </div>
-            
+        
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="association-lists">
+  <div class="section" id="association-lists">
 <h1><span class="section-number">3.8. </span>Association Lists<a class="headerlink" href="#association-lists" title="Permalink to this headline">¶</a></h1>
 <p>A <em>map</em> is a data structure that maps <em>keys</em> to <em>values</em>. Maps are also known as
 <em>dictionaries</em>. One easy implementation of a map is an <em>association list</em>, which
@@ -811,7 +794,13 @@ is a list of pairs. Here, for example, is an association list that maps some
 shape names to the number of sides they have:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">d</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;rectangle&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="p">(</span><span class="s2">&quot;nonagon&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">);</span> <span class="p">(</span><span class="s2">&quot;icosagon&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)]</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">d</span> <span class="o">=</span> <span class="o">[(</span><span class="s2">&quot;rectangle&quot;</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span> <span class="o">(</span><span class="s2">&quot;nonagon&quot;</span><span class="o">,</span> <span class="mi">9</span><span class="o">);</span> <span class="o">(</span><span class="s2">&quot;icosagon&quot;</span><span class="o">,</span> <span class="mi">20</span><span class="o">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val d : (string * int) list =
+  [(&quot;rectangle&quot;, 4); (&quot;nonagon&quot;, 9); (&quot;icosagon&quot;, 20)]
 </pre></div>
 </div>
 </div>
@@ -822,15 +811,23 @@ combination of two other types: lists and pairs.</p>
 list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">lst</span><span class="p">]</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">association</span> <span class="nb">list</span> <span class="n">that</span> <span class="n">binds</span> <span class="n">key</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span> <span class="n">value</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
-    <span class="ow">and</span> <span class="n">otherwise</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">same</span> <span class="k">as</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
-<span class="n">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">lst</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="p">::</span> <span class="n">lst</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [insert k v lst] is an association list that binds key [k] to value [v]</span>
+<span class="c">    and otherwise is the same as [lst] *)</span>
+<span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">lst</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="n">lst</span>
 
-<span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">find</span> <span class="n">k</span> <span class="n">lst</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">Some</span> <span class="n">v</span><span class="p">]</span> <span class="k">if</span> <span class="n">association</span> <span class="nb">list</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="n">binds</span> <span class="n">key</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span>
-    <span class="n">value</span> <span class="p">[</span><span class="n">v</span><span class="p">];</span> <span class="ow">and</span> <span class="ow">is</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">bind</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-<span class="n">let</span> <span class="n">rec</span> <span class="n">lookup</span> <span class="n">k</span> <span class="o">=</span> <span class="n">function</span>
-<span class="o">|</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-<span class="o">|</span> <span class="p">(</span><span class="n">k</span><span class="s1">&#39;, v) :: t -&gt; if k = k&#39;</span> <span class="n">then</span> <span class="n">Some</span> <span class="n">v</span> <span class="k">else</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">t</span>
+<span class="c">(** [find k lst] is [Some v] if association list [lst] binds key [k] to</span>
+<span class="c">    value [v]; and is [None] if [lst] does not bind [k]. *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">lookup</span> <span class="n">k</span> <span class="o">=</span> <span class="k">function</span>
+<span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="nc">None</span>
+<span class="o">|</span> <span class="o">(</span><span class="n">k&#39;</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">k</span> <span class="o">=</span> <span class="n">k&#39;</span> <span class="k">then</span> <span class="nc">Some</span> <span class="n">v</span> <span class="k">else</span> <span class="n">lookup</span> <span class="n">k</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val insert : &#39;a -&gt; &#39;b -&gt; (&#39;a * &#39;b) list -&gt; (&#39;a * &#39;b) list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lookup : &#39;a -&gt; (&#39;a * &#39;b) list -&gt; &#39;b option = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
@@ -873,42 +870,34 @@ function in the library because it’s so trivial just to cons a pair on.</p>
 
               </div>
               
+        
+        <div class='prev-next-bottom'>
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="options.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3.7. </span>Options</p>
+    <a class='left-prev' id="prev-link" href="options.html" title="previous page"><span class="section-number">3.7. </span>Options</a>
+    <a class='right-next' id="next-link" href="algebraic_data_types.html" title="next page"><span class="section-number">3.9. </span>Algebraic Data Types</a>
+
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="algebraic_data_types.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.9. </span>Algebraic Data Types</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
+        
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael R. Clarkson et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
+  
   </body>
 </html>

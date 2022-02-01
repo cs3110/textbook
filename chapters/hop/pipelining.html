@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>4.6. Pipelining &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,27 +42,24 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4.7. Currying" href="currying.html" />
     <link rel="prev" title="4.5. Beyond Lists" href="beyond_lists.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -79,10 +76,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -92,9 +85,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -111,7 +104,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -212,7 +205,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -425,7 +418,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -593,7 +586,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -652,7 +645,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -664,7 +657,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -729,7 +722,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -785,27 +778,17 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+        <div class="d-none d-md-block col-md-2 bd-toc show">
             
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Pipelining</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                    </div>
-                </div>
-            </div>
-            
+        
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="pipelining">
+  <div class="section" id="pipelining">
 <h1><span class="section-number">4.6. </span>Pipelining<a class="headerlink" href="#pipelining" title="Permalink to this headline">¶</a></h1>
 <p>Suppose we wanted to compute the sum of squares of the numbers from 0 up to <span class="math notranslate nohighlight">\(n\)</span>.
 How might we go about it? Of course (math being the best form of optimization),
@@ -827,11 +810,16 @@ might use a <code class="docutils literal notranslate"><span class="pre">for</sp
 <p>The equivalent (tail) recursive code in OCaml would be:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">sum_sq</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="n">let</span> <span class="n">rec</span> <span class="n">loop</span> <span class="n">i</span> <span class="nb">sum</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">n</span> <span class="n">then</span> <span class="nb">sum</span>
-    <span class="k">else</span> <span class="n">loop</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nb">sum</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span>
-  <span class="ow">in</span> <span class="n">loop</span> <span class="mi">0</span> <span class="mi">0</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">sum_sq</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">loop</span> <span class="n">i</span> <span class="n">sum</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">n</span> <span class="k">then</span> <span class="n">sum</span>
+    <span class="k">else</span> <span class="n">loop</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span><span class="o">)</span>
+  <span class="k">in</span> <span class="n">loop</span> <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_sq : int -&gt; int = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
@@ -840,14 +828,28 @@ might use a <code class="docutils literal notranslate"><span class="pre">for</sp
 functions and the pipeline operator:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="p">(</span> <span class="o">--</span> <span class="p">)</span> <span class="n">i</span> <span class="n">j</span> <span class="o">=</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span> <span class="n">then</span> <span class="p">[]</span> <span class="k">else</span> <span class="n">i</span> <span class="p">::</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">--</span> <span class="n">j</span>
-<span class="n">let</span> <span class="n">square</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-<span class="n">let</span> <span class="nb">sum</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">fold_left</span> <span class="p">(</span> <span class="o">+</span> <span class="p">)</span> <span class="mi">0</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="o">(</span> <span class="o">--</span> <span class="o">)</span> <span class="n">i</span> <span class="n">j</span> <span class="o">=</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span> <span class="k">then</span> <span class="bp">[]</span> <span class="k">else</span> <span class="n">i</span> <span class="o">::</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">--</span> <span class="n">j</span>
+<span class="k">let</span> <span class="n">square</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+<span class="k">let</span> <span class="n">sum</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">0</span>
 
-<span class="n">let</span> <span class="n">sum_sq</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="mi">0</span> <span class="o">--</span> <span class="n">n</span>              <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">;</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="o">...</span><span class="p">;</span><span class="n">n</span><span class="p">]</span>   <span class="o">*</span><span class="p">)</span>
-  <span class="o">|&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">map</span> <span class="n">square</span>  <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">;</span><span class="mi">1</span><span class="p">;</span><span class="mi">4</span><span class="p">;</span><span class="o">...</span><span class="p">;</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
-  <span class="o">|&gt;</span> <span class="nb">sum</span>              <span class="p">(</span><span class="o">*</span>  <span class="mi">0</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">+...+</span><span class="n">n</span><span class="o">*</span><span class="n">n</span>  <span class="o">*</span><span class="p">)</span>
+<span class="k">let</span> <span class="n">sum_sq</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="mi">0</span> <span class="o">--</span> <span class="n">n</span>              <span class="c">(* [0;1;2;...;n]   *)</span>
+  <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">square</span>  <span class="c">(* [0;1;4;...;n*n] *)</span>
+  <span class="o">|&gt;</span> <span class="n">sum</span>              <span class="c">(*  0+1+4+...+n*n  *)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( -- ) : int -&gt; int -&gt; int list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val square : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_sq : int -&gt; int = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
@@ -859,17 +861,25 @@ pipelined through <code class="docutils literal notranslate"><span class="pre">s
 <p>The other alternatives that you might consider are somewhat uglier:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span> <span class="n">Maybe</span> <span class="n">worse</span><span class="p">:</span> <span class="n">a</span> <span class="n">lot</span> <span class="n">of</span> <span class="n">extra</span> <span class="p">[</span><span class="n">let</span><span class="o">..</span><span class="ow">in</span><span class="p">]</span> <span class="n">syntax</span> <span class="ow">and</span> <span class="n">unnecessary</span> <span class="n">names</span> <span class="n">to</span>
-   <span class="k">for</span> <span class="n">intermediate</span> <span class="n">values</span> <span class="n">we</span> <span class="n">don</span><span class="s1">&#39;t care about. *)</span>
-<span class="n">let</span> <span class="n">sum_sq</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="n">let</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">n</span> <span class="ow">in</span>
-  <span class="n">let</span> <span class="n">sq_l</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">map</span> <span class="n">square</span> <span class="n">l</span> <span class="ow">in</span>
-  <span class="nb">sum</span> <span class="n">sq_l</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* Maybe worse: a lot of extra [let..in] syntax and unnecessary names to</span>
+<span class="c">   for intermediate values we don&#39;t care about. *)</span>
+<span class="k">let</span> <span class="n">sum_sq</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">n</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">sq_l</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">square</span> <span class="n">l</span> <span class="k">in</span>
+  <span class="n">sum</span> <span class="n">sq_l</span>
 
-<span class="p">(</span><span class="o">*</span> <span class="n">Maybe</span> <span class="n">worse</span><span class="p">:</span> <span class="n">have</span> <span class="n">to</span> <span class="n">read</span> <span class="n">the</span> <span class="n">function</span> <span class="n">applications</span> <span class="kn">from</span> <span class="nn">right</span> <span class="n">to</span> <span class="n">left</span>
-   <span class="n">rather</span> <span class="n">than</span> <span class="n">top</span> <span class="n">to</span> <span class="n">bottom</span><span class="p">,</span> <span class="ow">and</span> <span class="n">extra</span> <span class="n">parentheses</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-<span class="n">let</span> <span class="n">sum_sq</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="nb">sum</span> <span class="p">(</span><span class="n">List</span><span class="o">.</span><span class="n">map</span> <span class="n">square</span> <span class="p">(</span><span class="mi">0</span><span class="o">--</span><span class="n">n</span><span class="p">))</span>
+<span class="c">(* Maybe worse: have to read the function applications from right to left</span>
+<span class="c">   rather than top to bottom, and extra parentheses. *)</span>
+<span class="k">let</span> <span class="n">sum_sq</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="n">sum</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">square</span> <span class="o">(</span><span class="mi">0</span><span class="o">--</span><span class="n">n</span><span class="o">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_sq : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_sq : int -&gt; int = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
@@ -907,42 +917,34 @@ structures we study there.</p>
 
               </div>
               
+        
+        <div class='prev-next-bottom'>
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="beyond_lists.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4.5. </span>Beyond Lists</p>
+    <a class='left-prev' id="prev-link" href="beyond_lists.html" title="previous page"><span class="section-number">4.5. </span>Beyond Lists</a>
+    <a class='right-next' id="next-link" href="currying.html" title="next page"><span class="section-number">4.7. </span>Currying</a>
+
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="currying.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4.7. </span>Currying</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
+        
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael R. Clarkson et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
+  
   </body>
 </html>

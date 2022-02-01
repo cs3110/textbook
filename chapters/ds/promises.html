@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>8.6. Promises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,10 +57,7 @@
     <link rel="next" title="8.7. Monads" href="monads.html" />
     <link rel="prev" title="8.5. Memoization" href="memoization.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -77,10 +74,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -90,9 +83,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -109,7 +102,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -210,7 +203,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -423,7 +416,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -591,7 +584,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -650,7 +643,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -662,7 +655,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -727,7 +720,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -783,12 +776,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+        <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#concurrency">
@@ -848,78 +841,10 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Promises</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#concurrency">
-   8.6.1. Concurrency
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#threads">
-   8.6.2. Threads
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   8.6.3. Promises
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#making-our-own-promises">
-   8.6.4. Making Our Own Promises
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lwt-promises">
-   8.6.5. Lwt Promises
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#asynchronous-i-o">
-   8.6.6. Asynchronous I/O
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#promises-and-asynchronous-i-o">
-   8.6.7. Promises and Asynchronous I/O
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#callbacks">
-   8.6.8. Callbacks
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#implementing-callbacks">
-   8.6.9. Implementing Callbacks
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-full-implementation">
-   8.6.10. The Full Implementation
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
+        
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="promises">
+  <div class="section" id="promises">
 <h1><span class="section-number">8.6. </span>Promises<a class="headerlink" href="#promises" title="Permalink to this headline">¶</a></h1>
 <p>So far we have only considered <em>sequential</em> programs. Execution of a sequential
 program proceeds one step at a time, with no choice about which step to take
@@ -1079,37 +1004,52 @@ used primarily by the client.</p>
 to make the interface clearer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="n">A</span> <span class="n">signature</span> <span class="k">for</span> <span class="n">Lwt</span><span class="o">-</span><span class="n">style</span> <span class="n">promises</span><span class="p">,</span> <span class="k">with</span> <span class="n">better</span> <span class="n">names</span> <span class="o">*</span><span class="p">)</span>
-<span class="n">module</span> <span class="nb">type</span> <span class="n">PROMISE</span> <span class="o">=</span> <span class="n">sig</span>
-  <span class="nb">type</span> <span class="s1">&#39;a state =</span>
-    <span class="o">|</span> <span class="n">Pending</span>
-    <span class="o">|</span> <span class="n">Resolved</span> <span class="n">of</span> <span class="s1">&#39;a</span>
-    <span class="o">|</span> <span class="n">Rejected</span> <span class="n">of</span> <span class="n">exn</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** A signature for Lwt-style promises, with better names *)</span>
+<span class="k">module</span> <span class="k">type</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
+    <span class="o">|</span> <span class="nc">Pending</span>
+    <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+    <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
-  <span class="nb">type</span> <span class="s1">&#39;a promise</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  <span class="nb">type</span> <span class="s1">&#39;a resolver</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">make</span> <span class="p">()]</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">new</span> <span class="n">promise</span> <span class="ow">and</span> <span class="n">resolver</span><span class="o">.</span> <span class="n">The</span> <span class="n">promise</span> <span class="ow">is</span> <span class="n">pending</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">make</span> <span class="p">:</span> <span class="n">unit</span> <span class="o">-&gt;</span> <span class="s1">&#39;a promise * &#39;</span><span class="n">a</span> <span class="n">resolver</span>
+  <span class="c">(** [make ()] is a new promise and resolver. The promise is pending. *)</span>
+  <span class="k">val</span> <span class="n">make</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="k">return</span> <span class="n">x</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">new</span> <span class="n">promise</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">already</span> <span class="n">resolved</span> <span class="k">with</span> <span class="n">value</span>
-      <span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="k">return</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">promise</span>
+  <span class="c">(** [return x] is a new promise that is already resolved with value</span>
+<span class="c">      [x]. *)</span>
+  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">state</span> <span class="n">p</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">state</span> <span class="n">of</span> <span class="n">the</span> <span class="n">promise</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">state</span> <span class="p">:</span> <span class="s1">&#39;a promise -&gt; &#39;</span><span class="n">a</span> <span class="n">state</span>
+  <span class="c">(** [state p] is the state of the promise *)</span>
+  <span class="k">val</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">resolve</span> <span class="n">r</span> <span class="n">x</span><span class="p">]</span> <span class="n">resolves</span> <span class="n">the</span> <span class="n">promise</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="n">associated</span> <span class="k">with</span> <span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="k">with</span>
-      <span class="n">value</span> <span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">meaning</span> <span class="n">that</span> <span class="p">[</span><span class="n">state</span> <span class="n">p</span><span class="p">]</span> <span class="n">will</span> <span class="n">become</span> <span class="p">[</span><span class="n">Resolved</span> <span class="n">x</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="ow">is</span> <span class="n">pending</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">resolve</span> <span class="p">:</span> <span class="s1">&#39;a resolver -&gt; &#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">unit</span>
+  <span class="c">(** [resolve r x] resolves the promise [p] associated with [r] with</span>
+<span class="c">      value [x], meaning that [state p] will become [Resolved x].</span>
+<span class="c">      Requires: [p] is pending. *)</span>
+  <span class="k">val</span> <span class="n">resolve</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">reject</span> <span class="n">r</span> <span class="n">x</span><span class="p">]</span> <span class="n">rejects</span> <span class="n">the</span> <span class="n">promise</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="n">associated</span> <span class="k">with</span> <span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="k">with</span>
-      <span class="n">exception</span> <span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">meaning</span> <span class="n">that</span> <span class="p">[</span><span class="n">state</span> <span class="n">p</span><span class="p">]</span> <span class="n">will</span> <span class="n">become</span> <span class="p">[</span><span class="n">Rejected</span> <span class="n">x</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="ow">is</span> <span class="n">pending</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">reject</span> <span class="p">:</span> <span class="s1">&#39;a resolver -&gt; exn -&gt; unit</span>
-<span class="n">end</span>
+  <span class="c">(** [reject r x] rejects the promise [p] associated with [r] with</span>
+<span class="c">      exception [x], meaning that [state p] will become [Rejected x].</span>
+<span class="c">      Requires: [p] is pending. *)</span>
+  <span class="k">val</span> <span class="n">reject</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="n">exn</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type PROMISE =
+  sig
+    type &#39;a state = Pending | Resolved of &#39;a | Rejected of exn
+    type &#39;a promise
+    type &#39;a resolver
+    val make : unit -&gt; &#39;a promise * &#39;a resolver
+    val return : &#39;a -&gt; &#39;a promise
+    val state : &#39;a promise -&gt; &#39;a state
+    val resolve : &#39;a resolver -&gt; &#39;a -&gt; unit
+    val reject : &#39;a resolver -&gt; exn -&gt; unit
+  end
 </pre></div>
 </div>
 </div>
@@ -1118,8 +1058,16 @@ to make the interface clearer.</p>
 <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">promise</span></code> be a reference to a state:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="s1">&#39;a state = Pending | Resolved of &#39;</span><span class="n">a</span> <span class="o">|</span> <span class="n">Rejected</span> <span class="n">of</span> <span class="n">exn</span>
-<span class="nb">type</span> <span class="s1">&#39;a promise = &#39;</span><span class="n">a</span> <span class="n">state</span> <span class="n">ref</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="n">ref</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a state = Pending | Resolved of &#39;a | Rejected of exn
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a promise = &#39;a state ref
 </pre></div>
 </div>
 </div>
@@ -1129,7 +1077,12 @@ to make the interface clearer.</p>
 It will simply be the same as a promise.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="s1">&#39;a resolver = &#39;</span><span class="n">a</span> <span class="n">promise</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a resolver = &#39;a promise
 </pre></div>
 </div>
 </div>
@@ -1145,13 +1098,18 @@ resolved or rejected, and once the state has changed, it will not allow it to be
 changed again. In other words, <code class="docutils literal notranslate"><span class="pre">update</span></code> enforces the “write once” invariant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(** [write_once p s] changes the state of [p] to be [s].  If [p] and [s]
-    are both pending, that has no effect.
-    Raises: [Invalid_arg] if the state of [p] is not pending. *)
-let write_once p s =
-  if !p = Pending
-  then p := s
-  else invalid_arg &quot;cannot write twice&quot;
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [write_once p s] changes the state of [p] to be [s].  If [p] and [s]</span>
+<span class="c">    are both pending, that has no effect.</span>
+<span class="c">    Raises: [Invalid_arg] if the state of [p] is not pending. *)</span>
+<span class="k">let</span> <span class="n">write_once</span> <span class="n">p</span> <span class="n">s</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="o">!</span><span class="n">p</span> <span class="o">=</span> <span class="nc">Pending</span>
+  <span class="k">then</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">s</span>
+  <span class="k">else</span> <span class="n">invalid_arg</span> <span class="s2">&quot;cannot write twice&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val write_once : &#39;a state ref -&gt; &#39;a state -&gt; unit = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
@@ -1159,9 +1117,14 @@ let write_once p s =
 <p>Using that helper, we can implement the <code class="docutils literal notranslate"><span class="pre">make</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">make</span> <span class="p">()</span> <span class="o">=</span>
-  <span class="n">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">ref</span> <span class="n">Pending</span> <span class="ow">in</span>
-  <span class="n">p</span><span class="p">,</span> <span class="n">p</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">make</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">ref</span> <span class="nc">Pending</span> <span class="k">in</span>
+  <span class="n">p</span><span class="o">,</span> <span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val make : unit -&gt; &#39;a state ref * &#39;a state ref = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
@@ -1170,34 +1133,39 @@ let write_once p s =
 Putting it altogether in a module, we have:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module Promise : PROMISE = struct
-  type &#39;a state =
-    | Pending
-    | Resolved of &#39;a
-    | Rejected of exn
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Promise</span> <span class="o">:</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
+    <span class="o">|</span> <span class="nc">Pending</span>
+    <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+    <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
-  type &#39;a promise = &#39;a state ref
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="n">ref</span>
 
-  type &#39;a resolver = &#39;a promise
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  (** [write_once p s] changes the state of [p] to be [s]. If [p] and
-      [s] are both pending, that has no effect. Raises: [Invalid_arg] if
-      the state of [p] is not pending. *)
-  let write_once p s =
-    if !p = Pending then p := s else invalid_arg &quot;cannot write twice&quot;
+  <span class="c">(** [write_once p s] changes the state of [p] to be [s]. If [p] and</span>
+<span class="c">      [s] are both pending, that has no effect. Raises: [Invalid_arg] if</span>
+<span class="c">      the state of [p] is not pending. *)</span>
+  <span class="k">let</span> <span class="n">write_once</span> <span class="n">p</span> <span class="n">s</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="o">!</span><span class="n">p</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="k">then</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">s</span> <span class="k">else</span> <span class="n">invalid_arg</span> <span class="s2">&quot;cannot write twice&quot;</span>
 
-  let make () =
-    let p = ref Pending in
-    (p, p)
+  <span class="k">let</span> <span class="n">make</span> <span class="bp">()</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">ref</span> <span class="nc">Pending</span> <span class="k">in</span>
+    <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span>
 
-  let return x = ref (Resolved x)
+  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ref</span> <span class="o">(</span><span class="nc">Resolved</span> <span class="n">x</span><span class="o">)</span>
 
-  let state p = !p
+  <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="o">!</span><span class="n">p</span>
 
-  let resolve r x = write_once r (Resolved x)
+  <span class="k">let</span> <span class="n">resolve</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">write_once</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Resolved</span> <span class="n">x</span><span class="o">)</span>
 
-  let reject r x = write_once r (Rejected x)
-end
+  <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">write_once</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Promise : PROMISE
 </pre></div>
 </div>
 </div>
@@ -1214,30 +1182,45 @@ over time.)</p>
 with comments to compare them to the interface we implemented above:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Lwt</span> <span class="o">=</span> <span class="n">sig</span>
-  <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">Sleep</span><span class="p">]</span> <span class="n">means</span> <span class="n">pending</span><span class="o">.</span>  <span class="p">[</span><span class="n">Return</span><span class="p">]</span> <span class="n">means</span> <span class="n">resolved</span><span class="o">.</span>
-     <span class="p">[</span><span class="n">Fail</span><span class="p">]</span> <span class="n">means</span> <span class="n">rejected</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="s1">&#39;a state = Sleep | Return of &#39;</span><span class="n">a</span> <span class="o">|</span> <span class="n">Fail</span> <span class="n">of</span> <span class="n">exn</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Lwt</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(* [Sleep] means pending.  [Return] means resolved.</span>
+<span class="c">     [Fail] means rejected. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Sleep</span> <span class="o">|</span> <span class="nc">Return</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Fail</span> <span class="k">of</span> <span class="n">exn</span>
 
-  <span class="p">(</span><span class="o">*</span> <span class="n">a</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">promise</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="s1">&#39;a t</span>
+  <span class="c">(* a [t] is a promise *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">*</span> <span class="n">a</span> <span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">resolver</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="s1">&#39;a u</span>
+  <span class="c">(* a [u] is a resolver *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">u</span>
 
-  <span class="n">val</span> <span class="n">state</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; &#39;</span><span class="n">a</span> <span class="n">state</span>
+  <span class="k">val</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span>
 
-  <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">wakeup</span><span class="p">]</span> <span class="n">means</span> <span class="p">[</span><span class="n">resolve</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">wakeup</span> <span class="p">:</span> <span class="s1">&#39;a u -&gt; &#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">unit</span>
+  <span class="c">(* [wakeup] means [resolve] *)</span>
+  <span class="k">val</span> <span class="n">wakeup</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">u</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">wakeup_exn</span><span class="p">]</span> <span class="n">means</span> <span class="p">[</span><span class="n">reject</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">wakeup_exn</span> <span class="p">:</span> <span class="s1">&#39;a u -&gt; exn -&gt; unit</span>
+  <span class="c">(* [wakeup_exn] means [reject] *)</span>
+  <span class="k">val</span> <span class="n">wakeup_exn</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">u</span> <span class="o">-&gt;</span> <span class="n">exn</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">wait</span><span class="p">]</span> <span class="n">means</span> <span class="p">[</span><span class="n">make</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">wait</span> <span class="p">:</span> <span class="n">unit</span> <span class="o">-&gt;</span> <span class="s1">&#39;a t * &#39;</span><span class="n">a</span> <span class="n">u</span>
+  <span class="c">(* [wait] means [make] *)</span>
+  <span class="k">val</span> <span class="n">wait</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">u</span>
 
-  <span class="n">val</span> <span class="k">return</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span>
-<span class="n">end</span>
+  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Lwt =
+  sig
+    type &#39;a state = Sleep | Return of &#39;a | Fail of exn
+    type &#39;a t
+    type &#39;a u
+    val state : &#39;a t -&gt; &#39;a state
+    val wakeup : &#39;a u -&gt; &#39;a -&gt; unit
+    val wakeup_exn : &#39;a u -&gt; exn -&gt; unit
+    val wait : unit -&gt; &#39;a t * &#39;a u
+    val return : &#39;a -&gt; &#39;a t
+  end
 </pre></div>
 </div>
 </div>
@@ -1249,8 +1232,14 @@ intuition for what Lwt implements.</p>
 <p>Here is some example Lwt code that you can try out in utop:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#require &quot;lwt&quot;;;</span>
-<span class="n">let</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">Lwt</span><span class="o">.</span><span class="n">wait</span><span class="p">();;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">require</span> <span class="s2">&quot;lwt&quot;</span><span class="o">;;</span>
+<span class="k">let</span> <span class="n">p</span><span class="o">,</span> <span class="n">r</span> <span class="o">=</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">wait</span><span class="bp">()</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val p : &#39;_weak1 Lwt.t = &lt;abstr&gt;
+val r : &#39;_weak1 Lwt.u = &lt;abstr&gt;
 </pre></div>
 </div>
 </div>
@@ -1261,7 +1250,13 @@ to have a promise that will eventually contain an <code class="docutils literal 
 code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">(</span><span class="n">p</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">Lwt</span><span class="o">.</span><span class="n">t</span><span class="p">),</span> <span class="n">r</span> <span class="o">=</span> <span class="n">Lwt</span><span class="o">.</span><span class="n">wait</span> <span class="p">()</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">int</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span><span class="o">),</span> <span class="n">r</span> <span class="o">=</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">wait</span> <span class="bp">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val p : int Lwt.t = &lt;abstr&gt;
+val r : int Lwt.u = &lt;abstr&gt;
 </pre></div>
 </div>
 </div>
@@ -1269,28 +1264,52 @@ code:</p>
 <p>Now we can resolve the promise:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Lwt</span><span class="o">.</span><span class="n">state</span> <span class="n">p</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">state</span> <span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int Lwt.state = Lwt.Sleep
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Lwt</span><span class="o">.</span><span class="n">wakeup</span> <span class="n">r</span> <span class="mi">42</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">wakeup</span> <span class="n">r</span> <span class="mi">42</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Lwt</span><span class="o">.</span><span class="n">state</span> <span class="n">p</span><span class="p">;;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">state</span> <span class="n">p</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int Lwt.state = Lwt.Return 42
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Lwt</span><span class="o">.</span><span class="n">wakeup</span> <span class="n">r</span> <span class="mi">42</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">wakeup</span> <span class="n">r</span> <span class="mi">42</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Invalid_argument &quot;Lwt.wakeup&quot;.
+<span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">invalid_arg</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;stdlib.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">30</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">20</span><span class="o">-</span><span class="mi">45</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
 </pre></div>
 </div>
 </div>
@@ -1300,9 +1319,21 @@ second time, which is not permitted.</p>
 <p>To reject a promise, we can write similar code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">(</span><span class="n">p</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">Lwt</span><span class="o">.</span><span class="n">t</span><span class="p">),</span> <span class="n">r</span> <span class="o">=</span> <span class="n">Lwt</span><span class="o">.</span><span class="n">wait</span> <span class="p">();;</span>
-<span class="n">Lwt</span><span class="o">.</span><span class="n">wakeup_exn</span> <span class="n">r</span> <span class="p">(</span><span class="n">Failure</span> <span class="s2">&quot;nope&quot;</span><span class="p">);;</span>
-<span class="n">Lwt</span><span class="o">.</span><span class="n">state</span> <span class="n">p</span><span class="p">;;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">int</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span><span class="o">),</span> <span class="n">r</span> <span class="o">=</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">wait</span> <span class="bp">()</span><span class="o">;;</span>
+<span class="nn">Lwt</span><span class="p">.</span><span class="n">wakeup_exn</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Failure</span> <span class="s2">&quot;nope&quot;</span><span class="o">);;</span>
+<span class="nn">Lwt</span><span class="p">.</span><span class="n">state</span> <span class="n">p</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val p : int Lwt.t = &lt;abstr&gt;
+val r : int Lwt.u = &lt;abstr&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int Lwt.state = Lwt.Fail (Failure &quot;nope&quot;)
 </pre></div>
 </div>
 </div>
@@ -1866,126 +1897,145 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
 <p>Here’s all of that code in one executable block:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="n">A</span> <span class="n">signature</span> <span class="k">for</span> <span class="n">Lwt</span><span class="o">-</span><span class="n">style</span> <span class="n">promises</span><span class="p">,</span> <span class="k">with</span> <span class="n">better</span> <span class="n">names</span> <span class="o">*</span><span class="p">)</span>
-<span class="n">module</span> <span class="nb">type</span> <span class="n">PROMISE</span> <span class="o">=</span> <span class="n">sig</span>
-  <span class="nb">type</span> <span class="s1">&#39;a state =</span>
-    <span class="o">|</span> <span class="n">Pending</span>
-    <span class="o">|</span> <span class="n">Resolved</span> <span class="n">of</span> <span class="s1">&#39;a</span>
-    <span class="o">|</span> <span class="n">Rejected</span> <span class="n">of</span> <span class="n">exn</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** A signature for Lwt-style promises, with better names *)</span>
+<span class="k">module</span> <span class="k">type</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
+    <span class="o">|</span> <span class="nc">Pending</span>
+    <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+    <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
-  <span class="nb">type</span> <span class="s1">&#39;a promise</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  <span class="nb">type</span> <span class="s1">&#39;a resolver</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">make</span> <span class="p">()]</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">new</span> <span class="n">promise</span> <span class="ow">and</span> <span class="n">resolver</span><span class="o">.</span> <span class="n">The</span> <span class="n">promise</span> <span class="ow">is</span> <span class="n">pending</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">make</span> <span class="p">:</span> <span class="n">unit</span> <span class="o">-&gt;</span> <span class="s1">&#39;a promise * &#39;</span><span class="n">a</span> <span class="n">resolver</span>
+  <span class="c">(** [make ()] is a new promise and resolver. The promise is pending. *)</span>
+  <span class="k">val</span> <span class="n">make</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="k">return</span> <span class="n">x</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">new</span> <span class="n">promise</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">already</span> <span class="n">resolved</span> <span class="k">with</span> <span class="n">value</span>
-      <span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="k">return</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">promise</span>
+  <span class="c">(** [return x] is a new promise that is already resolved with value</span>
+<span class="c">      [x]. *)</span>
+  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">state</span> <span class="n">p</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">state</span> <span class="n">of</span> <span class="n">the</span> <span class="n">promise</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">state</span> <span class="p">:</span> <span class="s1">&#39;a promise -&gt; &#39;</span><span class="n">a</span> <span class="n">state</span>
+  <span class="c">(** [state p] is the state of the promise *)</span>
+  <span class="k">val</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">resolve</span> <span class="n">r</span> <span class="n">x</span><span class="p">]</span> <span class="n">resolves</span> <span class="n">the</span> <span class="n">promise</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="n">associated</span> <span class="k">with</span> <span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="k">with</span>
-      <span class="n">value</span> <span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">meaning</span> <span class="n">that</span> <span class="p">[</span><span class="n">state</span> <span class="n">p</span><span class="p">]</span> <span class="n">will</span> <span class="n">become</span> <span class="p">[</span><span class="n">Resolved</span> <span class="n">x</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="ow">is</span> <span class="n">pending</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">resolve</span> <span class="p">:</span> <span class="s1">&#39;a resolver -&gt; &#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="n">unit</span>
+  <span class="c">(** [resolve r x] resolves the promise [p] associated with [r] with</span>
+<span class="c">      value [x], meaning that [state p] will become [Resolved x].</span>
+<span class="c">      Requires: [p] is pending. *)</span>
+  <span class="k">val</span> <span class="n">resolve</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">reject</span> <span class="n">r</span> <span class="n">x</span><span class="p">]</span> <span class="n">rejects</span> <span class="n">the</span> <span class="n">promise</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="n">associated</span> <span class="k">with</span> <span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="k">with</span>
-      <span class="n">exception</span> <span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">meaning</span> <span class="n">that</span> <span class="p">[</span><span class="n">state</span> <span class="n">p</span><span class="p">]</span> <span class="n">will</span> <span class="n">become</span> <span class="p">[</span><span class="n">Rejected</span> <span class="n">x</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="ow">is</span> <span class="n">pending</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">reject</span> <span class="p">:</span> <span class="s1">&#39;a resolver -&gt; exn -&gt; unit</span>
+  <span class="c">(** [reject r x] rejects the promise [p] associated with [r] with</span>
+<span class="c">      exception [x], meaning that [state p] will become [Rejected x].</span>
+<span class="c">      Requires: [p] is pending. *)</span>
+  <span class="k">val</span> <span class="n">reject</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="n">exn</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">p</span> <span class="o">&gt;&gt;=</span> <span class="n">c</span><span class="p">]</span> <span class="n">registers</span> <span class="n">callback</span> <span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">with</span> <span class="n">promise</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">When</span> <span class="n">the</span> <span class="n">promise</span> <span class="ow">is</span> <span class="n">resolved</span><span class="p">,</span> <span class="n">the</span> <span class="n">callback</span> <span class="n">will</span> <span class="n">be</span> <span class="n">run</span>
-      <span class="n">on</span> <span class="n">the</span> <span class="n">promises</span><span class="s1">&#39;s contents.  If the promise is never</span>
-      <span class="n">resolved</span><span class="p">,</span> <span class="n">the</span> <span class="n">callback</span> <span class="n">will</span> <span class="n">never</span> <span class="n">run</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="p">(</span><span class="o">&gt;&gt;=</span><span class="p">)</span> <span class="p">:</span> <span class="s1">&#39;a promise -&gt; (&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="s1">&#39;b promise) -&gt; &#39;</span><span class="n">b</span> <span class="n">promise</span>
-<span class="n">end</span>
+  <span class="c">(** [p &gt;&gt;= c] registers callback [c] with promise [p].</span>
+<span class="c">      When the promise is resolved, the callback will be run</span>
+<span class="c">      on the promises&#39;s contents.  If the promise is never</span>
+<span class="c">      resolved, the callback will never run. *)</span>
+  <span class="k">val</span> <span class="o">(&gt;&gt;=)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
+<span class="k">end</span>
 
-<span class="n">module</span> <span class="n">Promise</span> <span class="p">:</span> <span class="n">PROMISE</span> <span class="o">=</span> <span class="n">struct</span>
-  <span class="nb">type</span> <span class="s1">&#39;a state = Pending | Resolved of &#39;</span><span class="n">a</span> <span class="o">|</span> <span class="n">Rejected</span> <span class="n">of</span> <span class="n">exn</span>
+<span class="k">module</span> <span class="nc">Promise</span> <span class="o">:</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">RI</span><span class="p">:</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">be</span> <span class="p">[</span><span class="n">Pending</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="s1">&#39;a handler = &#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="n">unit</span>
+  <span class="c">(** RI: the input may not be [Pending] *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">RI</span><span class="p">:</span> <span class="k">if</span> <span class="p">[</span><span class="n">state</span> <span class="o">&lt;&gt;</span> <span class="n">Pending</span><span class="p">]</span> <span class="n">then</span> <span class="p">[</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[]]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="s1">&#39;a promise = {</span>
-    <span class="n">mutable</span> <span class="n">state</span> <span class="p">:</span> <span class="s1">&#39;a state;</span>
-    <span class="n">mutable</span> <span class="n">handlers</span> <span class="p">:</span> <span class="s1">&#39;a handler list</span>
-  <span class="p">}</span>
+  <span class="c">(** RI: if [state &lt;&gt; Pending] then [handlers = []]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">mutable</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">;</span>
+    <span class="k">mutable</span> <span class="n">handlers</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="kt">list</span>
+  <span class="o">}</span>
 
-  <span class="n">let</span> <span class="n">enqueue</span>
-      <span class="p">(</span><span class="n">handler</span> <span class="p">:</span> <span class="s1">&#39;a state -&gt; unit)</span>
-      <span class="p">(</span><span class="n">promise</span> <span class="p">:</span> <span class="s1">&#39;a promise) : unit</span>
+  <span class="k">let</span> <span class="n">enqueue</span>
+      <span class="o">(</span><span class="n">handler</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">unit</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="kt">unit</span>
     <span class="o">=</span>
-    <span class="n">promise</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="n">handler</span> <span class="p">::</span> <span class="n">promise</span><span class="o">.</span><span class="n">handlers</span>
+    <span class="n">promise</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="n">handler</span> <span class="o">::</span> <span class="n">promise</span><span class="o">.</span><span class="n">handlers</span>
 
-  <span class="nb">type</span> <span class="s1">&#39;a resolver = &#39;</span><span class="n">a</span> <span class="n">promise</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">write_once</span> <span class="n">p</span> <span class="n">s</span><span class="p">]</span> <span class="n">changes</span> <span class="n">the</span> <span class="n">state</span> <span class="n">of</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="n">to</span> <span class="n">be</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span>  <span class="n">If</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="ow">and</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
-      <span class="n">are</span> <span class="n">both</span> <span class="n">pending</span><span class="p">,</span> <span class="n">that</span> <span class="n">has</span> <span class="n">no</span> <span class="n">effect</span><span class="o">.</span>
-      <span class="n">Raises</span><span class="p">:</span> <span class="p">[</span><span class="n">Invalid_arg</span><span class="p">]</span> <span class="k">if</span> <span class="n">the</span> <span class="n">state</span> <span class="n">of</span> <span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">pending</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">write_once</span> <span class="n">p</span> <span class="n">s</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">Pending</span>
-    <span class="n">then</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span> <span class="o">&lt;-</span> <span class="n">s</span>
+  <span class="c">(** [write_once p s] changes the state of [p] to be [s].  If [p] and [s]</span>
+<span class="c">      are both pending, that has no effect.</span>
+<span class="c">      Raises: [Invalid_arg] if the state of [p] is not pending. *)</span>
+  <span class="k">let</span> <span class="n">write_once</span> <span class="n">p</span> <span class="n">s</span> <span class="o">=</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span>
+    <span class="k">then</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span> <span class="o">&lt;-</span> <span class="n">s</span>
     <span class="k">else</span> <span class="n">invalid_arg</span> <span class="s2">&quot;cannot write twice&quot;</span>
 
-  <span class="n">let</span> <span class="n">make</span> <span class="p">()</span> <span class="o">=</span>
-    <span class="n">let</span> <span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="n">state</span> <span class="o">=</span> <span class="n">Pending</span><span class="p">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="p">[]}</span> <span class="ow">in</span>
-    <span class="n">p</span><span class="p">,</span> <span class="n">p</span>
+  <span class="k">let</span> <span class="n">make</span> <span class="bp">()</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span> <span class="k">in</span>
+    <span class="n">p</span><span class="o">,</span> <span class="n">p</span>
 
-  <span class="n">let</span> <span class="k">return</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="p">{</span><span class="n">state</span> <span class="o">=</span> <span class="n">Resolved</span> <span class="n">x</span><span class="p">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="p">[]}</span>
+  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span>
+    <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Resolved</span> <span class="n">x</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
 
-  <span class="n">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span>
+  <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">requires</span><span class="p">:</span> <span class="p">[</span><span class="n">st</span><span class="p">]</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">be</span> <span class="p">[</span><span class="n">Pending</span><span class="p">]</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">resolve_or_reject</span> <span class="p">(</span><span class="n">r</span> <span class="p">:</span> <span class="s1">&#39;a resolver) (st : &#39;</span><span class="n">a</span> <span class="n">state</span><span class="p">)</span> <span class="o">=</span>
-    <span class="k">assert</span> <span class="p">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="n">Pending</span><span class="p">);</span>
-    <span class="n">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="ow">in</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="p">[];</span>
-    <span class="n">write_once</span> <span class="n">r</span> <span class="n">st</span><span class="p">;</span>
-    <span class="n">List</span><span class="o">.</span><span class="n">iter</span> <span class="p">(</span><span class="n">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">st</span><span class="p">)</span> <span class="n">handlers</span>
+  <span class="c">(** requires: [st] may not be [Pending] *)</span>
+  <span class="k">let</span> <span class="n">resolve_or_reject</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
+    <span class="k">assert</span> <span class="o">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="nc">Pending</span><span class="o">);</span>
+    <span class="k">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="k">in</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="bp">[]</span><span class="o">;</span>
+    <span class="n">write_once</span> <span class="n">r</span> <span class="n">st</span><span class="o">;</span>
+    <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">st</span><span class="o">)</span> <span class="n">handlers</span>
 
-  <span class="n">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve_or_reject</span> <span class="n">r</span> <span class="p">(</span><span class="n">Rejected</span> <span class="n">x</span><span class="p">)</span>
+  <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
+    <span class="n">resolve_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
 
-  <span class="n">let</span> <span class="n">resolve</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve_or_reject</span> <span class="n">r</span> <span class="p">(</span><span class="n">Resolved</span> <span class="n">x</span><span class="p">)</span>
+  <span class="k">let</span> <span class="n">resolve</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
+    <span class="n">resolve_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Resolved</span> <span class="n">x</span><span class="o">)</span>
 
-  <span class="n">let</span> <span class="n">handler</span> <span class="p">(</span><span class="n">resolver</span> <span class="p">:</span> <span class="s1">&#39;a resolver) : &#39;</span><span class="n">a</span> <span class="n">handler</span>
-    <span class="o">=</span> <span class="n">function</span>
-      <span class="o">|</span> <span class="n">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
-      <span class="o">|</span> <span class="n">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-      <span class="o">|</span> <span class="n">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">x</span>
+  <span class="k">let</span> <span class="n">handler</span> <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span>
+    <span class="o">=</span> <span class="k">function</span>
+      <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
+      <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
+      <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">x</span>
 
-  <span class="n">let</span> <span class="n">handler_of_callback</span>
-      <span class="p">(</span><span class="n">callback</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">b</span> <span class="n">promise</span><span class="p">)</span>
-      <span class="p">(</span><span class="n">resolver</span> <span class="p">:</span> <span class="s1">&#39;b resolver) : &#39;</span><span class="n">a</span> <span class="n">handler</span>
-    <span class="o">=</span> <span class="n">function</span>
-      <span class="o">|</span> <span class="n">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
-      <span class="o">|</span> <span class="n">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-      <span class="o">|</span> <span class="n">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span>
-        <span class="n">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="ow">in</span>
+  <span class="k">let</span> <span class="n">handler_of_callback</span>
+      <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span>
+    <span class="o">=</span> <span class="k">function</span>
+      <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
+      <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
+      <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span>
+        <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
         <span class="k">match</span> <span class="n">promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-        <span class="o">|</span> <span class="n">Resolved</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">y</span>
-        <span class="o">|</span> <span class="n">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-        <span class="o">|</span> <span class="n">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="p">(</span><span class="n">handler</span> <span class="n">resolver</span><span class="p">)</span> <span class="n">promise</span>
+        <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">y</span>
+        <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
+        <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">handler</span> <span class="n">resolver</span><span class="o">)</span> <span class="n">promise</span>
 
-  <span class="n">let</span> <span class="p">(</span><span class="o">&gt;&gt;=</span><span class="p">)</span>
-      <span class="p">(</span><span class="n">input_promise</span> <span class="p">:</span> <span class="s1">&#39;a promise)</span>
-      <span class="p">(</span><span class="n">callback</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">b</span> <span class="n">promise</span><span class="p">)</span> <span class="p">:</span> <span class="s1">&#39;b promise</span>
+  <span class="k">let</span> <span class="o">(&gt;&gt;=)</span>
+      <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
     <span class="o">=</span>
     <span class="k">match</span> <span class="n">input_promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="n">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">callback</span> <span class="n">x</span>
-    <span class="o">|</span> <span class="n">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="n">state</span> <span class="o">=</span> <span class="n">Rejected</span> <span class="n">exc</span><span class="p">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="p">[]}</span>
-    <span class="o">|</span> <span class="n">Pending</span> <span class="o">-&gt;</span>
-      <span class="n">let</span> <span class="n">output_promise</span><span class="p">,</span> <span class="n">output_resolver</span> <span class="o">=</span> <span class="n">make</span> <span class="p">()</span> <span class="ow">in</span>
-      <span class="n">enqueue</span> <span class="p">(</span><span class="n">handler_of_callback</span> <span class="n">callback</span> <span class="n">output_resolver</span><span class="p">)</span> <span class="n">input_promise</span><span class="p">;</span>
+    <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">callback</span> <span class="n">x</span>
+    <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Rejected</span> <span class="n">exc</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+    <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span>
+      <span class="k">let</span> <span class="n">output_promise</span><span class="o">,</span> <span class="n">output_resolver</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
+      <span class="n">enqueue</span> <span class="o">(</span><span class="n">handler_of_callback</span> <span class="n">callback</span> <span class="n">output_resolver</span><span class="o">)</span> <span class="n">input_promise</span><span class="o">;</span>
       <span class="n">output_promise</span>
-<span class="n">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type PROMISE =
+  sig
+    type &#39;a state = Pending | Resolved of &#39;a | Rejected of exn
+    type &#39;a promise
+    type &#39;a resolver
+    val make : unit -&gt; &#39;a promise * &#39;a resolver
+    val return : &#39;a -&gt; &#39;a promise
+    val state : &#39;a promise -&gt; &#39;a state
+    val resolve : &#39;a resolver -&gt; &#39;a -&gt; unit
+    val reject : &#39;a resolver -&gt; exn -&gt; unit
+    val ( &gt;&gt;= ) : &#39;a promise -&gt; (&#39;a -&gt; &#39;b promise) -&gt; &#39;b promise
+  end
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Promise : PROMISE
 </pre></div>
 </div>
 </div>
@@ -2015,42 +2065,34 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
 
               </div>
               
+        
+        <div class='prev-next-bottom'>
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="memoization.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">8.5. </span>Memoization</p>
+    <a class='left-prev' id="prev-link" href="memoization.html" title="previous page"><span class="section-number">8.5. </span>Memoization</a>
+    <a class='right-next' id="next-link" href="monads.html" title="next page"><span class="section-number">8.7. </span>Monads</a>
+
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="monads.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8.7. </span>Monads</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
+        
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael R. Clarkson et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
+  
   </body>
 </html>

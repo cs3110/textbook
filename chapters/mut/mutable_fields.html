@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>7.2. Mutable Fields &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,10 +42,10 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -57,10 +57,7 @@
     <link rel="next" title="7.3. Arrays and Loops" href="arrays.html" />
     <link rel="prev" title="7.1. Refs" href="refs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -77,10 +74,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -90,9 +83,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -109,7 +102,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -210,7 +203,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -423,7 +416,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -591,7 +584,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -650,7 +643,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -662,7 +655,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -727,7 +720,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -783,12 +776,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+        <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#refs-are-mutable-fields">
@@ -813,43 +806,10 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Mutable Fields</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#refs-are-mutable-fields">
-   7.2.1. Refs Are Mutable Fields
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-mutable-singly-linked-lists">
-   7.2.2. Example: Mutable Singly-Linked Lists
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-mutable-stacks">
-   7.2.3. Example: Mutable Stacks
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
+        
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="mutable-fields">
+  <div class="section" id="mutable-fields">
 <h1><span class="section-number">7.2. </span>Mutable Fields<a class="headerlink" href="#mutable-fields" title="Permalink to this headline">¶</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/9RNeX5t4_xA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The fields of a record can be declared as mutable, meaning their contents can be
@@ -857,7 +817,12 @@ updated without constructing a new record. For example, here is a record type
 for two-dimensional colored points whose color field <code class="docutils literal notranslate"><span class="pre">c</span></code> is mutable:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">point</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="p">:</span> <span class="nb">int</span><span class="p">;</span> <span class="n">y</span> <span class="p">:</span> <span class="nb">int</span><span class="p">;</span> <span class="n">mutable</span> <span class="n">c</span> <span class="p">:</span> <span class="n">string</span><span class="p">}</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">point</span> <span class="o">=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span> <span class="k">mutable</span> <span class="n">c</span> <span class="o">:</span> <span class="kt">string</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type point = { x : int; y : int; mutable c : string; }
 </pre></div>
 </div>
 </div>
@@ -869,21 +834,36 @@ field. In particular, we write <code class="docutils literal notranslate"><span 
 a left arrow.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">}</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="o">{</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val p : point = {x = 0; y = 0; c = &quot;red&quot;}
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">c</span> <span class="o">&lt;-</span> <span class="s2">&quot;white&quot;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">c</span> <span class="o">&lt;-</span> <span class="s2">&quot;white&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : point = {x = 0; y = 0; c = &quot;white&quot;}
 </pre></div>
 </div>
 </div>
@@ -891,7 +871,15 @@ a left arrow.</p>
 <p>Non-mutable fields cannot be updated that way:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;-</span> <span class="mi">3</span><span class="p">;;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;-</span> <span class="mi">3</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[5]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="n">p</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;-</span> <span class="mi">3</span><span class="p">;;</span>
+    <span class="o">^^^^^^^^</span>
+<span class="ne">Error</span>: The record field x is not mutable
 </pre></div>
 </div>
 </div>
@@ -915,7 +903,12 @@ a left arrow.</p>
 record with a single mutable field named <code class="docutils literal notranslate"><span class="pre">contents</span></code>!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">42</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">42</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val r : int ref = {contents = 42}
 </pre></div>
 </div>
 </div>
@@ -924,21 +917,36 @@ record with a single mutable field named <code class="docutils literal notransla
 functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">ref</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="n">contents</span> <span class="o">=</span> <span class="n">x</span><span class="p">}</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">ref</span> <span class="n">x</span> <span class="o">=</span> <span class="o">{</span><span class="n">contents</span> <span class="o">=</span> <span class="n">x</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ref : &#39;a -&gt; &#39;a ref = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>let ( ! ) r = r.contents
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">!</span> <span class="o">)</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">contents</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( ! ) : &#39;a ref -&gt; &#39;a = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="p">(</span> <span class="o">:=</span> <span class="p">)</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="n">x</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">:=</span> <span class="o">)</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( := ) : &#39;a ref -&gt; &#39;a -&gt; unit = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
@@ -954,18 +962,26 @@ Nonetheless the functions do behave the same as the OCaml source given above.</p
 did with references. The types for nodes and lists are simplified:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="n">An</span> <span class="p">[</span><span class="s1">&#39;a node] is a node of a mutable singly-linked list. It contains a value</span>
-    <span class="n">of</span> <span class="nb">type</span> <span class="p">[</span><span class="s1">&#39;a] and optionally has a pointer to the next node. *)</span>
-<span class="nb">type</span> <span class="s1">&#39;a node = {</span>
-  <span class="n">mutable</span> <span class="nb">next</span> <span class="p">:</span> <span class="s1">&#39;a node option;</span>
-  <span class="n">value</span> <span class="p">:</span> <span class="s1">&#39;a</span>
-<span class="p">}</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** An [&#39;a node] is a node of a mutable singly-linked list. It contains a value</span>
+<span class="c">    of type [&#39;a] and optionally has a pointer to the next node. *)</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">mutable</span> <span class="n">next</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="o">;</span>
+  <span class="k">value</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span>
+<span class="o">}</span>
 
-<span class="p">(</span><span class="o">**</span> <span class="n">An</span> <span class="p">[</span><span class="s1">&#39;a mlist] is a mutable singly-linked list with elements of type [&#39;</span><span class="n">a</span><span class="p">]</span><span class="o">.</span>
-    <span class="n">RI</span><span class="p">:</span> <span class="n">The</span> <span class="nb">list</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">contain</span> <span class="nb">any</span> <span class="n">cycles</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-<span class="nb">type</span> <span class="s1">&#39;a mlist = {</span>
-  <span class="n">mutable</span> <span class="n">first</span> <span class="p">:</span> <span class="s1">&#39;a node option;</span>
-<span class="p">}</span>
+<span class="c">(** An [&#39;a mlist] is a mutable singly-linked list with elements of type [&#39;a].</span>
+<span class="c">    RI: The list does not contain any cycles. *)</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mlist</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">mutable</span> <span class="n">first</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a node = { mutable next : &#39;a node option; value : &#39;a; }
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a mlist = { mutable first : &#39;a node option; }
 </pre></div>
 </div>
 </div>
@@ -976,24 +992,35 @@ the operations, but the code is slightly simplified because we don’t
 have to use reference operations:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">insert_first</span> <span class="n">lst</span> <span class="n">n</span><span class="p">]</span> <span class="n">mutates</span> <span class="n">mlist</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="n">by</span> <span class="n">inserting</span> <span class="n">value</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">as</span> <span class="n">the</span>
-    <span class="n">first</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">list</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-<span class="n">let</span> <span class="n">insert_first</span> <span class="p">(</span><span class="n">lst</span> <span class="p">:</span> <span class="s1">&#39;a mlist) (v : &#39;</span><span class="n">a</span><span class="p">)</span> <span class="o">=</span>
-  <span class="n">lst</span><span class="o">.</span><span class="n">first</span> <span class="o">&lt;-</span> <span class="n">Some</span> <span class="p">{</span><span class="n">value</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span> <span class="nb">next</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">first</span><span class="p">}</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [insert_first lst n] mutates mlist [lst] by inserting value [v] as the</span>
+<span class="c">    first value in the list. *)</span>
+<span class="k">let</span> <span class="n">insert_first</span> <span class="o">(</span><span class="n">lst</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mlist</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">=</span>
+  <span class="n">lst</span><span class="o">.</span><span class="n">first</span> <span class="o">&lt;-</span> <span class="nc">Some</span> <span class="o">{</span><span class="k">value</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">first</span><span class="o">}</span>
 
-<span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">empty</span> <span class="p">()]</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">empty</span> <span class="n">singly</span><span class="o">-</span><span class="n">linked</span> <span class="nb">list</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-<span class="n">let</span> <span class="n">empty</span> <span class="p">()</span> <span class="p">:</span> <span class="s1">&#39;a mlist = {</span>
-  <span class="n">first</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">}</span>
+<span class="c">(** [empty ()] is an empty singly-linked list. *)</span>
+<span class="k">let</span> <span class="n">empty</span> <span class="bp">()</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mlist</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="n">first</span> <span class="o">=</span> <span class="nc">None</span>
+<span class="o">}</span>
 
-<span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">to_list</span> <span class="n">lst</span><span class="p">]</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">OCaml</span> <span class="nb">list</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">values</span> <span class="k">as</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span>
-    <span class="ow">in</span> <span class="n">the</span> <span class="n">same</span> <span class="n">order</span><span class="o">.</span> <span class="n">Not</span> <span class="n">tail</span> <span class="n">recursive</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-<span class="n">let</span> <span class="n">to_list</span> <span class="p">(</span><span class="n">lst</span> <span class="p">:</span> <span class="s1">&#39;a mlist) : &#39;</span><span class="n">a</span> <span class="nb">list</span> <span class="o">=</span>
-  <span class="n">let</span> <span class="n">rec</span> <span class="n">helper</span> <span class="o">=</span> <span class="n">function</span>
-    <span class="o">|</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="p">[]</span>
-    <span class="o">|</span> <span class="n">Some</span> <span class="p">{</span><span class="nb">next</span><span class="p">;</span> <span class="n">value</span><span class="p">}</span> <span class="o">-&gt;</span> <span class="n">value</span> <span class="p">::</span> <span class="n">helper</span> <span class="nb">next</span>
-  <span class="ow">in</span>
+<span class="c">(** [to_list lst] is an OCaml list containing the same values as [lst]</span>
+<span class="c">    in the same order. Not tail recursive. *)</span>
+<span class="k">let</span> <span class="n">to_list</span> <span class="o">(</span><span class="n">lst</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">mlist</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">helper</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="bp">[]</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="o">{</span><span class="n">next</span><span class="o">;</span> <span class="k">value</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="k">value</span> <span class="o">::</span> <span class="n">helper</span> <span class="n">next</span>
+  <span class="k">in</span>
   <span class="n">helper</span> <span class="n">lst</span><span class="o">.</span><span class="n">first</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val insert_first : &#39;a mlist -&gt; &#39;a -&gt; unit = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val empty : unit -&gt; &#39;a mlist = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val to_list : &#39;a mlist -&gt; &#39;a list = &lt;fun&gt;
 </pre></div>
 </div>
 </div>
@@ -1006,31 +1033,44 @@ ways. Let’s use what we’ve learned from mutable linked lists to
 implement mutable stacks.  Here is an interface:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">MutableStack</span> <span class="o">=</span> <span class="n">sig</span>
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="s1">&#39;a t] is the type of mutable stacks whose elements have type [&#39;</span><span class="n">a</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">The</span> <span class="n">stack</span> <span class="ow">is</span> <span class="n">mutable</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">sense</span> <span class="n">that</span> <span class="n">its</span> <span class="n">elements</span> <span class="n">can</span>
-      <span class="n">be</span> <span class="n">changed</span><span class="p">,</span> <span class="n">but</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">sense</span> <span class="n">that</span> <span class="n">it</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">persistent</span><span class="p">:</span>
-      <span class="n">the</span> <span class="n">operations</span> <span class="p">[</span><span class="n">push</span><span class="p">]</span> <span class="ow">and</span> <span class="p">[</span><span class="n">pop</span><span class="p">]</span> <span class="n">destructively</span> <span class="n">modify</span> <span class="n">the</span> <span class="n">stack</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="s1">&#39;a t</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">MutableStack</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(** [&#39;a t] is the type of mutable stacks whose elements have type [&#39;a].</span>
+<span class="c">      The stack is mutable not in the sense that its elements can</span>
+<span class="c">      be changed, but in the sense that it is not persistent:</span>
+<span class="c">      the operations [push] and [pop] destructively modify the stack. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Raised</span> <span class="k">if</span> <span class="p">[</span><span class="n">peek</span><span class="p">]</span> <span class="ow">or</span> <span class="p">[</span><span class="n">pop</span><span class="p">]</span> <span class="n">encounter</span> <span class="n">the</span> <span class="n">empty</span> <span class="n">stack</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="c">(** Raised if [peek] or [pop] encounter the empty stack. *)</span>
+  <span class="k">exception</span> <span class="nc">Empty</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">empty</span> <span class="p">()]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">empty</span> <span class="n">stack</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="n">unit</span> <span class="o">-&gt;</span> <span class="s1">&#39;a t</span>
+  <span class="c">(** [empty ()] is the empty stack *)</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">push</span> <span class="n">x</span> <span class="n">s</span><span class="p">]</span> <span class="n">modifies</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="n">to</span> <span class="n">make</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="n">its</span> <span class="n">top</span> <span class="n">element</span><span class="o">.</span>
-      <span class="n">The</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">the</span> <span class="n">elements</span> <span class="n">are</span> <span class="n">unchanged</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">push</span> <span class="p">:</span> <span class="s1">&#39;a -&gt; &#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">unit</span>
+  <span class="c">(** [push x s] modifies [s] to make [x] its top element.</span>
+<span class="c">      The rest of the elements are unchanged. *)</span>
+  <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">**</span><span class="p">[</span><span class="n">peek</span> <span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">top</span> <span class="n">element</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span>
-     <span class="n">Raises</span><span class="p">:</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">peek</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; &#39;</span><span class="n">a</span>
+  <span class="c">(**[peek s] is the top element of [s].</span>
+<span class="c">     Raises: [Empty] is [s] is empty. *)</span>
+  <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">pop</span> <span class="n">s</span><span class="p">]</span> <span class="n">removes</span> <span class="n">the</span> <span class="n">top</span> <span class="n">element</span> <span class="n">of</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">Raises</span><span class="p">:</span> <span class="p">[</span><span class="n">Empty</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="ow">is</span> <span class="n">empty</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">pop</span> <span class="p">:</span> <span class="s1">&#39;a t -&gt; unit</span>
-<span class="n">end</span>
+  <span class="c">(** [pop s] removes the top element of [s].</span>
+<span class="c">      Raises: [Empty] is [s] is empty. *)</span>
+  <span class="k">val</span> <span class="n">pop</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type MutableStack =
+  sig
+    type &#39;a t
+    exception Empty
+    val empty : unit -&gt; &#39;a t
+    val push : &#39;a -&gt; &#39;a t -&gt; unit
+    val peek : &#39;a t -&gt; &#39;a
+    val pop : &#39;a t -&gt; unit
+  end
 </pre></div>
 </div>
 </div>
@@ -1038,37 +1078,42 @@ implement mutable stacks.  Here is an interface:</p>
 <p>Now let’s implement the mutable stack with a mutable linked list.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">MutableRecordStack</span> <span class="p">:</span> <span class="n">MutableStack</span> <span class="o">=</span> <span class="n">struct</span>
-  <span class="p">(</span><span class="o">**</span> <span class="n">An</span> <span class="p">[</span><span class="s1">&#39;a node] is a node of a mutable linked list.  It has</span>
-     <span class="n">a</span> <span class="n">field</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="n">that</span> <span class="n">contains</span> <span class="n">the</span> <span class="n">node</span><span class="s1">&#39;s value, and</span>
-     <span class="n">a</span> <span class="n">mutable</span> <span class="n">field</span> <span class="p">[</span><span class="nb">next</span><span class="p">]</span> <span class="n">that</span> <span class="ow">is</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="k">if</span> <span class="n">the</span> <span class="n">node</span> <span class="n">has</span>
-     <span class="n">no</span> <span class="n">successor</span><span class="p">,</span> <span class="ow">or</span> <span class="p">[</span><span class="n">Some</span> <span class="n">n</span><span class="p">]</span> <span class="k">if</span> <span class="n">the</span> <span class="n">successor</span> <span class="ow">is</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="s1">&#39;a node = {value : &#39;</span><span class="n">a</span><span class="p">;</span> <span class="n">mutable</span> <span class="nb">next</span> <span class="p">:</span> <span class="s1">&#39;a node option}</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">MutableRecordStack</span> <span class="o">:</span> <span class="nc">MutableStack</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** An [&#39;a node] is a node of a mutable linked list.  It has</span>
+<span class="c">     a field [value] that contains the node&#39;s value, and</span>
+<span class="c">     a mutable field [next] that is [None] if the node has</span>
+<span class="c">     no successor, or [Some n] if the successor is [n]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="o">=</span> <span class="o">{</span><span class="k">value</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span> <span class="k">mutable</span> <span class="n">next</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="o">}</span>
 
- <span class="p">(</span><span class="o">**</span> <span class="n">AF</span><span class="p">:</span> <span class="n">An</span> <span class="p">[</span><span class="s1">&#39;a t] is a stack represented by a mutable linked list.</span>
-     <span class="n">The</span> <span class="n">mutable</span> <span class="n">field</span> <span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">first</span> <span class="n">node</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">list</span><span class="p">,</span>
-     <span class="n">which</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">top</span> <span class="n">of</span> <span class="n">the</span> <span class="n">stack</span><span class="o">.</span> <span class="n">The</span> <span class="n">empty</span> <span class="n">stack</span> <span class="ow">is</span> <span class="n">represented</span>
-     <span class="n">by</span> <span class="p">{</span><span class="n">top</span> <span class="o">=</span> <span class="kc">None</span><span class="p">}</span><span class="o">.</span>  <span class="n">The</span> <span class="n">node</span> <span class="p">{</span><span class="n">top</span> <span class="o">=</span> <span class="n">Some</span> <span class="n">n</span><span class="p">}</span> <span class="n">represents</span> <span class="n">the</span>
-     <span class="n">stack</span> <span class="n">whose</span> <span class="n">top</span> <span class="ow">is</span> <span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="ow">and</span> <span class="n">whose</span> <span class="n">remaining</span> <span class="n">elements</span> <span class="n">are</span>
-     <span class="n">the</span> <span class="n">successors</span> <span class="n">of</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="s1">&#39;a t = {mutable top : &#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="p">}</span>
+ <span class="c">(** AF: An [&#39;a t] is a stack represented by a mutable linked list.</span>
+<span class="c">     The mutable field [top] is the first node of the list,</span>
+<span class="c">     which is the top of the stack. The empty stack is represented</span>
+<span class="c">     by {top = None}.  The node {top = Some n} represents the</span>
+<span class="c">     stack whose top is [n], and whose remaining elements are</span>
+<span class="c">     the successors of [n]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="o">{</span><span class="k">mutable</span> <span class="n">top</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="o">}</span>
 
-  <span class="n">exception</span> <span class="n">Empty</span>
+  <span class="k">exception</span> <span class="nc">Empty</span>
 
-  <span class="n">let</span> <span class="n">empty</span> <span class="p">()</span> <span class="o">=</span> <span class="p">{</span><span class="n">top</span> <span class="o">=</span> <span class="kc">None</span><span class="p">}</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="bp">()</span> <span class="o">=</span> <span class="o">{</span><span class="n">top</span> <span class="o">=</span> <span class="nc">None</span><span class="o">}</span>
 
-  <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">top</span> <span class="o">&lt;-</span> <span class="n">Some</span> <span class="p">{</span><span class="n">value</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span> <span class="nb">next</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">top</span><span class="p">}</span>
+  <span class="k">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">top</span> <span class="o">&lt;-</span> <span class="nc">Some</span> <span class="o">{</span><span class="k">value</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">top</span><span class="o">}</span>
 
-  <span class="n">let</span> <span class="n">peek</span> <span class="n">s</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">peek</span> <span class="n">s</span> <span class="o">=</span>
     <span class="k">match</span> <span class="n">s</span><span class="o">.</span><span class="n">top</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
-    <span class="o">|</span> <span class="n">Some</span> <span class="p">{</span><span class="n">value</span><span class="p">}</span> <span class="o">-&gt;</span> <span class="n">value</span>
+    <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="o">{</span><span class="k">value</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="k">value</span>
 
-  <span class="n">let</span> <span class="n">pop</span> <span class="n">s</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">pop</span> <span class="n">s</span> <span class="o">=</span>
     <span class="k">match</span> <span class="n">s</span><span class="o">.</span><span class="n">top</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="kc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span>
-    <span class="o">|</span> <span class="n">Some</span> <span class="p">{</span><span class="nb">next</span><span class="p">}</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">top</span> <span class="o">&lt;-</span> <span class="nb">next</span>
-<span class="n">end</span>
+    <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="nc">Empty</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="o">{</span><span class="n">next</span><span class="o">}</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">top</span> <span class="o">&lt;-</span> <span class="n">next</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module MutableRecordStack : MutableStack
 </pre></div>
 </div>
 </div>
@@ -1098,42 +1143,34 @@ implement mutable stacks.  Here is an interface:</p>
 
               </div>
               
+        
+        <div class='prev-next-bottom'>
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="refs.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">7.1. </span>Refs</p>
+    <a class='left-prev' id="prev-link" href="refs.html" title="previous page"><span class="section-number">7.1. </span>Refs</a>
+    <a class='right-next' id="next-link" href="arrays.html" title="next page"><span class="section-number">7.3. </span>Arrays and Loops</a>
+
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="arrays.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7.3. </span>Arrays and Loops</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
+        
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael R. Clarkson et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
+  
   </body>
 </html>

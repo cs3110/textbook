@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.3. Expressions &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,27 +42,24 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="2.4. Functions" href="functions.html" />
     <link rel="prev" title="2.2. Compiling OCaml Programs" href="compiling.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -79,10 +76,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -92,9 +85,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -111,7 +104,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -212,7 +205,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -425,7 +418,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -593,7 +586,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -652,7 +645,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -664,7 +657,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -729,7 +722,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -785,12 +778,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+        <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#primitive-types-and-values">
@@ -835,63 +828,10 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Expressions</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#primitive-types-and-values">
-   2.3.1. Primitive Types and Values
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-operators">
-   2.3.2. More Operators
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#assertions">
-   2.3.3. Assertions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#if-expressions">
-   2.3.4. If Expressions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#let-expressions">
-   2.3.5. Let Expressions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scope">
-   2.3.6. Scope
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#type-annotations">
-   2.3.7. Type Annotations
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
+        
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="expressions">
+  <div class="section" id="expressions">
 <h1><span class="section-number">2.3. </span>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">¶</a></h1>
 <p>The primary piece of OCaml syntax is the <em>expression</em>. Just like programs in
 imperative languages are primarily built out of <em>commands</em>, programs in
@@ -925,21 +865,40 @@ The usual operators are available: <code class="docutils literal notranslate"><s
 two are integer division and modulus:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">65</span> <span class="o">/</span> <span class="mi">60</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">65</span> <span class="o">/</span> <span class="mi">60</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 1
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">65</span> <span class="n">mod</span> <span class="mi">60</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">65</span> <span class="ow">mod</span> <span class="mi">60</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 5
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">65</span> <span class="o">/</span> <span class="mi">0</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">65</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Division_by_zero.
+<span class="n">Raised</span> <span class="n">by</span> <span class="n">primitive</span> <span class="n">operation</span> <span class="n">at</span> <span class="n">unknown</span> <span class="n">location</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
 </pre></div>
 </div>
 </div>
@@ -959,14 +918,24 @@ always contain a dot—for example, <code class="docutils literal notranslate"><
 is a <code class="docutils literal notranslate"><span class="pre">float</span></code>; if you write it as <code class="docutils literal notranslate"><span class="pre">3</span></code>, it is instead an <code class="docutils literal notranslate"><span class="pre">int</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : float = 3.
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 3
 </pre></div>
 </div>
 </div>
@@ -976,14 +945,28 @@ on floats are written with a dot after them. For example, floating-point
 multiplication is written <code class="docutils literal notranslate"><span class="pre">*.</span></code> not <code class="docutils literal notranslate"><span class="pre">*</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span> <span class="o">*.</span> <span class="mf">2.</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="o">.</span><span class="mi">14</span> <span class="o">*.</span> <span class="mi">2</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : float = 6.28
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span> <span class="o">*</span> <span class="mf">2.</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="o">.</span><span class="mi">14</span> <span class="o">*</span> <span class="mi">2</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[7]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">4</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="mf">2.</span>
+    <span class="o">^^^^</span>
+<span class="ne">Error</span>: This expression has type float but an expression was expected of type
+         <span class="nb">int</span>
 </pre></div>
 </div>
 </div>
@@ -993,7 +976,12 @@ convert, there are two built-in functions for that purpose: <code class="docutil
 <code class="docutils literal notranslate"><span class="pre">float_of_int</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14</span> <span class="o">*.</span> <span class="p">(</span><span class="n">float_of_int</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span><span class="o">.</span><span class="mi">14</span> <span class="o">*.</span> <span class="o">(</span><span class="n">float_of_int</span> <span class="mi">2</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : float = 6.28
 </pre></div>
 </div>
 </div>
@@ -1002,7 +990,12 @@ convert, there are two built-in functions for that purpose: <code class="docutil
 lead to rounding errors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.1</span> <span class="o">+.</span> <span class="mf">0.2</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span> <span class="o">+.</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : float = 0.300000000000000044
 </pre></div>
 </div>
 </div>
@@ -1023,7 +1016,12 @@ written with double quotes, such as <code class="docutils literal notranslate"><
 is <code class="docutils literal notranslate"><span class="pre">^</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span> <span class="o">^</span> <span class="s2">&quot;def&quot;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span> <span class="o">^</span> <span class="s2">&quot;def&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;abcdef&quot;
 </pre></div>
 </div>
 </div>
@@ -1037,14 +1035,24 @@ there is no <code class="docutils literal notranslate"><span class="pre">string_
 be used to accomplish the same goal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">string_of_int</span> <span class="mi">42</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">string_of_int</span> <span class="mi">42</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;42&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="o">.</span><span class="n">make</span> <span class="mi">1</span> <span class="s1">&#39;z&#39;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">String</span><span class="p">.</span><span class="n">make</span> <span class="mi">1</span> <span class="sc">&#39;z&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;z&quot;
 </pre></div>
 </div>
 </div>
@@ -1054,14 +1062,28 @@ convert from a string if possible: <code class="docutils literal notranslate"><s
 <code class="docutils literal notranslate"><span class="pre">bool_of_string</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">int_of_string</span> <span class="s2">&quot;123&quot;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">int_of_string</span> <span class="s2">&quot;123&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 123
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">int_of_string</span> <span class="s2">&quot;not an int&quot;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">int_of_string</span> <span class="s2">&quot;not an int&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Failure &quot;int_of_string&quot;.
+<span class="n">Raised</span> <span class="n">by</span> <span class="n">primitive</span> <span class="n">operation</span> <span class="n">at</span> <span class="n">unknown</span> <span class="n">location</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
 </pre></div>
 </div>
 </div>
@@ -1071,21 +1093,40 @@ accessed by a 0-based index. The indexing operator is written with a dot and
 square brackets:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span><span class="o">.</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span><span class="o">.[</span><span class="mi">0</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : char = &#39;a&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span><span class="o">.</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span><span class="o">.[</span><span class="mi">1</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : char = &#39;b&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span><span class="o">.</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abc&quot;</span><span class="o">.[</span><span class="mi">3</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Invalid_argument &quot;index out of bounds&quot;.
+<span class="n">Raised</span> <span class="n">by</span> <span class="n">primitive</span> <span class="n">operation</span> <span class="n">at</span> <span class="n">unknown</span> <span class="n">location</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Toploop.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/toploop.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">212</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
 </pre></div>
 </div>
 </div>
@@ -1121,7 +1162,12 @@ The unit value is written <code class="docutils literal notranslate"><span class
 <code class="docutils literal notranslate"><span class="pre">true</span></code>, and to <code class="docutils literal notranslate"><span class="pre">e3</span></code> otherwise. We call <code class="docutils literal notranslate"><span class="pre">e1</span></code> the <em>guard</em> of the <code class="docutils literal notranslate"><span class="pre">if</span></code> expression.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="n">then</span> <span class="s2">&quot;yay!&quot;</span> <span class="k">else</span> <span class="s2">&quot;boo!&quot;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">then</span> <span class="s2">&quot;yay!&quot;</span> <span class="k">else</span> <span class="s2">&quot;boo!&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : string = &quot;yay!&quot;
 </pre></div>
 </div>
 </div>
@@ -1133,7 +1179,12 @@ similar to the ternary operator <code class="docutils literal notranslate"><span
 languages.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">4</span> <span class="o">+</span> <span class="p">(</span><span class="k">if</span> <span class="s1">&#39;a&#39;</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span> <span class="n">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="mi">4</span> <span class="o">+</span> <span class="o">(</span><span class="k">if</span> <span class="sc">&#39;a&#39;</span> <span class="o">=</span> <span class="sc">&#39;b&#39;</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 6
 </pre></div>
 </div>
 </div>
@@ -1151,7 +1202,17 @@ writing a single <code class="docutils literal notranslate"><span class="pre">if
 omit it you’ll likely get an error message that, for now, is inscrutable:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="n">then</span> <span class="mi">5</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">then</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[20]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">14</span><span class="o">-</span><span class="mi">15</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="k">if</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="n">then</span> <span class="mi">5</span>
+                  <span class="o">^</span>
+<span class="ne">Error</span>: This expression has type int but an expression was expected of type
+         <span class="n">unit</span>
+       <span class="n">because</span> <span class="n">it</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">result</span> <span class="n">of</span> <span class="n">a</span> <span class="n">conditional</span> <span class="k">with</span> <span class="n">no</span> <span class="k">else</span> <span class="n">branch</span>
 </pre></div>
 </div>
 </div>
@@ -1197,7 +1258,12 @@ notation for it. Whenever we would write “<code class="docutils literal notran
 with how the toplevel responds after it evaluates an expression that you enter:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val x : int = 42
 </pre></div>
 </div>
 </div>
@@ -1212,7 +1278,12 @@ indicates.</p>
 toplevel and in <code class="docutils literal notranslate"><span class="pre">.ml</span></code> files. For example,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val x : int = 42
 </pre></div>
 </div>
 </div>
@@ -1222,7 +1293,12 @@ toplevel. We’ll call this use of <code class="docutils literal notranslate"><s
 <p>There’s another use of <code class="docutils literal notranslate"><span class="pre">let</span></code> which is as an expression:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="ow">in</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="k">in</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 43
 </pre></div>
 </div>
 </div>
@@ -1234,7 +1310,15 @@ definitions, which themselves do not evaluate to any value. You can see that if
 you try putting a let definition in place of where an expression is expected:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[24]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">11</span><span class="o">-</span><span class="mi">12</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="p">(</span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+               <span class="o">^</span>
+<span class="ne">Error</span>: Syntax error: operator expected.
 </pre></div>
 </div>
 </div>
@@ -1244,7 +1328,12 @@ you try putting a let definition in place of where an expression is expected:</p
 to values. On the other hand, a <code class="docutils literal notranslate"><span class="pre">let</span></code> expression would work fine:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span> <span class="k">in</span> <span class="n">x</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 43
 </pre></div>
 </div>
 </div>
@@ -1438,7 +1527,12 @@ manually specify the desired type of an expression. A <em>type annotation</em> d
 that:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">5</span> <span class="p">:</span> <span class="nb">int</span><span class="p">)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="mi">5</span> <span class="o">:</span> <span class="kt">int</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 5
 </pre></div>
 </div>
 </div>
@@ -1446,7 +1540,17 @@ that:</p>
 <p>An incorrect annotation will produce a compile-time error:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">5</span> <span class="p">:</span> <span class="nb">float</span><span class="p">)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="mi">5</span> <span class="o">:</span> <span class="kt">float</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[27]&quot;, line 1, characters 1-2:
+1 | (5 : float)
+     ^
+Error: This expression has type int but an expression was expected of type
+         float
+  Hint: Did you mean `5.&#39;?
 </pre></div>
 </div>
 </div>
@@ -1460,7 +1564,17 @@ and you tried to write:</p>
 <p>You might try manually specifying that <code class="docutils literal notranslate"><span class="pre">5</span></code> was supposed to be a <code class="docutils literal notranslate"><span class="pre">float</span></code>:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">5</span> <span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">+.</span> <span class="mf">1.1</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="mi">5</span> <span class="o">:</span> <span class="kt">float</span><span class="o">)</span> <span class="o">+.</span> <span class="mi">1</span><span class="o">.</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[28]&quot;, line 1, characters 1-2:
+1 | (5 : float) +. 1.1
+     ^
+Error: This expression has type int but an expression was expected of type
+         float
+  Hint: Did you mean `5.&#39;?
 </pre></div>
 </div>
 </div>
@@ -1508,42 +1622,34 @@ There is no run-time conversion.</p>
 
               </div>
               
+        
+        <div class='prev-next-bottom'>
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="compiling.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2.2. </span>Compiling OCaml Programs</p>
+    <a class='left-prev' id="prev-link" href="compiling.html" title="previous page"><span class="section-number">2.2. </span>Compiling OCaml Programs</a>
+    <a class='right-next' id="next-link" href="functions.html" title="next page"><span class="section-number">2.4. </span>Functions</a>
+
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="functions.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.4. </span>Functions</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
+        
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael R. Clarkson et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
+  
   </body>
 </html>

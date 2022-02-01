@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>8.1. Hash Tables &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -42,27 +42,24 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="8.2. Amortized Analysis" href="amortized.html" />
     <link rel="prev" title="8. Data Structures" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -79,10 +76,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
       
@@ -92,9 +85,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -111,7 +104,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -212,7 +205,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -425,7 +418,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -593,7 +586,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -652,7 +645,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -664,7 +657,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -729,7 +722,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -785,12 +778,12 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+        <div class="d-none d-md-block col-md-2 bd-toc show">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#maps">
@@ -852,80 +845,10 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Hash Tables</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maps">
-   8.1.1. Maps
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maps-as-association-lists">
-   8.1.2. Maps as Association Lists
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maps-as-arrays">
-   8.1.3. Maps as Arrays
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maps-as-hash-tables">
-   8.1.4. Maps as Hash Tables
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chaining-representation">
-     8.1.4.1. Chaining Representation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#resizing">
-     8.1.4.2. Resizing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#implementation">
-     8.1.4.3. Implementation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hash-functions">
-   8.1.5. Hash Functions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#standard-library-hashtbl">
-   8.1.6. Standard Library
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     Hashtbl
-    </span>
-   </code>
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
+        
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="hash-tables">
+  <div class="section" id="hash-tables">
 <h1><span class="section-number">8.1. </span>Hash Tables<a class="headerlink" href="#hash-tables" title="Permalink to this headline">¶</a></h1>
 <p>The <em>hash table</em> is a widely used data structure whose performance relies upon
 mutability. The implementation of a hash table is quite involved compared to
@@ -968,37 +891,51 @@ for keys by themselves.</p></li>
 <p>Here is an interface for maps:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">Map</span> <span class="o">=</span> <span class="n">sig</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Map</span> <span class="o">=</span> <span class="k">sig</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">maps</span> <span class="n">that</span> <span class="n">bind</span> <span class="n">keys</span> <span class="n">of</span> <span class="nb">type</span>
-      <span class="p">[</span><span class="s1">&#39;k] to values of type [&#39;</span><span class="n">v</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span>
+  <span class="c">(** [(&#39;k, &#39;v) t] is the type of maps that bind keys of type</span>
+<span class="c">      [&#39;k] to values of type [&#39;v]. *)</span>
+  <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">same</span> <span class="nb">map</span> <span class="k">as</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">but</span> <span class="k">with</span> <span class="n">an</span> <span class="n">additional</span>
-      <span class="n">binding</span> <span class="kn">from</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span>  <span class="n">If</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">was</span> <span class="n">already</span> <span class="n">bound</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span>
-      <span class="n">that</span> <span class="n">binding</span> <span class="ow">is</span> <span class="n">replaced</span> <span class="n">by</span> <span class="n">the</span> <span class="n">binding</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">map</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">insert</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; &#39;</span><span class="n">v</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span>
+  <span class="c">(** [insert k v m] is the same map as [m], but with an additional</span>
+<span class="c">      binding from [k] to [v].  If [k] was already bound in [m],</span>
+<span class="c">      that binding is replaced by the binding to [v] in the new map. *)</span>
+  <span class="k">val</span> <span class="n">insert</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">find</span> <span class="n">k</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">Some</span> <span class="n">v</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="n">bound</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span>
-      <span class="ow">and</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">find</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t -&gt; &#39;</span><span class="n">v</span> <span class="n">option</span>
+  <span class="c">(** [find k m] is [Some v] if [k] is bound to [v] in [m],</span>
+<span class="c">      and [None] if not. *)</span>
+  <span class="k">val</span> <span class="n">find</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">option</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">remove</span> <span class="n">k</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">same</span> <span class="nb">map</span> <span class="k">as</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">but</span> <span class="n">without</span> <span class="nb">any</span> <span class="n">binding</span> <span class="n">of</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">If</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">bound</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">then</span> <span class="n">the</span> <span class="nb">map</span> <span class="ow">is</span> <span class="n">unchanged</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">remove</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t</span>
+  <span class="c">(** [remove k m] is the same map as [m], but without any binding of [k].</span>
+<span class="c">      If [k] was not bound in [m], then the map is unchanged. *)</span>
+  <span class="k">val</span> <span class="n">remove</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">empty</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">empty</span> <span class="nb">map</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">empty</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span>
+  <span class="c">(** [empty] is the empty map. *)</span>
+  <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">of_list</span> <span class="n">lst</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">bindings</span> <span class="k">as</span>
-      <span class="n">association</span> <span class="nb">list</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">contain</span> <span class="nb">any</span> <span class="n">duplicate</span> <span class="n">keys</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">of_list</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k * &#39;</span><span class="n">v</span><span class="p">)</span> <span class="nb">list</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span>
+  <span class="c">(** [of_list lst] is a map containing the same bindings as</span>
+<span class="c">      association list [lst].</span>
+<span class="c">      Requires: [lst] does not contain any duplicate keys. *)</span>
+  <span class="k">val</span> <span class="n">of_list</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">bindings</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">association</span> <span class="nb">list</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">same</span>
-      <span class="n">bindings</span> <span class="k">as</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span> <span class="n">There</span> <span class="n">are</span> <span class="n">no</span> <span class="n">duplicates</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">list</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">bindings</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">&#39;k * &#39;</span><span class="n">v</span><span class="p">)</span> <span class="nb">list</span>
-<span class="n">end</span>
+  <span class="c">(** [bindings m] is an association list containing the same</span>
+<span class="c">      bindings as [m]. There are no duplicates in the list. *)</span>
+  <span class="k">val</span> <span class="n">bindings</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Map =
+  sig
+    type (&#39;k, &#39;v) t
+    val insert : &#39;k -&gt; &#39;v -&gt; (&#39;k, &#39;v) t -&gt; (&#39;k, &#39;v) t
+    val find : &#39;k -&gt; (&#39;k, &#39;v) t -&gt; &#39;v option
+    val remove : &#39;k -&gt; (&#39;k, &#39;v) t -&gt; (&#39;k, &#39;v) t
+    val empty : (&#39;k, &#39;v) t
+    val of_list : (&#39;k * &#39;v) list -&gt; (&#39;k, &#39;v) t
+    val bindings : (&#39;k, &#39;v) t -&gt; (&#39;k * &#39;v) list
+  end
 </pre></div>
 </div>
 </div>
@@ -1021,44 +958,49 @@ seen that representation twice so far <a class="reference internal" href="../dat
 is an implementation of <code class="docutils literal notranslate"><span class="pre">Map</span></code> using it:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">ListMap</span> <span class="p">:</span> <span class="n">Map</span> <span class="o">=</span> <span class="n">struct</span>
-  <span class="p">(</span><span class="o">**</span> <span class="n">AF</span><span class="p">:</span> <span class="p">[[(</span><span class="n">k1</span><span class="p">,</span> <span class="n">v1</span><span class="p">);</span> <span class="p">(</span><span class="n">k2</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span> <span class="o">...</span><span class="p">;</span> <span class="p">(</span><span class="n">kn</span><span class="p">,</span> <span class="n">vn</span><span class="p">)]]</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">map</span> <span class="p">{</span><span class="n">k1</span> <span class="p">:</span> <span class="n">v1</span><span class="p">,</span> <span class="n">k2</span> <span class="p">:</span> <span class="n">v2</span><span class="p">,</span>
-      <span class="o">...</span><span class="p">,</span> <span class="n">kn</span> <span class="p">:</span> <span class="n">vn</span><span class="p">}</span><span class="o">.</span> <span class="n">If</span> <span class="n">a</span> <span class="n">key</span> <span class="n">appears</span> <span class="n">more</span> <span class="n">than</span> <span class="n">once</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">list</span><span class="p">,</span> <span class="n">then</span> <span class="ow">in</span> <span class="n">the</span>
-      <span class="nb">map</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">bound</span> <span class="n">to</span> <span class="n">the</span> <span class="n">left</span><span class="o">-</span><span class="n">most</span> <span class="n">occurrence</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">list</span><span class="o">.</span> <span class="n">For</span> <span class="n">example</span><span class="p">,</span>
-      <span class="p">[[(</span><span class="n">k</span><span class="p">,</span> <span class="n">v1</span><span class="p">);</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v2</span><span class="p">)]]</span> <span class="n">represents</span> <span class="p">{</span><span class="n">k</span> <span class="p">:</span> <span class="n">v1</span><span class="p">}</span><span class="o">.</span> <span class="n">The</span> <span class="n">empty</span> <span class="nb">list</span> <span class="n">represents</span>
-      <span class="n">the</span> <span class="n">empty</span> <span class="nb">map</span><span class="o">.</span>
-      <span class="n">RI</span><span class="p">:</span> <span class="n">none</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;k * &#39;</span><span class="n">v</span><span class="p">)</span> <span class="nb">list</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ListMap</span> <span class="o">:</span> <span class="nc">Map</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** AF: [[(k1, v1); (k2, v2); ...; (kn, vn)]] is the map {k1 : v1, k2 : v2,</span>
+<span class="c">      ..., kn : vn}. If a key appears more than once in the list, then in the</span>
+<span class="c">      map it is bound to the left-most occurrence in the list. For example,</span>
+<span class="c">      [[(k, v1); (k, v2)]] represents {k : v1}. The empty list represents</span>
+<span class="c">      the empty map.</span>
+<span class="c">      RI: none. *)</span>
+  <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="p">::</span> <span class="n">m</span>
+  <span class="c">(** Efficiency: O(1). *)</span>
+  <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="n">m</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">find</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">assoc_opt</span>
+  <span class="c">(** Efficiency: O(n). *)</span>
+  <span class="k">let</span> <span class="n">find</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">assoc_opt</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">remove</span> <span class="n">k</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">filter</span> <span class="p">(</span><span class="n">fun</span> <span class="p">(</span><span class="n">k</span><span class="s1">&#39;, _) -&gt; k &lt;&gt; k&#39;</span><span class="p">)</span> <span class="n">lst</span>
+  <span class="c">(** Efficiency: O(n). *)</span>
+  <span class="k">let</span> <span class="n">remove</span> <span class="n">k</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">k&#39;</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="n">k</span> <span class="o">&lt;&gt;</span> <span class="n">k&#39;</span><span class="o">)</span> <span class="n">lst</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="c">(** Efficiency: O(1). *)</span>
+  <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span>
+  <span class="c">(** Efficiency: O(1). *)</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">lst</span> <span class="o">=</span> <span class="n">lst</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">keys</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">the</span> <span class="n">keys</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">without</span>
-      <span class="nb">any</span> <span class="n">duplicates</span><span class="o">.</span>
-      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span> <span class="n">log</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">keys</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m</span> <span class="o">|&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">map</span> <span class="n">fst</span> <span class="o">|&gt;</span> <span class="n">List</span><span class="o">.</span><span class="n">sort_uniq</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">compare</span>
+  <span class="c">(** [keys m] is a list of the keys in [m], without</span>
+<span class="c">      any duplicates.</span>
+<span class="c">      Efficiency: O(n log n). *)</span>
+  <span class="k">let</span> <span class="n">keys</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">fst</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">binding</span> <span class="n">m</span> <span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)],</span> <span class="n">where</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">value</span> <span class="n">that</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span>
-       <span class="n">binds</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span>
-       <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span>
-       <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">binding</span> <span class="n">m</span> <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">List</span><span class="o">.</span><span class="n">assoc</span> <span class="n">k</span> <span class="n">m</span><span class="p">)</span>
+  <span class="c">(** [binding m k] is [(k, v)], where [v] is the value that [k]</span>
+<span class="c">       binds in [m].</span>
+<span class="c">       Requires: [k] is a key in [m].</span>
+<span class="c">       Efficiency: O(n). *)</span>
+  <span class="k">let</span> <span class="n">binding</span> <span class="n">m</span> <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="nn">List</span><span class="p">.</span><span class="n">assoc</span> <span class="n">k</span> <span class="n">m</span><span class="o">)</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span> <span class="n">log</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">bindings</span> <span class="n">m</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">map</span> <span class="p">(</span><span class="n">binding</span> <span class="n">m</span><span class="p">)</span> <span class="p">(</span><span class="n">keys</span> <span class="n">m</span><span class="p">)</span>
-<span class="n">end</span>
+  <span class="c">(** Efficiency: O(n log n) + O(n) * O(n), which is O(n^2). *)</span>
+  <span class="k">let</span> <span class="n">bindings</span> <span class="n">m</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="n">binding</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">keys</span> <span class="n">m</span><span class="o">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ListMap : Map
 </pre></div>
 </div>
 </div>
@@ -1109,39 +1051,53 @@ of the table (i.e., the number of bindings that can be stored in it) whenever an
 empty table is created. That leads to the following interface:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">DirectAddressMap</span> <span class="o">=</span> <span class="n">sig</span>
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">maps</span> <span class="n">that</span> <span class="n">bind</span> <span class="n">keys</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span> <span class="n">to</span> <span class="n">values</span> <span class="n">of</span>
-      <span class="nb">type</span> <span class="p">[</span><span class="s1">&#39;v]. *)</span>
-  <span class="nb">type</span> <span class="s1">&#39;v t</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">DirectAddressMap</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(** [t] is the type of maps that bind keys of type int to values of</span>
+<span class="c">      type [&#39;v]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span><span class="p">]</span> <span class="n">mutates</span> <span class="nb">map</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="n">to</span> <span class="n">bind</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span> <span class="n">If</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">was</span>
-      <span class="n">already</span> <span class="n">bound</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">that</span> <span class="n">binding</span> <span class="ow">is</span> <span class="n">replaced</span> <span class="n">by</span> <span class="n">the</span> <span class="n">binding</span> <span class="n">to</span>
-      <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="nb">map</span><span class="o">.</span> <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">bounds</span> <span class="k">for</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">insert</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;v -&gt; &#39;</span><span class="n">v</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">unit</span>
+  <span class="c">(** [insert k v m] mutates map [m] to bind [k] to [v]. If [k] was</span>
+<span class="c">      already bound in [m], that binding is replaced by the binding to</span>
+<span class="c">      [v] in the new map. Requires: [k] is in bounds for [m]. *)</span>
+  <span class="k">val</span> <span class="n">insert</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">find</span> <span class="n">k</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">Some</span> <span class="n">v</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="n">bound</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="ow">and</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
-      <span class="k">if</span> <span class="ow">not</span><span class="o">.</span> <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">bounds</span> <span class="k">for</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">find</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;v t -&gt; &#39;</span><span class="n">v</span> <span class="n">option</span>
+  <span class="c">(** [find k m] is [Some v] if [k] is bound to [v] in [m], and [None]</span>
+<span class="c">      if not. Requires: [k] is in bounds for [m]. *)</span>
+  <span class="k">val</span> <span class="n">find</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">option</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">remove</span> <span class="n">k</span> <span class="n">m</span><span class="p">]</span> <span class="n">mutates</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="n">to</span> <span class="n">remove</span> <span class="nb">any</span> <span class="n">binding</span> <span class="n">of</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span> <span class="n">If</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">was</span>
-      <span class="ow">not</span> <span class="n">bound</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">then</span> <span class="n">the</span> <span class="nb">map</span> <span class="ow">is</span> <span class="n">unchanged</span><span class="o">.</span> <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">in</span>
-      <span class="n">bounds</span> <span class="k">for</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">remove</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;v t -&gt; unit</span>
+  <span class="c">(** [remove k m] mutates [m] to remove any binding of [k]. If [k] was</span>
+<span class="c">      not bound in [m], then the map is unchanged. Requires: [k] is in</span>
+<span class="c">      bounds for [m]. *)</span>
+  <span class="k">val</span> <span class="n">remove</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">create</span> <span class="n">c</span><span class="p">]</span> <span class="n">creates</span> <span class="n">a</span> <span class="nb">map</span> <span class="k">with</span> <span class="n">capacity</span> <span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span> <span class="n">Keys</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">through</span> <span class="p">[</span><span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-      <span class="n">are</span> <span class="n">_in</span> <span class="n">bounds_</span> <span class="k">for</span> <span class="n">the</span> <span class="nb">map</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">create</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;v t</span>
+  <span class="c">(** [create c] creates a map with capacity [c]. Keys [0] through [c-1]</span>
+<span class="c">      are _in bounds_ for the map. *)</span>
+  <span class="k">val</span> <span class="n">create</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">of_list</span> <span class="n">c</span> <span class="n">lst</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a</span> <span class="nb">map</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">bindings</span> <span class="k">as</span>
-      <span class="n">association</span> <span class="nb">list</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="ow">and</span> <span class="k">with</span> <span class="n">capacity</span> <span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span> <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="n">does</span>
-      <span class="ow">not</span> <span class="n">contain</span> <span class="nb">any</span> <span class="n">duplicate</span> <span class="n">keys</span><span class="p">,</span> <span class="ow">and</span> <span class="n">every</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">in</span>
-      <span class="n">bounds</span> <span class="k">for</span> <span class="n">capacity</span> <span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">of_list</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">int</span> <span class="o">*</span> <span class="s1">&#39;v) list -&gt; &#39;</span><span class="n">v</span> <span class="n">t</span>
+  <span class="c">(** [of_list c lst] is a map containing the same bindings as</span>
+<span class="c">      association list [lst] and with capacity [c]. Requires: [lst] does</span>
+<span class="c">      not contain any duplicate keys, and every key in [lst] is in</span>
+<span class="c">      bounds for capacity [c]. *)</span>
+  <span class="k">val</span> <span class="n">of_list</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="kt">int</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">bindings</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">association</span> <span class="nb">list</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">bindings</span>
-      <span class="k">as</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span> <span class="n">There</span> <span class="n">are</span> <span class="n">no</span> <span class="n">duplicate</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">list</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">bindings</span> <span class="p">:</span> <span class="s1">&#39;v t -&gt; (int * &#39;</span><span class="n">v</span><span class="p">)</span> <span class="nb">list</span>
-<span class="n">end</span>
+  <span class="c">(** [bindings m] is an association list containing the same bindings</span>
+<span class="c">      as [m]. There are no duplicate keys in the list. *)</span>
+  <span class="k">val</span> <span class="n">bindings</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="kt">int</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type DirectAddressMap =
+  sig
+    type &#39;v t
+    val insert : int -&gt; &#39;v -&gt; &#39;v t -&gt; unit
+    val find : int -&gt; &#39;v t -&gt; &#39;v option
+    val remove : int -&gt; &#39;v t -&gt; unit
+    val create : int -&gt; &#39;v t
+    val of_list : int -&gt; (int * &#39;v) list -&gt; &#39;v t
+    val bindings : &#39;v t -&gt; (int * &#39;v) list
+  end
 </pre></div>
 </div>
 </div>
@@ -1150,44 +1106,49 @@ empty table is created. That leads to the following interface:</p>
 <p>Here is an implementation of that interface:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module ArrayMap : DirectAddressMap = struct
-  (** AF: [[|Some v0; Some v1; ... |]] represents {0 : v0, 1 : v1, ...}.
-      If element [i] of the array is instead [None], then [i] is not
-      bound in the map.
-      RI: None. *)
-  type &#39;v t = &#39;v option array
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">ArrayMap</span> <span class="o">:</span> <span class="nc">DirectAddressMap</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** AF: [[|Some v0; Some v1; ... |]] represents {0 : v0, 1 : v1, ...}.</span>
+<span class="c">      If element [i] of the array is instead [None], then [i] is not</span>
+<span class="c">      bound in the map.</span>
+<span class="c">      RI: None. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">option</span> <span class="kt">array</span>
 
-  (** Efficiency: O(1) *)
-  let insert k v a = a.(k) &lt;- Some v
+  <span class="c">(** Efficiency: O(1) *)</span>
+  <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.(</span><span class="n">k</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="nc">Some</span> <span class="n">v</span>
 
-  (** Efficiency: O(1) *)
-  let find k a = a.(k)
+  <span class="c">(** Efficiency: O(1) *)</span>
+  <span class="k">let</span> <span class="n">find</span> <span class="n">k</span> <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.(</span><span class="n">k</span><span class="o">)</span>
 
-  (** Efficiency: O(1) *)
-  let remove k a = a.(k) &lt;- None
+  <span class="c">(** Efficiency: O(1) *)</span>
+  <span class="k">let</span> <span class="n">remove</span> <span class="n">k</span> <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.(</span><span class="n">k</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="nc">None</span>
 
-  (** Efficiency: O(c) *)
-  let create c = Array.make c None
+  <span class="c">(** Efficiency: O(c) *)</span>
+  <span class="k">let</span> <span class="n">create</span> <span class="n">c</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">make</span> <span class="n">c</span> <span class="nc">None</span>
 
-  (** Efficiency: O(c) *)
-  let of_list c lst =
-    (* O(c) *)
-    let a = create c in
-    (* O(c) * O(1) = O(c) *)
-    List.iter (fun (k, v) -&gt; insert k v a) lst;
-    a
+  <span class="c">(** Efficiency: O(c) *)</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">c</span> <span class="n">lst</span> <span class="o">=</span>
+    <span class="c">(* O(c) *)</span>
+    <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="n">create</span> <span class="n">c</span> <span class="k">in</span>
+    <span class="c">(* O(c) * O(1) = O(c) *)</span>
+    <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">a</span><span class="o">)</span> <span class="n">lst</span><span class="o">;</span>
+    <span class="n">a</span>
 
-  (** Efficiency: O(c) *)
-  let bindings a =
-    let bs = ref [] in
-    (* O(1) *)
-    let add_binding k v =
-      match v with None -&gt; () | Some v -&gt; bs := (k, v) :: !bs
-    in
-    (* O(c) *)
-    Array.iteri add_binding a;
-    !bs
-end
+  <span class="c">(** Efficiency: O(c) *)</span>
+  <span class="k">let</span> <span class="n">bindings</span> <span class="n">a</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">bs</span> <span class="o">=</span> <span class="n">ref</span> <span class="bp">[]</span> <span class="k">in</span>
+    <span class="c">(* O(1) *)</span>
+    <span class="k">let</span> <span class="n">add_binding</span> <span class="n">k</span> <span class="n">v</span> <span class="o">=</span>
+      <span class="k">match</span> <span class="n">v</span> <span class="k">with</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="bp">()</span> <span class="o">|</span> <span class="nc">Some</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="n">bs</span> <span class="o">:=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="o">!</span><span class="n">bs</span>
+    <span class="k">in</span>
+    <span class="c">(* O(c) *)</span>
+    <span class="nn">Array</span><span class="p">.</span><span class="n">iteri</span> <span class="n">add_binding</span> <span class="n">a</span><span class="o">;</span>
+    <span class="o">!</span><span class="n">bs</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module ArrayMap : DirectAddressMap
 </pre></div>
 </div>
 </div>
@@ -1214,39 +1175,53 @@ operations that use it would not be efficient.</p>
 to pass in a hash function when a table is created:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="nb">type</span> <span class="n">TableMap</span> <span class="o">=</span> <span class="n">sig</span>
-  <span class="p">(</span><span class="o">**</span> <span class="p">[(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">mutable</span> <span class="n">table</span><span class="o">-</span><span class="n">based</span> <span class="n">maps</span> <span class="n">that</span> <span class="n">bind</span>
-      <span class="n">keys</span> <span class="n">of</span> <span class="nb">type</span> <span class="p">[</span><span class="s1">&#39;k] to values of type [&#39;</span><span class="n">v</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">TableMap</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="c">(** [(&#39;k, &#39;v) t] is the type of mutable table-based maps that bind</span>
+<span class="c">      keys of type [&#39;k] to values of type [&#39;v]. *)</span>
+  <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span><span class="p">]</span> <span class="n">mutates</span> <span class="nb">map</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="n">to</span> <span class="n">bind</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span> <span class="n">If</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">was</span>
-      <span class="n">already</span> <span class="n">bound</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">that</span> <span class="n">binding</span> <span class="ow">is</span> <span class="n">replaced</span> <span class="n">by</span> <span class="n">the</span> <span class="n">binding</span> <span class="n">to</span>
-      <span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">insert</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; &#39;</span><span class="n">v</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">unit</span>
+  <span class="c">(** [insert k v m] mutates map [m] to bind [k] to [v]. If [k] was</span>
+<span class="c">      already bound in [m], that binding is replaced by the binding to</span>
+<span class="c">      [v]. *)</span>
+  <span class="k">val</span> <span class="n">insert</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">find</span> <span class="n">k</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="p">[</span><span class="n">Some</span> <span class="n">v</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="n">binds</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="ow">and</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="k">if</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span>
-      <span class="n">does</span> <span class="ow">not</span> <span class="n">bind</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">find</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t -&gt; &#39;</span><span class="n">v</span> <span class="n">option</span>
+  <span class="c">(** [find k m] is [Some v] if [m] binds [k] to [v], and [None] if [m]</span>
+<span class="c">      does not bind [k]. *)</span>
+  <span class="k">val</span> <span class="n">find</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">option</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">remove</span> <span class="n">k</span> <span class="n">m</span><span class="p">]</span> <span class="n">mutates</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="n">to</span> <span class="n">remove</span> <span class="nb">any</span> <span class="n">binding</span> <span class="n">of</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span> <span class="n">If</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">was</span>
-      <span class="ow">not</span> <span class="n">bound</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">the</span> <span class="nb">map</span> <span class="ow">is</span> <span class="n">unchanged</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">remove</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t -&gt; unit</span>
+  <span class="c">(** [remove k m] mutates [m] to remove any binding of [k]. If [k] was</span>
+<span class="c">      not bound in [m], the map is unchanged. *)</span>
+  <span class="k">val</span> <span class="n">remove</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">create</span> <span class="nb">hash</span> <span class="n">c</span><span class="p">]</span> <span class="n">creates</span> <span class="n">a</span> <span class="n">new</span> <span class="n">table</span> <span class="nb">map</span> <span class="k">with</span> <span class="n">capacity</span> <span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="n">that</span>
-      <span class="n">will</span> <span class="n">use</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="k">as</span> <span class="n">the</span> <span class="n">function</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">keys</span> <span class="n">to</span> <span class="n">integers</span><span class="o">.</span>
-      <span class="n">Requires</span><span class="p">:</span> <span class="n">The</span> <span class="n">output</span> <span class="n">of</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="ow">is</span> <span class="n">always</span> <span class="n">non</span><span class="o">-</span><span class="n">negative</span><span class="p">,</span> <span class="ow">and</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span>
-      <span class="n">runs</span> <span class="ow">in</span> <span class="n">constant</span> <span class="n">time</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">create</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k -&gt; int) -&gt; int -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t</span>
+  <span class="c">(** [create hash c] creates a new table map with capacity [c] that</span>
+<span class="c">      will use [hash] as the function to convert keys to integers.</span>
+<span class="c">      Requires: The output of [hash] is always non-negative, and [hash]</span>
+<span class="c">      runs in constant time. *)</span>
+  <span class="k">val</span> <span class="n">create</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">bindings</span> <span class="n">m</span><span class="p">]</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">association</span> <span class="nb">list</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">same</span> <span class="n">bindings</span>
-      <span class="k">as</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">bindings</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="s1">&#39;k * &#39;</span><span class="n">v</span><span class="p">)</span> <span class="nb">list</span>
+  <span class="c">(** [bindings m] is an association list containing the same bindings</span>
+<span class="c">      as [m]. *)</span>
+  <span class="k">val</span> <span class="n">bindings</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">of_list</span> <span class="nb">hash</span> <span class="n">lst</span><span class="p">]</span> <span class="n">creates</span> <span class="n">a</span> <span class="nb">map</span> <span class="k">with</span> <span class="n">the</span> <span class="n">same</span> <span class="n">bindings</span> <span class="k">as</span> <span class="p">[</span><span class="n">lst</span><span class="p">],</span>
-      <span class="n">using</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="k">as</span> <span class="n">the</span> <span class="nb">hash</span> <span class="n">function</span><span class="o">.</span> <span class="n">Requires</span><span class="p">:</span> <span class="p">[</span><span class="n">lst</span><span class="p">]</span> <span class="n">does</span> <span class="ow">not</span>
-      <span class="n">contain</span> <span class="nb">any</span> <span class="n">duplicate</span> <span class="n">keys</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">of_list</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k -&gt; int) -&gt; (&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="s1">&#39;v) list -&gt; (&#39;</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;v) t</span>
-<span class="n">end</span>
+  <span class="c">(** [of_list hash lst] creates a map with the same bindings as [lst],</span>
+<span class="c">      using [hash] as the hash function. Requires: [lst] does not</span>
+<span class="c">      contain any duplicate keys. *)</span>
+  <span class="k">val</span> <span class="n">of_list</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type TableMap =
+  sig
+    type (&#39;k, &#39;v) t
+    val insert : &#39;k -&gt; &#39;v -&gt; (&#39;k, &#39;v) t -&gt; unit
+    val find : &#39;k -&gt; (&#39;k, &#39;v) t -&gt; &#39;v option
+    val remove : &#39;k -&gt; (&#39;k, &#39;v) t -&gt; unit
+    val create : (&#39;k -&gt; int) -&gt; int -&gt; (&#39;k, &#39;v) t
+    val bindings : (&#39;k, &#39;v) t -&gt; (&#39;k * &#39;v) list
+    val of_list : (&#39;k -&gt; int) -&gt; (&#39;k * &#39;v) list -&gt; (&#39;k, &#39;v) t
+  end
 </pre></div>
 </div>
 </div>
@@ -1389,119 +1364,124 @@ array to become smaller when the load factor is too low.</p>
 discussed above.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">HashMap</span> <span class="p">:</span> <span class="n">TableMap</span> <span class="o">=</span> <span class="n">struct</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">HashMap</span> <span class="o">:</span> <span class="nc">TableMap</span> <span class="o">=</span> <span class="k">struct</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">AF</span> <span class="ow">and</span> <span class="n">RI</span><span class="p">:</span> <span class="n">above</span> <span class="o">*</span><span class="p">)</span>
-  <span class="nb">type</span> <span class="p">(</span><span class="s1">&#39;k, &#39;</span><span class="n">v</span><span class="p">)</span> <span class="n">t</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nb">hash</span> <span class="p">:</span> <span class="s1">&#39;k -&gt; int;</span>
-    <span class="n">mutable</span> <span class="n">size</span> <span class="p">:</span> <span class="nb">int</span><span class="p">;</span>
-    <span class="n">mutable</span> <span class="n">buckets</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;k * &#39;</span><span class="n">v</span><span class="p">)</span> <span class="nb">list</span> <span class="n">array</span>
-  <span class="p">}</span>
+  <span class="c">(** AF and RI: above *)</span>
+  <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">hash</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">;</span>
+    <span class="k">mutable</span> <span class="n">size</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span>
+    <span class="k">mutable</span> <span class="n">buckets</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="kt">list</span> <span class="kt">array</span>
+  <span class="o">}</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">capacity</span> <span class="n">tab</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">buckets</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">capacity</span> <span class="p">{</span><span class="n">buckets</span><span class="p">}</span> <span class="o">=</span>
-    <span class="n">Array</span><span class="o">.</span><span class="n">length</span> <span class="n">buckets</span>
+  <span class="c">(** [capacity tab] is the number of buckets in [tab].</span>
+<span class="c">      Efficiency: O(1) *)</span>
+  <span class="k">let</span> <span class="n">capacity</span> <span class="o">{</span><span class="n">buckets</span><span class="o">}</span> <span class="o">=</span>
+    <span class="nn">Array</span><span class="p">.</span><span class="n">length</span> <span class="n">buckets</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">load_factor</span> <span class="n">tab</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">load</span> <span class="n">factor</span> <span class="n">of</span> <span class="p">[</span><span class="n">tab</span><span class="p">],</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="p">,</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span>
-      <span class="n">bindings</span> <span class="n">divided</span> <span class="n">by</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">buckets</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">load_factor</span> <span class="n">tab</span> <span class="o">=</span>
-    <span class="n">float_of_int</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">/.</span> <span class="n">float_of_int</span> <span class="p">(</span><span class="n">capacity</span> <span class="n">tab</span><span class="p">)</span>
+  <span class="c">(** [load_factor tab] is the load factor of [tab], i.e., the number of</span>
+<span class="c">      bindings divided by the number of buckets. *)</span>
+  <span class="k">let</span> <span class="n">load_factor</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">float_of_int</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">/.</span> <span class="n">float_of_int</span> <span class="o">(</span><span class="n">capacity</span> <span class="n">tab</span><span class="o">)</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">create</span> <span class="nb">hash</span> <span class="n">n</span> <span class="o">=</span>
-    <span class="p">{</span><span class="nb">hash</span><span class="p">;</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">buckets</span> <span class="o">=</span> <span class="n">Array</span><span class="o">.</span><span class="n">make</span> <span class="n">n</span> <span class="p">[]}</span>
+  <span class="c">(** Efficiency: O(n) *)</span>
+  <span class="k">let</span> <span class="n">create</span> <span class="n">hash</span> <span class="n">n</span> <span class="o">=</span>
+    <span class="o">{</span><span class="n">hash</span><span class="o">;</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">buckets</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">make</span> <span class="n">n</span> <span class="bp">[]</span><span class="o">}</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">index</span> <span class="n">k</span> <span class="n">tab</span><span class="p">]</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">index</span> <span class="n">at</span> <span class="n">which</span> <span class="n">key</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">should</span> <span class="n">be</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">the</span>
-      <span class="n">buckets</span> <span class="n">of</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span><span class="o">.</span>
-      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
-    <span class="p">(</span><span class="n">tab</span><span class="o">.</span><span class="n">hash</span> <span class="n">k</span><span class="p">)</span> <span class="n">mod</span> <span class="p">(</span><span class="n">capacity</span> <span class="n">tab</span><span class="p">)</span>
+  <span class="c">(** [index k tab] is the index at which key [k] should be stored in the</span>
+<span class="c">      buckets of [tab].</span>
+<span class="c">      Efficiency: O(1) *)</span>
+  <span class="k">let</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="o">(</span><span class="n">tab</span><span class="o">.</span><span class="n">hash</span> <span class="n">k</span><span class="o">)</span> <span class="ow">mod</span> <span class="o">(</span><span class="n">capacity</span> <span class="n">tab</span><span class="o">)</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span><span class="p">]</span> <span class="n">inserts</span> <span class="n">a</span> <span class="n">binding</span> <span class="kn">from</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="n">to</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span>
-      <span class="ow">and</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">resize</span> <span class="n">the</span> <span class="n">table</span><span class="p">,</span> <span class="n">regardless</span> <span class="n">of</span> <span class="n">what</span> <span class="n">happens</span> <span class="n">to</span> <span class="n">the</span>
-      <span class="n">load</span> <span class="n">factor</span><span class="o">.</span>
-      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">expected</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span> <span class="o">=</span>
-    <span class="n">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="ow">in</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-    <span class="n">let</span> <span class="n">old_bucket</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">in</span>
-    <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="p">::</span> <span class="n">List</span><span class="o">.</span><span class="n">remove_assoc</span> <span class="n">k</span> <span class="n">old_bucket</span><span class="p">;</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">List</span><span class="o">.</span><span class="n">mem_assoc</span> <span class="n">k</span> <span class="n">old_bucket</span><span class="p">)</span> <span class="n">then</span>
-      <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">()</span>
+  <span class="c">(** [insert_no_resize k v tab] inserts a binding from [k] to [v] in [tab]</span>
+<span class="c">      and does not resize the table, regardless of what happens to the</span>
+<span class="c">      load factor.</span>
+<span class="c">      Efficiency: expected O(L) *)</span>
+  <span class="k">let</span> <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="k">in</span> <span class="c">(* O(1) *)</span>
+    <span class="k">let</span> <span class="n">old_bucket</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.(</span><span class="n">b</span><span class="o">)</span> <span class="k">in</span>
+    <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.(</span><span class="n">b</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span><span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="nn">List</span><span class="p">.</span><span class="n">remove_assoc</span> <span class="n">k</span> <span class="n">old_bucket</span><span class="o">;</span> <span class="c">(* O(L) *)</span>
+    <span class="k">if</span> <span class="n">not</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">mem_assoc</span> <span class="n">k</span> <span class="n">old_bucket</span><span class="o">)</span> <span class="k">then</span>
+      <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="bp">()</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">rehash</span> <span class="n">tab</span> <span class="n">new_capacity</span><span class="p">]</span> <span class="n">replaces</span> <span class="n">the</span> <span class="n">buckets</span> <span class="n">array</span> <span class="n">of</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span> <span class="k">with</span> <span class="n">a</span> <span class="n">new</span>
-      <span class="n">array</span> <span class="n">of</span> <span class="n">size</span> <span class="p">[</span><span class="n">new_capacity</span><span class="p">],</span> <span class="ow">and</span> <span class="n">re</span><span class="o">-</span><span class="n">inserts</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">bindings</span> <span class="n">of</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span>
-      <span class="n">into</span> <span class="n">the</span> <span class="n">new</span> <span class="n">array</span><span class="o">.</span>  <span class="n">The</span> <span class="n">keys</span> <span class="n">are</span> <span class="n">re</span><span class="o">-</span><span class="n">hashed</span><span class="p">,</span> <span class="n">so</span> <span class="n">the</span> <span class="n">bindings</span> <span class="n">will</span>
-      <span class="n">likely</span> <span class="n">land</span> <span class="ow">in</span> <span class="n">different</span> <span class="n">buckets</span><span class="o">.</span>
-      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">where</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">bindings</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">rehash</span> <span class="n">tab</span> <span class="n">new_capacity</span> <span class="o">=</span>
-    <span class="p">(</span><span class="o">*</span> <span class="n">insert</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="n">into</span> <span class="n">tab</span> <span class="o">*</span><span class="p">)</span>
-    <span class="n">let</span> <span class="n">rehash_binding</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">=</span>
+  <span class="c">(** [rehash tab new_capacity] replaces the buckets array of [tab] with a new</span>
+<span class="c">      array of size [new_capacity], and re-inserts all the bindings of [tab]</span>
+<span class="c">      into the new array.  The keys are re-hashed, so the bindings will</span>
+<span class="c">      likely land in different buckets.</span>
+<span class="c">      Efficiency: O(n), where n is the number of bindings. *)</span>
+  <span class="k">let</span> <span class="n">rehash</span> <span class="n">tab</span> <span class="n">new_capacity</span> <span class="o">=</span>
+    <span class="c">(* insert (k, v) into tab *)</span>
+    <span class="k">let</span> <span class="n">rehash_binding</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">=</span>
       <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span>
-    <span class="ow">in</span>
-    <span class="p">(</span><span class="o">*</span> <span class="n">insert</span> <span class="nb">all</span> <span class="n">bindings</span> <span class="n">of</span> <span class="n">bucket</span> <span class="n">into</span> <span class="n">tab</span> <span class="o">*</span><span class="p">)</span>
-    <span class="n">let</span> <span class="n">rehash_bucket</span> <span class="n">bucket</span> <span class="o">=</span>
-      <span class="n">List</span><span class="o">.</span><span class="n">iter</span> <span class="n">rehash_binding</span> <span class="n">bucket</span>
-    <span class="ow">in</span>
-    <span class="n">let</span> <span class="n">old_buckets</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span> <span class="ow">in</span>
-    <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span> <span class="o">&lt;-</span> <span class="n">Array</span><span class="o">.</span><span class="n">make</span> <span class="n">new_capacity</span> <span class="p">[];</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-    <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">rehash_binding</span><span class="p">]</span> <span class="ow">is</span> <span class="n">called</span> <span class="n">by</span> <span class="p">[</span><span class="n">rehash_bucket</span><span class="p">]</span> <span class="n">once</span> <span class="k">for</span> <span class="n">every</span> <span class="n">binding</span> <span class="o">*</span><span class="p">)</span>
-    <span class="n">Array</span><span class="o">.</span><span class="n">iter</span> <span class="n">rehash_bucket</span> <span class="n">old_buckets</span> <span class="p">(</span><span class="o">*</span> <span class="n">expected</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+    <span class="k">in</span>
+    <span class="c">(* insert all bindings of bucket into tab *)</span>
+    <span class="k">let</span> <span class="n">rehash_bucket</span> <span class="n">bucket</span> <span class="o">=</span>
+      <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="n">rehash_binding</span> <span class="n">bucket</span>
+    <span class="k">in</span>
+    <span class="k">let</span> <span class="n">old_buckets</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span> <span class="k">in</span>
+    <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span> <span class="o">&lt;-</span> <span class="nn">Array</span><span class="p">.</span><span class="n">make</span> <span class="n">new_capacity</span> <span class="bp">[]</span><span class="o">;</span> <span class="c">(* O(n) *)</span>
+    <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="c">(* [rehash_binding] is called by [rehash_bucket] once for every binding *)</span>
+    <span class="nn">Array</span><span class="p">.</span><span class="n">iter</span> <span class="n">rehash_bucket</span> <span class="n">old_buckets</span> <span class="c">(* expected O(n) *)</span>
 
-  <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">resize_if_needed</span> <span class="n">tab</span><span class="p">]</span> <span class="n">resizes</span> <span class="ow">and</span> <span class="n">rehashes</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span> <span class="k">if</span> <span class="n">the</span> <span class="n">load</span> <span class="n">factor</span>
-     <span class="ow">is</span> <span class="n">too</span> <span class="n">big</span> <span class="ow">or</span> <span class="n">too</span> <span class="n">small</span><span class="o">.</span>  <span class="n">Load</span> <span class="n">factors</span> <span class="n">are</span> <span class="n">allowed</span> <span class="n">to</span> <span class="nb">range</span> <span class="kn">from</span>
-     <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="n">to</span> <span class="mf">2.</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="o">=</span>
-    <span class="n">let</span> <span class="n">lf</span> <span class="o">=</span> <span class="n">load_factor</span> <span class="n">tab</span> <span class="ow">in</span>
-    <span class="k">if</span> <span class="n">lf</span> <span class="o">&gt;</span> <span class="mf">2.0</span> <span class="n">then</span>
-      <span class="n">rehash</span> <span class="n">tab</span> <span class="p">(</span><span class="n">capacity</span> <span class="n">tab</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="n">lf</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="n">then</span>
-      <span class="n">rehash</span> <span class="n">tab</span> <span class="p">(</span><span class="n">capacity</span> <span class="n">tab</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="k">else</span> <span class="p">()</span>
+  <span class="c">(* [resize_if_needed tab] resizes and rehashes [tab] if the load factor</span>
+<span class="c">     is too big or too small.  Load factors are allowed to range from</span>
+<span class="c">     1/2 to 2. *)</span>
+  <span class="k">let</span> <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">lf</span> <span class="o">=</span> <span class="n">load_factor</span> <span class="n">tab</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="n">lf</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span> <span class="k">then</span>
+      <span class="n">rehash</span> <span class="n">tab</span> <span class="o">(</span><span class="n">capacity</span> <span class="n">tab</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">lf</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span> <span class="k">then</span>
+      <span class="n">rehash</span> <span class="n">tab</span> <span class="o">(</span><span class="n">capacity</span> <span class="n">tab</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>
+    <span class="k">else</span> <span class="bp">()</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span> <span class="o">=</span>
-    <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span><span class="p">;</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-    <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="c">(** Efficiency: O(n) *)</span>
+  <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span><span class="o">;</span> <span class="c">(* O(L) *)</span>
+    <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="c">(* O(n) *)</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">expected</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">find</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
-    <span class="n">List</span><span class="o">.</span><span class="n">assoc_opt</span> <span class="n">k</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">index</span> <span class="n">k</span> <span class="n">tab</span><span class="p">)</span>
+  <span class="c">(** Efficiency: expected O(L) *)</span>
+  <span class="k">let</span> <span class="n">find</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="nn">List</span><span class="p">.</span><span class="n">assoc_opt</span> <span class="n">k</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.(</span><span class="n">index</span> <span class="n">k</span> <span class="n">tab</span><span class="o">)</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="p">[</span><span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span><span class="p">]</span> <span class="n">removes</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="kn">from</span> <span class="p">[</span><span class="n">tab</span><span class="p">]</span> <span class="ow">and</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">trigger</span>
-      <span class="n">a</span> <span class="n">resize</span><span class="p">,</span> <span class="n">regardless</span> <span class="n">of</span> <span class="n">what</span> <span class="n">happens</span> <span class="n">to</span> <span class="n">the</span> <span class="n">load</span> <span class="n">factor</span><span class="o">.</span>
-      <span class="n">Efficiency</span><span class="p">:</span> <span class="n">expected</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
-    <span class="n">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="ow">in</span>
-    <span class="n">let</span> <span class="n">old_bucket</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">in</span>
-    <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">List</span><span class="o">.</span><span class="n">remove_assoc</span> <span class="n">k</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
-    <span class="k">if</span> <span class="n">List</span><span class="o">.</span><span class="n">mem_assoc</span> <span class="n">k</span> <span class="n">old_bucket</span> <span class="n">then</span>
-      <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">()</span>
+  <span class="c">(** [remove_no_resize k tab] removes [k] from [tab] and does not trigger</span>
+<span class="c">      a resize, regardless of what happens to the load factor.</span>
+<span class="c">      Efficiency: expected O(L) *)</span>
+  <span class="k">let</span> <span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">old_bucket</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.(</span><span class="n">b</span><span class="o">)</span> <span class="k">in</span>
+    <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.(</span><span class="n">b</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="nn">List</span><span class="p">.</span><span class="n">remove_assoc</span> <span class="n">k</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.(</span><span class="n">b</span><span class="o">);</span>
+    <span class="k">if</span> <span class="nn">List</span><span class="p">.</span><span class="n">mem_assoc</span> <span class="n">k</span> <span class="n">old_bucket</span> <span class="k">then</span>
+      <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="bp">()</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">remove</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
-    <span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span><span class="p">;</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-    <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="c">(** Efficiency: O(n) *)</span>
+  <span class="k">let</span> <span class="n">remove</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span><span class="o">;</span> <span class="c">(* O(L) *)</span>
+    <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="c">(* O(n) *)</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">bindings</span> <span class="n">tab</span> <span class="o">=</span>
-    <span class="n">Array</span><span class="o">.</span><span class="n">fold_left</span>
-      <span class="p">(</span><span class="n">fun</span> <span class="n">acc</span> <span class="n">bucket</span> <span class="o">-&gt;</span>
-         <span class="n">List</span><span class="o">.</span><span class="n">fold_left</span>
-           <span class="p">(</span><span class="o">*</span> <span class="mi">1</span> <span class="n">cons</span> <span class="k">for</span> <span class="n">every</span> <span class="n">binding</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-           <span class="p">(</span><span class="n">fun</span> <span class="n">acc</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="p">::</span> <span class="n">acc</span><span class="p">)</span>
-           <span class="n">acc</span> <span class="n">bucket</span><span class="p">)</span>
-      <span class="p">[]</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span>
+  <span class="c">(** Efficiency: O(n) *)</span>
+  <span class="k">let</span> <span class="n">bindings</span> <span class="n">tab</span> <span class="o">=</span>
+    <span class="nn">Array</span><span class="p">.</span><span class="n">fold_left</span>
+      <span class="o">(</span><span class="k">fun</span> <span class="n">acc</span> <span class="n">bucket</span> <span class="o">-&gt;</span>
+         <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span>
+           <span class="c">(* 1 cons for every binding, which is O(n) *)</span>
+           <span class="o">(</span><span class="k">fun</span> <span class="n">acc</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span><span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span><span class="n">v</span><span class="o">)</span> <span class="o">::</span> <span class="n">acc</span><span class="o">)</span>
+           <span class="n">acc</span> <span class="n">bucket</span><span class="o">)</span>
+      <span class="bp">[]</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span>
 
-  <span class="p">(</span><span class="o">**</span> <span class="n">Efficiency</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-  <span class="n">let</span> <span class="n">of_list</span> <span class="nb">hash</span> <span class="n">lst</span> <span class="o">=</span>
-    <span class="n">let</span> <span class="n">m</span> <span class="o">=</span> <span class="n">create</span> <span class="nb">hash</span> <span class="p">(</span><span class="n">List</span><span class="o">.</span><span class="n">length</span> <span class="n">lst</span><span class="p">)</span> <span class="ow">in</span>  <span class="p">(</span><span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
-    <span class="n">List</span><span class="o">.</span><span class="n">iter</span> <span class="p">(</span><span class="n">fun</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span><span class="p">)</span> <span class="n">lst</span><span class="p">;</span> <span class="p">(</span><span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">is</span> <span class="n">O</span><span class="p">(</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span><span class="p">)</span>
+  <span class="c">(** Efficiency: O(n^2) *)</span>
+  <span class="k">let</span> <span class="n">of_list</span> <span class="n">hash</span> <span class="n">lst</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">m</span> <span class="o">=</span> <span class="n">create</span> <span class="n">hash</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">length</span> <span class="n">lst</span><span class="o">)</span> <span class="k">in</span>  <span class="c">(* O(n) *)</span>
+    <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span><span class="o">)</span> <span class="n">lst</span><span class="o">;</span> <span class="c">(* n * O(n) is O(n^2) *)</span>
     <span class="n">m</span>
-<span class="n">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module HashMap : TableMap
 </pre></div>
 </div>
 </div>
@@ -1599,10 +1579,24 @@ is an integer, floating-point number, string, character, booleans or constant
 constructor.  You can see that as we hash these lists:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Hashtbl</span><span class="o">.</span><span class="n">hash</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">;</span> <span class="mi">5</span><span class="p">;</span> <span class="mi">6</span><span class="p">;</span> <span class="mi">7</span><span class="p">;</span> <span class="mi">8</span><span class="p">;</span> <span class="mi">9</span><span class="p">];;</span>
-<span class="n">Hashtbl</span><span class="o">.</span><span class="n">hash</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">;</span> <span class="mi">5</span><span class="p">;</span> <span class="mi">6</span><span class="p">;</span> <span class="mi">7</span><span class="p">;</span> <span class="mi">8</span><span class="p">;</span> <span class="mi">9</span><span class="p">;</span> <span class="mi">10</span><span class="p">];;</span>
-<span class="n">Hashtbl</span><span class="o">.</span><span class="n">hash</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">;</span> <span class="mi">5</span><span class="p">;</span> <span class="mi">6</span><span class="p">;</span> <span class="mi">7</span><span class="p">;</span> <span class="mi">8</span><span class="p">;</span> <span class="mi">9</span><span class="p">;</span> <span class="mi">10</span><span class="p">;</span> <span class="mi">11</span><span class="p">];;</span>
-<span class="n">Hashtbl</span><span class="o">.</span><span class="n">hash</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">;</span> <span class="mi">5</span><span class="p">;</span> <span class="mi">6</span><span class="p">;</span> <span class="mi">7</span><span class="p">;</span> <span class="mi">8</span><span class="p">;</span> <span class="mi">9</span><span class="p">;</span> <span class="mi">10</span><span class="p">;</span> <span class="mi">11</span><span class="p">;</span> <span class="mi">12</span><span class="p">];;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Hashtbl</span><span class="p">.</span><span class="n">hash</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">;</span> <span class="mi">5</span><span class="o">;</span> <span class="mi">6</span><span class="o">;</span> <span class="mi">7</span><span class="o">;</span> <span class="mi">8</span><span class="o">;</span> <span class="mi">9</span><span class="o">];;</span>
+<span class="nn">Hashtbl</span><span class="p">.</span><span class="n">hash</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">;</span> <span class="mi">5</span><span class="o">;</span> <span class="mi">6</span><span class="o">;</span> <span class="mi">7</span><span class="o">;</span> <span class="mi">8</span><span class="o">;</span> <span class="mi">9</span><span class="o">;</span> <span class="mi">10</span><span class="o">];;</span>
+<span class="nn">Hashtbl</span><span class="p">.</span><span class="n">hash</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">;</span> <span class="mi">5</span><span class="o">;</span> <span class="mi">6</span><span class="o">;</span> <span class="mi">7</span><span class="o">;</span> <span class="mi">8</span><span class="o">;</span> <span class="mi">9</span><span class="o">;</span> <span class="mi">10</span><span class="o">;</span> <span class="mi">11</span><span class="o">];;</span>
+<span class="nn">Hashtbl</span><span class="p">.</span><span class="n">hash</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">;</span> <span class="mi">5</span><span class="o">;</span> <span class="mi">6</span><span class="o">;</span> <span class="mi">7</span><span class="o">;</span> <span class="mi">8</span><span class="o">;</span> <span class="mi">9</span><span class="o">;</span> <span class="mi">10</span><span class="o">;</span> <span class="mi">11</span><span class="o">;</span> <span class="mi">12</span><span class="o">];;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 635296333
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 822221246
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 822221246
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 822221246
 </pre></div>
 </div>
 </div>
@@ -1632,11 +1626,19 @@ to provide a hash function, the module uses <code class="docutils literal notran
 we’ll create a table and fill it up:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="n">Hashtbl</span><span class="p">;;</span>
-<span class="n">let</span> <span class="n">t</span> <span class="o">=</span> <span class="n">create</span> <span class="mi">16</span><span class="p">;;</span>
-<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">16</span> <span class="n">do</span>
-  <span class="n">add</span> <span class="n">t</span> <span class="n">i</span> <span class="p">(</span><span class="n">string_of_int</span> <span class="n">i</span><span class="p">)</span>
-<span class="n">done</span><span class="p">;;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Hashtbl</span><span class="o">;;</span>
+<span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="n">create</span> <span class="mi">16</span><span class="o">;;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">to</span> <span class="mi">16</span> <span class="k">do</span>
+  <span class="n">add</span> <span class="n">t</span> <span class="n">i</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">i</span><span class="o">)</span>
+<span class="k">done</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val t : (&#39;_weak1, &#39;_weak2) Hashtbl.t = &lt;abstr&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
 </div>
@@ -1645,7 +1647,14 @@ we’ll create a table and fill it up:</p>
 over buckets with <code class="docutils literal notranslate"><span class="pre">Hashtbl.stats</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="n">t</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : Hashtbl.statistics =
+{num_bindings = 16; num_buckets = 16; max_bucket_length = 3;
+ bucket_histogram = [|6; 5; 4; 1|]}
 </pre></div>
 </div>
 </div>
@@ -1655,10 +1664,20 @@ The bucket histogram is an array <code class="docutils literal notranslate"><spa
 <p>Let’s pump up the load factor to 2:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">17</span> <span class="n">to</span> <span class="mi">32</span> <span class="n">do</span>
-  <span class="n">add</span> <span class="n">t</span> <span class="n">i</span> <span class="p">(</span><span class="n">string_of_int</span> <span class="n">i</span><span class="p">)</span>
-<span class="n">done</span><span class="p">;;</span>
-<span class="n">stats</span> <span class="n">t</span><span class="p">;;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">17</span> <span class="k">to</span> <span class="mi">32</span> <span class="k">do</span>
+  <span class="n">add</span> <span class="n">t</span> <span class="n">i</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">i</span><span class="o">)</span>
+<span class="k">done</span><span class="o">;;</span>
+<span class="n">stats</span> <span class="n">t</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : Hashtbl.statistics =
+{num_bindings = 32; num_buckets = 16; max_bucket_length = 4;
+ bucket_histogram = [|3; 3; 3; 5; 2|]}
 </pre></div>
 </div>
 </div>
@@ -1667,8 +1686,18 @@ The bucket histogram is an array <code class="docutils literal notranslate"><spa
 buckets:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add</span> <span class="n">t</span> <span class="mi">33</span> <span class="s2">&quot;33&quot;</span><span class="p">;;</span>
-<span class="n">stats</span> <span class="n">t</span><span class="p">;;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">add</span> <span class="n">t</span> <span class="mi">33</span> <span class="s2">&quot;33&quot;</span><span class="o">;;</span>
+<span class="n">stats</span> <span class="n">t</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : Hashtbl.statistics =
+{num_bindings = 33; num_buckets = 32; max_bucket_length = 3;
+ bucket_histogram = [|11; 11; 8; 2|]}
 </pre></div>
 </div>
 </div>
@@ -1676,10 +1705,20 @@ buckets:</p>
 <p>But <code class="docutils literal notranslate"><span class="pre">Hashtbl</span></code> does not implement resize on removal:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">33</span> <span class="n">do</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">to</span> <span class="mi">33</span> <span class="k">do</span>
   <span class="n">remove</span> <span class="n">t</span> <span class="n">i</span>
-<span class="n">done</span><span class="p">;;</span>
-<span class="n">stats</span> <span class="n">t</span><span class="p">;;</span>
+<span class="k">done</span><span class="o">;;</span>
+<span class="n">stats</span> <span class="n">t</span><span class="o">;;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : Hashtbl.statistics =
+{num_bindings = 0; num_buckets = 32; max_bucket_length = 0;
+ bucket_histogram = [|32|]}
 </pre></div>
 </div>
 </div>
@@ -1744,42 +1783,34 @@ correspondence.</p>
 
               </div>
               
+        
+        <div class='prev-next-bottom'>
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">8. </span>Data Structures</p>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page"><span class="section-number">8. </span>Data Structures</a>
+    <a class='right-next' id="next-link" href="amortized.html" title="next page"><span class="section-number">8.2. </span>Amortized Analysis</a>
+
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="amortized.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8.2. </span>Amortized Analysis</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
+        
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael R. Clarkson et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael R. Clarkson et al.<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
+  
   </body>
 </html>
