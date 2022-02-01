@@ -87,7 +87,7 @@ definitions of the `ListSet` module, as well as a definition of `of_list`. We
 don't have to know the source code implementing `ListSet` to make this happen.
 
 ```{note}
-You might wonder we why can't simply implement `of_list` as the identity
+You might wonder why we can't simply implement `of_list` as the identity
 function. See the section below on encapsulation for the answer.
 ```
 
