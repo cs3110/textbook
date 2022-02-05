@@ -767,5 +767,6 @@ what they can accomplish. We can choose whether they include the old
 functionality. And no subtyping relationships are necessarily involved.
 Moreover, the functor we wrote can be used to extend **any** set implementation
 with `of_list`, whereas class extension applies to just a **single** base class.
-There are ways of achieving something similar in Java with *mixins*, which were
-added in Java 1.5.
+There are ways of achieving something similar in object-oriented languages with *mixins*, which enable a class to re-use functionality from other classes without necessitating the complication of multiple inheritance.
+
+
