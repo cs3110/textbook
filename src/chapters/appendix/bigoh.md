@@ -1,6 +1,6 @@
 # Big-Oh Notation
 
-What does it mean to be *efficient*? Cornell professors Bobby Kleinberg and Eva
+What does it mean to be *efficient*? Cornell professors Jon Kleinberg and Eva
 Tardos have a wonderful explanation in chapter 2 of their textbook, *Algorithm
 Design* (2006). This appendix is a summary and reinterpretation of that
 explanation from a functional programming perspective. The ultimate answer will
