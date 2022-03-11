@@ -12,7 +12,7 @@ For example, suppose that `foo.mli` contains exactly the following:
 
 ```ocaml
 val x : int
-val f : int -> int -> int
+val f : int -> int
 ```
 
 and `foo.ml`, in the same directory, contains exactly the following:
@@ -29,7 +29,7 @@ Then compiling `foo.ml` will have the same effect as defining the module
 ```ocaml
 module Foo : sig
   val x : int
-  val f : int -> int -> int
+  val f : int -> int
 end = struct
   let x = 0
   let y = 12
