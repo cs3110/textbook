@@ -202,15 +202,15 @@ Some of the patterns `p1..pn` could be exception patterns of the form
 `exception` keyword), and let `r1..rm` be the subsequence of non-exception
 patterns. Then we can rewrite the code as:
 ```ocaml
-match
-  try e with
-    | q1 -> e1
+try
+  match e with
+    | r1 -> e1
     | ...
-    | qn -> en
+    | rn -> en
 with
-  | r1 -> e1
+  | q1 -> e1
   | ...
-  | rm -> em
+  | qm -> em
 ```
 Which is to say: try evaluating `e`. If it produces an exception packet, use the
 exception patterns from the original match expression to handle that packet. If
