@@ -224,7 +224,7 @@ want to check, and more specifically, to check whether it satisfies a property.
 
 We can create *arbitraries* out of generators using the function
 `QCheck.make : 'a QCheck.Gen.t -> 'a QCheck.arbitrary`. (Actually that function
-takes some optional arguments that we elude here.) This isn't actually the
+takes some optional arguments that we elide here.) This isn't actually the
 normal way to create arbitraries, but it's a simple way that will help us
 understand them; we'll get to the normal way in a little while. For example, the
 following expression represents an arbitrary integer:
