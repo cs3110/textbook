@@ -155,7 +155,7 @@ N=100,000|< 1 sec|3 hours|32 years|very long
 N=1,000,000|1 sec|12 days|104 years|very long
 
 As you can see, when inputs get big, there's a serious difference between
-$N^3$ and $N^2$ and $N$. We might as well ignore low-order terms,
+$N^3$ and $N^2$ and $2^N$. We might as well ignore low-order terms,
 because they are completely dominated by the highest-order term when we think
 big.
 
