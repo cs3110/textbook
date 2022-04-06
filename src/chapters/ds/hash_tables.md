@@ -729,7 +729,7 @@ The hash values stop changing after the list goes beyond 10 elements. That has
 implications for how we use this built-in hash function: it will not necessarily
 provide good diffusion for large data structures, which means performance could
 degrade as collisions become common. To support clients who want to hash such
-structures, `Hashtble` provides another function `hash_param` which can be
+structures, `Hashtbl` provides another function `hash_param` which can be
 configured to examine more nodes.
 
 **Hash table.** Here's an abstract of the hash table interface:
