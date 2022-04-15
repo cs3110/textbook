@@ -171,11 +171,11 @@ module type MutableStack = sig
   val push : 'a -> 'a t -> unit
 
   (**[peek s] is the top element of [s].
-     Raises: [Empty] is [s] is empty. *)
+     Raises: [Empty] if [s] is empty. *)
   val peek : 'a t -> 'a
 
   (** [pop s] removes the top element of [s].
-      Raises: [Empty] is [s] is empty. *)
+      Raises: [Empty] if [s] is empty. *)
   val pop : 'a t -> unit
 end
 ```
