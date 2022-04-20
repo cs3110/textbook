@@ -150,7 +150,7 @@ resolved, the promise can instead be *rejected*, in which case the box is filled
 with an exception. Regardless of whether the promise is resolved or rejected,
 once the box is filled, its contents may never change.
 
-For now, we will mostly forget about concurrency. Later we'll come back and add
+For now, we will mostly forget about concurrency. Later we'll come back and
 incorporate it. But there is one part of the design for concurrency that we need
 to address now. When we later start using functions for OS-provided concurrency,
 such as concurrent reads and writes from files, there will need to be a division
