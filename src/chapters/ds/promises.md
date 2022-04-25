@@ -224,7 +224,7 @@ module type PROMISE = sig
 end
 ```
 
-To implement that interface, we can make the representation type of of
+To implement that interface, we can make the representation type of
 `'a promise` be a reference to a state:
 
 ```{code-cell} ocaml
