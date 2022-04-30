@@ -744,7 +744,7 @@ computing some promised value. The first line, `read_line stdin >>= fun s1 ->`
 means that a promise is created, resolved, and its contents extracted under the
 name `s1`. The second line means the same, except that its contents are named
 `s2`. The third line creates a final promise whose contents are eventually
-extracted by `Lst_main.run`, at which point the program may terminate.
+extracted by `Lwt_main.run`, at which point the program may terminate.
 
 The `>>=` operator is perhaps most famous from the functional language Haskell,
 which uses it extensively for monads. We'll cover monads as our next major
