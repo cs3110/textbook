@@ -472,7 +472,7 @@ server reading a file to be served to a client. And instead of printing a
 string, the server was delivering the contents of a different file that had
 completed reading to a different client. That's why asynchronous I/O can be so
 useful: it helps to *hide latency*. Here, "latency" means waiting for data to be
-transfered from one place to another, e.g., from disk to memory. Latency hiding
+transferred from one place to another, e.g., from disk to memory. Latency hiding
 is an excellent use for concurrency.
 
 Note that all the concurrency here is really coming from the operating system,
@@ -526,7 +526,7 @@ resolved `string` whose value is `"Camels are bae"`, not that `p` itself is a
 val p : string Lwt.t
 ```
 
-To disable that feature of utop, or to reenable it, call the function
+To disable that feature of utop, or to re-enable it, call the function
 `UTop.set_auto_run_lwt : bool -> unit`, which changes how utop evaluates Lwt
 promises at the top level. You can see the behavior change in the following
 code:

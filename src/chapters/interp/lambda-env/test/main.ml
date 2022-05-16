@@ -7,7 +7,7 @@ let code_part (Closure (x, e, _)) =
   Fun (x, e)
 
 (** [make n s1 s2] makes an OUnit test named [n] that expects
-    [s2] to evalute to [s1]. *)
+    [s2] to evaluate to [s1]. *)
 let make n s1 s2 =
   n >:: (fun _ -> assert_equal (parse s1) (s2 |> interp |> code_part))
 

@@ -87,7 +87,7 @@ But now there really is no difference at all between `add1'` and `concat_bang'`
 except for their names. They are totally duplicated code. Even their types are
 now the same, because nothing about them mentions integers or strings. We might
 as well just keep only one of them and come up with a good new name for it. One
-possibility could be `transform`, because they tranform a list by applying a
+possibility could be `transform`, because they transform a list by applying a
 function to each element of the list:
 
 ```{code-cell} ocaml
