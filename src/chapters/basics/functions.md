@@ -796,7 +796,7 @@ each recursive call, being accumulated in it. The "remaining computation"
 *after*.  When the base case of the recursion finally arrives, the function
 now returns `acc`, where the answer has been accumulated.
 
-But the original base case of 0 still needs to exist in the code somwhere.
+But the original base case of 0 still needs to exist in the code somewhere.
 And it does, as the original value of `acc` that is passed to `count_aux`.
 Now `count_tr` (we'll get to why the name is "tr" in just a minute) works
 as a replacement for our original `count`.
@@ -873,7 +873,7 @@ be tail recursive:
    work on the accumulator argument, before the recursive call. This is the only
    step that requires much ingenuity.
 
-**An Example: Factorial.** Let's tranform this factorial function to be
+**An Example: Factorial.** Let's transform this factorial function to be
 tail recursive:
 
 ```{code-cell} ocaml

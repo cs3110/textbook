@@ -15,7 +15,7 @@ responsibility. Try not to abuse your new-found power!
 * array
 * assignment
 * dereference
-* determinstic
+* deterministic
 * immutable
 * index
 * loop

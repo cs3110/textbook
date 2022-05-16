@@ -79,7 +79,7 @@ like a rocket ship.  In the drop-down menu you'll find two ways to interact
 with the code:
 
 - *Binder* will launch the site [mybinder.org](https://mybinder.org), which is a
-  free cloud-based service for "reproducible, interactive, sharable environments
+  free cloud-based service for "reproducible, interactive, shareable environments
   for science at scale." All the computation happens in their cloud servers, but
   the UI is provided through your browser. It will take a little while for the
   textbook page to open in Binder. Once it does, you can edit and run the code

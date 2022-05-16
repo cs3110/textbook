@@ -255,7 +255,7 @@ end
 Installing a custom formatter, as discussed in the
 [section on encapsulation][encap], could also be understood as implementing the
 abstraction function. But in that case it's usable only by humans at the
-toplevel rather than other code, programatically.
+toplevel rather than other code, programmatically.
 
 [encap]: ../modules/encapsulation.md
 

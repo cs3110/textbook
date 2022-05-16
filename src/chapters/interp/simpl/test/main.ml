@@ -4,13 +4,13 @@ open Ast
 open Main
 
 (** [make_i n i s] makes an OUnit test named [n] that expects
-    [s] to evalute to [Int i]. *)
+    [s] to evaluate to [Int i]. *)
 let make_i n i s =
   [n >:: (fun _ -> assert_equal (Int i) (interp_small s));
    n >:: (fun _ -> assert_equal (Int i) (interp_big s))]
 
 (** [make_b n b s] makes an OUnit test named [n] that expects
-    [s] to evalute to [Bool b]. *)
+    [s] to evaluate to [Bool b]. *)
 let make_b n b s =
   [n >:: (fun _ -> assert_equal (Bool b) (interp_small s));
    n >:: (fun _ -> assert_equal (Bool b) (interp_big s))]
