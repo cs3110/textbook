@@ -89,7 +89,7 @@ save on repeated computation.
 
 Although this code uses imperative constructs (specifically, array update), the
 side effects are not visible outside the function `fibm`. So from a client's
-perspective, `fibm` is functional. There's not need to mention the imperative
+perspective, `fibm` is functional. There's no need to mention the imperative
 implementation (i.e., the benign side effects) that are used internally.
 
 ## Memoization Using Higher-order Functions

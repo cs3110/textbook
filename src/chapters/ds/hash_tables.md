@@ -444,7 +444,7 @@ $O(L)$.
 
 {{ video_embed | replace("%%VID%%", "mn2pDfusFyY")}}
 
-How could we arrange for buckets to have expected constant length? To answer
+How could we arrange buckets to have expected constant length? To answer
 that, let's think about the number of bindings and buckets in the table. Define
 the *load factor* of the table to be
 
@@ -547,11 +547,11 @@ module HashMap : TableMap = struct
       likely land in different buckets.
       Efficiency: O(n), where n is the number of bindings. *)
   let rehash tab new_capacity =
-    (* insert (k, v) into tab *)
+    (* insert [(k, v)] into [tab] *)
     let rehash_binding (k, v) =
       insert_no_resize k v tab
     in
-    (* insert all bindings of bucket into tab *)
+    (* insert all bindings of bucket into [tab] *)
     let rehash_bucket bucket =
       List.iter rehash_binding bucket
     in
