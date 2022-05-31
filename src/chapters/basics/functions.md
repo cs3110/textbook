@@ -455,7 +455,7 @@ let id_int' : int -> int = id
 ```
 
 we are in fact instantiating the `'a` in the type of `id` with the type `int`.
-And just as there is no way to "unapply" a function&mdash;for example, given `6`
+And just as there is no way to "unapply" a function&mdash;for example, given `5`
 we can't compute backwards to `id 5`&mdash;we can't unapply that type
 instantiation and change `int` back to `'a`.
 
