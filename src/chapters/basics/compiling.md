@@ -11,7 +11,7 @@ For example, you could use the following commands:
 
 ```console
 $ mkdir hello-world
-$ code hello-world
+$ cd hello-world
 ```
 
 ```{warning}
