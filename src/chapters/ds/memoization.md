@@ -214,14 +214,14 @@ module Memoized = struct
   let rec party t : int * string list =
     match t with
     | Empty -> (0, [])
-    | Node (v, name, left, right, memo) -> (
+    | Node (_, name, left, right, memo) -> (
         match !memo with
         | Some result -> result
         | None ->
             let infun, innames = party_in t in
             let outfun, outnames = party_out t in
             let result =
-              if infun > outfun then (v + infun, name :: innames)
+              if infun > outfun then (infun, innames)
               else (outfun, outnames)
             in
             memo := Some result;
@@ -237,7 +237,7 @@ module Memoized = struct
   and party_out t =
     match t with
     | Empty -> (0, [])
-    | Node (v, _, l, r, _) ->
+    | Node (_, _, l, r, _) ->
         let lfun, lnames = party l and rfun, rnames = party r in
         (lfun + rfun, lnames @ rnames)
 end
