@@ -46,7 +46,7 @@ Manual option:
 
 # How to Build the Textbook
 
-- Run `make build` or just `make` to build the HTML version.
+- Run `make html` or just `make` to build the HTML version.
 - Run `make view` (currently supported on Mac only) to conveniently open the
   generated HTML in your browser.
 - Run `make deploy` to deploy the textbook to GitHub Pages. Before doing that,
