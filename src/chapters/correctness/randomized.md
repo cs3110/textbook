@@ -168,7 +168,7 @@ produce a pseudorandom value of type `'a`. So `QCheck.Gen.int` produces
 pseudorandom integers. The function `generate1` actually does the generation of
 one pseudorandom value. It takes an optional argument that is a PRNG state; if
 that argument is not supplied, it uses the default PRNG state. The function
-`generate` produces a list of `n` pseduorandom values.
+`generate` produces a list of `n` pseudorandom values.
 
 QCheck implements many producers of pseudorandom values. Here are a few more of
 them:
