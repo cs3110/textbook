@@ -11,6 +11,7 @@ kernelspec:
   display_name: OCaml
   language: OCaml
   name: ocaml-jupyter
+thebe-kernel: ocaml-jupyter
 ---
 
 # About This Book
