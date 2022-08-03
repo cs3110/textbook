@@ -8,9 +8,9 @@ download it here: {{ code_link | replace("%%NAME%%", "simpl.zip") }}.
 <!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "parse")}}
 
-Run `make utop` in the SimPL interpreter implementation. It will compile the
-interpreter and launch utop. Evaluate the following expressions. Note what each
-returns.
+Run `make utop` in the SimPL interpreter implementation. It will
+compile the interpreter and launch utop. Then type `open Interp.Main`
+and evaluate the following expressions. Note what each returns.
 
 * `parse "22"`
 * `parse "1 + 2 + 3"`
