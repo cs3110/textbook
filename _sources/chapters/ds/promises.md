@@ -150,7 +150,7 @@ resolved, the promise can instead be *rejected*, in which case the box is filled
 with an exception. Regardless of whether the promise is resolved or rejected,
 once the box is filled, its contents may never change.
 
-For now, we will mostly forget about concurrency. Later we'll come back and add
+For now, we will mostly forget about concurrency. Later we'll come back and
 incorporate it. But there is one part of the design for concurrency that we need
 to address now. When we later start using functions for OS-provided concurrency,
 such as concurrent reads and writes from files, there will need to be a division
@@ -224,7 +224,7 @@ module type PROMISE = sig
 end
 ```
 
-To implement that interface, we can make the representation type of of
+To implement that interface, we can make the representation type of
 `'a promise` be a reference to a state:
 
 ```{code-cell} ocaml
@@ -472,7 +472,7 @@ server reading a file to be served to a client. And instead of printing a
 string, the server was delivering the contents of a different file that had
 completed reading to a different client. That's why asynchronous I/O can be so
 useful: it helps to *hide latency*. Here, "latency" means waiting for data to be
-transfered from one place to another, e.g., from disk to memory. Latency hiding
+transferred from one place to another, e.g., from disk to memory. Latency hiding
 is an excellent use for concurrency.
 
 Note that all the concurrency here is really coming from the operating system,
@@ -526,7 +526,7 @@ resolved `string` whose value is `"Camels are bae"`, not that `p` itself is a
 val p : string Lwt.t
 ```
 
-To disable that feature of utop, or to reenable it, call the function
+To disable that feature of utop, or to re-enable it, call the function
 `UTop.set_auto_run_lwt : bool -> unit`, which changes how utop evaluates Lwt
 promises at the top level. You can see the behavior change in the following
 code:
@@ -744,7 +744,7 @@ computing some promised value. The first line, `read_line stdin >>= fun s1 ->`
 means that a promise is created, resolved, and its contents extracted under the
 name `s1`. The second line means the same, except that its contents are named
 `s2`. The third line creates a final promise whose contents are eventually
-extracted by `Lst_main.run`, at which point the program may terminate.
+extracted by `Lwt_main.run`, at which point the program may terminate.
 
 The `>>=` operator is perhaps most famous from the functional language Haskell,
 which uses it extensively for monads. We'll cover monads as our next major

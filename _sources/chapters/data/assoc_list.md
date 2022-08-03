@@ -32,7 +32,7 @@ list:
     and otherwise is the same as [lst] *)
 let insert k v lst = (k, v) :: lst
 
-(** [find k lst] is [Some v] if association list [lst] binds key [k] to
+(** [lookup k lst] is [Some v] if association list [lst] binds key [k] to
     value [v]; and is [None] if [lst] does not bind [k]. *)
 let rec lookup k = function
 | [] -> None

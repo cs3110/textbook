@@ -89,7 +89,7 @@ save on repeated computation.
 
 Although this code uses imperative constructs (specifically, array update), the
 side effects are not visible outside the function `fibm`. So from a client's
-perspective, `fibm` is functional. There's not need to mention the imperative
+perspective, `fibm` is functional. There's no need to mention the imperative
 implementation (i.e., the benign side effects) that are used internally.
 
 ## Memoization Using Higher-order Functions
@@ -147,8 +147,9 @@ Each employee has an associated “fun value” and we want the set of invited
 employees to have a maximum total fun value. However, no employee is fun if his
 superior is invited, so we never invite two employees who are connected in the
 org chart. (The less fun name for this problem is the maximum weight independent
-set in a tree.) There are $2n$ possible invitation lists, so the naive algorithm
-that compares the fun of every invitation list takes exponential time.
+set in a tree.) For an org chart with $n$ employees, there are $2^{n}$ possible 
+invitation lists, so the naive algorithm that compares the fun of every valid 
+invitation list takes exponential time.
 
 We can use memoization to turn this into a linear-time algorithm. We start by
 defining a variant type to represent the employees. The int at each node is the
@@ -213,14 +214,14 @@ module Memoized = struct
   let rec party t : int * string list =
     match t with
     | Empty -> (0, [])
-    | Node (v, name, left, right, memo) -> (
+    | Node (_, name, left, right, memo) -> (
         match !memo with
         | Some result -> result
         | None ->
             let infun, innames = party_in t in
             let outfun, outnames = party_out t in
             let result =
-              if infun > outfun then (v + infun, name :: innames)
+              if infun > outfun then (infun, innames)
               else (outfun, outnames)
             in
             memo := Some result;
@@ -236,7 +237,7 @@ module Memoized = struct
   and party_out t =
     match t with
     | Empty -> (0, [])
-    | Node (v, _, l, r, _) ->
+    | Node (_, _, l, r, _) ->
         let lfun, lnames = party l and rfun, rnames = party r in
         (lfun + rfun, lnames @ rnames)
 end

@@ -134,7 +134,7 @@ The usual short-circuit conjunction `&&` and disjunction `||` operators are
 available.
 
 **Type `char`: Characters.** Characters are written with single quotes, such as
-`'a'`, `'b`, and `'c'`. They are represented as bytes &mdash;that is, 8-bit
+`'a'`, `'b'`, and `'c'`. They are represented as bytes &mdash;that is, 8-bit
 integers&mdash; in the ISO 9958-1 "Latin-1" encoding. The first half of the
 characters in that range are the standard ASCII characters. You can convert
 characters to and from integers with `char_of_int` and `int_of_char`.

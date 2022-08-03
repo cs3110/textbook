@@ -4,11 +4,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>9.3. Substitution Model &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,38 +20,37 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe,.cell"
-        const thebe_selector_input = "pre,.cell_input div.highlight"
-        const thebe_selector_output = ".output,.cell_output"
-    </script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -57,10 +58,27 @@
     <link rel="next" title="9.4. Environment Model" href="environment.html" />
     <link rel="prev" title="9.2. Parsing" href="parsing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -69,10 +87,15 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
       
       <img src="../../_static/lambda-light.png" class="logo" alt="logo">
       
@@ -83,9 +106,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Preface
  </span>
@@ -102,7 +125,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
@@ -203,7 +226,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -416,7 +439,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -584,7 +607,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -643,7 +666,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -655,7 +678,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Appendix
  </span>
@@ -674,92 +697,197 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/chapters/interp/substitution.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/substitution.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/interp/substitution.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/cs3110/textbook"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/substitution.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/cs3110/textbook/edit/main/src/chapters/interp/substitution.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/chapters/interp/substitution.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#evaluating-simpl-in-the-substitution-model">
    9.3.1. Evaluating SimPL in the Substitution Model
@@ -822,17 +950,95 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Substitution Model</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-simpl-in-the-substitution-model">
+   9.3.1. Evaluating SimPL in the Substitution Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-single-step-relation">
+   9.3.2. Implementing the Single-Step Relation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-multistep-relation">
+   9.3.3. The Multistep Relation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-the-big-step-relation">
+   9.3.4. Defining the Big-Step Relation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-big-step-relation">
+   9.3.5. Implementing the Big-Step Relation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#substitution-in-simpl">
+   9.3.6. Substitution in SimPL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-substitution">
+   9.3.7. Implementing Substitution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-simpl-interpreter-is-done">
+   9.3.8. The SimPL Interpreter is Done!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#capture-avoiding-substitution">
+   9.3.9. Capture-Avoiding Substitution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#core-ocaml">
+   9.3.10. Core OCaml
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-substitution-model">
+   9.3.11. Evaluating Core OCaml in the Substitution Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#big-step-relation">
+   9.3.12. Big-Step Relation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="section" id="substitution-model">
-<h1><span class="section-number">9.3. </span>Substitution Model<a class="headerlink" href="#substitution-model" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="substitution-model">
+<h1><span class="section-number">9.3. </span>Substitution Model<a class="headerlink" href="#substitution-model" title="Permalink to this headline">#</a></h1>
 <p>After lexing and parsing, the next phase is type checking (and other semantic
 analysis). We will skip that phase for now and return to it at the end of this
 chapter.</p>
@@ -916,8 +1122,8 @@ tends to be nicer to work with mathematically, whereas the environment model
 tends to be more similar to how an interpreter is implemented.</p>
 <p>Some examples will help to make sense of all this. Let’s look, next, at how to
 define the relations for SimPL.</p>
-<div class="section" id="evaluating-simpl-in-the-substitution-model">
-<h2><span class="section-number">9.3.1. </span>Evaluating SimPL in the Substitution Model<a class="headerlink" href="#evaluating-simpl-in-the-substitution-model" title="Permalink to this headline">¶</a></h2>
+<section id="evaluating-simpl-in-the-substitution-model">
+<h2><span class="section-number">9.3.1. </span>Evaluating SimPL in the Substitution Model<a class="headerlink" href="#evaluating-simpl-in-the-substitution-model" title="Permalink to this headline">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/J-DkHQ37kaM" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s begin by defining a small-step substitution-model semantics for SimPL.
 That is, we’re going to define a relation <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> that represents how an
@@ -1077,9 +1283,9 @@ an unbound variable. Thus, any well-typed expression <code class="docutils liter
 point of attempting to step a variable name.</p>
 <p>As with constants, we therefore don’t need to add any rules for variables. But,
 for clarity, we could state that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-/-&gt;</span></code>.</p>
-</div>
-<div class="section" id="implementing-the-single-step-relation">
-<h2><span class="section-number">9.3.2. </span>Implementing the Single-Step Relation<a class="headerlink" href="#implementing-the-single-step-relation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="implementing-the-single-step-relation">
+<h2><span class="section-number">9.3.2. </span>Implementing the Single-Step Relation<a class="headerlink" href="#implementing-the-single-step-relation" title="Permalink to this headline">#</a></h2>
 <p>It’s easy to turn the above definitions of <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> into an OCaml function that
 pattern matches against AST nodes. In the code below, recall that we have yet
 finished defining substitution (i.e., <code class="docutils literal notranslate"><span class="pre">subst</span></code>); we’ll return to that in the next
@@ -1128,9 +1334,9 @@ analysis of pattern matching forces us to write a branch nonetheless. Moreover,
 if it ever turned out that we had a bug in our type checker that caused
 ill-typed binary operator applications to be evaluated, this exception would
 help us discover what was going wrong.</p>
-</div>
-<div class="section" id="the-multistep-relation">
-<h2><span class="section-number">9.3.3. </span>The Multistep Relation<a class="headerlink" href="#the-multistep-relation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="the-multistep-relation">
+<h2><span class="section-number">9.3.3. </span>The Multistep Relation<a class="headerlink" href="#the-multistep-relation" title="Permalink to this headline">#</a></h2>
 <p>Now that we’ve defined <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>, there’s really nothing left to do to define
 <code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code>. It’s just the reflexive transitive closure of <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>. In other words, it
 can be defined with just these two rules:</p>
@@ -1151,9 +1357,9 @@ just an expression, but a value. That’s easy to implement:</p>
   <span class="k">else</span> <span class="n">e</span> <span class="o">|&gt;</span> <span class="n">step</span> <span class="o">|&gt;</span> <span class="n">eval_small</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="defining-the-big-step-relation">
-<h2><span class="section-number">9.3.4. </span>Defining the Big-Step Relation<a class="headerlink" href="#defining-the-big-step-relation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="defining-the-big-step-relation">
+<h2><span class="section-number">9.3.4. </span>Defining the Big-Step Relation<a class="headerlink" href="#defining-the-big-step-relation" title="Permalink to this headline">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/P456qGgeoYs" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Recall that our goal in defining the big-step relation <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code> is to make sure it
 agrees with the multistep relation <code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code>.</p>
@@ -1195,9 +1401,9 @@ evaluate a variable name:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>x =/=&gt;
 </pre></div>
 </div>
-</div>
-<div class="section" id="implementing-the-big-step-relation">
-<h2><span class="section-number">9.3.5. </span>Implementing the Big-Step Relation<a class="headerlink" href="#implementing-the-big-step-relation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="implementing-the-big-step-relation">
+<h2><span class="section-number">9.3.5. </span>Implementing the Big-Step Relation<a class="headerlink" href="#implementing-the-big-step-relation" title="Permalink to this headline">#</a></h2>
 <p>The big-step evaluation relation is, if anything, even easier to implement than
 the small-step relation. It just recurses over the tree, evaluating
 subexpressions as required by the definition of <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code>:</p>
@@ -1226,9 +1432,9 @@ subexpressions as required by the definition of <code class="docutils literal no
 <p>It’s good engineering practice to factor out functions for each of the pieces of
 syntax, as we did above, unless the implementation can fit on just a single line
 in the main pattern match inside <code class="docutils literal notranslate"><span class="pre">eval_big</span></code>.</p>
-</div>
-<div class="section" id="substitution-in-simpl">
-<h2><span class="section-number">9.3.6. </span>Substitution in SimPL<a class="headerlink" href="#substitution-in-simpl" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="substitution-in-simpl">
+<h2><span class="section-number">9.3.6. </span>Substitution in SimPL<a class="headerlink" href="#substitution-in-simpl" title="Permalink to this headline">#</a></h2>
 <p>In the previous section, we posited a new notation <code class="docutils literal notranslate"><span class="pre">e'{e/x}</span></code>, meaning
 “the expression <code class="docutils literal notranslate"><span class="pre">e'</span></code> with <code class="docutils literal notranslate"><span class="pre">e</span></code> substituted for <code class="docutils literal notranslate"><span class="pre">x</span></code>.” The intuition is
 that anywhere <code class="docutils literal notranslate"><span class="pre">x</span></code> appears in <code class="docutils literal notranslate"><span class="pre">e'</span></code>, we should replace <code class="docutils literal notranslate"><span class="pre">x</span></code> with <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p>
@@ -1339,9 +1545,9 @@ going inside the body, we’d get a different result:</p>
 </pre></div>
 </div>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/lBqdzVTSdCc" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-</div>
-<div class="section" id="implementing-substitution">
-<h2><span class="section-number">9.3.7. </span>Implementing Substitution<a class="headerlink" href="#implementing-substitution" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="implementing-substitution">
+<h2><span class="section-number">9.3.7. </span>Implementing Substitution<a class="headerlink" href="#implementing-substitution" title="Permalink to this headline">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/gttjeAd5IS0" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The definitions above are easy to turn into OCaml code. Note that, although we
 write <code class="docutils literal notranslate"><span class="pre">v</span></code> below, the function is actually able to substitute any expression for
@@ -1363,17 +1569,17 @@ on a value, though.</p>
     <span class="nc">If</span> <span class="o">(</span><span class="n">subst</span> <span class="n">e1</span> <span class="n">v</span> <span class="n">x</span><span class="o">,</span> <span class="n">subst</span> <span class="n">e2</span> <span class="n">v</span> <span class="n">x</span><span class="o">,</span> <span class="n">subst</span> <span class="n">e3</span> <span class="n">v</span> <span class="n">x</span><span class="o">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-simpl-interpreter-is-done">
-<h2><span class="section-number">9.3.8. </span>The SimPL Interpreter is Done!<a class="headerlink" href="#the-simpl-interpreter-is-done" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="the-simpl-interpreter-is-done">
+<h2><span class="section-number">9.3.8. </span>The SimPL Interpreter is Done!<a class="headerlink" href="#the-simpl-interpreter-is-done" title="Permalink to this headline">#</a></h2>
 <p>We’ve completed developing our SimPL interpreter. Recall that the finished
 interpreter can be downloaded here: <a href="../../code/simpl.zip">simpl.zip</a>. It includes some rudimentary test cases, as well as makefile
 targets that you will find helpful.</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/348PIgywcss" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/Y2hiUqlfW8U" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-</div>
-<div class="section" id="capture-avoiding-substitution">
-<h2><span class="section-number">9.3.9. </span>Capture-Avoiding Substitution<a class="headerlink" href="#capture-avoiding-substitution" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="capture-avoiding-substitution">
+<h2><span class="section-number">9.3.9. </span>Capture-Avoiding Substitution<a class="headerlink" href="#capture-avoiding-substitution" title="Permalink to this headline">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/WrHrKnbRc1w" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The definition of substitution for SimPL was a little tricky but not too
 complicated. It turns out, though, that for other languages, the definition gets
@@ -1515,11 +1721,11 @@ LISP, and shows up throughout compiler implementations. It means
 </ol>
 <p>There is a complete implementation of an interpreter for the lambda calculus,
 including capture-avoiding substitution, that you can download: <a href="../../code/lambda-subst.zip">lambda-subst.zip</a>. It uses the <code class="docutils literal notranslate"><span class="pre">gensym</span></code> strategy from
-above the generate fresh names. There is a definition named <code class="docutils literal notranslate"><span class="pre">strategy</span></code> in
+above to generate fresh names. There is a definition named <code class="docutils literal notranslate"><span class="pre">strategy</span></code> in
 <code class="docutils literal notranslate"><span class="pre">main.ml</span></code> that you can use to switch between call-by-value and call-by-name.</p>
-</div>
-<div class="section" id="core-ocaml">
-<h2><span class="section-number">9.3.10. </span>Core OCaml<a class="headerlink" href="#core-ocaml" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="core-ocaml">
+<h2><span class="section-number">9.3.10. </span>Core OCaml<a class="headerlink" href="#core-ocaml" title="Permalink to this headline">#</a></h2>
 <p>Let’s now upgrade from SimPL and the lambda calculus to a larger language that
 we call <em>core OCaml</em>. Here is its syntax in BNF:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | e1 e2 | fun x -&gt; e
@@ -1556,9 +1762,9 @@ metasyntax.</p>
 including recursive functions, exceptions, mutability, and modules. Types are
 also missing; core OCaml does not have any type checking. Nonetheless, there is
 enough in this core language to keep us entertained.</p>
-</div>
-<div class="section" id="evaluating-core-ocaml-in-the-substitution-model">
-<h2><span class="section-number">9.3.11. </span>Evaluating Core OCaml in the Substitution Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-substitution-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="evaluating-core-ocaml-in-the-substitution-model">
+<h2><span class="section-number">9.3.11. </span>Evaluating Core OCaml in the Substitution Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-substitution-model" title="Permalink to this headline">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/ozocssmPMFY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s define the small and big step relations for Core OCaml. To be honest,
 there won’t be much that’s surprising at this point; we’ve seen just about
@@ -1606,9 +1812,9 @@ component, then their second component:</p>
 (v1, e2) --&gt; (v1, e2&#39;)
 	if e2 --&gt; e2&#39;
 
-fst (v1,v2) --&gt; v1
+fst (v1, v2) --&gt; v1
 
-snd (v1,v2) --&gt; v2
+snd (v1, v2) --&gt; v2
 </pre></div>
 </div>
 <p><strong>Constructors</strong> evaluate the expression they carry:</p>
@@ -1716,9 +1922,9 @@ anonymous functions, to make sure we get capture-avoidance correct:</p>
 the above rules as long as we are content with call-by-value semantics. But if
 we ever wanted call-by-name, we’d need all the extra conditions about free
 variables that we gave above.</p>
-</div>
-<div class="section" id="big-step-relation">
-<h2><span class="section-number">9.3.12. </span>Big-Step Relation<a class="headerlink" href="#big-step-relation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="big-step-relation">
+<h2><span class="section-number">9.3.12. </span>Big-Step Relation<a class="headerlink" href="#big-step-relation" title="Permalink to this headline">#</a></h2>
 <p>At this point there aren’t any new concepts remaining to introduce.
 We can just give the rules:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e1</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
@@ -1753,11 +1959,11 @@ We can just give the rules:</p>
 <span class="n">Right</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">Right</span> <span class="n">v</span>
   <span class="k">if</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">v</span>
 
-<span class="n">match</span> <span class="n">e</span> <span class="k">with</span> <span class="n">Left</span> <span class="n">x1</span> <span class="o">-&gt;</span> <span class="n">e1</span> <span class="o">|</span> <span class="n">Right</span> <span class="n">x2</span> <span class="o">-&gt;</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
+<span class="k">match</span> <span class="n">e</span> <span class="k">with</span> <span class="n">Left</span> <span class="n">x1</span> <span class="o">-&gt;</span> <span class="n">e1</span> <span class="o">|</span> <span class="n">Right</span> <span class="n">x2</span> <span class="o">-&gt;</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
   <span class="k">if</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">Left</span> <span class="n">v1</span>
   <span class="ow">and</span> <span class="n">e1</span><span class="p">{</span><span class="n">v1</span><span class="o">/</span><span class="n">x1</span><span class="p">}</span> <span class="o">==&gt;</span> <span class="n">v</span>
 
-<span class="n">match</span> <span class="n">e</span> <span class="k">with</span> <span class="n">Left</span> <span class="n">x1</span> <span class="o">-&gt;</span> <span class="n">e1</span> <span class="o">|</span> <span class="n">Right</span> <span class="n">x2</span> <span class="o">-&gt;</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
+<span class="k">match</span> <span class="n">e</span> <span class="k">with</span> <span class="n">Left</span> <span class="n">x1</span> <span class="o">-&gt;</span> <span class="n">e1</span> <span class="o">|</span> <span class="n">Right</span> <span class="n">x2</span> <span class="o">-&gt;</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
   <span class="k">if</span> <span class="n">e</span> <span class="o">==&gt;</span> <span class="n">Right</span> <span class="n">v2</span>
   <span class="ow">and</span> <span class="n">e2</span><span class="p">{</span><span class="n">v2</span><span class="o">/</span><span class="n">x2</span><span class="p">}</span> <span class="o">==&gt;</span> <span class="n">v</span>
 
@@ -1774,8 +1980,8 @@ We can just give the rules:</p>
   <span class="ow">and</span> <span class="n">e2</span><span class="p">{</span><span class="n">v1</span><span class="o">/</span><span class="n">x</span><span class="p">}</span> <span class="o">==&gt;</span> <span class="n">v</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1799,34 +2005,48 @@ We can just give the rules:</p>
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
-            
-    <a class='left-prev' id="prev-link" href="parsing.html" title="previous page"><span class="section-number">9.2. </span>Parsing</a>
-    <a class='right-next' id="next-link" href="environment.html" title="next page"><span class="section-number">9.4. </span>Environment Model</a>
-
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="parsing.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">9.2. </span>Parsing</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="environment.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.4. </span>Environment Model</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael R. Clarkson et al.<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael R. Clarkson et al.<br/>
+  
+      &copy; Copyright 2021.<br/>
+</p>
+        </footer>
     </div>
-  </footer>
-</main>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  
+
   </body>
 </html>

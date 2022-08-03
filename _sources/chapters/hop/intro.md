@@ -24,7 +24,7 @@ the ability to do higher-order programming through function pointers. But that
 ability also depends on the programming pattern of passing an additional
 *environment* parameter to provide the values of variables in the function to be
 called through the pointer. As we'll see in our later chapter on interpreters,
-the essence of (higher-order) functions in a functional langauge is that they
+the essence of (higher-order) functions in a functional language is that they
 are really something called a *closure* that obviates the need for that extra
 parameter. Bear in mind that the issue is not what is *possible* to compute in a
 language&mdash;after all everything is eventually compiled down to machine code,
