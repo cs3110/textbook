@@ -154,10 +154,9 @@ N=10,000|< 1 sec|2 min|12 days|very long
 N=100,000|< 1 sec|3 hours|32 years|very long
 N=1,000,000|1 sec|12 days|104 years|very long
 
-As you can see, when inputs get big, there's a serious difference between
-$N^3$ and $N^2$ and $N$. We might as well ignore low-order terms,
-because they are completely dominated by the highest-order term when we think
-big.
+As you can see, when inputs get big, there's a serious difference between each
+column of the table. We might as well ignore low-order terms, because they are
+completely dominated by the highest-order term when we think big.
 
 What about constant factors? My current laptop might be 2x faster (that is, a
 constant factor of 2) than the one I bought several years ago, but that's not an
