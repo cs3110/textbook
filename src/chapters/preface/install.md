@@ -49,23 +49,26 @@ have to repeat some or all of this installation process. Better to get it out of
 the way beforehand.
 
 **Linux.** If you're already running Linux, you're done with this step. Proceed
-to OPAM, below.
+to [Install OPAM](install-opam), below.
 
 **Mac.** Beneath the surface, macOS is already a Unix-based OS. But you're going
 to need some developer tools and a Unix package manager. There are two to pick
 from: [Homebrew][homebrew] and [MacPorts][macports]. From the perspective of
-this textbook and CS 3110, it doesn't matter which you choose. So if you're
-already accustomed to one, feel free to keep using it. Make sure to run its
-update command before continuing with these instructions.
+this textbook and CS 3110, it doesn't matter which you choose:
 
-Otherwise, pick one and follow the installation instructions on its website. The
-installation process for Homebrew is typically easier and faster, which might
-nudge you in that direction. If you do choose MacPorts, make sure to follow
-*all* the detailed instructions on its page, including XCode and an X11 server.
-**Do not install both Homebrew and MacPorts**; they aren't meant to co-exist. If
-you change your mind later, make sure to uninstall one before installing the
-other. After you've finished installing either Homebrew or MacPorts, you can
-proceed to OPAM, below.
+- If you're already accustomed to one, feel free to keep using it. Make sure to
+  run its update command before continuing with these instructions.
+
+- Otherwise, pick one and follow the installation instructions on its website.
+  The installation process for Homebrew is typically easier and faster, which
+  might nudge you in that direction. If you do choose MacPorts, make sure to
+  follow *all* the detailed instructions on its page, including XCode and an X11
+  server. **Do not install both Homebrew and MacPorts**; they aren't meant to
+  co-exist. If you change your mind later, make sure to uninstall one before
+  installing the other.
+
+After you've finished installing/updating either Homebrew or MacPorts, proceed
+to [Install OPAM](install-opam), below.
 
 [homebrew]: https://brew.sh/
 [macports]: https://www.macports.org/install.php
@@ -155,14 +158,14 @@ concept to master.
 We recommend storing your OCaml development work in the WSL filesystem, not the
 Windows filesystem.
 
+(install-opam)=
 ## Install OPAM
 
 **Linux.** Follow the [instructions for your distribution][opam-install].
 
-**Mac.** If you're using Homebrew, run these commands:
+**Mac.** If you're using Homebrew, run this command:
 
 ```console
-brew install gpatch
 brew install opam
 ```
 
@@ -212,11 +215,11 @@ and set of packages. You can have many switches and, well, switch between them
 this command:
 
 ```console
-opam switch create cs3110-2021fa ocaml-base-compiler.4.12.0
+opam switch create cs3110-2022fa ocaml-base-compiler.4.14.0
 ```
 
 ```{tip}
-If that command fails saying that the 4.12.0 compiler can't be found, you
+If that command fails saying that the 4.14.0 compiler can't be found, you
 probably installed OPAM sometime back in the past and now need to update it. Do
 so with `opam update`.
 ```
@@ -227,18 +230,36 @@ You might be prompted to run the next command.  If so, do it. If not, don't.
 eval $(opam env)
 ```
 
+```{tip}
+That should be the *only* time you have to run that command about `opam env`. In
+the future if you ever get a warning from OPAM that you need to re-run it,
+something is most likely wrong. Your shell is probably not running the OPAM
+configuration commands that `opam init` was meant to install. You could try
+`opam init --reinit` to see whether that fixes it. Also try logging out of your
+OS and logging back in.
+```
+
 Regardless, continue:
 
 ```console
 opam install -y utop odoc ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat ocamlformat-rpc
 ```
 
-(Make sure to grab that whole line above when you copy it.)
+Make sure to grab that whole line above when you copy it. You will get some
+output about editor configuration. Unless you intend to use Emacs or vim for
+OCaml development, you can safely ignore that output. We're going to use VS Code
+as the editor in these instructions, so let's ignore it.
 
 You should now be able to launch utop, the OCaml Universal Toplevel.
 
 ```console
 utop
+```
+
+```{tip}
+You should see a message "Welcome to utop version ... (using OCaml version
+4.14.0)!" If the OCaml version is incorrect, then you probably have an
+environment issue. See the tip above about the `opam env` command.
 ```
 
 Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt.
@@ -277,26 +298,31 @@ works. If it does not, here are some common issues:
   `opam init` command. To fix it, follow the "redo" instructions below.
 
 - **Is your switch listed?** Run `opam switch list` and make sure a switch named
-  `cs3110-2021fa` is listed, that it has the 4.12.0 compiler, and that it is the
+  `cs3110-2022fa` is listed, that it has the 4.14.0 compiler, and that it is the
   active switch (which is indicated with an arrow beside it). If that switch is
-  present but not active, run `opam switch cs3110-2021fa` then see whether utop
+  present but not active, run `opam switch cs3110-2022fa` then see whether utop
   works. If that switch is not present, follow the "redo" instructions below.
 
 **Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`,
 then re-run the OPAM initialization command for your OS (given above), then
 re-run the switch creation and package installation commands above. Finally,
-redo the double check: reboot and see whether utop still works. You want to get
-to the point where utop "just works" after a reboot.
+redo the double check: reboot and see whether utop still works.
+
+```{important}
+You want to get to the point where utop immediately works after a reboot,
+without having to type any additional commands.
+```
 
 ## Visual Studio Code
 
 Visual Studio Code is a great choice as a code editor for OCaml. (Though if you
 are already a power user of Emacs or Vim those are great, too.)
 
-- Download and install [Visual Studio Code][vscode] (henceforth, VS Code).
-  Launch VS Code. Find the extensions pane, either by going to View ->
-  Extensions, or by clicking on the icon for it in the column of icons on the
-  left.
+First, download and install [Visual Studio Code][vscode] (henceforth, VS Code).
+Launch VS Code. Find the extensions pane, either by going to View -> Extensions,
+or by clicking on the icon for it in the column of icons on the left.
+
+Second, follow one of these steps if you are on Windows or Mac:
 
 - **Windows only:** Install the "Remote - WSL" extension. Second, open a WSL
   window by using the command "Remote-WSL: New Window" or by running `code .` in
@@ -308,16 +334,19 @@ are already a power user of Emacs or Vim those are great, too.)
   "Shell Command: Install 'code' command in PATH" command. Run it. Then close
   any open terminals to let the new path settings take effect.
 
-- **For everyone:** In the extensions pane, search for and install the "OCaml Platform" extension.
-  Be careful to use the extension with _exactly the right name_ - the correct extension will also have an icon of a camel on a black background, as opposed to a red or orange background. **Windows only:**
-  make sure you install the extension with the button that says "Install on WSL:
-  ...", not with a button that says only "Install". The latter will not
-  work.
-   
+Third, regardless of your OS, again open the VS Code extensions pane. **Search
+for and install the "OCaml Platform" extension.** Be careful to install the
+extension with *exactly* that name.
+
 ```{warning}
-The extensions named simply "OCaml" or "OCaml and Reason IDE" are not the right ones. (They
-are both old and no longer maintained by their developers.)
-``` 
+The extensions named simply "OCaml" or "OCaml and Reason IDE" are not the right
+ones. They are both old and no longer maintained by their developers.
+```
+
+**Windows only:** make sure you install the OCaml Platform extension using the
+button that says "Install on WSL: ...", not with a button that says only
+"Install". If you've already done the latter, that's okay; but, you need to also
+install on WSL.
 
 [vscode]: https://code.visualstudio.com/
 
