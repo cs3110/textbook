@@ -44,6 +44,14 @@ guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
     [manufacturer] [model]", substituting for the manufacturer and model of your
     machine. This [Red Hat Linux][rh-virt] page might also help.
 
+  - If you get an error about "kernel panic" and "attempted to kill the idle
+    task", then you might need to increase the number of processors provided to
+    it by your host OS. Select the VM in Virtual Box, click Settings, and look
+    at the System → Processor settings. Increase the number of processors from 1
+    to 2. If the sliders are greyed out and won't permit adjustment, it means
+    the VM is still running: you can't change the amount of memory while the
+    guest OS is active; so, shut down the VM (see below) and try again.
+
   - If the machine just freezes or blacks out or aborts, you might need to
     adjust the memory provided to it by your host OS. Select the VM in Virtual
     Box, click Settings, and look at the System and Display settings. You might
