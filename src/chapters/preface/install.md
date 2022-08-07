@@ -43,18 +43,24 @@ Let's get started!
 
 ## Unix Development Environment
 
+```{important}
 **First, upgrade your OS.** If you've been intending to make any major OS
 upgrades, do them now. Otherwise when you do get around to upgrading, you might
 have to repeat some or all of this installation process. Better to get it out of
 the way beforehand.
+```
 
-**Linux.** If you're already running Linux, you're done with this step. Proceed
-to [Install OPAM](install-opam), below.
+### Linux
 
-**Mac.** Beneath the surface, macOS is already a Unix-based OS. But you're going
-to need some developer tools and a Unix package manager. There are two to pick
-from: [Homebrew][homebrew] and [MacPorts][macports]. From the perspective of
-this textbook and CS 3110, it doesn't matter which you choose:
+If you're already running Linux, you're done with this step. Proceed to
+[Install OPAM](install-opam), below.
+
+### Mac
+
+Beneath the surface, macOS is already a Unix-based OS. But you're going to need
+some developer tools and a Unix package manager. There are two to pick from:
+[Homebrew][homebrew] and [MacPorts][macports]. From the perspective of this
+textbook and CS 3110, it doesn't matter which you choose:
 
 - If you're already accustomed to one, feel free to keep using it. Make sure to
   run its update command before continuing with these instructions.
@@ -73,50 +79,66 @@ to [Install OPAM](install-opam), below.
 [homebrew]: https://brew.sh/
 [macports]: https://www.macports.org/install.php
 
-**Windows.** Unix development in Windows 10 is made possible by the Windows
-Subsystem for Linux (WSL). Follow [Microsoft's install instructions for
-WSL][wsl]. Here are a few notes on Microsoft's instructions:
+### Windows
 
-- From the perspective of this textbook and CS 3110, it doesn't matter whether
-  you join Windows Insider.
+Unix development in Windows is made possible by the Windows Subsystem for Linux
+(WSL). If you have a recent version of Windows (build 20262, released November
+2020, or newer), WSL is easy to install. If you don't have that recent of a
+version, try running Windows Update to get it.
 
-- WSL2 is preferred over WSL1 by OCaml (and WSL2 offers performance and
-  functionality improvements), so install WSL2 if you can.
+```{tip}
+If you get an error about the "virtual machine" while installing WSL, you might
+need to enable virtualization in your machine's BIOS. The instructions for that
+are dependent on the manufacturer of your machine. Try googling "enable
+virtualization [manufacturer] [model]", substituting for the manufacturer and
+model of your machine. This [Red Hat Linux][rh-virt] page might also help.
+```
 
-- To open Windows PowerShell as Administrator, click Start, type PowerShell,
-  and it should come up as the best match.  Click "Run as Administrator",
-  and click Yes to allow changes.
+**With a recent version of Windows,** here's all you have to do:
 
-- To use WSL2 (rather than WSL1) you might need to enable virtualization in your
-  machine's BIOS; some laptop manufacturers disable it before shipping machines
-  from the factory. The instructions for that are dependent on the manufacturer
-  of your machine. Try googling "enable virtualization <manufacturer> <model>",
-  substituting for the manufacturer and model of your machine. This
-  [Red Hat Linux][rh-virt] page might also help.
+- Open Windows PowerShell as Administrator. To do that, click Start, type
+  PowerShell, and it should come up as the best match. Click "Run as
+  Administrator", and click Yes to allow changes.
 
-- These instructions assume that you install Ubuntu (20.04) as the Linux
-  distribution from the Microsoft Store. In principle other distributions should
-  work, but might require different commands from this point forward.
+- Run `wsl --install`. When the Ubuntu download is completed, it will likely
+  ask you to reboot. Do so. The installation will automatically resume after
+  the reboot.
 
 - You will be prompted to create a Unix username and password. You can use any
   username and password you wish. It has no bearing on your Windows username and
   password (though you are free to re-use those). Do not put a space in your
   username. Do not forget your password. You will need it in the future.
 
-- To enable copy-and-paste, click on the icon on the top left of the shell
-  window, click Properties, and make sure “Use Ctrl+Shift+C/V as Copy/Paste” is
-  checked. Now Ctrl+Shift+C will copy and Ctrl+Shift+V will paste into the
-  terminal. Note that you have to include Shift as part of that keystroke.
+Now skip to the "Ubuntu setup" paragraph below.
 
-[wsl]: https://docs.microsoft.com/en-us/windows/wsl/install-manual
+**Without a recent version of Windows,** you will need to follow
+[Microsoft's manual install instructions][wsl-manual]. WSL2 is preferred over
+WSL1 by OCaml (and WSL2 offers performance and functionality improvements), so
+install WSL2 if you can.
+
+[wsl-manual]: https://docs.microsoft.com/en-us/windows/wsl/install-manual
 [rh-virt]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios
 
-When you've finished installing WSL, open the Ubuntu app.  You will be at
-the *Bash prompt*, which looks something like this:
+**Ubuntu setup.** These rest of these instructions assume that you installed
+Ubuntu (20.04) as the Linux distribution. That is the default distribution in
+WSL. In principle other distributions should work, but might require different
+commands from this point forward.
+
+Open the Ubuntu app. (It might already be open if you just finished installing
+WSL.) You will be at the *Bash prompt*, which looks something like this:
 
 ```console
-user@machine:$
+user@machine:~$
 ```
+
+Enable copy-and-paste:
+
+- Click on the Ubuntu icon on the top left of the window.
+- Click Properties
+- Make sure “Use Ctrl+Shift+C/V as Copy/Paste” is checked.
+
+ Now Ctrl+Shift+C will copy and Ctrl+Shift+V will paste into the terminal. Note
+ that you have to include Shift as part of that keystroke.
 
 Run the following command to update the *APT package manager*, which is what
 helps to install Unix packages:
@@ -141,22 +163,38 @@ Now run this command to upgrade all the APT software packages:
 sudo apt upgrade -y
 ```
 
-WSL has its own filesystem that is distinct from the Windows filesystem, though
-there are ways to access each from the other. This is a potentially tricky
-concept to master.
+Then install some useful packages that we will need:
 
-- When you launch Ubuntu and get the $ prompt, you are in the WSL filesystem.
+```console
+sudo apt install -y zip unzip build-essential
+```
+
+**File Systems.** WSL has its own filesystem that is distinct from the Windows
+file system, though there are ways to access each from the other.
+
+- When you launch Ubuntu and get the $ prompt, you are in the WSL file system.
   Your home directory there is named `~`, which is a built-in alias for
-  `/home/your_user_name`.
+  `/home/your_ubuntu_user_name`. You can run `explorer.exe .` (note the dot at
+  the end of that) to open your Ubuntu home directory in Windows explorer.
 
-- When you use Windows, you are in the Windows filesystem. [Microsoft issued one
-  hard-and-fast rule][wsl1-fs]: "Do not under any circumstances access
-  [WSL filesystem] files using Windows." You can corrupt the files.
+- From Ubuntu, you can access your Windows home directory at the path
+  `/mnt/c/Users/your_windows_user_name/`.
 
-[wsl1-fs]: https://devblogs.microsoft.com/commandline/do-not-change-linux-files-using-windows-apps-and-tools/
+- From Windows Explorer, you can access your Ubuntu home directory under the
+  Linux icon in the left-hand list (near "This PC" and "Network"), then
+  navigating to Ubuntu &rarr; `home` &rarr; `your_ubuntu_user_name`. Or you can
+  go there directly by typing into the Windows Explorer path bar:
+  `\\wsl$\Ubuntu\home\your_ubuntu_user_name`.
 
-We recommend storing your OCaml development work in the WSL filesystem, not the
-Windows filesystem.
+Practice accessing your Ubuntu and Windows home directories now, and make
+sure you can recognize which you are in. For advanced information, see
+Microsoft's [guide to Windows and Linux file systems][wsl-fs].
+
+We recommend storing your OCaml development work in your Ubuntu home directory,
+not your Windows home directory. By implication, Microsoft also recommends that
+in the guide just linked.
+
+[wsl-fs]: https://docs.microsoft.com/en-us/windows/wsl/filesystems
 
 (install-opam)=
 ## Install OPAM
@@ -180,7 +218,7 @@ sudo port install opam
 **Windows.** Run this command from Ubuntu:
 
 ```console
-sudo apt install -y m4 zip unzip bubblewrap build-essential opam
+sudo apt install opam
 ```
 
 ## Initialize OPAM
@@ -196,7 +234,10 @@ installation.
 opam init --bare -a -y
 ```
 
-**WSL1.**  Run:
+It is expected behavior to get a note about making sure `.profile` is well
+sourced in `.bashrc`. You don't need to do anything about that.
+
+**WSL1.** Hopefully you are running WSL2, not WSL1. But on WSL1, run:
 
 ```console
 opam init --bare -a -y --disable-sandboxing
@@ -224,29 +265,55 @@ probably installed OPAM sometime back in the past and now need to update it. Do
 so with `opam update`.
 ```
 
-You might be prompted to run the next command.  If so, do it. If not, don't.
+You might be prompted to run the next command. It won't matter whether you do or
+not, because of the very next step we're going to do (i.e., logging out).
 
 ```console
 eval $(opam env)
 ```
 
-```{tip}
-That should be the *only* time you have to run that command about `opam env`. In
-the future if you ever get a warning from OPAM that you need to re-run it,
-something is most likely wrong. Your shell is probably not running the OPAM
-configuration commands that `opam init` was meant to install. You could try
-`opam init --reinit` to see whether that fixes it. Also try logging out of your
-OS and logging back in.
+Now we need to make sure your OCaml environment was configured correctly.
+**Logout from your OS (or just reboot).** Then re-open your terminal
+and run this command:
+
+```console
+opam switch list
 ```
 
-Regardless, continue:
+You should get output like this:
+
+```
+#  switch         compiler                    description
+→  cs3110-2022fa  ocaml-base-compiler.4.14.0  cs3110-2022fa
+```
+
+There might be other lines if you happen to have done OCaml development before.
+Here's what to check for:
+
+- You **must not** get a warning that "The environment is not in sync with the
+  current switch. You should run `eval $(opam env)`". If either of the two
+  issues below also occur, you need to resolve this issue first.
+
+- There must be a right arrow in the first column next to the `cs3110-2022fa`
+  switch.
+
+- That switch must have the right name and the right compiler version, 4.14.0.
+
+```{warning}
+If you do get that warning about `opam env`, something is wrong. Your shell is
+probably not running the OPAM configuration commands that `opam init` was meant
+to install. You could try `opam init --reinit` to see whether that fixes it.
+Also, make sure you really did log out of your OS (or reboot).
+```
+
+Continue by installing the OPAM packages we need:
 
 ```console
 opam install -y utop odoc ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat ocamlformat-rpc
 ```
 
 Make sure to grab that whole line above when you copy it. You will get some
-output about editor configuration. Unless you intend to use Emacs or vim for
+output about editor configuration. Unless you intend to use Emacs or Vim for
 OCaml development, you can safely ignore that output. We're going to use VS Code
 as the editor in these instructions, so let's ignore it.
 
@@ -262,28 +329,33 @@ You should see a message "Welcome to utop version ... (using OCaml version
 environment issue. See the tip above about the `opam env` command.
 ```
 
-Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt.
+Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt;
+you do not type it yourself.
 
 ```ocaml
 # 3110;;
 - : int = 3110
 ```
 
-Stop to appreciate how lovely `3110` is. Then quit utop. Note that you must
-enter the extra # before the quit directive.
+Stop to appreciate how lovely `3110` is. Then quit utop. Note that this time you
+must enter the extra # before the quit directive.
 
 ```ocaml
 # #quit;;
 ```
 
+A faster way to quit is to type Control+D.
+
 ## Double Check OCaml
 
-Let's pause to double check whether your installation has been successful. It's
-worth the effort!
+If you're having any trouble with your installation, follow these double-check
+instructions. Some of them repeat the tips we provided above, but we've put them
+all here in one place to help diagnose any issues.
 
-First, **reboot your computer**. (Really! No matter how silly it might seem, we
-want a clean slate for this test.) Second, run utop, and make sure it still
-works. If it does not, here are some common issues:
+First, **reboot your computer**. We need a clean slate for this double check.
+
+Second, run utop, and make sure it works. If it does not, here are some common
+issues:
 
 - **Are you in the right Unix prompt?** On Mac, make sure you are in whatever
   Unix shell is the default for your Terminal: don't run bash or zsh or anything
@@ -303,10 +375,11 @@ works. If it does not, here are some common issues:
   present but not active, run `opam switch cs3110-2022fa` then see whether utop
   works. If that switch is not present, follow the "redo" instructions below.
 
-**Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`,
-then re-run the OPAM initialization command for your OS (given above), then
-re-run the switch creation and package installation commands above. Finally,
-redo the double check: reboot and see whether utop still works.
+**Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`.
+Then go back to the OPAM initialization step in the instructions way above, and
+proceed forward. Be extra careful to use the exact OPAM commands given above;
+sometimes mistakes occur when parts of them are omitted. Finally, redo the
+double check: reboot and see whether utop still works.
 
 ```{important}
 You want to get to the point where utop immediately works after a reboot,
@@ -319,34 +392,49 @@ Visual Studio Code is a great choice as a code editor for OCaml. (Though if you
 are already a power user of Emacs or Vim those are great, too.)
 
 First, download and install [Visual Studio Code][vscode] (henceforth, VS Code).
-Launch VS Code. Find the extensions pane, either by going to View -> Extensions,
-or by clicking on the icon for it in the column of icons on the left.
+Launch VS Code. Open the extensions pane, either by going to View &rarr;
+Extensions, or by clicking on the icon for it in the column of icons on the left
+— it looks like four little squares, the top-right of which is separated from
+the other three.
 
 Second, follow one of these steps if you are on Windows or Mac:
 
 - **Windows only:** Install the "Remote - WSL" extension. Second, open a WSL
-  window by using the command "Remote-WSL: New Window" or by running `code .` in
-  Ubuntu. Either way, make sure you see the green "WSL" indicator in the
-  bottom-left of the VS Code window. Follow the rest of the instructions in that
-  window.
+  window by using the command "Remote-WSL: New WSL Window". The first time you
+  do this, it will install some additional software. After that completes, you
+  will a green "WSL: Ubuntu" indicator in the bottom-left of the VS Code window.
+  **Make sure that you see "WSL: Ubuntu" there before proceeding with the
+  instructions below.** If you see just an icon that looks like
+  <sub>&gt;</sub><sup>&lt;</sup> then click it, and choose "New WSL Window" from
+  the Command Palette that opens.
 
 - **Mac only:** Open the Command Palette and type "shell command" to find the
-  "Shell Command: Install 'code' command in PATH" command. Run it. Then close
-  any open terminals to let the new path settings take effect.
+  "Shell Command: Install 'code' command in PATH" command. Run it.
 
-Third, regardless of your OS, again open the VS Code extensions pane. **Search
-for and install the "OCaml Platform" extension.** Be careful to install the
-extension with *exactly* that name.
+Third, regardless of your OS, close any open terminals — or just logout or
+reboot — to let the new path settings take effect, so that you will later be
+able to launch VS Code from the terminal.
+
+Fourth, again open the VS Code extensions pane. Search for and install the
+**"OCaml Platform"** extension from OCaml Labs. Be careful to install the
+extension with *exactly* that name. (If you happen to note a "build failing"
+icon on the extension's page, don't be concerned.)
 
 ```{warning}
 The extensions named simply "OCaml" or "OCaml and Reason IDE" are not the right
 ones. They are both old and no longer maintained by their developers.
 ```
 
-**Windows only:** make sure you install the OCaml Platform extension using the
-button that says "Install on WSL: ...", not with a button that says only
+```{warning}
+**Windows only:** make sure you install the OCaml Platform extension using a
+button that says "Install in WSL: Ubuntu", not with a button that says only
 "Install". If you've already done the latter, that's okay; but, you need to also
-install on WSL.
+install on WSL. If you can't find a button that says "Install in WSL" then you
+probably do not have the green "WSL: Ubuntu" indicator at the bottom-left of
+your VS Code window, either. Follow the instructions above to open a WSL window.
+From there, try again to install the OCaml Platform extension using the "Install
+in WSL" button.
+```
 
 [vscode]: https://code.visualstudio.com/
 
@@ -359,7 +447,7 @@ Let's make sure VS Code's OCaml support is working.
 
 - Open a fresh new Unix shell. **Windows**: remember that's the Ubuntu, not
   PowerShell or Cmd. **Mac**: remember that you shouldn't be manually switching
-  to a different shell.
+  to a different shell by typing `zsh` or `bash`.
 
 - Navigate to a directory of your choice, preferably a subdirectory of your home
   directory. For example, you might create a directory for your 3110 work inside
@@ -372,25 +460,21 @@ Let's make sure VS Code's OCaml support is working.
   ```console
   code .
   ```
-  Go to File -> New File. Save the file with the name `test.ml`. VS Code should
-  give it an orange camel icon.
+  Go to File &rarr; New File. Save the file with the name `test.ml`. VS Code
+  should give it an orange camel icon.
 
-- Type the following OCaml code then press Return:
+- Type the following OCaml code then press Return/Enter:
   ```ocaml
   let x : int = 3110
   ```
   As you type, VS Code should colorize the syntax, suggest some completions, and
   add a little annotation above the line of code. Try changing the `int` you
   typed to `string`. A squiggle should appear under `3110`. Hover over it to see
-  the error message. Go to View -> Problems to see it there, too. Add double
+  the error message. Go to View &rarr; Problems to see it there, too. Add double
   quotes around the integer to make it a string, and the problem will go away.
 
 **If you don't observe those behaviors,** something is wrong with your install.
 Here's how to proceed:
-
-- Do not hardcode any paths in the VS Code settings file, despite any advice you
-  might find online.  That is a band-aid, not a cure of whatever the underlying
-  problem really is.
 
 - Make sure that, from the same Unix prompt as which you launched VS Code, you
   can successfully complete the double-check instructions for your OPAM switch:
@@ -408,19 +492,26 @@ Here's how to proceed:
 and re-doing all the install instructions above from scratch. Pay close
 attention to any warnings or errors.
 
+```{warning}
+While troubleshooting any VS Code issues, **do not hardcode any paths** in the
+VS Code settings file, despite any advice you might find online. That is a
+band-aid, not a cure of whatever the underlying problem really is. More than
+likely, the real problem is an OCaml environment issue that you can investigate
+with the OCaml double-check instructions above.
+```
+
 ## VS Code Settings
 
 We recommend tweaking a few editor settings. Open the user settings JSON file by
-(i) going to View → Command Palette, (ii) typing “settings json”, and (iii)
-selecting Open Settings (JSON). Copy and paste these settings into the window:
+(i) going to View → Command Palette, (ii) typing "user settings json", and (iii)
+selecting Open User Settings (JSON). Copy and paste these settings into the
+window:
 
 ```json
 {
     "editor.tabSize": 2,
-    "editor.rulers": [
-        80
-    ],
-    "editor.formatOnSave": true,
+    "editor.rulers": [ 80 ],
+    "editor.formatOnSave": true
 }
 ```
 
@@ -438,7 +529,7 @@ spin up a separate Zoom call.  To install Live Share:
 
 - The first time you use Live Share, you will be prompted to login. If you are a
   Cornell student, choose to login with your Microsoft account, not Github.
-  Enter your Cornell NetID email, e.g., your_netid@cornell.edu. That will take
+  Enter your Cornell NetID email, e.g., `your_netid@cornell.edu`. That will take
   you to Cornell's login site. Use the password associated with your NetID.
 
 To collaborate with Live Share:
