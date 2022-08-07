@@ -1036,25 +1036,33 @@ create a file named <code class="docutils literal notranslate"><span class="pre"
 </pre></div>
 </div>
 <p>That declares an <em>executable</em> (a program that can be executed) whose main file
-is <code class="docutils literal notranslate"><span class="pre">hello.ml</span></code>. Then run this command from the terminal:</p>
+is <code class="docutils literal notranslate"><span class="pre">hello.ml</span></code>.</p>
+<p>Also create a file named <code class="docutils literal notranslate"><span class="pre">dune-project</span></code> and put the following in it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(lang dune 3.4)
+</pre></div>
+</div>
+<p>That tells Dune that this project uses Dune version 3.4, which was current at
+the time this version of the textbook was released. This <em>project</em> file is
+needed in the root directory of every source tree that you want to compile with
+Dune. In general, you’ll have a <code class="docutils literal notranslate"><span class="pre">dune</span></code> file in every subdirectory of the source
+tree but only one <code class="docutils literal notranslate"><span class="pre">dune-project</span></code> file at the root.</p>
+<p>Then run this command from the terminal:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune build hello.exe
 </pre></div>
 </div>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">.exe</span></code> extension is used on all platforms by dune, not just on
-Windows. That causes dune to build a <em>native</em> executable rather than a bytecode
-executable. The first time you run that command, dune will automatically create
-another file <code class="docutils literal notranslate"><span class="pre">dune-project</span></code> that marks the root directory of the project. You
-don’t need to do anything more with that file.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">.exe</span></code> extension is used on all platforms by Dune, not just on
+Windows. That causes Dune to build a <em>native</em> executable rather than a bytecode
+executable.</p>
 <p>Dune will create a directory <code class="docutils literal notranslate"><span class="pre">_build</span></code> and compile our program inside it. That’s
 one benefit of the build system over directly running the compiler: instead of
 polluting your source directory with a bunch of generated files, they get
 cleanly created in a separate directory. Inside <code class="docutils literal notranslate"><span class="pre">_build</span></code> there are many files
-that get created by dune. Our executable is buried rather deep:</p>
+that get created by Dune. Our executable is buried a couple of levels down:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>_build/default/hello.exe
 <span class="go">Hello world!</span>
 </pre></div>
 </div>
-<p>But dune provides a shortcut to having to remember and type all of that.
+<p>But Dune provides a shortcut to having to remember and type all of that.
 To build and execute the program in one step, we can simply run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune <span class="nb">exec</span> ./hello.exe
 <span class="go">Hello world!</span>
@@ -1067,7 +1075,7 @@ To build and execute the program in one step, we can simply run:</p>
 <p>That removes the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory, leaving just your source code.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>When dune compiles your program, it caches a copy of your source files in
+<p>When Dune compiles your program, it caches a copy of your source files in
 <code class="docutils literal notranslate"><span class="pre">_build/default</span></code>. If you ever accidentally make a mistake that results in loss
 of a source file, you might be able to recover it from inside <code class="docutils literal notranslate"><span class="pre">_build</span></code>. Of
 course, using source control like git is also advisable.</p>
@@ -1125,7 +1133,7 @@ course, using source control like git is also advisable.</p>
   
     By Michael R. Clarkson et al.<br/>
   
-      &copy; Copyright 2021.<br/>
+      &copy; Copyright 2022.<br/>
 </p>
         </footer>
     </div>

@@ -972,7 +972,7 @@ guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
 <li><p>Download and install Oracle’s free <a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> for your host OS.
 Or, if you already had it installed, make sure you update to the latest
 version of VirtualBox before proceeding.</p></li>
-<li><p>Download <a class="reference external" href="https://cornell.box.com/v/cs3110-2021fa-ubuntu">our VM</a>. Don’t worry about the “We’re sorry, the preview
+<li><p>Download <a class="reference external" href="https://cornell.box.com/v/cs3110-2022fa-ubuntu">our VM</a>. Don’t worry about the “We’re sorry, the preview
 didn’t load” message you see. Just click the Download button and save the
 <code class="docutils literal notranslate"><span class="pre">.ova</span></code> file wherever you like. It’s about a 6GB file, so the download might
 take awhile.</p></li>
@@ -983,7 +983,7 @@ you just downloaded. Click Next, then Import.</p></li>
 <section id="starting-the-vm">
 <h2>Starting the VM<a class="headerlink" href="#starting-the-vm" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Select cs3110-2021fa-ubuntu from the list of machines in VirtualBox. Click
+<li><p>Select cs3110-2022fa-ubuntu from the list of machines in VirtualBox. Click
 Start. At this point various errors can occur that depend on your hardware,
 hence are hard to predict.</p>
 <ul>
@@ -991,8 +991,15 @@ hence are hard to predict.</p>
 likely need to access your computer’s BIOS settings and enable
 virtualization. The details of that will vary depending on the model and
 manufacturer of your computer. Try googling “enable virtualization
-<manufacturer> <model>”, substituting for the manufacturer and model of your
+[manufacturer] [model]”, substituting for the manufacturer and model of your
 machine. This <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios">Red Hat Linux</a> page might also help.</p></li>
+<li><p>If you get an error about “kernel panic” and “attempted to kill the idle
+task”, then you might need to increase the number of processors provided to
+it by your host OS. Select the VM in Virtual Box, click Settings, and look
+at the System → Processor settings. Increase the number of processors from 1
+to 2. If the sliders are greyed out and won’t permit adjustment, it means
+the VM is still running: you can’t change the amount of memory while the
+guest OS is active; so, shut down the VM (see below) and try again.</p></li>
 <li><p>If the machine just freezes or blacks out or aborts, you might need to
 adjust the memory provided to it by your host OS. Select the VM in Virtual
 Box, click Settings, and look at the System and Display settings. You might
@@ -1113,7 +1120,7 @@ you can safely delete the <code class="docutils literal notranslate"><span class
   
     By Michael R. Clarkson et al.<br/>
   
-      &copy; Copyright 2021.<br/>
+      &copy; Copyright 2022.<br/>
 </p>
         </footer>
     </div>

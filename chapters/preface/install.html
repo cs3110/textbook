@@ -892,6 +892,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#unix-development-environment">
    Unix Development Environment
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linux">
+     Linux
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mac">
+     Mac
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#windows">
+     Windows
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#install-opam">
@@ -956,6 +973,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#unix-development-environment">
    Unix Development Environment
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linux">
+     Linux
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mac">
+     Mac
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#windows">
+     Windows
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#install-opam">
@@ -1045,60 +1079,87 @@ internet.</p>
 <p>Let’s get started!</p>
 <section id="unix-development-environment">
 <h2>Unix Development Environment<a class="headerlink" href="#unix-development-environment" title="Permalink to this headline">#</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p><strong>First, upgrade your OS.</strong> If you’ve been intending to make any major OS
 upgrades, do them now. Otherwise when you do get around to upgrading, you might
 have to repeat some or all of this installation process. Better to get it out of
 the way beforehand.</p>
-<p><strong>Linux.</strong> If you’re already running Linux, you’re done with this step. Proceed
-to OPAM, below.</p>
-<p><strong>Mac.</strong> Beneath the surface, macOS is already a Unix-based OS. But you’re going
-to need some developer tools and a Unix package manager. There are two to pick
-from: <a class="reference external" href="https://brew.sh/">Homebrew</a> and <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a>. From the perspective of
-this textbook and CS 3110, it doesn’t matter which you choose. So if you’re
-already accustomed to one, feel free to keep using it. Make sure to run its
-update command before continuing with these instructions.</p>
-<p>Otherwise, pick one and follow the installation instructions on its website. The
-installation process for Homebrew is typically easier and faster, which might
-nudge you in that direction. If you do choose MacPorts, make sure to follow
-<em>all</em> the detailed instructions on its page, including XCode and an X11 server.
-<strong>Do not install both Homebrew and MacPorts</strong>; they aren’t meant to co-exist. If
-you change your mind later, make sure to uninstall one before installing the
-other. After you’ve finished installing either Homebrew or MacPorts, you can
-proceed to OPAM, below.</p>
-<p><strong>Windows.</strong> Unix development in Windows 10 is made possible by the Windows
-Subsystem for Linux (WSL). Follow <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-manual">Microsoft’s install instructions for
-WSL</a>. Here are a few notes on Microsoft’s instructions:</p>
+</div>
+<section id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">#</a></h3>
+<p>If you’re already running Linux, you’re done with this step. Proceed to
+<a class="reference internal" href="#install-opam"><span class="std std-ref">Install OPAM</span></a>, below.</p>
+</section>
+<section id="mac">
+<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">#</a></h3>
+<p>Beneath the surface, macOS is already a Unix-based OS. But you’re going to need
+some developer tools and a Unix package manager. There are two to pick from:
+<a class="reference external" href="https://brew.sh/">Homebrew</a> and <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a>. From the perspective of this
+textbook and CS 3110, it doesn’t matter which you choose:</p>
 <ul class="simple">
-<li><p>From the perspective of this textbook and CS 3110, it doesn’t matter whether
-you join Windows Insider.</p></li>
-<li><p>WSL2 is preferred over WSL1 by OCaml (and WSL2 offers performance and
-functionality improvements), so install WSL2 if you can.</p></li>
-<li><p>To open Windows PowerShell as Administrator, click Start, type PowerShell,
-and it should come up as the best match.  Click “Run as Administrator”,
-and click Yes to allow changes.</p></li>
-<li><p>To use WSL2 (rather than WSL1) you might need to enable virtualization in your
-machine’s BIOS; some laptop manufacturers disable it before shipping machines
-from the factory. The instructions for that are dependent on the manufacturer
-of your machine. Try googling “enable virtualization <manufacturer> <model>”,
-substituting for the manufacturer and model of your machine. This
-<a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios">Red Hat Linux</a> page might also help.</p></li>
-<li><p>These instructions assume that you install Ubuntu (20.04) as the Linux
-distribution from the Microsoft Store. In principle other distributions should
-work, but might require different commands from this point forward.</p></li>
+<li><p>If you’re already accustomed to one, feel free to keep using it. Make sure to
+run its update command before continuing with these instructions.</p></li>
+<li><p>Otherwise, pick one and follow the installation instructions on its website.
+The installation process for Homebrew is typically easier and faster, which
+might nudge you in that direction. If you do choose MacPorts, make sure to
+follow <em>all</em> the detailed instructions on its page, including XCode and an X11
+server. <strong>Do not install both Homebrew and MacPorts</strong>; they aren’t meant to
+co-exist. If you change your mind later, make sure to uninstall one before
+installing the other.</p></li>
+</ul>
+<p>After you’ve finished installing/updating either Homebrew or MacPorts, proceed
+to <a class="reference internal" href="#install-opam"><span class="std std-ref">Install OPAM</span></a>, below.</p>
+</section>
+<section id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
+<p>Unix development in Windows is made possible by the Windows Subsystem for Linux
+(WSL). If you have a recent version of Windows (build 20262, released November
+2020, or newer), WSL is easy to install. If you don’t have that recent of a
+version, try running Windows Update to get it.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you get an error about the “virtual machine” while installing WSL, you might
+need to enable virtualization in your machine’s BIOS. The instructions for that
+are dependent on the manufacturer of your machine. Try googling “enable
+virtualization [manufacturer] [model]”, substituting for the manufacturer and
+model of your machine. This <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios">Red Hat Linux</a> page might also help.</p>
+</div>
+<p><strong>With a recent version of Windows,</strong> here’s all you have to do:</p>
+<ul class="simple">
+<li><p>Open Windows PowerShell as Administrator. To do that, click Start, type
+PowerShell, and it should come up as the best match. Click “Run as
+Administrator”, and click Yes to allow changes.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">wsl</span> <span class="pre">--install</span></code>. When the Ubuntu download is completed, it will likely
+ask you to reboot. Do so. The installation will automatically resume after
+the reboot.</p></li>
 <li><p>You will be prompted to create a Unix username and password. You can use any
 username and password you wish. It has no bearing on your Windows username and
 password (though you are free to re-use those). Do not put a space in your
 username. Do not forget your password. You will need it in the future.</p></li>
-<li><p>To enable copy-and-paste, click on the icon on the top left of the shell
-window, click Properties, and make sure “Use Ctrl+Shift+C/V as Copy/Paste” is
-checked. Now Ctrl+Shift+C will copy and Ctrl+Shift+V will paste into the
-terminal. Note that you have to include Shift as part of that keystroke.</p></li>
 </ul>
-<p>When you’ve finished installing WSL, open the Ubuntu app.  You will be at
-the <em>Bash prompt</em>, which looks something like this:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@machine:$</span>
+<p>Now skip to the “Ubuntu setup” paragraph below.</p>
+<p><strong>Without a recent version of Windows,</strong> you will need to follow
+<a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-manual">Microsoft’s manual install instructions</a>. WSL2 is preferred over
+WSL1 by OCaml (and WSL2 offers performance and functionality improvements), so
+install WSL2 if you can.</p>
+<p><strong>Ubuntu setup.</strong> These rest of these instructions assume that you installed
+Ubuntu (20.04) as the Linux distribution. That is the default distribution in
+WSL. In principle other distributions should work, but might require different
+commands from this point forward.</p>
+<p>Open the Ubuntu app. (It might already be open if you just finished installing
+WSL.) You will be at the <em>Bash prompt</em>, which looks something like this:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@machine:~$</span>
 </pre></div>
 </div>
+<p>Enable copy-and-paste:</p>
+<ul class="simple">
+<li><p>Click on the Ubuntu icon on the top left of the window.</p></li>
+<li><p>Click Properties</p></li>
+<li><p>Make sure “Use Ctrl+Shift+C/V as Copy/Paste” is checked.</p></li>
+</ul>
+<p>Now Ctrl+Shift+C will copy and Ctrl+Shift+V will paste into the terminal. Note
+that you have to include Shift as part of that keystroke.</p>
 <p>Run the following command to update the <em>APT package manager</em>, which is what
 helps to install Unix packages:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt update</span>
@@ -1117,26 +1178,38 @@ do not randomly try it without reason.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt upgrade -y</span>
 </pre></div>
 </div>
-<p>WSL has its own filesystem that is distinct from the Windows filesystem, though
-there are ways to access each from the other. This is a potentially tricky
-concept to master.</p>
+<p>Then install some useful packages that we will need:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt install -y zip unzip build-essential</span>
+</pre></div>
+</div>
+<p><strong>File Systems.</strong> WSL has its own filesystem that is distinct from the Windows
+file system, though there are ways to access each from the other.</p>
 <ul class="simple">
-<li><p>When you launch Ubuntu and get the $ prompt, you are in the WSL filesystem.
+<li><p>When you launch Ubuntu and get the $ prompt, you are in the WSL file system.
 Your home directory there is named <code class="docutils literal notranslate"><span class="pre">~</span></code>, which is a built-in alias for
-<code class="docutils literal notranslate"><span class="pre">/home/your_user_name</span></code>.</p></li>
-<li><p>When you use Windows, you are in the Windows filesystem. <a class="reference external" href="https://devblogs.microsoft.com/commandline/do-not-change-linux-files-using-windows-apps-and-tools/">Microsoft issued one
-hard-and-fast rule</a>: “Do not under any circumstances access
-[WSL filesystem] files using Windows.” You can corrupt the files.</p></li>
+<code class="docutils literal notranslate"><span class="pre">/home/your_ubuntu_user_name</span></code>. You can run <code class="docutils literal notranslate"><span class="pre">explorer.exe</span> <span class="pre">.</span></code> (note the dot at
+the end of that) to open your Ubuntu home directory in Windows explorer.</p></li>
+<li><p>From Ubuntu, you can access your Windows home directory at the path
+<code class="docutils literal notranslate"><span class="pre">/mnt/c/Users/your_windows_user_name/</span></code>.</p></li>
+<li><p>From Windows Explorer, you can access your Ubuntu home directory under the
+Linux icon in the left-hand list (near “This PC” and “Network”), then
+navigating to Ubuntu → <code class="docutils literal notranslate"><span class="pre">home</span></code> → <code class="docutils literal notranslate"><span class="pre">your_ubuntu_user_name</span></code>. Or you can
+go there directly by typing into the Windows Explorer path bar:
+<code class="docutils literal notranslate"><span class="pre">\\wsl$\Ubuntu\home\your_ubuntu_user_name</span></code>.</p></li>
 </ul>
-<p>We recommend storing your OCaml development work in the WSL filesystem, not the
-Windows filesystem.</p>
+<p>Practice accessing your Ubuntu and Windows home directories now, and make
+sure you can recognize which you are in. For advanced information, see
+Microsoft’s <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/filesystems">guide to Windows and Linux file systems</a>.</p>
+<p>We recommend storing your OCaml development work in your Ubuntu home directory,
+not your Windows home directory. By implication, Microsoft also recommends that
+in the guide just linked.</p>
+</section>
 </section>
 <section id="install-opam">
-<h2>Install OPAM<a class="headerlink" href="#install-opam" title="Permalink to this headline">#</a></h2>
+<span id="id1"></span><h2>Install OPAM<a class="headerlink" href="#install-opam" title="Permalink to this headline">#</a></h2>
 <p><strong>Linux.</strong> Follow the <a class="reference external" href="https://opam.ocaml.org/doc/Install.html">instructions for your distribution</a>.</p>
-<p><strong>Mac.</strong> If you’re using Homebrew, run these commands:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">brew install gpatch</span>
-<span class="go">brew install opam</span>
+<p><strong>Mac.</strong> If you’re using Homebrew, run this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">brew install opam</span>
 </pre></div>
 </div>
 <p>If you’re using MacPorts, run this command:</p>
@@ -1144,7 +1217,7 @@ Windows filesystem.</p>
 </pre></div>
 </div>
 <p><strong>Windows.</strong> Run this command from Ubuntu:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt install -y m4 zip unzip bubblewrap build-essential opam</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt install opam</span>
 </pre></div>
 </div>
 </section>
@@ -1159,7 +1232,9 @@ installation.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam init --bare -a -y</span>
 </pre></div>
 </div>
-<p><strong>WSL1.</strong>  Run:</p>
+<p>It is expected behavior to get a note about making sure <code class="docutils literal notranslate"><span class="pre">.profile</span></code> is well
+sourced in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>. You don’t need to do anything about that.</p>
+<p><strong>WSL1.</strong> Hopefully you are running WSL2, not WSL1. But on WSL1, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam init --bare -a -y --disable-sandboxing</span>
 </pre></div>
 </div>
@@ -1172,46 +1247,87 @@ WSL1</a>.</p>
 and set of packages. You can have many switches and, well, switch between them
 —whence the name. Create a switch for this semester’s CS 3110 by running
 this command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam switch create cs3110-2021fa ocaml-base-compiler.4.12.0</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam switch create cs3110-2022fa ocaml-base-compiler.4.14.0</span>
 </pre></div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If that command fails saying that the 4.12.0 compiler can’t be found, you
+<p>If that command fails saying that the 4.14.0 compiler can’t be found, you
 probably installed OPAM sometime back in the past and now need to update it. Do
 so with <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">update</span></code>.</p>
 </div>
-<p>You might be prompted to run the next command.  If so, do it. If not, don’t.</p>
+<p>You might be prompted to run the next command. It won’t matter whether you do or
+not, because of the very next step we’re going to do (i.e., logging out).</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">eval $(opam env)</span>
 </pre></div>
 </div>
-<p>Regardless, continue:</p>
+<p>Now we need to make sure your OCaml environment was configured correctly.
+<strong>Logout from your OS (or just reboot).</strong> Then re-open your terminal
+and run this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam switch list</span>
+</pre></div>
+</div>
+<p>You should get output like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#  switch         compiler                    description
+→  cs3110-2022fa  ocaml-base-compiler.4.14.0  cs3110-2022fa
+</pre></div>
+</div>
+<p>There might be other lines if you happen to have done OCaml development before.
+Here’s what to check for:</p>
+<ul class="simple">
+<li><p>You <strong>must not</strong> get a warning that “The environment is not in sync with the
+current switch. You should run <code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">$(opam</span> <span class="pre">env)</span></code>”. If either of the two
+issues below also occur, you need to resolve this issue first.</p></li>
+<li><p>There must be a right arrow in the first column next to the <code class="docutils literal notranslate"><span class="pre">cs3110-2022fa</span></code>
+switch.</p></li>
+<li><p>That switch must have the right name and the right compiler version, 4.14.0.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you do get that warning about <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">env</span></code>, something is wrong. Your shell is
+probably not running the OPAM configuration commands that <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">init</span></code> was meant
+to install. You could try <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">init</span> <span class="pre">--reinit</span></code> to see whether that fixes it.
+Also, make sure you really did log out of your OS (or reboot).</p>
+</div>
+<p>Continue by installing the OPAM packages we need:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam install -y utop odoc ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat ocamlformat-rpc</span>
 </pre></div>
 </div>
-<p>(Make sure to grab that whole line above when you copy it.)</p>
+<p>Make sure to grab that whole line above when you copy it. You will get some
+output about editor configuration. Unless you intend to use Emacs or Vim for
+OCaml development, you can safely ignore that output. We’re going to use VS Code
+as the editor in these instructions, so let’s ignore it.</p>
 <p>You should now be able to launch utop, the OCaml Universal Toplevel.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">utop</span>
 </pre></div>
 </div>
-<p>Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You should see a message “Welcome to utop version … (using OCaml version
+4.14.0)!” If the OCaml version is incorrect, then you probably have an
+environment issue. See the tip above about the <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">env</span></code> command.</p>
+</div>
+<p>Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt;
+you do not type it yourself.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="mi">3110</span><span class="o">;;</span>
 <span class="o">-</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">3110</span>
 </pre></div>
 </div>
-<p>Stop to appreciate how lovely <code class="docutils literal notranslate"><span class="pre">3110</span></code> is. Then quit utop. Note that you must
-enter the extra # before the quit directive.</p>
+<p>Stop to appreciate how lovely <code class="docutils literal notranslate"><span class="pre">3110</span></code> is. Then quit utop. Note that this time you
+must enter the extra # before the quit directive.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="o">#</span><span class="n">quit</span><span class="o">;;</span>
 </pre></div>
 </div>
+<p>A faster way to quit is to type Control+D.</p>
 </section>
 <section id="double-check-ocaml">
 <h2>Double Check OCaml<a class="headerlink" href="#double-check-ocaml" title="Permalink to this headline">#</a></h2>
-<p>Let’s pause to double check whether your installation has been successful. It’s
-worth the effort!</p>
-<p>First, <strong>reboot your computer</strong>. (Really! No matter how silly it might seem, we
-want a clean slate for this test.) Second, run utop, and make sure it still
-works. If it does not, here are some common issues:</p>
+<p>If you’re having any trouble with your installation, follow these double-check
+instructions. Some of them repeat the tips we provided above, but we’ve put them
+all here in one place to help diagnose any issues.</p>
+<p>First, <strong>reboot your computer</strong>. We need a clean slate for this double check.</p>
+<p>Second, run utop, and make sure it works. If it does not, here are some common
+issues:</p>
 <ul class="simple">
 <li><p><strong>Are you in the right Unix prompt?</strong> On Mac, make sure you are in whatever
 Unix shell is the default for your Terminal: don’t run bash or zsh or anything
@@ -1224,44 +1340,66 @@ OPAM environment; you shouldn’t have to manually activate the environment with
 the <code class="docutils literal notranslate"><span class="pre">eval</span></code> command. Probably something went wrong earlier when you ran the
 <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">init</span></code> command. To fix it, follow the “redo” instructions below.</p></li>
 <li><p><strong>Is your switch listed?</strong> Run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">list</span></code> and make sure a switch named
-<code class="docutils literal notranslate"><span class="pre">cs3110-2021fa</span></code> is listed, that it has the 4.12.0 compiler, and that it is the
+<code class="docutils literal notranslate"><span class="pre">cs3110-2022fa</span></code> is listed, that it has the 4.14.0 compiler, and that it is the
 active switch (which is indicated with an arrow beside it). If that switch is
-present but not active, run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">cs3110-2021fa</span></code> then see whether utop
+present but not active, run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">cs3110-2022fa</span></code> then see whether utop
 works. If that switch is not present, follow the “redo” instructions below.</p></li>
 </ul>
-<p><strong>Redo Instructions:</strong> Remove the OPAM directory by running <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">~/.opam</span></code>,
-then re-run the OPAM initialization command for your OS (given above), then
-re-run the switch creation and package installation commands above. Finally,
-redo the double check: reboot and see whether utop still works. You want to get
-to the point where utop “just works” after a reboot.</p>
+<p><strong>Redo Instructions:</strong> Remove the OPAM directory by running <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">~/.opam</span></code>.
+Then go back to the OPAM initialization step in the instructions way above, and
+proceed forward. Be extra careful to use the exact OPAM commands given above;
+sometimes mistakes occur when parts of them are omitted. Finally, redo the
+double check: reboot and see whether utop still works.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You want to get to the point where utop immediately works after a reboot,
+without having to type any additional commands.</p>
+</div>
 </section>
 <section id="visual-studio-code">
 <h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">#</a></h2>
 <p>Visual Studio Code is a great choice as a code editor for OCaml. (Though if you
 are already a power user of Emacs or Vim those are great, too.)</p>
+<p>First, download and install <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> (henceforth, VS Code).
+Launch VS Code. Open the extensions pane, either by going to View →
+Extensions, or by clicking on the icon for it in the column of icons on the left
+— it looks like four little squares, the top-right of which is separated from
+the other three.</p>
+<p>Second, follow one of these steps if you are on Windows or Mac:</p>
 <ul class="simple">
-<li><p>Download and install <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> (henceforth, VS Code).
-Launch VS Code. Find the extensions pane, either by going to View -&gt;
-Extensions, or by clicking on the icon for it in the column of icons on the
-left.</p></li>
 <li><p><strong>Windows only:</strong> Install the “Remote - WSL” extension. Second, open a WSL
-window by using the command “Remote-WSL: New Window” or by running <code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">.</span></code> in
-Ubuntu. Either way, make sure you see the green “WSL” indicator in the
-bottom-left of the VS Code window. Follow the rest of the instructions in that
-window.</p></li>
+window by using the command “Remote-WSL: New WSL Window”. The first time you
+do this, it will install some additional software. After that completes, you
+will a green “WSL: Ubuntu” indicator in the bottom-left of the VS Code window.
+<strong>Make sure that you see “WSL: Ubuntu” there before proceeding with the
+instructions below.</strong> If you see just an icon that looks like
+<sub>&gt;</sub><sup>&lt;</sup> then click it, and choose “New WSL Window” from
+the Command Palette that opens.</p></li>
 <li><p><strong>Mac only:</strong> Open the Command Palette and type “shell command” to find the
-“Shell Command: Install ‘code’ command in PATH” command. Run it. Then close
-any open terminals to let the new path settings take effect.</p></li>
-<li><p><strong>For everyone:</strong> In the extensions pane, search for and install the “OCaml Platform” extension.
-Be careful to use the extension with <em>exactly the right name</em> - the correct extension will also have an icon of a camel on a black background, as opposed to a red or orange background. <strong>Windows only:</strong>
-make sure you install the extension with the button that says “Install on WSL:
-…”, not with a button that says only “Install”. The latter will not
-work.</p></li>
+“Shell Command: Install ‘code’ command in PATH” command. Run it.</p></li>
 </ul>
+<p>Third, regardless of your OS, close any open terminals — or just logout or
+reboot — to let the new path settings take effect, so that you will later be
+able to launch VS Code from the terminal.</p>
+<p>Fourth, again open the VS Code extensions pane. Search for and install the
+<strong>“OCaml Platform”</strong> extension from OCaml Labs. Be careful to install the
+extension with <em>exactly</em> that name. (If you happen to note a “build failing”
+icon on the extension’s page, don’t be concerned.)</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The extensions named simply “OCaml” or “OCaml and Reason IDE” are not the right ones. (They
-are both old and no longer maintained by their developers.)</p>
+<p>The extensions named simply “OCaml” or “OCaml and Reason IDE” are not the right
+ones. They are both old and no longer maintained by their developers.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Windows only:</strong> make sure you install the OCaml Platform extension using a
+button that says “Install in WSL: Ubuntu”, not with a button that says only
+“Install”. If you’ve already done the latter, that’s okay; but, you need to also
+install on WSL. If you can’t find a button that says “Install in WSL” then you
+probably do not have the green “WSL: Ubuntu” indicator at the bottom-left of
+your VS Code window, either. Follow the instructions above to open a WSL window.
+From there, try again to install the OCaml Platform extension using the “Install
+in WSL” button.</p>
 </div>
 </section>
 <section id="double-check-vs-code">
@@ -1272,7 +1410,7 @@ are both old and no longer maintained by their developers.)</p>
 will detect so many potential mistakes now that it’s worth the effort.)</p></li>
 <li><p>Open a fresh new Unix shell. <strong>Windows</strong>: remember that’s the Ubuntu, not
 PowerShell or Cmd. <strong>Mac</strong>: remember that you shouldn’t be manually switching
-to a different shell.</p></li>
+to a different shell by typing <code class="docutils literal notranslate"><span class="pre">zsh</span></code> or <code class="docutils literal notranslate"><span class="pre">bash</span></code>.</p></li>
 <li><p>Navigate to a directory of your choice, preferably a subdirectory of your home
 directory. For example, you might create a directory for your 3110 work inside
 your home directory:</p>
@@ -1284,26 +1422,23 @@ your home directory:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">code .</span>
 </pre></div>
 </div>
-<p>Go to File -&gt; New File. Save the file with the name <code class="docutils literal notranslate"><span class="pre">test.ml</span></code>. VS Code should
-give it an orange camel icon.</p>
+<p>Go to File → New File. Save the file with the name <code class="docutils literal notranslate"><span class="pre">test.ml</span></code>. VS Code
+should give it an orange camel icon.</p>
 </li>
-<li><p>Type the following OCaml code then press Return:</p>
+<li><p>Type the following OCaml code then press Return/Enter:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">3110</span>
 </pre></div>
 </div>
 <p>As you type, VS Code should colorize the syntax, suggest some completions, and
 add a little annotation above the line of code. Try changing the <code class="docutils literal notranslate"><span class="pre">int</span></code> you
 typed to <code class="docutils literal notranslate"><span class="pre">string</span></code>. A squiggle should appear under <code class="docutils literal notranslate"><span class="pre">3110</span></code>. Hover over it to see
-the error message. Go to View -&gt; Problems to see it there, too. Add double
+the error message. Go to View → Problems to see it there, too. Add double
 quotes around the integer to make it a string, and the problem will go away.</p>
 </li>
 </ul>
 <p><strong>If you don’t observe those behaviors,</strong> something is wrong with your install.
 Here’s how to proceed:</p>
 <ul class="simple">
-<li><p>Do not hardcode any paths in the VS Code settings file, despite any advice you
-might find online.  That is a band-aid, not a cure of whatever the underlying
-problem really is.</p></li>
 <li><p>Make sure that, from the same Unix prompt as which you launched VS Code, you
 can successfully complete the double-check instructions for your OPAM switch:
 can you run utop? is the right switch active? If not, that’s the problem you
@@ -1318,18 +1453,25 @@ launching VS Code from Ubuntu rather than PowerShell or from the Windows GUI.</p
 <p><strong>If you’re still stuck with an issue,</strong> try uninstalling VS Code, rebooting,
 and re-doing all the install instructions above from scratch. Pay close
 attention to any warnings or errors.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While troubleshooting any VS Code issues, <strong>do not hardcode any paths</strong> in the
+VS Code settings file, despite any advice you might find online. That is a
+band-aid, not a cure of whatever the underlying problem really is. More than
+likely, the real problem is an OCaml environment issue that you can investigate
+with the OCaml double-check instructions above.</p>
+</div>
 </section>
 <section id="vs-code-settings">
 <h2>VS Code Settings<a class="headerlink" href="#vs-code-settings" title="Permalink to this headline">#</a></h2>
 <p>We recommend tweaking a few editor settings. Open the user settings JSON file by
-(i) going to View → Command Palette, (ii) typing “settings json”, and (iii)
-selecting Open Settings (JSON). Copy and paste these settings into the window:</p>
+(i) going to View → Command Palette, (ii) typing “user settings json”, and (iii)
+selecting Open User Settings (JSON). Copy and paste these settings into the
+window:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="mi">80</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -1346,7 +1488,7 @@ spin up a separate Zoom call.  To install Live Share:</p>
 Install it.</p></li>
 <li><p>The first time you use Live Share, you will be prompted to login. If you are a
 Cornell student, choose to login with your Microsoft account, not Github.
-Enter your Cornell NetID email, e.g., <a class="reference external" href="mailto:your_netid&#37;&#52;&#48;cornell&#46;edu">your_netid<span>&#64;</span>cornell<span>&#46;</span>edu</a>. That will take
+Enter your Cornell NetID email, e.g., <code class="docutils literal notranslate"><span class="pre">your_netid&#64;cornell.edu</span></code>. That will take
 you to Cornell’s login site. Use the password associated with your NetID.</p></li>
 </ul>
 <p>To collaborate with Live Share:</p>
@@ -1409,7 +1551,7 @@ to the shared programming session.</p></li>
   
     By Michael R. Clarkson et al.<br/>
   
-      &copy; Copyright 2021.<br/>
+      &copy; Copyright 2022.<br/>
 </p>
         </footer>
     </div>

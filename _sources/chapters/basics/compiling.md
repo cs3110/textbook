@@ -68,7 +68,6 @@ Now let's clean up all those generated files:
 $ rm hello.byte hello.cmi hello.cmo
 ```
 
-
 ## What about Main?
 
 Unlike C or Java, OCaml programs do not need to have a special function named
@@ -109,30 +108,42 @@ create a file named `dune` and put the following in it:
 ```
 
 That declares an *executable* (a program that can be executed) whose main file
-is `hello.ml`. Then run this command from the terminal:
+is `hello.ml`.
+
+Also create a file named `dune-project` and put the following in it:
+
+```text
+(lang dune 3.4)
+```
+
+That tells Dune that this project uses Dune version 3.4, which was current at
+the time this version of the textbook was released. This *project* file is
+needed in the root directory of every source tree that you want to compile with
+Dune. In general, you'll have a `dune` file in every subdirectory of the source
+tree but only one `dune-project` file at the root.
+
+Then run this command from the terminal:
 
 ```console
 $ dune build hello.exe
 ```
 
-Note that the `.exe` extension is used on all platforms by dune, not just on
-Windows. That causes dune to build a *native* executable rather than a bytecode
-executable. The first time you run that command, dune will automatically create
-another file `dune-project` that marks the root directory of the project. You
-don't need to do anything more with that file.
+Note that the `.exe` extension is used on all platforms by Dune, not just on
+Windows. That causes Dune to build a *native* executable rather than a bytecode
+executable.
 
 Dune will create a directory `_build` and compile our program inside it. That's
 one benefit of the build system over directly running the compiler: instead of
 polluting your source directory with a bunch of generated files, they get
 cleanly created in a separate directory. Inside `_build` there are many files
-that get created by dune. Our executable is buried rather deep:
+that get created by Dune. Our executable is buried a couple of levels down:
 
 ```console
 $ _build/default/hello.exe
 Hello world!
 ```
 
-But dune provides a shortcut to having to remember and type all of that.
+But Dune provides a shortcut to having to remember and type all of that.
 To build and execute the program in one step, we can simply run:
 
 ```console
@@ -149,7 +160,7 @@ $ dune clean
 That removes the `_build` directory, leaving just your source code.
 
 ```{tip}
-When dune compiles your program, it caches a copy of your source files in
+When Dune compiles your program, it caches a copy of your source files in
 `_build/default`. If you ever accidentally make a mistake that results in loss
 of a source file, you might be able to recover it from inside `_build`. Of
 course, using source control like git is also advisable.
