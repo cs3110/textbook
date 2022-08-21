@@ -1069,7 +1069,7 @@ carries two subtrees.</p>
 </div>
 <p>The <em>size</em> of a tree is the number of nodes in it (that is, <code class="docutils literal notranslate"><span class="pre">Node</span></code>s, not
 <code class="docutils literal notranslate"><span class="pre">Leaf</span></code>s). For example, the size of tree <code class="docutils literal notranslate"><span class="pre">t</span></code> above is 7. Here is a function
-function <code class="docutils literal notranslate"><span class="pre">size</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">tree</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> that returns the number of nodes in a tree:</p>
+<code class="docutils literal notranslate"><span class="pre">size</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">tree</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> that returns the number of nodes in a tree:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">rec</span> <span class="n">size</span> <span class="o">=</span> <span class="n">function</span>
   <span class="o">|</span> <span class="n">Leaf</span> <span class="o">-&gt;</span> <span class="mi">0</span>
   <span class="o">|</span> <span class="n">Node</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">size</span> <span class="n">l</span> <span class="o">+</span> <span class="n">size</span> <span class="n">r</span>

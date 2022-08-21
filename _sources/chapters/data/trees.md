@@ -68,7 +68,7 @@ let t =
 
 The *size* of a tree is the number of nodes in it (that is, `Node`s, not
 `Leaf`s). For example, the size of tree `t` above is 7. Here is a function
-function `size : 'a tree -> int` that returns the number of nodes in a tree:
+`size : 'a tree -> int` that returns the number of nodes in a tree:
 ```
 let rec size = function
   | Leaf -> 0

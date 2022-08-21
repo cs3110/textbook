@@ -1090,7 +1090,7 @@ that raises <code class="docutils literal notranslate"><span class="pre">Failure
 </div>
 <p>The expression <code class="docutils literal notranslate"><span class="pre">e</span></code> is what might raise an exception. If it does not, the entire
 <code class="docutils literal notranslate"><span class="pre">try</span></code> expression evaluates to whatever <code class="docutils literal notranslate"><span class="pre">e</span></code> does. If <code class="docutils literal notranslate"><span class="pre">e</span></code> does raise an exception
-value <code class="docutils literal notranslate"><span class="pre">v</span></code>, that value <code class="docutils literal notranslate"><span class="pre">v</span></code> is that matched against the provide patterns, exactly
+value <code class="docutils literal notranslate"><span class="pre">v</span></code>, that value <code class="docutils literal notranslate"><span class="pre">v</span></code> is matched against the provided patterns, exactly
 like <code class="docutils literal notranslate"><span class="pre">match</span></code> expression.</p>
 <section id="exceptions-are-extensible-variants">
 <h2><span class="section-number">3.10.1. </span>Exceptions are Extensible Variants<a class="headerlink" href="#exceptions-are-extensible-variants" title="Permalink to this headline">#</a></h2>
@@ -1292,7 +1292,7 @@ of its usage:</p>
 </div>
 </div>
 </div>
-<p>Note that the code is above is just a standard <code class="docutils literal notranslate"><span class="pre">match</span></code> expression, not a <code class="docutils literal notranslate"><span class="pre">try</span></code>
+<p>Note that the code above is just a standard <code class="docutils literal notranslate"><span class="pre">match</span></code> expression, not a <code class="docutils literal notranslate"><span class="pre">try</span></code>
 expression. It matches the value of <code class="docutils literal notranslate"><span class="pre">List.hd</span> <span class="pre">[]</span></code> against the three provided
 patterns. As we know, <code class="docutils literal notranslate"><span class="pre">List.hd</span> <span class="pre">[]</span></code> will raise an exception containing the value
 <code class="docutils literal notranslate"><span class="pre">Failure</span> <span class="pre">&quot;hd&quot;</span></code>. The <em>exception pattern</em> <code class="docutils literal notranslate"><span class="pre">exception</span> <span class="pre">(Failure</span> <span class="pre">s)</span></code> matches that
