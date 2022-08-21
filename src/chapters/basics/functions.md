@@ -923,8 +923,16 @@ we've seen so far, but hopefully nothing terribly surprising.
 [zarith]: https://antoinemine.github.io/Zarith/doc/latest/Z.html
 
 ```{code-cell} ocaml
-#require "zarith.top";;
+:tags: ["remove-cell"]
+#use "topfind";;
+```
 
+```{code-cell} ocaml
+:tags: ["remove-output"]
+#require "zarith.top";;
+```
+
+```{code-cell} ocaml
 let rec zfact_aux n acc =
   if Z.equal n Z.zero then acc else zfact_aux (Z.pred n) (Z.mul acc n);;
 

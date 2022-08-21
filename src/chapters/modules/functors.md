@@ -602,6 +602,7 @@ Suppose we wanted to write an OUnit test for `ListStack`:
 
 ```{code-cell} ocaml
 :tags: ["remove-cell"]
+#use "topfind";;
 #require "ounit2";;
 open OUnit2;;
 ```

@@ -28,7 +28,7 @@ Manual option:
   `opam switch create textbook ocaml-base-compiler.4.14.0`
 - Install Ocaml-Jupyter with `opam install jupyter`.
 - Also install the packages needed by the textbook:
-  `opam install ounit2 qcheck menhir`.
+  `opam install ounit2 qcheck menhir zarith`.
 - Run `ocaml-jupyter-opam-genspec`. Note in the output where it generated
   the kernelspec. Edit that file and change the `display_name` to just "OCaml".
   **That's important.** The display name will be hardcoded in each chapter
@@ -37,13 +37,16 @@ Manual option:
 - Make sure you've already done the above Conda environment install and have
   that environment active.
 - Run `jupyter kernelspec install --user --name ocaml-jupyter "$(opam var share)/jupyter"`
-- If your `~/.ocamlinit` has `#use "topfind";;` consider surrounding that with
+- If your `~/.ocamlinit` contains `#use "topfind";;`, then considering
+  surrounding it with these assignment statements:
   ```
   Sys.interactive := false;;
   #use "topfind";;
   Sys.interactive := true;;
   ```
-  That will reduce the amount of output you see when building the textbook.
+  The assignment statements will reduce the amount of output you see when
+  building the textbook. But if your `~/.ocamlinit` does not already
+  `#use "topfind"`, there's no need to add it or the statements.
 
 # How to Build the Textbook
 
