@@ -63,7 +63,7 @@ try e with
 ```
 The expression `e` is what might raise an exception. If it does not, the entire
 `try` expression evaluates to whatever `e` does. If `e` does raise an exception
-value `v`, that value `v` is that matched against the provide patterns, exactly
+value `v`, that value `v` is matched against the provided patterns, exactly
 like `match` expression.
 
 ## Exceptions are Extensible Variants
@@ -183,7 +183,7 @@ match List.hd [] with
   | _ :: _ -> "nonempty"
   | exception (Failure s) -> s
 ```
-Note that the code is above is just a standard `match` expression, not a `try`
+Note that the code above is just a standard `match` expression, not a `try`
 expression. It matches the value of `List.hd []` against the three provided
 patterns. As we know, `List.hd []` will raise an exception containing the value
 `Failure "hd"`. The *exception pattern* `exception (Failure s)` matches that
