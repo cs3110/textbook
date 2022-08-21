@@ -101,9 +101,10 @@ before, here's all you have to do:
   PowerShell, and it should come up as the best match. Click "Run as
   Administrator", and click Yes to allow changes.
 
-- Run `wsl --install`. When the Ubuntu download is completed, it will likely
-  ask you to reboot. Do so. The installation will automatically resume after
-  the reboot.
+- Run `wsl --install`. (Or, if you have already installed WSL but not Ubuntu
+  before, then instead run `wsl --install -d Ubuntu`.) When the Ubuntu download
+  is completed, it will likely ask you to reboot. Do so. The installation will
+  automatically resume after the reboot.
 
 - You will be prompted to create a Unix username and password. You can use any
   username and password you wish. It has no bearing on your Windows username and
