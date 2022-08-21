@@ -348,8 +348,18 @@ promises. Nonetheless, the core ideas that we developed above provide sound
 intuition for what Lwt implements.
 
 Here is some example Lwt code that you can try out in utop:
+
 ```{code-cell} ocaml
+:tags: ["remove-cell"]
+#use "topfind";;
+```
+
+```{code-cell} ocaml
+:tags: ["remove-output"]
 #require "lwt";;
+```
+
+```{code-cell} ocaml
 let p, r = Lwt.wait();;
 ```
 

@@ -168,6 +168,12 @@ The problem is that the OUnit library hasn't been loaded into utop yet. It can
 be with the following directive:
 
 ```{code-cell} ocaml
+:tags: ["remove-cell"]
+#use "topfind";;
+```
+
+```{code-cell} ocaml
+:tags: ["remove-output"]
 #require "ounit2";;
 ```
 

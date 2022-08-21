@@ -142,6 +142,12 @@ generators, properties, and arbitraries.  If you want to follow along in
 utop, load QCheck with this directive:
 
 ```{code-cell} ocaml
+:tags: ["remove-cell"]
+#use "topfind";;
+```
+
+```{code-cell} ocaml
+:tags: ["remove-output"]
 #require "qcheck";;
 ```
 

@@ -94,7 +94,8 @@ virtualization [manufacturer] [model]", substituting for the manufacturer and
 model of your machine. This [Red Hat Linux][rh-virt] page might also help.
 ```
 
-**With a recent version of Windows,** here's all you have to do:
+**With a recent version of Windows,** and assuming you've never installed WSL
+before, here's all you have to do:
 
 - Open Windows PowerShell as Administrator. To do that, click Start, type
   PowerShell, and it should come up as the best match. Click "Run as
@@ -108,6 +109,13 @@ model of your machine. This [Red Hat Linux][rh-virt] page might also help.
   username and password you wish. It has no bearing on your Windows username and
   password (though you are free to re-use those). Do not put a space in your
   username. Do not forget your password. You will need it in the future.
+
+```{warning}
+*Do not proceed* with these instructions if you were not prompted to create a
+Unix username and password. Something has gone wrong. Perhaps your Ubuntu
+installation did not complete correctly. Try uninstalling Ubuntu and
+reinstalling it through the Windows Start menu.
+```
 
 Now skip to the "Ubuntu setup" paragraph below.
 
@@ -129,6 +137,14 @@ WSL.) You will be at the *Bash prompt*, which looks something like this:
 
 ```console
 user@machine:~$
+```
+
+```{warning}
+If that prompt instead looks like `root@...#`, something is wrong. Did you
+create a Unix username and password for Ubuntu in the earlier step above? If so,
+the username in this prompt should be the username you chose back then, not
+`root`. *Do not proceed* with these instructions if your prompt looks like
+`root@...#`. Perhaps you could uninstall Ubuntu and reinstall it.
 ```
 
 Enable copy-and-paste:

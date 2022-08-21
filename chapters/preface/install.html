@@ -1125,7 +1125,8 @@ are dependent on the manufacturer of your machine. Try googling “enable
 virtualization [manufacturer] [model]”, substituting for the manufacturer and
 model of your machine. This <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios">Red Hat Linux</a> page might also help.</p>
 </div>
-<p><strong>With a recent version of Windows,</strong> here’s all you have to do:</p>
+<p><strong>With a recent version of Windows,</strong> and assuming you’ve never installed WSL
+before, here’s all you have to do:</p>
 <ul class="simple">
 <li><p>Open Windows PowerShell as Administrator. To do that, click Start, type
 PowerShell, and it should come up as the best match. Click “Run as
@@ -1138,6 +1139,13 @@ username and password you wish. It has no bearing on your Windows username and
 password (though you are free to re-use those). Do not put a space in your
 username. Do not forget your password. You will need it in the future.</p></li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><em>Do not proceed</em> with these instructions if you were not prompted to create a
+Unix username and password. Something has gone wrong. Perhaps your Ubuntu
+installation did not complete correctly. Try uninstalling Ubuntu and
+reinstalling it through the Windows Start menu.</p>
+</div>
 <p>Now skip to the “Ubuntu setup” paragraph below.</p>
 <p><strong>Without a recent version of Windows,</strong> you will need to follow
 <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-manual">Microsoft’s manual install instructions</a>. WSL2 is preferred over
@@ -1151,6 +1159,14 @@ commands from this point forward.</p>
 WSL.) You will be at the <em>Bash prompt</em>, which looks something like this:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@machine:~$</span>
 </pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If that prompt instead looks like <code class="docutils literal notranslate"><span class="pre">root&#64;...#</span></code>, something is wrong. Did you
+create a Unix username and password for Ubuntu in the earlier step above? If so,
+the username in this prompt should be the username you chose back then, not
+<code class="docutils literal notranslate"><span class="pre">root</span></code>. <em>Do not proceed</em> with these instructions if your prompt looks like
+<code class="docutils literal notranslate"><span class="pre">root&#64;...#</span></code>. Perhaps you could uninstall Ubuntu and reinstall it.</p>
 </div>
 <p>Enable copy-and-paste:</p>
 <ul class="simple">
