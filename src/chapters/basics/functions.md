@@ -918,7 +918,9 @@ fact 50
 ```
 To solve that problem, we turn to OCaml's big integer library,
 [Zarith][zarith]. Here we use a few OCaml features that are beyond anything
-we've seen so far, but hopefully nothing terribly surprising.
+we've seen so far, but hopefully nothing terribly surprising. (If you want to
+follow along with this code, first install Zarith in OPAM with
+`opam install zarith`.)
 
 [zarith]: https://antoinemine.github.io/Zarith/doc/latest/Z.html
 
