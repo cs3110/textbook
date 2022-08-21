@@ -23,8 +23,9 @@ Manual option:
 # How to Create the OCaml Jupyter Kernel
 
 - Create an OPAM switch for the textbook.  This should be a switch with
-  minimal packages installed. E.g.,
-  `opam switch create textbook ocaml-base-compiler.4.12.0`
+  minimal packages installed, and the compiler version should match
+  the installation instructions in the textbook. E.g.,
+  `opam switch create textbook ocaml-base-compiler.4.14.0`
 - Install Ocaml-Jupyter with `opam install jupyter`.
 - Also install the packages needed by the textbook:
   `opam install ounit2 qcheck menhir`.
