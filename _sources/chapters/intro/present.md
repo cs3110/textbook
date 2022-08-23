@@ -60,12 +60,11 @@ Emergency Response Team (CERT, a US government agency tasked with cybersecurity)
 were due to buffer overflows, something that's impossible in a type-safe
 language.
 
-Some functional languages, like Python and Racket, are type-safe but
-*dynamically typed*. That is, type errors are caught only at run time. Other
-languages, like C and C++, are statically typed but not type safe. There's no
-guarantee that a type error won't occur at run time. And still other languages,
-like Java, use a combination of static and dynamic typing to achieve type
-safety.
+Some languages, like Python and Racket, are type-safe but *dynamically typed*.
+That is, type errors are caught only at run time. Other languages, like C and
+C++, are statically typed but not type safe. There's no guarantee that a type
+error won't occur at run time. And still other languages, like Java, use a
+combination of static and dynamic typing to achieve type safety.
 
 OCaml supports a number of advanced features, some of which you will have
 encountered before, and some of which are likely to be new:
