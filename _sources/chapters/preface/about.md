@@ -98,7 +98,11 @@ with the code:
   the code cells on the page to be editable. It takes some time for the
   connection to be made behind the scenes, during which you will see "Waiting
   for kernel". After the connection has been made, you can edit all the code
-  cells on the page and re-run them.
+  cells on the page and re-run them. **Live code is temporarily disabled in this
+  textbook due to a [bug in Jupyter Book][thebe-bug]. As a workaround, use
+  Binder as described above.**
+
+[thebe-bug]: https://github.com/executablebooks/jupyter-book/issues/1173
 
 Try interacting with the cell above now to make it print a string of your choice.
 How about: `"Camels are bae."`
