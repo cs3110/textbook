@@ -1549,14 +1549,13 @@ have thrown away all those additional promises as irrelevant. Sure, that’s
 information lost, but at least no promises will be broken.  It’s always
 going to be safe to use a function of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> when what we needed
 was a function of type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p>
-<p>The converse is not true.  If we needed a function of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> but tried
+<p>The converse is not true. If we needed a function of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code> but tried
 to use a function of type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>, we’d be in trouble as soon as someone
-passed an input of e.g. type <code class="docutils literal notranslate"><span class="pre">bool</span></code>.  Here are two concrete examples, which
-of course do not compile:</p>
-<div class="cell tag_raises-exception docutils container">
+passed an input of another type, such as <code class="docutils literal notranslate"><span class="pre">bool</span></code>. To prevent that trouble, OCaml
+does something potentially surprising with the following code:</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id&#39;</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;;</span>
-<span class="k">let</span> <span class="n">id&#39;&#39;</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="n">id_int</span><span class="o">;;</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">id&#39;</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1564,23 +1563,29 @@ of course do not compile:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id&#39; : int -&gt; int = &lt;fun&gt;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id&#39;&#39; : int -&gt; int = &lt;fun&gt;
+</div>
+</div>
+<p>Function <code class="docutils literal notranslate"><span class="pre">id'</span></code> is actually the increment function, not the identity function. So
+passing it a <code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">string</span></code> or some complicated data structure is not safe;
+the only data <code class="docutils literal notranslate"><span class="pre">+</span></code> can safely manipulate are integers. OCaml therefore
+<em>instantiates</em> the type varaiable <code class="docutils literal notranslate"><span class="pre">'a</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>, thus preventing us from
+applying <code class="docutils literal notranslate"><span class="pre">id'</span></code> to non-integers:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="n">id&#39;</span> <span class="bp">true</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[17]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="nb">id</span><span class="s1">&#39; true</span>
+        <span class="o">^^^^</span>
+<span class="ne">Error</span>: This expression has type bool but an expression was expected of type
+         <span class="nb">int</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The first is maybe more obviously wrong than the second. Function <code class="docutils literal notranslate"><span class="pre">id'</span></code> is
-actually the increment function, not the identify function. So passing it a
-<code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">string</span></code> or some complicated data structure is not safe; the only data
-<code class="docutils literal notranslate"><span class="pre">+</span></code> can safely manipulate are integers.</p>
-<p>Function <code class="docutils literal notranslate"><span class="pre">id''</span></code> is maybe less obviously wrong. If follow the chain of definition
-backwards, we discover that <code class="docutils literal notranslate"><span class="pre">id''</span></code> is really going to be just <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">x</span></code>.
-There’s nothing wrong with that code as the implementation of <code class="docutils literal notranslate"><span class="pre">id''</span></code>: it’s
-guaranteed to return an output of the same type as its input, because it <em>does</em>
-return its input. But the compiler doesn’t go back and peek “under the covers”
-like that. Function <code class="docutils literal notranslate"><span class="pre">id_int</span></code> has type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> at the point <code class="docutils literal notranslate"><span class="pre">id''</span></code> is being
-defined, and that’s all that matters. The compiler has to assume it could be
-<em>any</em> function of that type, including the increment function.</p>
 <p>That leads us to another, more mechanical, way to think about all of this in
 terms of <strong>application</strong>. By that we mean the very same notion of how a function
 is applied to arguments: when evaluating the application <code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">5</span></code>, the argument
@@ -1629,7 +1634,7 @@ and instantiate it at type <code class="docutils literal notranslate"><span clas
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val first_int : int -&gt; &#39;b -&gt; int = &lt;fun&gt;
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[18]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">38</span><span class="o">-</span><span class="mi">43</span><span class="p">:</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[19]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">38</span><span class="o">-</span><span class="mi">43</span><span class="p">:</span>
 <span class="mi">3</span> <span class="o">|</span> <span class="n">let</span> <span class="n">bad_first</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;b -&gt; string = first;;</span>
                                           <span class="o">^^^^^</span>
 <span class="ne">Error</span>: This expression has type int -&gt; &#39;b -&gt; int

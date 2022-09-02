@@ -419,30 +419,25 @@ information lost, but at least no promises will be broken.  It's always
 going to be safe to use a function of type `'a -> 'a` when what we needed
 was a function of type `int -> int`.
 
-The converse is not true.  If we needed a function of type `'a -> 'a` but tried
+The converse is not true. If we needed a function of type `'a -> 'a` but tried
 to use a function of type `int -> int`, we'd be in trouble as soon as someone
-passed an input of e.g. type `bool`.  Here are two concrete examples, which
-of course do not compile:
+passed an input of another type, such as `bool`. To prevent that trouble, OCaml
+does something potentially surprising with the following code:
+
+```{code-cell} ocaml
+let id' : 'a -> 'a = fun x -> x + 1
+```
+
+Function `id'` is actually the increment function, not the identity function. So
+passing it a `bool` or `string` or some complicated data structure is not safe;
+the only data `+` can safely manipulate are integers. OCaml therefore
+*instantiates* the type varaiable `'a` to `int`, thus preventing us from
+applying `id'` to non-integers:
 
 ```{code-cell} ocaml
 :tags: ["raises-exception"]
-let id' : 'a -> 'a = fun x -> x + 1;;
-let id'' : 'a -> 'a = id_int;;
+id' true
 ```
-
-The first is maybe more obviously wrong than the second. Function `id'` is
-actually the increment function, not the identify function. So passing it a
-`bool` or `string` or some complicated data structure is not safe; the only data
-`+` can safely manipulate are integers.
-
-Function `id''` is maybe less obviously wrong. If follow the chain of definition
-backwards, we discover that `id''` is really going to be just `fun x -> x`.
-There's nothing wrong with that code as the implementation of `id''`: it's
-guaranteed to return an output of the same type as its input, because it *does*
-return its input. But the compiler doesn't go back and peek "under the covers"
-like that. Function `id_int` has type `int -> int` at the point `id''` is being
-defined, and that's all that matters. The compiler has to assume it could be
-*any* function of that type, including the increment function.
 
 That leads us to another, more mechanical, way to think about all of this in
 terms of **application**. By that we mean the very same notion of how a function
