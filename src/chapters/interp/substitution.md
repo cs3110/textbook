@@ -324,7 +324,7 @@ let is_value : expr -> bool = function
   | Var _ | Let _ | Binop _ | If _ -> false
 
 (** [subst e v x] is [e{v/x}]. *)
-let subst e v x =
+let subst _ _ _ =
   failwith "See next section"
 
 (** [step] is the [-->] relation, that is, a single step of
