@@ -1110,7 +1110,7 @@ and it’s orthogonal to the choice of small vs. big step. There are two differe
 ways to think about the implementation of variables:</p>
 <ul class="simple">
 <li><p>We could eagerly <em>substitute</em> the value of a variable for its name throughout
-the scope of that name, as soon as we finding a binding of the variable.</p></li>
+the scope of that name, as soon as we find a binding of the variable.</p></li>
 <li><p>We could lazily record the substitution in a dictionary, which is usually
 called an <em>environment</em> when used for this purpose, and we could look up the
 variable’s value in that environment whenever we find its name mentioned in a
@@ -1287,16 +1287,16 @@ for clarity, we could state that <code class="docutils literal notranslate"><spa
 <section id="implementing-the-single-step-relation">
 <h2><span class="section-number">9.3.2. </span>Implementing the Single-Step Relation<a class="headerlink" href="#implementing-the-single-step-relation" title="Permalink to this headline">#</a></h2>
 <p>It’s easy to turn the above definitions of <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> into an OCaml function that
-pattern matches against AST nodes. In the code below, recall that we have yet
-finished defining substitution (i.e., <code class="docutils literal notranslate"><span class="pre">subst</span></code>); we’ll return to that in the next
-section.</p>
+pattern matches against AST nodes. In the code below, recall that we have not
+yet finished defining substitution (i.e., <code class="docutils literal notranslate"><span class="pre">subst</span></code>); we’ll return to that in the
+next section.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [is_value e] is whether [e] is a value. *)</span>
 <span class="k">let</span> <span class="n">is_value</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="o">=</span> <span class="k">function</span>
   <span class="o">|</span> <span class="nc">Int</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Bool</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">true</span>
   <span class="o">|</span> <span class="nc">Var</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Let</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Binop</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">If</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
 
 <span class="c">(** [subst e v x] is [e{v/x}]. *)</span>
-<span class="k">let</span> <span class="n">subst</span> <span class="n">e</span> <span class="n">v</span> <span class="n">x</span> <span class="o">=</span>
+<span class="k">let</span> <span class="n">subst</span> <span class="o">_</span> <span class="o">_</span> <span class="o">_</span> <span class="o">=</span>
   <span class="n">failwith</span> <span class="s2">&quot;See next section&quot;</span>
 
 <span class="c">(** [step] is the [--&gt;] relation, that is, a single step of</span>

@@ -86,7 +86,7 @@ and it's orthogonal to the choice of small vs. big step. There are two different
 ways to think about the implementation of variables:
 
 * We could eagerly *substitute* the value of a variable for its name throughout
-  the scope of that name, as soon as we finding a binding of the variable.
+  the scope of that name, as soon as we find a binding of the variable.
 
 * We could lazily record the substitution in a dictionary, which is usually
   called an *environment* when used for this purpose, and we could look up the
@@ -313,9 +313,9 @@ for clarity, we could state that `x -/->`.
 ## Implementing the Single-Step Relation
 
 It's easy to turn the above definitions of `-->` into an OCaml function that
-pattern matches against AST nodes. In the code below, recall that we have yet
-finished defining substitution (i.e., `subst`); we'll return to that in the next
-section.
+pattern matches against AST nodes. In the code below, recall that we have not
+yet finished defining substitution (i.e., `subst`); we'll return to that in the
+next section.
 
 ```ocaml
 (** [is_value e] is whether [e] is a value. *)
@@ -324,7 +324,7 @@ let is_value : expr -> bool = function
   | Var _ | Let _ | Binop _ | If _ -> false
 
 (** [subst e v x] is [e{v/x}]. *)
-let subst e v x =
+let subst _ _ _ =
   failwith "See next section"
 
 (** [step] is the [-->] relation, that is, a single step of

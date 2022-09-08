@@ -667,7 +667,7 @@ module ListStack : Stack = struct
     let pp_break fmt () = fprintf fmt "@," in
     fprintf fmt "@[<v 0>top of stack";
     if s <> [] then fprintf fmt "@,";
-    pp_print_list ~pp_sep:pp_break pp_val fmt (List.rev s);
+    pp_print_list ~pp_sep:pp_break pp_val fmt s;
     fprintf fmt "@,bottom of stack@]"
 end
 ```
