@@ -4,6 +4,8 @@
   [Miniconda3 for Python 3.9](https://docs.conda.io/en/latest/miniconda.html).
 - Run `conda update -n base -c defaults conda` to upgrade that base install to
   latest versions.
+- Run `conda env create -f environment.yml` to create the `textbook`
+  environment.  
 - Proceed with one of the next two options.
 
 Automatic option (recommended for quality of life):
@@ -15,8 +17,6 @@ Automatic option (recommended for quality of life):
 
 Manual option:
 
-- Run `conda env create -f environment.yml` to create the `textbook`
-  environment.
 - Run `conda activate textbook` to activate the environment **every time** you
   want to work on the textbook.
 
@@ -29,6 +29,9 @@ Manual option:
 - Install Ocaml-Jupyter with `opam install jupyter`.
 - Also install the packages needed by the textbook:
   `opam install ounit2 qcheck menhir zarith`.
+- For ease of editing OCaml code in VS Code while in the textbook switch, also
+  install these packages:
+  `opam install ocaml-lsp-server ocamlformat ocamlformat-rpc`.
 - Run `ocaml-jupyter-opam-genspec`. Note in the output where it generated
   the kernelspec. Edit that file and change the `display_name` to just "OCaml".
   **That's important.** The display name will be hardcoded in each chapter
