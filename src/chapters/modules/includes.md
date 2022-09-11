@@ -306,7 +306,7 @@ module UniqListSet : Set = struct
 end
 ```
 
-Suppose we wanted add `of_list` to that module too. One possibility would be to
+Suppose we wanted to add `of_list` to that module too. One possibility would be to
 copy and paste that function from `ListSet` into `UniqListSet`. But that's poor
 software engineering. So let's rule that out right away as a non-solution.
 

@@ -88,7 +88,7 @@ to the queue takes time that is linear in $n$.
 <!--------------------------------------------------------------------------->
 {{ ex4 | replace("%%NAME%%", "binary search tree map")}}
 
-Write a module `BstMap` that implements the `Map` module type using the a binary
+Write a module `BstMap` that implements the `Map` module type using a binary
 search tree type. *Binary trees* were covered earlier when we discussed
 algebraic data types. A binary *search* tree (BST) is a binary tree that obeys
 the following *BST Invariant*:
@@ -127,7 +127,7 @@ end
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "fraction reduced")}}
 
-Modify your implementation of `Fraction` to ensure these invariants hold of
+Modify your implementation of `Fraction` to ensure these invariants hold for
 every value `v` of type `t` that is returned from `make`, `add`, and `mul`:
 
 1. `v` is in *[reduced form][irreducible]*
@@ -408,7 +408,7 @@ The type `date` is now abstract. Again re-do the same work in utop. Some of the
 responses will change. Explain in your own words those changes.
 
 <!--------------------------------------------------------------------------->
-{{ ex3 | replace("%%NAME%%", "printer for dat")}}
+{{ ex3 | replace("%%NAME%%", "printer for date")}}
 
 Add a declaration to `date.mli`:
 

@@ -605,7 +605,7 @@ module ListStack : ListStack = struct ... end
 ```
 
 In OCaml the namespaces for modules and module types are distinct, so it's
-perfectly valid to have a module named `ListStack` and and module type named
+perfectly valid to have a module named `ListStack` and a module type named
 `ListStack`. The compiler will not get confused about which you mean, because
 they occur in distinct syntactic contexts. But as a human you might well get
 confused by those seemingly overloaded names.
