@@ -302,7 +302,7 @@ Of course, mutual recursion can be used if desired:
 ```{code-cell} ocaml
 module M = struct
   let rec even = function 0 -> true | n -> odd (n - 1)
-  and odd = function 1 -> true | n -> even (n - 1)
+  and odd = function 1 -> true | 0 -> false | n -> even (n - 1)
 end
 ```
 
