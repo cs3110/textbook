@@ -55,7 +55,7 @@ coexist without affecting one another.
 {{ video_embed | replace("%%VID%%", "LWmGzSCpvVY")}}
 
 We implemented stacks earlier in this chapter. Here's a terse variant of one of
-those implementations, in which add a `to_list` operation to make it easier to
+those implementations, in which we add a `to_list` operation to make it easier to
 view the contents of the stack in examples:
 
 ```{code-cell} ocaml
@@ -95,7 +95,7 @@ to_list s;;
 to_list s';;
 ```
 
-The value `s` is unchanged by the `pop` operation on `s'`. Both versions of the
+The value `s` is unchanged by the `pop` operation on `s`. Both versions of the
 stack coexist.
 
 The `Stack` module type gives us a strong hint that the data structure is
@@ -363,8 +363,8 @@ So even though in the worst case `dequeue` (and `front`) will be linear time,
 most of the time they will not be. In fact, later in this book when we study
 *amortized analysis* we will show that in the long run they can be understood as
 constant-time operations. For now, here's a piece of intuition to support that
-claim: every individual element enters the outbox once (with a cons), moves to
-the inbox once (with a pattern match then cons), and leaves the inbox once (with
+claim: every individual element enters the inbox once (with a cons), moves to
+the outbox once (with a pattern match then cons), and leaves the outbox once (with
 a pattern match). Each of those is constant time. So each element only ever
 experiences constant-time operations from its own perspective.
 
