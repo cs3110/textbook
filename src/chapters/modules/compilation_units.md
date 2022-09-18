@@ -123,7 +123,7 @@ We're using the name "mystack" because the standard library already has a
 `Stack` module. Re-using that name could lead to error messages that are
 somewhat hard to understand.
 
-Also put this code in `mystack.ml`, notice that there is no `struct..end`
+Also put this code in `mystack.ml`, noting that there is no `struct..end`
 around it or any `module`:
 
 ```ocaml

@@ -95,8 +95,8 @@ to_list s;;
 to_list s';;
 ```
 
-The value `s` is unchanged by the `pop` operation on `s`. Both versions of the
-stack coexist.
+The value `s` is unchanged by the `pop` operation that creates `s'`. Both
+versions of the stack coexist.
 
 The `Stack` module type gives us a strong hint that the data structure is
 persistent in the types it provides for `push` and `pop`:
