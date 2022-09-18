@@ -115,7 +115,7 @@ end
 module IntRational : Field = struct
   type t = int * int
 
-  let zero = (0, 0)
+  let zero = (0, 1)
 
   let one = (1, 1)
 
@@ -135,7 +135,7 @@ end
 module FloatRational : Field = struct
   type t = float * float
 
-  let zero = (0., 0.)
+  let zero = (0., 1.)
 
   let one = (1., 1.)
 
