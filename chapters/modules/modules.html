@@ -1400,8 +1400,15 @@ being evaluated, <code class="docutils literal notranslate"><span class="pre">y<
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">M</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">let</span> <span class="k">rec</span> <span class="n">even</span> <span class="o">=</span> <span class="k">function</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">odd</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
-  <span class="ow">and</span> <span class="n">odd</span> <span class="o">=</span> <span class="k">function</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">even</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+  <span class="c">(* Requires: input is non-negative. *)</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">even</span> <span class="o">=</span> <span class="k">function</span> 
+    <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="bp">true</span> 
+    <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="bp">false</span> 
+    <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">odd</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+  <span class="ow">and</span> <span class="n">odd</span> <span class="o">=</span> <span class="k">function</span> 
+    <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="bp">false</span> 
+    <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="bp">true</span> 
+    <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">even</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -1581,6 +1588,9 @@ in a short expression:</p>
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s&#39; : string = &quot;bigred&quot;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val s&#39;&#39; : string = &quot;bigred&quot;
 </pre></div>
 </div>
 </div>
@@ -1833,7 +1843,7 @@ have used <code class="docutils literal notranslate"><span class="pre">ListStack
 </pre></div>
 </div>
 <p>In OCaml the namespaces for modules and module types are distinct, so it’s
-perfectly valid to have a module named <code class="docutils literal notranslate"><span class="pre">ListStack</span></code> and and module type named
+perfectly valid to have a module named <code class="docutils literal notranslate"><span class="pre">ListStack</span></code> and a module type named
 <code class="docutils literal notranslate"><span class="pre">ListStack</span></code>. The compiler will not get confused about which you mean, because
 they occur in distinct syntactic contexts. But as a human you might well get
 confused by those seemingly overloaded names.</p>

@@ -25,7 +25,7 @@ parameterization that is enabled by an OCaml language feature called *functors*.
 ```{note}
 **Why the name "functor"?** In [category theory][intellectualterrorism], a
 *category* contains *morphisms*, which are a generalization of functions as we
-known them, and a *functor* is map between categories. Likewise, OCaml modules
+know them, and a *functor* is map between categories. Likewise, OCaml modules
 contain functions, and OCaml functors map from modules to modules.
 ```
 

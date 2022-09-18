@@ -1076,7 +1076,7 @@ coexist without affecting one another.</p>
 <h2><span class="section-number">5.6.2. </span>Stacks<a class="headerlink" href="#stacks" title="Permalink to this headline">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/LWmGzSCpvVY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We implemented stacks earlier in this chapter. Here’s a terse variant of one of
-those implementations, in which add a <code class="docutils literal notranslate"><span class="pre">to_list</span></code> operation to make it easier to
+those implementations, in which we add a <code class="docutils literal notranslate"><span class="pre">to_list</span></code> operation to make it easier to
 view the contents of the stack in examples:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
@@ -1152,8 +1152,8 @@ view the contents of the stack in examples:</p>
 </div>
 </div>
 </div>
-<p>The value <code class="docutils literal notranslate"><span class="pre">s</span></code> is unchanged by the <code class="docutils literal notranslate"><span class="pre">pop</span></code> operation on <code class="docutils literal notranslate"><span class="pre">s'</span></code>. Both versions of the
-stack coexist.</p>
+<p>The value <code class="docutils literal notranslate"><span class="pre">s</span></code> is unchanged by the <code class="docutils literal notranslate"><span class="pre">pop</span></code> operation that creates <code class="docutils literal notranslate"><span class="pre">s'</span></code>. Both
+versions of the stack coexist.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Stack</span></code> module type gives us a strong hint that the data structure is
 persistent in the types it provides for <code class="docutils literal notranslate"><span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">pop</span></code>:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
@@ -1496,8 +1496,8 @@ when the outbox becomes empty.</p>
 most of the time they will not be. In fact, later in this book when we study
 <em>amortized analysis</em> we will show that in the long run they can be understood as
 constant-time operations. For now, here’s a piece of intuition to support that
-claim: every individual element enters the outbox once (with a cons), moves to
-the inbox once (with a pattern match then cons), and leaves the inbox once (with
+claim: every individual element enters the inbox once (with a cons), moves to
+the outbox once (with a pattern match then cons), and leaves the outbox once (with
 a pattern match). Each of those is constant time. So each element only ever
 experiences constant-time operations from its own perspective.</p>
 <p>For now, let’s move on to implementing these ideas. In the implementation, we’ll

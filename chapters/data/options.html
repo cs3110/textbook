@@ -1001,11 +1001,12 @@ list is non empty.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">Some</span></code> means there’s something inside the box, and it’s <code class="docutils literal notranslate"><span class="pre">42</span></code>. The <code class="docutils literal notranslate"><span class="pre">None</span></code>
 means there’s nothing inside the box.</p>
-<p>As for the types we see above, <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">option</span></code> is a type for every type <code class="docutils literal notranslate"><span class="pre">t</span></code>, much
-like <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">list</span></code> is a type for every type <code class="docutils literal notranslate"><span class="pre">t</span></code>. Values of type <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">option</span></code> might
-contain a value of type <code class="docutils literal notranslate"><span class="pre">t</span></code>, or they might contain nothing. <code class="docutils literal notranslate"><span class="pre">None</span></code> has type
-<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">option</span></code> because it’s unknown what the type is of the thing inside, as there
-isn’t anything inside.</p>
+<p>Like <code class="docutils literal notranslate"><span class="pre">list</span></code>, we call <code class="docutils literal notranslate"><span class="pre">option</span></code> a <em>type constructor</em>: given a type, it produces a
+new type; but, it is not itself a type. So for any type <code class="docutils literal notranslate"><span class="pre">t</span></code>, we can write
+<code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">option</span></code> as a type. But <code class="docutils literal notranslate"><span class="pre">option</span></code> all by itself cannot be used as a type.
+Values of type <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">option</span></code> might contain a value of type <code class="docutils literal notranslate"><span class="pre">t</span></code>, or they might
+contain nothing. <code class="docutils literal notranslate"><span class="pre">None</span></code> has type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">option</span></code> because it’s unconstrained what the
+type is of the thing inside — as there isn’t anything inside.</p>
 <p>You can access the contents of an option value <code class="docutils literal notranslate"><span class="pre">e</span></code> using pattern matching.
 Here’s a function that extracts an <code class="docutils literal notranslate"><span class="pre">int</span></code> from an option, if there is one inside,
 and converts it to a string:</p>
