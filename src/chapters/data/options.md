@@ -71,7 +71,7 @@ None
 The `Some` means there's something inside the box, and it's `42`. The `None`
 means there's nothing inside the box.
 
-As for the types we see above, `t option` is a option type for every type `t`, much
+As for the types we see above, `t option` is a type for every type `t`, much
 like `t list` is a list for every type `t`. Values of type `t option` might
 contain a value of type `t`, or they might contain nothing. `None` has type
 `'a option` because it's unknown what the type is of the thing inside, as there
