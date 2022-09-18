@@ -71,11 +71,12 @@ None
 The `Some` means there's something inside the box, and it's `42`. The `None`
 means there's nothing inside the box.
 
-As for the types we see above, `t option` is a type for every type `t`, much
-like `t list` is a type for every type `t`. Values of type `t option` might
-contain a value of type `t`, or they might contain nothing. `None` has type
-`'a option` because it's unknown what the type is of the thing inside, as there
-isn't anything inside.
+Like `list`, we call `option` a *type constructor*: given a type, it produces a
+new type; but, it is not itself a type. So for any type `t`, we can write
+`t option` as a type. But `option` all by itself cannot be used as a type.
+Values of type `t option` might contain a value of type `t`, or they might
+contain nothing. `None` has type `'a option` because it's unconstrained what the
+type is of the thing inside &mdash; as there isn't anything inside.
 
 You can access the contents of an option value `e` using pattern matching.
 Here's a function that extracts an `int` from an option, if there is one inside,
