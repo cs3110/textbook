@@ -304,11 +304,9 @@ module M = struct
   (* Requires: input is non-negative. *)
   let rec even = function 
     | 0 -> true 
-    | 1 -> false 
     | n -> odd (n - 1)
   and odd = function 
     | 0 -> false 
-    | 1 -> true 
     | n -> even (n - 1)
 end
 ```

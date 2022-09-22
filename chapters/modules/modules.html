@@ -1403,11 +1403,9 @@ being evaluated, <code class="docutils literal notranslate"><span class="pre">y<
   <span class="c">(* Requires: input is non-negative. *)</span>
   <span class="k">let</span> <span class="k">rec</span> <span class="n">even</span> <span class="o">=</span> <span class="k">function</span> 
     <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="bp">true</span> 
-    <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="bp">false</span> 
     <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">odd</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
   <span class="ow">and</span> <span class="n">odd</span> <span class="o">=</span> <span class="k">function</span> 
     <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="bp">false</span> 
-    <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="bp">true</span> 
     <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">even</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
 <span class="k">end</span>
 </pre></div>
