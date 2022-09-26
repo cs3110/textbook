@@ -224,7 +224,7 @@ let rec is_sorted = function
 ```
 
 **Arbitraries.** The way we present to QCheck the outputs to be checked is with
-a value of type `'a QCheck.Arbitrary`. This type represents an "arbitrary" value
+a value of type `'a QCheck.arbitrary`. This type represents an "arbitrary" value
 of type `'a`&mdash;that is, it has been pseudorandomly chosen as a value that we
 want to check, and more specifically, to check whether it satisfies a property.
 

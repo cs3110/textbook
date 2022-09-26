@@ -64,7 +64,7 @@ without disclosing all the details of the module's implementation.
 
 *Locality* is one of the benefits of abstraction by specification. A module can
 be understood without needing to examine its implementation. This locality is
-critical in implementing large programs, and even in in implementing smaller
+critical in implementing large programs, and even in implementing smaller
 programs in teams. No one person can keep the entire system in their head at a
 time.
 
