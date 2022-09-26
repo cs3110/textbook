@@ -605,7 +605,7 @@ type expr =
 ```
 
 For example, the expression `5 < 6` would be represented as
-`Binop (BLeq, Int 5, Int 6)`. We'll see more examples of this kind of
+`Binop (Int 5, BLeq, Int 6)`. We'll see more examples of this kind of
 representation later in the book when we study interpreters.
 
 The induction principle for `expr` is:

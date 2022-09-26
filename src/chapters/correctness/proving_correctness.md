@@ -637,7 +637,7 @@ terminate.
 
 To show that, the base case is easy: when the input is `(0, _)`, the function
 terminates. But in other cases, it makes a recursive call, and we need to define
-an appropriate `<` relation. It turns out *lexicograpic ordering* on pairs
+an appropriate `<` relation. It turns out *lexicographic ordering* on pairs
 works. Define `(a, b) < (c, d)` if:
 
 - `a < c`, or
