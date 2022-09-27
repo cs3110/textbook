@@ -483,18 +483,30 @@ Using that additional equation, we can continue:
   (List.rev (h' :: t'), [x])
 =   { AF equation }
   List.rev (x :: h' :: t'), []
+  
+Justification for { AF equation }  
+  
+let e = (List.rev (h' :: t'), [x])
+let e'= List.rev (x :: h' :: t'), []
 
-The AF equation holds because:
-
-  List.rev (h' :: t') @ [x]
-=   { eval rev }
+  AF(e)
+=   { application of AF } 
   List.rev (h' :: t') @ List.rev [x]
 =   { rev distributes over @, an exercise in the previous lecture }
   List.rev ([x] @ (h' :: t'))
 =   { eval @ }
-  List.rev (x :: h' :: t'))
-=   { lst @ [] = lst, an exercise in the previous lecture }
+  List.rev (x :: h' :: t')
+  
+  AF(e')
+=   { application of AF }
+  List.rev (x :: h' :: t') @ List.rev []
+=   { eval rev }
   List.rev (x :: h' :: t') @ []
+=   { eval @ }
+  List.rev (x :: h' :: t')
+  
+Since AF(e) = AF(e'), e = e'  
+
 
 Case analysis:  t = h' :: t'
 
