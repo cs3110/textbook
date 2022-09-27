@@ -42,10 +42,10 @@ type shape =
 This type, `shape`, represents a shape that is either a point, a circle, or a
 rectangle. A point is represented by a constructor `Point` that *carries* some
 additional data, which is a value of type `point`. A circle is represented by a
-constructor `Circle` that carries a pair of type `point * float`, which
-according to the comment represents the center of the circle and its radius. A
-rectangle is represented by a constructor `Rect` that carries a pair of type
-`point*point`.
+constructor `Circle` that carries two pieces of data: one of type `point` and
+the other of type `float`. Those data represent the center of the circle and its
+radius. A rectangle is represented by a constructor `Rect` that carries two more
+points.
 
 {{ video_embed | replace("%%VID%%", "K_eA-8LhlVY")}}
 {{ video_embed | replace("%%VID%%", "SpuQfO_597E")}}
@@ -75,10 +75,12 @@ particular constructor.
 
 Variant types are sometimes called *tagged unions*. Every value of the type is
 from the set of values that is the union of all values from the underlying types
-that the constructor carries. For the `shape` type, every value is tagged with
-either `Point` or `Circle` or `Rect` and carries a value from the set of all
-`point` valued unioned with the set of all `point * float` values unioned with
-the set of all `point * point` values.
+that the constructor carries. For example, with the `shape` type, every value is
+tagged with either `Point` or `Circle` or `Rect` and carries a value from:
+
+- the set of all `point` values, unioned with 
+- the set of all `point * float` values, unioned with
+- the set of all `point * point` values.
 
 Another name for these variant types is an *algebraic data type*. "Algebra" here
 refers to the fact that variant types contain both sum and product types, as

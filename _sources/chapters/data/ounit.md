@@ -67,6 +67,12 @@ file and put this in it:
  (libraries ounit2))
 ```
 
+And create a `dune-project` file as usual:
+
+```text
+(lang dune 3.4)
+```
+
 Now build the test suite:
 
 ```console

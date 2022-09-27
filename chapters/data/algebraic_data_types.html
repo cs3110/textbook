@@ -1074,10 +1074,10 @@ enumerate values:</p>
 <p>This type, <code class="docutils literal notranslate"><span class="pre">shape</span></code>, represents a shape that is either a point, a circle, or a
 rectangle. A point is represented by a constructor <code class="docutils literal notranslate"><span class="pre">Point</span></code> that <em>carries</em> some
 additional data, which is a value of type <code class="docutils literal notranslate"><span class="pre">point</span></code>. A circle is represented by a
-constructor <code class="docutils literal notranslate"><span class="pre">Circle</span></code> that carries a pair of type <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">*</span> <span class="pre">float</span></code>, which
-according to the comment represents the center of the circle and its radius. A
-rectangle is represented by a constructor <code class="docutils literal notranslate"><span class="pre">Rect</span></code> that carries a pair of type
-<code class="docutils literal notranslate"><span class="pre">point*point</span></code>.</p>
+constructor <code class="docutils literal notranslate"><span class="pre">Circle</span></code> that carries two pieces of data: one of type <code class="docutils literal notranslate"><span class="pre">point</span></code> and
+the other of type <code class="docutils literal notranslate"><span class="pre">float</span></code>. Those data represent the center of the circle and its
+radius. A rectangle is represented by a constructor <code class="docutils literal notranslate"><span class="pre">Rect</span></code> that carries two more
+points.</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/K_eA-8LhlVY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/SpuQfO_597E" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Here are a couple functions that use the <code class="docutils literal notranslate"><span class="pre">shape</span></code> type:</p>
@@ -1115,10 +1115,13 @@ the constructor a <em>tag</em>, because it tags the data it carries as being fro
 particular constructor.</p>
 <p>Variant types are sometimes called <em>tagged unions</em>. Every value of the type is
 from the set of values that is the union of all values from the underlying types
-that the constructor carries. For the <code class="docutils literal notranslate"><span class="pre">shape</span></code> type, every value is tagged with
-either <code class="docutils literal notranslate"><span class="pre">Point</span></code> or <code class="docutils literal notranslate"><span class="pre">Circle</span></code> or <code class="docutils literal notranslate"><span class="pre">Rect</span></code> and carries a value from the set of all
-<code class="docutils literal notranslate"><span class="pre">point</span></code> valued unioned with the set of all <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">*</span> <span class="pre">float</span></code> values unioned with
-the set of all <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">*</span> <span class="pre">point</span></code> values.</p>
+that the constructor carries. For example, with the <code class="docutils literal notranslate"><span class="pre">shape</span></code> type, every value is
+tagged with either <code class="docutils literal notranslate"><span class="pre">Point</span></code> or <code class="docutils literal notranslate"><span class="pre">Circle</span></code> or <code class="docutils literal notranslate"><span class="pre">Rect</span></code> and carries a value from:</p>
+<ul class="simple">
+<li><p>the set of all <code class="docutils literal notranslate"><span class="pre">point</span></code> values, unioned with</p></li>
+<li><p>the set of all <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">*</span> <span class="pre">float</span></code> values, unioned with</p></li>
+<li><p>the set of all <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">*</span> <span class="pre">point</span></code> values.</p></li>
+</ul>
 <p>Another name for these variant types is an <em>algebraic data type</em>. “Algebra” here
 refers to the fact that variant types contain both sum and product types, as
 defined in the previous lecture. The sum types come from the fact that a value
