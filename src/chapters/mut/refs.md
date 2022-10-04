@@ -96,9 +96,9 @@ that can be passed to and returned from functions. But unlike other values
 (e.g., integers, variants), there is no way to directly write a location in an
 OCaml program. That's different than languages like C, in which programmers can
 directly write memory addresses and do arithmetic on pointers. C programmers
-want that kind of low-level access to do things like interface with hardware and
-build operating systems. Higher-level programmers are willing to forego it to
-get *memory safety*. That's a hard term to define, but according to
+want that kind of low-level access to do things like interfacing with hardware
+and building operating systems. Higher-level programmers are willing to forego
+it to get *memory safety*. That's a hard term to define, but according to
 [Hicks 2014][memory-safety-hicks] it intuitively means that
 
 * pointers are only created in a safe way that defines their legal memory
@@ -518,7 +518,7 @@ isn't it the usual `'a -> 'a`?
 The answer has to do with a particularly tricky interaction between polymorphism
 and mutability. In a later chapter on interpreters, we'll learn how type
 inference works, and at that point we'll be able to explain the problem in
-detail. In short, allowing the type `'a -> 'a` for that ref would lead the
+detail. In short, allowing the type `'a -> 'a` for that ref would lead to the
 possibility of programs that crash at run time because of type errors.
 
 For now, think about it this way: although the *value* stored in a ref cell is
@@ -671,7 +671,7 @@ Inserting a new first element just requires creating a new node, linking from
 it to the original list, and mutating the list:
 
 ```{code-cell} ocaml
-(** [insert_first lst n] mutates mlist [lst] by inserting value [v] as the
+(** [insert_first lst v] mutates mlist [lst] by inserting value [v] as the
     first value in the list. *)
 let insert_first (lst : 'a mlist) (v : 'a) : unit =
   lst := Some { next = ref !lst; value = v }
