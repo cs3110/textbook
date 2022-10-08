@@ -54,7 +54,7 @@ end
 The functor's name is `IncX`. It's essentially a function from modules to
 modules. As a function, it takes an input and produces an output. Its input is
 named `M`, and the type of its input is `X`. Its output is the structure that
-appears on the right-hand side of the equals sign: `struct let x = M.x + 1`.
+appears on the right-hand side of the equals sign: `struct let x = M.x + 1 end`.
 
 Another way to think about `IncX` is that it's a *parameterized structure*. The
 parameter that it takes is named `M` and has type `X`. The structure itself has
