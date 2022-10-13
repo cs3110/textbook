@@ -76,7 +76,7 @@ record with a single mutable field named `contents`!
 let r = ref 42
 ```
 
-The other syntax we've seen for records is in fact equivalent to simple OCaml
+The other syntax we've seen for refs is in fact equivalent to simple OCaml
 functions:
 
 ```{code-cell} ocaml
