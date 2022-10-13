@@ -1459,7 +1459,7 @@ Case analysis:  t = [], b = h&#39; :: t&#39;
 =   { eval enq }
   deq ([h], x :: h&#39; :: t&#39;)
 =   { eval deq }
-  List.rev (x :: h&#39; :: t&#39;), []
+  (List.rev (x :: h&#39; :: t&#39;), [])
 
   enq x (deq q)
 =   { rewriting q as ([h], h&#39; :: t&#39;) }
@@ -1472,31 +1472,41 @@ Case analysis:  t = [], b = h&#39; :: t&#39;
 STUCK
 </pre></div>
 </div>
-<p>Wait, we just got stuck! <code class="docutils literal notranslate"><span class="pre">List.rev</span> <span class="pre">(x</span> <span class="pre">::</span> <span class="pre">h'</span> <span class="pre">::</span> <span class="pre">t'),</span> <span class="pre">[]</span></code> and
-<code class="docutils literal notranslate"><span class="pre">(List.rev</span> <span class="pre">(h'</span> <span class="pre">::</span> <span class="pre">t'),</span> <span class="pre">[x])</span></code> are not the same. But, abstractly, they do
-represent the same queue: <code class="docutils literal notranslate"><span class="pre">(List.rev</span> <span class="pre">t')</span> <span class="pre">&#64;</span> <span class="pre">[h';</span> <span class="pre">x]</span></code>. We need to allow an
-additional equation for the representation type:</p>
+<p>Wait, we just got stuck! <code class="docutils literal notranslate"><span class="pre">(List.rev</span> <span class="pre">(x</span> <span class="pre">::</span> <span class="pre">h'</span> <span class="pre">::</span> <span class="pre">t'),</span> <span class="pre">[])</span></code> and
+<code class="docutils literal notranslate"><span class="pre">(List.rev</span> <span class="pre">(h'</span> <span class="pre">::</span> <span class="pre">t'),</span> <span class="pre">[x])</span></code> are different. But, abstractly, they do
+represent the same queue: <code class="docutils literal notranslate"><span class="pre">(List.rev</span> <span class="pre">t')</span> <span class="pre">&#64;</span> <span class="pre">[h';</span> <span class="pre">x]</span></code>.</p>
+<p>To solve this problem, we will adopt the following equation for representation
+types:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e = e&#39;   if  AF(e) = AF(e&#39;)
 </pre></div>
 </div>
-<p>Using that additional equation, we can continue:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  (List.rev (h&#39; :: t&#39;), [x])
-=   { AF equation }
-  List.rev (x :: h&#39; :: t&#39;), []
-
-The AF equation holds because:
-
-  List.rev (h&#39; :: t&#39;) @ [x]
-=   { eval rev }
+<p>That equation allows us to conclude that the two differing expressions are
+equal:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  AF((List.rev (h&#39; :: t&#39;), [x]))
+=   { apply AF } 
   List.rev (h&#39; :: t&#39;) @ List.rev [x]
 =   { rev distributes over @, an exercise in the previous lecture }
   List.rev ([x] @ (h&#39; :: t&#39;))
 =   { eval @ }
-  List.rev (x :: h&#39; :: t&#39;))
-=   { lst @ [] = lst, an exercise in the previous lecture }
+  List.rev (x :: h&#39; :: t&#39;)
+  
+  AF((List.rev (x :: h&#39; :: t&#39;), []))
+=   { apply AF }
+  List.rev (x :: h&#39; :: t&#39;) @ List.rev []
+=   { eval rev }
   List.rev (x :: h&#39; :: t&#39;) @ []
-
-Case analysis:  t = h&#39; :: t&#39;
+=   { eval @ }
+  List.rev (x :: h&#39; :: t&#39;)
+</pre></div>
+</div>
+<p>Now we are unstuck:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  (List.rev (h&#39; :: t&#39;), [x])
+=   { AF equation }
+  (List.rev (x :: h&#39; :: t&#39;), [])
+</pre></div>
+</div>
+<p>There is one more case analysis remaining to finish the proof:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Case analysis:  t = h&#39; :: t&#39;
 
   deq (enq x q)
 =   { rewriting q as (h :: h&#39; :: t&#39;, b) }

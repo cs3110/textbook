@@ -455,7 +455,7 @@ Case analysis:  t = [], b = h' :: t'
 =   { eval enq }
   deq ([h], x :: h' :: t')
 =   { eval deq }
-  List.rev (x :: h' :: t'), []
+  (List.rev (x :: h' :: t'), [])
 
   enq x (deq q)
 =   { rewriting q as ([h], h' :: t') }
@@ -468,34 +468,49 @@ Case analysis:  t = [], b = h' :: t'
 STUCK
 ```
 
-Wait, we just got stuck! `List.rev (x :: h' :: t'), []` and
-`(List.rev (h' :: t'), [x])` are not the same. But, abstractly, they do
-represent the same queue: `(List.rev t') @ [h'; x]`. We need to allow an
-additional equation for the representation type:
+Wait, we just got stuck! `(List.rev (x :: h' :: t'), [])` and
+`(List.rev (h' :: t'), [x])` are different. But, abstractly, they do
+represent the same queue: `(List.rev t') @ [h'; x]`.
+
+To solve this problem, we will adopt the following equation for representation
+types:
 
 ```text
 e = e'   if  AF(e) = AF(e')
 ```
 
-Using that additional equation, we can continue:
+That equation allows us to conclude that the two differing expressions are
+equal:
 
 ```text
-  (List.rev (h' :: t'), [x])
-=   { AF equation }
-  List.rev (x :: h' :: t'), []
-
-The AF equation holds because:
-
-  List.rev (h' :: t') @ [x]
-=   { eval rev }
+  AF((List.rev (h' :: t'), [x]))
+=   { apply AF } 
   List.rev (h' :: t') @ List.rev [x]
 =   { rev distributes over @, an exercise in the previous lecture }
   List.rev ([x] @ (h' :: t'))
 =   { eval @ }
-  List.rev (x :: h' :: t'))
-=   { lst @ [] = lst, an exercise in the previous lecture }
+  List.rev (x :: h' :: t')
+  
+  AF((List.rev (x :: h' :: t'), []))
+=   { apply AF }
+  List.rev (x :: h' :: t') @ List.rev []
+=   { eval rev }
   List.rev (x :: h' :: t') @ []
+=   { eval @ }
+  List.rev (x :: h' :: t')
+```
 
+Now we are unstuck:
+
+```text
+  (List.rev (h' :: t'), [x])
+=   { AF equation }
+  (List.rev (x :: h' :: t'), [])
+```
+
+There is one more case analysis remaining to finish the proof:
+  
+```text
 Case analysis:  t = h' :: t'
 
   deq (enq x q)
