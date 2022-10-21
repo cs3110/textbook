@@ -19,9 +19,9 @@ thebe-kernel: ocaml-jupyter
 **Reporting Errors.** If you find an error, please report it! Or if you have a
 suggestion about how to rewrite some part of the book, let us know. Just go to
 the page of the book for which you'd like to make a suggestion, click on the
-Github icon (it looks like a cat) near the top right of the page, and click
+GitHub icon (it looks like a cat) near the top right of the page, and click
 "open issue" or "suggest edit". The latter is a little heavier weight, because
-it requires you to fork the textbook repository with Github. But for minor edits
+it requires you to fork the textbook repository with GitHub. But for minor edits
 that will be appreciated and lead to much quicker uptake of suggestions.
 
 **Background.** This book is used at Cornell for a third-semester programming

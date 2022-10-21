@@ -545,7 +545,7 @@ spin up a separate Zoom call.  To install Live Share:
   Install it.
 
 - The first time you use Live Share, you will be prompted to login. If you are a
-  Cornell student, choose to login with your Microsoft account, not Github.
+  Cornell student, choose to login with your Microsoft account, not GitHub.
   Enter your Cornell NetID email, e.g., `your_netid@cornell.edu`. That will take
   you to Cornell's login site. Use the password associated with your NetID.
 
