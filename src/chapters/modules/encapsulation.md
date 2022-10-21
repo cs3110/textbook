@@ -691,7 +691,7 @@ ListStack.(empty |> push 1 |> push 2)
 
 For more information, see the [toplevel manual][toplevel] (search for
 `#install_printer`), the [Format module][format], and this
-[OCaml Github issue][poly-printer]. The latter seems to be the only place that
+[OCaml GitHub issue][poly-printer]. The latter seems to be the only place that
 documents the use of extra arguments, as in `pp_val` above, to print values of
 polymorphic types.
 

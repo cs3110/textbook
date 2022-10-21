@@ -24,7 +24,7 @@ HUnit in Haskell, etc. The basic workflow for using OUnit is as follows:
 
 * Build and run `test` to execute the unit tests.
 
-The [OUnit documentation][ounitdoc] is available on Github.
+The [OUnit documentation][ounitdoc] is available on GitHub.
 
 [ounitdoc]: https://gildor478.github.io/ounit/ounit2/index.html
 

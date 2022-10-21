@@ -131,7 +131,7 @@ is part of the Ocsigen project, which is a web framework for OCaml.
 
 We now take a deeper look at promises in Lwt. The name of the library was an
 acronym for "light-weight threads." But that was a misnomer, as the
-[Github page][lwt-github] admits (as of 10/22/18):
+[GitHub page][lwt-github] admits (as of 10/22/18):
 
 > Much of the current manual refers to ... "lightweight threads" or
 just "threads." This will be fixed in the new manual. [Lwt implements] promises,
