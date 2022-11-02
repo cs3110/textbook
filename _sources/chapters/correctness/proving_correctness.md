@@ -215,13 +215,13 @@ Proof: by induction on n.
 P(n) = sumto n = n * (n + 1) / 2
 
 Base case: n = 0
-Show: sumto 0 = 0 * (n + 1) / 2
+Show: sumto 0 = 0 * (0 + 1) / 2
 
   sumto 0
 =   { evaluation }
   0
 =   { algebra }
-  0 * (n + 1) / 2
+  0 * (0 + 1) / 2
 
 Inductive case: n = k + 1
 Show: sumto (k + 1) = (k + 1) * ((k + 1) + 1) / 2
