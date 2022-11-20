@@ -80,7 +80,7 @@ are: they both produce the value `42`.
 What about functions: are `fun x -> x` and `fun y -> y` equal? Syntactically
 they are different. But semantically, they both produce a value that is the
 identity function: when they are applied to an input, they will both produce the
-same output. That is, `(fun x -> x) z = z`, and `(fun y -> y) z =  z`. If it is
+same output. That is, `(fun x -> x) z = z`, and `(fun y -> y) z = z`. If it is
 the case that for all inputs two functions produce the same output, we will
 consider the functions to be equal:
 
