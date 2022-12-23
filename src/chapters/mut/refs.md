@@ -178,7 +178,7 @@ mutability, it's time to treat it formally.
   - If there are multiple expressions in a sequence, e.g., `e1; e2; ...; en`,
     then evaluate each one in order from left to right, returning only `vn`.
     Another way to think about this is that semicolon is right
-    associative&mdash;for example `e1; e2; e3` is the same as `e1; (e2; e3))`.
+    associative&mdash;for example `e1; e2; e3` is the same as `(e1; (e2; e3))`.
 
 * **Static semantics:** `e1; e2 : t` if `e1 : unit` and `e2 : t`. Similarly,
   `e1; e2; ...; en : t` if `e1 : unit`, `e2 : unit`, ... (i.e., all expressions
