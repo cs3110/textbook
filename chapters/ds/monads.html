@@ -1905,15 +1905,14 @@ and string concatenation. Here’s that idea expressed as its own function:</p>
 </div>
 </div>
 </div>
-<p>Using <code class="docutils literal notranslate"><span class="pre">return</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code>, we can re-implement <code class="docutils literal notranslate"><span class="pre">loggable</span></code>, such that no pairs
+<p>Using <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code>, we can re-implement <code class="docutils literal notranslate"><span class="pre">loggable</span></code>, such that no pairs
 or pattern matching are ever used in its body:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">loggable</span> <span class="o">(</span><span class="n">name</span> <span class="o">:</span> <span class="kt">string</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">=</span>
   <span class="k">fun</span> <span class="n">m</span> <span class="o">-&gt;</span>
     <span class="n">m</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span>
-    <span class="n">log</span> <span class="n">name</span> <span class="n">f</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">-&gt;</span>
-    <span class="n">return</span> <span class="n">y</span>
+    <span class="n">log</span> <span class="n">name</span> <span class="n">f</span> <span class="n">x</span>
 </pre></div>
 </div>
 </div>

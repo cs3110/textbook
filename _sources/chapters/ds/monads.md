@@ -563,15 +563,14 @@ let ( >>= ) (m : int * string) (f : int -> int * string) : int * string =
   (y, s1 ^ s2)
 ```
 
-Using `return` and `>>=`, we can re-implement `loggable`, such that no pairs
+Using `>>=`, we can re-implement `loggable`, such that no pairs
 or pattern matching are ever used in its body:
 
 ```{code-cell} ocaml
 let loggable (name : string) (f : int -> int) : int * string -> int * string =
   fun m ->
     m >>= fun x ->
-    log name f x >>= fun y ->
-    return y
+    log name f x
 ```
 
 **The Writer Monad.** The monad we just discovered is usually called the *writer

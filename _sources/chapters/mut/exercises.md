@@ -157,7 +157,7 @@ Write a function `init_matrix : int -> int -> (int -> int -> 'a) -> 'a array
 array` such that `init_matrix n o f` creates and returns an `n` by `o` matrix
 `m` with `m.(i).(j) = f i j` for all `i` and `j` in bounds.
 
-See the documentation for `make_matrix` for more information on the
+See the documentation for [`make_matrix`](https://v2.ocaml.org/api/Array.html#VALmake_matrix) for more information on the
 representation of matrices as arrays.
 
 <!--------------------------------------------------------------------------->
