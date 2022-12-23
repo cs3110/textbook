@@ -105,8 +105,10 @@ particular list, `'a` must be `bool`.
 
 ```{note}
 The video linked above also uses records and tuples as examples. Those are
-covered in the [next section](records_tuples) of this book.
+covered in a [later section](records_tuples) of this book.
 ```
+
+{{ video_embed | replace("%%VID%%", "sO9wxUxajS4")}}
 
 There are really only two ways to build a list, with nil and cons. So if we want
 to take apart a list into its component pieces, we have to say what to do with
@@ -253,8 +255,6 @@ it easier to reason about the code, and makes it safe for the compiler to
 perform an optimization.
 
 ## Pattern Matching with Lists
-
-{{ video_embed | replace("%%VID%%", "sO9wxUxajS4")}}
 
 We saw above how to access lists using pattern matching. Let's look more
 carefully at this feature.
