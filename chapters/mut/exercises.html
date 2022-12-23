@@ -1030,43 +1030,6 @@ for initialization.</p>
 <code class="docutils literal notranslate"><span class="pre">m</span></code> with <code class="docutils literal notranslate"><span class="pre">m.(i).(j)</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">i</span> <span class="pre">j</span></code> for all <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> in bounds.</p>
 <p>See the documentation for <a class="reference external" href="https://v2.ocaml.org/api/Array.html#VALmake_matrix"><code class="docutils literal notranslate"><span class="pre">make_matrix</span></code></a> for more information on the
 representation of matrices as arrays.</p>
-<!--------------------------------------------------------------------------->
-<hr class="docutils" />
-<p><strong>Exercise: doubly linked list [★★★★]</strong></p>
-<p>Implement a data abstraction for a mutable doubly-linked list. Here is a
-representation type to get you started:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** An [&#39;a node] is a node of a mutable doubly-linked list.</span>
-<span class="c">    It contains a value of type [&#39;a] and optionally has</span>
-<span class="c">    pointers to previous and/or next nodes. *)</span>
-<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="k">mutable</span> <span class="n">prev</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="o">;</span>
-  <span class="k">mutable</span> <span class="n">next</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="o">;</span>
-  <span class="k">value</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span>
-<span class="o">}</span>
-
-<span class="c">(** An [&#39;a dlist] is a mutable doubly-linked list with elements</span>
-<span class="c">    of type [&#39;a].  It is possible to access the first and</span>
-<span class="c">    last elements in constant time.</span>
-<span class="c">    RI: The list does not contain any cycles. *)</span>
-<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">dlist</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="k">mutable</span> <span class="n">first</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="o">;</span>
-  <span class="k">mutable</span> <span class="n">last</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">option</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-</div>
-<p>Implement at least these operations:</p>
-<ul class="simple">
-<li><p>create an empty list</p></li>
-<li><p>insert a new first value</p></li>
-<li><p>insert a new last value</p></li>
-<li><p>insert a new node after a given node</p></li>
-<li><p>insert a new node before a given node</p></li>
-<li><p>remove a node</p></li>
-<li><p>iterate forward through the list applying a function</p></li>
-<li><p>iterate backward through the list applying a function</p></li>
-</ul>
-<p><em>Hint: draw pictures! Reasoning about mutable data structures is typically
-easier if you draw a picture.</em></p>
 </section>
 
     <script type="text/x-thebe-config">
