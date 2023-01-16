@@ -1568,7 +1568,7 @@ does something potentially surprising with the following code:</p>
 <p>Function <code class="docutils literal notranslate"><span class="pre">id'</span></code> is actually the increment function, not the identity function. So
 passing it a <code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">string</span></code> or some complicated data structure is not safe;
 the only data <code class="docutils literal notranslate"><span class="pre">+</span></code> can safely manipulate are integers. OCaml therefore
-<em>instantiates</em> the type varaiable <code class="docutils literal notranslate"><span class="pre">'a</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>, thus preventing us from
+<em>instantiates</em> the type variable <code class="docutils literal notranslate"><span class="pre">'a</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>, thus preventing us from
 applying <code class="docutils literal notranslate"><span class="pre">id'</span></code> to non-integers:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
@@ -2193,7 +2193,7 @@ base case as the accumulator:</p>
 </pre></div>
 </div>
 <p>Finally, we change the recursive case:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">else</span> <span class="n">fact</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">acc</span><span class="o">)</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">else</span> <span class="n">fact_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">acc</span><span class="o">)</span>
 </pre></div>
 </div>
 <p>Putting it all together, we have:</p>

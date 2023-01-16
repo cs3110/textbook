@@ -431,7 +431,7 @@ let id' : 'a -> 'a = fun x -> x + 1
 Function `id'` is actually the increment function, not the identity function. So
 passing it a `bool` or `string` or some complicated data structure is not safe;
 the only data `+` can safely manipulate are integers. OCaml therefore
-*instantiates* the type varaiable `'a` to `int`, thus preventing us from
+*instantiates* the type variable `'a` to `int`, thus preventing us from
 applying `id'` to non-integers:
 
 ```{code-cell} ocaml
@@ -895,7 +895,7 @@ if n = 0 then acc ...
 
 Finally, we change the recursive case:
 ```ocaml
-else fact (n - 1) (n * acc)
+else fact_aux (n - 1) (n * acc)
 ```
 
 Putting it all together, we have:
