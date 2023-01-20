@@ -273,7 +273,7 @@ and set of packages. You can have many switches and, well, switch between them
 this command:
 
 ```console
-opam switch create cs3110-2022fa ocaml-base-compiler.4.14.0
+opam switch create cs3110-2023sp ocaml-base-compiler.4.14.0
 ```
 
 ```{tip}
@@ -301,7 +301,7 @@ You should get output like this:
 
 ```
 #  switch         compiler                    description
-→  cs3110-2022fa  ocaml-base-compiler.4.14.0  cs3110-2022fa
+→  cs3110-2023sp  ocaml-base-compiler.4.14.0  cs3110-2023sp
 ```
 
 There might be other lines if you happen to have done OCaml development before.
@@ -311,7 +311,7 @@ Here's what to check for:
   current switch. You should run `eval $(opam env)`". If either of the two
   issues below also occur, you need to resolve this issue first.
 
-- There must be a right arrow in the first column next to the `cs3110-2022fa`
+- There must be a right arrow in the first column next to the `cs3110-2023sp`
   switch.
 
 - That switch must have the right name and the right compiler version, 4.14.0.
@@ -387,9 +387,9 @@ issues:
   `opam init` command. To fix it, follow the "redo" instructions below.
 
 - **Is your switch listed?** Run `opam switch list` and make sure a switch named
-  `cs3110-2022fa` is listed, that it has the 4.14.0 compiler, and that it is the
+  `cs3110-2023sp` is listed, that it has the 4.14.0 compiler, and that it is the
   active switch (which is indicated with an arrow beside it). If that switch is
-  present but not active, run `opam switch cs3110-2022fa` then see whether utop
+  present but not active, run `opam switch cs3110-2023sp` then see whether utop
   works. If that switch is not present, follow the "redo" instructions below.
 
 **Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`.
