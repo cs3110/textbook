@@ -1375,14 +1375,14 @@ has the skeleton for an OUnit test suite.</p></li>
 </div>
 </li>
 <li><p>Run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune <span class="nb">exec</span> --instrument-with bisect_ppx ./test_sorts.exe
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--instrument-with<span class="w"> </span>bisect_ppx<span class="w"> </span>./test_sorts.exe
 </pre></div>
 </div>
 <p>That will execute the test suite with Bisect coverage enabled, causing some
 files named <code class="docutils literal notranslate"><span class="pre">bisectNNNN.coverage</span></code> to be produced.</p>
 </li>
 <li><p>Run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bisect-ppx-report html
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bisect-ppx-report<span class="w"> </span>html
 </pre></div>
 </div>
 <p>to generate the Bisect report from your test suite execution.  The report
@@ -1396,7 +1396,7 @@ You’ll see that we’ve managed to cover only one line of the source code.</p>
 documented in the test file, and increasing your code coverage. Between each
 run, you will need to delete the <code class="docutils literal notranslate"><span class="pre">bisectNNNN.coverage</span></code> files, otherwise
 the report will contain information from those previous runs:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rm bisect*.coverage
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rm<span class="w"> </span>bisect*.coverage
 </pre></div>
 </div>
 </li>
@@ -1411,7 +1411,7 @@ possible for that to affect coverage if you are testing imperative code. To make
 the tests run one at a time, in order, you can pass the flag
 <code class="docutils literal notranslate"><span class="pre">-runner</span> <span class="pre">sequential</span></code> to the executable. OUnit will see that flag and cease
 parallelization:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune <span class="nb">exec</span> --instrument-with bisect_ppx ./test_sorts.exe -- -runner sequential
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--instrument-with<span class="w"> </span>bisect_ppx<span class="w"> </span>./test_sorts.exe<span class="w"> </span>--<span class="w"> </span>-runner<span class="w"> </span>sequential
 </pre></div>
 </div>
 </section>

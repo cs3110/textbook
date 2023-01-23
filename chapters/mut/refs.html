@@ -1857,7 +1857,7 @@ at which it can be used. It can’t, for example, be applied to a string.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[36]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">7</span><span class="o">-</span><span class="mi">14</span><span class="p">:</span>
-<span class="mi">1</span> <span class="o">|</span> <span class="o">!</span>fact0 <span class="s2">&quot;camel&quot;</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="o">!</span>fact0<span class="w"> </span><span class="s2">&quot;camel&quot;</span>
            <span class="o">^^^^^^^</span>
 <span class="ne">Error</span>: This expression has type string but an expression was expected of type
          <span class="nb">int</span>
@@ -2212,10 +2212,10 @@ think about that would be that a function whose input type is <code class="docut
 function or method in an imperative language that takes in no arguments. For
 example, in Java a linked list class could have a constructor that takes no
 arguments and creates an empty list:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">LinkedList</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="cm">/** Returns an empty list. */</span><span class="w"></span>
-<span class="w">  </span><span class="n">LinkedList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">LinkedList</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="cm">/** Returns an empty list. */</span>
+<span class="w">  </span><span class="n">LinkedList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p><strong>Mutable values.</strong> In <code class="docutils literal notranslate"><span class="pre">mlist</span></code>, the nodes of the list are mutable, but the

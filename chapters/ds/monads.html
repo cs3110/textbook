@@ -1181,16 +1181,6 @@ division to be an option, you lose that <em>compositionality</em>.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val div : int -&gt; int -&gt; int option = &lt;fun&gt;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( / ) : int -&gt; int -&gt; int option = &lt;fun&gt;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[4]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">7</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">12</span><span class="o">-</span><span class="mi">19</span><span class="p">:</span>
-<span class="mi">7</span> <span class="o">|</span> <span class="n">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="o">^^^^^^^</span>
-<span class="ne">Error</span>: This expression has type int option
-       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>The problem is that we can’t add an <code class="docutils literal notranslate"><span class="pre">int</span></code> to an <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">option</span></code>:  the addition
@@ -2008,9 +1998,9 @@ will state those laws below. But first, let’s pause to consider sequential ord
 in imperative languages.</p>
 <p>*<em>Sequential Order.</em> In languages like Java and C, there is a semicolon that
 imposes a sequential order on statements, e.g.:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
-<span class="n">x</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="n">x</span><span class="o">++</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>First <code class="docutils literal notranslate"><span class="pre">x</span></code> is printed, then incremented, then printed again. The effects that

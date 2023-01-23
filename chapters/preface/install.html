@@ -1264,7 +1264,7 @@ WSL1</a>.</p>
 and set of packages. You can have many switches and, well, switch between them
 —whence the name. Create a switch for this semester’s CS 3110 by running
 this command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam switch create cs3110-2022fa ocaml-base-compiler.4.14.0</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam switch create cs3110-2023sp ocaml-base-compiler.4.14.0</span>
 </pre></div>
 </div>
 <div class="admonition tip">
@@ -1286,7 +1286,7 @@ and run this command:</p>
 </div>
 <p>You should get output like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#  switch         compiler                    description
-→  cs3110-2022fa  ocaml-base-compiler.4.14.0  cs3110-2022fa
+→  cs3110-2023sp  ocaml-base-compiler.4.14.0  cs3110-2023sp
 </pre></div>
 </div>
 <p>There might be other lines if you happen to have done OCaml development before.
@@ -1295,7 +1295,7 @@ Here’s what to check for:</p>
 <li><p>You <strong>must not</strong> get a warning that “The environment is not in sync with the
 current switch. You should run <code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">$(opam</span> <span class="pre">env)</span></code>”. If either of the two
 issues below also occur, you need to resolve this issue first.</p></li>
-<li><p>There must be a right arrow in the first column next to the <code class="docutils literal notranslate"><span class="pre">cs3110-2022fa</span></code>
+<li><p>There must be a right arrow in the first column next to the <code class="docutils literal notranslate"><span class="pre">cs3110-2023sp</span></code>
 switch.</p></li>
 <li><p>That switch must have the right name and the right compiler version, 4.14.0.</p></li>
 </ul>
@@ -1357,9 +1357,9 @@ OPAM environment; you shouldn’t have to manually activate the environment with
 the <code class="docutils literal notranslate"><span class="pre">eval</span></code> command. Probably something went wrong earlier when you ran the
 <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">init</span></code> command. To fix it, follow the “redo” instructions below.</p></li>
 <li><p><strong>Is your switch listed?</strong> Run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">list</span></code> and make sure a switch named
-<code class="docutils literal notranslate"><span class="pre">cs3110-2022fa</span></code> is listed, that it has the 4.14.0 compiler, and that it is the
+<code class="docutils literal notranslate"><span class="pre">cs3110-2023sp</span></code> is listed, that it has the 4.14.0 compiler, and that it is the
 active switch (which is indicated with an arrow beside it). If that switch is
-present but not active, run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">cs3110-2022fa</span></code> then see whether utop
+present but not active, run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">cs3110-2023sp</span></code> then see whether utop
 works. If that switch is not present, follow the “redo” instructions below.</p></li>
 </ul>
 <p><strong>Redo Instructions:</strong> Remove the OPAM directory by running <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">~/.opam</span></code>.
@@ -1485,11 +1485,11 @@ with the OCaml double-check instructions above.</p>
 (i) going to View → Command Palette, (ii) typing “user settings json”, and (iii)
 selecting Open User Settings (JSON). Copy and paste these settings into the
 window:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Save the file and close the tab.</p>

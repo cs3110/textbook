@@ -956,8 +956,8 @@ files and compile them.</p>
 <h2><span class="section-number">2.2.1. </span>Storing code in files<a class="headerlink" href="#storing-code-in-files" title="Permalink to this headline">#</a></h2>
 <p>Open a terminal, create a new directory, and open VS Code in that directory.
 For example, you could use the following commands:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir hello-world
-<span class="gp">$ </span><span class="nb">cd</span> hello-world
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>hello-world
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>hello-world
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -982,7 +982,7 @@ to write it in a .ml file.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">_</span> <span class="pre">=</span></code> above means that we don’t care to give a name (hence the “blank”
 or underscore) to code on the right-hand side of the <code class="docutils literal notranslate"><span class="pre">=</span></code>.</p>
 <p>Save the file and return to the command line.  Compile the code:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlc -o hello.byte hello.ml
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ocamlc<span class="w"> </span>-o<span class="w"> </span>hello.byte<span class="w"> </span>hello.ml
 </pre></div>
 </div>
 <p>The compiler is named <code class="docutils literal notranslate"><span class="pre">ocamlc</span></code>. The <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">hello.byte</span></code> option says to name the
@@ -999,7 +999,7 @@ file, recompile, and rerun. Try making the code print multiple lines.</p>
 that might feel unfamiliar if you’re used to working inside IDEs like Eclipse.
 Don’t worry; it will soon become second nature.</p>
 <p>Now let’s clean up all those generated files:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rm hello.byte hello.cmi hello.cmo
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rm<span class="w"> </span>hello.byte<span class="w"> </span>hello.cmi<span class="w"> </span>hello.cmo
 </pre></div>
 </div>
 </section>
@@ -1047,7 +1047,7 @@ needed in the root directory of every source tree that you want to compile with
 Dune. In general, you’ll have a <code class="docutils literal notranslate"><span class="pre">dune</span></code> file in every subdirectory of the source
 tree but only one <code class="docutils literal notranslate"><span class="pre">dune-project</span></code> file at the root.</p>
 <p>Then run this command from the terminal:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune build hello.exe
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span>build<span class="w"> </span>hello.exe
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">.exe</span></code> extension is used on all platforms by Dune, not just on
@@ -1064,12 +1064,12 @@ that get created by Dune. Our executable is buried a couple of levels down:</p>
 </div>
 <p>But Dune provides a shortcut to having to remember and type all of that.
 To build and execute the program in one step, we can simply run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune <span class="nb">exec</span> ./hello.exe
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>./hello.exe
 <span class="go">Hello world!</span>
 </pre></div>
 </div>
 <p>Finally, to clean up all the compiled code we just run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune clean
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span>clean
 </pre></div>
 </div>
 <p>That removes the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory, leaving just your source code.</p>

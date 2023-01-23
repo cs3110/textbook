@@ -1214,11 +1214,11 @@ nor any constructors (in the OO sense of that word).</p>
 of definitions in its own namespace. In <code class="docutils literal notranslate"><span class="pre">ListStack</span></code>, we have some definitions of
 functions—<code class="docutils literal notranslate"><span class="pre">push</span></code>, <code class="docutils literal notranslate"><span class="pre">pop</span></code>, etc.—and one value, <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
 <p>So whereas in Java we might create a couple of stacks using code like this:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Stack</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="p">();</span><span class="w"></span>
-<span class="n">s1</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="n">s1</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="n">Stack</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="p">();</span><span class="w"></span>
-<span class="n">s2</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Stack</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="p">();</span>
+<span class="n">s1</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">s1</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">Stack</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="p">();</span>
+<span class="n">s2</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>In OCaml the same stacks could be created as follows:</p>
@@ -1960,11 +1960,11 @@ visible to code outside of <code class="docutils literal notranslate"><span clas
 you’ve probably seen before in an object-oriented language. We’re going to take
 a brief detour into that realm now, then come back to OCaml and modules.</p>
 <p>In Java, the <code class="docutils literal notranslate"><span class="pre">extends</span></code> keyword creates subtype relationships between classes:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">C</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="kd">class</span> <span class="nc">D</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">C</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">class</span> <span class="nc">D</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 
-<span class="n">D</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">D</span><span class="p">();</span><span class="w"></span>
-<span class="n">C</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span><span class="w"></span>
+<span class="n">D</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">D</span><span class="p">();</span>
+<span class="n">C</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Subtyping is what permits the assignment of <code class="docutils literal notranslate"><span class="pre">d</span></code> to <code class="docutils literal notranslate"><span class="pre">c</span></code> on the last line of that
