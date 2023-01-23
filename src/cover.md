@@ -5,7 +5,7 @@ emphasis on semantics and software engineering. This book is the textbook for CS
 3110 Data Structures and Functional Programming at Cornell University. A past
 title of this book was "Functional Programming in OCaml".
 
-**Fall 2022 Edition.**
+**Spring 2023 Edition.**
 
 **Videos.** There are over 200 YouTube videos embedded in this book.
 They can be watched independently of reading the book. Start with
@@ -20,7 +20,7 @@ easy task. The primary compiler and author of this work in its form as a unified
 textbook is Michael R. Clarkson, who as of the Fall 2021 edition was the author
 of about 40% of the words and code tokens.
 
-**Copyright 2021–2022 Michael R. Clarkson.** Released under the <a rel="license"
+**Copyright 2021–2023 Michael R. Clarkson.** Released under the <a rel="license"
 href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons
 Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
 
