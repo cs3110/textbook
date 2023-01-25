@@ -416,8 +416,8 @@ the other three.
 
 Second, follow one of these steps if you are on Windows or Mac:
 
-- **Windows only:** Install the "Remote - WSL" extension. Second, open a WSL
-  window by using the command "Remote-WSL: New WSL Window". The first time you
+- **Windows only:** Install the "WSL" extension. Second, open a WSL
+  window by using the command "WSL: New WSL Window". The first time you
   do this, it will install some additional software. After that completes, you
   will see a green "WSL: Ubuntu" indicator in the bottom-left of the VS Code
   window. **Make sure that you see "WSL: Ubuntu" there before proceeding with
