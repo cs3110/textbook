@@ -282,6 +282,18 @@ probably installed OPAM sometime back in the past and now need to update it. Do
 so with `opam update`.
 ```
 
+```{tip}
+If that command fails saying that there was a compilation error when installing 
+the 4.14.0 compiler for Mac users, it is possible that you don't have a C 
+compiler or there is an issue with your existing compiler. Check if you have 
+the XCode command-line tools (which includes a C compiler) installed by 
+running `xcode-select --print-path`. If it is not installed, do so by running 
+`xcode-select --install`. If it is installed, you can try resetting it by 
+running `xcode-select --reset`. If resetting does not resolve the issue, you
+may try reinstalling the XCode command-line tools by searching for the 
+relevant steps for your version of macOS. 
+```
+
 You might be prompted to run the next command. It won't matter whether you do or
 not, because of the very next step we're going to do (i.e., logging out).
 
