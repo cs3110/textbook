@@ -1582,31 +1582,34 @@ targets that you will find helpful.</p>
 <h2><span class="section-number">9.3.9. </span>Capture-Avoiding Substitution<a class="headerlink" href="#capture-avoiding-substitution" title="Permalink to this headline">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/WrHrKnbRc1w" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The definition of substitution for SimPL was a little tricky but not too
-complicated. It turns out, though, that for other languages, the definition gets
+complicated. It turns out, though, that in general, the definition gets
 more complicated.</p>
 <p>Let’s consider this tiny language:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | e1 e2 | fun x -&gt; e
 v ::= fun x -&gt; e
 </pre></div>
 </div>
-<p>It is known as the <em>lambda calculus</em>. There are only three kinds of expressions
-in it: variables, function application, and anonymous functions. The only values
-are anonymous functions. The language isn’t even typed. Yet, one of its most
-remarkable properties is that it <em>computationally universal:</em> it can express any
-computable function. (To learn more about that, read about the <em>Church-Turing
-Hypothesis</em>.)</p>
-<p>Defining a big-step evaluation relation for the lambda calculus is
-straightforward. In fact, there’s only one rule required:</p>
+<p>This syntax is also known as the <em>lambda calculus</em>. There are only three kinds
+of expressions in it: variables, function application, and anonymous functions.
+The only values are anonymous functions. The language isn’t even typed. Yet, one
+of its most remarkable properties is that it is <em>computationally universal:</em> it
+can express any computable function. (To learn more about that, read about the
+<em>Church-Turing Hypothesis</em>.)</p>
+<p>There are several ways to define an evaluation semantics for the lambda
+calculus. Perhaps the simplest way—also closest to OCaml—uses the following
+rule:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e1 e2 ==&gt; v
   if e1 ==&gt; fun x -&gt; e
   and e2 ==&gt; v2
   and e{v2/x} ==&gt; v
 </pre></div>
 </div>
-<p>That rule is named <em>call by value</em>, because it requires arguments to be reduced
-to a value before a function can be applied. If that seems obvious, it’s because
-you’re used to it from OCaml. Other languages use other rules. For example,
-Haskell uses a variant on <em>call by name</em>, which is this rule:</p>
+<p>This rule is the <em>only</em> rule we need: no other rules are required. This rule is
+also known as the <em>call by value</em> semantics, because it requires arguments to be
+reduced to <em>values</em> before a function can be applied. If that seems obvious,
+it’s because you’re used to it from OCaml.</p>
+<p>However, other semantics are certainly possible. For example, Haskell uses a
+variant called <em>call by name</em>, with the single rule:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e1 e2 ==&gt; v
   if e1 ==&gt; fun x -&gt; e
   and e{e2/x} ==&gt; v
@@ -1660,8 +1663,7 @@ name being substituted inside an anonymous function can accidentally be
 <p>Note that we never had this problem in SimPL, in part because SimPL was typed.
 The function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">y</span> <span class="pre">-&gt;</span> <span class="pre">z</span></code> if applied to any argument would just return <code class="docutils literal notranslate"><span class="pre">z</span></code>,
 which is an unbound variable. But the lambda calculus is untyped, so we can’t
-rely on typing to rule out this possibility here. Moreover, with rules such as
-call by name, we might well end up needing to evaluate such expressions.</p>
+rely on typing to rule out this possibility here.</p>
 <p>So the question becomes, how do we define substitution so that it gets the right
 answer, without capturing variables? The answer is called <em>capture-avoiding
 substitution</em>, and a correct definition of it eluded mathematicians for
@@ -1918,10 +1920,11 @@ anonymous functions, to make sure we get capture-avoidance correct:</p>
  = match e{v/x} with Left x -&gt; e1 | Right x -&gt; e2
 </pre></div>
 </div>
-<p>We wouldn’t actually have to worry about capture-avoiding substitution in all
-the above rules as long as we are content with call-by-value semantics. But if
-we ever wanted call-by-name, we’d need all the extra conditions about free
-variables that we gave above.</p>
+<p>For typical implementations of programming languages, we don’t have to worry
+about capture-avoiding substitution because we only evaluate well-typed
+expressions, which don’t have free variables. But for more exotic programming
+languages, it can be necessary to evaluate open expressions. In these cases,
+we’d need all the extra conditions about free variables that we gave above.</p>
 </section>
 <section id="big-step-relation">
 <h2><span class="section-number">9.3.12. </span>Big-Step Relation<a class="headerlink" href="#big-step-relation" title="Permalink to this headline">#</a></h2>
