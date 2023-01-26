@@ -659,7 +659,7 @@ targets that you will find helpful.
 {{ video_embed | replace("%%VID%%", "WrHrKnbRc1w")}}
 
 The definition of substitution for SimPL was a little tricky but not too
-complicated. It turns out, though, that for other languages, the definition gets
+complicated. It turns out, though, that in general, the definition gets
 more complicated.
 
 Let's consider this tiny language:
@@ -669,15 +669,16 @@ e ::= x | e1 e2 | fun x -> e
 v ::= fun x -> e
 ```
 
-It is known as the *lambda calculus*. There are only three kinds of expressions
-in it: variables, function application, and anonymous functions. The only values
-are anonymous functions. The language isn't even typed. Yet, one of its most
-remarkable properties is that it *computationally universal:* it can express any
-computable function. (To learn more about that, read about the *Church-Turing
-Hypothesis*.)
+This syntax is also known as the *lambda calculus*. There are only three kinds
+of expressions in it: variables, function application, and anonymous functions.
+The only values are anonymous functions. The language isn't even typed. Yet, one
+of its most remarkable properties is that it is *computationally universal:* it
+can express any computable function. (To learn more about that, read about the
+*Church-Turing Hypothesis*.)
 
-Defining a big-step evaluation relation for the lambda calculus is
-straightforward. In fact, there's only one rule required:
+There are several ways to define an evaluation semantics for the lambda
+calculus. Perhaps the simplest way---also closest to OCaml---uses the following
+rule:
 
 ```text
 e1 e2 ==> v
@@ -686,10 +687,13 @@ e1 e2 ==> v
   and e{v2/x} ==> v
 ```
 
-That rule is named *call by value*, because it requires arguments to be reduced
-to a value before a function can be applied. If that seems obvious, it's because
-you're used to it from OCaml. Other languages use other rules. For example,
-Haskell uses a variant on *call by name*, which is this rule:
+This rule is the *only* rule we need: no other rules are required. This rule is
+also known as the *call by value* semantics, because it requires arguments to be
+reduced to *values* before a function can be applied. If that seems obvious,
+it's because you're used to it from OCaml.
+
+However, other semantics are certainly possible. For example, Haskell uses a
+variant called *call by name*, with the single rule:
 
 ```text
 e1 e2 ==> v
@@ -760,8 +764,7 @@ name being substituted inside an anonymous function can accidentally be
 Note that we never had this problem in SimPL, in part because SimPL was typed.
 The function `fun y -> z` if applied to any argument would just return `z`,
 which is an unbound variable. But the lambda calculus is untyped, so we can't
-rely on typing to rule out this possibility here. Moreover, with rules such as
-call by name, we might well end up needing to evaluate such expressions.
+rely on typing to rule out this possibility here.
 
 So the question becomes, how do we define substitution so that it gets the right
 answer, without capturing variables? The answer is called *capture-avoiding
@@ -1054,10 +1057,11 @@ anonymous functions, to make sure we get capture-avoidance correct:
  = match e{v/x} with Left x -> e1 | Right x -> e2
 ```
 
-We wouldn't actually have to worry about capture-avoiding substitution in all
-the above rules as long as we are content with call-by-value semantics. But if
-we ever wanted call-by-name, we'd need all the extra conditions about free
-variables that we gave above.
+For typical implementations of programming languages, we don't have to worry
+about capture-avoiding substitution because we only evaluate well-typed
+expressions, which don't have free variables. But for more exotic programming
+languages, it can be necessary to evaluate open expressions. In these cases,
+we'd need all the extra conditions about free variables that we gave above.
 
 ## Big-Step Relation
 
