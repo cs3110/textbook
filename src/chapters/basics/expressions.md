@@ -601,8 +601,8 @@ a check that the expression really does have the given type.
 
 Note that the parentheses are required.
 
-**Dynamic semantics.** There is no run-time meaning for a type annotation.
-It goes away during compilation, because it indicates a compile-time check.
-There is no run-time conversion.
+**Dynamic semantics.** If `e` evaluates to `v`, then `(e : t)` evaluates to `v`.
+It gives the same result of `e` because a type annotation indicates a compile-time
+check and has no effects during run-time. There is no run-time conversion.
 
 **Static semantics.**  If `e` has type `t` then `(e : t)` has type `t`.
