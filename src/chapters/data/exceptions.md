@@ -113,8 +113,9 @@ following code raises `A`:
 :tags: ["raises-exception"]
 let _ = raise A in raise B;;
 ```
-And with functions, the argument must be evaluated before the function. So the
-following code also raises `A`, in addition to producing some compiler warnings
+And with functions, OCaml does not officially specify the evaluation order of a function
+and its argument, but the current implementation evaluates the argument before the function.
+So the following code also raises `A`, in addition to producing some compiler warnings
 that the first expression will never actually be applied as a function to an
 argument:
 ```{code-cell} ocaml
