@@ -198,7 +198,7 @@ let empty lst =
   | [] -> true
   | h :: t -> false
 ```
-But there a much better way to write the same function without pattern matching:
+But there is a much better way to write the same function without pattern matching:
 ```{code-cell} ocaml
 let empty lst =
   lst = []
