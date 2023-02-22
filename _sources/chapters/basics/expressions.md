@@ -604,5 +604,7 @@ Note that the parentheses are required.
 **Dynamic semantics.** There is no run-time meaning for a type annotation.
 It goes away during compilation, because it indicates a compile-time check.
 There is no run-time conversion.
+So, if `(e : t)` compiled successfully, then at run-time it is simply `e`,
+and it evaluates as `e` would.
 
 **Static semantics.**  If `e` has type `t` then `(e : t)` has type `t`.

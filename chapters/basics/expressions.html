@@ -1799,7 +1799,9 @@ a check that the expression really does have the given type.</p>
 <p>Note that the parentheses are required.</p>
 <p><strong>Dynamic semantics.</strong> There is no run-time meaning for a type annotation.
 It goes away during compilation, because it indicates a compile-time check.
-There is no run-time conversion.</p>
+There is no run-time conversion.
+So, if <code class="docutils literal notranslate"><span class="pre">(e</span> <span class="pre">:</span> <span class="pre">t)</span></code> compiled successfully, then at run-time it is simply <code class="docutils literal notranslate"><span class="pre">e</span></code>,
+and it evaluates as <code class="docutils literal notranslate"><span class="pre">e</span></code> would.</p>
 <p><strong>Static semantics.</strong>  If <code class="docutils literal notranslate"><span class="pre">e</span></code> has type <code class="docutils literal notranslate"><span class="pre">t</span></code> then <code class="docutils literal notranslate"><span class="pre">(e</span> <span class="pre">:</span> <span class="pre">t)</span></code> has type <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
 </section>
 </section>

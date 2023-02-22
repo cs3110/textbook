@@ -1124,8 +1124,9 @@ following code raises <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 </div>
-<p>And with functions, the argument must be evaluated before the function. So the
-following code also raises <code class="docutils literal notranslate"><span class="pre">A</span></code>, in addition to producing some compiler warnings
+<p>And with functions, OCaml does not officially specify the evaluation order of a function
+and its argument, but the current implementation evaluates the argument before the function.
+So the following code also raises <code class="docutils literal notranslate"><span class="pre">A</span></code>, in addition to producing some compiler warnings
 that the first expression will never actually be applied as a function to an
 argument:</p>
 <div class="cell tag_raises-exception tag_hide-output docutils container">
@@ -1327,10 +1328,12 @@ expression <code class="docutils literal notranslate"><span class="pre">e</span>
 otherwise it fails.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>A common error is to forget the <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">()</span> <span class="pre">-&gt;</span> <span class="pre">...)</span></code> around <code class="docutils literal notranslate"><span class="pre">e</span></code>. If you do, the
-OUnit test case will fail, and you will likely be confused as to why. The reason
-is that, without the extra anonymous function, the exception is raised before
-<code class="docutils literal notranslate"><span class="pre">assert_raises</span></code> ever gets a chance to handle it.</p>
+<p>Note that the second argument of <code class="docutils literal notranslate"><span class="pre">assert_raises</span></code> is a <em>function</em> of type <code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>, sometimes called a “thunk”. It may seem strange to write a function with
+this type—the only possible input is <code class="docutils literal notranslate"><span class="pre">()</span></code>—but this is a common pattern in
+functional languages to suspend or delay the evaluation of some program. In this
+case, we want <code class="docutils literal notranslate"><span class="pre">assert_raises</span></code> to evaluate <code class="docutils literal notranslate"><span class="pre">List.hd</span> <span class="pre">[]</span></code> when it is ready. If we
+evaluated <code class="docutils literal notranslate"><span class="pre">List.hd</span> <span class="pre">[]</span></code> immediately, <code class="docutils literal notranslate"><span class="pre">assert_raises</span></code> would not be able to check
+if the right exception is raised.</p>
 </div>
 </section>
 </section>
