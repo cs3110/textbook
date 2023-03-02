@@ -1948,27 +1948,27 @@ Error: This expression has type bool but an expression was expected of type int
 mutability yet. You might be tempted to think that it’s a phenomenon that
 affects only OCaml. But indeed, even Java suffers.</p>
 <p>Consider the following class hierarchy:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Animal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-<span class="kd">class</span> <span class="nc">Elephant</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-<span class="kd">class</span> <span class="nc">Rabbit</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Animal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="kd">class</span> <span class="nc">Elephant</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="kd">class</span> <span class="nc">Rabbit</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Now suppose we create an array of animals:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Animal</span><span class="o">[]</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rabbit</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Animal</span><span class="o">[]</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rabbit</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Here we are using <em>subtype polymorphism</em> to assign an array of <code class="docutils literal notranslate"><span class="pre">Rabbit</span></code> objects
 to an <code class="docutils literal notranslate"><span class="pre">Animal[]</span></code> reference. That’s not the same as <em>parametric polymorphism</em> as
 we’ve been using in OCaml, but it’s nonetheless polymorphism.</p>
 <p>What if we try this?</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Elephant</span><span class="p">()</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Elephant</span><span class="p">()</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Since <code class="docutils literal notranslate"><span class="pre">a</span></code> is typed as an <code class="docutils literal notranslate"><span class="pre">Animal</span></code> array, it stands to reason that we could
 assign an elephant object into it, just as we could assign a rabbit object. And
 indeed that code is fine according to the Java compiler. But Java gives us a
 runtime error if we run that code!</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Exception</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">ArrayStoreException</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Exception</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">ArrayStoreException</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The problem is that mutating the first array element to be a rabbit would leave

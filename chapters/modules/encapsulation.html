@@ -1135,6 +1135,9 @@ Then don’t supply the annotation at the time of module definition:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Math : sig val fact_aux : int -&gt; int -&gt; int val fact : int -&gt; int end
 </pre></div>
 </div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module MathCheck : MATH
+</pre></div>
+</div>
 </div>
 </div>
 <p>Now <code class="docutils literal notranslate"><span class="pre">Math.fact_aux</span></code> is visible, but <code class="docutils literal notranslate"><span class="pre">MathCheck.fact_aux</span></code> is not:</p>
@@ -1179,10 +1182,10 @@ similar to the use of visibility modifiers such as <code class="docutils literal
 Java. In fact one way to think about Java class definitions is that they
 simultaneously define multiple signatures.</p>
 <p>For example, consider this Java class:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">C</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">C</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>An analogy to it in OCaml would be the following modules and types:</p>
@@ -1361,18 +1364,18 @@ types, and so forth.</p>
 encountering here is a lack of encapsulation. We should have kept the type that
 implements <code class="docutils literal notranslate"><span class="pre">ListStack</span></code> hidden from clients. In Java, for example, we might have
 written:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">ListStack</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stack</span><span class="p">;</span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
-<span class="w">  </span><span class="p">...</span>
-<span class="p">}</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">ListStack</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stack</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>That way clients of <code class="docutils literal notranslate"><span class="pre">ListStack</span></code> would be unaware of <code class="docutils literal notranslate"><span class="pre">stack</span></code> or <code class="docutils literal notranslate"><span class="pre">size</span></code>.  In fact,
 they wouldn’t be able to name those fields at all.  Instead, they would
 just use <code class="docutils literal notranslate"><span class="pre">ListStack</span></code> as the type of the stack:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ListStack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-<span class="n">s</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">ListStack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ListStack</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="n">s</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>So in OCaml, how can we keep the <em>representation type</em> of the stack hidden? What
