@@ -492,10 +492,9 @@ Now we could use that map to associate names with birth years:
 let k1 = {last = "Kardashian"; first = "Kourtney"}
 let k2 = {last = "Kardashian"; first = "Kimberly"}
 let k3 = {last = "Kardashian"; first = "Khloe"}
-let k4 = {last = "West"; first = "Kanye"}
 
 let nm =
-  NameMap.(empty |> add k1 1979 |> add k2 1980 |> add k3 1984 |> add k4 1977)
+  NameMap.(empty |> add k1 1979 |> add k2 1980 |> add k3 1984)
 
 let lst = NameMap.bindings nm
 ```

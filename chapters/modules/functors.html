@@ -1856,10 +1856,9 @@ compare records that way:</p>
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">k1</span> <span class="o">=</span> <span class="o">{</span><span class="n">last</span> <span class="o">=</span> <span class="s2">&quot;Kardashian&quot;</span><span class="o">;</span> <span class="n">first</span> <span class="o">=</span> <span class="s2">&quot;Kourtney&quot;</span><span class="o">}</span>
 <span class="k">let</span> <span class="n">k2</span> <span class="o">=</span> <span class="o">{</span><span class="n">last</span> <span class="o">=</span> <span class="s2">&quot;Kardashian&quot;</span><span class="o">;</span> <span class="n">first</span> <span class="o">=</span> <span class="s2">&quot;Kimberly&quot;</span><span class="o">}</span>
 <span class="k">let</span> <span class="n">k3</span> <span class="o">=</span> <span class="o">{</span><span class="n">last</span> <span class="o">=</span> <span class="s2">&quot;Kardashian&quot;</span><span class="o">;</span> <span class="n">first</span> <span class="o">=</span> <span class="s2">&quot;Khloe&quot;</span><span class="o">}</span>
-<span class="k">let</span> <span class="n">k4</span> <span class="o">=</span> <span class="o">{</span><span class="n">last</span> <span class="o">=</span> <span class="s2">&quot;West&quot;</span><span class="o">;</span> <span class="n">first</span> <span class="o">=</span> <span class="s2">&quot;Kanye&quot;</span><span class="o">}</span>
 
 <span class="k">let</span> <span class="n">nm</span> <span class="o">=</span>
-  <span class="nn">NameMap</span><span class="p">.</span><span class="o">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="n">k1</span> <span class="mi">1979</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="n">k2</span> <span class="mi">1980</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="n">k3</span> <span class="mi">1984</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="n">k4</span> <span class="mi">1977</span><span class="o">)</span>
+  <span class="nn">NameMap</span><span class="p">.</span><span class="o">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="n">k1</span> <span class="mi">1979</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="n">k2</span> <span class="mi">1980</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="n">k3</span> <span class="mi">1984</span><span class="o">)</span>
 
 <span class="k">let</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">NameMap</span><span class="p">.</span><span class="n">bindings</span> <span class="n">nm</span>
 </pre></div>
@@ -1875,17 +1874,13 @@ compare records that way:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val k3 : name = {first = &quot;Khloe&quot;; last = &quot;Kardashian&quot;}
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val k4 : name = {first = &quot;Kanye&quot;; last = &quot;West&quot;}
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val nm : int NameMap.t = &lt;abstr&gt;
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val lst : (NameMap.key * int) list =
   [({first = &quot;Khloe&quot;; last = &quot;Kardashian&quot;}, 1984);
    ({first = &quot;Kimberly&quot;; last = &quot;Kardashian&quot;}, 1980);
-   ({first = &quot;Kourtney&quot;; last = &quot;Kardashian&quot;}, 1979);
-   ({first = &quot;Kanye&quot;; last = &quot;West&quot;}, 1977)]
+   ({first = &quot;Kourtney&quot;; last = &quot;Kardashian&quot;}, 1979)]
 </pre></div>
 </div>
 </div>
