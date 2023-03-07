@@ -237,12 +237,18 @@ The expression `assert_raises exc (fun () -> e)` checks to see whether
 expression `e` raises exception `exc`. If so, the OUnit test case succeeds,
 otherwise it fails.
 
-```{tip}
 Note that the second argument of `assert_raises` is a *function* of type `unit
 -> 'a`, sometimes called a "thunk". It may seem strange to write a function with
 this type---the only possible input is `()`---but this is a common pattern in
-functional languages to suspend or delay the evaluation of some program. In this
+functional languages to suspend or delay the evaluation of a program. In this
 case, we want `assert_raises` to evaluate `List.hd []` when it is ready. If we
 evaluated `List.hd []` immediately, `assert_raises` would not be able to check
-if the right exception is raised.
+if the right exception is raised. We'll learn more about thunks in a later
+chapter.
+
+```{tip}
+A common error is to forget the `(fun () -> ...)` around `e`. If you make this
+mistake, the program may still typecheck but the OUnit test case will fail:
+without the extra anonymous function, the exception is raised before
+`assert_raises` ever gets a chance to handle it.
 ```
