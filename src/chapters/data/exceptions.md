@@ -246,7 +246,7 @@ evaluated `List.hd []` immediately, `assert_raises` would not be able to check
 if the right exception is raised. We'll learn more about thunks in a later
 chapter.
 
-```{tip}
+```{warning}
 A common error is to forget the `(fun () -> ...)` around `e`. If you make this
 mistake, the program may still typecheck but the OUnit test case will fail:
 without the extra anonymous function, the exception is raised before
