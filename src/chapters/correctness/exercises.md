@@ -200,7 +200,6 @@ Prove that `expsq x n = exp x n`, where
 ```ocaml
 let rec expsq x n =
   if n = 0 then 1
-  else if n = 1 then x
   else (if n mod 2 = 0 then 1 else x) * expsq (x * x) (n / 2)
 ```
 
