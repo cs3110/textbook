@@ -1,36 +1,46 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>4.9. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -38,13 +48,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -54,844 +64,439 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/hop/exercises';</script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="5. Modular Programming" href="../modules/intro.html" />
     <link rel="prev" title="4.8. Summary" href="summary.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../cover.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Preface
- </span>
-</p>
+    
+    
+    <img src="../../_static/lambda-light.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/lambda-light.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preface</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../preface/about.html">
-   About This Book
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../preface/install.html">
-   Installing OCaml
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../preface/about.html">About This Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preface/install.html">Installing OCaml</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Introduction
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../intro/intro.html">
-   1. Better Programming Through OCaml
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/past.html">
-     1.1. The Past of OCaml
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/present.html">
-     1.2. The Present of OCaml
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/future.html">
-     1.3. Look to Your Future
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/3110.html">
-     1.4. A Brief History of CS 3110
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro/summary.html">
-     1.5. Summary
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../basics/intro.html">
-   2. The Basics of OCaml
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basics/toplevel.html">
-     2.1. The OCaml Toplevel
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basics/compiling.html">
-     2.2. Compiling OCaml Programs
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basics/expressions.html">
-     2.3. Expressions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basics/functions.html">
-     2.4. Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basics/documentation.html">
-     2.5. Documentation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basics/printing.html">
-     2.6. Printing
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basics/debugging.html">
-     2.7. Debugging
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basics/summary.html">
-     2.8. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../basics/exercises.html">
-     2.9. Exercises
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro/intro.html">1. Better Programming Through OCaml</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro/past.html">1.1. The Past of OCaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/present.html">1.2. The Present of OCaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/future.html">1.3. Look to Your Future</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/3110.html">1.4. A Brief History of CS 3110</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/summary.html">1.5. Summary</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  OCaml Programming
- </span>
-</p>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/intro.html">2. The Basics of OCaml</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/toplevel.html">2.1. The OCaml Toplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/compiling.html">2.2. Compiling OCaml Programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/expressions.html">2.3. Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/functions.html">2.4. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/documentation.html">2.5. Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/printing.html">2.6. Printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/debugging.html">2.7. Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/summary.html">2.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/exercises.html">2.9. Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">OCaml Programming</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../data/intro.html">
-   3. Data and Types
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/lists.html">
-     3.1. Lists
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/variants.html">
-     3.2. Variants
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/ounit.html">
-     3.3. Unit Testing with OUnit
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/records_tuples.html">
-     3.4. Records and Tuples
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/pattern_matching_advanced.html">
-     3.5. Advanced Pattern Matching
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/type_synonym.html">
-     3.6. Type Synonyms
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/options.html">
-     3.7. Options
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/assoc_list.html">
-     3.8. Association Lists
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/algebraic_data_types.html">
-     3.9. Algebraic Data Types
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/exceptions.html">
-     3.10. Exceptions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/trees.html">
-     3.11. Example: Trees
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/nats.html">
-     3.12. Example: Natural Numbers
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/summary.html">
-     3.13. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data/exercises.html">
-     3.14. Exercises
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="intro.html">
-   4. Higher-Order Programming
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="higher_order.html">
-     4.1. Higher-Order Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="map.html">
-     4.2. Map
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="filter.html">
-     4.3. Filter
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="fold.html">
-     4.4. Fold
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="beyond_lists.html">
-     4.5. Beyond Lists
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="pipelining.html">
-     4.6. Pipelining
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="currying.html">
-     4.7. Currying
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="summary.html">
-     4.8. Summary
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     4.9. Exercises
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../modules/intro.html">
-   5. Modular Programming
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/module_systems.html">
-     5.1. Module Systems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/modules.html">
-     5.2. Modules
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/toplevel.html">
-     5.3. Modules and the Toplevel
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/encapsulation.html">
-     5.4. Encapsulation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/compilation_units.html">
-     5.5. Compilation Units
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/functional_data_structures.html">
-     5.6. Functional Data Structures
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/module_type_constraints.html">
-     5.7. Module Type Constraints
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/includes.html">
-     5.8. Includes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/functors.html">
-     5.9. Functors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/summary.html">
-     5.10. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../modules/exercises.html">
-     5.11. Exercises
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data/intro.html">3. Data and Types</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data/lists.html">3.1. Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/variants.html">3.2. Variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/ounit.html">3.3. Unit Testing with OUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/records_tuples.html">3.4. Records and Tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/pattern_matching_advanced.html">3.5. Advanced Pattern Matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/type_synonym.html">3.6. Type Synonyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/options.html">3.7. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/assoc_list.html">3.8. Association Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/algebraic_data_types.html">3.9. Algebraic Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/exceptions.html">3.10. Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/trees.html">3.11. Example: Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/nats.html">3.12. Example: Natural Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/summary.html">3.13. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/exercises.html">3.14. Exercises</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Correctness and Efficiency
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../correctness/intro.html">
-   6. Correctness
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-  <label for="toctree-checkbox-6">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/specifications.html">
-     6.1. Specifications
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/function_docs.html">
-     6.2. Function Documentation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/module_docs.html">
-     6.3. Module Documentation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/test_debug.html">
-     6.4. Testing and Debugging
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/black_glass_box.html">
-     6.5. Black-box and Glass-box Testing
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/randomized.html">
-     6.6. Randomized Testing with QCheck
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/proving_correctness.html">
-     6.7. Proving Correctness
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/structural_induction.html">
-     6.8. Structural Induction
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/alg_spec.html">
-     6.9. Algebraic Specification
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/summary.html">
-     6.10. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../correctness/exercises.html">
-     6.11. Exercises
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../mut/intro.html">
-   7. Mutability
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
-  <label for="toctree-checkbox-7">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../mut/refs.html">
-     7.1. Refs
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../mut/mutable_fields.html">
-     7.2. Mutable Fields
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../mut/arrays.html">
-     7.3. Arrays and Loops
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../mut/summary.html">
-     7.4. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../mut/exercises.html">
-     7.5. Exercises
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../ds/intro.html">
-   8. Data Structures
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
-  <label for="toctree-checkbox-8">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ds/hash_tables.html">
-     8.1. Hash Tables
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ds/amortized.html">
-     8.2. Amortized Analysis
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ds/rb.html">
-     8.3. Red-Black Trees
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ds/sequence.html">
-     8.4. Sequences
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ds/memoization.html">
-     8.5. Memoization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ds/promises.html">
-     8.6. Promises
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ds/monads.html">
-     8.7. Monads
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ds/summary.html">
-     8.8. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ds/exercises.html">
-     8.9. Exercises
-    </a>
-   </li>
-  </ul>
- </li>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">4. Higher-Order Programming</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="higher_order.html">4.1. Higher-Order Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="map.html">4.2. Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">4.3. Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fold.html">4.4. Fold</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beyond_lists.html">4.5. Beyond Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipelining.html">4.6. Pipelining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="currying.html">4.7. Currying</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">4.8. Summary</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.9. Exercises</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Language Implementation
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../interp/intro.html">
-   9. Interpreters
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
-  <label for="toctree-checkbox-9">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../interp/calculator.html">
-     9.1. Example: Calculator
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../interp/parsing.html">
-     9.2. Parsing
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../interp/substitution.html">
-     9.3. Substitution Model
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../interp/environment.html">
-     9.4. Environment Model
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../interp/typecheck.html">
-     9.5. Type Checking
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../interp/inference.html">
-     9.6. Type Inference
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../interp/summary.html">
-     9.7. Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../interp/exercises.html">
-     9.8. Exercises
-    </a>
-   </li>
-  </ul>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../modules/intro.html">5. Modular Programming</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/module_systems.html">5.1. Module Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/modules.html">5.2. Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/toplevel.html">5.3. Modules and the Toplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/encapsulation.html">5.4. Encapsulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/compilation_units.html">5.5. Compilation Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/functional_data_structures.html">5.6. Functional Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/module_type_constraints.html">5.7. Module Type Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/includes.html">5.8. Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/functors.html">5.9. Functors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/summary.html">5.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/exercises.html">5.11. Exercises</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Lagniappe
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../adv/curry-howard.html">
-   The Curry-Howard Correspondence
-  </a>
- </li>
+</li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendix
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correctness and Efficiency</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/bigoh.html">
-   Big-Oh Notation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../appendix/vm.html">
-   Virtual Machine
-  </a>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">6. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">6.1. Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">6.2. Function Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">6.3. Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">6.4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">6.5. Black-box and Glass-box Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">6.6. Randomized Testing with QCheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">6.7. Proving Correctness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">6.8. Structural Induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/alg_spec.html">6.9. Algebraic Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">6.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">6.11. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">7. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">7.1. Refs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">7.2. Mutable Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">7.3. Arrays and Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">7.4. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">7.5. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">8. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">8.1. Hash Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">8.2. Amortized Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">8.3. Red-Black Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">8.4. Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">8.5. Memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/promises.html">8.6. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/monads.html">8.7. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">8.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">8.9. Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Language Implementation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interp/intro.html">9. Interpreters</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interp/calculator.html">9.1. Example: Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/parsing.html">9.2. Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/substitution.html">9.3. Substitution Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/environment.html">9.4. Environment Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/typecheck.html">9.5. Type Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/inference.html">9.6. Type Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/summary.html">9.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/exercises.html">9.8. Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lagniappe</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../adv/curry-howard.html">The Curry-Howard Correspondence</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../appendix/bigoh.html">Big-Oh Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/vm.html">Virtual Machine</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cs3110/textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cs3110/textbook/edit/main/src/chapters/hop/exercises.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/hop/exercises.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/chapters/hop/exercises.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/cs3110/textbook"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/hop/exercises.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/edit/main/src/chapters/hop/exercises.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/chapters/hop/exercises.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
+</div></div>
       
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
+    </div>
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
 </div>
+</div>
+              
+              
 
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exercises</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Exercises</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="exercises">
 <h1><span class="section-number">4.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
 <p>Solutions to most exercises are <a href="https://github.com/cs3110/textbook-solutions">available</a>.
@@ -1092,7 +697,7 @@ vector dot product.</em></p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./chapters/hop"
         },
         predefinedOutput: true
@@ -1100,50 +705,85 @@ vector dot product.</em></p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="summary.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4.8. </span>Summary</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="summary.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.8. </span>Summary</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="../modules/intro.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="../modules/intro.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">5. </span>Modular Programming</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
   
-    By Michael R. Clarkson et al.<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
-</div>
+<p class="component-author">
+By Michael R. Clarkson et al.
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
 
-      </div>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
