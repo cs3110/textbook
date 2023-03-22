@@ -413,6 +413,14 @@ By presenting that warning to the programmer, the compiler is helping the
 programmer to defend against the possibility of `Match_failure` exceptions at
 runtime.
 
+```{note}
+Sorry about how the output from the cell above gets split into many lines in the
+HTML. That is currently an [open issue with JupyterBook][issue], the framework
+used to build this book.
+
+[issue]: https://github.com/executablebooks/jupyter-book/issues/973
+```
+
 Second, **unused branches:** the compiler checks to see whether any of the
 branches could never be matched against because one of the previous branches is
 guaranteed to succeed. For example, the function below will cause the compiler
