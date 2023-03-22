@@ -200,6 +200,7 @@ Prove that `expsq x n = exp x n`, where
 ```ocaml
 let rec expsq x n =
   if n = 0 then 1
+  else if n = 1 then x
   else (if n mod 2 = 0 then 1 else x) * expsq (x * x) (n / 2)
 ```
 
@@ -208,6 +209,19 @@ Proceed by *[strong induction][strong-ind]* on `n`. Function `expsq` implements
 computation than `exp`.
 
 [strong-ind]: https://en.wikipedia.org/wiki/Mathematical_induction#Complete_(strong)_induction
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "expsq simplified")}}
+
+Redo the preceding exercise, but with this simplified version of the function.
+The simplified version requires less code, but requires an additional recursive
+call.
+
+```ocaml
+let rec expsq' x n =
+  if n = 0 then 1
+  else (if n mod 2 = 0 then 1 else x) * expsq' (x * x) (n / 2)
+```
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "mult")}}
