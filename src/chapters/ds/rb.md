@@ -171,8 +171,15 @@ Here's how it works.
 
 We always color the new node red to ensure that the Global Invariant is
 preserved. However, this may destroy the Local Invariant by producing two
-adjacent red nodes. In order to restore the invariant, we consider not only the
-new red node and its red parent, but also its (black) grandparent.
+adjacent red nodes. If the parent of the new node is the root, we can simply
+change the color of the root to be black. This restores the local invariant
+while preserving the global invariant.
+
+If the parent of the new node is not the root, we need to also consider the
+*grandparent* of the new node. Note that we haven't modified the color of the
+parent and the grandparent yet, so since the Local Invariant held before we
+inserted the new node, and since the parent is red, the grandparent must be
+black.
 
 {{ video_embed | replace("%%VID%%", "igUOhpGICgA")}}
 
@@ -248,9 +255,10 @@ let balance = function
 This balancing transformation possibly breaks the Local Invariant one level up
 in the tree, but it can be restored again at that level in the same way, and so
 on up the tree. In the worst case, the process cascades all the way up to the
-root, resulting in two adjacent red nodes, one of them the root. But if this
+root and results in two adjacent red nodes, one of them the root. But if this
 happens, we can just recolor the root black, which increases the black height by
-one. The amount of work is $O(\log n)$. The `insert` code using `balance` is as
+one while restoring the Local Invariant, and preserving the Global Invariant.
+The amount of work is $O(\log n)$. The `insert` code using `balance` is as
 follows:
 
 ```{code-cell} ocaml
