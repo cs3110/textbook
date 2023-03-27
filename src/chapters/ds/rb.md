@@ -185,7 +185,10 @@ black.
 
 The next figure shows the four possible cases that can arise. In it, `a`-`d` are
 possibly empty subtrees, and `x`-`z` are values stored at a node. The nodes
-colors are indicated with `R` and `B`.
+colors are indicated with `R` and `B`. We've marked the current "new" node with
+square brackets. When we are first inserting, this new node will have no
+children. But as we recurse up the tree, the current "new" node may have
+subtrees.
 
 ```text
            1             2             3             4
@@ -194,7 +197,7 @@ colors are indicated with `R` and `B`.
           / \           / \           / \           / \
          Ry  d         Rx  d         a   Rz        a   Ry
         /  \          / \               /  \          /  \
-      Rx   c         a   Ry            Ry   d        b    Rz
+     [Rx]  c         a  [Ry]          [Ry]  d        b   [Rz]
      /  \               /  \          / \                /  \
     a    b             b    c        b   c              c    d
 ```
@@ -230,10 +233,21 @@ replacing any of the above four cases with:
 ```
 
 ```{tip}
-To really understand Okasaki's algorithm, ensure that the last three diagrams
-make sense. The choice of which labels are placed where in the first diagram is
-crucial. That's what guarantees the ordering holds, hence that the final tree is
-the same in all four cases.
+To understand why Okasaki's algorithm guarantees the BST invariant, ensure that
+the last three diagrams make sense. The choice of which labels are placed where
+in the first diagram is crucial. That's what guarantees the ordering holds,
+hence that the final tree is the same in all four cases.
+```
+
+```{tip}
+It’s also worth thinking about why these operations preserves the local and
+global invariants. We have to use a careful combination of facts about the
+various subtrees. For instance, in the first case:
+
+- `x` is the current “new” node, and the subtree starting from `x` satisfies all RB tree invariants.
+- the subtree `c` satisfies all RB tree invariants.
+- the subtree `a` satisfies all RB tree invariants.
+- the subtree `z` satisfies all RB tree invariants *except* possibly at nodes/paths in subtree `x`.
 ```
 
 {{ video_embed | replace("%%VID%%", "D4FJMJUIMSw")}}
