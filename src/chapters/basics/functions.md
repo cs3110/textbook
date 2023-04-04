@@ -391,7 +391,7 @@ let id_int (x : int) : int = x
 ```
 
 That's the same function as `id`, except for the two manual type annotations.
-Because of those, we cannot apply `id_int` to a bool like we did `id`:
+Because of those, we cannot apply `id_int` to a `bool` like we did `id`:
 
 ```{code-cell} ocaml
 :tags: ["raises-exception"]

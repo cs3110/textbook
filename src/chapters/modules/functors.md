@@ -449,7 +449,7 @@ parameterized on a module that bundles together the type of keys with a function
 that can be used to compare them. It's the client's responsibility to implement
 that module.
 
-The Java Collections Framework solves a similar problem in the TreeMap class,
+The Java Collections Framework solves a similar problem in the `TreeMap` class,
 which has a [constructor that takes a Comparator][treemapcomparator]. There, the
 client has the responsibility of implementing a class for comparisons, rather
 than a structure. Though the language features are different, the idea is the

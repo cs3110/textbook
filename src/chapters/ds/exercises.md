@@ -62,7 +62,7 @@ Define a function `load_factor : ('a,'b) Hashtbl.t -> float`, such that
 *Hint: stats.*
 
 Add one more binding to `tab`. Do the stats or load factor change? Now add yet
-another binding. Now do the stats or load factor change? *Hint: Hashtbl
+another binding. Now do the stats or load factor change? *Hint: `Hashtbl`
 resizes when the load factor goes strictly above 2.*
 
 <!--------------------------------------------------------------------------->
@@ -516,7 +516,7 @@ open Lwt_unix
     the file named "log". *)
 let log () : input_channel Lwt.t =
   openfile "log" [O_RDONLY] 0 >>= fun fd ->
-  Lwt.return (of_fd input fd)
+  Lwt.return (of_fd ~mode:input fd)
 
 (** [loop ic] reads one line from [ic], prints it to stdout,
     then calls itself recursively. It is an infinite loop. *)

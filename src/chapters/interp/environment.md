@@ -24,7 +24,7 @@ To account for the environment, the evaluation relation needs to change. Instead
 of `e --> e'` or `e ==> v`, both of which are binary relations, we now need a
 ternary relation, which is either
 
-* `<env, e> --> e`, or
+* `<env, e> --> e'`, or
 
 * `<env, e> ==> v`,
 

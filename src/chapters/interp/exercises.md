@@ -52,7 +52,7 @@ Type inference for SimPL can be done in a much simpler way than for the larger
 language (with anonymous functions and let expression) that we considered in the
 section on type inference.
 
-Run `make` in the SimPL interpreter implementation. It will compile the
+Run `make utop` in the SimPL interpreter implementation. It will compile the
 interpreter and launch utop. Now, define a function `infer : string -> typ` such
 that `infer s` parses `s` into an expression and infers the type of `s` in the
 empty context. Your solution will make use of the `typeof` function. You don't
@@ -183,20 +183,19 @@ Implement evaluation of pairs.  Follow this strategy:
 
 * Implement `is_value` for pairs. A pair of values (e.g., `(0,1)`) is itself a
   value, so the function will need to become recursive.
-* Implement `subst` for pairs:  `(e1, e2){v/x} = (e1{v/x}, e2{v/x})`.
+* Implement `subst` for pairs: `(e1, e2){v/x} = (e1{v/x}, e2{v/x})`.
 * Implement small-step and big-step evaluation of pairs, using these rules:
+  ```text
+  (e1, e2) --> (e1', e2)
+    if e1 --> e1'
 
-```text
-(e1, e2) --> (e1', e2)
-  if e1 --> e1'
+  (v1, e2) --> (v1, e2')
+    if e2 --> e2'
 
-(v1, e2) --> (v1, e2')
-  if e2 --> e2'
-
-(e1, e2) ==> (v1, v2)
-  if e1 ==> v1
-  and e2 ==> v2
-```
+  (e1, e2) ==> (v1, v2)
+    if e1 ==> v1
+    and e2 ==> v2
+  ```
 
 <!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "desugar list")}}
@@ -334,7 +333,7 @@ But that rule doesn't work properly, as we see in the following example:
 
 ```text
   let rec fact = fun x ->
-	if x <= 1 then 1 else x * (fact (x - 1)) in
+    if x <= 1 then 1 else x * (fact (x - 1)) in
   fact 3
 
 -->

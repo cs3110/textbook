@@ -741,7 +741,7 @@ as part of the solution, and also apply it to the remaining constraints:
 ```text
 ...
 =
-{('d -> 'e) / 'a}; unify(('c = int -> 'd, int -> int -> int = 'b -> 'c) {('d -> 'e) / 'a}
+{('d -> 'e) / 'a}; unify(('c = int -> 'd, int -> int -> int = 'b -> 'c) {('d -> 'e) / 'a})
 =
 {('d -> 'e) / 'a}; unify('c = int -> 'd, int -> int -> int = 'b -> 'c)
 ```
@@ -985,7 +985,7 @@ env |- n : instantiate(env(n)) -| {}
 The only thing that changes there is that use of `instantiate`. Its job is to
 take a type scheme like `'a . 'a -> 'a` and _instantiate_ it into a new type
 (and here we strictly mean a type, not a type scheme) with fresh type variables.
-For example, `'a . 'a -> 'a` could be instantiated as `'b -> 'b`, if '`b` isn't
+For example, `'a . 'a -> 'a` could be instantiated as `'b -> 'b`, if `'b` isn't
 yet in use anywhere else as a type variable.
 
 Here's how those two revised rules work together to get our earlier example with

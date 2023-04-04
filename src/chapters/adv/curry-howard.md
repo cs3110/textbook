@@ -397,14 +397,14 @@ env |- e1 : t1         env |- e2 : t2
      env |- (e1, e2) : t1 * t2
 
 
- env |- e : t1 * t2
---------------------
- env |- fst e : t1
+env |- e : t1 * t2
+------------------
+env |- fst e : t1
 
 
- env |- e : t1 * t2
---------------------
- env |- snd e : t2
+env |- e : t1 * t2
+------------------
+env |- snd e : t2
 ```
 
 **Proof trees, logically.** Let's rewrite each of those proof trees to eliminate
@@ -413,13 +413,13 @@ propositions-as-types correspondence to re-write the types as propositions:
 
 ```text
 
---------
- p |- p
+-----------
+env, p |- p
 
 
-   env, p1 |- p2
--------------------
-  env |- p1 -> p2
+ env, p1 |- p2
+---------------
+env |- p1 -> p2
 
 
 env |- p1 -> p2     env |- p1
@@ -470,11 +470,11 @@ as propositions, we get this proof tree:
 ```text
 ----------------           ----------------
 a /\ b |- a /\ b           a /\ b |- a /\ b
-----------------          -----------------
+----------------           ----------------
   a /\ b |- b                a /\ b |- a
---------------------------------------------
+-------------------------------------------
               a /\ b |- b /\ a
-          ------------------------
+           ----------------------
            {} |- a /\ b -> b /\ a
 ```
 
@@ -516,7 +516,7 @@ to type check.
 ```text
 ------------------------         -------------------------
 {a : t, b : t'} |- a : t         {a : t, b : t'} |- b : t'
----------------------------------------------------------
+----------------------------------------------------------
          {a : t, b : t'} |- (a, b) : t * t'
          ----------------------------------
          {a : t, b : t'} |- fst (a, b) : t
@@ -524,7 +524,7 @@ to type check.
 
 Erasing that proof tree to just the propositions, per the proofs-as-programs
 correspondence, we get this proof tree:
-```
+```text
 -----------            -----------
 t, t' |-  t            t, t' |- t'
 ----------------------------------
@@ -536,8 +536,8 @@ t, t' |-  t            t, t' |- t'
 However, there is a much simpler proof tree with the same conclusion:
 
 ```text
- ------------
-  t, t' |- t
+----------
+t, t' |- t
 ```
 
 In other words, we don't need the detour through proving `t /\ t'` to prove `t`,

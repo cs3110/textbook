@@ -268,7 +268,7 @@ sometimes compute the same function, but in general do not. For example,
 = (((0 + 1) + 2) + 3
 = 6
 = 1 + (2 + (3 + 0))
-= List.fold_right ( + ) lst [1; 2; 3]
+= List.fold_right ( + ) [1; 2; 3] 0
 ```
 
 but
@@ -279,7 +279,7 @@ but
 = -6
 <> 2
 = 1 - (2 - (3 - 0))
-= List.fold_right ( - ) lst [1; 2; 3]
+= List.fold_right ( - ) [1; 2; 3] 0
 ```
 
 Based on the equations above, it looks like the fact that `+` is commutative and
@@ -331,7 +331,7 @@ Proof:
 =   { commutativity }
   f (f y x) z
 =   { associativity }
-  f y (f z x)
+  f y (f x z)
 
 QED
 ```
