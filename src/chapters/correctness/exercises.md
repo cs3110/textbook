@@ -25,7 +25,7 @@ Let's create a data abstraction for single-variable integer polynomials of the
 form
 
 $$
-c_n x^n + \ldots + c_1 x + c_0.
+c_n x^n + \dotsb + c_1 x + c_0 .
 $$
 
 Let's assume that the polynomials are *dense*, meaning that they contain very
