@@ -130,8 +130,8 @@ time. Then we'd be in real trouble as the number of bindings continued to grow:
   insertions. There are now 400 bindings and 300 buckets. The load factor is
   400/300 = 4/3, not 1.
 
-- The average cost of each insert is now 100+200+200+400 / 300 = 3. That's still
-  okay.
+- The average cost of each insert is now (100+200+200+400) / 300 = 3. That's
+  still okay.
 
 - **Round 3.** Insert 200 more bindings. There are now 600 bindings and 300
   buckets. The load factor is 2.
@@ -140,7 +140,7 @@ time. Then we'd be in real trouble as the number of bindings continued to grow:
   insertions. There are now 600 bindings and 400 buckets. The load factor is
   3/2, not 1.
 
-- The average cost of each insert is now 100+200+200+400+200+600 / 500 = 3.4.
+- The average cost of each insert is now (100+200+200+400+200+600) / 500 = 3.4.
   It's going up.
 
 - **Round 4.** Insert 200 more bindings. There are now 800 bindings and 400
@@ -150,16 +150,16 @@ time. Then we'd be in real trouble as the number of bindings continued to grow:
   insertions. There are now 800 bindings and 500 buckets. The load factor is
   8/5, not 1.
 
-- The average cost of each insert is now 100+200+200+400+200+600+200+800 / 700 =
-  3.9. It's continuing to go up, not staying constant.
+- The average cost of each insert is now (100+200+200+400+200+600+200+800) / 700
+  = 3.9. It's continuing to go up, not staying constant.
 
-After $k$ rounds we have $200k$ bindings and $100k$ buckets. We have called
-`insert` to insert $100+200k$ bindings, but all the rehashing has caused us to
+After $k$ rounds we have $200k$ bindings and $100(k+1)k$ buckets. We have called
+`insert` to insert $100+200(k-1)$ bindings, but all the rehashing has caused us to
 do $100+200(k-1)+\sum_{i=1}^{k} 200i$ actual insertions. That last term is the
 real problem. It's quadratic:
 
 $$
-\sum_{i=1}^{k} 200i \quad = \quad \frac{200k (200 (k+1))}{2} \quad = \quad 20,000 (k^2 + k)
+\sum_{i=1}^{k} 200i \quad = \quad 200 \sum_{i=1}^k i = \quad 200 \frac{k(k+1)}{2} \quad = \quad 100 (k^2 + k)
 $$
 
 So over a series of $n$ calls to `insert`, we do $O(n^2)$ actual inserts. That
