@@ -102,7 +102,7 @@ instinct might be to reach for a loop, instead try to use `Array.map` and
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "normalize")}}
 
-Every vector can be *normalized* by dividing each component by
+Every vector $x$ can be *normalized* by dividing each component by
 $|x|$; this yields a vector with norm 1:
 
 $$

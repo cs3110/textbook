@@ -606,10 +606,11 @@ Suppose we have a binary relation `<` on inputs. Despite the notation, this
 relation need not be the less-than relation on integers---although that will
 work for `fact`. Also suppose that it is never possible to create an infinite
 sequence `x0 > x1 > x2 > x3 ...` of elements using this relation. (Where of
-course `a > b` iff `b < a`.) That is, there are no infinite descending chains of
-elements: once you pick a starting element `x0`, there can be only a finite
-number of "descents" according to the `<` relation before you bottom out and hit
-a base case. This property of `<` makes it a *well-founded relation*.
+course `a > b` if and only if `b < a`.) That is, there are no infinite
+descending chains of elements: once you pick a starting element `x0`, there can
+be only a finite number of "descents" according to the `<` relation before you
+bottom out and hit a base case. This property of `<` makes it a *well-founded
+relation*.
 
 So, a recursive function terminates if all its recursive calls are on elements
 that are smaller according to `<`. Why? Because there can be only a finite

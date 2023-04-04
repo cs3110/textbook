@@ -17,8 +17,8 @@
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "product")}}
 
-Write a function that returns the product of all the elements in a list. The
-product of all the elements of an empty list is `1`.
+Write a function `product` that returns the product of all the elements in a
+list. The product of all the elements of an empty list is `1`.
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "concat")}}
