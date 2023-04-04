@@ -290,7 +290,7 @@ let x = v1 in e2 --> e2{v1/x}
 **Variables.** Note how the let expression rule eliminates a variable from
 showing up in the body expression: the variable's name is replaced by the value
 that variable should have. So, we should *never* reach the point of attempting
-to step a variable name&mdash;assuming that the program was well typed.
+to step a variable name&mdash;assuming that the program was well-typed.
 
 Consider OCaml: if we try to evaluate an expression with an unbound variable,
 what happens? Let's check utop:
@@ -842,7 +842,7 @@ above to generate fresh names. There is a definition named `strategy` in
 ## Core OCaml
 
 Let's now upgrade from SimPL and the lambda calculus to a larger language that
-we call *core OCaml*. Here is its syntax in BNF:
+we call *Core OCaml*. Here is its syntax in BNF:
 
 ```text
 e ::= x | e1 e2 | fun x -> e
@@ -879,7 +879,7 @@ metasyntax.
 
 There are a few important OCaml constructs omitted from this core language,
 including recursive functions, exceptions, mutability, and modules. Types are
-also missing; core OCaml does not have any type checking. Nonetheless, there is
+also missing; Core OCaml does not have any type checking. Nonetheless, there is
 enough in this core language to keep us entertained.
 
 ## Evaluating Core OCaml in the Substitution Model

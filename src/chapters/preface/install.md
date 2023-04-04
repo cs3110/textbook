@@ -121,9 +121,9 @@ reinstalling it through the Windows Start menu.
 Now skip to the "Ubuntu setup" paragraph below.
 
 **Without a recent version of Windows,** you will need to follow
-[Microsoft's manual install instructions][wsl-manual]. WSL2 is preferred over
-WSL1 by OCaml (and WSL2 offers performance and functionality improvements), so
-install WSL2 if you can.
+[Microsoft's manual installation instructions][wsl-manual]. WSL2 is preferred
+over WSL1 by OCaml (and WSL2 offers performance and functionality improvements),
+so install WSL2 if you can.
 
 [wsl-manual]: https://docs.microsoft.com/en-us/windows/wsl/install-manual
 [rh-virt]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios
@@ -251,8 +251,8 @@ installation.
 opam init --bare -a -y
 ```
 
-It is expected behavior to get a note about making sure `.profile` is well
-sourced in `.bashrc`. You don't need to do anything about that.
+It is expected behavior to get a note about making sure `.profile` is
+well-sourced in `.bashrc`. You don't need to do anything about that.
 
 **WSL1.** Hopefully you are running WSL2, not WSL1. But on WSL1, run:
 
@@ -490,8 +490,8 @@ Let's make sure VS Code's OCaml support is working.
   the error message. Go to View &rarr; Problems to see it there, too. Add double
   quotes around the integer to make it a string, and the problem will go away.
 
-**If you don't observe those behaviors,** something is wrong with your install.
-Here's how to proceed:
+**If you don't observe those behaviors,** something is wrong with your
+installation. Here's how to proceed:
 
 - Make sure that, from the same Unix prompt as which you launched VS Code, you
   can successfully complete the double-check instructions for your OPAM switch:
@@ -506,7 +506,7 @@ Here's how to proceed:
   launching VS Code from Ubuntu rather than PowerShell or from the Windows GUI.
 
 **If you're still stuck with an issue,** try uninstalling VS Code, rebooting,
-and re-doing all the install instructions above from scratch. Pay close
+and re-doing all the installation instructions above from scratch. Pay close
 attention to any warnings or errors.
 
 ```{warning}

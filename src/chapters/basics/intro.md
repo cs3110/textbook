@@ -36,8 +36,8 @@ There are two pieces to semantics, the *dynamic* semantics of a language and the
 behavior of a program as it is executed or evaluated. The static semantics
 define the compile-time checking that is done to ensure that a program is legal,
 beyond any syntactic requirements. The most important kind of static semantics
-is probably *type checking*: the rules that define whether a program is well
-typed or not. Learning the semantics of a new language is usually the real
+is probably *type checking*: the rules that define whether a program is
+well-typed or not. Learning the semantics of a new language is usually the real
 challenge, even though the syntax might be the first hurdle you have to
 overcome. You need to understand semantics to say what you mean to the computer,
 and you need to say what you mean so that your program performs the right

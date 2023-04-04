@@ -64,7 +64,7 @@ end
 open Context
 
 (** [typeof ctx e] is the type of [e] in context [ctx]. 
-    Raises: [Failure] if [e] is not well typed in [ctx]. *)
+    Raises: [Failure] if [e] is not well-typed in [ctx]. *)
 let rec typeof ctx = function
   | Int _ -> TInt
   | Bool _ -> TBool
@@ -98,7 +98,7 @@ and typeof_if ctx e1 e2 e3 =
   end
   else failwith if_guard_err
 
-(** [typecheck e] checks whether [e] is well typed in
+(** [typecheck e] checks whether [e] is well-typed in
     the empty context. Raises: [Failure] if not. *)
 let typecheck e =
   ignore (typeof empty e)

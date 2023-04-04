@@ -264,7 +264,7 @@ let insert x s =
   in
   match ins s with
   | Node (_, y, a, b) -> Node (Black, y, a, b)
-  | Leaf -> (* guaranteed to be nonempty *)
+  | Leaf -> (* guaranteed to be non-empty *)
     failwith "RBT insert failed with ins returning leaf"
 ```
 

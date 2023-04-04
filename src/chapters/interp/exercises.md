@@ -67,9 +67,9 @@ Try out your `infer` function on these test cases:
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "subexpression types")}}
 
-Suppose that a SimPL expression is well typed in a context `ctx`. Are all of its
-subexpressions also well typed in `ctx`? For every subexpression, does there
-exist some context in which the subexpression is well typed? Why or why not?
+Suppose that a SimPL expression is well-typed in a context `ctx`. Are all of its
+subexpressions also well-typed in `ctx`? For every subexpression, does there
+exist some context in which the subexpression is well-typed? Why or why not?
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "typing")}}
@@ -205,12 +205,12 @@ Suppose we treat list expressions like syntactic sugar in the following way:
 * `[]` is syntactic sugar for `Left 0`.
 * `e1 :: e2` is syntactic sugar for `Right (e1, e2)`.
 
-What is the core OCaml expression to which `[1; 2; 3]` desugars?
+What is the Core OCaml expression to which `[1; 2; 3]` desugars?
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "list not empty")}}
 
-Write a core OCaml function `not_empty` that returns `1` if a list is non-empty
+Write a Core OCaml function `not_empty` that returns `1` if a list is non-empty
 and `0` if the list is empty. Use the substitution model to check that your
 function behaves properly on these test cases:
 
@@ -220,9 +220,9 @@ function behaves properly on these test cases:
 <!--------------------------------------------------------------------------->
 {{ ex4 | replace("%%NAME%%", "generalize patterns")}}
 
-In core OCaml, there are only two patterns: `Left x` and `Right x`,
+In Core OCaml, there are only two patterns: `Left x` and `Right x`,
 where `x` is a variable name.  But in full OCaml, patterns are far more
-general. Let's see how far we can generalize patterns in core OCaml.
+general. Let's see how far we can generalize patterns in Core OCaml.
 
 **Step 1:** Here is a BNF grammar for patterns, and slightly revised
 BNF grammar for expressions:

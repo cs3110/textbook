@@ -313,7 +313,7 @@ end
 
 **Static semantics.**
 
-A structure is well typed if all the definitions in it are themselves
+A structure is well-typed if all the definitions in it are themselves
 well-typed, according to all the typing rules we have already learned.
 
 As we've seen in toplevel output, the module type of a structure is a signature.

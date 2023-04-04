@@ -320,7 +320,7 @@ deeper...
 
 We have seen that programs and proofs are both ways to manipulate and transform
 evidence. In fact, every program **is** a proof that the type of the program is
-inhabited, since the type checker must verify that the program is well typed.
+inhabited, since the type checker must verify that the program is well-typed.
 
 The details of type checking, though, lead to an even more compelling
 correspondence between programs and proofs. Let's restrict our attention to
@@ -329,7 +329,7 @@ pairs and functions. (The other propositional connectives could be included as
 well, but require additional work.)
 
 **Type checking rules.** For type checking, we gave many *rules* to define when
-a program is well typed. Here are rules for variables, functions, and pairs:
+a program is well-typed. Here are rules for variables, functions, and pairs:
 
 ```text
 {x : t, ...} |- x : t

@@ -351,7 +351,7 @@ exception `Failure "empty"` but just the string `"empty"`) if the list is empty.
 Write two OUnit tests to determine whether your solution to **list max exn**,
 above, correctly raises an exception when its input is the empty list, and
 whether it correctly returns the max value of the input list when that list is
-nonempty.
+non-empty.
 
 <!--------------------------------------------------------------------------->
 {{ ex4 | replace("%%NAME%%", "is_bst")}}

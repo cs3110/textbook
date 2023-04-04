@@ -98,7 +98,7 @@ sense of equality, not as the OCaml polymorphic equality operator. For example,
 we allow `(fun x -> x) = (fun y -> y)`, even though OCaml's operator would raise
 an exception and refuse to compare functions.
 
-We're also going to restrict ourselves to expressions that are well typed, pure
+We're also going to restrict ourselves to expressions that are well-typed, pure
 (meaning they have no side effects), and total (meaning they don't have
 exceptions or infinite loops).
 

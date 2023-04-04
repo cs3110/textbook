@@ -85,7 +85,7 @@ kind studied in discrete mathematics or theory of computation courses.
 - value restriction
 - virtual machine
 - weak type variable
-- well typed
+- well-typed
 
 ## Further Reading
 

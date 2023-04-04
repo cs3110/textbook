@@ -906,7 +906,7 @@ constraints, it will break them down into `'a = int`, '`a = 'b`, `'a = bool`,
 and `'a = 'c`. The first and third of those are contradictory, because we can't
 have `'a = int` and `'a = bool`. One or the other will be substituted away
 during unification, leaving an unsatisfiable constraint `int = bool`. At that
-point unification will fail, declaring the program to be ill typed.
+point unification will fail, declaring the program to be ill-typed.
 
 The problem is that the `'a` type variable in the inferred type of `id` stands
 for an unknown but **fixed** type. At each application of `id`, we want to let
