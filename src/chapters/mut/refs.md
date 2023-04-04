@@ -221,7 +221,7 @@ next_val ()
 ```
 
 In the implementation of `next_val`, there are two expressions separated by
-semi-colon. The first expression, `counter := !counter + 1`, is an assignment
+semicolon. The first expression, `counter := !counter + 1`, is an assignment
 that increments `counter` by 1. The second expression, `!counter`, returns the
 newly incremented contents of `counter`.
 
@@ -240,7 +240,7 @@ Using it, we could write `incr counter` instead of `counter := !counter + 1`.
 (There's also a `decr` function that decrements by 1.)
 
 Second, the way we coded the counter currently exposes the `counter` variable to
-the outside world. Maybe we're prefer to hide it so that clients of `next_val`
+the outside world. Maybe we’d prefer to hide it so that clients of `next_val`
 can't directly change it. We could do so by nesting `counter` inside the scope
 of `next_val`:
 

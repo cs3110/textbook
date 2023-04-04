@@ -305,7 +305,7 @@ without the tail recursion, or be content with a reversed list.
 The bigger lesson to take away from this discussion is that there can be a
 tradeoff between time and space efficiency for recursive functions. By
 attempting to make a function more space efficient (i.e., tail recursive), we
-can accidentally make it asympotically less time efficient (i.e., quadratic
+can accidentally make it asymptotically less time efficient (i.e., quadratic
 instead of linear), or if we're clever keep the asymptotic time efficiency the
 same (i.e., linear) at the cost of a constant factor (i.e., processing twice).
 

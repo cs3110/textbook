@@ -57,7 +57,6 @@ imperative programs. Dijkstra's _weakest precondition_ calculus is another.
 * failure
 * fault
 * formal methods
-* formal methods
 * generator
 * glass box
 * identity
@@ -84,8 +83,6 @@ imperative programs. Dijkstra's _weakest precondition_ calculus is another.
 * paths through implementation
 * paths through specification
 * postcondition
-* postcondition
-* precondition
 * precondition
 * producer
 * query
@@ -101,7 +98,6 @@ imperative programs. Dijkstra's _weakest precondition_ calculus is another.
 * returns clause
 * satisfaction
 * social methods
-* specification
 * specification
 * testing
 * total correctness

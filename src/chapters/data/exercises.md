@@ -280,7 +280,7 @@ impossible.
 Complete the `quadrant` function below, which should return the quadrant of the
 given `x, y` point according to the diagram on the right (borrowed from
 [Wikipedia](https://en.wikipedia.org/wiki/File:Cartesian_coordinates_2D.svg)).
-Points that lie on an axis do not belong to any quandrant. *Hints: (a) define a
+Points that lie on an axis do not belong to any quadrant. *Hints: (a) define a
 helper function for the sign of an integer, (b) match against a pair.*
 
 ```ocaml

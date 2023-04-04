@@ -29,10 +29,10 @@ following:
 
 - *Pair programming.* The most informal approach to code review is through pair
   programming, in which code is developed by a pair of engineers: the driver who
-  writes the code, and the observer who watches. The role of the observer is be
-  a critic, to think about potential errors, and to help navigate larger design
-  issues. It's usually better to have the observer be the engineer with the
-  greater experience with the coding task at hand. The observer reviews the
+  writes the code, and the observer who watches. The role of the observer is to
+  be a critic, to think about potential errors, and to help navigate larger
+  design issues. It's usually better to have the observer be the engineer with
+  the greater experience with the coding task at hand. The observer reviews the
   code, serving as the devil's advocate that the driver must convince. When the
   pair is developing specifications, the observer thinks about how to make specs
   clearer or shorter. Pair programming has other benefits. It is often more fun

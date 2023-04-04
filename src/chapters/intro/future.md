@@ -13,7 +13,7 @@ scratch affords the opportunity to reflect along the way about the difference
 between *programming* and programming *in a language.*
 
 If after OCaml you want to learn more about functional programming, you'll be
-well prepared. OCaml does a great job of clarifying and simplifying the essence
+well-prepared. OCaml does a great job of clarifying and simplifying the essence
 of functional programming in a way that other languages that blend functional
 and imperative programming (like Scala) or take functional programming to the
 extreme (like Haskell) do not.

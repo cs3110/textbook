@@ -49,7 +49,7 @@ in many ways inside a language, which one do you choose? Some will be more
 natural than others. Programmers who are fluent in the language will prefer
 certain modes of expression over others. We could think of this in terms of
 using the dominant paradigms in the language effectively, whether they are
-imperative, functional, object oriented, etc. You need to understand idioms to
+imperative, functional, object-oriented, etc. You need to understand idioms to
 say what you mean not just to the computer, but to other programmers. When you
 write code idiomatically, other programmers will understand your code better.
 

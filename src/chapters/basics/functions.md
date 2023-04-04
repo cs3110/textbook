@@ -148,7 +148,7 @@ follow the same rules as function identifiers. The keyword `rec` is required if
 
 Note that syntax for function definitions is actually simplified compared to
 what OCaml really allows. We will learn more about some augmented syntax for
-function definition in the next couple weeks. But for now, this simplified
+function definition in the next couple of weeks. But for now, this simplified
 version will help us focus.
 
 Mutually recursive functions can be defined with the `and` keyword:
@@ -334,7 +334,7 @@ then send the result of that through the `square` function. This is a nice,
 idiomatic way of expressing the computation in OCaml. The former way is arguably
 not as elegant: it involves writing extra parentheses and requires the reader's
 eyes to jump around, rather than move linearly from left to right. The latter
-way scales up nicely when the number of functions being applied grows, where as
+way scales up nicely when the number of functions being applied grows, whereas
 the former way requires more and more parentheses:
 
 ```{code-cell} ocaml
@@ -643,7 +643,7 @@ takes a single argument and returns a new function that expects the remaining
 arguments.
 
 Function application, on the other hand, is *left associative*: there
-are implicit parenthesis around function applications, from left to right.
+are implicit parentheses around function applications, from left to right.
 So
 
 ```ocaml

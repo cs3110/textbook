@@ -106,7 +106,7 @@ Every vector can be *normalized* by dividing each component by
 $|x|$; this yields a vector with norm 1:
 
 $$
-\left(\frac{x_1}{|x|}, \ldots, \frac{x_n}{|x|}\right)
+\left(\frac{x_1}{|x|}, \ldots, \frac{x_n}{|x|}\right) .
 $$
 
 Write a function `normalize : vector -> unit` that normalizes a vector "in

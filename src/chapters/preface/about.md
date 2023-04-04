@@ -53,8 +53,8 @@ been superseded by the "OCaml Platform" plugin.
 The order that the textbook covers topics sometimes differs from the order that
 the videos cover the topics, simply because the videos originate from lectures.
 The videos are placed in the textbook nearest to the topic they cover, but that
-does mean sometimes the videos are not in chronological order.  To watch them
-in their original order, start with this [YouTube playlist][videos].
+does mean that sometimes the videos are not in chronological order.  To watch
+them in their original order, start with this [YouTube playlist][videos].
 
 [videos]: https://www.youtube.com/playlist?list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU
 

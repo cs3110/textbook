@@ -309,7 +309,7 @@ match v with |  -/->
 Evaluation will get stuck at that point because none of the three other
 rules above will apply.
 
-**Step 4:** Double check your rules by evaluating the following
+**Step 4:** Double-check your rules by evaluating the following
 expression:
 
 `match (1 + 2, 3) with | (1,0) -> 4 | (1,x) -> x | (x,y) -> x + y`

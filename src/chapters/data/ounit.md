@@ -274,8 +274,8 @@ the code is written. Automating test suites is crucial so that continuous
 testing requires essentially no effort.
 
 Here's an example of TDD. We deliberately choose an exceedingly simple function
-to implement, so that the process is clear. Suppose we are working with a
-datatype for days:
+to implement, so that the process is clear. Suppose we are working with a data
+type for days:
 
 ```ocaml
 type day = Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday

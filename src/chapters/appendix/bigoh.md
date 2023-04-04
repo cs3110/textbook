@@ -106,7 +106,7 @@ Note how all three ideas come together there: steps, size, polynomial.
 But if we try to put that definition to use, it still isn't perfect. Coming up
 with an exact formula for the maximum number of execution steps can be insanely
 tedious. For example, in one other algorithm textbook, the authors develop this
-following polynomial for the number of execution steps taken by a pseudo-code
+following polynomial for the number of execution steps taken by a pseudocode
 implementation of insertion sort:
 
 $$

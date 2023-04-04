@@ -608,7 +608,7 @@ But that doesn't mean that a tail-recursive implementation is strictly better.
 For example, the tail-recursive function might be harder to read. (Consider
 `sum_plus_acc`.) Also, there are cases where implementing a tail-recursive
 function entails having to do a pre- or post-processing pass to reverse the
-list. On small to medium sized lists, the overhead of reversing the list (both
+list. On small to medium-sized lists, the overhead of reversing the list (both
 in time and in allocating memory for the reversed list) can make the
 tail-recursive version less time efficient. What constitutes "small" vs. "big"
 here? That's hard to say, but maybe 10,000 is a good estimate, according to the

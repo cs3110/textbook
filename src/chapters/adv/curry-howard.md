@@ -88,9 +88,9 @@ let snd (x, y) = y
 
 We could think of `pair` as a function that takes in evidence for `'a` and
 evidence for `'b`, and gives us back evidence for `'a * 'b`. That latter piece
-of evidence is the the pair `(x, y)` containing the individual pieces of
-evidence, `x` and `y`. Similarly, `fst` and `snd` extract the individual pieces
-of evidence from the pair. Thus,
+of evidence is the pair `(x, y)` containing the individual pieces of evidence,
+`x` and `y`. Similarly, `fst` and `snd` extract the individual pieces of
+evidence from the pair. Thus,
 
 - If you have evidence for `'a` and evidence for `'b`, you can produce evidence
   for `'a` and `'b`.

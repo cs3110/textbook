@@ -143,7 +143,7 @@ higher-order logics can be expressed in second-order logic.
 In programming languages, *first-order functions* similarly refer to functions
 that operate on individual data elements (e.g., strings, ints, records,
 variants, etc.). Whereas *higher-order function* can operate on functions, much
-like higher-order logics can quantify over over properties (which are like
+like higher-order logics can quantify over properties (which are like
 functions).
 
 ## Famous Higher-order Functions

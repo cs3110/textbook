@@ -148,7 +148,7 @@ actually: we haven't defined any rules yet.
 
 Let's introduce another notation written `e -/->`, which is meant to look like
 an arrow with a slash through it, to mean "there does not exist an `e'` such
-that `e --> e'`. Using that we could write:
+that `e --> e'`". Using that we could write:
 
 * `i -/->`
 * `b -/->`
@@ -271,10 +271,10 @@ let x = v1 in e2 --> e2 with v1 substituted for x
 For example, `let x = 42 in x + 1` should step to `42 + 1`, because substituting
 `42` for `x` in `x + 1` yields `42 + 1`.
 
-Of course, the right hand side of that rule isn't really an expression. It's
+Of course, the right-hand side of that rule isn't really an expression. It's
 just giving an intuition for the expression that we really want. We need to
 formally define what "substitute" means. It turns out to be rather tricky. So,
-rather then getting side-tracked by it right now, let's assume a new notation:
+rather than getting side-tracked by it right now, let's assume a new notation:
 `e'{e/x}`, which means, "the expression `e'` with `e` substituted for `x`."
 We'll come back to that notation in the next section and give it a careful
 definition.

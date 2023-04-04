@@ -22,7 +22,7 @@ guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
 - Download [our VM][3110vm]. Don’t worry about the “We’re sorry, the preview
   didn’t load” message you see. Just click the Download button and save the
   `.ova` file wherever you like. It’s about a 6GB file, so the download might
-  take awhile.
+  take a while.
 
 - Launch VirtualBox, select File → Import Appliance, and choose the `.ova` file
   you just downloaded. Click Next, then Import.

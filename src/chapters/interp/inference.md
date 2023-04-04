@@ -37,7 +37,7 @@ At a very high level, OCaml's type reconstruction algorithm works as follows:
   applications, pattern matches, etc. Think of these constraints as a system of
   equations like you might have in algebra.
 
-- Use that system of equations to solve for the type of the name begin defined.
+- Use that system of equations to solve for the type of the name being defined.
 
 The OCaml type reconstruction algorithm attempts to never reject a program that
 could type check, if the programmer had written down types. It also attempts
@@ -54,10 +54,10 @@ algorithm was independently invented by Roger <u>H</u>indley and Robin
 <u>M</u>ilner.
 
 HM has been rediscovered many times by many people. Curry used it informally in
-the 1950's (perhaps even the 1930's). He wrote it up formally in 1967 (published
+the 1950s (perhaps even the 1930s). He wrote it up formally in 1967 (published
 1969). Hindley discovered it independently in 1969; Morris in 1968; and Milner
 in 1978. In the realm of logic, similar ideas go back perhaps as far as Tarski
-in the 1920's. Commenting on this history, Hindley wrote,
+in the 1920s. Commenting on this history, Hindley wrote,
 
 > There must be a moral to this story of continual re-discovery; perhaps someone
 > along the line should have learned to read. Or someone else learn to write.
@@ -98,7 +98,7 @@ t ::= int | bool | t1 -> t2
 ```
 
 That language is SimPL, plus the lambda calculus, minus `let` expressions. It
-turns out `let` expressions add a extra layer of complication, so we'll come
+turns out `let` expressions add an extra layer of complication, so we'll come
 back to them later.
 
 Since anonymous functions in this language do not have type annotations, we have
@@ -110,8 +110,8 @@ to infer the type of the argument `x`. For example,
 - In `fun x -> if x then 1 else 0`, argument `x` must have type `bool` hence the
   function has type `bool -> int`.
 
-- Function `fun x -> if x then x else 0` is untypeable, because it would require
-  `x` to have both type `int` and `bool`, which isn't allowed.
+- The function `fun x -> if x then x else 0` is untypeable, because it would
+  require `x` to have both type `int` and `bool`, which isn't allowed.
 
 **A Syntactic Simplification.** We can treat `e1 bop e2` as syntactic sugar for
 `( bop ) e1 e2`. That is, we treat infix binary operators as prefix function
@@ -483,7 +483,7 @@ To find a substitution that unifies constraint set `C`, we use an algorithm
       `ti = t'i`, and return `unify(C'')`.
 -->
 
-In the second and third sub-cases, the check that `'x` should not occur in the
+In the second and third subcases, the check that `'x` should not occur in the
 type ensures that the algorithm is actually eliminating the variable. Otherwise,
 the algorithm could end up re-introducing the variable instead of eliminating
 it.
@@ -553,7 +553,7 @@ I |- fun f -> fun x -> f (( + ) x 1)
 ```
 
 For now we leave off the `: t -| C`, because that's the output of constraint
-generation. We haven't figure out the output yet! Since we have a function, we
+generation. We haven't figured out the output yet! Since we have a function, we
 use the function rule for inference to proceed by introducing a fresh type
 variable for the argument:
 

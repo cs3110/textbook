@@ -173,7 +173,7 @@ end
 {{ video_embed | replace("%%VID%%", "cUEN8sFVkS4")}}
 
 *Mutable maps* are maps whose bindings may be mutated. The interface for a
-mutable map therefore differs from a immutable map. Insertion and removal
+mutable map therefore differs from an immutable map. Insertion and removal
 operations for a mutable map therefore return `unit`, because they do not
 produce a new map but instead mutate an existing map.
 

@@ -100,9 +100,9 @@ Seems reasonable, right? The problem is, **it's wrong.** At least, it's wrong if
 you want evaluation to behave the same as OCaml. Or, to be honest, nearly any
 other modern language.
 
-It will be easier to explain why it's wrong if we add two more language feature:
-let expressions and integer constants. Integer constants would evaluate to
-themselves:
+It will be easier to explain why it's wrong if we add two more language
+features: let expressions and integer constants. Integer constants would
+evaluate to themselves:
 
 ```text
 <env, i> ==> i

@@ -94,8 +94,8 @@ surgery* to rebalance the tree. Some examples of balanced binary search tree
 data structures include:
 
 - AVL trees (1962)
-- 2-3 trees (1970's)
-- Red-black trees (1970's)
+- 2-3 trees (1970s)
+- Red-black trees (1970s)
 
 Each of these ensures $O(\log n)$ running time by enforcing a stronger invariant
 on the data structure than just the binary search tree invariant.
@@ -105,7 +105,7 @@ on the data structure than just the binary search tree invariant.
 {{ video_embed | replace("%%VID%%", "JzhG0jDxGqg")}}
 
 Red-black trees are relatively simple balanced binary tree data structure. The
-idea is to strengthen the representation invariant so a tree has height
+idea is to strengthen the representation invariant so that a tree has height
 logarithmic in the number of nodes $n$. To help enforce the invariant, we color
 each node of the tree either *red* or *black*. Where it matters, we consider the
 color of an empty tree to be black.

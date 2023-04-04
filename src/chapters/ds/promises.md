@@ -169,7 +169,7 @@ There will be a one-to-one association between promises and resolvers. The
 resolver for a promise will be used internally by the concurrency library but
 not revealed to clients. The clients will only get access to the promise.
 
-For example, suppose the concurrency library supported a operation to
+For example, suppose the concurrency library supported an operation to
 concurrently read a string from the network. The library would implement that
 operation as follows:
 
@@ -787,7 +787,7 @@ let _ = Lwt_main.run p
 Now the code looks pretty much exactly like what its equivalent synchronous
 version would be. But don't be fooled: all the asynchronous I/O, the promises,
 and the callbacks are still there. Thus, the evaluation of `p` first registers a
-callback with a promise, then moves on to the the evaluation of `Lwt_main.run`
+callback with a promise, then moves on to the evaluation of `Lwt_main.run`
 without waiting for the first string to finish being read. To prove that to
 yourself, run the following code:
 

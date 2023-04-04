@@ -346,7 +346,7 @@ You should see a message "Welcome to utop version ... (using OCaml version
 environment issue. See the tip above about the `opam env` command.
 ```
 
-Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt;
+Enter 3110 followed by two semicolons. Press return. The # is the utop prompt;
 you do not type it yourself.
 
 ```ocaml
@@ -369,7 +369,7 @@ If you're having any trouble with your installation, follow these double-check
 instructions. Some of them repeat the tips we provided above, but we've put them
 all here in one place to help diagnose any issues.
 
-First, **reboot your computer**. We need a clean slate for this double check.
+First, **reboot your computer**. We need a clean slate for this double-check.
 
 Second, run utop, and make sure it works. If it does not, here are some common
 issues:
@@ -396,7 +396,7 @@ issues:
 Then go back to the OPAM initialization step in the instructions way above, and
 proceed forward. Be extra careful to use the exact OPAM commands given above;
 sometimes mistakes occur when parts of them are omitted. Finally, redo the
-double check: reboot and see whether utop still works.
+double-check: reboot and see whether utop still works.
 
 ```{important}
 You want to get to the point where utop immediately works after a reboot,
@@ -495,7 +495,7 @@ Here's how to proceed:
 
 - Make sure that, from the same Unix prompt as which you launched VS Code, you
   can successfully complete the double-check instructions for your OPAM switch:
-  can you run utop? is the right switch active? If not, that's the problem you
+  can you run utop? Is the right switch active? If not, that's the problem you
   need to solve first. Then return to the VS Code issue. It might be fixed now.
 
 - If you're on WSL and VS Code does add syntax highlighting but does not add
@@ -544,8 +544,8 @@ spin up a separate Zoom call.  To install Live Share:
 - Open the Extensions page in VS Code.  Search for "Live Share Extension Pack".
   Install it.
 
-- The first time you use Live Share, you will be prompted to login. If you are a
-  Cornell student, choose to login with your Microsoft account, not GitHub.
+- The first time you use Live Share, you will be prompted to log in. If you are
+  a Cornell student, choose to log in with your Microsoft account, not GitHub.
   Enter your Cornell NetID email, e.g., `your_netid@cornell.edu`. That will take
   you to Cornell's login site. Use the password associated with your NetID.
 
