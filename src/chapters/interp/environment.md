@@ -300,7 +300,7 @@ it anyway.
 
 ```text
 e ::= x | e1 e2 | fun x -> e
-    | i | b | e1 + e2
+    | i | b | e1 bop e2
     | (e1,e2) | fst e1 | snd e2
     | Left e | Right e
     | match e with Left x1 -> e1 | Right x2 -> e2
@@ -336,10 +336,10 @@ Evaluation of most other language features just uses the environment without
 changing it:
 
 ```text
-<env, e1 + e2> ==> n
-  if  <env,e1> ==> n1
-  and <env,e2> ==> n2
-  and n is the result of applying the primitive operation + to n1 and n2
+<env, e1 bop e2> ==> v
+  if  <env,e1> ==> v1
+  and <env,e2> ==> v2
+  and v is the result of applying the primitive operation bop to v1 and v2
 
 <env, (e1, e2)> ==> (v1, v2)
   if  <env, e1> ==> v1

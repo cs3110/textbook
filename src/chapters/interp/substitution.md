@@ -853,7 +853,7 @@ e ::= x | e1 e2 | fun x -> e
     | if e1 then e2 else e3
     | let x = e1 in e2
 
-bop ::= + | * | < | =
+bop ::= + | * | <= | -
 
 x ::= <identifiers>
 
@@ -894,15 +894,15 @@ everything already in SimPL and in the lambda calculus.
 SimPL:
 
 ```text
-e1 + e2 --> e1' + e2
+e1 bop e2 --> e1' bop e2
 	if e1 --> e1'
 
-v1 + e2 --> v1 + e2'
+v1 bop e2 --> v1 bop e2'
 	if e2 --> e2'
 
-i1 + i2 --> i3
-	where i3 is the result of applying primitive operation +
-	to i1 and i2
+v1 bop v2 --> v3
+	where v3 is the result of applying primitive operation bop
+	to v1 and v2
 
 if e1 then e2 else e3 --> if e1' then e2 else e3
 	if e1 --> e1'
@@ -977,7 +977,7 @@ i{v/x} = i
 
 b{v/x} = b
 
-(e1 + e2) {v/x} = e1{v/x} + e2{v/x}
+(e1 bop e2) {v/x} = e1{v/x} bop e2{v/x}
 
 (if e1 then e2 else e3){v/x}
  = if e1{v/x} then e2{v/x} else e3{v/x}
