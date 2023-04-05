@@ -171,9 +171,9 @@ Here's how it works.
 
 We always color the new node red to ensure that the Global Invariant is
 preserved. However, this may destroy the Local Invariant by producing two
-adjacent red nodes. If the parent of the new node is the root, we can simply
-change the color of the root to be black. This restores the local invariant
-while preserving the global invariant.
+adjacent red nodes. If the parent of the new node is the root, then the new
+node's parent is black and the Local Invariant holds, so we don't need to do
+anything.
 
 If the parent of the new node is not the root, we need to also consider the
 *grandparent* of the new node. Note that we haven't modified the color of the
@@ -185,10 +185,10 @@ black.
 
 The next figure shows the four possible cases that can arise. In it, `a`-`d` are
 possibly empty subtrees, and `x`-`z` are values stored at a node. The nodes
-colors are indicated with `R` and `B`. We've marked the current "new" node with
-square brackets. When we are first inserting, this new node will have no
-children. But as we recurse up the tree, the current "new" node may have
-subtrees.
+colors are indicated with `R` and `B`. We've marked the root of the subtree that
+we've fixed up so far with square brackets. Right after inserting the new node
+as a red node, the marked node is just the new node and it will have no
+children. But as we recurse up the tree, the marked node may have subtrees.
 
 ```text
            1             2             3             4
@@ -241,13 +241,14 @@ hence that the final tree is the same in all four cases.
 
 ```{tip}
 It’s also worth thinking about why these operations preserves the local and
-global invariants. We have to use a careful combination of facts about the
-various subtrees. For instance, in the first case:
-
-- `x` is the current “new” node, and the subtree starting from `x` satisfies all RB tree invariants.
-- the subtree `c` satisfies all RB tree invariants.
-- the subtree `a` satisfies all RB tree invariants.
-- the subtree `z` satisfies all RB tree invariants *except* possibly at nodes/paths in subtree `x`.
+global invariants. The key idea is that at every point in the process, the whole
+tree satsfies all RB tree invariants *except* possibly the local invariant at
+the marked node `x` and its parent `y`, which might both be red. Using this
+fact, we can show that after rotation (1) the subtree rooted at `y` satisfies
+all RB tree invariants, and (2) the black height of the subtree rooted at `y` is
+the same as the black height of the subtree rooted at `z` before the rotation.
+Thus after the rotation, the whole tree satisfies all RB tree invariants, except
+possibly the local invariant at `y` and its parent.
 ```
 
 {{ video_embed | replace("%%VID%%", "D4FJMJUIMSw")}}
