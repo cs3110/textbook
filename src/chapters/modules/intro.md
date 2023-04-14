@@ -38,7 +38,7 @@ there is only one programmer working on a moderately large program, and it is
 crucial when there is more than one programmer.
 
 Industrial-strength languages contain mechanisms that support modular
-programming. In general (i.e. across programming languages), a module
+programming. In general (i.e., across programming languages), a module
 specification is known as an *interface*, which provides information to clients
 about the module's functionality while hiding the *implementation*.
 Object-oriented languages support modular programming with *classes*. The Java

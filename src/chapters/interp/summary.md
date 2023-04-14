@@ -1,6 +1,6 @@
 # Summary
 
-At first it might seem mysterious how a programming language could be
+At first, it might seem mysterious how a programming language could be
 implemented. But, after this chapter, hopefully some of that mystery has been
 revealed. Implementation of a programming language is just a matter of the same
 studious application of syntax, dynamic semantics, and static semantics that

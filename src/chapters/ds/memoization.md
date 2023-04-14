@@ -73,7 +73,7 @@ that it happens to make. Now we look for a way to bound the total number of
 recursive calls by finding some measure of the progress that is being made.
 
 A good choice of progress measure, not only here but also for many uses of
-memoization, is the number of nonempty entries in the table (i.e. entries that
+memoization, is the number of nonempty entries in the table (i.e., entries that
 contain `Some n` rather than `None`). Each time `f_mem` makes the two recursive
 calls it also increases the number of nonempty entries by one (filling in a
 formerly empty entry in the table with a new value). Since the table has only

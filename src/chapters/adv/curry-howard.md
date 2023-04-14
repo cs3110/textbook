@@ -554,7 +554,7 @@ simpler proof:
 Note that typing derivation is for the program `a`, which is exactly what the
 bigger program `fst (a, b)` evaluates to.
 
-Thus evaluation of the program causes the proof tree to simplify, and the
+Thus, evaluation of the program causes the proof tree to simplify, and the
 simplified proof tree is actually (through the proofs-as programs
 correspondence) a simpler proof of the same proposition. **Evaluation therefore
 corresponds to proof simplification.** And that is the final level of the

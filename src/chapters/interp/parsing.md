@@ -219,7 +219,7 @@ trailer.
 **Header.** The *header* appears between `%{` and `%}`. It is code that will be
 copied literally into the generated `parser.ml`. Here we use it just to open the
 `Ast` module so that, later on in the grammar definition, we can write
-expressions like `Int i` instead of `Ast.Int i`. If we wanted we could also
+expressions like `Int i` instead of `Ast.Int i`. If we wanted, we could also
 define some OCaml functions in the header.
 
 ```text

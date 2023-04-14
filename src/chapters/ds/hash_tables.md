@@ -467,7 +467,7 @@ is guaranteed.
 
 There's no way for the implementer to know in advance, though, exactly how many
 buckets will be needed. So instead, the implementer will have to *resize* the
-bucket array whenever the load factor gets too high. Typically the newly
+bucket array whenever the load factor gets too high. Typically, the newly
 allocated bucket will be of a size to restore the load factor to about 1.
 
 Putting those two ideas together, if the load factor reaches 2, then there are

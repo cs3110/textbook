@@ -748,7 +748,7 @@ must guarantee.
 The particular flavor of subtyping in Java is called *nominal subtyping*, which
 is to say, it is based on names. In our example, `D` is a subtype of `C` just
 because of the way the names were declared. The programmer decreed that subtype
-relationship, and the language accepted the decree without question. Indeed the
+relationship, and the language accepted the decree without question. Indeed, the
 *only* subtype relationships that exist are those that have been decreed by name
 through such uses of `extends` and `implements`.
 

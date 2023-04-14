@@ -120,9 +120,9 @@ likewise, `compose h h x = h (h x)`. Thus we have:
 twice h x = h (h x) = compose h h x
 ```
 
-Therefore can conclude that `twice h x = compose h h x`. And by extensionality
-we can simplify that equality: Since `twice h x = compose h h x` holds for all
-`x`, we can conclude `twice h = compose h h`.
+Therefore, we can conclude that `twice h x = compose h h x`. And by
+extensionality we can simplify that equality: Since `twice h x = compose h h x`
+holds for all `x`, we can conclude `twice h = compose h h`.
 
 As another example, suppose we define an infix operator for function
 composition:

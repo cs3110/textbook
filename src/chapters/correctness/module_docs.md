@@ -371,7 +371,7 @@ an *invariant*.
 
 When implementing a complex abstract data type, it is often helpful to write an
 internal function that can be used to check that the rep invariant holds of a
-given data item. By convention we will call this function `rep_ok`. If the
+given data item. By convention, we will call this function `rep_ok`. If the
 module accepts values of the abstract type that are created outside the module,
 say by exposing the implementation of the type in the signature, then `rep_ok`
 should be applied to these to ensure the representation invariant is satisfied.

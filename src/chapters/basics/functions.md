@@ -404,7 +404,7 @@ Another way of writing `id_int` would be in terms of `id`:
 let id_int' : int -> int = id
 ```
 
-In effect we took a value of type `'a -> 'a`, and we bound it to a name whose
+In effect, we took a value of type `'a -> 'a`, and we bound it to a name whose
 type was manually specified as being `int -> int`. You might ask, why does that
 work? They aren't the same types, after all.
 

@@ -213,7 +213,7 @@ let () = assert (postorder t = [1;3;2;5;7;6;4])
 On unbalanced trees, the traversal functions above require quadratic worst-case
 time (in the number of nodes), because of the `@` operator. Re-implement the
 functions without `@`, and instead using `::`, such that they perform exactly
-one cons per `Node` in the tree. Thus the worst-case execution time will be
+one cons per `Node` in the tree. Thus, the worst-case execution time will be
 linear. You will need to add an additional accumulator argument to each
 function, much like with tail recursion. (But your implementations won't
 actually be tail recursive.)

@@ -107,10 +107,10 @@ Then use `QCheck.make` to create an arbitrary that represents a list whose
 length is between 5 and 10, and whose elements are integers between 0 and 100.
 The type of your arbitrary should be `int list QCheck.arbitrary`.
 
-Finally create and run a QCheck test that checks whether at least one element of
-an arbitrary list (of 5 to 10 elements, each between 0 and 100) is even. You'll
-need to "upgrade" the `is_even` property to work on a list of integers rather
-than a single integer.
+Finally, create and run a QCheck test that checks whether at least one element
+of an arbitrary list (of 5 to 10 elements, each between 0 and 100) is even.
+You'll need to "upgrade" the `is_even` property to work on a list of integers
+rather than a single integer.
 
 Each time you run the test, recall that it will generate 100 lists and check the
 property of them. If you run the test many times, you'll likely see some

@@ -869,7 +869,7 @@ components (i.e., they are pairs). A longer tuple could be coded up with nested
 pairs. For example, `(1, 2, 3)` in OCaml could be `(1, (2, 3))` in this core
 language.
 
-Also to keep variant types simple in this core model, we represent them with
+Also, to keep variant types simple in this core model, we represent them with
 only two constructors, which we name `Left` and `Right`. A variant with more
 constructors could be coded up with nested applications of those two
 constructors. Since we have only two constructors, match expressions need only

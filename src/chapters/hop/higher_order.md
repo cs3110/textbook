@@ -54,10 +54,10 @@ let fourth x = twice square x
 
 Above, we have exploited the structural similarity between `quad` and `fourth`
 to save work. Admittedly, in this toy example it might not seem like much work.
-But imagine that `twice` were actually some much more complicated function. Then
-if someone comes up with a more efficient version of it, every function written
-in terms of it (like `quad` and `fourth`) could benefit from that improvement in
-efficiency, without needing to be recoded.
+But imagine that `twice` were actually some much more complicated function.
+Then, if someone comes up with a more efficient version of it, every function
+written in terms of it (like `quad` and `fourth`) could benefit from that
+improvement in efficiency, without needing to be recoded.
 
 Part of being an excellent programmer is recognizing such similarities and
 *abstracting* them by creating functions (or other units of code) that implement

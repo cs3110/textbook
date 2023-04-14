@@ -153,9 +153,9 @@ pieces:
 - So its first argument must have type `int`.  Which `1` does.
 - And its second argument must have type `int`, too. So `t = int`. That is a
   _constraint_ on `t`.
-- Finally the body of the function must also have type `int`, since that's the
+- Finally, the body of the function must also have type `int`, since that's the
   return type of `( + )`.
-- Therefore the type of the entire function must be `t -> int`.
+- Therefore, the type of the entire function must be `t -> int`.
 - Since `t = int`, that type is `int -> int`.
 
 The type inference algorithm follows the same idea of generating unknown types,
@@ -338,7 +338,7 @@ int -> int
 't
 ```
 
-Hence the type of `( + ) 1` is `int -> int`.
+Hence, the type of `( + ) 1` is `int -> int`.
 
 ## Solving Constraints
 
@@ -412,7 +412,7 @@ A substitution `S` can be applied to a constraint `t = t'`. The result
 `(t = t') S` is defined to be `t S = t' S`. So we just apply the substitution on
 both sides of the constraint.
 
-Finally a substitution can be applied to a set `C` of constraints; the result
+Finally, a substitution can be applied to a set `C` of constraints; the result
 `C S` is the result of applying `S` to each of the individual constraints in
 `C`.
 
@@ -437,7 +437,7 @@ int -> (int -> int)
 A substitution `S` unifies a set `C` of constraints if `S` unifies every
 constraint in `C`.
 
-At last we can precisely say what it means to solve a set of constraints: we
+At last, we can precisely say what it means to solve a set of constraints: we
 must find a substitution that unifies the set. That is, we need to find a
 sequence of maps from type variables to types, such that the sequence causes
 each equation in the constraint set to "unite", meaning that its left-hand side
@@ -451,7 +451,7 @@ To find a substitution that unifies constraint set `C`, we use an algorithm
 - If `C` contains at least one constraint `t1 = t2` and possibly some other
   constraints `C'`, then `unify(C)` is defined as follows:
 
-    - If `t1` and `t2` are both the same simple type&mdash;i.e. both the same
+    - If `t1` and `t2` are both the same simple type&mdash;i.e., both the same
       type variable `'x`, or both `int` or both `bool`&mdash; then return
       `unify(C')`. *In this case, the constraint contained no useful
       information, so we're tossing it out and continuing.*

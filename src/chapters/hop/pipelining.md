@@ -83,6 +83,6 @@ a tradeoff between clarity and efficiency of code.
 
 Note that the inefficiency is *not* from the pipeline operator itself, but from
 having to construct all those unnecessary intermediate lists. So don't get the
-idea that pipelining is intrinsically bad. In fact it can be quite useful. When
+idea that pipelining is intrinsically bad. In fact, it can be quite useful. When
 we get to the chapter on modules, we'll use it quite often with some of the data
 structures we study there.

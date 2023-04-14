@@ -117,7 +117,7 @@ Here are some ideas for how to test the `create` function:
 
 - Looking at the square above, we see that it has boundaries at `min_int` and
   `max_int`. We want to try to construct rationals at the corners and along the
-  sides of the square, e.g. `create min_int min_int`, `create max_int 2`, etc.
+  sides of the square, e.g., `create min_int min_int`, `create max_int 2`, etc.
 
 - The line `p=0` is important because `p/q` is zero all along it. We should try
   `(0, q)` for various values of `q`.
@@ -312,7 +312,7 @@ Look at the abstraction function and representation invariant for hints about
 what boundaries may exist in the space of values manipulated by a data
 abstraction. The rep invariant is a particularly effective tool for constructing
 useful test cases. Looking at the rep invariant of the `Rational` data
-abstraction above, we see that it requires that `q` is non-zero. Therefore we
+abstraction above, we see that it requires that `q` is non-zero. Therefore, we
 should construct test cases to see whether it's possible to cause that invariant
 to be violated.
 

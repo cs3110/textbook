@@ -289,7 +289,7 @@ s.push(1);
 So in OCaml, how can we keep the *representation type* of the stack hidden? What
 we learned about opacity and sealing thus far does not suffice. The problem is
 that the type `'a list * int` literally appears in the signature of
-`ListStackCachedSize`, e.g. in `push`:
+`ListStackCachedSize`, e.g., in `push`:
 
 ```{code-cell} ocaml
 ListStackCachedSize.push
@@ -558,7 +558,7 @@ fun x -> x
 ```
 
 On the one hand, it's reasonable for the toplevel to behave this way. Once a
-type is abstract its implementation isn't meant to be revealed to clients. So
+type is abstract, its implementation isn't meant to be revealed to clients. So
 actually printing out the list `[]` or `[2; 1]` as responses to the above inputs
 would be revealing more than is intended.
 

@@ -18,7 +18,7 @@ kernelspec:
 So far we have only considered *sequential* programs. Execution of a sequential
 program proceeds one step at a time, with no choice about which step to take
 next. Sequential programs are limited in that they are not very good at dealing
-with multiple sources of simultaneous input and they can only execute on a
+with multiple sources of simultaneous input, and they can only execute on a
 single processor. Many modern applications are instead *concurrent*.
 
 ## Concurrency
@@ -645,7 +645,7 @@ function does one of three things, depending on the state of `p`:
 
 * If `p` is pending, then `bind` does not wait for `p` to be resolved, nor for
   `c` to be run. Rather, `bind` just registers the callback to eventually be run
-  when (or if) the promise is resolved. Therefore the `bind` function returns a
+  when (or if) the promise is resolved. Therefore, the `bind` function returns a
   new promise. That promise will become resolved when (or if) the callback
   completes running, sometime in the future. Its contents will be whatever
   contents are contained within the promise that the callback itself returns.

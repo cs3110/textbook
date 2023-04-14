@@ -8,7 +8,7 @@
 * Construct a list that has the integers 1 through 5 in it. Use the square
   bracket notation for lists.
 
-* Construct the same list, but do not use the square bracket notation. Instead
+* Construct the same list, but do not use the square bracket notation. Instead,
   use `::` and `[]`.
 
 * Construct the same list again. This time, the following expression must appear

@@ -52,7 +52,7 @@ let pred = function
   | Succ m -> m
 ```
 
-Similarly we can define a function to add two numbers:
+Similarly, we can define a function to add two numbers:
 
 ```{code-cell} ocaml
 let rec add n1 n2 =
