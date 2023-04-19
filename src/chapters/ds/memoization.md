@@ -134,7 +134,7 @@ memoization technique:
 
 ```{code-cell} ocaml
 let fib_memo =
-  let rec fib self n =
+  let fib self n =
     if n < 2 then 1 else self (n - 1) + self (n - 2)
   in
   memo_rec fib
