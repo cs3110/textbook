@@ -31,7 +31,7 @@ meaningful value, such as a `void` return type in Java or `None` return value in
 Python.
 
 So if you're coming from an object-oriented background, be careful about the
-terminology. **Everything here is a strictly a function, not a method.**
+terminology. **Everything here is strictly a function, not a method.**
 ```
 
 ## Function Definitions
