@@ -22,7 +22,7 @@ using them all along without thinking too much about them.
 information. Abstraction thus enables *encapsulation*, aka *information hiding*.
 Usually, abstraction mechanisms for modules allow revealing some names that
 exist inside the module, but hiding some others. Abstractions therefore describe
-relationships among modules: there might be many modules that could considered
+relationships among modules: there might be many modules that could be considered
 to satisfy a given abstraction. Abstraction is essential for modularity, because
 it enables implementers of a module to hide the details of the implementation
 from clients, thus preventing the clients from abusing those details. In a large
