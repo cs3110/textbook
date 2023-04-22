@@ -22,16 +22,17 @@ using them all along without thinking too much about them.
 information. Abstraction thus enables *encapsulation*, aka *information hiding*.
 Usually, abstraction mechanisms for modules allow revealing some names that
 exist inside the module, but hiding some others. Abstractions therefore describe
-relationships among modules: there might be many modules that could satisfy a
-given abstraction. Abstraction is essential for modularity, because it enables
-implementers of a module to hide the details of the implementation from clients,
-thus preventing the clients from abusing those details. In a large team, the
-modules one programmer designs are thereby protected from abuse by another
-programmer. It also enables clients to be blissfully unaware of those details.
-So, in a large team, no programmer has to be aware of all the details of all the
-modules. In Java, interfaces and abstract classes provide abstraction. In OCaml,
-*signatures* are used to abstract structures by hiding some of the structure's
-names and definitions. Signatures are essentially the types of structures.
+relationships among modules: there might be many modules that could be considered
+to satisfy a given abstraction. Abstraction is essential for modularity, because
+it enables implementers of a module to hide the details of the implementation
+from clients, thus preventing the clients from abusing those details. In a large
+team, the modules one programmer designs are thereby protected from abuse by
+another programmer. It also enables clients to be blissfully unaware of those
+details. So, in a large team, no programmer has to be aware of all the details
+of all the modules. In Java, interfaces and abstract classes provide
+abstraction. In OCaml, *signatures* are used to abstract structures by hiding
+some of the structure's names and definitions. Signatures are essentially the
+types of structures.
 
 **Code reuse.** A module system enables *code reuse* by providing features that
 enable code from one module to be used as part of another module without having
