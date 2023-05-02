@@ -142,7 +142,8 @@ library for promises.
 
 [lwt-github]: https://github.com/ocsigen/lwt
 
-In Lwt, a *promise* is a write-once reference: a value that is permitted to
+In Lwt, a *promise* is a 
+reference: a value that is permitted to
 mutate at most once. When created, it is like an empty box that contains
 nothing. We say that the promise is *pending*. Eventually the promise can be
 *resolved*, which is like putting something inside the box. Instead of being
@@ -253,10 +254,10 @@ resolved or rejected, and once the state has changed, it will not allow it to be
 changed again. In other words, `update` enforces the "write once" invariant.
 
 ```{code-cell} ocaml
-(** [write_once p s] changes the state of [p] to be [s].  If [p] and [s]
+(** [update p s] changes the state of [p] to be [s].  If [p] and [s]
     are both pending, that has no effect.
     Raises: [Invalid_arg] if the state of [p] is not pending. *)
-let write_once p s =
+let update p s =
   if !p = Pending
   then p := s
   else invalid_arg "cannot write twice"
