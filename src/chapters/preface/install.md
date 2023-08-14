@@ -273,11 +273,11 @@ and set of packages. You can have many switches and, well, switch between them
 this command:
 
 ```console
-opam switch create cs3110-2023sp ocaml-base-compiler.4.14.0
+opam switch create cs3110-2023fa ocaml-base-compiler.5.0.0
 ```
 
 ```{tip}
-If that command fails saying that the 4.14.0 compiler can't be found, you
+If that command fails saying that the 5.0.0 compiler can't be found, you
 probably installed OPAM sometime back in the past and now need to update it. Do
 so with `opam update`.
 ```
@@ -301,7 +301,7 @@ You should get output like this:
 
 ```
 #  switch         compiler                    description
-→  cs3110-2023sp  ocaml-base-compiler.4.14.0  cs3110-2023sp
+→  cs3110-2023fa  ocaml-base-compiler.5.0.0  cs3110-2023fa
 ```
 
 There might be other lines if you happen to have done OCaml development before.
@@ -311,10 +311,10 @@ Here's what to check for:
   current switch. You should run `eval $(opam env)`". If either of the two
   issues below also occur, you need to resolve this issue first.
 
-- There must be a right arrow in the first column next to the `cs3110-2023sp`
+- There must be a right arrow in the first column next to the `cs3110-2023fa`
   switch.
 
-- That switch must have the right name and the right compiler version, 4.14.0.
+- That switch must have the right name and the right compiler version, 5.0.0.
 
 ```{warning}
 If you do get that warning about `opam env`, something is wrong. Your shell is
@@ -342,7 +342,7 @@ utop
 
 ```{tip}
 You should see a message "Welcome to utop version ... (using OCaml version
-4.14.0)!" If the OCaml version is incorrect, then you probably have an
+5.0.0)!" If the OCaml version is incorrect, then you probably have an
 environment issue. See the tip above about the `opam env` command.
 ```
 
@@ -387,9 +387,9 @@ issues:
   `opam init` command. To fix it, follow the "redo" instructions below.
 
 - **Is your switch listed?** Run `opam switch list` and make sure a switch named
-  `cs3110-2023sp` is listed, that it has the 4.14.0 compiler, and that it is the
+  `cs3110-2023fa` is listed, that it has the 5.0.0 compiler, and that it is the
   active switch (which is indicated with an arrow beside it). If that switch is
-  present but not active, run `opam switch cs3110-2023sp` then see whether utop
+  present but not active, run `opam switch cs3110-2023fa` then see whether utop
   works. If that switch is not present, follow the "redo" instructions below.
 
 **Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`.
