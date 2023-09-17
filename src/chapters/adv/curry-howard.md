@@ -56,7 +56,7 @@ example, `3110 : int`, and `[] : 'a list`. We long ago learned to read those as
 
 Let's try a different reading now. Instead of "has type", let's read "is
 evidence for". So, `3110` is evidence for `int`. What does that mean? Think of a
-type as a set of values. So, `3110` is evidence that type is not empty.
+type as a set of values. So, `3110` is evidence that type `int` is not empty.
 Likewise, `[]` is evidence that the type `'a list` is not empty. We say that the
 type is *inhabited* if it is not empty.
 
