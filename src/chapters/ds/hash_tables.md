@@ -735,7 +735,7 @@ configured to examine more nodes.
 **Hash table.** Here's an abstract of the hash table interface:
 
 ```ocaml
-module type Hashtbl = struct
+module type Hashtbl = sig
   type ('a, 'b) t
   val create : int -> ('a, 'b) t
   val add : ('a, 'b) t -> 'a -> 'b -> unit
