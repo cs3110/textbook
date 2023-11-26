@@ -15,7 +15,7 @@ kernelspec:
 
 # Fold
 
-The map functional gives us a way to individually transform each element of a
+The map function gives us a way to individually transform each element of a
 list. The filter functional gives us a way to individually decide whether to
 keep or throw away each element of a list. But both of those are really just
 looking at a single element at a time. What if we wanted to somehow combine all
