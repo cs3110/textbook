@@ -326,7 +326,7 @@ Also, make sure you really did log out of your OS (or reboot).
 Continue by installing the OPAM packages we need:
 
 ```console
-opam install -y utop odoc ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat ocamlformat-rpc
+opam install -y utop odoc ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat
 ```
 
 Make sure to grab that whole line above when you copy it. You will get some
