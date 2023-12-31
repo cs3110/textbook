@@ -216,7 +216,7 @@ We add the following new pattern form to the list of legal patterns:
 
 * `(p1, ..., pn)`
 
-The parentheses are again not entirely mandatory but usually are idimoatic to
+The parentheses are again not entirely mandatory but usually are idiomatic to
 include.
 
 And we extend the definition of when a pattern matches a value and produces a
