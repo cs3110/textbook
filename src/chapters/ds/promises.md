@@ -248,10 +248,10 @@ using the type system to control whether it's possible to apply certain
 functions (e.g., `state` vs `resolve`) to a promise.
 
 To help implement the rest of the functions, let's start by writing a helper
-function `update : 'a promise -> 'a state -> unit` to update the reference. This
+function `write_once : 'a promise -> 'a state -> unit` to update the reference. This
 function will implement changing the state of the promise from pending to either
 resolved or rejected, and once the state has changed, it will not allow it to be
-changed again. In other words, `update` enforces the "write once" invariant.
+changed again. That is, it enforces the "write once" invariant.
 
 ```{code-cell} ocaml
 (** [update p s] changes the state of [p] to be [s].  If [p] and [s]
