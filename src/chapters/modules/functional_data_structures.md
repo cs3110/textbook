@@ -327,7 +327,7 @@ are transferred from the inbox to the outbox. When a dequeue is requested, that
 element is removed from the outbox; or when the front element is requested, we
 check the outbox for it. For example, if the inbox currently had `[3; 4; 5]` and
 the outbox had `[1; 2]`, then the front element would be `1`, which is the head
-of the outbox. Dequeuing would remove that element and leave the inbox with just
+of the outbox. Dequeuing would remove that element and leave the outbox with just
 `[2]`, which is the tail of the outbox. Likewise, enqueuing `6` would make the
 inbox become `[3; 4; 5; 6]`.
 
