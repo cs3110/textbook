@@ -254,10 +254,10 @@ resolved or rejected, and once the state has changed, it will not allow it to be
 changed again. That is, it enforces the "write once" invariant.
 
 ```{code-cell} ocaml
-(** [update p s] changes the state of [p] to be [s].  If [p] and [s]
+(** [write_once p s] changes the state of [p] to be [s].  If [p] and [s]
     are both pending, that has no effect.
     Raises: [Invalid_arg] if the state of [p] is not pending. *)
-let update p s =
+let write_once p s =
   if !p = Pending
   then p := s
   else invalid_arg "cannot write twice"
