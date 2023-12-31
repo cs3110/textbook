@@ -358,7 +358,7 @@ example,
 # let c = a ^ b;;
 # ...
 ```
-is understand by OCaml in the same way as
+is understood by OCaml in the same way as
 ```ocaml
 let a = "big" in
 let b = "red" in
