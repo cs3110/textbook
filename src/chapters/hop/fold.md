@@ -16,10 +16,10 @@ kernelspec:
 # Fold
 
 The map function gives us a way to individually transform each element of a
-list. The filter functional gives us a way to individually decide whether to
+list. The filter function gives us a way to individually decide whether to
 keep or throw away each element of a list. But both of those are really just
 looking at a single element at a time. What if we wanted to somehow combine all
-the elements of a list? That's what the *fold* functional is for. It turns out
+the elements of a list? That's what the *fold* function is for. It turns out
 that there are two versions of it, which we'll study in this section. But to
 start, let's look at a related function&mdash;not actually in the standard
 library&mdash;that we call *combine*.
