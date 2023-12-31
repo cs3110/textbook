@@ -11,7 +11,7 @@ you have experienced so far. Adapting to that perspective requires letting go
 of old ideas: assignment statements, loops, classes and objects, among others.
 That won't be easy.
 
-> <i>Nan-in, a Japanese master during the Meiji era (1868-1912), received a
+> <i>Nan-in (南隠), a Japanese master during the Meiji era (1868-1912), received a
 > university professor who came to inquire about Zen. Nan-in served tea. He
 > poured his visitor's cup full, and then kept on pouring. The professor watched
 > the overflow until he no longer could restrain himself. "It is overfull. No
