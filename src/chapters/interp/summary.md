@@ -43,7 +43,7 @@ kind studied in discrete mathematics or theory of computation courses.
 - lexer
 - machine configuration
 - metavariable
-- non-terminal
+- nonterminal
 - operational semantics
 - optimizing compiler
 - parser
