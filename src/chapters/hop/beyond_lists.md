@@ -93,7 +93,7 @@ Why did we pick `fold_right` and not `fold_left` for this development? Because
 `fold_left` is tail recursive, which is something we're never going to achieve
 on binary trees. Suppose we process the left branch first; then we still have to
 process the right branch before we can return. So there will always be work left
-to do after a recursive call on one branch. Thus on trees an equivalent to
+to do after a recursive call on one branch. Thus, on trees an equivalent to
 `fold_right` is the best which we can hope for.
 
 The technique we used to derive `fold_tree` works for any OCaml variant type

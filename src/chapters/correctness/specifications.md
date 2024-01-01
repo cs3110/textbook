@@ -13,7 +13,7 @@ promised functionality?
 Specifications usually involve preconditions and postconditions. The
 preconditions inform what the client must guarantee about inputs they pass in,
 and what the implementer may assume about those inputs. The postconditions
-inform what they client may assume about outputs they receive, and what the
+inform what the client may assume about outputs they receive, and what the
 implementer must guarantee about those outputs.
 
 An implementation *satisfies* a specification if it provides the behavior

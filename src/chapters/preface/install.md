@@ -121,9 +121,9 @@ reinstalling it through the Windows Start menu.
 Now skip to the "Ubuntu setup" paragraph below.
 
 **Without a recent version of Windows,** you will need to follow
-[Microsoft's manual install instructions][wsl-manual]. WSL2 is preferred over
-WSL1 by OCaml (and WSL2 offers performance and functionality improvements), so
-install WSL2 if you can.
+[Microsoft's manual installation instructions][wsl-manual]. WSL2 is preferred
+over WSL1 by OCaml (and WSL2 offers performance and functionality improvements),
+so install WSL2 if you can.
 
 [wsl-manual]: https://docs.microsoft.com/en-us/windows/wsl/install-manual
 [rh-virt]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios
@@ -251,8 +251,8 @@ installation.
 opam init --bare -a -y
 ```
 
-It is expected behavior to get a note about making sure `.profile` is well
-sourced in `.bashrc`. You don't need to do anything about that.
+It is expected behavior to get a note about making sure `.profile` is
+well-sourced in `.bashrc`. You don't need to do anything about that.
 
 **WSL1.** Hopefully you are running WSL2, not WSL1. But on WSL1, run:
 
@@ -346,7 +346,7 @@ You should see a message "Welcome to utop version ... (using OCaml version
 environment issue. See the tip above about the `opam env` command.
 ```
 
-Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt;
+Enter 3110 followed by two semicolons. Press return. The # is the utop prompt;
 you do not type it yourself.
 
 ```ocaml
@@ -363,13 +363,13 @@ must enter the extra # before the quit directive.
 
 A faster way to quit is to type Control+D.
 
-## Double Check OCaml
+## Double-Check OCaml
 
 If you're having any trouble with your installation, follow these double-check
 instructions. Some of them repeat the tips we provided above, but we've put them
 all here in one place to help diagnose any issues.
 
-First, **reboot your computer**. We need a clean slate for this double check.
+First, **reboot your computer**. We need a clean slate for this double-check procedure.
 
 Second, run utop, and make sure it works. If it does not, here are some common
 issues:
@@ -395,8 +395,7 @@ issues:
 **Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`.
 Then go back to the OPAM initialization step in the instructions way above, and
 proceed forward. Be extra careful to use the exact OPAM commands given above;
-sometimes mistakes occur when parts of them are omitted. Finally, redo the
-double check: reboot and see whether utop still works.
+sometimes mistakes occur when parts of them are omitted. Finally, double-check again: reboot and see whether utop still works.
 
 ```{important}
 You want to get to the point where utop immediately works after a reboot,
@@ -490,12 +489,12 @@ Let's make sure VS Code's OCaml support is working.
   the error message. Go to View &rarr; Problems to see it there, too. Add double
   quotes around the integer to make it a string, and the problem will go away.
 
-**If you don't observe those behaviors,** something is wrong with your install.
-Here's how to proceed:
+**If you don't observe those behaviors,** something is wrong with your
+installation. Here's how to proceed:
 
 - Make sure that, from the same Unix prompt as which you launched VS Code, you
   can successfully complete the double-check instructions for your OPAM switch:
-  can you run utop? is the right switch active? If not, that's the problem you
+  Can you run utop? Is the right switch active? If not, that's the problem you
   need to solve first. Then return to the VS Code issue. It might be fixed now.
 
 - If you're on WSL and VS Code does add syntax highlighting but does not add
@@ -506,7 +505,7 @@ Here's how to proceed:
   launching VS Code from Ubuntu rather than PowerShell or from the Windows GUI.
 
 **If you're still stuck with an issue,** try uninstalling VS Code, rebooting,
-and re-doing all the install instructions above from scratch. Pay close
+and re-doing all the installation instructions above from scratch. Pay close
 attention to any warnings or errors.
 
 ```{warning}
@@ -544,8 +543,8 @@ spin up a separate Zoom call.  To install Live Share:
 - Open the Extensions page in VS Code.  Search for "Live Share Extension Pack".
   Install it.
 
-- The first time you use Live Share, you will be prompted to login. If you are a
-  Cornell student, choose to login with your Microsoft account, not GitHub.
+- The first time you use Live Share, you will be prompted to log in. If you are
+  a Cornell student, choose to log in with your Microsoft account, not GitHub.
   Enter your Cornell NetID email, e.g., `your_netid@cornell.edu`. That will take
   you to Cornell's login site. Use the password associated with your NetID.
 

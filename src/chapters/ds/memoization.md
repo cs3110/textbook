@@ -73,9 +73,9 @@ that it happens to make. Now we look for a way to bound the total number of
 recursive calls by finding some measure of the progress that is being made.
 
 A good choice of progress measure, not only here but also for many uses of
-memoization, is the number of nonempty entries in the table (i.e. entries that
+memoization, is the number of non-empty entries in the table (i.e., entries that
 contain `Some n` rather than `None`). Each time `f_mem` makes the two recursive
-calls it also increases the number of nonempty entries by one (filling in a
+calls it also increases the number of non-empty entries by one (filling in a
 formerly empty entry in the table with a new value). Since the table has only
 `n` entries, there can thus only be a total of $O(n)$ calls to `f_mem`, for a
 total running time of $O(n)$ (because we established above that each call takes
@@ -152,8 +152,8 @@ invitation lists, so the naive algorithm that compares the fun of every valid
 invitation list takes exponential time.
 
 We can use memoization to turn this into a linear-time algorithm. We start by
-defining a variant type to represent the employees. The int at each node is the
-fun.
+defining a variant type to represent the employees. The `int` at each node is
+the fun.
 
 ```ocaml
 type tree = Empty | Node of int * tree * tree
@@ -167,8 +167,8 @@ optimal invitation lists for the left and right children that do not include
 their respective root nodes. So it seems useful to have functions that optimize
 the invite lists for the case where the root node is required to be invited, and
 for the case where the root node is excluded. We'll call these two functions
-party_in and party_out. Then the result of party is just the maximum of these
-two functions:
+`party_in` and `party_out`. Then the result of party is just the maximum of
+these two functions:
 
 ```{code-cell} ocaml
 module Unmemoized = struct

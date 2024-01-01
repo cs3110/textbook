@@ -7,7 +7,7 @@ powerful feature (as you might expect from its rather lengthy semantics). We'll
 see more uses for pattern matching as the course proceeds.
 
 These built-in lists are implemented as singly-linked lists. That's important to
-keep in mind when your needs go beyond small to medium sized lists. Recursive
+keep in mind when your needs go beyond small- to medium-sized lists. Recursive
 functions on long lists will take up a lot of stack space, so tail recursion
 becomes important. And if you're attempting to process really huge lists, you
 probably don't want linked lists at all, but instead a data structure that will

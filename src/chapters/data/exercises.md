@@ -8,7 +8,7 @@
 * Construct a list that has the integers 1 through 5 in it. Use the square
   bracket notation for lists.
 
-* Construct the same list, but do not use the square bracket notation. Instead
+* Construct the same list, but do not use the square bracket notation. Instead,
   use `::` and `[]`.
 
 * Construct the same list again. This time, the following expression must appear
@@ -17,8 +17,8 @@
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "product")}}
 
-Write a function that returns the product of all the elements in a list. The
-product of all the elements of an empty list is `1`.
+Write a function `product` that returns the product of all the elements in a
+list. The product of all the elements of an empty list is `1`.
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "concat")}}
@@ -280,7 +280,7 @@ impossible.
 Complete the `quadrant` function below, which should return the quadrant of the
 given `x, y` point according to the diagram on the right (borrowed from
 [Wikipedia](https://en.wikipedia.org/wiki/File:Cartesian_coordinates_2D.svg)).
-Points that lie on an axis do not belong to any quandrant. *Hints: (a) define a
+Points that lie on an axis do not belong to any quadrant. *Hints: (a) define a
 helper function for the sign of an integer, (b) match against a pair.*
 
 ```ocaml
@@ -351,7 +351,7 @@ exception `Failure "empty"` but just the string `"empty"`) if the list is empty.
 Write two OUnit tests to determine whether your solution to **list max exn**,
 above, correctly raises an exception when its input is the empty list, and
 whether it correctly returns the max value of the input list when that list is
-nonempty.
+non-empty.
 
 <!--------------------------------------------------------------------------->
 {{ ex4 | replace("%%NAME%%", "is_bst")}}

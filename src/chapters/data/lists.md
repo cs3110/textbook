@@ -207,7 +207,7 @@ let empty lst =
 Note how all the recursive functions above are similar to doing proofs by
 induction on the natural numbers: every natural number is either 0 or is 1
 greater than some other natural number $n$, and so a proof by induction has a
-base case for 0 and an inductive case for $n + 1$. Likewise all our functions
+base case for 0 and an inductive case for $n + 1$. Likewise, all our functions
 have a base case for the empty list and a recursive case for the list that has
 one more element than another list. This similarity is no accident. There is a
 deep relationship between induction and recursion; we'll explore that
@@ -274,7 +274,7 @@ match. The first vertical bar in the entire pattern match is optional.
 The `p`'s here are a new syntactic form called a *pattern*. For now, a pattern
 may be:
 
-* a variable name, e.g. `x`
+* a variable name, e.g., `x`
 * the underscore character `_`, which is called the *wildcard*
 * the empty list `[]`
 * `p1 :: p2`
@@ -608,7 +608,7 @@ But that doesn't mean that a tail-recursive implementation is strictly better.
 For example, the tail-recursive function might be harder to read. (Consider
 `sum_plus_acc`.) Also, there are cases where implementing a tail-recursive
 function entails having to do a pre- or post-processing pass to reverse the
-list. On small to medium sized lists, the overhead of reversing the list (both
+list. On small- to medium-sized lists, the overhead of reversing the list (both
 in time and in allocating memory for the reversed list) can make the
 tail-recursive version less time efficient. What constitutes "small" vs. "big"
 here? That's hard to say, but maybe 10,000 is a good estimate, according to the

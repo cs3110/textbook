@@ -148,7 +148,7 @@ actually: we haven't defined any rules yet.
 
 Let's introduce another notation written `e -/->`, which is meant to look like
 an arrow with a slash through it, to mean "there does not exist an `e'` such
-that `e --> e'`. Using that we could write:
+that `e --> e'`". Using that we could write:
 
 * `i -/->`
 * `b -/->`
@@ -271,10 +271,10 @@ let x = v1 in e2 --> e2 with v1 substituted for x
 For example, `let x = 42 in x + 1` should step to `42 + 1`, because substituting
 `42` for `x` in `x + 1` yields `42 + 1`.
 
-Of course, the right hand side of that rule isn't really an expression. It's
+Of course, the right-hand side of that rule isn't really an expression. It's
 just giving an intuition for the expression that we really want. We need to
 formally define what "substitute" means. It turns out to be rather tricky. So,
-rather then getting side-tracked by it right now, let's assume a new notation:
+rather than getting side-tracked by it right now, let's assume a new notation:
 `e'{e/x}`, which means, "the expression `e'` with `e` substituted for `x`."
 We'll come back to that notation in the next section and give it a careful
 definition.
@@ -290,7 +290,7 @@ let x = v1 in e2 --> e2{v1/x}
 **Variables.** Note how the let expression rule eliminates a variable from
 showing up in the body expression: the variable's name is replaced by the value
 that variable should have. So, we should *never* reach the point of attempting
-to step a variable name&mdash;assuming that the program was well typed.
+to step a variable name&mdash;assuming that the program was well-typed.
 
 Consider OCaml: if we try to evaluate an expression with an unbound variable,
 what happens? Let's check utop:
@@ -842,7 +842,7 @@ above to generate fresh names. There is a definition named `strategy` in
 ## Core OCaml
 
 Let's now upgrade from SimPL and the lambda calculus to a larger language that
-we call *core OCaml*. Here is its syntax in BNF:
+we call *Core OCaml*. Here is its syntax in BNF:
 
 ```text
 e ::= x | e1 e2 | fun x -> e
@@ -853,7 +853,7 @@ e ::= x | e1 e2 | fun x -> e
     | if e1 then e2 else e3
     | let x = e1 in e2
 
-bop ::= + | * | < | =
+bop ::= + | - | * | <=
 
 x ::= <identifiers>
 
@@ -864,12 +864,15 @@ b ::= true | false
 v ::= fun x -> e | i | b | (v1, v2) | Left v | Right v
 ```
 
+The binary operators we have specified in `bop` are meant to be representative,
+not exhaustive. We could add `<`, `=`, and others.
+
 To keep tuples simple in this core model, we represent them with only two
 components (i.e., they are pairs). A longer tuple could be coded up with nested
 pairs. For example, `(1, 2, 3)` in OCaml could be `(1, (2, 3))` in this core
 language.
 
-Also to keep variant types simple in this core model, we represent them with
+Also, to keep variant types simple in this core model, we represent them with
 only two constructors, which we name `Left` and `Right`. A variant with more
 constructors could be coded up with nested applications of those two
 constructors. Since we have only two constructors, match expressions need only
@@ -879,7 +882,7 @@ metasyntax.
 
 There are a few important OCaml constructs omitted from this core language,
 including recursive functions, exceptions, mutability, and modules. Types are
-also missing; core OCaml does not have any type checking. Nonetheless, there is
+also missing; Core OCaml does not have any type checking. Nonetheless, there is
 enough in this core language to keep us entertained.
 
 ## Evaluating Core OCaml in the Substitution Model
@@ -894,15 +897,15 @@ everything already in SimPL and in the lambda calculus.
 SimPL:
 
 ```text
-e1 + e2 --> e1' + e2
+e1 bop e2 --> e1' bop e2
 	if e1 --> e1'
 
-v1 + e2 --> v1 + e2'
+v1 bop e2 --> v1 bop e2'
 	if e2 --> e2'
 
-i1 + i2 --> i3
-	where i3 is the result of applying primitive operation +
-	to i1 and i2
+v1 bop v2 --> v3
+	where v3 is the result of applying primitive operation bop
+	to v1 and v2
 
 if e1 then e2 else e3 --> if e1' then e2 else e3
 	if e1 --> e1'
@@ -977,7 +980,7 @@ i{v/x} = i
 
 b{v/x} = b
 
-(e1 + e2) {v/x} = e1{v/x} + e2{v/x}
+(e1 bop e2) {v/x} = e1{v/x} bop e2{v/x}
 
 (if e1 then e2 else e3){v/x}
  = if e1{v/x} then e2{v/x} else e3{v/x}

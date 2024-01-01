@@ -64,7 +64,7 @@ operations that each have cost $T_1, T_2, \ldots, T_n$, is just the average cost
 of each operation:
 
 $$
-\frac{T_1 + T_2 + ... + T_n}{n}.
+\frac{T_1 + T_2 + \dotsb + T_n}{n}.
 $$
 
 Thus, even if one operation is especially expensive, we could average that out
@@ -85,15 +85,15 @@ price, the final operation in the sequence would have been "pre-paid" by the
 extra price we paid for earlier inserts. And all of them would be constant-time,
 since four times a constant is still a constant.
 
-Generalizing from the example above, let's suppose that the the number of
-buckets currently in a hash table is $2^n$, and that the load factor is
-currently 1. Therefore, there are currently $2^n$ bindings in the table. Next:
+Generalizing from the example above, let's suppose that the number of buckets
+currently in a hash table is $2^n$, and that the load factor is currently 1.
+Therefore, there are currently $2^n$ bindings in the table. Next:
 
 - A series of $2^n - 1$ inserts occurs. There are now $2^n + 2^n - 1$ bindings
   in the table.
 
 - One more insert occurs. That brings the number of bindings up to $2^n + 2^n$,
-  which is $2^{n+1}$. But the number of buckets is $2^n$, so the the load factor
+  which is $2^{n+1}$. But the number of buckets is $2^n$, so the load factor
   just reached 2. A resize is necessary.
 
 - The resize occurs. That doubles the number of buckets. All $2^{n+1}$ bindings
@@ -130,8 +130,8 @@ time. Then we'd be in real trouble as the number of bindings continued to grow:
   insertions. There are now 400 bindings and 300 buckets. The load factor is
   400/300 = 4/3, not 1.
 
-- The average cost of each insert is now 100+200+200+400 / 300 = 3. That's still
-  okay.
+- The average cost of each insert is now (100+200+200+400) / 300 = 3. That's
+  still okay.
 
 - **Round 3.** Insert 200 more bindings. There are now 600 bindings and 300
   buckets. The load factor is 2.
@@ -140,7 +140,7 @@ time. Then we'd be in real trouble as the number of bindings continued to grow:
   insertions. There are now 600 bindings and 400 buckets. The load factor is
   3/2, not 1.
 
-- The average cost of each insert is now 100+200+200+400+200+600 / 500 = 3.4.
+- The average cost of each insert is now (100+200+200+400+200+600) / 500 = 3.4.
   It's going up.
 
 - **Round 4.** Insert 200 more bindings. There are now 800 bindings and 400
@@ -150,16 +150,16 @@ time. Then we'd be in real trouble as the number of bindings continued to grow:
   insertions. There are now 800 bindings and 500 buckets. The load factor is
   8/5, not 1.
 
-- The average cost of each insert is now 100+200+200+400+200+600+200+800 / 700 =
-  3.9. It's continuing to go up, not staying constant.
+- The average cost of each insert is now (100+200+200+400+200+600+200+800) / 700
+  = 3.9. It's continuing to go up, not staying constant.
 
-After $k$ rounds we have $200k$ bindings and $100k$ buckets. We have called
-`insert` to insert $100+200k$ bindings, but all the rehashing has caused us to
+After $k$ rounds we have $200k$ bindings and $100(k+1)$ buckets. We have called
+`insert` to insert $100+200(k-1)$ bindings, but all the rehashing has caused us to
 do $100+200(k-1)+\sum_{i=1}^{k} 200i$ actual insertions. That last term is the
 real problem. It's quadratic:
 
 $$
-\sum_{i=1}^{k} 200i \quad = \quad \frac{200k (200 (k+1))}{2} \quad = \quad 20,000 (k^2 + k)
+\sum_{i=1}^{k} 200i \quad = \quad 200 \sum_{i=1}^k i = \quad 200 \frac{k(k+1)}{2} \quad = \quad 100 (k^2 + k) .
 $$
 
 So over a series of $n$ calls to `insert`, we do $O(n^2)$ actual inserts. That
@@ -337,7 +337,7 @@ will be in the inbox. Now we do the following:
 Each one of those $n$ `dequeue` operations requires an actual cost of $O(n)$ to
 reverse the inbox. So the entire series has an actual cost of $O(n^2)$. But
 the amortized analysis techniques only apply to the first `dequeue`. After that,
-all the the accounts are empty (banker's method), or the potential is zero
+all the accounts are empty (banker's method), or the potential is zero
 (physicist's), which means the remaining operations can't use them to pay for
 the expensive list reversal. The total cost of the series is therefore $O(n^2 -
 n)$, which is $O(n^2)$.

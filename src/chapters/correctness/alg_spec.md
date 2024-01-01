@@ -576,7 +576,7 @@ Let's categorize the operations of a data structure as follows:
 Given such a categorization, we can design the equational specification of a
 data structure by applying non-generators to generators. For example: What does
 `is_empty` return on `empty`? on `push`? What does `front` return on `enq`? What
-does `deq` return on `enq`? etc.
+does `deq` return on `enq`? Etc.
 
 So if there are `n` generators and `m` non-generators of a data structure, we
 would begin by trying to create `n*m` equations, one for each pair of a
@@ -607,7 +607,7 @@ following equations:
      original expression by reducing it to `empty`.
 
    - `deq (enq x q) = enq x (deq q)`, if `is_empty q = false`. This simplifies
-     the original expression by reducing it to an generator applied to a smaller
+     the original expression by reducing it to a generator applied to a smaller
      argument, `deq q` instead of `deq (enq x q)`.
 
 We don't usually design equations involving pairs of non-generators. Sometimes

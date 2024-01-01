@@ -281,7 +281,7 @@ the union function from the implementation of sets as lists with repeated
 elements covered last time. When this function is applied to the concrete pair
 [1; 3], [2; 2], it corresponds to the lower-left corner of the diagram. The
 result of this operation is the list [2; 2; 1; 3], whose corresponding abstract
-value is the list {1, 2, 3}. Note that if we apply the abstraction function AF
+value is the set {1, 2, 3}. Note that if we apply the abstraction function AF
 to the input lists [1; 3] and [2; 2], we have the sets {1, 3} and {2}. The
 commutative diagram requires that in this instance the union of {1, 3} and {2}
 is {1, 2, 3}, which is of course true.
@@ -307,7 +307,7 @@ the length of the list:
 let size = List.length
 ```
 
-How do wo know that latter implementation is correct? That is, how do we know
+How do we know that latter implementation is correct? That is, how do we know
 that "lists have no duplicates"? It's hinted at by the name of the module, and
 it can be deduced from the implementation of `add`, but we've never carefully
 documented it. Right now, the code does not explicitly say that there are no
@@ -371,7 +371,7 @@ an *invariant*.
 
 When implementing a complex abstract data type, it is often helpful to write an
 internal function that can be used to check that the rep invariant holds of a
-given data item. By convention we will call this function `rep_ok`. If the
+given data item. By convention, we will call this function `rep_ok`. If the
 module accepts values of the abstract type that are created outside the module,
 say by exposing the implementation of the type in the signature, then `rep_ok`
 should be applied to these to ensure the representation invariant is satisfied.

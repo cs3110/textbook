@@ -313,7 +313,7 @@ end
 
 **Static semantics.**
 
-A structure is well typed if all the definitions in it are themselves
+A structure is well-typed if all the definitions in it are themselves
 well-typed, according to all the typing rules we have already learned.
 
 As we've seen in toplevel output, the module type of a structure is a signature.
@@ -748,7 +748,7 @@ must guarantee.
 The particular flavor of subtyping in Java is called *nominal subtyping*, which
 is to say, it is based on names. In our example, `D` is a subtype of `C` just
 because of the way the names were declared. The programmer decreed that subtype
-relationship, and the language accepted the decree without question. Indeed the
+relationship, and the language accepted the decree without question. Indeed, the
 *only* subtype relationships that exist are those that have been decreed by name
 through such uses of `extends` and `implements`.
 

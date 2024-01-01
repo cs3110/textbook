@@ -54,10 +54,10 @@ let fourth x = twice square x
 
 Above, we have exploited the structural similarity between `quad` and `fourth`
 to save work. Admittedly, in this toy example it might not seem like much work.
-But imagine that `twice` were actually some much more complicated function. Then
-if someone comes up with a more efficient version of it, every function written
-in terms of it (like `quad` and `fourth`) could benefit from that improvement in
-efficiency, without needing to be recoded.
+But imagine that `twice` were actually some much more complicated function.
+Then, if someone comes up with a more efficient version of it, every function
+written in terms of it (like `quad` and `fourth`) could benefit from that
+improvement in efficiency, without needing to be recoded.
 
 Part of being an excellent programmer is recognizing such similarities and
 *abstracting* them by creating functions (or other units of code) that implement
@@ -143,7 +143,7 @@ higher-order logics can be expressed in second-order logic.
 In programming languages, *first-order functions* similarly refer to functions
 that operate on individual data elements (e.g., strings, ints, records,
 variants, etc.). Whereas *higher-order function* can operate on functions, much
-like higher-order logics can quantify over over properties (which are like
+like higher-order logics can quantify over properties (which are like
 functions).
 
 ## Famous Higher-order Functions

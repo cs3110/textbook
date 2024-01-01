@@ -102,11 +102,11 @@ instinct might be to reach for a loop, instead try to use `Array.map` and
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "normalize")}}
 
-Every vector can be *normalized* by dividing each component by
+Every vector $x$ can be *normalized* by dividing each component by
 $|x|$; this yields a vector with norm 1:
 
 $$
-\left(\frac{x_1}{|x|}, \ldots, \frac{x_n}{|x|}\right)
+\left(\frac{x_1}{|x|}, \ldots, \frac{x_n}{|x|}\right) .
 $$
 
 Write a function `normalize : vector -> unit` that normalizes a vector "in

@@ -62,14 +62,14 @@ Define a function `load_factor : ('a,'b) Hashtbl.t -> float`, such that
 *Hint: stats.*
 
 Add one more binding to `tab`. Do the stats or load factor change? Now add yet
-another binding. Now do the stats or load factor change? *Hint: Hashtbl
+another binding. Now do the stats or load factor change? *Hint: `Hashtbl`
 resizes when the load factor goes strictly above 2.*
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "functorial interface")}}
 
 Use the functorial interface (i.e., `Hashtbl.Make`) to create a hash table whose
-keys are strings that are case insensitive. Be careful to obey the specification
+keys are strings that are case-insensitive. Be careful to obey the specification
 of `Hashtbl.HashedType.hash`:
 
 > If two keys are equal according to `equal`, then they have identical hash
@@ -213,7 +213,7 @@ let () = assert (postorder t = [1;3;2;5;7;6;4])
 On unbalanced trees, the traversal functions above require quadratic worst-case
 time (in the number of nodes), because of the `@` operator. Re-implement the
 functions without `@`, and instead using `::`, such that they perform exactly
-one cons per `Node` in the tree. Thus the worst-case execution time will be
+one cons per `Node` in the tree. Thus, the worst-case execution time will be
 linear. You will need to add an additional accumulator argument to each
 function, much like with tail recursion. (But your implementations won't
 actually be tail recursive.)
@@ -300,7 +300,7 @@ satisfies `p`, then `filter p s` does not terminate.
 Define a function `interleave : 'a sequence -> 'a sequence -> 'a sequence`, such
 that `interleave <a1; a2; a3; ...> <b1; b2; b3; ...>` is the sequence
 `<a1; b1; a2; b2; a3; b3; ...>`. For example, `interleave nats pow2` would be
-`<0; 1; 1; 2; 2; 4; 3; 8; ...>`
+`<0; 1; 1; 2; 2; 4; 3; 8; ...>`.
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "sift")}}
@@ -419,9 +419,9 @@ section on laziness.
 {{ ex2 | replace("%%NAME%%", "promise and resolve")}}
 
 Use the finished version of the `Promise` module we developed to do the
-following: create a integer promise and resolver, bind a function on the promise
-to print the contents of the promise, then resolve the promise. Only after the
-promise is resolved should the printing occur.
+following: create an integer promise and resolver, bind a function on the
+promise to print the contents of the promise, then resolve the promise. Only
+after the promise is resolved should the printing occur.
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "promise and resolve lwt")}}
@@ -516,7 +516,7 @@ open Lwt_unix
     the file named "log". *)
 let log () : input_channel Lwt.t =
   openfile "log" [O_RDONLY] 0 >>= fun fd ->
-  Lwt.return (of_fd input fd)
+  Lwt.return (of_fd ~mode:input fd)
 
 (** [loop ic] reads one line from [ic], prints it to stdout,
     then calls itself recursively. It is an infinite loop. *)
@@ -727,7 +727,7 @@ two very useful list library functions that can help you.
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "trivial monad laws")}}
 
-Here is the world's most trivial monad. All it does is wrap a value inside of a
+Here is the world's most trivial monad. All it does is wrap a value inside a
 constructor.
 
 ```ocaml

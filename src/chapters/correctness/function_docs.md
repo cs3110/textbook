@@ -278,8 +278,8 @@ let zeros lst =
   List.fold_left (fun zs x -> zs + is0 x) 0 lst
 ```
 
-A similarly bad practice is to encode the type of the variable in its name, e.g.
-naming a variable `i_count` to show that it's an integer. The type system is
-going to guarantee that for you, and your editor can provide a hover-over to
+A similarly bad practice is to encode the type of the variable in its name,
+e.g., naming a variable `i_count` to show that it's an integer. The type system
+is going to guarantee that for you, and your editor can provide a hover-over to
 show the type. If you really want to emphasize the type in the code, add a type
 annotation at the point where the variable comes into scope.

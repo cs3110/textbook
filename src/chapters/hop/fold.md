@@ -184,7 +184,7 @@ let rec combine_tr f acc = function
 ```
 
 Pay close attention to the definition of `acc'`, the new accumulator, in each
-of those version:
+of those versions:
 
 - In the original version, we procrastinate using the head element `h`. First,
   we combine all the remaining tail elements to get `acc'`. Only then do we use

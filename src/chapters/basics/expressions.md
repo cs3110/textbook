@@ -334,7 +334,7 @@ let x = 42 in x + 1
 ```
 Here we're *binding* a value to the name `x` then using that binding inside
 another expression, `x+1`. We'll call this use of `let` a *let expression*.
-Since it's an expression it evaluates to a value. That's different than
+Since it's an expression, it evaluates to a value. That's different than
 definitions, which themselves do not evaluate to any value. You can see that if
 you try putting a let definition in place of where an expression is expected:
 ```{code-cell}

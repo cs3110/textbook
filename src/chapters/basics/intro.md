@@ -36,8 +36,8 @@ There are two pieces to semantics, the *dynamic* semantics of a language and the
 behavior of a program as it is executed or evaluated. The static semantics
 define the compile-time checking that is done to ensure that a program is legal,
 beyond any syntactic requirements. The most important kind of static semantics
-is probably *type checking*: the rules that define whether a program is well
-typed or not. Learning the semantics of a new language is usually the real
+is probably *type checking*: the rules that define whether a program is
+well-typed or not. Learning the semantics of a new language is usually the real
 challenge, even though the syntax might be the first hurdle you have to
 overcome. You need to understand semantics to say what you mean to the computer,
 and you need to say what you mean so that your program performs the right
@@ -49,7 +49,7 @@ in many ways inside a language, which one do you choose? Some will be more
 natural than others. Programmers who are fluent in the language will prefer
 certain modes of expression over others. We could think of this in terms of
 using the dominant paradigms in the language effectively, whether they are
-imperative, functional, object oriented, etc. You need to understand idioms to
+imperative, functional, object-oriented, etc. You need to understand idioms to
 say what you mean not just to the computer, but to other programmers. When you
 write code idiomatically, other programmers will understand your code better.
 
