@@ -494,7 +494,7 @@ installation. Here's how to proceed:
 
 - Make sure that, from the same Unix prompt as which you launched VS Code, you
   can successfully complete the double-check instructions for your OPAM switch:
-  can you run utop? Is the right switch active? If not, that's the problem you
+  Can you run utop? Is the right switch active? If not, that's the problem you
   need to solve first. Then return to the VS Code issue. It might be fixed now.
 
 - If you're on WSL and VS Code does add syntax highlighting but does not add
