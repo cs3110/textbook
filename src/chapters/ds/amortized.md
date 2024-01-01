@@ -153,7 +153,7 @@ time. Then we'd be in real trouble as the number of bindings continued to grow:
 - The average cost of each insert is now (100+200+200+400+200+600+200+800) / 700
   = 3.9. It's continuing to go up, not staying constant.
 
-After $k$ rounds we have $200k$ bindings and $100(k+1)k$ buckets. We have called
+After $k$ rounds we have $200k$ bindings and $100(k+1)$ buckets. We have called
 `insert` to insert $100+200(k-1)$ bindings, but all the rehashing has caused us to
 do $100+200(k-1)+\sum_{i=1}^{k} 200i$ actual insertions. That last term is the
 real problem. It's quadratic:
