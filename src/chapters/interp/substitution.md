@@ -853,7 +853,7 @@ e ::= x | e1 e2 | fun x -> e
     | if e1 then e2 else e3
     | let x = e1 in e2
 
-bop ::= + | * | <= | -
+bop ::= + | - | * | <=
 
 x ::= <identifiers>
 
@@ -863,6 +863,9 @@ b ::= true | false
 
 v ::= fun x -> e | i | b | (v1, v2) | Left v | Right v
 ```
+
+The binary operators we have specified in `bop` are meant to be representative,
+not exhaustive. We could add `<`, `=`, and others.
 
 To keep tuples simple in this core model, we represent them with only two
 components (i.e., they are pairs). A longer tuple could be coded up with nested
