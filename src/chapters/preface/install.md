@@ -363,13 +363,13 @@ must enter the extra # before the quit directive.
 
 A faster way to quit is to type Control+D.
 
-## Double Check OCaml
+## Double-Check OCaml
 
 If you're having any trouble with your installation, follow these double-check
 instructions. Some of them repeat the tips we provided above, but we've put them
 all here in one place to help diagnose any issues.
 
-First, **reboot your computer**. We need a clean slate for this double-check.
+First, **reboot your computer**. We need a clean slate for this double-check procedure.
 
 Second, run utop, and make sure it works. If it does not, here are some common
 issues:
@@ -395,8 +395,7 @@ issues:
 **Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`.
 Then go back to the OPAM initialization step in the instructions way above, and
 proceed forward. Be extra careful to use the exact OPAM commands given above;
-sometimes mistakes occur when parts of them are omitted. Finally, redo the
-double-check: reboot and see whether utop still works.
+sometimes mistakes occur when parts of them are omitted. Finally, double-check again: reboot and see whether utop still works.
 
 ```{important}
 You want to get to the point where utop immediately works after a reboot,
