@@ -235,15 +235,6 @@ U C T U R E into an empty tree. Carry out the insertion algorithm yourself by
 hand, then check your work with the implementation provided in the book.
 
 <!--------------------------------------------------------------------------->
-{{ ex2 | replace("%%NAME%%", "standard library set")}}
-
-Read the [source code][stdlib-set-ml] of the standard library `Set` module.
-Find the representation invariant for the balanced trees that it uses.
-Which kind of tree does it most resemble:  2-3, AVL, or red-black?
-
-[stdlib-set-ml]: https://github.com/ocaml/ocaml/blob/trunk/stdlib/set.ml
-
-<!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "pow2")}}
 
 Using this type:
