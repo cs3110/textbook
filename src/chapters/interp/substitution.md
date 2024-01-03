@@ -667,6 +667,7 @@ Let's consider this tiny language:
 ```text
 e ::= x | e1 e2 | fun x -> e
 v ::= fun x -> e
+x ::= <identifiers>
 ```
 
 This syntax is also known as the *lambda calculus*. There are only three kinds
