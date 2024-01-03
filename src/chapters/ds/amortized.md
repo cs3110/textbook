@@ -72,13 +72,19 @@ over a bunch of inexpensive operations.
 
 {{ video_embed | replace("%%VID%%", "eKzgddLniSw")}}
 
-Applying that idea to a hash table, suppose the table has 8 bindings and 8
-buckets. Then 8 more inserts are made. The first 7 are (expected) constant-time,
-but the 8th insert is linear time: it increases the load factor to 2, causing a
-resize, thus causing rehashing of all 16 bindings into a new table. The total
-cost over that series of operations is therefore the cost of 8+16 inserts. For
-simplicity of calculation, we could grossly round that up to 16+16 = 32 inserts.
-So the average cost of each operation in the sequence is 32/8 = 4 inserts.
+Applying that idea to a hash table, let's analyze what happens when an insert
+operation causes an expensive resize. Assume the table resizes when the load
+factor reaches 2. (That is more proactive than OCaml's `Hashtbl`, which resizes
+when the load factor *exceeds* 2. It doesn't really matter which choice we make,
+but resize-on-reaching will simplify our analysis a little.)
+
+Suppose the table has 8 bindings and 8 buckets. Then 8 more inserts are made.
+The first 7 are (expected) constant-time, but the 8th insert is linear time: it
+increases the load factor to 2, causing a resize, thus causing rehashing of all
+16 bindings into a new table. The total cost over that series of operations is
+therefore the cost of 8+16 inserts. For simplicity of calculation, we could
+grossly round that up to 16+16 = 32 inserts. So the average cost of each
+operation in the sequence is 32/8 = 4 inserts.
 
 In other words, if we just pretended each insert cost four times its normal
 price, the final operation in the sequence would have been "pre-paid" by the
