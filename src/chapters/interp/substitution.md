@@ -942,6 +942,12 @@ component, then their second component:
 (v1, e2) --> (v1, e2')
 	if e2 --> e2'
 
+fst e --> fst e'
+  if e --> e'
+
+snd e --> snd e'
+  if e --> e'
+
 fst (v1, v2) --> v1
 
 snd (v1, v2) --> v2
