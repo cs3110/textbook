@@ -287,8 +287,7 @@ to a string, you could use `String.make`. An even fancier way would be to use
 Write a function `first_after : calendar -> Date.t -> string` that returns the
 name of the first event that occurs strictly after the given date. If there is
 no such event, the function should raise `Not_found`, which is an exception
-already defined in the standard library. *Hint: there is a one-line solution
-that uses two functions from the `Map.S` signature.*
+already defined in the standard library. *Hint: you can do this in one-line by using a function or two from the `Map.S` signature.*
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "sets")}}
