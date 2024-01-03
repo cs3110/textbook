@@ -343,7 +343,14 @@ compute that involves a function that computes $f(k) = \frac{x^k}{k!}$.
 
 Define a function `total : float sequence -> float sequence`, such that
 `total <a; b; c; ...>` is a running total of the input elements, i.e.,
-`<a; a+.b; a+.b+.c; ...>`.
+`<a; a+.b; a+.b+.c; ...>`. 
+
+By using `e_terms` and `total` together, you will be able to compute successive
+approximations of $e^x$ that correspond to finite prefixes of the infinite
+summation. For example, you could compute the stream
+`<1.; 2.; 2.5; 2.66666666666666652; 2.70833333333333304; ...>`. It contains
+successive approximations of $e^1$, such that element $n$ of the stream is
+$\sum_{k=0}^{n} \frac{1^k}{k!}$.
 
 Define a function `within : float -> float sequence -> float`, such that
 `within eps s` is the first element of `s` for which the absolute difference
@@ -354,10 +361,10 @@ positive. For example,
 `within 0.1 <1.0; 2.0; 2.5; 2.75; 2.875; 2.9375; 2.96875; ...>` is `2.9375`.
 
 Finally, define a function `e : float -> float -> float` such that `e x eps` is
-$e^x$ computed to within a tolerance of `eps`, which must be strictly positive.
-Note that there is an interesting boundary case where `x=1.0` for the first two
-terms of the sum; you could choose to drop the first term (which is always
-`1.0`) from the sequence before using `within`.
+$e^x$ computed using a finite prefix of the infinite summation above. The
+computation should halt when the absolute difference between successive
+approximations is below `eps`, which must be strictly positive. For 
+example, `e 1. 0.01` would be `2.71666666666666634`.
 
 <!--------------------------------------------------------------------------->
 {{ ex4 | replace("%%NAME%%", "better e")}}
