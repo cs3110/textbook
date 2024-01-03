@@ -228,10 +228,12 @@ newly incremented contents of `counter`.
 The `next_val` function is unusual in that every time we call it, it returns a
 different value. That's quite different than any of the functions we've
 implemented ourselves so far, which have always been *deterministic*: for a
-given input, they always produced the same output. On the other hand, we've seen
-some library functions that are *nondeterministic*, for example, functions in
-the `Random` module, and `Stdlib.read_line`. It's no coincidence that those
-happen to be implemented using mutable features.
+given input, they always produced the same output. On the other hand, some
+functions are *nondeterministic*: each invocation of the function might produce
+a different output despite receiving the same input. In the standard library,
+for example, functions in the `Random` module are nondeterministic, as is
+`Stdlib.read_line`, which reads input from the user. It's no coincidence that
+those happen to be implemented using mutable features.
 
 We could improve our counter in a couple ways. First, there is a library
 function `incr : int ref -> unit` that increments an `int ref` by 1. Thus it is
