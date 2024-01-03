@@ -429,6 +429,17 @@ let rec fact = fun x ->
 fact 3
 ```
 
+Use the following (capture-avoiding) substitution rules, which are similar to
+the rules for `let` and `fun`:
+
+```text
+(rec f -> e){v/x} = rec f -> e{v/x}
+  if x <> f
+  and f not in FV(v)
+
+(rec f -> e){v/f} = rec f -> e
+```
+
 <!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "simple expressions")}}
 
