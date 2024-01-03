@@ -57,7 +57,7 @@ let rec mem x = function
     else if x > y then mem x r
     else true
 
-(** [insert x t] is [t] . *)
+(** [insert x t] is [t] with [x] inserted as a member. *)
 let rec insert x = function
   | Leaf -> Node (x, Leaf, Leaf)
   | Node (y, l, r) as t ->
