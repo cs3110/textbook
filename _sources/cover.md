@@ -5,15 +5,16 @@ emphasis on semantics and software engineering. This book is the textbook for CS
 3110 Data Structures and Functional Programming at Cornell University. A past
 title of this book was "Functional Programming in OCaml".
 
-**Fall 2023 Edition.**
+**Winter 2024 Edition.** This is a volatile interim edition between Fall 2023
+and Spring 2024.
 
 **Videos.** There are over 200 YouTube videos embedded in this book.
 They can be watched independently of reading the book. Start with
 this [YouTube playlist][videos].
 
 **Authors.** This book is based on courses taught by Michael R. Clarkson, Robert
-L. Constable, Nate Foster, Michael D. George, Dan Grossman, Daniel P.
-Huttenlocher, Dexter Kozen, Greg Morrisett, Andrew C. Myers, Radu Rugina, and
+L. Constable, Nate Foster, Michael D. George, Dan Grossman, Justin Hsu, Daniel
+P. Huttenlocher, Dexter Kozen, Greg Morrisett, Andrew C. Myers, Radu Rugina, and
 Ramin Zabih. Together they have created over 20 years worth of course notes and
 intellectual contributions. Teasing out who contributed what is, by now, not an
 easy task. The primary compiler and author of this work in its form as a unified
