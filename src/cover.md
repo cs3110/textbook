@@ -5,7 +5,8 @@ emphasis on semantics and software engineering. This book is the textbook for CS
 3110 Data Structures and Functional Programming at Cornell University. A past
 title of this book was "Functional Programming in OCaml".
 
-**Fall 2023 Edition.**
+**Winter 2024 Edition.** This is a volatile interim edition between Fall 2023
+and Spring 2024.
 
 **Videos.** There are over 200 YouTube videos embedded in this book.
 They can be watched independently of reading the book. Start with
