@@ -195,8 +195,8 @@ format specifier above as an example.
 
 - The newline `"\n"` after that is another plain character sequence.
 
-- Finally the conversion specifier `"%!"` means to *flush the output buffer*. As
-  you might have learned in earlier programming classes, output is often
+- Finally, the conversion specifier `"%!"` means to *flush the output buffer*.
+  As you might have learned in earlier programming classes, output is often
   *buffered*, meaning that it doesn't all happen at once or right away. Flushing
   the buffer ensures that anything still sitting in the buffer gets output
   immediately. This specifier is special in that it doesn't actually need

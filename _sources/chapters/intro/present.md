@@ -71,7 +71,7 @@ safety.
 OCaml supports a number of advanced features, some of which you will have
 encountered before, and some of which are likely to be new:
 
--   **Algebraic datatypes:** You can build sophisticated data structures in
+-   **Algebraic data types:** You can build sophisticated data structures in
     OCaml easily, without fussing with pointers and memory management. *Pattern
     matching*&mdash;a feature we'll soon learn about that enables examining the shape
     of a data structure&mdash;makes them even more convenient.

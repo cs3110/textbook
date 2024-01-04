@@ -181,7 +181,7 @@ of its usage:
 ```{code-cell} ocaml
 match List.hd [] with
   | [] -> "empty"
-  | _ :: _ -> "nonempty"
+  | _ :: _ -> "non-empty"
   | exception (Failure s) -> s
 ```
 Note that the code above is just a standard `match` expression, not a `try`

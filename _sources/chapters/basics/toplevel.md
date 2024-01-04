@@ -34,7 +34,7 @@ type the `#` there: it is in addition to the `#` prompt you already see.
 ## Types and values
 
 You can enter expressions into the OCaml toplevel. End an expression with a
-double semi-colon `;;` and press the return key. OCaml will then evaluate the
+double semicolon `;;` and press the return key. OCaml will then evaluate the
 expression, tell you the resulting value, and the value's type. For example:
 
 ```ocaml

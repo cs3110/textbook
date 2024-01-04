@@ -11,7 +11,7 @@ you have experienced so far. Adapting to that perspective requires letting go
 of old ideas: assignment statements, loops, classes and objects, among others.
 That won't be easy.
 
-> <i>Nan-in, a Japanese master during the Meiji era (1868-1912), received a
+> <i>Nan-in (南隠), a Japanese master during the Meiji era (1868-1912), received a
 > university professor who came to inquire about Zen. Nan-in served tea. He
 > poured his visitor's cup full, and then kept on pouring. The professor watched
 > the overflow until he no longer could restrain himself. "It is overfull. No
@@ -56,7 +56,7 @@ necessarily easier to write.
 The OCaml code you write can be stylish and tasteful. At first, this might not
 be apparent. You are learning a new language after all&mdash;you wouldn't expect
 to appreciate Sanskrit poetry on day 1 of Introductory Sanskrit. In fact, you'll
-likely feel frustrated for awhile as you struggle to express yourself in a new
+likely feel frustrated for a while as you struggle to express yourself in a new
 language. So give it some time. After you've mastered OCaml, you might be
 surprised at how ugly those other languages you already know end up feeling when
 you return to them.

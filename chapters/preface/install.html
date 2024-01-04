@@ -4,13 +4,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Installing OCaml &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,39 +18,40 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../../_static/op_lotus_480.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="1. Better Programming Through OCaml" href="../intro/intro.html" />
@@ -64,21 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -87,17 +72,16 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      <img src="../../_static/op_lotus_480.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
@@ -108,7 +92,7 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -125,7 +109,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -226,7 +210,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -439,7 +423,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -607,7 +591,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -666,7 +650,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -678,7 +662,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -697,17 +681,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -715,179 +694,79 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/cs3110/textbook"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/preface/install.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/edit/main/src/chapters/preface/install.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/chapters/preface/install.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/preface/install.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/preface/install.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/preface/install.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#unix-development-environment">
    Unix Development Environment
@@ -927,7 +806,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#double-check-ocaml">
-   Double Check OCaml
+   Double-Check OCaml
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -952,11 +831,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Installing OCaml</h1>
@@ -1008,7 +888,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#double-check-ocaml">
-   Double Check OCaml
+   Double-Check OCaml
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -1037,12 +917,11 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="installing-ocaml">
-<h1>Installing OCaml<a class="headerlink" href="#installing-ocaml" title="Permalink to this headline">#</a></h1>
+  <div class="section" id="installing-ocaml">
+<h1>Installing OCaml<a class="headerlink" href="#installing-ocaml" title="Permalink to this headline">¶</a></h1>
 <p>If all you need is a way to follow along with the code examples in this book,
 you don’t actually have to install OCaml! The code on each page is executable in
 your browser, as described earlier in this <a class="reference internal" href="about.html"><span class="doc std std-doc">Preface</span></a>.</p>
@@ -1077,8 +956,8 @@ course, do think critically about suggestions made by random strangers on the
 internet.</p>
 </div>
 <p>Let’s get started!</p>
-<section id="unix-development-environment">
-<h2>Unix Development Environment<a class="headerlink" href="#unix-development-environment" title="Permalink to this headline">#</a></h2>
+<div class="section" id="unix-development-environment">
+<h2>Unix Development Environment<a class="headerlink" href="#unix-development-environment" title="Permalink to this headline">¶</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p><strong>First, upgrade your OS.</strong> If you’ve been intending to make any major OS
@@ -1086,13 +965,13 @@ upgrades, do them now. Otherwise when you do get around to upgrading, you might
 have to repeat some or all of this installation process. Better to get it out of
 the way beforehand.</p>
 </div>
-<section id="linux">
-<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">#</a></h3>
+<div class="section" id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
 <p>If you’re already running Linux, you’re done with this step. Proceed to
 <a class="reference internal" href="#install-opam"><span class="std std-ref">Install OPAM</span></a>, below.</p>
-</section>
-<section id="mac">
-<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="mac">
+<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h3>
 <p>Beneath the surface, macOS is already a Unix-based OS. But you’re going to need
 some developer tools and a Unix package manager. There are two to pick from:
 <a class="reference external" href="https://brew.sh/">Homebrew</a> and <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a>. From the perspective of this
@@ -1110,9 +989,9 @@ installing the other.</p></li>
 </ul>
 <p>After you’ve finished installing/updating either Homebrew or MacPorts, proceed
 to <a class="reference internal" href="#install-opam"><span class="std std-ref">Install OPAM</span></a>, below.</p>
-</section>
-<section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
 <p>Unix development in Windows is made possible by the Windows Subsystem for Linux
 (WSL). If you have a recent version of Windows (build 20262, released November
 2020, or newer), WSL is easy to install. If you don’t have that recent of a
@@ -1149,9 +1028,9 @@ reinstalling it through the Windows Start menu.</p>
 </div>
 <p>Now skip to the “Ubuntu setup” paragraph below.</p>
 <p><strong>Without a recent version of Windows,</strong> you will need to follow
-<a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-manual">Microsoft’s manual install instructions</a>. WSL2 is preferred over
-WSL1 by OCaml (and WSL2 offers performance and functionality improvements), so
-install WSL2 if you can.</p>
+<a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-manual">Microsoft’s manual installation instructions</a>. WSL2 is preferred
+over WSL1 by OCaml (and WSL2 offers performance and functionality improvements),
+so install WSL2 if you can.</p>
 <p><strong>Ubuntu setup.</strong> These rest of these instructions assume that you installed
 Ubuntu (20.04) as the Linux distribution. That is the default distribution in
 WSL. In principle other distributions should work, but might require different
@@ -1220,10 +1099,10 @@ Microsoft’s <a class="reference external" href="https://docs.microsoft.com/en-
 <p>We recommend storing your OCaml development work in your Ubuntu home directory,
 not your Windows home directory. By implication, Microsoft also recommends that
 in the guide just linked.</p>
-</section>
-</section>
-<section id="install-opam">
-<span id="id1"></span><h2>Install OPAM<a class="headerlink" href="#install-opam" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="install-opam">
+<span id="id1"></span><h2>Install OPAM<a class="headerlink" href="#install-opam" title="Permalink to this headline">¶</a></h2>
 <p><strong>Linux.</strong> Follow the <a class="reference external" href="https://opam.ocaml.org/doc/Install.html">instructions for your distribution</a>.</p>
 <p><strong>Mac.</strong> If you’re using Homebrew, run this command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">brew install opam</span>
@@ -1237,9 +1116,9 @@ in the guide just linked.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt install opam</span>
 </pre></div>
 </div>
-</section>
-<section id="initialize-opam">
-<h2>Initialize OPAM<a class="headerlink" href="#initialize-opam" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="initialize-opam">
+<h2>Initialize OPAM<a class="headerlink" href="#initialize-opam" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Do not put <code class="docutils literal notranslate"><span class="pre">sudo</span></code> in front of any <code class="docutils literal notranslate"><span class="pre">opam</span></code> commands. That would break your OCaml
@@ -1249,17 +1128,17 @@ installation.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam init --bare -a -y</span>
 </pre></div>
 </div>
-<p>It is expected behavior to get a note about making sure <code class="docutils literal notranslate"><span class="pre">.profile</span></code> is well
-sourced in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>. You don’t need to do anything about that.</p>
+<p>It is expected behavior to get a note about making sure <code class="docutils literal notranslate"><span class="pre">.profile</span></code> is
+well-sourced in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>. You don’t need to do anything about that.</p>
 <p><strong>WSL1.</strong> Hopefully you are running WSL2, not WSL1. But on WSL1, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam init --bare -a -y --disable-sandboxing</span>
 </pre></div>
 </div>
 <p>It is necessary to disable sandboxing because of an <a class="reference external" href="https://github.com/ocaml/opam-repository/issues/12050">issue involving OPAM and
 WSL1</a>.</p>
-</section>
-<section id="create-an-opam-switch">
-<h2>Create an OPAM Switch<a class="headerlink" href="#create-an-opam-switch" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="create-an-opam-switch">
+<h2>Create an OPAM Switch<a class="headerlink" href="#create-an-opam-switch" title="Permalink to this headline">¶</a></h2>
 <p>A <em>switch</em> is a named installation of OCaml with a particular compiler version
 and set of packages. You can have many switches and, well, switch between them
 —whence the name. Create a switch for this semester’s CS 3110 by running
@@ -1307,7 +1186,7 @@ to install. You could try <code class="docutils literal notranslate"><span class
 Also, make sure you really did log out of your OS (or reboot).</p>
 </div>
 <p>Continue by installing the OPAM packages we need:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam install -y utop odoc ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat ocamlformat-rpc</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam install -y utop odoc ounit2 qcheck bisect_ppx menhir ocaml-lsp-server ocamlformat</span>
 </pre></div>
 </div>
 <p>Make sure to grab that whole line above when you copy it. You will get some
@@ -1324,7 +1203,7 @@ as the editor in these instructions, so let’s ignore it.</p>
 5.0.0)!” If the OCaml version is incorrect, then you probably have an
 environment issue. See the tip above about the <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">env</span></code> command.</p>
 </div>
-<p>Enter 3110 followed by two semi-colons. Press return. The # is the utop prompt;
+<p>Enter 3110 followed by two semicolons. Press return. The # is the utop prompt;
 you do not type it yourself.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="mi">3110</span><span class="o">;;</span>
 <span class="o">-</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">3110</span>
@@ -1336,13 +1215,13 @@ must enter the extra # before the quit directive.</p>
 </pre></div>
 </div>
 <p>A faster way to quit is to type Control+D.</p>
-</section>
-<section id="double-check-ocaml">
-<h2>Double Check OCaml<a class="headerlink" href="#double-check-ocaml" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="double-check-ocaml">
+<h2>Double-Check OCaml<a class="headerlink" href="#double-check-ocaml" title="Permalink to this headline">¶</a></h2>
 <p>If you’re having any trouble with your installation, follow these double-check
 instructions. Some of them repeat the tips we provided above, but we’ve put them
 all here in one place to help diagnose any issues.</p>
-<p>First, <strong>reboot your computer</strong>. We need a clean slate for this double check.</p>
+<p>First, <strong>reboot your computer</strong>. We need a clean slate for this double-check procedure.</p>
 <p>Second, run utop, and make sure it works. If it does not, here are some common
 issues:</p>
 <ul class="simple">
@@ -1365,16 +1244,15 @@ works. If that switch is not present, follow the “redo” instructions below.<
 <p><strong>Redo Instructions:</strong> Remove the OPAM directory by running <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">~/.opam</span></code>.
 Then go back to the OPAM initialization step in the instructions way above, and
 proceed forward. Be extra careful to use the exact OPAM commands given above;
-sometimes mistakes occur when parts of them are omitted. Finally, redo the
-double check: reboot and see whether utop still works.</p>
+sometimes mistakes occur when parts of them are omitted. Finally, double-check again: reboot and see whether utop still works.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>You want to get to the point where utop immediately works after a reboot,
 without having to type any additional commands.</p>
 </div>
-</section>
-<section id="visual-studio-code">
-<h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="visual-studio-code">
+<h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">¶</a></h2>
 <p>Visual Studio Code is a great choice as a code editor for OCaml. (Though if you
 are already a power user of Emacs or Vim those are great, too.)</p>
 <p>First, download and install <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> (henceforth, VS Code).
@@ -1418,9 +1296,9 @@ your VS Code window, either. Follow the instructions above to open a WSL window.
 From there, try again to install the OCaml Platform extension using the “Install
 in WSL” button.</p>
 </div>
-</section>
-<section id="double-check-vs-code">
-<h2>Double Check VS Code<a class="headerlink" href="#double-check-vs-code" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="double-check-vs-code">
+<h2>Double Check VS Code<a class="headerlink" href="#double-check-vs-code" title="Permalink to this headline">¶</a></h2>
 <p>Let’s make sure VS Code’s OCaml support is working.</p>
 <ul>
 <li><p>Reboot your computer again. (Yeah, that really shouldn’t be necessary. But it
@@ -1453,12 +1331,12 @@ the error message. Go to View → Problems to see it there, too. Add double
 quotes around the integer to make it a string, and the problem will go away.</p>
 </li>
 </ul>
-<p><strong>If you don’t observe those behaviors,</strong> something is wrong with your install.
-Here’s how to proceed:</p>
+<p><strong>If you don’t observe those behaviors,</strong> something is wrong with your
+installation. Here’s how to proceed:</p>
 <ul class="simple">
 <li><p>Make sure that, from the same Unix prompt as which you launched VS Code, you
 can successfully complete the double-check instructions for your OPAM switch:
-can you run utop? is the right switch active? If not, that’s the problem you
+Can you run utop? Is the right switch active? If not, that’s the problem you
 need to solve first. Then return to the VS Code issue. It might be fixed now.</p></li>
 <li><p>If you’re on WSL and VS Code does add syntax highlighting but does not add
 squiggles as described above, and/or you get an error about “Sandbox
@@ -1468,7 +1346,7 @@ installed the “Remote - WSL” extension as described above, and that you are
 launching VS Code from Ubuntu rather than PowerShell or from the Windows GUI.</p></li>
 </ul>
 <p><strong>If you’re still stuck with an issue,</strong> try uninstalling VS Code, rebooting,
-and re-doing all the install instructions above from scratch. Pay close
+and re-doing all the installation instructions above from scratch. Pay close
 attention to any warnings or errors.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1478,9 +1356,9 @@ band-aid, not a cure of whatever the underlying problem really is. More than
 likely, the real problem is an OCaml environment issue that you can investigate
 with the OCaml double-check instructions above.</p>
 </div>
-</section>
-<section id="vs-code-settings">
-<h2>VS Code Settings<a class="headerlink" href="#vs-code-settings" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="vs-code-settings">
+<h2>VS Code Settings<a class="headerlink" href="#vs-code-settings" title="Permalink to this headline">¶</a></h2>
 <p>We recommend tweaking a few editor settings. Open the user settings JSON file by
 (i) going to View → Command Palette, (ii) typing “user settings json”, and (iii)
 selecting Open User Settings (JSON). Copy and paste these settings into the
@@ -1493,9 +1371,9 @@ window:</p>
 </pre></div>
 </div>
 <p>Save the file and close the tab.</p>
-</section>
-<section id="using-vs-code-collaboratively">
-<h2>Using VS Code Collaboratively<a class="headerlink" href="#using-vs-code-collaboratively" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="using-vs-code-collaboratively">
+<h2>Using VS Code Collaboratively<a class="headerlink" href="#using-vs-code-collaboratively" title="Permalink to this headline">¶</a></h2>
 <p>VS Code’s <a class="reference external" href="https://code.visualstudio.com/learn/collaboration/live-share">Live Share</a> extension makes it easy and fun to collaborate
 on code with other humans.  You can edit code together like collaborating inside
 a Google Doc.  It even supports a shared voice channel, so there’s no need to
@@ -1503,8 +1381,8 @@ spin up a separate Zoom call.  To install Live Share:</p>
 <ul class="simple">
 <li><p>Open the Extensions page in VS Code.  Search for “Live Share Extension Pack”.
 Install it.</p></li>
-<li><p>The first time you use Live Share, you will be prompted to login. If you are a
-Cornell student, choose to login with your Microsoft account, not GitHub.
+<li><p>The first time you use Live Share, you will be prompted to log in. If you are
+a Cornell student, choose to log in with your Microsoft account, not GitHub.
 Enter your Cornell NetID email, e.g., <code class="docutils literal notranslate"><span class="pre">your_netid&#64;cornell.edu</span></code>. That will take
 you to Cornell’s login site. Use the password associated with your NetID.</p></li>
 </ul>
@@ -1515,8 +1393,8 @@ URL to the <em>guests</em> however you like (DM, email, etc.).</p></li>
 <li><p>The guest puts that URL into a browser or directly into VS Code, and connects
 to the shared programming session.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1540,11 +1418,9 @@ to the shared programming session.</p></li>
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="about.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1560,28 +1436,24 @@ to the shared programming session.</p></li>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Michael R. Clarkson et al.<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

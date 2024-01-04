@@ -149,7 +149,7 @@ that integer overflow occurred?
 {{ ex3 | replace("%%NAME%%", "poly types")}}
 
 What is the type of each of the functions below?  You can ask the toplevel to check
-your answers
+your answers.
 
 ```ocaml
 let f x = if x then x else x

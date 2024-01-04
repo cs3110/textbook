@@ -4,13 +4,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Curry-Howard Correspondence &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,41 +18,42 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../../_static/op_lotus_480.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Big-Oh Notation" href="../appendix/bigoh.html" />
@@ -66,21 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -89,17 +74,16 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      <img src="../../_static/op_lotus_480.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
@@ -110,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -127,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -228,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -441,7 +425,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -609,7 +593,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -668,7 +652,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -680,7 +664,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -699,17 +683,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -717,225 +696,99 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
 
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/cs3110/textbook/main?urlpath=tree/src/chapters/adv/curry-howard.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/cs3110/textbook"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/adv/curry-howard.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/edit/main/src/chapters/adv/curry-howard.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/chapters/adv/curry-howard.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download notebook file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-code"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="../../_sources/chapters/adv/curry-howard.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/adv/curry-howard.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/adv/curry-howard.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/adv/curry-howard.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/adv/curry-howard.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/main?urlpath=tree/src/chapters/adv/curry-howard.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#computing-with-evidence">
    Computing with Evidence
@@ -973,11 +826,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>The Curry-Howard Correspondence</h1>
@@ -1031,12 +885,11 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="the-curry-howard-correspondence">
-<h1>The Curry-Howard Correspondence<a class="headerlink" href="#the-curry-howard-correspondence" title="Permalink to this headline">#</a></h1>
+  <div class="section" id="the-curry-howard-correspondence">
+<h1>The Curry-Howard Correspondence<a class="headerlink" href="#the-curry-howard-correspondence" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>A <em>lagniappe</em> is a small and unexpected gift — a little “something extra”.
@@ -1064,8 +917,8 @@ machines both formalize what “computation” informally means.</p>
 <p>Instead of focusing on that impossible task, we’re going to focus on the
 relationship between proofs and programs. It turns out the two are deeply
 connected in a surprising way.</p>
-<section id="computing-with-evidence">
-<h2>Computing with Evidence<a class="headerlink" href="#computing-with-evidence" title="Permalink to this headline">#</a></h2>
+<div class="section" id="computing-with-evidence">
+<h2>Computing with Evidence<a class="headerlink" href="#computing-with-evidence" title="Permalink to this headline">¶</a></h2>
 <p>We’re accustomed to OCaml programs that manipulate data, such as integers and
 variants and functions. Those data values are always typed: at compile time,
 OCaml infers (or the programmer annotates) the types of expressions. For
@@ -1073,7 +926,7 @@ example, <code class="docutils literal notranslate"><span class="pre">3110</span
 “<code class="docutils literal notranslate"><span class="pre">3110</span></code> has type <code class="docutils literal notranslate"><span class="pre">int</span></code>”, and “<code class="docutils literal notranslate"><span class="pre">[]</span></code> has type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">list</span></code>”.</p>
 <p>Let’s try a different reading now. Instead of “has type”, let’s read “is
 evidence for”. So, <code class="docutils literal notranslate"><span class="pre">3110</span></code> is evidence for <code class="docutils literal notranslate"><span class="pre">int</span></code>. What does that mean? Think of a
-type as a set of values. So, <code class="docutils literal notranslate"><span class="pre">3110</span></code> is evidence that type is not empty.
+type as a set of values. So, <code class="docutils literal notranslate"><span class="pre">3110</span></code> is evidence that type <code class="docutils literal notranslate"><span class="pre">int</span></code> is not empty.
 Likewise, <code class="docutils literal notranslate"><span class="pre">[]</span></code> is evidence that the type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">list</span></code> is not empty. We say that the
 type is <em>inhabited</em> if it is not empty.</p>
 <p>Are there empty types? There actually is one in OCaml, though we’ve never had
@@ -1123,9 +976,9 @@ the following functions construct and destruct pairs:</p>
 </div>
 <p>We could think of <code class="docutils literal notranslate"><span class="pre">pair</span></code> as a function that takes in evidence for <code class="docutils literal notranslate"><span class="pre">'a</span></code> and
 evidence for <code class="docutils literal notranslate"><span class="pre">'b</span></code>, and gives us back evidence for <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">*</span> <span class="pre">'b</span></code>. That latter piece
-of evidence is the the pair <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code> containing the individual pieces of
-evidence, <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. Similarly, <code class="docutils literal notranslate"><span class="pre">fst</span></code> and <code class="docutils literal notranslate"><span class="pre">snd</span></code> extract the individual pieces
-of evidence from the pair. Thus,</p>
+of evidence is the pair <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code> containing the individual pieces of evidence,
+<code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. Similarly, <code class="docutils literal notranslate"><span class="pre">fst</span></code> and <code class="docutils literal notranslate"><span class="pre">snd</span></code> extract the individual pieces of
+evidence from the pair. Thus,</p>
 <ul class="simple">
 <li><p>If you have evidence for <code class="docutils literal notranslate"><span class="pre">'a</span></code> and evidence for <code class="docutils literal notranslate"><span class="pre">'b</span></code>, you can produce evidence
 for <code class="docutils literal notranslate"><span class="pre">'a</span></code> and <code class="docutils literal notranslate"><span class="pre">'b</span></code>.</p></li>
@@ -1165,9 +1018,9 @@ val snd : &#39;a * &#39;b -&gt; &#39;b                A /\ B -&gt; B
 </div>
 <p>If you replace <code class="docutils literal notranslate"><span class="pre">'a</span></code> with A, and <code class="docutils literal notranslate"><span class="pre">'b</span></code> with B, and <code class="docutils literal notranslate"><span class="pre">*</span></code> with <code class="docutils literal notranslate"><span class="pre">/\</span></code>, <strong>the types of
 the programs are identical to the formulas!</strong></p>
-</section>
-<section id="the-correspondence">
-<h2>The Correspondence<a class="headerlink" href="#the-correspondence" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="the-correspondence">
+<h2>The Correspondence<a class="headerlink" href="#the-correspondence" title="Permalink to this headline">¶</a></h2>
 <p>What we have just discovered is that computing with evidence corresponds to
 constructing valid logical proofs. This correspondence is not just an accident
 that occurs with these three specific programs. Rather, it is a deep phenomenon
@@ -1187,9 +1040,9 @@ three little programs corresponded to formulas, and the programs themselves
 corresponded to the reasoning done in proofs involving conjunctions. We haven’t
 seen the third yet; we will later.</p>
 <p>Let’s dig into each of the correspondences to appreciate them more fully.</p>
-</section>
-<section id="types-correspond-to-propositions">
-<h2>Types Correspond to Propositions<a class="headerlink" href="#types-correspond-to-propositions" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="types-correspond-to-propositions">
+<h2>Types Correspond to Propositions<a class="headerlink" href="#types-correspond-to-propositions" title="Permalink to this headline">¶</a></h2>
 <p>In <em>propositional logic</em>, formulas are created with atomic propositions,
 negation, conjunction, disjunction, and implication. The following BNF describes
 propositional logic formulas:</p>
@@ -1348,19 +1201,19 @@ enables us to read propositions as types:</p>
 </ul>
 <p>But that is only the first level of the Curry-Howard correspondence. It goes
 deeper…</p>
-</section>
-<section id="programs-correspond-to-proofs">
-<h2>Programs Correspond to Proofs<a class="headerlink" href="#programs-correspond-to-proofs" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="programs-correspond-to-proofs">
+<h2>Programs Correspond to Proofs<a class="headerlink" href="#programs-correspond-to-proofs" title="Permalink to this headline">¶</a></h2>
 <p>We have seen that programs and proofs are both ways to manipulate and transform
 evidence. In fact, every program <strong>is</strong> a proof that the type of the program is
-inhabited, since the type checker must verify that the program is well typed.</p>
+inhabited, since the type checker must verify that the program is well-typed.</p>
 <p>The details of type checking, though, lead to an even more compelling
 correspondence between programs and proofs. Let’s restrict our attention to
 programs and proofs involving just conjunction and implication, or equivalently,
 pairs and functions. (The other propositional connectives could be included as
 well, but require additional work.)</p>
 <p><strong>Type checking rules.</strong> For type checking, we gave many <em>rules</em> to define when
-a program is well typed. Here are rules for variables, functions, and pairs:</p>
+a program is well-typed. Here are rules for variables, functions, and pairs:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{x : t, ...} |- x : t
 </pre></div>
 </div>
@@ -1415,26 +1268,26 @@ env |- e1 : t1         env |- e2 : t2
      env |- (e1, e2) : t1 * t2
 
 
- env |- e : t1 * t2
---------------------
- env |- fst e : t1
+env |- e : t1 * t2
+------------------
+env |- fst e : t1
 
 
- env |- e : t1 * t2
---------------------
- env |- snd e : t2
+env |- e : t1 * t2
+------------------
+env |- snd e : t2
 </pre></div>
 </div>
 <p><strong>Proof trees, logically.</strong> Let’s rewrite each of those proof trees to eliminate
 the programs, leaving only the types. At the same time, let’s use the
 propositions-as-types correspondence to re-write the types as propositions:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--------
- p |- p
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-----------
+env, p |- p
 
 
-   env, p1 |- p2
--------------------
-  env |- p1 -&gt; p2
+ env, p1 |- p2
+---------------
+env |- p1 -&gt; p2
 
 
 env |- p1 -&gt; p2     env |- p1
@@ -1479,11 +1332,11 @@ swapping the types involved.</p>
 as propositions, we get this proof tree:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>----------------           ----------------
 a /\ b |- a /\ b           a /\ b |- a /\ b
-----------------          -----------------
+----------------           ----------------
   a /\ b |- b                a /\ b |- a
---------------------------------------------
+-------------------------------------------
               a /\ b |- b /\ a
-          ------------------------
+           ----------------------
            {} |- a /\ b -&gt; b /\ a
 </pre></div>
 </div>
@@ -1504,9 +1357,9 @@ proposition.</p></li>
 </ul>
 <p>But that is only the second level of the Curry-Howard correspondence. It goes
 deeper…</p>
-</section>
-<section id="evaluation-corresponds-to-simplification">
-<h2>Evaluation Corresponds to Simplification<a class="headerlink" href="#evaluation-corresponds-to-simplification" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="evaluation-corresponds-to-simplification">
+<h2>Evaluation Corresponds to Simplification<a class="headerlink" href="#evaluation-corresponds-to-simplification" title="Permalink to this headline">¶</a></h2>
 <p>We will treat this part of the correspondence only briefly. Consider the
 following program:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">fst</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span>
@@ -1518,7 +1371,7 @@ following program:</p>
 to type check.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>------------------------         -------------------------
 {a : t, b : t&#39;} |- a : t         {a : t, b : t&#39;} |- b : t&#39;
----------------------------------------------------------
+----------------------------------------------------------
          {a : t, b : t&#39;} |- (a, b) : t * t&#39;
          ----------------------------------
          {a : t, b : t&#39;} |- fst (a, b) : t
@@ -1526,17 +1379,17 @@ to type check.</p>
 </div>
 <p>Erasing that proof tree to just the propositions, per the proofs-as-programs
 correspondence, we get this proof tree:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-----------</span>            <span class="o">-----------</span>
-<span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="s1">&#39; |-  t            t, t&#39;</span> <span class="o">|-</span> <span class="n">t</span><span class="s1">&#39;</span>
-<span class="o">----------------------------------</span>
-         <span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="s1">&#39; |- t /\ t&#39;</span>
-         <span class="o">----------------</span>
-            <span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="s1">&#39; |- t</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-----------            -----------
+t, t&#39; |-  t            t, t&#39; |- t&#39;
+----------------------------------
+         t, t&#39; |- t /\ t&#39;
+         ----------------
+            t, t&#39; |- t
 </pre></div>
 </div>
 <p>However, there is a much simpler proof tree with the same conclusion:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> ------------
-  t, t&#39; |- t
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>----------
+t, t&#39; |- t
 </pre></div>
 </div>
 <p>In other words, we don’t need the detour through proving <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">/\</span> <span class="pre">t'</span></code> to prove <code class="docutils literal notranslate"><span class="pre">t</span></code>,
@@ -1549,14 +1402,14 @@ simpler proof:</p>
 </div>
 <p>Note that typing derivation is for the program <code class="docutils literal notranslate"><span class="pre">a</span></code>, which is exactly what the
 bigger program <code class="docutils literal notranslate"><span class="pre">fst</span> <span class="pre">(a,</span> <span class="pre">b)</span></code> evaluates to.</p>
-<p>Thus evaluation of the program causes the proof tree to simplify, and the
+<p>Thus, evaluation of the program causes the proof tree to simplify, and the
 simplified proof tree is actually (through the proofs-as programs
 correspondence) a simpler proof of the same proposition. <strong>Evaluation therefore
 corresponds to proof simplification.</strong> And that is the final level of the
 Curry-Howard correspondence.</p>
-</section>
-<section id="what-it-all-means">
-<h2>What It All Means<a class="headerlink" href="#what-it-all-means" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="what-it-all-means">
+<h2>What It All Means<a class="headerlink" href="#what-it-all-means" title="Permalink to this headline">¶</a></h2>
 <p>Logic is a fundamental aspect of human inquiry.  It guides us in reasoning about
 the world, in drawing valid inferences, in deducing what must be true vs. what
 must be false.  Training in logic and argumentation—in various fields and
@@ -1571,9 +1424,9 @@ task that humans do in trying to present a proof in the best possible way.</p>
 <p>Computation is thus intrinsically linked to reasoning. And functional
 programming is a fundamental part of human inquiry.</p>
 <p>Could there <em>be</em> a better reason to study functional programming?</p>
-</section>
-<section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p>Solutions to most exercises are <a href="https://github.com/cs3110/textbook-solutions">available</a>.
 Fall 2022 is the first public release of these solutions.
 Though they have been available to Cornell students for a few years,
@@ -1620,8 +1473,8 @@ should.)</p></li>
 </ul>
 <p>Your simplified <code class="docutils literal notranslate"><span class="pre">f</span></code> and the original <code class="docutils literal notranslate"><span class="pre">f</span></code> are both proofs of the same
 proposition, but evaluation has helped you to produce a simpler proof.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1645,11 +1498,9 @@ proposition, but evaluation has helped you to produce a simpler proof.</p>
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="../interp/exercises.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1665,28 +1516,24 @@ proposition, but evaluation has helped you to produce a simpler proof.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Michael R. Clarkson et al.<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

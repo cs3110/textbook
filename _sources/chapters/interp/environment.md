@@ -24,7 +24,7 @@ To account for the environment, the evaluation relation needs to change. Instead
 of `e --> e'` or `e ==> v`, both of which are binary relations, we now need a
 ternary relation, which is either
 
-* `<env, e> --> e`, or
+* `<env, e> --> e'`, or
 
 * `<env, e> ==> v`,
 
@@ -100,9 +100,9 @@ Seems reasonable, right? The problem is, **it's wrong.** At least, it's wrong if
 you want evaluation to behave the same as OCaml. Or, to be honest, nearly any
 other modern language.
 
-It will be easier to explain why it's wrong if we add two more language feature:
-let expressions and integer constants. Integer constants would evaluate to
-themselves:
+It will be easier to explain why it's wrong if we add two more language
+features: let expressions and integer constants. Integer constants would
+evaluate to themselves:
 
 ```text
 <env, i> ==> i
@@ -300,7 +300,7 @@ it anyway.
 
 ```text
 e ::= x | e1 e2 | fun x -> e
-    | i | b | e1 + e2
+    | i | b | e1 bop e2
     | (e1,e2) | fst e1 | snd e2
     | Left e | Right e
     | match e with Left x1 -> e1 | Right x2 -> e2
@@ -336,10 +336,10 @@ Evaluation of most other language features just uses the environment without
 changing it:
 
 ```text
-<env, e1 + e2> ==> n
-  if  <env,e1> ==> n1
-  and <env,e2> ==> n2
-  and n is the result of applying the primitive operation + to n1 and n2
+<env, e1 bop e2> ==> v
+  if  <env,e1> ==> v1
+  and <env,e2> ==> v2
+  and v is the result of applying the primitive operation bop to v1 and v2
 
 <env, (e1, e2)> ==> (v1, v2)
   if  <env, e1> ==> v1

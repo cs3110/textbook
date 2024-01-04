@@ -52,7 +52,7 @@ Type inference for SimPL can be done in a much simpler way than for the larger
 language (with anonymous functions and let expression) that we considered in the
 section on type inference.
 
-Run `make` in the SimPL interpreter implementation. It will compile the
+Run `make utop` in the SimPL interpreter implementation. It will compile the
 interpreter and launch utop. Now, define a function `infer : string -> typ` such
 that `infer s` parses `s` into an expression and infers the type of `s` in the
 empty context. Your solution will make use of the `typeof` function. You don't
@@ -67,9 +67,9 @@ Try out your `infer` function on these test cases:
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "subexpression types")}}
 
-Suppose that a SimPL expression is well typed in a context `ctx`. Are all of its
-subexpressions also well typed in `ctx`? For every subexpression, does there
-exist some context in which the subexpression is well typed? Why or why not?
+Suppose that a SimPL expression is well-typed in a context `ctx`. Are all of its
+subexpressions also well-typed in `ctx`? For every subexpression, does there
+exist some context in which the subexpression is well-typed? Why or why not?
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "typing")}}
@@ -183,20 +183,19 @@ Implement evaluation of pairs.  Follow this strategy:
 
 * Implement `is_value` for pairs. A pair of values (e.g., `(0,1)`) is itself a
   value, so the function will need to become recursive.
-* Implement `subst` for pairs:  `(e1, e2){v/x} = (e1{v/x}, e2{v/x})`.
+* Implement `subst` for pairs: `(e1, e2){v/x} = (e1{v/x}, e2{v/x})`.
 * Implement small-step and big-step evaluation of pairs, using these rules:
+  ```text
+  (e1, e2) --> (e1', e2)
+    if e1 --> e1'
 
-```text
-(e1, e2) --> (e1', e2)
-  if e1 --> e1'
+  (v1, e2) --> (v1, e2')
+    if e2 --> e2'
 
-(v1, e2) --> (v1, e2')
-  if e2 --> e2'
-
-(e1, e2) ==> (v1, v2)
-  if e1 ==> v1
-  and e2 ==> v2
-```
+  (e1, e2) ==> (v1, v2)
+    if e1 ==> v1
+    and e2 ==> v2
+  ```
 
 <!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "desugar list")}}
@@ -206,12 +205,12 @@ Suppose we treat list expressions like syntactic sugar in the following way:
 * `[]` is syntactic sugar for `Left 0`.
 * `e1 :: e2` is syntactic sugar for `Right (e1, e2)`.
 
-What is the core OCaml expression to which `[1; 2; 3]` desugars?
+What is the Core OCaml expression to which `[1; 2; 3]` desugars?
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "list not empty")}}
 
-Write a core OCaml function `not_empty` that returns `1` if a list is non-empty
+Write a Core OCaml function `not_empty` that returns `1` if a list is non-empty
 and `0` if the list is empty. Use the substitution model to check that your
 function behaves properly on these test cases:
 
@@ -221,9 +220,9 @@ function behaves properly on these test cases:
 <!--------------------------------------------------------------------------->
 {{ ex4 | replace("%%NAME%%", "generalize patterns")}}
 
-In core OCaml, there are only two patterns: `Left x` and `Right x`,
+In Core OCaml, there are only two patterns: `Left x` and `Right x`,
 where `x` is a variable name.  But in full OCaml, patterns are far more
-general. Let's see how far we can generalize patterns in core OCaml.
+general. Let's see how far we can generalize patterns in Core OCaml.
 
 **Step 1:** Here is a BNF grammar for patterns, and slightly revised
 BNF grammar for expressions:
@@ -310,7 +309,7 @@ match v with |  -/->
 Evaluation will get stuck at that point because none of the three other
 rules above will apply.
 
-**Step 4:** Double check your rules by evaluating the following
+**Step 4:** Double-check your rules by evaluating the following
 expression:
 
 `match (1 + 2, 3) with | (1,0) -> 4 | (1,x) -> x | (x,y) -> x + y`
@@ -334,7 +333,7 @@ But that rule doesn't work properly, as we see in the following example:
 
 ```text
   let rec fact = fun x ->
-	if x <= 1 then 1 else x * (fact (x - 1)) in
+    if x <= 1 then 1 else x * (fact (x - 1)) in
   fact 3
 
 -->
@@ -428,6 +427,17 @@ tedious). You may want to simplify your life by writing "F" in place of
 let rec fact = fun x ->
   if x <= 1 then 1 else x * (fact (x - 1)) in
 fact 3
+```
+
+Use the following (capture-avoiding) substitution rules, which are similar to
+the rules for `let` and `fun`:
+
+```text
+(rec f -> e){v/x} = rec f -> e{v/x}
+  if x <> f
+  and f not in FV(v)
+
+(rec f -> e){v/f} = rec f -> e
 ```
 
 <!--------------------------------------------------------------------------->

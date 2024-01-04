@@ -98,7 +98,7 @@ sense of equality, not as the OCaml polymorphic equality operator. For example,
 we allow `(fun x -> x) = (fun y -> y)`, even though OCaml's operator would raise
 an exception and refuse to compare functions.
 
-We're also going to restrict ourselves to expressions that are well typed, pure
+We're also going to restrict ourselves to expressions that are well-typed, pure
 (meaning they have no side effects), and total (meaning they don't have
 exceptions or infinite loops).
 
@@ -120,9 +120,9 @@ likewise, `compose h h x = h (h x)`. Thus we have:
 twice h x = h (h x) = compose h h x
 ```
 
-Therefore can conclude that `twice h x = compose h h x`. And by extensionality
-we can simplify that equality: Since `twice h x = compose h h x` holds for all
-`x`, we can conclude `twice h = compose h h`.
+Therefore, we can conclude that `twice h x = compose h h x`. And by
+extensionality we can simplify that equality: Since `twice h x = compose h h x`
+holds for all `x`, we can conclude `twice h = compose h h`.
 
 As another example, suppose we define an infix operator for function
 composition:
@@ -606,10 +606,11 @@ Suppose we have a binary relation `<` on inputs. Despite the notation, this
 relation need not be the less-than relation on integers---although that will
 work for `fact`. Also suppose that it is never possible to create an infinite
 sequence `x0 > x1 > x2 > x3 ...` of elements using this relation. (Where of
-course `a > b` iff `b < a`.) That is, there are no infinite descending chains of
-elements: once you pick a starting element `x0`, there can be only a finite
-number of "descents" according to the `<` relation before you bottom out and hit
-a base case. This property of `<` makes it a *well-founded relation*.
+course `a > b` if and only if `b < a`.) That is, there are no infinite
+descending chains of elements: once you pick a starting element `x0`, there can
+be only a finite number of "descents" according to the `<` relation before you
+bottom out and hit a base case. This property of `<` makes it a *well-founded
+relation*.
 
 So, a recursive function terminates if all its recursive calls are on elements
 that are smaller according to `<`. Why? Because there can be only a finite

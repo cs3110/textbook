@@ -62,14 +62,14 @@ Define a function `load_factor : ('a,'b) Hashtbl.t -> float`, such that
 *Hint: stats.*
 
 Add one more binding to `tab`. Do the stats or load factor change? Now add yet
-another binding. Now do the stats or load factor change? *Hint: Hashtbl
+another binding. Now do the stats or load factor change? *Hint: `Hashtbl`
 resizes when the load factor goes strictly above 2.*
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "functorial interface")}}
 
 Use the functorial interface (i.e., `Hashtbl.Make`) to create a hash table whose
-keys are strings that are case insensitive. Be careful to obey the specification
+keys are strings that are case-insensitive. Be careful to obey the specification
 of `Hashtbl.HashedType.hash`:
 
 > If two keys are equal according to `equal`, then they have identical hash
@@ -213,7 +213,7 @@ let () = assert (postorder t = [1;3;2;5;7;6;4])
 On unbalanced trees, the traversal functions above require quadratic worst-case
 time (in the number of nodes), because of the `@` operator. Re-implement the
 functions without `@`, and instead using `::`, such that they perform exactly
-one cons per `Node` in the tree. Thus the worst-case execution time will be
+one cons per `Node` in the tree. Thus, the worst-case execution time will be
 linear. You will need to add an additional accumulator argument to each
 function, much like with tail recursion. (But your implementations won't
 actually be tail recursive.)
@@ -233,15 +233,6 @@ is the maximum number of black nodes along any path from its root to a leaf.
 Draw the red-black tree that results from inserting the characters D A T A S T R
 U C T U R E into an empty tree. Carry out the insertion algorithm yourself by
 hand, then check your work with the implementation provided in the book.
-
-<!--------------------------------------------------------------------------->
-{{ ex2 | replace("%%NAME%%", "standard library set")}}
-
-Read the [source code][stdlib-set-ml] of the standard library `Set` module.
-Find the representation invariant for the balanced trees that it uses.
-Which kind of tree does it most resemble:  2-3, AVL, or red-black?
-
-[stdlib-set-ml]: https://github.com/ocaml/ocaml/blob/trunk/stdlib/set.ml
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "pow2")}}
@@ -300,7 +291,7 @@ satisfies `p`, then `filter p s` does not terminate.
 Define a function `interleave : 'a sequence -> 'a sequence -> 'a sequence`, such
 that `interleave <a1; a2; a3; ...> <b1; b2; b3; ...>` is the sequence
 `<a1; b1; a2; b2; a3; b3; ...>`. For example, `interleave nats pow2` would be
-`<0; 1; 1; 2; 2; 4; 3; 8; ...>`
+`<0; 1; 1; 2; 2; 4; 3; 8; ...>`.
 
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "sift")}}
@@ -343,7 +334,14 @@ compute that involves a function that computes $f(k) = \frac{x^k}{k!}$.
 
 Define a function `total : float sequence -> float sequence`, such that
 `total <a; b; c; ...>` is a running total of the input elements, i.e.,
-`<a; a+.b; a+.b+.c; ...>`.
+`<a; a+.b; a+.b+.c; ...>`. 
+
+By using `e_terms` and `total` together, you will be able to compute successive
+approximations of $e^x$ that correspond to finite prefixes of the infinite
+summation. For example, you could compute the stream
+`<1.; 2.; 2.5; 2.66666666666666652; 2.70833333333333304; ...>`. It contains
+successive approximations of $e^1$, such that element $n$ of the stream is
+$\sum_{k=0}^{n} \frac{1^k}{k!}$.
 
 Define a function `within : float -> float sequence -> float`, such that
 `within eps s` is the first element of `s` for which the absolute difference
@@ -354,10 +352,10 @@ positive. For example,
 `within 0.1 <1.0; 2.0; 2.5; 2.75; 2.875; 2.9375; 2.96875; ...>` is `2.9375`.
 
 Finally, define a function `e : float -> float -> float` such that `e x eps` is
-$e^x$ computed to within a tolerance of `eps`, which must be strictly positive.
-Note that there is an interesting boundary case where `x=1.0` for the first two
-terms of the sum; you could choose to drop the first term (which is always
-`1.0`) from the sequence before using `within`.
+$e^x$ computed using a finite prefix of the infinite summation above. The
+computation should halt when the absolute difference between successive
+approximations is below `eps`, which must be strictly positive. For 
+example, `e 1. 0.01` would be `2.71666666666666634`.
 
 <!--------------------------------------------------------------------------->
 {{ ex4 | replace("%%NAME%%", "better e")}}
@@ -419,9 +417,9 @@ section on laziness.
 {{ ex2 | replace("%%NAME%%", "promise and resolve")}}
 
 Use the finished version of the `Promise` module we developed to do the
-following: create a integer promise and resolver, bind a function on the promise
-to print the contents of the promise, then resolve the promise. Only after the
-promise is resolved should the printing occur.
+following: create an integer promise and resolver, bind a function on the
+promise to print the contents of the promise, then resolve the promise. Only
+after the promise is resolved should the printing occur.
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "promise and resolve lwt")}}
@@ -516,7 +514,7 @@ open Lwt_unix
     the file named "log". *)
 let log () : input_channel Lwt.t =
   openfile "log" [O_RDONLY] 0 >>= fun fd ->
-  Lwt.return (of_fd input fd)
+  Lwt.return (of_fd ~mode:input fd)
 
 (** [loop ic] reads one line from [ic], prints it to stdout,
     then calls itself recursively. It is an infinite loop. *)
@@ -727,7 +725,7 @@ two very useful list library functions that can help you.
 <!--------------------------------------------------------------------------->
 {{ ex3 | replace("%%NAME%%", "trivial monad laws")}}
 
-Here is the world's most trivial monad. All it does is wrap a value inside of a
+Here is the world's most trivial monad. All it does is wrap a value inside a
 constructor.
 
 ```ocaml

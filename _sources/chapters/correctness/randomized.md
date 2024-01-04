@@ -103,7 +103,7 @@ possible to manipulate that state in limited ways. For example, you can
 
 * duplicate the current state with `Random.State.copy`,
 
-* request a random int generated from a particular state with
+* request a random `int` generated from a particular state with
   `Random.State.int`, and
 
 * initialize the state yourself. The functions `Random.self_init` and

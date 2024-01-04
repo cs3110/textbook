@@ -4,13 +4,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>8.9. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,41 +18,42 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../../_static/op_lotus_480.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="9. Interpreters" href="../interp/intro.html" />
@@ -66,21 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -89,17 +74,16 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      <img src="../../_static/op_lotus_480.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
@@ -110,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -127,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -228,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -441,7 +425,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -609,7 +593,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -668,7 +652,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -680,7 +664,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -699,185 +683,92 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
             
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/ds/exercises.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/ds/exercises.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/ds/exercises.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
         </div>
     </div>
-    <div id="rtd-footer-container"></div>
 </div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/cs3110/textbook"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/ds/exercises.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/edit/main/src/chapters/ds/exercises.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/chapters/ds/exercises.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-    </div>
-</div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Exercises</h1>
@@ -888,12 +779,11 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="exercises">
-<h1><span class="section-number">8.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
+  <div class="section" id="exercises">
+<h1><span class="section-number">8.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
 <p>Solutions to most exercises are <a href="https://github.com/cs3110/textbook-solutions">available</a>.
 Fall 2022 is the first public release of these solutions.
 Though they have been available to Cornell students for a few years,
@@ -952,13 +842,13 @@ the bindings in <code class="docutils literal notranslate"><span class="pre">tab
 <code class="docutils literal notranslate"><span class="pre">load_factor</span> <span class="pre">h</span></code> is the load factor of <code class="docutils literal notranslate"><span class="pre">h</span></code>. What is the load factor of <code class="docutils literal notranslate"><span class="pre">tab</span></code>?
 <em>Hint: stats.</em></p>
 <p>Add one more binding to <code class="docutils literal notranslate"><span class="pre">tab</span></code>. Do the stats or load factor change? Now add yet
-another binding. Now do the stats or load factor change? <em>Hint: Hashtbl
+another binding. Now do the stats or load factor change? <em>Hint: <code class="docutils literal notranslate"><span class="pre">Hashtbl</span></code>
 resizes when the load factor goes strictly above 2.</em></p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: functorial interface [★★★]</strong></p>
 <p>Use the functorial interface (i.e., <code class="docutils literal notranslate"><span class="pre">Hashtbl.Make</span></code>) to create a hash table whose
-keys are strings that are case insensitive. Be careful to obey the specification
+keys are strings that are case-insensitive. Be careful to obey the specification
 of <code class="docutils literal notranslate"><span class="pre">Hashtbl.HashedType.hash</span></code>:</p>
 <blockquote>
 <div><p>If two keys are equal according to <code class="docutils literal notranslate"><span class="pre">equal</span></code>, then they have identical hash
@@ -1083,7 +973,7 @@ applications:</p>
 <p>On unbalanced trees, the traversal functions above require quadratic worst-case
 time (in the number of nodes), because of the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator. Re-implement the
 functions without <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, and instead using <code class="docutils literal notranslate"><span class="pre">::</span></code>, such that they perform exactly
-one cons per <code class="docutils literal notranslate"><span class="pre">Node</span></code> in the tree. Thus the worst-case execution time will be
+one cons per <code class="docutils literal notranslate"><span class="pre">Node</span></code> in the tree. Thus, the worst-case execution time will be
 linear. You will need to add an additional accumulator argument to each
 function, much like with tail recursion. (But your implementations won’t
 actually be tail recursive.)</p>
@@ -1101,12 +991,6 @@ is the maximum number of black nodes along any path from its root to a leaf.</p>
 <p>Draw the red-black tree that results from inserting the characters D A T A S T R
 U C T U R E into an empty tree. Carry out the insertion algorithm yourself by
 hand, then check your work with the implementation provided in the book.</p>
-<!--------------------------------------------------------------------------->
-<hr class="docutils" />
-<p><strong>Exercise: standard library set [★★]</strong></p>
-<p>Read the <a class="reference external" href="https://github.com/ocaml/ocaml/blob/trunk/stdlib/set.ml">source code</a> of the standard library <code class="docutils literal notranslate"><span class="pre">Set</span></code> module.
-Find the representation invariant for the balanced trees that it uses.
-Which kind of tree does it most resemble:  2-3, AVL, or red-black?</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: pow2 [★★]</strong></p>
@@ -1157,7 +1041,7 @@ satisfies <code class="docutils literal notranslate"><span class="pre">p</span><
 <p>Define a function <code class="docutils literal notranslate"><span class="pre">interleave</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">sequence</span></code>, such
 that <code class="docutils literal notranslate"><span class="pre">interleave</span> <span class="pre">&lt;a1;</span> <span class="pre">a2;</span> <span class="pre">a3;</span> <span class="pre">...&gt;</span> <span class="pre">&lt;b1;</span> <span class="pre">b2;</span> <span class="pre">b3;</span> <span class="pre">...&gt;</span></code> is the sequence
 <code class="docutils literal notranslate"><span class="pre">&lt;a1;</span> <span class="pre">b1;</span> <span class="pre">a2;</span> <span class="pre">b2;</span> <span class="pre">a3;</span> <span class="pre">b3;</span> <span class="pre">...&gt;</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">interleave</span> <span class="pre">nats</span> <span class="pre">pow2</span></code> would be
-<code class="docutils literal notranslate"><span class="pre">&lt;0;</span> <span class="pre">1;</span> <span class="pre">1;</span> <span class="pre">2;</span> <span class="pre">2;</span> <span class="pre">4;</span> <span class="pre">3;</span> <span class="pre">8;</span> <span class="pre">...&gt;</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">&lt;0;</span> <span class="pre">1;</span> <span class="pre">1;</span> <span class="pre">2;</span> <span class="pre">2;</span> <span class="pre">4;</span> <span class="pre">3;</span> <span class="pre">8;</span> <span class="pre">...&gt;</span></code>.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: sift [★★★]</strong></p>
@@ -1193,6 +1077,12 @@ compute that involves a function that computes <span class="math notranslate noh
 <p>Define a function <code class="docutils literal notranslate"><span class="pre">total</span> <span class="pre">:</span> <span class="pre">float</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">float</span> <span class="pre">sequence</span></code>, such that
 <code class="docutils literal notranslate"><span class="pre">total</span> <span class="pre">&lt;a;</span> <span class="pre">b;</span> <span class="pre">c;</span> <span class="pre">...&gt;</span></code> is a running total of the input elements, i.e.,
 <code class="docutils literal notranslate"><span class="pre">&lt;a;</span> <span class="pre">a+.b;</span> <span class="pre">a+.b+.c;</span> <span class="pre">...&gt;</span></code>.</p>
+<p>By using <code class="docutils literal notranslate"><span class="pre">e_terms</span></code> and <code class="docutils literal notranslate"><span class="pre">total</span></code> together, you will be able to compute successive
+approximations of <span class="math notranslate nohighlight">\(e^x\)</span> that correspond to finite prefixes of the infinite
+summation. For example, you could compute the stream
+<code class="docutils literal notranslate"><span class="pre">&lt;1.;</span> <span class="pre">2.;</span> <span class="pre">2.5;</span> <span class="pre">2.66666666666666652;</span> <span class="pre">2.70833333333333304;</span> <span class="pre">...&gt;</span></code>. It contains
+successive approximations of <span class="math notranslate nohighlight">\(e^1\)</span>, such that element <span class="math notranslate nohighlight">\(n\)</span> of the stream is
+<span class="math notranslate nohighlight">\(\sum_{k=0}^{n} \frac{1^k}{k!}\)</span>.</p>
 <p>Define a function <code class="docutils literal notranslate"><span class="pre">within</span> <span class="pre">:</span> <span class="pre">float</span> <span class="pre">-&gt;</span> <span class="pre">float</span> <span class="pre">sequence</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>, such that
 <code class="docutils literal notranslate"><span class="pre">within</span> <span class="pre">eps</span> <span class="pre">s</span></code> is the first element of <code class="docutils literal notranslate"><span class="pre">s</span></code> for which the absolute difference
 between that element and the element before it is strictly less than <code class="docutils literal notranslate"><span class="pre">eps</span></code>. If
@@ -1201,10 +1091,10 @@ an “infinite loop”). As a precondition, the <em>tolerance</em> <code class="
 positive. For example,
 <code class="docutils literal notranslate"><span class="pre">within</span> <span class="pre">0.1</span> <span class="pre">&lt;1.0;</span> <span class="pre">2.0;</span> <span class="pre">2.5;</span> <span class="pre">2.75;</span> <span class="pre">2.875;</span> <span class="pre">2.9375;</span> <span class="pre">2.96875;</span> <span class="pre">...&gt;</span></code> is <code class="docutils literal notranslate"><span class="pre">2.9375</span></code>.</p>
 <p>Finally, define a function <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">:</span> <span class="pre">float</span> <span class="pre">-&gt;</span> <span class="pre">float</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code> such that <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">x</span> <span class="pre">eps</span></code> is
-<span class="math notranslate nohighlight">\(e^x\)</span> computed to within a tolerance of <code class="docutils literal notranslate"><span class="pre">eps</span></code>, which must be strictly positive.
-Note that there is an interesting boundary case where <code class="docutils literal notranslate"><span class="pre">x=1.0</span></code> for the first two
-terms of the sum; you could choose to drop the first term (which is always
-<code class="docutils literal notranslate"><span class="pre">1.0</span></code>) from the sequence before using <code class="docutils literal notranslate"><span class="pre">within</span></code>.</p>
+<span class="math notranslate nohighlight">\(e^x\)</span> computed using a finite prefix of the infinite summation above. The
+computation should halt when the absolute difference between successive
+approximations is below <code class="docutils literal notranslate"><span class="pre">eps</span></code>, which must be strictly positive. For
+example, <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">1.</span> <span class="pre">0.01</span></code> would be <code class="docutils literal notranslate"><span class="pre">2.71666666666666634</span></code>.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: better e [★★★★]</strong></p>
@@ -1256,9 +1146,9 @@ section on laziness.</p>
 <hr class="docutils" />
 <p><strong>Exercise: promise and resolve [★★]</strong></p>
 <p>Use the finished version of the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> module we developed to do the
-following: create a integer promise and resolver, bind a function on the promise
-to print the contents of the promise, then resolve the promise. Only after the
-promise is resolved should the printing occur.</p>
+following: create an integer promise and resolver, bind a function on the
+promise to print the contents of the promise, then resolve the promise. Only
+after the promise is resolved should the printing occur.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: promise and resolve lwt [★★]</strong></p>
@@ -1339,7 +1229,7 @@ any exceptions.</p>
 <span class="c">    the file named &quot;log&quot;. *)</span>
 <span class="k">let</span> <span class="n">log</span> <span class="bp">()</span> <span class="o">:</span> <span class="n">input_channel</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span>
   <span class="n">openfile</span> <span class="s2">&quot;log&quot;</span> <span class="o">[</span><span class="nc">O_RDONLY</span><span class="o">]</span> <span class="mi">0</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">fd</span> <span class="o">-&gt;</span>
-  <span class="nn">Lwt</span><span class="p">.</span><span class="n">return</span> <span class="o">(</span><span class="n">of_fd</span> <span class="n">input</span> <span class="n">fd</span><span class="o">)</span>
+  <span class="nn">Lwt</span><span class="p">.</span><span class="n">return</span> <span class="o">(</span><span class="n">of_fd</span> <span class="o">~</span><span class="n">mode</span><span class="o">:</span><span class="n">input</span> <span class="n">fd</span><span class="o">)</span>
 
 <span class="c">(** [loop ic] reads one line from [ic], prints it to stdout,</span>
 <span class="c">    then calls itself recursively. It is an infinite loop. *)</span>
@@ -1521,7 +1411,7 @@ two very useful list library functions that can help you.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: trivial monad laws [★★★]</strong></p>
-<p>Here is the world’s most trivial monad. All it does is wrap a value inside of a
+<p>Here is the world’s most trivial monad. All it does is wrap a value inside a
 constructor.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Trivial</span> <span class="o">:</span> <span class="nc">Monad</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="nc">Wrap</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
@@ -1532,7 +1422,7 @@ constructor.</p>
 </div>
 <p>Prove that the three monad laws, as formulated using <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> and <code class="docutils literal notranslate"><span class="pre">return</span></code>, hold
 for the trivial monad.</p>
-</section>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1556,11 +1446,9 @@ for the trivial monad.</p>
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="summary.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1576,28 +1464,24 @@ for the trivial monad.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Michael R. Clarkson et al.<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

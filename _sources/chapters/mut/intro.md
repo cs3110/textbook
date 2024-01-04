@@ -1,7 +1,7 @@
 # Mutability
 
 OCaml is not a *pure* language: it does admit side effects. We have seen that
-already with I/O, especially printing. But up till now we have limited ourself
+already with I/O, especially printing. But up till now we have limited ourselves
 to the subset of the language that is *immutable*: values could not change.
 
 Mutability is neither good nor bad. It enables new functionality that we

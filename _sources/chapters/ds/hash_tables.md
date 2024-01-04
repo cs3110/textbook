@@ -173,7 +173,7 @@ end
 {{ video_embed | replace("%%VID%%", "cUEN8sFVkS4")}}
 
 *Mutable maps* are maps whose bindings may be mutated. The interface for a
-mutable map therefore differs from a immutable map. Insertion and removal
+mutable map therefore differs from an immutable map. Insertion and removal
 operations for a mutable map therefore return `unit`, because they do not
 produce a new map but instead mutate an existing map.
 
@@ -467,7 +467,7 @@ is guaranteed.
 
 There's no way for the implementer to know in advance, though, exactly how many
 buckets will be needed. So instead, the implementer will have to *resize* the
-bucket array whenever the load factor gets too high. Typically the newly
+bucket array whenever the load factor gets too high. Typically, the newly
 allocated bucket will be of a size to restore the load factor to about 1.
 
 Putting those two ideas together, if the load factor reaches 2, then there are
@@ -735,7 +735,7 @@ configured to examine more nodes.
 **Hash table.** Here's an abstract of the hash table interface:
 
 ```ocaml
-module type Hashtbl = struct
+module type Hashtbl = sig
   type ('a, 'b) t
   val create : int -> ('a, 'b) t
   val add : ('a, 'b) t -> 'a -> 'b -> unit

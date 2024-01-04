@@ -56,7 +56,7 @@ example, `3110 : int`, and `[] : 'a list`. We long ago learned to read those as
 
 Let's try a different reading now. Instead of "has type", let's read "is
 evidence for". So, `3110` is evidence for `int`. What does that mean? Think of a
-type as a set of values. So, `3110` is evidence that type is not empty.
+type as a set of values. So, `3110` is evidence that type `int` is not empty.
 Likewise, `[]` is evidence that the type `'a list` is not empty. We say that the
 type is *inhabited* if it is not empty.
 
@@ -88,9 +88,9 @@ let snd (x, y) = y
 
 We could think of `pair` as a function that takes in evidence for `'a` and
 evidence for `'b`, and gives us back evidence for `'a * 'b`. That latter piece
-of evidence is the the pair `(x, y)` containing the individual pieces of
-evidence, `x` and `y`. Similarly, `fst` and `snd` extract the individual pieces
-of evidence from the pair. Thus,
+of evidence is the pair `(x, y)` containing the individual pieces of evidence,
+`x` and `y`. Similarly, `fst` and `snd` extract the individual pieces of
+evidence from the pair. Thus,
 
 - If you have evidence for `'a` and evidence for `'b`, you can produce evidence
   for `'a` and `'b`.
@@ -320,7 +320,7 @@ deeper...
 
 We have seen that programs and proofs are both ways to manipulate and transform
 evidence. In fact, every program **is** a proof that the type of the program is
-inhabited, since the type checker must verify that the program is well typed.
+inhabited, since the type checker must verify that the program is well-typed.
 
 The details of type checking, though, lead to an even more compelling
 correspondence between programs and proofs. Let's restrict our attention to
@@ -329,7 +329,7 @@ pairs and functions. (The other propositional connectives could be included as
 well, but require additional work.)
 
 **Type checking rules.** For type checking, we gave many *rules* to define when
-a program is well typed. Here are rules for variables, functions, and pairs:
+a program is well-typed. Here are rules for variables, functions, and pairs:
 
 ```text
 {x : t, ...} |- x : t
@@ -397,14 +397,14 @@ env |- e1 : t1         env |- e2 : t2
      env |- (e1, e2) : t1 * t2
 
 
- env |- e : t1 * t2
---------------------
- env |- fst e : t1
+env |- e : t1 * t2
+------------------
+env |- fst e : t1
 
 
- env |- e : t1 * t2
---------------------
- env |- snd e : t2
+env |- e : t1 * t2
+------------------
+env |- snd e : t2
 ```
 
 **Proof trees, logically.** Let's rewrite each of those proof trees to eliminate
@@ -413,13 +413,13 @@ propositions-as-types correspondence to re-write the types as propositions:
 
 ```text
 
---------
- p |- p
+-----------
+env, p |- p
 
 
-   env, p1 |- p2
--------------------
-  env |- p1 -> p2
+ env, p1 |- p2
+---------------
+env |- p1 -> p2
 
 
 env |- p1 -> p2     env |- p1
@@ -470,11 +470,11 @@ as propositions, we get this proof tree:
 ```text
 ----------------           ----------------
 a /\ b |- a /\ b           a /\ b |- a /\ b
-----------------          -----------------
+----------------           ----------------
   a /\ b |- b                a /\ b |- a
---------------------------------------------
+-------------------------------------------
               a /\ b |- b /\ a
-          ------------------------
+           ----------------------
            {} |- a /\ b -> b /\ a
 ```
 
@@ -516,7 +516,7 @@ to type check.
 ```text
 ------------------------         -------------------------
 {a : t, b : t'} |- a : t         {a : t, b : t'} |- b : t'
----------------------------------------------------------
+----------------------------------------------------------
          {a : t, b : t'} |- (a, b) : t * t'
          ----------------------------------
          {a : t, b : t'} |- fst (a, b) : t
@@ -524,7 +524,7 @@ to type check.
 
 Erasing that proof tree to just the propositions, per the proofs-as-programs
 correspondence, we get this proof tree:
-```
+```text
 -----------            -----------
 t, t' |-  t            t, t' |- t'
 ----------------------------------
@@ -536,8 +536,8 @@ t, t' |-  t            t, t' |- t'
 However, there is a much simpler proof tree with the same conclusion:
 
 ```text
- ------------
-  t, t' |- t
+----------
+t, t' |- t
 ```
 
 In other words, we don't need the detour through proving `t /\ t'` to prove `t`,
@@ -554,7 +554,7 @@ simpler proof:
 Note that typing derivation is for the program `a`, which is exactly what the
 bigger program `fst (a, b)` evaluates to.
 
-Thus evaluation of the program causes the proof tree to simplify, and the
+Thus, evaluation of the program causes the proof tree to simplify, and the
 simplified proof tree is actually (through the proofs-as programs
 correspondence) a simpler proof of the same proposition. **Evaluation therefore
 corresponds to proof simplification.** And that is the final level of the

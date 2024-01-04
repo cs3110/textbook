@@ -4,13 +4,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>8.2. Amortized Analysis &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,41 +18,42 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../../_static/op_lotus_480.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="8.3. Red-Black Trees" href="rb.html" />
@@ -66,21 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -89,17 +74,16 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      <img src="../../_static/op_lotus_480.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
@@ -110,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -127,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -228,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -441,7 +425,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -609,7 +593,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -668,7 +652,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -680,7 +664,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -699,17 +683,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -717,179 +696,79 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/cs3110/textbook"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/ds/amortized.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/edit/main/src/chapters/ds/amortized.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/chapters/ds/amortized.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/ds/amortized.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/ds/amortized.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/ds/amortized.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#amortized-analysis-of-hash-tables">
    8.2.1. Amortized Analysis of Hash Tables
@@ -912,11 +791,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Amortized Analysis</h1>
@@ -955,12 +835,11 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="amortized-analysis">
-<h1><span class="section-number">8.2. </span>Amortized Analysis<a class="headerlink" href="#amortized-analysis" title="Permalink to this headline">#</a></h1>
+  <div class="section" id="amortized-analysis">
+<h1><span class="section-number">8.2. </span>Amortized Analysis<a class="headerlink" href="#amortized-analysis" title="Permalink to this headline">¶</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/1fPx0hcXlRg" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Our analysis of the efficiency of hash table operations concluded that <code class="docutils literal notranslate"><span class="pre">find</span></code>
 runs in expected constant time, where the modifier “expected” is needed to
@@ -1003,8 +882,8 @@ occasionally expensive, it’s so rarely expensive that the average cost of an
 operation is actually constant time! But, we need to do more complicated math
 (or more complicated than our lunch budgeting anyway) to actually demonstrate
 that’s true.</p>
-<section id="amortized-analysis-of-hash-tables">
-<h2><span class="section-number">8.2.1. </span>Amortized Analysis of Hash Tables<a class="headerlink" href="#amortized-analysis-of-hash-tables" title="Permalink to this headline">#</a></h2>
+<div class="section" id="amortized-analysis-of-hash-tables">
+<h2><span class="section-number">8.2.1. </span>Amortized Analysis of Hash Tables<a class="headerlink" href="#amortized-analysis-of-hash-tables" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/GwnYcPmn8PQ" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>“Amortization” is a financial term. One of its meanings is to pay off a debt
 over time. In algorithmic analysis, we use it to refer to paying off the cost of
@@ -1016,30 +895,35 @@ operations that each have cost <span class="math notranslate nohighlight">\(T_1,
 of each operation:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{T_1 + T_2 + ... + T_n}{n}.
+\frac{T_1 + T_2 + \dotsb + T_n}{n}.
 \]</div>
 <p>Thus, even if one operation is especially expensive, we could average that out
 over a bunch of inexpensive operations.</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/eKzgddLniSw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<p>Applying that idea to a hash table, suppose the table has 8 bindings and 8
-buckets. Then 8 more inserts are made. The first 7 are (expected) constant-time,
-but the 8th insert is linear time: it increases the load factor to 2, causing a
-resize, thus causing rehashing of all 16 bindings into a new table. The total
-cost over that series of operations is therefore the cost of 8+16 inserts. For
-simplicity of calculation, we could grossly round that up to 16+16 = 32 inserts.
-So the average cost of each operation in the sequence is 32/8 = 4 inserts.</p>
+<p>Applying that idea to a hash table, let’s analyze what happens when an insert
+operation causes an expensive resize. Assume the table resizes when the load
+factor reaches 2. (That is more proactive than OCaml’s <code class="docutils literal notranslate"><span class="pre">Hashtbl</span></code>, which resizes
+when the load factor <em>exceeds</em> 2. It doesn’t really matter which choice we make,
+but resize-on-reaching will simplify our analysis a little.)</p>
+<p>Suppose the table has 8 bindings and 8 buckets. Then 8 more inserts are made.
+The first 7 are (expected) constant-time, but the 8th insert is linear time: it
+increases the load factor to 2, causing a resize, thus causing rehashing of all
+16 bindings into a new table. The total cost over that series of operations is
+therefore the cost of 8+16 inserts. For simplicity of calculation, we could
+grossly round that up to 16+16 = 32 inserts. So the average cost of each
+operation in the sequence is 32/8 = 4 inserts.</p>
 <p>In other words, if we just pretended each insert cost four times its normal
 price, the final operation in the sequence would have been “pre-paid” by the
 extra price we paid for earlier inserts. And all of them would be constant-time,
 since four times a constant is still a constant.</p>
-<p>Generalizing from the example above, let’s suppose that the the number of
-buckets currently in a hash table is <span class="math notranslate nohighlight">\(2^n\)</span>, and that the load factor is
-currently 1. Therefore, there are currently <span class="math notranslate nohighlight">\(2^n\)</span> bindings in the table. Next:</p>
+<p>Generalizing from the example above, let’s suppose that the number of buckets
+currently in a hash table is <span class="math notranslate nohighlight">\(2^n\)</span>, and that the load factor is currently 1.
+Therefore, there are currently <span class="math notranslate nohighlight">\(2^n\)</span> bindings in the table. Next:</p>
 <ul class="simple">
 <li><p>A series of <span class="math notranslate nohighlight">\(2^n - 1\)</span> inserts occurs. There are now <span class="math notranslate nohighlight">\(2^n + 2^n - 1\)</span> bindings
 in the table.</p></li>
 <li><p>One more insert occurs. That brings the number of bindings up to <span class="math notranslate nohighlight">\(2^n + 2^n\)</span>,
-which is <span class="math notranslate nohighlight">\(2^{n+1}\)</span>. But the number of buckets is <span class="math notranslate nohighlight">\(2^n\)</span>, so the the load factor
+which is <span class="math notranslate nohighlight">\(2^{n+1}\)</span>. But the number of buckets is <span class="math notranslate nohighlight">\(2^n\)</span>, so the load factor
 just reached 2. A resize is necessary.</p></li>
 <li><p>The resize occurs. That doubles the number of buckets. All <span class="math notranslate nohighlight">\(2^{n+1}\)</span> bindings
 have to be reinserted into the new table, which is of size <span class="math notranslate nohighlight">\(2^{n+1}\)</span>. The load
@@ -1068,38 +952,38 @@ buckets. The load factor is 2.</p></li>
 <li><p>Increase the number of buckets <strong>by 100</strong> and rehash. That’s 400 more
 insertions. There are now 400 bindings and 300 buckets. The load factor is
 400/300 = 4/3, not 1.</p></li>
-<li><p>The average cost of each insert is now 100+200+200+400 / 300 = 3. That’s still
-okay.</p></li>
+<li><p>The average cost of each insert is now (100+200+200+400) / 300 = 3. That’s
+still okay.</p></li>
 <li><p><strong>Round 3.</strong> Insert 200 more bindings. There are now 600 bindings and 300
 buckets. The load factor is 2.</p></li>
 <li><p>Increase the number of buckets <strong>by 100</strong> and rehash. That’s 600 more
 insertions. There are now 600 bindings and 400 buckets. The load factor is
 3/2, not 1.</p></li>
-<li><p>The average cost of each insert is now 100+200+200+400+200+600 / 500 = 3.4.
+<li><p>The average cost of each insert is now (100+200+200+400+200+600) / 500 = 3.4.
 It’s going up.</p></li>
 <li><p><strong>Round 4.</strong> Insert 200 more bindings. There are now 800 bindings and 400
 buckets. The load factor is 2.</p></li>
 <li><p>Increase the number of buckets <strong>by 100</strong> and rehash. That’s 800 more
 insertions. There are now 800 bindings and 500 buckets. The load factor is
 8/5, not 1.</p></li>
-<li><p>The average cost of each insert is now 100+200+200+400+200+600+200+800 / 700 =
-3.9. It’s continuing to go up, not staying constant.</p></li>
+<li><p>The average cost of each insert is now (100+200+200+400+200+600+200+800) / 700
+= 3.9. It’s continuing to go up, not staying constant.</p></li>
 </ul>
-<p>After <span class="math notranslate nohighlight">\(k\)</span> rounds we have <span class="math notranslate nohighlight">\(200k\)</span> bindings and <span class="math notranslate nohighlight">\(100k\)</span> buckets. We have called
-<code class="docutils literal notranslate"><span class="pre">insert</span></code> to insert <span class="math notranslate nohighlight">\(100+200k\)</span> bindings, but all the rehashing has caused us to
+<p>After <span class="math notranslate nohighlight">\(k\)</span> rounds we have <span class="math notranslate nohighlight">\(200k\)</span> bindings and <span class="math notranslate nohighlight">\(100(k+1)\)</span> buckets. We have called
+<code class="docutils literal notranslate"><span class="pre">insert</span></code> to insert <span class="math notranslate nohighlight">\(100+200(k-1)\)</span> bindings, but all the rehashing has caused us to
 do <span class="math notranslate nohighlight">\(100+200(k-1)+\sum_{i=1}^{k} 200i\)</span> actual insertions. That last term is the
 real problem. It’s quadratic:</p>
 <div class="math notranslate nohighlight">
 \[
-\sum_{i=1}^{k} 200i \quad = \quad \frac{200k (200 (k+1))}{2} \quad = \quad 20,000 (k^2 + k)
+\sum_{i=1}^{k} 200i \quad = \quad 200 \sum_{i=1}^k i = \quad 200 \frac{k(k+1)}{2} \quad = \quad 100 (k^2 + k) .
 \]</div>
 <p>So over a series of <span class="math notranslate nohighlight">\(n\)</span> calls to <code class="docutils literal notranslate"><span class="pre">insert</span></code>, we do <span class="math notranslate nohighlight">\(O(n^2)\)</span> actual inserts. That
 makes the amortized cost of <code class="docutils literal notranslate"><span class="pre">insert</span></code> be <span class="math notranslate nohighlight">\(O(n)\)</span>, which is linear! Not constant.</p>
 <p>That’s why it’s so important to double the size of the array at each rehash.
 It’s what gives us the amortized constant-time performance.</p>
-</section>
-<section id="amortized-analysis-of-batched-queues">
-<h2><span class="section-number">8.2.2. </span>Amortized Analysis of Batched Queues<a class="headerlink" href="#amortized-analysis-of-batched-queues" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="amortized-analysis-of-batched-queues">
+<h2><span class="section-number">8.2.2. </span>Amortized Analysis of Batched Queues<a class="headerlink" href="#amortized-analysis-of-batched-queues" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/7OV9iKT0Huw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The implementation of <a class="reference internal" href="../modules/functional_data_structures.html"><span class="doc std std-doc">batched queues</span></a> with two lists was in a way more
 efficient than the implementation with just one list, because it managed to
@@ -1154,9 +1038,9 @@ in a sequence is amortized constant time. Is this just a bookkeeping trick?
 Absolutely. But it also reveals the deeper truth that on average we get
 constant-time performance, even though some operations might rarely have
 worst-case linear-time performance.</p>
-</section>
-<section id="bankers-and-physicists">
-<h2><span class="section-number">8.2.3. </span>Bankers and Physicists<a class="headerlink" href="#bankers-and-physicists" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="bankers-and-physicists">
+<h2><span class="section-number">8.2.3. </span>Bankers and Physicists<a class="headerlink" href="#bankers-and-physicists" title="Permalink to this headline">¶</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/-846PptyO7Q" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Conceptually, amortized analysis can be understood in three ways:</p>
 <ol class="simple">
@@ -1228,9 +1112,9 @@ potential into that element’s account.</p></li>
 data structure being analyzed, or which is easier for you to wrap your head
 around. You might find one or the other of the methods easier to understand for
 the data structures above, and your friend might have a different opinion.</p>
-</section>
-<section id="amortized-analysis-and-persistence">
-<h2><span class="section-number">8.2.4. </span>Amortized Analysis and Persistence<a class="headerlink" href="#amortized-analysis-and-persistence" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="amortized-analysis-and-persistence">
+<h2><span class="section-number">8.2.4. </span>Amortized Analysis and Persistence<a class="headerlink" href="#amortized-analysis-and-persistence" title="Permalink to this headline">¶</a></h2>
 <p>Amortized analysis breaks down as a technique when data structures are used
 persistently. For example, suppose we have a batched queue <code class="docutils literal notranslate"><span class="pre">q</span></code> into which we’ve
 inserted <span class="math notranslate nohighlight">\(n+1\)</span> elements. One element will be in the outbox, and the other <span class="math notranslate nohighlight">\(n\)</span>
@@ -1244,7 +1128,7 @@ will be in the inbox. Now we do the following:</p>
 <p>Each one of those <span class="math notranslate nohighlight">\(n\)</span> <code class="docutils literal notranslate"><span class="pre">dequeue</span></code> operations requires an actual cost of <span class="math notranslate nohighlight">\(O(n)\)</span> to
 reverse the inbox. So the entire series has an actual cost of <span class="math notranslate nohighlight">\(O(n^2)\)</span>. But
 the amortized analysis techniques only apply to the first <code class="docutils literal notranslate"><span class="pre">dequeue</span></code>. After that,
-all the the accounts are empty (banker’s method), or the potential is zero
+all the accounts are empty (banker’s method), or the potential is zero
 (physicist’s), which means the remaining operations can’t use them to pay for
 the expensive list reversal. The total cost of the series is therefore <span class="math notranslate nohighlight">\(O(n^2 -
 n)\)</span>, which is <span class="math notranslate nohighlight">\(O(n^2)\)</span>.</p>
@@ -1259,8 +1143,8 @@ reason that debt ends up working as an analysis technique can be summed up as:
 although our banks would never (financially speaking) allow us to spend money
 twice, they would be fine with us paying off our debt multiple times. Consult
 Okasaki’s <em>Purely Functional Data Structures</em> to learn more.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1284,11 +1168,9 @@ Okasaki’s <em>Purely Functional Data Structures</em> to learn more.</p>
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="hash_tables.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1304,28 +1186,24 @@ Okasaki’s <em>Purely Functional Data Structures</em> to learn more.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Michael R. Clarkson et al.<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

@@ -127,7 +127,7 @@ form; the changes to the other forms follow from those below:
 
 {{ video_embed | replace("%%VID%%", "3ExRHHqfWm4")}}
 
-Here are several ways to get a Pokemon's hit points:
+Here are several ways to get a Pok&eacute;mon's hit points:
 ```{code-cell} ocaml
 (* Pokemon types *)
 type ptype = TNormal | TFire | TWater

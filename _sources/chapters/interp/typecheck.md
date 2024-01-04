@@ -7,7 +7,7 @@ After lexing and parsing, the next phase of compilation is semantic analysis,
 and the primary task of semantic analysis is type checking.
 
 A *type system* is a mathematical description of how to determine whether an
-expression is *ill typed* or *well typed*, and in the latter case, what the type
+expression is *ill-typed* or *well-typed*, and in the latter case, what the type
 of the expression is. A *type checker* is a program that implements a type
 system, i.e., that implements the static semantics of the language.
 
@@ -41,14 +41,14 @@ mathematical notation we would write $\mapsto$ instead of `->` in
 `env[x -> v]`, but we're aiming for notation that is easily typed on a standard
 keyboard.
 
-With all that machinery, we can at last define what it means to be well typed:
-An expression `e` is **well typed** in static environment `env` if there exists
+With all that machinery, we can at last define what it means to be well-typed:
+An expression `e` is **well-typed** in static environment `env` if there exists
 a type `t` for which `env |- e : t`. The goal of a type checker is thus to find
 such a type `t`, starting from some initial static environment.
 
 It's convenient to pretend that the initial static environment is empty. But in
 practice, it's rare that a language truly uses the empty static environment to
-determine whether a program is well typed. In OCaml, for example, there are many
+determine whether a program is well-typed. In OCaml, for example, there are many
 built-in identifiers that are always in scope, such as everything in the
 `Stdlib` module.
 
@@ -203,7 +203,7 @@ Let's start with the base cases:
 open StaticEnvironment
 
 (** [typeof env e] is the type of [e] in static environment [env].
-    Raises: [Failure] if [e] is not well typed in [env]. *)
+    Raises: [Failure] if [e] is not well-typed in [env]. *)
 let rec typeof env = function
   | Int _ -> TInt
   | Bool _ -> TBool
@@ -220,8 +220,8 @@ previously defined for `|-`. In particular:
 
 Also note how the implementation of `typeof` differs in one major way from the
 definition of `|-`: error handling. The type system didn't say what to do about
-errors; rather, it just defined what it meant to be well typed. The type
-checker, on the other hand, needs to take action and report ill typed programs.
+errors; rather, it just defined what it meant to be well-typed. The type
+checker, on the other hand, needs to take action and report ill-typed programs.
 Our `typeof` function does that by raising exceptions. The `lookup` function, in
 particular, will raise an exception if we attempt to lookup a variable that
 hasn't been bound in the static environment.
@@ -268,11 +268,11 @@ and typeof_if env e1 e2 e3 =
 Note how the recursive calls in the implementation of `typeof` occur exactly in
 the same places where the definition of `|-` is inductive.
 
-Finally, we can implement a function to check whether an expression is well
-typed:
+Finally, we can implement a function to check whether an expression is
+well-typed:
 
 ```ocaml
-(** [typecheck e] checks whether [e] is well typed in
+(** [typecheck e] checks whether [e] is well-typed in
     the empty static environment. Raises: [Failure] if not. *)
 let typecheck e =
   ignore (typeof empty e)
@@ -290,12 +290,12 @@ the `-->` relation, we can make that idea precise.
 The goals of a language designer usually include ensuring that these two
 properties, which establish a relationship between `|-` and `-->`, both hold:
 
-* **Progress:** If an expression is well typed, then either it is already a
+* **Progress:** If an expression is well-typed, then either it is already a
   value, or it can take at least one step. We can formalize that as, "for all
   `e`, if there exists a `t` such that `{} |- e : t`, then `e` is a value, or
   there exists an `e'` such that `e --> e'`."
 
-* **Preservation:** If an expression is well typed, then if the expression
+* **Preservation:** If an expression is well-typed, then if the expression
   steps, the new expression has the same type as the old expression. Formally,
   "for all `e` and `t` such that `{} |- e : t`, if there exists an `e'` such
   that `e --> e'`, then `{} |- e' : t`."

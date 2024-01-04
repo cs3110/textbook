@@ -48,7 +48,7 @@ The first part of the response from OCaml, `val x : int ref`, indicates that `x`
 is a variable whose type is `int ref`. We have a new type constructor here. Much
 like `list` and `option` are type constructors, so is `ref`. A `t ref`, for any
 type `t`, is a reference to a memory location that is guaranteed to contain a
-value of type `t`. As usual we should read a type from right to left: `t ref`
+value of type `t`. As usual, we should read a type from right to left: `t ref`
 means a reference to a `t`. The second part of the response shows us the
 contents of the memory location. Indeed, the contents have been initialized to
 `0`.
@@ -221,17 +221,19 @@ next_val ()
 ```
 
 In the implementation of `next_val`, there are two expressions separated by
-semi-colon. The first expression, `counter := !counter + 1`, is an assignment
+semicolon. The first expression, `counter := !counter + 1`, is an assignment
 that increments `counter` by 1. The second expression, `!counter`, returns the
 newly incremented contents of `counter`.
 
 The `next_val` function is unusual in that every time we call it, it returns a
 different value. That's quite different than any of the functions we've
 implemented ourselves so far, which have always been *deterministic*: for a
-given input, they always produced the same output. On the other hand, we've seen
-some library functions that are *nondeterministic*, for example, functions in
-the `Random` module, and `Stdlib.read_line`. It's no coincidence that those
-happen to be implemented using mutable features.
+given input, they always produced the same output. On the other hand, some
+functions are *nondeterministic*: each invocation of the function might produce
+a different output despite receiving the same input. In the standard library,
+for example, functions in the `Random` module are nondeterministic, as is
+`Stdlib.read_line`, which reads input from the user. It's no coincidence that
+those happen to be implemented using mutable features.
 
 We could improve our counter in a couple ways. First, there is a library
 function `incr : int ref -> unit` that increments an `int ref` by 1. Thus it is
@@ -240,7 +242,7 @@ Using it, we could write `incr counter` instead of `counter := !counter + 1`.
 (There's also a `decr` function that decrements by 1.)
 
 Second, the way we coded the counter currently exposes the `counter` variable to
-the outside world. Maybe we're prefer to hide it so that clients of `next_val`
+the outside world. Maybe we’d prefer to hide it so that clients of `next_val`
 can't directly change it. We could do so by nesting `counter` inside the scope
 of `next_val`:
 

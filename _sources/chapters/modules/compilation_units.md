@@ -181,7 +181,7 @@ end
 **Missing Implementation Files.** This case is much rarer, and not one you are
 likely to encounter in everyday development. But be aware that there is a
 **misuse** case that Java or C++ programmers sometimes accidentally fall into.
-Suppose you have an interface for which there will be a few implementation.
+Suppose you have an interface for which there will be a few implementations.
 Thinking back to stacks earlier in this chapter, perhaps you have a module type
 `Stack` and two modules that implement it, `ListStack` and `CustomStack`:
 

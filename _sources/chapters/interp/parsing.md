@@ -219,7 +219,7 @@ trailer.
 **Header.** The *header* appears between `%{` and `%}`. It is code that will be
 copied literally into the generated `parser.ml`. Here we use it just to open the
 `Ast` module so that, later on in the grammar definition, we can write
-expressions like `Int i` instead of `Ast.Int i`. If we wanted we could also
+expressions like `Int i` instead of `Ast.Int i`. If we wanted, we could also
 define some OCaml functions in the header.
 
 ```text
@@ -427,10 +427,10 @@ let id = letter+
 ```
 
 The regular expressions above are for whitespace (spaces and tabs), digits (0
-through 9), integers (nonempty sequences of digits, optionally preceded by a
+through 9), integers (non-empty sequences of digits, optionally preceded by a
 minus sign), letters (a through z, and A through Z), and SimPL variable names
-(nonempty sequences of letters) aka ids or "identifiers"&mdash;though we're now
-using that word in two different senses.
+(non-empty sequences of letters) aka ids or "identifiers"&mdash;though we're
+now using that word in two different senses.
 
 FYI, these aren't exactly the same as the OCaml definitions of integers and
 identifiers.

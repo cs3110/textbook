@@ -351,7 +351,7 @@ Instead, there is a keyword built-in to the OCaml syntax that does it: `lazy e`.
 
 * **Static semantics:**  If `e : u`, then `lazy e : u Lazy.t`.
 
-* **Dynamic semantics:** `lazy e` does not evaluate `e` to a value. Instead it
+* **Dynamic semantics:** `lazy e` does not evaluate `e` to a value. Instead, it
   produces a *suspension* that, when later forced, will evaluate `e` to a value
   `v` and return `v`. Moreover, that suspension remembers that `v` is its forced
   value. And if the suspension is ever forced again, it immediately returns `v`

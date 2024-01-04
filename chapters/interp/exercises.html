@@ -4,13 +4,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>9.8. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,41 +18,42 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../../_static/op_lotus_480.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="The Curry-Howard Correspondence" href="../adv/curry-howard.html" />
@@ -66,21 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -89,17 +74,16 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      <img src="../../_static/op_lotus_480.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
@@ -110,7 +94,7 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -127,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -228,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -441,7 +425,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -609,7 +593,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -668,7 +652,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -680,7 +664,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -699,185 +683,92 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
             
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/interp/exercises.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/exercises.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/interp/exercises.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
         </div>
     </div>
-    <div id="rtd-footer-container"></div>
 </div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/cs3110/textbook"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/interp/exercises.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/edit/main/src/chapters/interp/exercises.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/chapters/interp/exercises.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-    </div>
-</div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Exercises</h1>
@@ -888,12 +779,11 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="exercises">
-<h1><span class="section-number">9.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h1>
+  <div class="section" id="exercises">
+<h1><span class="section-number">9.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
 <p>Solutions to most exercises are <a href="https://github.com/cs3110/textbook-solutions">available</a>.
 Fall 2022 is the first public release of these solutions.
 Though they have been available to Cornell students for a few years,
@@ -946,7 +836,7 @@ original declaration order.</p></li>
 <p>Type inference for SimPL can be done in a much simpler way than for the larger
 language (with anonymous functions and let expression) that we considered in the
 section on type inference.</p>
-<p>Run <code class="docutils literal notranslate"><span class="pre">make</span></code> in the SimPL interpreter implementation. It will compile the
+<p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">utop</span></code> in the SimPL interpreter implementation. It will compile the
 interpreter and launch utop. Now, define a function <code class="docutils literal notranslate"><span class="pre">infer</span> <span class="pre">:</span> <span class="pre">string</span> <span class="pre">-&gt;</span> <span class="pre">typ</span></code> such
 that <code class="docutils literal notranslate"><span class="pre">infer</span> <span class="pre">s</span></code> parses <code class="docutils literal notranslate"><span class="pre">s</span></code> into an expression and infers the type of <code class="docutils literal notranslate"><span class="pre">s</span></code> in the
 empty context. Your solution will make use of the <code class="docutils literal notranslate"><span class="pre">typeof</span></code> function. You don’t
@@ -960,9 +850,9 @@ need constraint collection or unification.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: subexpression types [★★]</strong></p>
-<p>Suppose that a SimPL expression is well typed in a context <code class="docutils literal notranslate"><span class="pre">ctx</span></code>. Are all of its
-subexpressions also well typed in <code class="docutils literal notranslate"><span class="pre">ctx</span></code>? For every subexpression, does there
-exist some context in which the subexpression is well typed? Why or why not?</p>
+<p>Suppose that a SimPL expression is well-typed in a context <code class="docutils literal notranslate"><span class="pre">ctx</span></code>. Are all of its
+subexpressions also well-typed in <code class="docutils literal notranslate"><span class="pre">ctx</span></code>? For every subexpression, does there
+exist some context in which the subexpression is well-typed? Why or why not?</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: typing [★★]</strong></p>
@@ -1065,12 +955,11 @@ can still try parsing them in utop with the <code class="docutils literal notran
 <hr class="docutils" />
 <p><strong>Exercise: pair evaluation [★★★]</strong></p>
 <p>Implement evaluation of pairs.  Follow this strategy:</p>
-<ul class="simple">
+<ul>
 <li><p>Implement <code class="docutils literal notranslate"><span class="pre">is_value</span></code> for pairs. A pair of values (e.g., <code class="docutils literal notranslate"><span class="pre">(0,1)</span></code>) is itself a
 value, so the function will need to become recursive.</p></li>
-<li><p>Implement <code class="docutils literal notranslate"><span class="pre">subst</span></code> for pairs:  <code class="docutils literal notranslate"><span class="pre">(e1,</span> <span class="pre">e2){v/x}</span> <span class="pre">=</span> <span class="pre">(e1{v/x},</span> <span class="pre">e2{v/x})</span></code>.</p></li>
-<li><p>Implement small-step and big-step evaluation of pairs, using these rules:</p></li>
-</ul>
+<li><p>Implement <code class="docutils literal notranslate"><span class="pre">subst</span></code> for pairs: <code class="docutils literal notranslate"><span class="pre">(e1,</span> <span class="pre">e2){v/x}</span> <span class="pre">=</span> <span class="pre">(e1{v/x},</span> <span class="pre">e2{v/x})</span></code>.</p></li>
+<li><p>Implement small-step and big-step evaluation of pairs, using these rules:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(e1, e2) --&gt; (e1&#39;, e2)
   if e1 --&gt; e1&#39;
 
@@ -1082,6 +971,8 @@ value, so the function will need to become recursive.</p></li>
   and e2 ==&gt; v2
 </pre></div>
 </div>
+</li>
+</ul>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: desugar list [★]</strong></p>
@@ -1090,11 +981,11 @@ value, so the function will need to become recursive.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code> is syntactic sugar for <code class="docutils literal notranslate"><span class="pre">Left</span> <span class="pre">0</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">::</span> <span class="pre">e2</span></code> is syntactic sugar for <code class="docutils literal notranslate"><span class="pre">Right</span> <span class="pre">(e1,</span> <span class="pre">e2)</span></code>.</p></li>
 </ul>
-<p>What is the core OCaml expression to which <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3]</span></code> desugars?</p>
+<p>What is the Core OCaml expression to which <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3]</span></code> desugars?</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: list not empty [★★]</strong></p>
-<p>Write a core OCaml function <code class="docutils literal notranslate"><span class="pre">not_empty</span></code> that returns <code class="docutils literal notranslate"><span class="pre">1</span></code> if a list is non-empty
+<p>Write a Core OCaml function <code class="docutils literal notranslate"><span class="pre">not_empty</span></code> that returns <code class="docutils literal notranslate"><span class="pre">1</span></code> if a list is non-empty
 and <code class="docutils literal notranslate"><span class="pre">0</span></code> if the list is empty. Use the substitution model to check that your
 function behaves properly on these test cases:</p>
 <ul class="simple">
@@ -1104,9 +995,9 @@ function behaves properly on these test cases:</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: generalize patterns [★★★★]</strong></p>
-<p>In core OCaml, there are only two patterns: <code class="docutils literal notranslate"><span class="pre">Left</span> <span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">Right</span> <span class="pre">x</span></code>,
+<p>In Core OCaml, there are only two patterns: <code class="docutils literal notranslate"><span class="pre">Left</span> <span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">Right</span> <span class="pre">x</span></code>,
 where <code class="docutils literal notranslate"><span class="pre">x</span></code> is a variable name.  But in full OCaml, patterns are far more
-general. Let’s see how far we can generalize patterns in core OCaml.</p>
+general. Let’s see how far we can generalize patterns in Core OCaml.</p>
 <p><strong>Step 1:</strong> Here is a BNF grammar for patterns, and slightly revised
 BNF grammar for expressions:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p ::= i | (p1, p2) | Left p | Right p | x | _
@@ -1177,7 +1068,7 @@ match v with | p1 -&gt; e1 | p2 -&gt; e2 | ... | pn -&gt; en
 </div>
 <p>Evaluation will get stuck at that point because none of the three other
 rules above will apply.</p>
-<p><strong>Step 4:</strong> Double check your rules by evaluating the following
+<p><strong>Step 4:</strong> Double-check your rules by evaluating the following
 expression:</p>
 <p><code class="docutils literal notranslate"><span class="pre">match</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">2,</span> <span class="pre">3)</span> <span class="pre">with</span> <span class="pre">|</span> <span class="pre">(1,0)</span> <span class="pre">-&gt;</span> <span class="pre">4</span> <span class="pre">|</span> <span class="pre">(1,x)</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">|</span> <span class="pre">(x,y)</span> <span class="pre">-&gt;</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code></p>
 <!--------------------------------------------------------------------------->
@@ -1193,7 +1084,7 @@ expression:</p>
 </div>
 <p>But that rule doesn’t work properly, as we see in the following example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  let rec fact = fun x -&gt;
-	if x &lt;= 1 then 1 else x * (fact (x - 1)) in
+    if x &lt;= 1 then 1 else x * (fact (x - 1)) in
   fact 3
 
 --&gt;
@@ -1272,6 +1163,15 @@ tedious). You may want to simplify your life by writing “F” in place of
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let rec fact = fun x -&gt;
   if x &lt;= 1 then 1 else x * (fact (x - 1)) in
 fact 3
+</pre></div>
+</div>
+<p>Use the following (capture-avoiding) substitution rules, which are similar to
+the rules for <code class="docutils literal notranslate"><span class="pre">let</span></code> and <code class="docutils literal notranslate"><span class="pre">fun</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(rec f -&gt; e){v/x} = rec f -&gt; e{v/x}
+  if x &lt;&gt; f
+  and f not in FV(v)
+
+(rec f -&gt; e){v/f} = rec f -&gt; e
 </pre></div>
 </div>
 <!--------------------------------------------------------------------------->
@@ -1437,7 +1337,7 @@ definition:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">s</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="n">z</span><span class="o">)</span>
 </pre></div>
 </div>
-</section>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1461,11 +1361,9 @@ definition:</p>
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="summary.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1481,28 +1379,24 @@ definition:</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Michael R. Clarkson et al.<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

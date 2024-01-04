@@ -209,7 +209,7 @@ we'd like to know *why* they're not equal. In particular, we'd like to know what
 the actual output produced by `sum` was for that test case. To find out, we need
 to pass an additional argument to `assert_equal`. That argument, whose label is
 `printer`, should be a function that can transform the outputs to strings. In
-this case, the outputs are integers, so `string_of_int` from the Stdlib module
+this case, the outputs are integers, so `string_of_int` from the `Stdlib` module
 will suffice. We modify the test suite as follows:
 
 ```ocaml
@@ -274,8 +274,8 @@ the code is written. Automating test suites is crucial so that continuous
 testing requires essentially no effort.
 
 Here's an example of TDD. We deliberately choose an exceedingly simple function
-to implement, so that the process is clear. Suppose we are working with a
-datatype for days:
+to implement, so that the process is clear. Suppose we are working with a data
+type for days:
 
 ```ocaml
 type day = Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday

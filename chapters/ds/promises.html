@@ -4,13 +4,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>8.6. Promises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,39 +18,40 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="shortcut icon" href="../../_static/op_lotus_480.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="8.7. Monads" href="monads.html" />
@@ -64,21 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -87,17 +72,16 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="../../_static/lambda-light.png" class="logo" alt="logo">
+      <img src="../../_static/op_lotus_480.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
@@ -108,7 +92,7 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Preface
  </span>
@@ -125,7 +109,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -226,7 +210,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   OCaml Programming
  </span>
@@ -439,7 +423,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Correctness and Efficiency
  </span>
@@ -607,7 +591,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Language Implementation
  </span>
@@ -666,7 +650,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Lagniappe
  </span>
@@ -678,7 +662,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Appendix
  </span>
@@ -697,17 +681,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -715,225 +694,99 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
 
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/cs3110/textbook/main?urlpath=tree/src/chapters/ds/promises.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/cs3110/textbook"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/ds/promises.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/cs3110/textbook/edit/main/src/chapters/ds/promises.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/chapters/ds/promises.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download notebook file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-code"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="../../_sources/chapters/ds/promises.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/chapters/ds/promises.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/ds/promises.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cs3110/textbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/ds/promises.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cs3110/textbook/edit/main/src/chapters/ds/promises.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cs3110/textbook/main?urlpath=tree/src/chapters/ds/promises.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#concurrency">
    8.6.1. Concurrency
@@ -986,11 +839,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Promises</h1>
@@ -1059,19 +913,18 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="promises">
-<h1><span class="section-number">8.6. </span>Promises<a class="headerlink" href="#promises" title="Permalink to this headline">#</a></h1>
+  <div class="section" id="promises">
+<h1><span class="section-number">8.6. </span>Promises<a class="headerlink" href="#promises" title="Permalink to this headline">¶</a></h1>
 <p>So far we have only considered <em>sequential</em> programs. Execution of a sequential
 program proceeds one step at a time, with no choice about which step to take
 next. Sequential programs are limited in that they are not very good at dealing
-with multiple sources of simultaneous input and they can only execute on a
+with multiple sources of simultaneous input, and they can only execute on a
 single processor. Many modern applications are instead <em>concurrent</em>.</p>
-<section id="concurrency">
-<h2><span class="section-number">8.6.1. </span>Concurrency<a class="headerlink" href="#concurrency" title="Permalink to this headline">#</a></h2>
+<div class="section" id="concurrency">
+<h2><span class="section-number">8.6.1. </span>Concurrency<a class="headerlink" href="#concurrency" title="Permalink to this headline">¶</a></h2>
 <p>Concurrent programs enable computations to overlap in duration, instead of being
 forced to happen sequentially.</p>
 <ul class="simple">
@@ -1132,9 +985,9 @@ concurrently (e.g., with the left and right products evaluated simultaneously)
 without changing the answer. Imperative programming is more problematic. For
 example, the expressions <code class="docutils literal notranslate"><span class="pre">!x</span></code> and <code class="docutils literal notranslate"><span class="pre">incr</span> <span class="pre">x;</span> <span class="pre">!x</span></code>, if executed concurrently, could
 give different results depending on which executes first.</p>
-</section>
-<section id="threads">
-<h2><span class="section-number">8.6.2. </span>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="threads">
+<h2><span class="section-number">8.6.2. </span>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">¶</a></h2>
 <p>To make concurrent programming easier, computer scientists have invented many
 abstractions. One of the best known is <em>threads</em>. Abstractly, a thread is a
 single sequential computation. There can be many threads running at a time,
@@ -1152,9 +1005,9 @@ memory, etc.  To implement preemption, a scheduler sets a timer in the
 hardware; when the timer goes off, the current thread is interrupted and
 the scheduler gets to run.  CS 3410 and 4410 cover those concepts in
 detail.</p>
-</section>
-<section id="id1">
-<h2><span class="section-number">8.6.3. </span>Promises<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">8.6.3. </span>Promises<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>In the functional programming paradigm, one of the best known abstractions for
 concurrency is <em>promises</em>. Other names for this idea include <em>futures</em>,
 <em>deferreds</em>, and <em>delayeds</em>. All those names refer to the idea of a computation
@@ -1179,7 +1032,8 @@ and has nothing to do with system or preemptive threads.</p>
 </div></blockquote>
 <p>So don’t think of Lwt as having anything to do with threads: it really is a
 library for promises.</p>
-<p>In Lwt, a <em>promise</em> is a write-once reference: a value that is permitted to
+<p>In Lwt, a <em>promise</em> is a
+reference: a value that is permitted to
 mutate at most once. When created, it is like an empty box that contains
 nothing. We say that the promise is <em>pending</em>. Eventually the promise can be
 <em>resolved</em>, which is like putting something inside the box. Instead of being
@@ -1203,7 +1057,7 @@ need that ability.</p></li>
 There will be a one-to-one association between promises and resolvers. The
 resolver for a promise will be used internally by the concurrency library but
 not revealed to clients. The clients will only get access to the promise.</p>
-<p>For example, suppose the concurrency library supported a operation to
+<p>For example, suppose the concurrency library supported an operation to
 concurrently read a string from the network. The library would implement that
 operation as follows:</p>
 <ul class="simple">
@@ -1216,9 +1070,9 @@ continues to work on reading the string.</p></li>
 <p>You might think of the resolver as being a “private and writeable” value used
 primarily by the library and the promise as being a “public and read-only” value
 used primarily by the client.</p>
-</section>
-<section id="making-our-own-promises">
-<h2><span class="section-number">8.6.4. </span>Making Our Own Promises<a class="headerlink" href="#making-our-own-promises" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="making-our-own-promises">
+<h2><span class="section-number">8.6.4. </span>Making Our Own Promises<a class="headerlink" href="#making-our-own-promises" title="Permalink to this headline">¶</a></h2>
 <p>Here is an interface for our own Lwt-style promises. The names have been changed
 to make the interface clearer.</p>
 <div class="cell docutils container">
@@ -1311,10 +1165,10 @@ the <code class="docutils literal notranslate"><span class="pre">Promise</span><
 using the type system to control whether it’s possible to apply certain
 functions (e.g., <code class="docutils literal notranslate"><span class="pre">state</span></code> vs <code class="docutils literal notranslate"><span class="pre">resolve</span></code>) to a promise.</p>
 <p>To help implement the rest of the functions, let’s start by writing a helper
-function <code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">promise</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">state</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code> to update the reference. This
+function <code class="docutils literal notranslate"><span class="pre">write_once</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">promise</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">state</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code> to update the reference. This
 function will implement changing the state of the promise from pending to either
 resolved or rejected, and once the state has changed, it will not allow it to be
-changed again. In other words, <code class="docutils literal notranslate"><span class="pre">update</span></code> enforces the “write once” invariant.</p>
+changed again. That is, it enforces the “write once” invariant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [write_once p s] changes the state of [p] to be [s].  If [p] and [s]</span>
@@ -1389,9 +1243,9 @@ Putting it altogether in a module, we have:</p>
 </div>
 </div>
 </div>
-</section>
-<section id="lwt-promises">
-<h2><span class="section-number">8.6.5. </span>Lwt Promises<a class="headerlink" href="#lwt-promises" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="lwt-promises">
+<h2><span class="section-number">8.6.5. </span>Lwt Promises<a class="headerlink" href="#lwt-promises" title="Permalink to this headline">¶</a></h2>
 <p>The types and names used in Lwt are a bit more obscure than those we used above.
 Lwt uses analogical terminology that comes from threads—but since Lwt does
 not actually implement threads, that terminology is not necessarily helpful. (We
@@ -1567,9 +1421,9 @@ val r : int Lwt.u = &lt;abstr&gt;
 The promise abstraction by itself is not inherently concurrent.  It’s
 just a data structure that can be written at most once, and that provides
 a means to control who can write to it (through the resolver).</p>
-</section>
-<section id="asynchronous-i-o">
-<h2><span class="section-number">8.6.6. </span>Asynchronous I/O<a class="headerlink" href="#asynchronous-i-o" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="asynchronous-i-o">
+<h2><span class="section-number">8.6.6. </span>Asynchronous I/O<a class="headerlink" href="#asynchronous-i-o" title="Permalink to this headline">¶</a></h2>
 <p>Now that we understand promises as a data abstraction, let’s turn to how they
 can be used for concurrency. The typical way they’re used with Lwt is for
 concurrent input and output (I/O).</p>
@@ -1639,9 +1493,9 @@ is an excellent use for concurrency.</p>
 <p>Note that all the concurrency here is really coming from the operating system,
 which is what provides the underlying asynchronous I/O infrastructure. Lwt is
 just exposing that infrastructure to you through a library.</p>
-</section>
-<section id="promises-and-asynchronous-i-o">
-<h2><span class="section-number">8.6.7. </span>Promises and Asynchronous I/O<a class="headerlink" href="#promises-and-asynchronous-i-o" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="promises-and-asynchronous-i-o">
+<h2><span class="section-number">8.6.7. </span>Promises and Asynchronous I/O<a class="headerlink" href="#promises-and-asynchronous-i-o" title="Permalink to this headline">¶</a></h2>
 <p>The output type of <code class="docutils literal notranslate"><span class="pre">Lwt_io.read_line</span></code> is <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Lwt.t</span></code>, meaning that the
 function returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> promise. Let’s investigate how the state of that
 promise evolves.</p>
@@ -1707,9 +1561,9 @@ is disabled. A good way to make that happen is to put the following line in your
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>UTop.set_auto_run_lwt false;;
 </pre></div>
 </div>
-</section>
-<section id="callbacks">
-<h2><span class="section-number">8.6.8. </span>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="callbacks">
+<h2><span class="section-number">8.6.8. </span>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h2>
 <p>For a program to benefit from the concurrency provided by asynchronous
 I/O and promises, there needs to be a way for the program to make use of
 resolved promises.  For example, if a web server is asynchronously
@@ -1770,7 +1624,7 @@ what <code class="docutils literal notranslate"><span class="pre">c</span></code
 returned is also rejected, with the same exception as <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> is pending, then <code class="docutils literal notranslate"><span class="pre">bind</span></code> does not wait for <code class="docutils literal notranslate"><span class="pre">p</span></code> to be resolved, nor for
 <code class="docutils literal notranslate"><span class="pre">c</span></code> to be run. Rather, <code class="docutils literal notranslate"><span class="pre">bind</span></code> just registers the callback to eventually be run
-when (or if) the promise is resolved. Therefore the <code class="docutils literal notranslate"><span class="pre">bind</span></code> function returns a
+when (or if) the promise is resolved. Therefore, the <code class="docutils literal notranslate"><span class="pre">bind</span></code> function returns a
 new promise. That promise will become resolved when (or if) the callback
 completes running, sometime in the future. Its contents will be whatever
 contents are contained within the promise that the callback itself returns.</p></li>
@@ -1892,7 +1746,7 @@ extension, run the following command:</p>
 <p>Now the code looks pretty much exactly like what its equivalent synchronous
 version would be. But don’t be fooled: all the asynchronous I/O, the promises,
 and the callbacks are still there. Thus, the evaluation of <code class="docutils literal notranslate"><span class="pre">p</span></code> first registers a
-callback with a promise, then moves on to the the evaluation of <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span></code>
+callback with a promise, then moves on to the evaluation of <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span></code>
 without waiting for the first string to finish being read. To prove that to
 yourself, run the following code:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Lwt_io</span>
@@ -1925,9 +1779,9 @@ one promise in <code class="docutils literal notranslate"><span class="pre">ps</
 return promise from the <code class="docutils literal notranslate"><span class="pre">pick</span></code> to take care of some computation that needs
 just one of a set of promises to be finished, but doesn’t care which one.</p></li>
 </ul>
-</section>
-<section id="implementing-callbacks">
-<h2><span class="section-number">8.6.9. </span>Implementing Callbacks<a class="headerlink" href="#implementing-callbacks" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="implementing-callbacks">
+<h2><span class="section-number">8.6.9. </span>Implementing Callbacks<a class="headerlink" href="#implementing-callbacks" title="Permalink to this headline">¶</a></h2>
 <p>When a callback is registered with <code class="docutils literal notranslate"><span class="pre">bind</span></code> or one of the other syntaxes, it is
 added to a list of callbacks that is stored with the promise. Eventually, when
 the promise has been resolved, the Lwt <em>resolution loop</em> runs the callbacks
@@ -2116,9 +1970,9 @@ to do that propagation:</p>
 <p>The Lwt implementation of <code class="docutils literal notranslate"><span class="pre">bind</span></code> follows essentially the same algorithm as we
 just implemented. Note that there is no concurrency in <code class="docutils literal notranslate"><span class="pre">bind</span></code>: as we said above,
 everything in Lwt is sequential; it’s the OS that provides the concurrency.</p>
-</section>
-<section id="the-full-implementation">
-<h2><span class="section-number">8.6.10. </span>The Full Implementation<a class="headerlink" href="#the-full-implementation" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="the-full-implementation">
+<h2><span class="section-number">8.6.10. </span>The Full Implementation<a class="headerlink" href="#the-full-implementation" title="Permalink to this headline">¶</a></h2>
 <p>Here’s all of that code in one executable block:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2265,8 +2119,8 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
 </div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -2290,11 +2144,9 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="memoization.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -2310,28 +2162,24 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Michael R. Clarkson et al.<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Michael R. Clarkson et al.<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

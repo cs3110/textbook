@@ -18,7 +18,7 @@ kernelspec:
 So far we have only considered *sequential* programs. Execution of a sequential
 program proceeds one step at a time, with no choice about which step to take
 next. Sequential programs are limited in that they are not very good at dealing
-with multiple sources of simultaneous input and they can only execute on a
+with multiple sources of simultaneous input, and they can only execute on a
 single processor. Many modern applications are instead *concurrent*.
 
 ## Concurrency
@@ -142,7 +142,8 @@ library for promises.
 
 [lwt-github]: https://github.com/ocsigen/lwt
 
-In Lwt, a *promise* is a write-once reference: a value that is permitted to
+In Lwt, a *promise* is a 
+reference: a value that is permitted to
 mutate at most once. When created, it is like an empty box that contains
 nothing. We say that the promise is *pending*. Eventually the promise can be
 *resolved*, which is like putting something inside the box. Instead of being
@@ -169,7 +170,7 @@ There will be a one-to-one association between promises and resolvers. The
 resolver for a promise will be used internally by the concurrency library but
 not revealed to clients. The clients will only get access to the promise.
 
-For example, suppose the concurrency library supported a operation to
+For example, suppose the concurrency library supported an operation to
 concurrently read a string from the network. The library would implement that
 operation as follows:
 
@@ -247,10 +248,10 @@ using the type system to control whether it's possible to apply certain
 functions (e.g., `state` vs `resolve`) to a promise.
 
 To help implement the rest of the functions, let's start by writing a helper
-function `update : 'a promise -> 'a state -> unit` to update the reference. This
+function `write_once : 'a promise -> 'a state -> unit` to update the reference. This
 function will implement changing the state of the promise from pending to either
 resolved or rejected, and once the state has changed, it will not allow it to be
-changed again. In other words, `update` enforces the "write once" invariant.
+changed again. That is, it enforces the "write once" invariant.
 
 ```{code-cell} ocaml
 (** [write_once p s] changes the state of [p] to be [s].  If [p] and [s]
@@ -645,7 +646,7 @@ function does one of three things, depending on the state of `p`:
 
 * If `p` is pending, then `bind` does not wait for `p` to be resolved, nor for
   `c` to be run. Rather, `bind` just registers the callback to eventually be run
-  when (or if) the promise is resolved. Therefore the `bind` function returns a
+  when (or if) the promise is resolved. Therefore, the `bind` function returns a
   new promise. That promise will become resolved when (or if) the callback
   completes running, sometime in the future. Its contents will be whatever
   contents are contained within the promise that the callback itself returns.
@@ -787,7 +788,7 @@ let _ = Lwt_main.run p
 Now the code looks pretty much exactly like what its equivalent synchronous
 version would be. But don't be fooled: all the asynchronous I/O, the promises,
 and the callbacks are still there. Thus, the evaluation of `p` first registers a
-callback with a promise, then moves on to the the evaluation of `Lwt_main.run`
+callback with a promise, then moves on to the evaluation of `Lwt_main.run`
 without waiting for the first string to finish being read. To prove that to
 yourself, run the following code:
 

@@ -58,7 +58,7 @@ or empty.
 
 In `list_max` above, we'd like to metaphorically return a box that's empty if
 the list is empty, or a box that contains the maximum element of the list if the
-list is non empty.
+list is non-empty.
 
 Here's how we create an option that is like a box with `42` inside it:
 ```{code-cell} ocaml

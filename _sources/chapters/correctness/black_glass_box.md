@@ -117,7 +117,7 @@ Here are some ideas for how to test the `create` function:
 
 - Looking at the square above, we see that it has boundaries at `min_int` and
   `max_int`. We want to try to construct rationals at the corners and along the
-  sides of the square, e.g. `create min_int min_int`, `create max_int 2`, etc.
+  sides of the square, e.g., `create min_int min_int`, `create max_int 2`, etc.
 
 - The line `p=0` is important because `p/q` is zero all along it. We should try
   `(0, q)` for various values of `q`.
@@ -264,7 +264,8 @@ based on if-expressions, match-expressions, and function applications. Test
 cases that collectively exercise all paths are said to be *path-complete*. At a
 minimum, path-completeness requires that for every line of code, and even for
 every expression in the program, there should be a test case that causes it to
-be executed. Any unexecuted code could contain a bug if has never been tested.
+be executed. Any unexecuted code could contain a bug if it has never been
+tested.
 
 For true path completeness we must consider all possible execution paths from
 start to finish of each function, and try to exercise every distinct path. In
@@ -311,7 +312,7 @@ Look at the abstraction function and representation invariant for hints about
 what boundaries may exist in the space of values manipulated by a data
 abstraction. The rep invariant is a particularly effective tool for constructing
 useful test cases. Looking at the rep invariant of the `Rational` data
-abstraction above, we see that it requires that `q` is non-zero. Therefore we
+abstraction above, we see that it requires that `q` is non-zero. Therefore, we
 should construct test cases to see whether it's possible to cause that invariant
 to be violated.
 
@@ -404,14 +405,14 @@ report to confirm that the code really did get executed.
    our test suite so far. Click on the link in that report for `sorts.ml`.
    You'll see that we've managed to cover only one line of the source code.
 
-7. There are some additional tests in the test file. Try un-commenting those, as
+7. There are some additional tests in the test file. Try uncommenting those, as
    documented in the test file, and increasing your code coverage. Between each
    run, you will need to delete the `bisectNNNN.coverage` files, otherwise
    the report will contain information from those previous runs:
    ```console
    $ rm bisect*.coverage
    ```
-  By the time you're done un-commenting the provided tests, you should be at 25%
+  By the time you're done uncommenting the provided tests, you should be at 25%
   coverage, including all of the insertion sort implementation. For fun, try
   adding more tests to get 100% coverage of merge sort.
 
