@@ -14,7 +14,7 @@ clean:
 	jupyter-book clean ${BOOK}
 
 html:
-	jupyter-book build ${BOOK}
+	OPAMSWITCH=textbook jupyter-book build ${BOOK}
 
 html-strict:
 	jupyter-book build -W ${BOOK}

@@ -4,7 +4,7 @@
 title: 'OCaml Programming: Correct + Efficient + Beautiful'
 author: Michael R. Clarkson et al.
 copyright: "2024"
-logo: op_lotus_480.png
+logo: op_lotus_title.png
 only_build_toc_files: true
 
 sphinx:
@@ -16,7 +16,7 @@ sphinx:
     # HTML output, even if they are not linked from any page
     html_extra_path: ['assets']
     # Favicon
-    html_favicon: op_lotus_480.png
+    html_favicon: op_lotus.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -28,10 +28,6 @@ latex:
   latex_documents:
     targetname: book.tex
 
-# Add a bibtex file so that we can create citations
-bibtex_bibfiles:
-  - references.bib
-
 # Information about where the book exists on the web
 repository:
   url: https://github.com/cs3110/textbook # Online location of your book
@@ -39,10 +35,8 @@ repository:
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
 launch_buttons:
-  thebe: false
-  # To disable Binder launch, comment out the Thebe line above and uncomment
-  # the binderhub_url line below.
-  # binderhub_url: ""
+  thebe: true
+  binderhub_url: "https://mybinder.org"
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository

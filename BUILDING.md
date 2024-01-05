@@ -31,7 +31,7 @@ Manual option:
   `opam install ounit2 qcheck menhir zarith`.
 - For ease of editing OCaml code in VS Code while in the textbook switch, also
   install these packages:
-  `opam install ocaml-lsp-server ocamlformat ocamlformat-rpc`.
+  `opam install ocaml-lsp-server ocamlformat`.
 - Run `ocaml-jupyter-opam-genspec`. Note in the output where it generated
   the kernelspec. Edit that file and change the `display_name` to just "OCaml".
   **That's important.** The display name will be hardcoded in each chapter
