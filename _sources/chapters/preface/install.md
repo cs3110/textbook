@@ -129,7 +129,7 @@ so install WSL2 if you can.
 [rh-virt]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios
 
 **Ubuntu setup.** These rest of these instructions assume that you installed
-Ubuntu (20.04) as the Linux distribution. That is the default distribution in
+Ubuntu (22.04) as the Linux distribution. That is the default distribution in
 WSL. In principle other distributions should work, but might require different
 commands from this point forward.
 
@@ -148,14 +148,10 @@ the username in this prompt should be the username you chose back then, not
 `root@...#`. Perhaps you could uninstall Ubuntu and reinstall it.
 ```
 
-Enable copy-and-paste:
-
-- Click on the Ubuntu icon on the top left of the window.
-- Click Properties
-- Make sure “Use Ctrl+Shift+C/V as Copy/Paste” is checked.
-
- Now Ctrl+Shift+C will copy and Ctrl+Shift+V will paste into the terminal. Note
- that you have to include Shift as part of that keystroke.
+In the current version of the Windows terminal, Ctrl+Shift+C will copy and
+Ctrl+Shift+V will paste into the terminal. Note that you have to include Shift
+as part of that keystroke. In older versions of the terminal, you might need to
+find an option in the terminal settings to enable those keyboard shortcuts.
 
 Run the following command to update the *APT package manager*, which is what
 helps to install Unix packages:
@@ -251,8 +247,8 @@ installation.
 opam init --bare -a -y
 ```
 
-It is expected behavior to get a note about making sure `.profile` is
-well-sourced in `.bashrc`. You don't need to do anything about that.
+(Don't worry if you get a note about making sure `.profile` is "well-sourced" in
+`.bashrc`. You don't need to do anything about that.)
 
 **WSL1.** Hopefully you are running WSL2, not WSL1. But on WSL1, run:
 
@@ -273,11 +269,11 @@ and set of packages. You can have many switches and, well, switch between them
 this command:
 
 ```console
-opam switch create cs3110-2023fa ocaml-base-compiler.5.0.0
+opam switch create cs3110-2024sp ocaml-base-compiler.5.1.1
 ```
 
 ```{tip}
-If that command fails saying that the 5.0.0 compiler can't be found, you
+If that command fails saying that the 5.1.1 compiler can't be found, you
 probably installed OPAM sometime back in the past and now need to update it. Do
 so with `opam update`.
 ```
@@ -301,7 +297,7 @@ You should get output like this:
 
 ```
 #  switch         compiler                    description
-→  cs3110-2023fa  ocaml-base-compiler.5.0.0  cs3110-2023fa
+→  cs3110-2024sp  ocaml-base-compiler.5.1.1   cs3110-2024sp
 ```
 
 There might be other lines if you happen to have done OCaml development before.
@@ -311,10 +307,10 @@ Here's what to check for:
   current switch. You should run `eval $(opam env)`". If either of the two
   issues below also occur, you need to resolve this issue first.
 
-- There must be a right arrow in the first column next to the `cs3110-2023fa`
+- There must be a right arrow in the first column next to the `cs3110-2024sp`
   switch.
 
-- That switch must have the right name and the right compiler version, 5.0.0.
+- That switch must have the right name and the right compiler version, 5.1.1.
 
 ```{warning}
 If you do get that warning about `opam env`, something is wrong. Your shell is
@@ -342,7 +338,7 @@ utop
 
 ```{tip}
 You should see a message "Welcome to utop version ... (using OCaml version
-5.0.0)!" If the OCaml version is incorrect, then you probably have an
+5.1.1)!" If the OCaml version is incorrect, then you probably have an
 environment issue. See the tip above about the `opam env` command.
 ```
 
@@ -369,7 +365,8 @@ If you're having any trouble with your installation, follow these double-check
 instructions. Some of them repeat the tips we provided above, but we've put them
 all here in one place to help diagnose any issues.
 
-First, **reboot your computer**. We need a clean slate for this double-check procedure.
+First, **reboot your computer**. We need a clean slate for this double-check
+procedure.
 
 Second, run utop, and make sure it works. If it does not, here are some common
 issues:
@@ -387,15 +384,16 @@ issues:
   `opam init` command. To fix it, follow the "redo" instructions below.
 
 - **Is your switch listed?** Run `opam switch list` and make sure a switch named
-  `cs3110-2023fa` is listed, that it has the 5.0.0 compiler, and that it is the
+  `cs3110-2024sp` is listed, that it has the 5.1.1 compiler, and that it is the
   active switch (which is indicated with an arrow beside it). If that switch is
-  present but not active, run `opam switch cs3110-2023fa` then see whether utop
+  present but not active, run `opam switch cs3110-2024sp` then see whether utop
   works. If that switch is not present, follow the "redo" instructions below.
 
 **Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`.
 Then go back to the OPAM initialization step in the instructions way above, and
 proceed forward. Be extra careful to use the exact OPAM commands given above;
-sometimes mistakes occur when parts of them are omitted. Finally, double-check again: reboot and see whether utop still works.
+sometimes mistakes occur when parts of them are omitted. Finally, double-check
+again: reboot and see whether utop still works.
 
 ```{important}
 You want to get to the point where utop immediately works after a reboot,
@@ -413,16 +411,14 @@ Extensions, or by clicking on the icon for it in the column of icons on the left
 — it looks like four little squares, the top-right of which is separated from
 the other three.
 
+At various points in the following instructions you will be asked to "open the
+Command Palette." To do that, go to View → Command Palette. There is also an
+operating system specific keyboard shortcut, which you will see to the right of
+the words "Command Palette" in that View menu.
+
 Second, follow one of these steps if you are on Windows or Mac:
 
-- **Windows only:** Install the "WSL" extension. Second, open a WSL
-  window by using the command "WSL: New WSL Window". The first time you
-  do this, it will install some additional software. After that completes, you
-  will see a green "WSL: Ubuntu" indicator in the bottom-left of the VS Code
-  window. **Make sure that you see "WSL: Ubuntu" there before proceeding with
-  the instructions below.** If you see just an icon that looks like
-  <sub>&gt;</sub><sup>&lt;</sup> then click it, and choose "New WSL Window" from
-  the Command Palette that opens.
+- **Windows only:** Install the "WSL" extension.
 
 - **Mac only:** Open the Command Palette and type "shell command" to find the
   "Shell Command: Install 'code' command in PATH" command. Run it.
@@ -431,30 +427,27 @@ Third, regardless of your OS, close any open terminals — or just logout or
 reboot — to let the new path settings take effect, so that you will later be
 able to launch VS Code from the terminal.
 
-Fourth, again open the VS Code extensions pane. Search for and install the
+Fourth, on **Windows only**, open the Command Palette and run the command "WSL:
+Connect to WSL". (If you on Mac, skip ahead to the next step.) The first time
+you do this, it will install some additional software. After that completes, you
+will see a "WSL: Ubuntu" indicator in the bottom-left of the VS Code window.
+**Make sure that you see "WSL: Ubuntu" there before proceeding with the next
+step below.** If you see just an icon that looks like
+<sub>&gt;</sub><sup>&lt;</sup> then click it, and choose "Connect to WSL" from
+the Command Palette that opens.
+
+Fifth, again open the VS Code extensions pane. Search for and install the
 **"OCaml Platform"** extension from OCaml Labs. Be careful to install the
-extension with *exactly* that name. (If you happen to note a "build failing"
-icon on the extension's page, don't be concerned.)
+extension with *exactly* that name.
 
 ```{warning}
 The extensions named simply "OCaml" or "OCaml and Reason IDE" are not the right
 ones. They are both old and no longer maintained by their developers.
 ```
 
-```{warning}
-**Windows only:** make sure you install the OCaml Platform extension using a
-button that says "Install in WSL: Ubuntu", not with a button that says only
-"Install". If you've already done the latter, that's okay; but, you need to also
-install on WSL. If you can't find a button that says "Install in WSL" then you
-probably do not have the green "WSL: Ubuntu" indicator at the bottom-left of
-your VS Code window, either. Follow the instructions above to open a WSL window.
-From there, try again to install the OCaml Platform extension using the "Install
-in WSL" button.
-```
-
 [vscode]: https://code.visualstudio.com/
 
-## Double Check VS Code
+## Double-Check VS Code
 
 Let's make sure VS Code's OCaml support is working.
 
@@ -499,10 +492,11 @@ installation. Here's how to proceed:
 
 - If you're on WSL and VS Code does add syntax highlighting but does not add
   squiggles as described above, and/or you get an error about "Sandbox
-  initialization failed", then double-check that you see a green "WSL" indicator
-  in the bottom left of the VS Code window. If you do not, make sure you
-  installed the "Remote - WSL" extension as described above, and that you are
-  launching VS Code from Ubuntu rather than PowerShell or from the Windows GUI.
+  initialization failed", then double-check that you see a "WSL" indicator in
+  the bottom left of the VS Code window. If you do not, make sure you installed
+  the "WSL" extension as described above, and that you are launching VS Code
+  from Ubuntu rather than PowerShell or from the Windows GUI. If you do, make
+  sure that the "OCaml Platform" extension is installed.
 
 **If you're still stuck with an issue,** try uninstalling VS Code, rebooting,
 and re-doing all the installation instructions above from scratch. Pay close
@@ -536,24 +530,13 @@ Save the file and close the tab.
 ## Using VS Code Collaboratively
 
 VS Code's [Live Share][liveshare] extension makes it easy and fun to collaborate
-on code with other humans.  You can edit code together like collaborating inside
-a Google Doc.  It even supports a shared voice channel, so there's no need to
-spin up a separate Zoom call.  To install Live Share:
+on code with other humans. You can edit code together like collaborating inside
+a Google Doc. It even supports a shared voice channel, so there's no need to
+spin up a separate Zoom call. To install and use Live Share, follow
+[Microsoft's tutorial][liveshare].
 
-- Open the Extensions page in VS Code.  Search for "Live Share Extension Pack".
-  Install it.
-
-- The first time you use Live Share, you will be prompted to log in. If you are
-  a Cornell student, choose to log in with your Microsoft account, not GitHub.
-  Enter your Cornell NetID email, e.g., `your_netid@cornell.edu`. That will take
-  you to Cornell's login site. Use the password associated with your NetID.
-
-To collaborate with Live Share:
-
-- The *host* starts the Live Share session.  That generates a URL.  Send the
-  URL to the *guests* however you like (DM, email, etc.).
-
-- The guest puts that URL into a browser or directly into VS Code, and connects
-  to the shared programming session.
+If you are a Cornell student, log in with your Microsoft account, not GitHub.
+Enter your Cornell NetID email, e.g., `your_netid@cornell.edu`. That will take
+you to Cornell's login site. Use the password associated with your NetID.
 
 [liveshare]: https://code.visualstudio.com/learn/collaboration/live-share
