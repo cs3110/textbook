@@ -17,25 +17,26 @@ guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
 
 - Download and install Oracle's free [VirtualBox][virtualbox] for your host OS.
   Or, if you already had it installed, make sure you update to the latest
-  version of VirtualBox before proceeding.
+  version of VirtualBox before proceeding. Unfortunately, VirtualBox does not
+  yet officially support Apple Silicon.
 
 - Download [our VM][3110vm]. Don’t worry about the “We’re sorry, the preview
   didn’t load” message you see. Just click the Download button and save the
-  `.ova` file wherever you like. It’s about a 6GB file, so the download might
+  `.ova` file wherever you like. It’s about a 9GB file, so the download might
   take a while.
 
 - Launch VirtualBox, select File → Import Appliance, and choose the `.ova` file
   you just downloaded. Click Next, then Import.
 
 [virtualbox]: https://www.virtualbox.org/wiki/Downloads
-[3110vm]: https://cornell.box.com/v/cs3110-2022fa-ubuntu
+[3110vm]: https://cornell.box.com/v/cs3110-2024sp
 
 
 ## Starting the VM
 
-- Select cs3110-2022fa-ubuntu from the list of machines in VirtualBox. Click
-  Start. At this point various errors can occur that depend on your hardware,
-  hence are hard to predict.
+- Select the CS 3110 VM from the list of machines in VirtualBox. Click Start. At
+  this point various errors can occur that depend on your hardware, hence are
+  hard to predict.
 
   - If you get an error about “VT-x/AMD-V hardware acceleration”, you most
     likely need to access your computer’s BIOS settings and enable
