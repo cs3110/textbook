@@ -29,7 +29,7 @@ guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
   you just downloaded. Click Next, then Import.
 
 [virtualbox]: https://www.virtualbox.org/wiki/Downloads
-[3110vm]: https://cornell.box.com/v/cs3110-2024sp
+[3110vm]: https://cornell.box.com/v/cs3110vm-2024sp
 
 
 ## Starting the VM
