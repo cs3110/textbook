@@ -96,9 +96,7 @@ with the code:
   the code cells on the page to be editable. It takes some time for the
   connection to be made behind the scenes, during which you will see "Waiting
   for kernel". After the connection has been made, you can edit all the code
-  cells on the page and re-run them. **Live code is temporarily disabled in this
-  textbook due to a [bug in Jupyter Book][thebe-bug]. As a workaround, use
-  Binder as described above.**
+  cells on the page and re-run them.
 
 [thebe-bug]: https://github.com/executablebooks/jupyter-book/issues/1173
 
