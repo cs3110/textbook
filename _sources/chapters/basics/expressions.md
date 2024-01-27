@@ -220,6 +220,18 @@ happens, and the entire expression evaluates to a special value called *unit*.
 The unit value is written `()` and its type is `unit`. But if the result is
 `false`, an exception is raised.
 
+One way to test a function `f` is to write a series of assertions like this:
+
+```ocaml
+let () = assert (f input1 = output1)
+let () = assert (f input2 = output2)
+let () = assert (f input3 = output3)
+```
+
+Those assert that `f input1` should be `output1`, and so forth. The
+`let () = ...` part of those is used to handle the unit value returned by each
+assertion.
+
 ## If Expressions
 
 {{ video_embed | replace("%%VID%%", "XJ6QPtlPD7s")}}

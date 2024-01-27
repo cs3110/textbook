@@ -925,6 +925,15 @@ equality operator.</p>
 happens, and the entire expression evaluates to a special value called <em>unit</em>.
 The unit value is written <code class="docutils literal notranslate"><span class="pre">()</span></code> and its type is <code class="docutils literal notranslate"><span class="pre">unit</span></code>. But if the result is
 <code class="docutils literal notranslate"><span class="pre">false</span></code>, an exception is raised.</p>
+<p>One way to test a function <code class="docutils literal notranslate"><span class="pre">f</span></code> is to write a series of assertions like this:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">f</span> <span class="n">input1</span> <span class="o">=</span> <span class="n">output1</span><span class="o">)</span>
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">f</span> <span class="n">input2</span> <span class="o">=</span> <span class="n">output2</span><span class="o">)</span>
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">f</span> <span class="n">input3</span> <span class="o">=</span> <span class="n">output3</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Those assert that <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">input1</span></code> should be <code class="docutils literal notranslate"><span class="pre">output1</span></code>, and so forth. The
+<code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">()</span> <span class="pre">=</span> <span class="pre">...</span></code> part of those is used to handle the unit value returned by each
+assertion.</p>
 </section>
 <section id="if-expressions">
 <h2><span class="section-number">2.3.4. </span>If Expressions<a class="headerlink" href="#if-expressions" title="Permalink to this heading">#</a></h2>
