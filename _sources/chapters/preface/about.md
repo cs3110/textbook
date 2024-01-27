@@ -98,8 +98,6 @@ with the code:
   for kernel". After the connection has been made, you can edit all the code
   cells on the page and re-run them.
 
-[thebe-bug]: https://github.com/executablebooks/jupyter-book/issues/1173
-
 Try interacting with the cell above now to make it print a string of your choice.
 How about: `"Camels are bae."`
 
