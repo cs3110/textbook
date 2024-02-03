@@ -89,7 +89,7 @@ that operate on types, instead of functions that operate on values.
 The type-checking rules:
 
 * `[] : 'a list`
-* If `e1 : t` and `e2 : t list` then `e1 :: e2 : t list`. In case the colons
+* If `e1 : t` and `e2 : t` then `e1 :: e2 : t list`. In case the colons
   and their precedence is confusing, the latter means `(e1 :: e2) : t list`.
 
 In the rule for `[]`, recall that `'a` is a type variable: it stands for an
