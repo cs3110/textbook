@@ -170,8 +170,8 @@ module type MutableStack = sig
       The rest of the elements are unchanged. *)
   val push : 'a -> 'a t -> unit
 
-  (**[peek s] is the top element of [s].
-     Raises: [Empty] if [s] is empty. *)
+  (** [peek s] is the top element of [s].
+      Raises: [Empty] if [s] is empty. *)
   val peek : 'a t -> 'a
 
   (** [pop s] removes the top element of [s].

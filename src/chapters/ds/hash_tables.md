@@ -150,9 +150,9 @@ module ListMap : Map = struct
   let keys m = m |> List.map fst |> List.sort_uniq Stdlib.compare
 
   (** [binding m k] is [(k, v)], where [v] is the value that [k]
-       binds in [m].
-       Requires: [k] is a key in [m].
-       Efficiency: O(n). *)
+      binds in [m].
+      Requires: [k] is a key in [m].
+      Efficiency: O(n). *)
   let binding m k = (k, List.assoc k m)
 
   (** Efficiency: O(n log n) + O(n) * O(n), which is O(n^2). *)
@@ -414,7 +414,7 @@ Here are the AF and RI:
         duplicate keys in association lists).  All keys are
         in the right buckets: if [k] is in [buckets] at index
         [b] then [hash(k) = b]. The output of [hash] must always
-        be non-negative. [hash] must run in constant time.*)
+        be non-negative. [hash] must run in constant time. *)
 ```
 
 What would the efficiency of `insert`, `find`, and `remove` be for this rep
