@@ -192,7 +192,9 @@ $ dune exec bin/main.exe
 
 It will print `Hello, World!`
 
-Dune does not add a `.ocamlformat` file to your project automatically. You might want to add one in the top-level directory, aka the *root*, of your project. That is the directory that has the file named `dune-project` in it.
+```{tip}
+If you use ocamlformat to automatically format your source code, note that Dune does not add a `.ocamlformat` file to your project automatically. You might want to add one in the top-level directory, aka the *root*, of your project. That is the directory that has the file named `dune-project` in it.
+```
 
 ### Running Dune Continuously
 
