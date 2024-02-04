@@ -99,6 +99,8 @@ in the [Dune manual][dune-man].
 
 [dune-man]: https://dune.readthedocs.io/en/stable/dune-files.html
 
+### Creating a Dune Project Manually
+
 Here is a small example of how to use Dune. In the same directory as `hello.ml`,
 create a file named `dune` and put the following in it:
 
@@ -165,3 +167,42 @@ When Dune compiles your program, it caches a copy of your source files in
 of a source file, you might be able to recover it from inside `_build`. Of
 course, using source control like git is also advisable.
 ```
+
+```{warning}
+Do not edit any of the files in the `_build` directory. If you ever get an error about trying to save a file that is read-only, you maybe are attempting to edit a file in the `_build` directory.
+```
+
+### Creating a Dune Project Automatically
+
+In the terminal, change to a directory where you want to store your work, for example, "~/work". Pick a name for your project, such as "calculator". Run:
+
+```console
+$ dune init project calculator
+$ cd calculator
+$ code .
+```
+
+You should now have VS Code open and see the files that Dune automatically generated for your project.
+
+From the terminal in the `calculator` directory, run:
+
+```console
+$ dune exec bin/main.exe
+```
+
+It will print `Hello, World!`
+
+Dune does not add a `.ocamlformat` file to your project automatically. You might want to add one in the top-level directory, aka the *root*, of your project. That is the directory that has the file named `dune-project` in it.
+
+### Running Dune Continuously
+
+When you run `dune build`, it compiles your project once. You might want to have your code compiled automatically every time you save a file in your project. To accomplish that, run this command:
+
+```console
+$ dune build --watch
+```
+
+Dune will respond that it is waiting for filesystem changes. That means Dune is now running continuously and rebuilding your project every time you save a file in VS Code. To stop Dune, press Control+C.
+
+
+

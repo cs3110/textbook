@@ -518,7 +518,12 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storing-code-in-files">2.2.1. Storing code in files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-main">2.2.2. What about Main?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dune">2.2.3. Dune</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dune">2.2.3. Dune</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dune-project-manually">2.2.3.1. Creating a Dune Project Manually</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dune-project-automatically">2.2.3.2. Creating a Dune Project Automatically</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-dune-continuously">2.2.3.3. Running Dune Continuously</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -612,6 +617,8 @@ to be compiled. Dune files use a functional-programming syntax descended from
 LISP called <em>s-expressions</em>, in which parentheses are used to show nested data
 that form a tree, much like HTML tags do. The syntax of Dune files is documented
 in the <a class="reference external" href="https://dune.readthedocs.io/en/stable/dune-files.html">Dune manual</a>.</p>
+<section id="creating-a-dune-project-manually">
+<h3><span class="section-number">2.2.3.1. </span>Creating a Dune Project Manually<a class="headerlink" href="#creating-a-dune-project-manually" title="Permalink to this heading">#</a></h3>
 <p>Here is a small example of how to use Dune. In the same directory as <code class="docutils literal notranslate"><span class="pre">hello.ml</span></code>,
 create a file named <code class="docutils literal notranslate"><span class="pre">dune</span></code> and put the following in it:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(executable
@@ -663,6 +670,35 @@ To build and execute the program in one step, we can simply run:</p>
 of a source file, you might be able to recover it from inside <code class="docutils literal notranslate"><span class="pre">_build</span></code>. Of
 course, using source control like git is also advisable.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not edit any of the files in the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory. If you ever get an error about trying to save a file that is read-only, you maybe are attempting to edit a file in the <code class="docutils literal notranslate"><span class="pre">_build</span></code> directory.</p>
+</div>
+</section>
+<section id="creating-a-dune-project-automatically">
+<h3><span class="section-number">2.2.3.2. </span>Creating a Dune Project Automatically<a class="headerlink" href="#creating-a-dune-project-automatically" title="Permalink to this heading">#</a></h3>
+<p>In the terminal, change to a directory where you want to store your work, for example, “~/work”. Pick a name for your project, such as “calculator”. Run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span>init<span class="w"> </span>project<span class="w"> </span>calculator
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>calculator
+<span class="gp">$ </span>code<span class="w"> </span>.
+</pre></div>
+</div>
+<p>You should now have VS Code open and see the files that Dune automatically generated for your project.</p>
+<p>From the terminal in the <code class="docutils literal notranslate"><span class="pre">calculator</span></code> directory, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>bin/main.exe
+</pre></div>
+</div>
+<p>It will print <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">World!</span></code></p>
+<p>Dune does not add a <code class="docutils literal notranslate"><span class="pre">.ocamlformat</span></code> file to your project automatically. You might want to add one in the top-level directory, aka the <em>root</em>, of your project. That is the directory that has the file named <code class="docutils literal notranslate"><span class="pre">dune-project</span></code> in it.</p>
+</section>
+<section id="running-dune-continuously">
+<h3><span class="section-number">2.2.3.3. </span>Running Dune Continuously<a class="headerlink" href="#running-dune-continuously" title="Permalink to this heading">#</a></h3>
+<p>When you run <code class="docutils literal notranslate"><span class="pre">dune</span> <span class="pre">build</span></code>, it compiles your project once. You might want to have your code compiled automatically every time you save a file in your project. To accomplish that, run this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span>build<span class="w"> </span>--watch
+</pre></div>
+</div>
+<p>Dune will respond that it is waiting for filesystem changes. That means Dune is now running continuously and rebuilding your project every time you save a file in VS Code. To stop Dune, press Control+C.</p>
+</section>
 </section>
 </section>
 
@@ -732,7 +768,12 @@ course, using source control like git is also advisable.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storing-code-in-files">2.2.1. Storing code in files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-main">2.2.2. What about Main?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dune">2.2.3. Dune</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dune">2.2.3. Dune</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dune-project-manually">2.2.3.1. Creating a Dune Project Manually</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dune-project-automatically">2.2.3.2. Creating a Dune Project Automatically</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-dune-continuously">2.2.3.3. Running Dune Continuously</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
