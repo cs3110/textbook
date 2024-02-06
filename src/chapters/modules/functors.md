@@ -418,7 +418,7 @@ module Make (Ord : OrderedType) = struct
   type 'a t =
     | Empty
     | Node of {l : 'a t; v : key; d : 'a; r : 'a t; h : int}
-      (** left subtree, key, value/data, right subtree, height of node *)
+      (** Left subtree, key, value/data, right subtree, height of node. *)
 
   let empty = Empty
 

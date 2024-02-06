@@ -43,7 +43,7 @@ also known as a *postcondition*: it describes a condition that holds after the
 function is called. Here is an example of a returns clause:
 
 ```ocaml
-(** returns: [sqr x] is the square root of [x]. *)
+(** Returns: [sqr x] is the square root of [x]. *)
 ```
 
 But we would typically leave out the `returns:`, and simply write the returns
@@ -95,7 +95,7 @@ before the function is called. Here is a requires clause for `sqr`:
 
 ```ocaml
 (** [sqr x] is the square root of [x]. Its relative accuracy is no worse
-    than [1.0e-6].  Requires: [x >= 0] *)
+    than [1.0e-6].  Requires: [x >= 0]. *)
 ```
 
 This specification doesn't say what happens when `x < 0`, nor does it have to.
@@ -179,7 +179,7 @@ played between two people: a *specifier* and a *devious programmer.*
 Suppose that the specifier writes the following specification:
 
 ```ocaml
-(** returns a list *)
+(** Returns a list. *)
 val reverse : 'a list -> 'a list
 ```
 
@@ -194,7 +194,7 @@ the spec with an implementation that gives the following output:
 The specifier, upon realizing this, refines the spec as follows:
 
 ```ocaml
-(** [reverse lst] returns a list that is the same length as [lst] *)
+(** [reverse lst] returns a list that is the same length as [lst]. *)
 val reverse : 'a list -> 'a list
 ```
 
@@ -210,7 +210,7 @@ Finally, the specifier settles on a third spec:
 
 ```ocaml
 (** [reverse lst] returns a list [m] satisfying the following conditions:
-    - [length lst = length m]
+    - [length lst = length m],
     - for all [i], [nth m i = nth lst (n - i - 1)],
       where [n] is the length of [lst].
     For example, [reverse [1; 2; 3]] is [3; 2; 1], and [reverse []] is []. *)

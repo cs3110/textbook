@@ -872,7 +872,7 @@ be tail recursive:
 tail recursive:
 
 ```{code-cell} ocaml
-(* [fact n] is [n] factorial *)
+(** [fact n] is [n] factorial. *)
 let rec fact n =
   if n = 0 then 1 else n * fact (n - 1)
 ```

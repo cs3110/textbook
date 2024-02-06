@@ -51,13 +51,13 @@ items of type `'a`. The interface might look something like this:
 (** A set is an unordered collection in which multiplicity is ignored. *)
 module type Set = sig
 
-  (** ['a t] represents a set whose elements are of type ['a] *)
+  (** ['a t] represents a set whose elements are of type ['a]. *)
   type 'a t
 
-  (** [empty] is the set containing no elements *)
+  (** [empty] is the set containing no elements. *)
   val empty : 'a t
 
-  (** [mem x s] is whether [x] is a member of set [s] *)
+  (** [mem x s] is whether [x] is a member of set [s]. *)
   val mem : 'a -> 'a t -> bool
 
   (** [add x s] is the set containing all the elements of [s]
@@ -68,7 +68,7 @@ module type Set = sig
       minus [x]. *)
   val rem : 'a -> 'a t -> 'a t
 
-  (** [size s] is the cardinality of [s] *)
+  (** [size s] is the cardinality of [s]. *)
   val size: 'a t -> int
 
   (** [union s1 s2] is the set containing all the elements that
@@ -90,7 +90,7 @@ implement this abstraction.
 As we've seen before, one easy way is as a list:
 
 ```{code-cell} ocaml
-(** Implementation of sets as lists with duplicates *)
+(** Implementation of sets as lists with duplicates. *)
 module ListSet : Set = struct
   type 'a t = 'a list
   let empty = []
@@ -122,7 +122,7 @@ type, yet some important aspects of the implementation (`add`, `size`,
 `union`) are quite different.
 
 ```{code-cell} ocaml
-(** Implementation of sets as lists without duplicates *)
+(** Implementation of sets as lists without duplicates. *)
 module UniqListSet : Set = struct
   type 'a t = 'a list
   let empty = []

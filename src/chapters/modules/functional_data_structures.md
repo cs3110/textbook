@@ -547,7 +547,7 @@ module type Set = sig
   (** ['a t] is the type of sets whose elements are of type ['a]. *)
   type 'a t
 
-  (** [empty] is the empty set *)
+  (** [empty] is the empty set. *)
   val empty : 'a t
 
   (** [mem x s] is whether [x] is an element of [s]. *)
