@@ -65,6 +65,7 @@ kind studied in discrete mathematics or theory of computation courses.
 - stuck
 - substitution
 - substitution model
+- subtype polymorphism
 - symbol
 - symbol table
 - target program
