@@ -198,7 +198,7 @@ The specifier, upon realizing this, refines the spec as follows:
 val reverse : 'a list -> 'a list
 ```
 
-But the specifier discovers that the spec still allows broken
+But the devious programmer discovers that the spec still allows broken
 implementations:
 
 ```ocaml
