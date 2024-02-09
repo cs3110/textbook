@@ -480,7 +480,7 @@ needed. There isn't necessarily a right answer here, but here's some advice:
   `include` or a functor application.
 
 * The rational structures can both be produced by a single functor that is
-  applied once to `IntField` and once to `FloatField`.
+  applied once to `IntRing` and once to `FloatRing`.
 
 * It's possible to eliminate all duplication of `of_int`, such that it is
   directly defined exactly once, and all structures reuse that definition; and
