@@ -120,7 +120,7 @@ implementer and may lead to a slower implementation.
 
 How can we convert `sqr` into a total function? One approach that is (too) often
 followed is to define some value that is returned in the cases that the requires
-clause would have ruled; for example:
+clause would have ruled out; for example:
 
 ```ocaml
 (** [sqr x] is the square root of [x] if [x >= 0],
