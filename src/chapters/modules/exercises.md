@@ -432,7 +432,7 @@ response from one phrase will change in a helpful way. Explain why.
 {{ ex4 | replace("%%NAME%%", "refactor arith")}}
 
 Download this file: {{ code_link | replace("%%NAME%%", "algebra.ml")}}. It
-contains two signatures and four structures:
+contains two signatures and six structures:
 
 * `Ring` is signature that describes the algebraic structure called a *[ring]*,
   which is an abstraction of the addition and multiplication operators.
