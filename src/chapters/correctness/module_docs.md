@@ -403,7 +403,7 @@ the rep invariant is being broken.
 module UniqListSet : Set = struct
 
   (** Abstraction function: The list [[a1; ...; an]] represents the
-      set {a1, ..., an}. The empty list [[]] represents the empty set [{}].
+      set [{a1, ..., an}]. The empty list [[]] represents the empty set [{}].
       Representation invariant: the list contains no duplicates. *)
   type 'a t = 'a list
 

@@ -213,7 +213,7 @@ Finally, the specifier settles on a third spec:
     - [length lst = length m],
     - for all [i], [nth m i = nth lst (n - i - 1)],
       where [n] is the length of [lst].
-    For example, [reverse [1; 2; 3]] is [3; 2; 1], and [reverse []] is []. *)
+    For example, [reverse [1; 2; 3]] is [[3; 2; 1]], and [reverse []] is [[]]. *)
 val reverse : 'a list -> 'a list
 ```
 
