@@ -474,6 +474,7 @@ module type LIST_STACK = sig
   val pop : 'a list -> 'a list
 end
 ```
+Note that the name of the module type is spelled in ALL_CAPS to distinguish it from a CamelCase module definition. (Is this an Ocaml convention...?)
 
 Now that we have both a module and a module type for list-based stacks, we
 should move the specification comments from the structure into the signature.
