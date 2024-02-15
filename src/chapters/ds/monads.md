@@ -638,7 +638,7 @@ to satisfy certain algebraic laws.  We saw those for stacks when we studied
 equational specification:
 
 * `peek (push x s) = x`
-* `pop (push x empty) = empty`
+* `pop (push x s) = s`
 * etc.
 
 A monad, though, is not just a single data structure. It's a design pattern for
