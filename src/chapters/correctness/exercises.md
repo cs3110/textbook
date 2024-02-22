@@ -34,7 +34,7 @@ few coefficients that are zero. Here is an incomplete interface for polynomials:
 ```ocaml
 (** [Poly] represents immutable polynomials with integer coefficients. *)
 module type Poly = sig
-  (** [t] is the type of polynomials *)
+  (** [t] is the type of polynomials. *)
   type t
 
   (** [eval x p] is [p] evaluated at [x]. Example: if [p] represents

@@ -19,7 +19,7 @@ kernelspec:
 
 Here are two functions we might want to write:
 ```{code-cell} ocaml
-(** [add1 lst] adds 1 to each element of [lst] *)
+(** [add1 lst] adds 1 to each element of [lst]. *)
 let rec add1 = function
   | [] -> []
   | h :: t -> (h + 1) :: add1 t
@@ -28,7 +28,7 @@ let lst1 = add1 [1; 2; 3]
 ```
 
 ```{code-cell} ocaml
-(** [concat_bang lst] concatenates "!" to each element of [lst] *)
+(** [concat_bang lst] concatenates "!" to each element of [lst]. *)
 let rec concat_bang = function
   | [] -> []
   | h :: t -> (h ^ "!") :: concat_bang t
@@ -47,14 +47,14 @@ head element: add versus concatenate. Let's rewrite the two functions to make
 that difference even more explicit:
 
 ```{code-cell} ocaml
-(** [add1 lst] adds 1 to each element of [lst] *)
+(** [add1 lst] adds 1 to each element of [lst]. *)
 let rec add1 = function
   | [] -> []
   | h :: t ->
     let f = fun x -> x + 1 in
     f h :: add1 t
 
-(** [concat_bang lst] concatenates "!" to each element of [lst] *)
+(** [concat_bang lst] concatenates "!" to each element of [lst]. *)
 let rec concat_bang = function
   | [] -> []
   | h :: t ->
@@ -72,14 +72,14 @@ let rec add1' f = function
   | [] -> []
   | h :: t -> f h :: add1' f t
 
-(** [add1 lst] adds 1 to each element of [lst] *)
+(** [add1 lst] adds 1 to each element of [lst]. *)
 let add1 = add1' (fun x -> x + 1)
 
 let rec concat_bang' f = function
   | [] -> []
   | h :: t -> f h :: concat_bang' f t
 
-(** [concat_bang lst] concatenates "!" to each element of [lst] *)
+(** [concat_bang lst] concatenates "!" to each element of [lst]. *)
 let concat_bang = concat_bang' (fun x -> x ^ "!")
 ```
 
@@ -95,10 +95,10 @@ let rec transform f = function
   | [] -> []
   | h :: t -> f h :: transform f t
 
-(** [add1 lst] adds 1 to each element of [lst] *)
+(** [add1 lst] adds 1 to each element of [lst]. *)
 let add1 = transform (fun x -> x + 1)
 
-(** [concat_bang lst] concatenates "!" to each element of [lst] *)
+(** [concat_bang lst] concatenates "!" to each element of [lst]. *)
 let concat_bang = transform (fun x -> x ^ "!")
 ```
 
@@ -128,10 +128,10 @@ let rec map f = function
   | [] -> []
   | h :: t -> f h :: map f t
 
-(** [add1 lst] adds 1 to each element of [lst] *)
+(** [add1 lst] adds 1 to each element of [lst]. *)
 let add1 = map (fun x -> x + 1)
 
-(** [concat_bang lst] concatenates "!" to each element of [lst] *)
+(** [concat_bang lst] concatenates "!" to each element of [lst]. *)
 let concat_bang = map (fun x -> x ^ "!")
 ```
 

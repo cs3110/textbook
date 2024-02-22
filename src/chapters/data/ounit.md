@@ -346,7 +346,7 @@ That's a sign that we should *refactor* the code. (As we did before with the
 
 Let's abstract a function that creates test cases for `next_weekday`:
 ```ocaml
-let make_next_weekday_test name expected_output input=
+let make_next_weekday_test name expected_output input =
   name >:: (fun _ -> assert_equal expected_output (next_weekday input))
 
 let tests = "test suite for next_weekday" >::: [

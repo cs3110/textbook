@@ -70,7 +70,7 @@ previous exercise.
   assume that the list is non-empty. *Hint: Use two library functions, and do
   not write any pattern matching code of your own.*
 
-* Write a function `any_zeroes : int list -> bool` that returns `true` if and
+* Write a function `any_zeros : int list -> bool` that returns `true` if and
   only if the input list contains at least one `0`. *Hint: use one library
   function, and do not write any pattern matching code of your own.*
 

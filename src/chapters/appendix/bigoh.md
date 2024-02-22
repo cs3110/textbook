@@ -67,7 +67,7 @@ structures is just the number of elements maintained by the data structure: the
 number of nodes in a list, or the number of nodes and edges in a graph, etc.
 
 Could an algorithm run in a different amount of time on two inputs of the same
-"size"? Sure. For example, multiplying a matrix by all zeroes might be faster
+"size"? Sure. For example, multiplying a matrix by all zeros might be faster
 than multiplying by arbitrary numbers. But in practice, size matters more than
 exact inputs.
 

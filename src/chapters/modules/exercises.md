@@ -108,7 +108,7 @@ Write a module that implements the `Fraction` module type below:
 
 ```ocaml
 module type Fraction = sig
-  (* A fraction is a rational number p/q, where q != 0.*)
+  (* A fraction is a rational number p/q, where q != 0. *)
   type t
 
   (** [make n d] is n/d. Requires d != 0. *)
