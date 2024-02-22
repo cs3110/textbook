@@ -383,7 +383,7 @@ variables, and thereby unify the set of equations.
 
 Much like the substitutions we defined before for the substitution model of
 evaluation, we'll write `{t / 'x}` for the *type substitution* that maps type
-variable `'x` to type `t`. For example, `{t2/'x} t1` means type `t1` with `t2`
+variable `'x` to type `t`. For example, `t1 {t2/'x}` means type `t1` with `t2`
 substituted for `'x`.
 
 We can define substitution on types as follows:

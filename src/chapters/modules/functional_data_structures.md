@@ -557,8 +557,8 @@ module type Set = sig
   val add : 'a -> 'a t -> 'a t
 
   (** [elements s] is a list containing the elements of [s].  No guarantee
-      is made about the ordering of that list, but each is guaranteed to
-      be unique. *)
+      is made about the ordering of that list, but each element is guaranteed
+      to be unique. *)
   val elements : 'a t -> 'a list
 end
 ```

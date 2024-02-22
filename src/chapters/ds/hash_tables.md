@@ -410,7 +410,7 @@ Here are the AF and RI:
       that represents the map
         {k11:v11, k12:v12, ...,
          k21:v21, k22:v22, ...,  ...}.
-      RI: No key appears more than once in array (so, no
+      RI: No key appears more than once in the array (so, no
         duplicate keys in association lists).  All keys are
         in the right buckets: if [k] is in [buckets] at index
         [b] then [hash(k) = b]. The output of [hash] must always
