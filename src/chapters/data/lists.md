@@ -344,9 +344,9 @@ Now we can say how to evaluate `match e with p1 -> e1 | ... | pn -> en`:
   languages. We'll come back to exceptions near the end of this chapter, after
   we've covered some of the other built-in data structures in OCaml.
 
-* Otherwise, stop trying to match at the first time a match succeeds against a
-  pattern. Let `pi` be that pattern and let $b$ be the variable bindings
-  produced by matching `v` against `pi`.
+* Otherwise, if a match is made, stop the matching process enter the branch. Let
+  `pi` be that pattern and let $b$ be the variable bindings produced by matching
+  `v` against `pi`.
 
 * Substitute those bindings inside `ei`, producing a new expression `e'`.
 
