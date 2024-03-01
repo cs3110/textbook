@@ -205,6 +205,7 @@ our stack module:
 :tags: ["hide-output"]
 module type Stack = sig
   type 'a t
+  exception Empty
   val empty : 'a t
   val is_empty : 'a t -> bool
   val push : 'a -> 'a t -> 'a t
