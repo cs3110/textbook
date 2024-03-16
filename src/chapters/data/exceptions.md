@@ -199,8 +199,8 @@ match e with
   | pn -> en
 ```
 Some of the patterns `p1..pn` could be exception patterns of the form
-`exception q`. Let `q1..qn` be that subsequence of patterns (without the
-`exception` keyword), and let `r1..rm` be the subsequence of non-exception
+`exception q`. Let `q1..qm` be that subsequence of patterns (without the
+`exception` keyword), and let `r1..rn` be the subsequence of non-exception
 patterns. Then we can rewrite the code as:
 ```ocaml
 try
@@ -233,8 +233,8 @@ let tests = "suite" >::: [
 
 let _ = run_test_tt_main tests
 ```
-The expression `assert_raises exc (fun () -> e)` checks to see whether
-expression `e` raises exception `exc`. If so, the OUnit test case succeeds,
+The expression `assert_raises exn (fun () -> e)` checks to see whether
+expression `e` raises exception `exn`. If so, the OUnit test case succeeds,
 otherwise it fails.
 
 Note that the second argument of `assert_raises` is a *function* of type `unit
