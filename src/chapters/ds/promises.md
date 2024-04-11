@@ -146,9 +146,10 @@ In Lwt, a *promise* is a
 reference: a value that is permitted to
 mutate at most once. When created, it is like an empty box that contains
 nothing. We say that the promise is *pending*. Eventually the promise can be
-*resolved*, which is like putting something inside the box. Instead of being
-resolved, the promise can instead be *rejected*, in which case the box is filled
-with an exception. Regardless of whether the promise is resolved or rejected,
+*fulfilled*, which is like putting something inside the box. Instead of being
+fulfilled, the promise can instead be *rejected*, in which case the box is filled
+with an exception. In either case, fulfilled or rejected, we say that the promise
+is *resolved*. Regardless of whether the promise is resolved or rejected,
 once the box is filled, its contents may never change.
 
 For now, we will mostly forget about concurrency. Later we'll come back and
@@ -196,7 +197,7 @@ to make the interface clearer.
 module type PROMISE = sig
   type 'a state =
     | Pending
-    | Resolved of 'a
+    | Fulfilled of 'a
     | Rejected of exn
 
   type 'a promise
@@ -206,17 +207,17 @@ module type PROMISE = sig
   (** [make ()] is a new promise and resolver. The promise is pending. *)
   val make : unit -> 'a promise * 'a resolver
 
-  (** [return x] is a new promise that is already resolved with value
+  (** [return x] is a new promise that is already fulfilled with value
       [x]. *)
   val return : 'a -> 'a promise
 
   (** [state p] is the state of the promise *)
   val state : 'a promise -> 'a state
 
-  (** [resolve r x] resolves the promise [p] associated with [r] with
-      value [x], meaning that [state p] will become [Resolved x].
+  (** [fulfill r x] fulfills the promise [p] associated with [r] with
+      value [x], meaning that [state p] will become [Fulfilled x].
       Requires: [p] is pending. *)
-  val resolve : 'a resolver -> 'a -> unit
+  val fulfill : 'a resolver -> 'a -> unit
 
   (** [reject r x] rejects the promise [p] associated with [r] with
       exception [x], meaning that [state p] will become [Rejected x].
@@ -229,7 +230,7 @@ To implement that interface, we can make the representation type of
 `'a promise` be a reference to a state:
 
 ```{code-cell} ocaml
-type 'a state = Pending | Resolved of 'a | Rejected of exn
+type 'a state = Pending | Fulfilled of 'a | Rejected of exn
 type 'a promise = 'a state ref
 ```
 
@@ -245,12 +246,12 @@ type 'a resolver = 'a promise
 So internally, the two types are exactly the same. But externally no client of
 the `Promise` module will be able to distinguish them. In other words, we're
 using the type system to control whether it's possible to apply certain
-functions (e.g., `state` vs `resolve`) to a promise.
+functions (e.g., `state` vs `fulfill`) to a promise.
 
 To help implement the rest of the functions, let's start by writing a helper
 function `write_once : 'a promise -> 'a state -> unit` to update the reference. This
 function will implement changing the state of the promise from pending to either
-resolved or rejected, and once the state has changed, it will not allow it to be
+fulfilled or rejected, and once the state has changed, it will not allow it to be
 changed again. That is, it enforces the "write once" invariant.
 
 ```{code-cell} ocaml
@@ -278,7 +279,7 @@ Putting it altogether in a module, we have:
 module Promise : PROMISE = struct
   type 'a state =
     | Pending
-    | Resolved of 'a
+    | Fulfilled of 'a
     | Rejected of exn
 
   type 'a promise = 'a state ref
@@ -295,11 +296,11 @@ module Promise : PROMISE = struct
     let p = ref Pending in
     (p, p)
 
-  let return x = ref (Resolved x)
+  let return x = ref (Fulfilled x)
 
   let state p = !p
 
-  let resolve r x = write_once r (Resolved x)
+  let fulfill r x = write_once r (Fulfilled x)
 
   let reject r x = write_once r (Rejected x)
 end
@@ -318,7 +319,7 @@ with comments to compare them to the interface we implemented above:
 
 ```{code-cell} ocaml
 module type Lwt = sig
-  (* [Sleep] means pending.  [Return] means resolved.
+  (* [Sleep] means pending. [Return] means fulfilled.
      [Fail] means rejected. *)
   type 'a state = Sleep | Return of 'a | Fail of exn
 
@@ -330,11 +331,11 @@ module type Lwt = sig
 
   val state : 'a t -> 'a state
 
-  (* [wakeup] means [resolve] *)
-  val wakeup : 'a u -> 'a -> unit
+  (* [wakeup_later] means [fulfill] *)
+  val wakeup_later : 'a u -> 'a -> unit
 
-  (* [wakeup_exn] means [reject] *)
-  val wakeup_exn : 'a u -> exn -> unit
+  (* [wakeup_later_exn] means [reject] *)
+  val wakeup_later_exn : 'a u -> exn -> unit
 
   (* [wait] means [make] *)
   val wait : unit -> 'a t * 'a u
@@ -378,14 +379,14 @@ Now we can resolve the promise:
 Lwt.state p
 ```
 ```{code-cell} ocaml
-Lwt.wakeup r 42
+Lwt.wakeup_later r 42
 ```
 ```{code-cell} ocaml
 Lwt.state p;;
 ```
 ```{code-cell} ocaml
 :tags: ["raises-exception"]
-Lwt.wakeup r 42
+Lwt.wakeup_later r 42
 ```
 
 That last exception was raised because we attempted to resolve the promise a
@@ -395,7 +396,7 @@ To reject a promise, we can write similar code:
 
 ```{code-cell} ocaml
 let (p : int Lwt.t), r = Lwt.wait ();;
-Lwt.wakeup_exn r (Failure "nope");;
+Lwt.wakeup_later_exn r (Failure "nope");;
 Lwt.state p;;
 ```
 
@@ -505,7 +506,7 @@ When the promise is returned from `read_line`, it is pending:
 ```
 
 When the Enter key is pressed and input is completed, the promise returned from
-`read_line` should become resolved. For example, suppose you enter "Camels are
+`read_line` should become fulfilled. For example, suppose you enter "Camels are
 bae":
 
 ```text
@@ -529,7 +530,7 @@ and if the promise is not yet resolved, utop will block until the promise
 becomes resolved so that the contents can be returned.*
 
 So the output `- : string = "Camels are bae"` really means that `p` contains a
-resolved `string` whose value is `"Camels are bae"`, not that `p` itself is a
+fulfilled `string` whose value is `"Camels are bae"`, not that `p` itself is a
 `string`. Indeed, the `#show_val` directive will show us that `p` is a promise:
 
 ```text
@@ -583,8 +584,8 @@ new asynchronous write with the result of the read. In other words,
 programs need a mechanism for managing the dependencies among promises.
 
 The mechanism provided in Lwt is named *callbacks.*  A callback is a
-function that will be run sometime after a promise has been resolved,
-and it will receive as input the contents of the resolved promise.
+function that will be run sometime after a promise has been fulfilled,
+and it will receive as input the contents of the fulfilled promise.
 Think of it like asking your friend to do some work for you: they
 promise to do it, and to call you back on the phone with the result of
 the work sometime after they've finished.
@@ -608,7 +609,7 @@ function `Lwt.bind`, which *binds* the callback to the promise:
 Lwt.bind p print_the_string
 ```
 
-Sometime after `p` is resolved, hence contains a string, the callback function
+Sometime after `p` is fulfilled, hence contains a string, the callback function
 will be run with that string as its input. That causes the string to be printed.
 
 Here's a complete utop transcript as an example of that:
@@ -630,14 +631,14 @@ The `bind` function takes a promise as its first argument. It doesn't matter
 whether that promise has been resolved yet or not. As its second argument,
 `bind` takes a callback function. That callback takes an input which is the same
 type `'a` as the contents of the promise. It's not an accident that they have
-the same type: the whole idea is to eventually run the callback on the resolved
+the same type: the whole idea is to eventually run the callback on the fulfilled
 promise, so the type the promise contains needs to be the same as the type the
 callback expects as input.
 
 After being invoked on a promise and callback, e.g., `bind p c`, the `bind`
 function does one of three things, depending on the state of `p`:
 
-* If `p` is already resolved, then `c` is run immediately on the contents of
+* If `p` is already fulfilled, then `c` is run immediately on the contents of
   `p`. The promise that is returned might or might not be pending, depending on
   what `c` does.
 
@@ -646,18 +647,20 @@ function does one of three things, depending on the state of `p`:
 
 * If `p` is pending, then `bind` does not wait for `p` to be resolved, nor for
   `c` to be run. Rather, `bind` just registers the callback to eventually be run
-  when (or if) the promise is resolved. Therefore, the `bind` function returns a
-  new promise. That promise will become resolved when (or if) the callback
+  when (or if) the promise is fulfilled. Therefore, the `bind` function returns a
+  new promise. That promise will become fulfilled when (or if) the callback
   completes running, sometime in the future. Its contents will be whatever
   contents are contained within the promise that the callback itself returns.
 
 ```{note}
 For the first case above: The Lwt source code claims that this behavior might
-change in a later version: under high load, `c` might be registered to run
-later. But as of v4.1.0 that behavior has not yet been activated. So, don't
+change: under high load, `c` might be registered to run
+later. But as of [v5.5.0][lwt-bind-src] that behavior has not yet been activated. So, don't
 worry about it&mdash;this paragraph is just here to future-proof this
 discussion.
 ```
+
+[lwt-bind-src]: https://github.com/ocsigen/lwt/blob/73f1a0f0acd5540f25e58bc410e1f63271189c6c/src/core/lwt.ml#L1820
 
 Let's consider that final case in more detail. We have one promise of type
 `'a Lwt.t` and two promises of type `'b Lwt.t`:
@@ -669,12 +672,12 @@ Let's consider that final case in more detail. We have one promise of type
   and returned to the user. It is pending at that point.
 
 * The second promise of type `'b Lwt.t`, call it promise Z, has not yet been
-  created. It will be created later, when promise X has been resolved, and the
+  created. It will be created later, when promise X has been fulfilled, and the
   callback has been run on the contents of X. The callback then returns promise
   Z. There is no guarantee about the state of Z; it might well still be pending
   when returned by the callback.
 
-* When Z is finally resolved, the contents of Y are updated to be the same as
+* When Z is finally fulfilled, the contents of Y are updated to be the same as
   the contents of Z.
 
 The reason why `bind` is designed with this type is so that programmers can set
@@ -708,7 +711,7 @@ let _ = Lwt_main.run p
 ```
 
 We've added one new function: `Lwt_main.run : 'a Lwt.t -> 'a`. It waits for its
-input promise to be resolved, then returns the contents. Typically this function
+input promise to be fulfilled, then returns the contents. This function
 is called only once in an entire program, near the end of the main file; and the
 input to it is typically a promise whose resolution indicates that all execution
 is finished.
@@ -752,14 +755,13 @@ let _ = Lwt_main.run p
 
 The way to visually parse the definition of `p` is to look at each line as
 computing some promised value. The first line, `read_line stdin >>= fun s1 ->`
-means that a promise is created, resolved, and its contents extracted under the
+means that a promise is created, fulfilled, and its contents extracted under the
 name `s1`. The second line means the same, except that its contents are named
 `s2`. The third line creates a final promise whose contents are eventually
 extracted by `Lwt_main.run`, at which point the program may terminate.
 
 The `>>=` operator is perhaps most famous from the functional language Haskell,
-which uses it extensively for monads. We'll cover monads as our next major
-topic.
+which uses it extensively for monads. We'll cover monads in a later section.
 
 **Bind as Let Syntax.** There is a *syntax extension* for OCaml that makes using
 bind even simpler than the infix operator `>>=`. To install the syntax
@@ -829,13 +831,19 @@ of many callbacks as a set. For example,
 
 When a callback is registered with `bind` or one of the other syntaxes, it is
 added to a list of callbacks that is stored with the promise. Eventually, when
-the promise has been resolved, the Lwt *resolution loop* runs the callbacks
+the promise has been fulfilled, the Lwt *resolution loop* runs the callbacks
 registered for the promise. There is no guarantee about the execution order of
 callbacks for a promise. In other words, the execution order is
 nondeterministic. If the order matters, the programmer needs to use the
 composition operators (such as `bind` and `join`) to enforce an ordering. If the
-promise never becomes resolved (or is rejected), none of its callbacks will ever
+promise never becomes fulfilled (or is rejected), none of its callbacks will ever
 be run.
+
+```{note}
+Lwt also supports registering functions that are run after a promise is rejected.
+`Lwt.catch` and `try%lwt` are used for this purpose. They are counterparts
+to `Lwt.bind` and `let%lwt`.
+```
 
 Once again, it's important to keep track of where the concurrency really comes
 from: the OS. There might be many asynchronous I/O operations occurring at the
@@ -855,10 +863,10 @@ module type PROMISE = sig
   ...
 
   (** [p >>= c] registers callback [c] with promise [p].
-      When the promise is resolved, the callback will be run
+      When the promise is fulfilled, the callback will be run
       on the promises's contents.  If the promise is never
-      resolved, the callback will never run. *)
-  val (>>=) : 'a promise -> ('a -> 'b promise) -> 'b promise
+      fulfilled, the callback will never run. *)
+  val ( >>= ) : 'a promise -> ('a -> 'b promise) -> 'b promise
 end
 ```
 
@@ -867,7 +875,7 @@ off just like before:
 
 ```ocaml
 module Promise : PROMISE = struct
-  type 'a state = Pending | Resolved of 'a | Rejected of exn
+  type 'a state = Pending | Fulfilled of 'a | Rejected of exn
   ...
 ```
 
@@ -888,11 +896,11 @@ discussed below.
 ```
 
 A *handler* is a new abstraction: a function that takes a non-pending state. It
-will be used to handle resolving and rejecting promises when their state is
+will be used to resolve and reject promises when their state is
 ready to switch away from pending. The primary use for a handler will be to run
 callbacks. As a representation invariant, we require that only pending promises
 may have handlers waiting in their list. Once the state becomes non-pending,
-i.e., either resolved or rejected, the handlers will all be processed and
+i.e., either fulfilled or rejected, the handlers will all be processed and
 removed from the list.
 
 This helper function that enqueues a handler on a promise's handler list will be
@@ -929,7 +937,7 @@ we have to update a few of the functions in trivial ways:
     p, p
 
   let return x =
-    {state = Resolved x; handlers = []}
+    {state = Fulfilled x; handlers = []}
 
   let state p = p.state
 ```
@@ -941,7 +949,7 @@ handlers list to be empty to ensure that the RI holds.
 
 ```ocaml
   (** requires: [st] may not be [Pending] *)
-  let resolve_or_reject (r : 'a resolver) (st : 'a state) =
+  let fulfill_or_reject (r : 'a resolver) (st : 'a state) =
     assert (st <> Pending);
     let handlers = r.handlers in
     r.handlers <- [];
@@ -949,23 +957,23 @@ handlers list to be empty to ensure that the RI holds.
     List.iter (fun f -> f st) handlers
 
   let reject r x =
-    resolve_or_reject r (Rejected x)
+    fulfill_or_reject r (Rejected x)
 
-  let resolve r x =
-    resolve_or_reject r (Resolved x)
+  let fulfill r x =
+    fulfill_or_reject r (Fulfilled x)
 ```
 
 Finally, the implementation of `>>=` is the trickiest part. First, if the
-promise is already resolved, let's go ahead and immediately run the callback on
+promise is already fulfilled, let's go ahead and immediately run the callback on
 it:
 
 ```ocaml
-  let (>>=)
+  let ( >>= )
       (input_promise : 'a promise)
       (callback : 'a -> 'b promise) : 'b promise
     =
     match input_promise.state with
-    | Resolved x -> callback x
+    | Fulfilled x -> callback x
 ```
 
 Second, if the promise is already rejected, then we return a promise
@@ -975,20 +983,18 @@ that is rejected with the same exception:
     | Rejected exc -> {state = Rejected exc; handlers = []}
 ```
 
-Third, if the promise is pending, we need to do more work. Here's what we said
-in our discussion of `bind` in the previous section:
-
-> [T]he bind function returns a new promise. That promise will become
-resolved when (or if) the callback completes running, sometime in the future.
+Third, if the promise is pending, we need to do more work. 
+The `bind` function needs to return a new promise. That promise will become
+fulfilled when (or if) the callback completes running, sometime in the future.
 Its contents will be whatever contents are contained within the promise that the
 callback itself returns.
 
-That's what we now need to implement. So, we create a new promise and resolver
+So, we create a new promise and resolver
 called `output_promise` and `output_resolver`. That promise is what `bind`
 returns. Before returning it, we use a helper function `handler_of_callback`
 (described below) to transform the callback into a handler, and enqueue that
 handler on the promise. That ensures the handler will be run when the promise
-later becomes resolved or rejected:
+later becomes resolved:
 
 ```ocaml
     | Pending ->
@@ -1012,16 +1018,16 @@ promise returned by bind to also be rejected.
       | Rejected exc -> reject resolver exc
 ```
 
-But if the state is resolved, then the callback provided by the user to bind
-can&mdash;at last!&mdash;be run on the contents of the resolved promise. Running
-the callback produces a new promise. It might already be rejected or resolved,
+But if the state is fulfiled, then the callback provided by the user to bind
+can&mdash;at last!&mdash;be run on the contents of the fulfilled promise. Running
+the callback produces a new promise. It might already be rejected or fulfilled,
 in which case that state again propagates.
 
 ```ocaml
-      | Resolved x ->
+      | Fulfilled x ->
         let promise = callback x in
         match promise.state with
-        | Resolved y -> resolve resolver y
+        | Fulfilled y -> resolve resolver y
         | Rejected exc -> reject resolver exc
 ```
 
@@ -1041,12 +1047,12 @@ to do that propagation:
     = function
       | Pending -> failwith "handler RI violated"
       | Rejected exc -> reject resolver exc
-      | Resolved x -> resolve resolver x
+      | Fulfilled x -> resolve resolver x
 ```
 
 The Lwt implementation of `bind` follows essentially the same algorithm as we
 just implemented. Note that there is no concurrency in `bind`: as we said above,
-everything in Lwt is sequential; it's the OS that provides the concurrency.
+it's the OS that provides the concurrency.
 
 ## The Full Implementation
 
@@ -1057,7 +1063,7 @@ Here's all of that code in one executable block:
 module type PROMISE = sig
   type 'a state =
     | Pending
-    | Resolved of 'a
+    | Fulfilled of 'a
     | Rejected of exn
 
   type 'a promise
@@ -1067,17 +1073,17 @@ module type PROMISE = sig
   (** [make ()] is a new promise and resolver. The promise is pending. *)
   val make : unit -> 'a promise * 'a resolver
 
-  (** [return x] is a new promise that is already resolved with value
+  (** [return x] is a new promise that is already fulfilled with value
       [x]. *)
   val return : 'a -> 'a promise
 
   (** [state p] is the state of the promise *)
   val state : 'a promise -> 'a state
 
-  (** [resolve r x] resolves the promise [p] associated with [r] with
-      value [x], meaning that [state p] will become [Resolved x].
+  (** [fulfill r x] resolves the promise [p] associated with [r] with
+      value [x], meaning that [state p] will become [Fulfilled x].
       Requires: [p] is pending. *)
-  val resolve : 'a resolver -> 'a -> unit
+  val fulfill : 'a resolver -> 'a -> unit
 
   (** [reject r x] rejects the promise [p] associated with [r] with
       exception [x], meaning that [state p] will become [Rejected x].
@@ -1085,14 +1091,14 @@ module type PROMISE = sig
   val reject : 'a resolver -> exn -> unit
 
   (** [p >>= c] registers callback [c] with promise [p].
-      When the promise is resolved, the callback will be run
+      When the promise is fulfilled, the callback will be run
       on the promises's contents.  If the promise is never
-      resolved, the callback will never run. *)
-  val (>>=) : 'a promise -> ('a -> 'b promise) -> 'b promise
+      fulfilled, the callback will never run. *)
+  val ( >>= ) : 'a promise -> ('a -> 'b promise) -> 'b promise
 end
 
 module Promise : PROMISE = struct
-  type 'a state = Pending | Resolved of 'a | Rejected of exn
+  type 'a state = Pending | Fulfilled of 'a | Rejected of exn
 
   (** RI: the input may not be [Pending] *)
   type 'a handler = 'a state -> unit
@@ -1124,12 +1130,12 @@ module Promise : PROMISE = struct
     p, p
 
   let return x =
-    {state = Resolved x; handlers = []}
+    {state = Fulfilled x; handlers = []}
 
   let state p = p.state
 
   (** requires: [st] may not be [Pending] *)
-  let resolve_or_reject (r : 'a resolver) (st : 'a state) =
+  let fulfill_or_reject (r : 'a resolver) (st : 'a state) =
     assert (st <> Pending);
     let handlers = r.handlers in
     r.handlers <- [];
@@ -1137,16 +1143,16 @@ module Promise : PROMISE = struct
     List.iter (fun f -> f st) handlers
 
   let reject r x =
-    resolve_or_reject r (Rejected x)
+    fulfill_or_reject r (Rejected x)
 
-  let resolve r x =
-    resolve_or_reject r (Resolved x)
+  let fulfill r x =
+    fulfill_or_reject r (Fulfilled x)
 
   let handler (resolver : 'a resolver) : 'a handler
     = function
       | Pending -> failwith "handler RI violated"
       | Rejected exc -> reject resolver exc
-      | Resolved x -> resolve resolver x
+      | Fulfilled x -> fulfill resolver x
 
   let handler_of_callback
       (callback : 'a -> 'b promise)
@@ -1154,19 +1160,19 @@ module Promise : PROMISE = struct
     = function
       | Pending -> failwith "handler RI violated"
       | Rejected exc -> reject resolver exc
-      | Resolved x ->
+      | Fulfilled x ->
         let promise = callback x in
         match promise.state with
-        | Resolved y -> resolve resolver y
+        | Fulfilled y -> fulfill resolver y
         | Rejected exc -> reject resolver exc
         | Pending -> enqueue (handler resolver) promise
 
-  let (>>=)
+  let ( >>= )
       (input_promise : 'a promise)
       (callback : 'a -> 'b promise) : 'b promise
     =
     match input_promise.state with
-    | Resolved x -> callback x
+    | Fulfilled x -> callback x
     | Rejected exc -> {state = Rejected exc; handlers = []}
     | Pending ->
       let output_promise, output_resolver = make () in
