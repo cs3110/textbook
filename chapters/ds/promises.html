@@ -723,9 +723,10 @@ library for promises.</p>
 reference: a value that is permitted to
 mutate at most once. When created, it is like an empty box that contains
 nothing. We say that the promise is <em>pending</em>. Eventually the promise can be
-<em>resolved</em>, which is like putting something inside the box. Instead of being
-resolved, the promise can instead be <em>rejected</em>, in which case the box is filled
-with an exception. Regardless of whether the promise is resolved or rejected,
+<em>fulfilled</em>, which is like putting something inside the box. Instead of being
+fulfilled, the promise can instead be <em>rejected</em>, in which case the box is filled
+with an exception. In either case, fulfilled or rejected, we say that the promise
+is <em>resolved</em>. Regardless of whether the promise is resolved or rejected,
 once the box is filled, its contents may never change.</p>
 <p>For now, we will mostly forget about concurrency. Later we’ll come back and
 incorporate it. But there is one part of the design for concurrency that we need
@@ -768,7 +769,7 @@ to make the interface clearer.</p>
 <span class="k">module</span> <span class="k">type</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">sig</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
     <span class="o">|</span> <span class="nc">Pending</span>
-    <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
     <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
@@ -778,17 +779,17 @@ to make the interface clearer.</p>
   <span class="c">(** [make ()] is a new promise and resolver. The promise is pending. *)</span>
   <span class="k">val</span> <span class="n">make</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span>
 
-  <span class="c">(** [return x] is a new promise that is already resolved with value</span>
+  <span class="c">(** [return x] is a new promise that is already fulfilled with value</span>
 <span class="c">      [x]. *)</span>
   <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
   <span class="c">(** [state p] is the state of the promise *)</span>
   <span class="k">val</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span>
 
-  <span class="c">(** [resolve r x] resolves the promise [p] associated with [r] with</span>
-<span class="c">      value [x], meaning that [state p] will become [Resolved x].</span>
+  <span class="c">(** [fulfill r x] fulfills the promise [p] associated with [r] with</span>
+<span class="c">      value [x], meaning that [state p] will become [Fulfilled x].</span>
 <span class="c">      Requires: [p] is pending. *)</span>
-  <span class="k">val</span> <span class="n">resolve</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+  <span class="k">val</span> <span class="n">fulfill</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
   <span class="c">(** [reject r x] rejects the promise [p] associated with [r] with</span>
 <span class="c">      exception [x], meaning that [state p] will become [Rejected x].</span>
@@ -801,13 +802,13 @@ to make the interface clearer.</p>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type PROMISE =
   sig
-    type &#39;a state = Pending | Resolved of &#39;a | Rejected of exn
+    type &#39;a state = Pending | Fulfilled of &#39;a | Rejected of exn
     type &#39;a promise
     type &#39;a resolver
     val make : unit -&gt; &#39;a promise * &#39;a resolver
     val return : &#39;a -&gt; &#39;a promise
     val state : &#39;a promise -&gt; &#39;a state
-    val resolve : &#39;a resolver -&gt; &#39;a -&gt; unit
+    val fulfill : &#39;a resolver -&gt; &#39;a -&gt; unit
     val reject : &#39;a resolver -&gt; exn -&gt; unit
   end
 </pre></div>
@@ -818,13 +819,13 @@ to make the interface clearer.</p>
 <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">promise</span></code> be a reference to a state:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="n">ref</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a state = Pending | Resolved of &#39;a | Rejected of exn
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a state = Pending | Fulfilled of &#39;a | Rejected of exn
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a promise = &#39;a state ref
@@ -850,11 +851,11 @@ It will simply be the same as a promise.</p>
 <p>So internally, the two types are exactly the same. But externally no client of
 the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> module will be able to distinguish them. In other words, we’re
 using the type system to control whether it’s possible to apply certain
-functions (e.g., <code class="docutils literal notranslate"><span class="pre">state</span></code> vs <code class="docutils literal notranslate"><span class="pre">resolve</span></code>) to a promise.</p>
+functions (e.g., <code class="docutils literal notranslate"><span class="pre">state</span></code> vs <code class="docutils literal notranslate"><span class="pre">fulfill</span></code>) to a promise.</p>
 <p>To help implement the rest of the functions, let’s start by writing a helper
 function <code class="docutils literal notranslate"><span class="pre">write_once</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">promise</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">state</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code> to update the reference. This
 function will implement changing the state of the promise from pending to either
-resolved or rejected, and once the state has changed, it will not allow it to be
+fulfilled or rejected, and once the state has changed, it will not allow it to be
 changed again. That is, it enforces the “write once” invariant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -896,7 +897,7 @@ Putting it altogether in a module, we have:</p>
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Promise</span> <span class="o">:</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
     <span class="o">|</span> <span class="nc">Pending</span>
-    <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
     <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="n">ref</span>
@@ -913,11 +914,11 @@ Putting it altogether in a module, we have:</p>
     <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">ref</span> <span class="nc">Pending</span> <span class="k">in</span>
     <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span>
 
-  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ref</span> <span class="o">(</span><span class="nc">Resolved</span> <span class="n">x</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ref</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
 
   <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="o">!</span><span class="n">p</span>
 
-  <span class="k">let</span> <span class="n">resolve</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">write_once</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Resolved</span> <span class="n">x</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">write_once</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
 
   <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">write_once</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
 <span class="k">end</span>
@@ -943,7 +944,7 @@ with comments to compare them to the interface we implemented above:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Lwt</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="c">(* [Sleep] means pending.  [Return] means resolved.</span>
+  <span class="c">(* [Sleep] means pending. [Return] means fulfilled.</span>
 <span class="c">     [Fail] means rejected. *)</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Sleep</span> <span class="o">|</span> <span class="nc">Return</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Fail</span> <span class="k">of</span> <span class="n">exn</span>
 
@@ -955,11 +956,11 @@ with comments to compare them to the interface we implemented above:</p>
 
   <span class="k">val</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span>
 
-  <span class="c">(* [wakeup] means [resolve] *)</span>
-  <span class="k">val</span> <span class="n">wakeup</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">u</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+  <span class="c">(* [wakeup_later] means [fulfill] *)</span>
+  <span class="k">val</span> <span class="n">wakeup_later</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">u</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="c">(* [wakeup_exn] means [reject] *)</span>
-  <span class="k">val</span> <span class="n">wakeup_exn</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">u</span> <span class="o">-&gt;</span> <span class="n">exn</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+  <span class="c">(* [wakeup_later_exn] means [reject] *)</span>
+  <span class="k">val</span> <span class="n">wakeup_later_exn</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">u</span> <span class="o">-&gt;</span> <span class="n">exn</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
   <span class="c">(* [wait] means [make] *)</span>
   <span class="k">val</span> <span class="n">wait</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">u</span>
@@ -976,8 +977,8 @@ with comments to compare them to the interface we implemented above:</p>
     type &#39;a t
     type &#39;a u
     val state : &#39;a t -&gt; &#39;a state
-    val wakeup : &#39;a u -&gt; &#39;a -&gt; unit
-    val wakeup_exn : &#39;a u -&gt; exn -&gt; unit
+    val wakeup_later : &#39;a u -&gt; &#39;a -&gt; unit
+    val wakeup_later_exn : &#39;a u -&gt; exn -&gt; unit
     val wait : unit -&gt; &#39;a t * &#39;a u
     val return : &#39;a -&gt; &#39;a t
   end
@@ -1042,7 +1043,7 @@ val r : int Lwt.u = &lt;abstr&gt;
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">wakeup</span> <span class="n">r</span> <span class="mi">42</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">wakeup_later</span> <span class="n">r</span> <span class="mi">42</span>
 </pre></div>
 </div>
 </div>
@@ -1066,12 +1067,12 @@ val r : int Lwt.u = &lt;abstr&gt;
 </div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">wakeup</span> <span class="n">r</span> <span class="mi">42</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">wakeup_later</span> <span class="n">r</span> <span class="mi">42</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Invalid_argument &quot;Lwt.wakeup&quot;.
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Invalid_argument &quot;Lwt.wakeup_later&quot;.
 <span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">invalid_arg</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;stdlib.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">30</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">20</span><span class="o">-</span><span class="mi">45</span>
 <span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
 <span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
@@ -1086,7 +1087,7 @@ second time, which is not permitted.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">int</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span><span class="o">),</span> <span class="n">r</span> <span class="o">=</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">wait</span> <span class="bp">()</span><span class="o">;;</span>
-<span class="nn">Lwt</span><span class="p">.</span><span class="n">wakeup_exn</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Failure</span> <span class="s2">&quot;nope&quot;</span><span class="o">);;</span>
+<span class="nn">Lwt</span><span class="p">.</span><span class="n">wakeup_later_exn</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Failure</span> <span class="s2">&quot;nope&quot;</span><span class="o">);;</span>
 <span class="nn">Lwt</span><span class="p">.</span><span class="n">state</span> <span class="n">p</span><span class="o">;;</span>
 </pre></div>
 </div>
@@ -1193,7 +1194,7 @@ promise evolves.</p>
 </pre></div>
 </div>
 <p>When the Enter key is pressed and input is completed, the promise returned from
-<code class="docutils literal notranslate"><span class="pre">read_line</span></code> should become resolved. For example, suppose you enter “Camels are
+<code class="docutils literal notranslate"><span class="pre">read_line</span></code> should become fulfilled. For example, suppose you enter “Camels are
 bae”:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># let p = read_line stdin;;
 val p : string Lwt.t = &lt;abstr&gt;
@@ -1213,7 +1214,7 @@ Specifically, whenever you try to directly evaluate a promise at the top level,
 and if the promise is not yet resolved, utop will block until the promise
 becomes resolved so that the contents can be returned.</em></p>
 <p>So the output <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">:</span> <span class="pre">string</span> <span class="pre">=</span> <span class="pre">&quot;Camels</span> <span class="pre">are</span> <span class="pre">bae&quot;</span></code> really means that <code class="docutils literal notranslate"><span class="pre">p</span></code> contains a
-resolved <code class="docutils literal notranslate"><span class="pre">string</span></code> whose value is <code class="docutils literal notranslate"><span class="pre">&quot;Camels</span> <span class="pre">are</span> <span class="pre">bae&quot;</span></code>, not that <code class="docutils literal notranslate"><span class="pre">p</span></code> itself is a
+fulfilled <code class="docutils literal notranslate"><span class="pre">string</span></code> whose value is <code class="docutils literal notranslate"><span class="pre">&quot;Camels</span> <span class="pre">are</span> <span class="pre">bae&quot;</span></code>, not that <code class="docutils literal notranslate"><span class="pre">p</span></code> itself is a
 <code class="docutils literal notranslate"><span class="pre">string</span></code>. Indeed, the <code class="docutils literal notranslate"><span class="pre">#show_val</span></code> directive will show us that <code class="docutils literal notranslate"><span class="pre">p</span></code> is a promise:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># #show_val p;;
 val p : string Lwt.t
@@ -1259,8 +1260,8 @@ a way to (i) become aware that a read has completed, and (ii) then do a
 new asynchronous write with the result of the read. In other words,
 programs need a mechanism for managing the dependencies among promises.</p>
 <p>The mechanism provided in Lwt is named <em>callbacks.</em>  A callback is a
-function that will be run sometime after a promise has been resolved,
-and it will receive as input the contents of the resolved promise.
+function that will be run sometime after a promise has been fulfilled,
+and it will receive as input the contents of the fulfilled promise.
 Think of it like asking your friend to do some work for you: they
 promise to do it, and to call you back on the phone with the result of
 the work sometime after they’ve finished.</p>
@@ -1279,7 +1280,7 @@ function <code class="docutils literal notranslate"><span class="pre">Lwt.bind</
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">bind</span> <span class="n">p</span> <span class="n">print_the_string</span>
 </pre></div>
 </div>
-<p>Sometime after <code class="docutils literal notranslate"><span class="pre">p</span></code> is resolved, hence contains a string, the callback function
+<p>Sometime after <code class="docutils literal notranslate"><span class="pre">p</span></code> is fulfilled, hence contains a string, the callback function
 will be run with that string as its input. That causes the string to be printed.</p>
 <p>Here’s a complete utop transcript as an example of that:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># let print_the_string str = Lwt_io.printf &quot;The string is: %S\n&quot; str;;
@@ -1298,29 +1299,29 @@ val print_the_string : string -&gt; unit Lwt.t = &lt;fun&gt;
 whether that promise has been resolved yet or not. As its second argument,
 <code class="docutils literal notranslate"><span class="pre">bind</span></code> takes a callback function. That callback takes an input which is the same
 type <code class="docutils literal notranslate"><span class="pre">'a</span></code> as the contents of the promise. It’s not an accident that they have
-the same type: the whole idea is to eventually run the callback on the resolved
+the same type: the whole idea is to eventually run the callback on the fulfilled
 promise, so the type the promise contains needs to be the same as the type the
 callback expects as input.</p>
 <p>After being invoked on a promise and callback, e.g., <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">p</span> <span class="pre">c</span></code>, the <code class="docutils literal notranslate"><span class="pre">bind</span></code>
 function does one of three things, depending on the state of <code class="docutils literal notranslate"><span class="pre">p</span></code>:</p>
 <ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> is already resolved, then <code class="docutils literal notranslate"><span class="pre">c</span></code> is run immediately on the contents of
+<li><p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> is already fulfilled, then <code class="docutils literal notranslate"><span class="pre">c</span></code> is run immediately on the contents of
 <code class="docutils literal notranslate"><span class="pre">p</span></code>. The promise that is returned might or might not be pending, depending on
 what <code class="docutils literal notranslate"><span class="pre">c</span></code> does.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> is already rejected, then <code class="docutils literal notranslate"><span class="pre">c</span></code> does not run. The promise that is
 returned is also rejected, with the same exception as <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> is pending, then <code class="docutils literal notranslate"><span class="pre">bind</span></code> does not wait for <code class="docutils literal notranslate"><span class="pre">p</span></code> to be resolved, nor for
 <code class="docutils literal notranslate"><span class="pre">c</span></code> to be run. Rather, <code class="docutils literal notranslate"><span class="pre">bind</span></code> just registers the callback to eventually be run
-when (or if) the promise is resolved. Therefore, the <code class="docutils literal notranslate"><span class="pre">bind</span></code> function returns a
-new promise. That promise will become resolved when (or if) the callback
+when (or if) the promise is fulfilled. Therefore, the <code class="docutils literal notranslate"><span class="pre">bind</span></code> function returns a
+new promise. That promise will become fulfilled when (or if) the callback
 completes running, sometime in the future. Its contents will be whatever
 contents are contained within the promise that the callback itself returns.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For the first case above: The Lwt source code claims that this behavior might
-change in a later version: under high load, <code class="docutils literal notranslate"><span class="pre">c</span></code> might be registered to run
-later. But as of v4.1.0 that behavior has not yet been activated. So, don’t
+change: under high load, <code class="docutils literal notranslate"><span class="pre">c</span></code> might be registered to run
+later. But as of <a class="reference external" href="https://github.com/ocsigen/lwt/blob/73f1a0f0acd5540f25e58bc410e1f63271189c6c/src/core/lwt.ml#L1820">v5.5.0</a> that behavior has not yet been activated. So, don’t
 worry about it—this paragraph is just here to future-proof this
 discussion.</p>
 </div>
@@ -1332,11 +1333,11 @@ was pending when <code class="docutils literal notranslate"><span class="pre">bi
 <li><p>The first promise of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>, call it promise Y, is created by <code class="docutils literal notranslate"><span class="pre">bind</span></code>
 and returned to the user. It is pending at that point.</p></li>
 <li><p>The second promise of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>, call it promise Z, has not yet been
-created. It will be created later, when promise X has been resolved, and the
+created. It will be created later, when promise X has been fulfilled, and the
 callback has been run on the contents of X. The callback then returns promise
 Z. There is no guarantee about the state of Z; it might well still be pending
 when returned by the callback.</p></li>
-<li><p>When Z is finally resolved, the contents of Y are updated to be the same as
+<li><p>When Z is finally fulfilled, the contents of Y are updated to be the same as
 the contents of Z.</p></li>
 </ul>
 <p>The reason why <code class="docutils literal notranslate"><span class="pre">bind</span></code> is designed with this type is so that programmers can set
@@ -1366,7 +1367,7 @@ command line.</p>
 </pre></div>
 </div>
 <p>We’ve added one new function: <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">Lwt.t</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>. It waits for its
-input promise to be resolved, then returns the contents. Typically this function
+input promise to be fulfilled, then returns the contents. This function
 is called only once in an entire program, near the end of the main file; and the
 input to it is typically a promise whose resolution indicates that all execution
 is finished.</p>
@@ -1404,13 +1405,12 @@ example had:</p>
 </div>
 <p>The way to visually parse the definition of <code class="docutils literal notranslate"><span class="pre">p</span></code> is to look at each line as
 computing some promised value. The first line, <code class="docutils literal notranslate"><span class="pre">read_line</span> <span class="pre">stdin</span> <span class="pre">&gt;&gt;=</span> <span class="pre">fun</span> <span class="pre">s1</span> <span class="pre">-&gt;</span></code>
-means that a promise is created, resolved, and its contents extracted under the
+means that a promise is created, fulfilled, and its contents extracted under the
 name <code class="docutils literal notranslate"><span class="pre">s1</span></code>. The second line means the same, except that its contents are named
 <code class="docutils literal notranslate"><span class="pre">s2</span></code>. The third line creates a final promise whose contents are eventually
 extracted by <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span></code>, at which point the program may terminate.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> operator is perhaps most famous from the functional language Haskell,
-which uses it extensively for monads. We’ll cover monads as our next major
-topic.</p>
+which uses it extensively for monads. We’ll cover monads in a later section.</p>
 <p><strong>Bind as Let Syntax.</strong> There is a <em>syntax extension</em> for OCaml that makes using
 bind even simpler than the infix operator <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code>. To install the syntax
 extension, run the following command:</p>
@@ -1471,13 +1471,19 @@ just one of a set of promises to be finished, but doesn’t care which one.</p><
 <h2><span class="section-number">8.6.9. </span>Implementing Callbacks<a class="headerlink" href="#implementing-callbacks" title="Permalink to this heading">#</a></h2>
 <p>When a callback is registered with <code class="docutils literal notranslate"><span class="pre">bind</span></code> or one of the other syntaxes, it is
 added to a list of callbacks that is stored with the promise. Eventually, when
-the promise has been resolved, the Lwt <em>resolution loop</em> runs the callbacks
+the promise has been fulfilled, the Lwt <em>resolution loop</em> runs the callbacks
 registered for the promise. There is no guarantee about the execution order of
 callbacks for a promise. In other words, the execution order is
 nondeterministic. If the order matters, the programmer needs to use the
 composition operators (such as <code class="docutils literal notranslate"><span class="pre">bind</span></code> and <code class="docutils literal notranslate"><span class="pre">join</span></code>) to enforce an ordering. If the
-promise never becomes resolved (or is rejected), none of its callbacks will ever
+promise never becomes fulfilled (or is rejected), none of its callbacks will ever
 be run.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lwt also supports registering functions that are run after a promise is rejected.
+<code class="docutils literal notranslate"><span class="pre">Lwt.catch</span></code> and <code class="docutils literal notranslate"><span class="pre">try%lwt</span></code> are used for this purpose. They are counterparts
+to <code class="docutils literal notranslate"><span class="pre">Lwt.bind</span></code> and <code class="docutils literal notranslate"><span class="pre">let%lwt</span></code>.</p>
+</div>
 <p>Once again, it’s important to keep track of where the concurrency really comes
 from: the OS. There might be many asynchronous I/O operations occurring at the
 OS level. But at the OCaml level, the resolution loop is sequential, meaning
@@ -1492,17 +1498,17 @@ operator to the <code class="docutils literal notranslate"><span class="pre">Pro
   <span class="o">...</span>
 
   <span class="c">(** [p &gt;&gt;= c] registers callback [c] with promise [p].</span>
-<span class="c">      When the promise is resolved, the callback will be run</span>
+<span class="c">      When the promise is fulfilled, the callback will be run</span>
 <span class="c">      on the promises&#39;s contents.  If the promise is never</span>
-<span class="c">      resolved, the callback will never run. *)</span>
-  <span class="k">val</span> <span class="o">(&gt;&gt;=)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
+<span class="c">      fulfilled, the callback will never run. *)</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 <p>Next, let’s re-develop the entire <code class="docutils literal notranslate"><span class="pre">Promise</span></code> structure.  We start
 off just like before:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Promise</span> <span class="o">:</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
   <span class="o">...</span>
 </pre></div>
 </div>
@@ -1521,11 +1527,11 @@ discussed below.</p>
 </pre></div>
 </div>
 <p>A <em>handler</em> is a new abstraction: a function that takes a non-pending state. It
-will be used to handle resolving and rejecting promises when their state is
+will be used to resolve and reject promises when their state is
 ready to switch away from pending. The primary use for a handler will be to run
 callbacks. As a representation invariant, we require that only pending promises
 may have handlers waiting in their list. Once the state becomes non-pending,
-i.e., either resolved or rejected, the handlers will all be processed and
+i.e., either fulfilled or rejected, the handlers will all be processed and
 removed from the list.</p>
 <p>This helper function that enqueues a handler on a promise’s handler list will be
 helpful later:</p>
@@ -1555,7 +1561,7 @@ we have to update a few of the functions in trivial ways:</p>
     <span class="n">p</span><span class="o">,</span> <span class="n">p</span>
 
   <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Resolved</span> <span class="n">x</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+    <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
 
   <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span>
 </pre></div>
@@ -1565,7 +1571,7 @@ promise, the first thing we need to do is to call <code class="docutils literal 
 before. Now we also need to process the handlers. Before doing so, we mutate the
 handlers list to be empty to ensure that the RI holds.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** requires: [st] may not be [Pending] *)</span>
-  <span class="k">let</span> <span class="n">resolve_or_reject</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">fulfill_or_reject</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
     <span class="k">assert</span> <span class="o">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="nc">Pending</span><span class="o">);</span>
     <span class="k">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="k">in</span>
     <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="bp">[]</span><span class="o">;</span>
@@ -1573,21 +1579,21 @@ handlers list to be empty to ensure that the RI holds.</p>
     <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">st</span><span class="o">)</span> <span class="n">handlers</span>
 
   <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
+    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
 
-  <span class="k">let</span> <span class="n">resolve</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Resolved</span> <span class="n">x</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
+    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
 </pre></div>
 </div>
 <p>Finally, the implementation of <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> is the trickiest part. First, if the
-promise is already resolved, let’s go ahead and immediately run the callback on
+promise is already fulfilled, let’s go ahead and immediately run the callback on
 it:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="o">(&gt;&gt;=)</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span>
       <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>
       <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
     <span class="o">=</span>
     <span class="k">match</span> <span class="n">input_promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">callback</span> <span class="n">x</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">callback</span> <span class="n">x</span>
 </pre></div>
 </div>
 <p>Second, if the promise is already rejected, then we return a promise
@@ -1595,20 +1601,17 @@ that is rejected with the same exception:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>    <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Rejected</span> <span class="n">exc</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
 </pre></div>
 </div>
-<p>Third, if the promise is pending, we need to do more work. Here’s what we said
-in our discussion of <code class="docutils literal notranslate"><span class="pre">bind</span></code> in the previous section:</p>
-<blockquote>
-<div><p>[T]he bind function returns a new promise. That promise will become
-resolved when (or if) the callback completes running, sometime in the future.
+<p>Third, if the promise is pending, we need to do more work.
+The <code class="docutils literal notranslate"><span class="pre">bind</span></code> function needs to return a new promise. That promise will become
+fulfilled when (or if) the callback completes running, sometime in the future.
 Its contents will be whatever contents are contained within the promise that the
 callback itself returns.</p>
-</div></blockquote>
-<p>That’s what we now need to implement. So, we create a new promise and resolver
+<p>So, we create a new promise and resolver
 called <code class="docutils literal notranslate"><span class="pre">output_promise</span></code> and <code class="docutils literal notranslate"><span class="pre">output_resolver</span></code>. That promise is what <code class="docutils literal notranslate"><span class="pre">bind</span></code>
 returns. Before returning it, we use a helper function <code class="docutils literal notranslate"><span class="pre">handler_of_callback</span></code>
 (described below) to transform the callback into a handler, and enqueue that
 handler on the promise. That ensures the handler will be run when the promise
-later becomes resolved or rejected:</p>
+later becomes resolved:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>    <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span>
       <span class="k">let</span> <span class="n">output_promise</span><span class="o">,</span> <span class="n">output_resolver</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
       <span class="n">enqueue</span> <span class="o">(</span><span class="n">handler_of_callback</span> <span class="n">callback</span> <span class="n">output_resolver</span><span class="o">)</span> <span class="n">input_promise</span><span class="o">;</span>
@@ -1628,14 +1631,14 @@ promise returned by bind to also be rejected.</p>
       <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
 </pre></div>
 </div>
-<p>But if the state is resolved, then the callback provided by the user to bind
-can—at last!—be run on the contents of the resolved promise. Running
-the callback produces a new promise. It might already be rejected or resolved,
+<p>But if the state is fulfiled, then the callback provided by the user to bind
+can—at last!—be run on the contents of the fulfilled promise. Running
+the callback produces a new promise. It might already be rejected or fulfilled,
 in which case that state again propagates.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>      <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span>
         <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
         <span class="k">match</span> <span class="n">promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-        <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">y</span>
+        <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">y</span>
         <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
 </pre></div>
 </div>
@@ -1651,12 +1654,12 @@ to do that propagation:</p>
     <span class="o">=</span> <span class="k">function</span>
       <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
       <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-      <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">x</span>
+      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">x</span>
 </pre></div>
 </div>
 <p>The Lwt implementation of <code class="docutils literal notranslate"><span class="pre">bind</span></code> follows essentially the same algorithm as we
 just implemented. Note that there is no concurrency in <code class="docutils literal notranslate"><span class="pre">bind</span></code>: as we said above,
-everything in Lwt is sequential; it’s the OS that provides the concurrency.</p>
+it’s the OS that provides the concurrency.</p>
 </section>
 <section id="the-full-implementation">
 <h2><span class="section-number">8.6.10. </span>The Full Implementation<a class="headerlink" href="#the-full-implementation" title="Permalink to this heading">#</a></h2>
@@ -1667,7 +1670,7 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
 <span class="k">module</span> <span class="k">type</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">sig</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
     <span class="o">|</span> <span class="nc">Pending</span>
-    <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
     <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
@@ -1677,17 +1680,17 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
   <span class="c">(** [make ()] is a new promise and resolver. The promise is pending. *)</span>
   <span class="k">val</span> <span class="n">make</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span>
 
-  <span class="c">(** [return x] is a new promise that is already resolved with value</span>
+  <span class="c">(** [return x] is a new promise that is already fulfilled with value</span>
 <span class="c">      [x]. *)</span>
   <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
   <span class="c">(** [state p] is the state of the promise *)</span>
   <span class="k">val</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span>
 
-  <span class="c">(** [resolve r x] resolves the promise [p] associated with [r] with</span>
-<span class="c">      value [x], meaning that [state p] will become [Resolved x].</span>
+  <span class="c">(** [fulfill r x] resolves the promise [p] associated with [r] with</span>
+<span class="c">      value [x], meaning that [state p] will become [Fulfilled x].</span>
 <span class="c">      Requires: [p] is pending. *)</span>
-  <span class="k">val</span> <span class="n">resolve</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+  <span class="k">val</span> <span class="n">fulfill</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
   <span class="c">(** [reject r x] rejects the promise [p] associated with [r] with</span>
 <span class="c">      exception [x], meaning that [state p] will become [Rejected x].</span>
@@ -1695,14 +1698,14 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
   <span class="k">val</span> <span class="n">reject</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="n">exn</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
   <span class="c">(** [p &gt;&gt;= c] registers callback [c] with promise [p].</span>
-<span class="c">      When the promise is resolved, the callback will be run</span>
+<span class="c">      When the promise is fulfilled, the callback will be run</span>
 <span class="c">      on the promises&#39;s contents.  If the promise is never</span>
-<span class="c">      resolved, the callback will never run. *)</span>
-  <span class="k">val</span> <span class="o">(&gt;&gt;=)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
+<span class="c">      fulfilled, the callback will never run. *)</span>
+  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
 <span class="k">end</span>
 
 <span class="k">module</span> <span class="nc">Promise</span> <span class="o">:</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Resolved</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
   <span class="c">(** RI: the input may not be [Pending] *)</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
@@ -1734,12 +1737,12 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
     <span class="n">p</span><span class="o">,</span> <span class="n">p</span>
 
   <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Resolved</span> <span class="n">x</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+    <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
 
   <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span>
 
   <span class="c">(** requires: [st] may not be [Pending] *)</span>
-  <span class="k">let</span> <span class="n">resolve_or_reject</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">fulfill_or_reject</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
     <span class="k">assert</span> <span class="o">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="nc">Pending</span><span class="o">);</span>
     <span class="k">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="k">in</span>
     <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="bp">[]</span><span class="o">;</span>
@@ -1747,16 +1750,16 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
     <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">st</span><span class="o">)</span> <span class="n">handlers</span>
 
   <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
+    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
 
-  <span class="k">let</span> <span class="n">resolve</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Resolved</span> <span class="n">x</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
+    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
 
   <span class="k">let</span> <span class="n">handler</span> <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span>
     <span class="o">=</span> <span class="k">function</span>
       <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
       <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-      <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">x</span>
+      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">fulfill</span> <span class="n">resolver</span> <span class="n">x</span>
 
   <span class="k">let</span> <span class="n">handler_of_callback</span>
       <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span>
@@ -1764,19 +1767,19 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
     <span class="o">=</span> <span class="k">function</span>
       <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
       <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-      <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span>
+      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span>
         <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
         <span class="k">match</span> <span class="n">promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-        <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">y</span>
+        <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">fulfill</span> <span class="n">resolver</span> <span class="n">y</span>
         <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
         <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">handler</span> <span class="n">resolver</span><span class="o">)</span> <span class="n">promise</span>
 
-  <span class="k">let</span> <span class="o">(&gt;&gt;=)</span>
+  <span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span>
       <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>
       <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
     <span class="o">=</span>
     <span class="k">match</span> <span class="n">input_promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="nc">Resolved</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">callback</span> <span class="n">x</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">callback</span> <span class="n">x</span>
     <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Rejected</span> <span class="n">exc</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
     <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span>
       <span class="k">let</span> <span class="n">output_promise</span><span class="o">,</span> <span class="n">output_resolver</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
@@ -1789,13 +1792,13 @@ everything in Lwt is sequential; it’s the OS that provides the concurrency.</p
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type PROMISE =
   sig
-    type &#39;a state = Pending | Resolved of &#39;a | Rejected of exn
+    type &#39;a state = Pending | Fulfilled of &#39;a | Rejected of exn
     type &#39;a promise
     type &#39;a resolver
     val make : unit -&gt; &#39;a promise * &#39;a resolver
     val return : &#39;a -&gt; &#39;a promise
     val state : &#39;a promise -&gt; &#39;a state
-    val resolve : &#39;a resolver -&gt; &#39;a -&gt; unit
+    val fulfill : &#39;a resolver -&gt; &#39;a -&gt; unit
     val reject : &#39;a resolver -&gt; exn -&gt; unit
     val ( &gt;&gt;= ) : &#39;a promise -&gt; (&#39;a -&gt; &#39;b promise) -&gt; &#39;b promise
   end
