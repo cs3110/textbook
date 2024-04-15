@@ -949,7 +949,7 @@ handlers list to be empty to ensure that the RI holds.
 
 ```ocaml
   (** requires: [st] may not be [Pending] *)
-  let fulfill_or_reject (r : 'a resolver) (st : 'a state) =
+  let resolve (r : 'a resolver) (st : 'a state) =
     assert (st <> Pending);
     let handlers = r.handlers in
     r.handlers <- [];
@@ -957,10 +957,10 @@ handlers list to be empty to ensure that the RI holds.
     List.iter (fun f -> f st) handlers
 
   let reject r x =
-    fulfill_or_reject r (Rejected x)
+    resolve r (Rejected x)
 
   let fulfill r x =
-    fulfill_or_reject r (Fulfilled x)
+    resolve r (Fulfilled x)
 ```
 
 Finally, the implementation of `>>=` is the trickiest part. First, if the
@@ -1135,7 +1135,7 @@ module Promise : PROMISE = struct
   let state p = p.state
 
   (** requires: [st] may not be [Pending] *)
-  let fulfill_or_reject (r : 'a resolver) (st : 'a state) =
+  let resolve (r : 'a resolver) (st : 'a state) =
     assert (st <> Pending);
     let handlers = r.handlers in
     r.handlers <- [];
@@ -1143,10 +1143,10 @@ module Promise : PROMISE = struct
     List.iter (fun f -> f st) handlers
 
   let reject r x =
-    fulfill_or_reject r (Rejected x)
+    resolve r (Rejected x)
 
   let fulfill r x =
-    fulfill_or_reject r (Fulfilled x)
+    resolve r (Fulfilled x)
 
   let handler (resolver : 'a resolver) : 'a handler
     = function

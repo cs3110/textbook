@@ -1571,7 +1571,7 @@ promise, the first thing we need to do is to call <code class="docutils literal 
 before. Now we also need to process the handlers. Before doing so, we mutate the
 handlers list to be empty to ensure that the RI holds.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** requires: [st] may not be [Pending] *)</span>
-  <span class="k">let</span> <span class="n">fulfill_or_reject</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">resolve</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
     <span class="k">assert</span> <span class="o">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="nc">Pending</span><span class="o">);</span>
     <span class="k">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="k">in</span>
     <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="bp">[]</span><span class="o">;</span>
@@ -1579,10 +1579,10 @@ handlers list to be empty to ensure that the RI holds.</p>
     <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">st</span><span class="o">)</span> <span class="n">handlers</span>
 
   <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
+    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
 
   <span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
+    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
 </pre></div>
 </div>
 <p>Finally, the implementation of <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> is the trickiest part. First, if the
@@ -1742,7 +1742,7 @@ it’s the OS that provides the concurrency.</p>
   <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span>
 
   <span class="c">(** requires: [st] may not be [Pending] *)</span>
-  <span class="k">let</span> <span class="n">fulfill_or_reject</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">resolve</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
     <span class="k">assert</span> <span class="o">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="nc">Pending</span><span class="o">);</span>
     <span class="k">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="k">in</span>
     <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="bp">[]</span><span class="o">;</span>
@@ -1750,10 +1750,10 @@ it’s the OS that provides the concurrency.</p>
     <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">st</span><span class="o">)</span> <span class="n">handlers</span>
 
   <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
+    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
 
   <span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
+    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
 
   <span class="k">let</span> <span class="n">handler</span> <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span>
     <span class="o">=</span> <span class="k">function</span>
