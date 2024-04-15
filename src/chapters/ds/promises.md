@@ -163,7 +163,7 @@ of responsibilities:
   resolved values.
 
 * The library and OS code that implements concurrency will need to *mutate* the
-  promise&mdash;that is, to actually resolve or reject it. Client code does not
+  promise&mdash;that is, to actually fulfill or reject it. Client code does not
   need that ability.
 
 We therefore will introduce one additional abstraction called a *resolver*.
@@ -896,7 +896,7 @@ discussed below.
 ```
 
 A *handler* is a new abstraction: a function that takes a non-pending state. It
-will be used to resolve and reject promises when their state is
+will be used to fulfill and reject promises when their state is
 ready to switch away from pending. The primary use for a handler will be to run
 callbacks. As a representation invariant, we require that only pending promises
 may have handlers waiting in their list. Once the state becomes non-pending,
@@ -942,7 +942,7 @@ we have to update a few of the functions in trivial ways:
   let state p = p.state
 ```
 
-Now we get to the trickier parts of the implementation. To resolve or reject a
+Now we get to the trickier parts of the implementation. To fulfill or reject a
 promise, the first thing we need to do is to call `write_once` on it, as we did
 before. Now we also need to process the handlers. Before doing so, we mutate the
 handlers list to be empty to ensure that the RI holds.
