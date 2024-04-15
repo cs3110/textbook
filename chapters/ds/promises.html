@@ -738,7 +738,7 @@ of responsibilities:</p>
 promises: query whether they are resolved or pending, and make use of the
 resolved values.</p></li>
 <li><p>The library and OS code that implements concurrency will need to <em>mutate</em> the
-promise—that is, to actually resolve or reject it. Client code does not
+promise—that is, to actually fulfill or reject it. Client code does not
 need that ability.</p></li>
 </ul>
 <p>We therefore will introduce one additional abstraction called a <em>resolver</em>.
@@ -1527,7 +1527,7 @@ discussed below.</p>
 </pre></div>
 </div>
 <p>A <em>handler</em> is a new abstraction: a function that takes a non-pending state. It
-will be used to resolve and reject promises when their state is
+will be used to fulfill and reject promises when their state is
 ready to switch away from pending. The primary use for a handler will be to run
 callbacks. As a representation invariant, we require that only pending promises
 may have handlers waiting in their list. Once the state becomes non-pending,
@@ -1566,7 +1566,7 @@ we have to update a few of the functions in trivial ways:</p>
   <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span>
 </pre></div>
 </div>
-<p>Now we get to the trickier parts of the implementation. To resolve or reject a
+<p>Now we get to the trickier parts of the implementation. To fulfill or reject a
 promise, the first thing we need to do is to call <code class="docutils literal notranslate"><span class="pre">write_once</span></code> on it, as we did
 before. Now we also need to process the handlers. Before doing so, we mutate the
 handlers list to be empty to ensure that the RI holds.</p>
