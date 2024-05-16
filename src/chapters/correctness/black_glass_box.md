@@ -33,12 +33,12 @@ module type RATIONAL = sig
       Raises: [Invalid_argument "0"] if [q] is 0. *)
   val create : int -> int -> t
 
-  (** [plus r1 r2] is [r1 + r2] *)
+  (** [plus r1 r2] is [r1 + r2]. *)
   val plus : t -> t -> t
 end
 
 module Rational : RATIONAL = struct
-  (** AF: [(p, q)] represents the rational number [p/q]
+  (** AF: [(p, q)] represents the rational number [p/q].
       RI: [q] is not 0. *)
   type t = int * int
 

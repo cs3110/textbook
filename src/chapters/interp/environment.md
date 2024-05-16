@@ -337,8 +337,8 @@ changing it:
 
 ```text
 <env, e1 bop e2> ==> v
-  if  <env,e1> ==> v1
-  and <env,e2> ==> v2
+  if  <env, e1> ==> v1
+  and <env, e2> ==> v2
   and v is the result of applying the primitive operation bop to v1 and v2
 
 <env, (e1, e2)> ==> (v1, v2)

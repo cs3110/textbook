@@ -452,8 +452,8 @@ structure. Here's an example:
 ```text
 <{}, (3 + 5) * 2> ==> 16          (op rule)
     because <{}, (3 + 5)> ==> 8   (op rule)
-        because <{},3> ==> 3      (int const rule)
-        and     <{},5> ==> 5      (int const rule)
+        because <{}, 3> ==> 3     (int const rule)
+        and     <{}, 5> ==> 5     (int const rule)
         and 3+5 is 8
     and <{}, 2> ==> 2             (int const rule)
     and 8*2 is 16
