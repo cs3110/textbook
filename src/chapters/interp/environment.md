@@ -281,10 +281,10 @@ The derived rule for let expressions remains unchanged:
 That's because the defining environment for the body `e2` is the same as the
 current environment `env` when the let expression is being evaluated.
 
-## An Implementation of SimPL in the Environment Model
+## An Implementation of the Lambda Calculus in the Environment Model
 
-You can download a complete implementation of the two semantics above: {{
-code_link | replace("%%NAME%%", "lambda-env.zip") }}. In `main.ml`, there is a
+You can download a complete implementation of the above two lambda calculus semantics:
+{{ code_link | replace("%%NAME%%", "lambda-env.zip") }}. In `main.ml`, there is a
 definition named `scope` that you can use to switch between lexical and dynamic
 scope.
 
