@@ -832,7 +832,7 @@ by copying-and-pasting the first test, then modifying it for the next three.
 That’s a sign that we should <em>refactor</em> the code. (As we did before with the
 <code class="docutils literal notranslate"><span class="pre">sum</span></code> function we were testing.)</p>
 <p>Let’s abstract a function that creates test cases for <code class="docutils literal notranslate"><span class="pre">next_weekday</span></code>:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">make_next_weekday_test</span> <span class="n">name</span> <span class="n">expected_output</span> <span class="n">input</span><span class="o">=</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">make_next_weekday_test</span> <span class="n">name</span> <span class="n">expected_output</span> <span class="n">input</span> <span class="o">=</span>
   <span class="n">name</span> <span class="o">&gt;::</span> <span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">assert_equal</span> <span class="n">expected_output</span> <span class="o">(</span><span class="n">next_weekday</span> <span class="n">input</span><span class="o">))</span>
 
 <span class="k">let</span> <span class="n">tests</span> <span class="o">=</span> <span class="s2">&quot;test suite for next_weekday&quot;</span> <span class="o">&gt;:::</span> <span class="o">[</span>

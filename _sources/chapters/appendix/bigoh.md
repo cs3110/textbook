@@ -67,7 +67,7 @@ structures is just the number of elements maintained by the data structure: the
 number of nodes in a list, or the number of nodes and edges in a graph, etc.
 
 Could an algorithm run in a different amount of time on two inputs of the same
-"size"? Sure. For example, multiplying a matrix by all zeroes might be faster
+"size"? Sure. For example, multiplying a matrix by all zeros might be faster
 than multiplying by arbitrary numbers. But in practice, size matters more than
 exact inputs.
 
@@ -145,14 +145,14 @@ we think big. The following table shows the number of steps as a function of
 input size N, assuming each step takes 1 microsecond. "Very long" means more
 than the estimated number of atoms in the universe.
 
-|$N$|$N^2$|$N^3$|$2^N$
-:-----:|:-----:|:-----:|:-----:|:-----:
-N=10|< 1 sec|< 1 sec|< 1 sec|< 1 sec
-N=100|< 1 sec|< 1 sec|1 sec|1017 years
-N=1,000|< 1 sec|1 sec|18 min|very long
-N=10,000|< 1 sec|2 min|12 days|very long
-N=100,000|< 1 sec|3 hours|32 years|very long
-N=1,000,000|1 sec|12 days|104 years|very long
+ |           |  $N$  |  $N^2$  |  $N^3$  |  $2^N$   |
+ |:----------|:-----:|:-------:|:-------:|:--------:| 
+ |N=10       |< 1 sec|< 1 sec  |< 1 sec  | < 1 sec  |
+ |N=100      |< 1 sec|< 1 sec  |  1 sec  |1017 years|
+ |N=1,000    |< 1 sec|  1 sec  | 18 min  | very long|
+ |N=10,000   |< 1 sec|  2 min  | 12 days | very long|
+ |N=100,000  |< 1 sec|  3 hours| 32 years| very long|
+ |N=1,000,000|  1 sec| 12 days |104 years| very long|
 
 As you can see, when inputs get big, there's a serious difference between each
 column of the table. We might as well ignore low-order terms, because they are

@@ -788,7 +788,7 @@ no data <em>constant</em>; and those that carry data, <em>non-constant</em>.</p>
 <p>depending on whether the constructor name <code class="docutils literal notranslate"><span class="pre">C</span></code> is non-constant or constant.</p>
 <p><strong>Dynamic semantics.</strong></p>
 <ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">e==&gt;v</span></code> then <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">e</span> <span class="pre">==&gt;</span> <span class="pre">C</span> <span class="pre">v</span></code>, assuming <code class="docutils literal notranslate"><span class="pre">C</span></code> is non-constant.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">==&gt;</span> <span class="pre">v</span></code> then <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">e</span> <span class="pre">==&gt;</span> <span class="pre">C</span> <span class="pre">v</span></code>, assuming <code class="docutils literal notranslate"><span class="pre">C</span></code> is non-constant.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> is already a value, assuming <code class="docutils literal notranslate"><span class="pre">C</span></code> is constant.</p></li>
 </ul>
 <p><strong>Static semantics.</strong></p>
@@ -927,10 +927,10 @@ here is a variant type that could be used to represent something similar to
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">intlist</span> <span class="o">=</span> <span class="nc">Nil</span> <span class="o">|</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">intlist</span>
 
-<span class="k">let</span> <span class="n">lst3</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span>  <span class="c">(* similar to 3 :: [] or [3]*)</span>
+<span class="k">let</span> <span class="n">lst3</span> <span class="o">=</span> <span class="nc">Cons</span> <span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span>  <span class="c">(* similar to 3 :: [] or [3] *)</span>
 <span class="k">let</span> <span class="n">lst123</span> <span class="o">=</span> <span class="nc">Cons</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">Cons</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">lst3</span><span class="o">))</span> <span class="c">(* similar to [1; 2; 3] *)</span>
 
-<span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">intlist</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span><span class="o">=</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">sum</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">intlist</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span>
   <span class="k">match</span> <span class="n">l</span> <span class="k">with</span>
   <span class="o">|</span> <span class="nc">Nil</span> <span class="o">-&gt;</span> <span class="mi">0</span>
   <span class="o">|</span> <span class="nc">Cons</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">+</span> <span class="n">sum</span> <span class="n">t</span>

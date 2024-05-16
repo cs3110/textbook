@@ -521,7 +521,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-lambda-calculus-in-the-environment-model">9.4.1. Evaluating the Lambda Calculus in the Environment Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lexical-vs-dynamic-scope">9.4.2. Lexical vs. Dynamic Scope</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">9.4.3. A Second Attempt at Evaluating the Lambda Calculus in the Environment Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-implementation-of-simpl-in-the-environment-model">9.4.4. An Implementation of SimPL in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-implementation-of-the-lambda-calculus-in-the-environment-model">9.4.4. An Implementation of the Lambda Calculus in the Environment Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-environment-model">9.4.5. Evaluating Core OCaml in the Environment Model</a></li>
 </ul>
             </nav>
@@ -760,9 +760,10 @@ suggest the “defining environment”) to evaluate the function body <code clas
 <p>That’s because the defining environment for the body <code class="docutils literal notranslate"><span class="pre">e2</span></code> is the same as the
 current environment <code class="docutils literal notranslate"><span class="pre">env</span></code> when the let expression is being evaluated.</p>
 </section>
-<section id="an-implementation-of-simpl-in-the-environment-model">
-<h2><span class="section-number">9.4.4. </span>An Implementation of SimPL in the Environment Model<a class="headerlink" href="#an-implementation-of-simpl-in-the-environment-model" title="Permalink to this heading">#</a></h2>
-<p>You can download a complete implementation of the two semantics above: <a href="../../code/lambda-env.zip">lambda-env.zip</a> In <code class="docutils literal notranslate"><span class="pre">main.ml</span></code>, there is a
+<section id="an-implementation-of-the-lambda-calculus-in-the-environment-model">
+<h2><span class="section-number">9.4.4. </span>An Implementation of the Lambda Calculus in the Environment Model<a class="headerlink" href="#an-implementation-of-the-lambda-calculus-in-the-environment-model" title="Permalink to this heading">#</a></h2>
+<p>You can download a complete implementation of the above two lambda calculus semantics:
+<a href="../../code/lambda-env.zip">lambda-env.zip</a>. In <code class="docutils literal notranslate"><span class="pre">main.ml</span></code>, there is a
 definition named <code class="docutils literal notranslate"><span class="pre">scope</span></code> that you can use to switch between lexical and dynamic
 scope.</p>
 </section>
@@ -804,8 +805,8 @@ it anyway.</p>
 <p>Evaluation of most other language features just uses the environment without
 changing it:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;env, e1 bop e2&gt; ==&gt; v
-  if  &lt;env,e1&gt; ==&gt; v1
-  and &lt;env,e2&gt; ==&gt; v2
+  if  &lt;env, e1&gt; ==&gt; v1
+  and &lt;env, e2&gt; ==&gt; v2
   and v is the result of applying the primitive operation bop to v1 and v2
 
 &lt;env, (e1, e2)&gt; ==&gt; (v1, v2)
@@ -919,7 +920,7 @@ and let expression) extends the environment with a new binding:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-lambda-calculus-in-the-environment-model">9.4.1. Evaluating the Lambda Calculus in the Environment Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lexical-vs-dynamic-scope">9.4.2. Lexical vs. Dynamic Scope</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">9.4.3. A Second Attempt at Evaluating the Lambda Calculus in the Environment Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-implementation-of-simpl-in-the-environment-model">9.4.4. An Implementation of SimPL in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-implementation-of-the-lambda-calculus-in-the-environment-model">9.4.4. An Implementation of the Lambda Calculus in the Environment Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-environment-model">9.4.5. Evaluating Core OCaml in the Environment Model</a></li>
 </ul>
   </nav></div>

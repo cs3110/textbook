@@ -715,13 +715,13 @@ than the values below:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 12
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 13
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 65
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 96
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 97
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 51
 </pre></div>
 </div>
 </div>
@@ -800,7 +800,7 @@ order according to the built-in <code class="docutils literal notranslate"><span
 
 <span class="k">let</span> <span class="k">rec</span> <span class="n">is_sorted</span> <span class="o">=</span> <span class="k">function</span>
   <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span>
-  <span class="o">|</span> <span class="o">[</span> <span class="n">h</span> <span class="o">]</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+  <span class="o">|</span> <span class="o">[_]</span> <span class="o">-&gt;</span> <span class="bp">true</span>
   <span class="o">|</span> <span class="n">h1</span> <span class="o">::</span> <span class="o">(</span><span class="n">h2</span> <span class="o">::</span> <span class="n">t</span> <span class="k">as</span> <span class="n">t&#39;</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">h1</span> <span class="o">&lt;=</span> <span class="n">h2</span> <span class="o">&amp;&amp;</span> <span class="n">is_sorted</span> <span class="n">t&#39;</span>
 </pre></div>
 </div>
@@ -883,7 +883,7 @@ generate at least one odd integer.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-random seed: 93600085
+random seed: 65051295
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1029,13 +1029,13 @@ to the generators found in <code class="docutils literal notranslate"><span clas
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test my_test failed (89 shrink steps):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test my_test failed (77 shrink steps):
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-63
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
@@ -1155,7 +1155,7 @@ and biased toward being smaller numbers in that range.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_4 failed (9 shrink steps):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_4 failed (13 shrink steps):
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>

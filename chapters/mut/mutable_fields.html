@@ -830,15 +830,15 @@ implement mutable stacks.  Here is an interface:</p>
   <span class="c">(** Raised if [peek] or [pop] encounter the empty stack. *)</span>
   <span class="k">exception</span> <span class="nc">Empty</span>
 
-  <span class="c">(** [empty ()] is the empty stack *)</span>
+  <span class="c">(** [empty ()] is the empty stack. *)</span>
   <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
   <span class="c">(** [push x s] modifies [s] to make [x] its top element.</span>
 <span class="c">      The rest of the elements are unchanged. *)</span>
   <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="c">(**[peek s] is the top element of [s].</span>
-<span class="c">     Raises: [Empty] if [s] is empty. *)</span>
+  <span class="c">(** [peek s] is the top element of [s].</span>
+<span class="c">      Raises: [Empty] if [s] is empty. *)</span>
   <span class="k">val</span> <span class="n">peek</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
 
   <span class="c">(** [pop s] removes the top element of [s].</span>

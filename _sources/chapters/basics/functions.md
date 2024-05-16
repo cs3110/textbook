@@ -76,7 +76,7 @@ One of the best known recursive functions is the factorial function. In OCaml,
 it can be written as follows:
 
 ```{code-cell} ocaml
-(** [fact n] is [n]!.
+(** [fact n] is [n!].
     Requires: [n >= 0]. *)
 let rec fact n = if n = 0 then 1 else n * fact (n - 1)
 ```
@@ -872,7 +872,7 @@ be tail recursive:
 tail recursive:
 
 ```{code-cell} ocaml
-(* [fact n] is [n] factorial *)
+(** [fact n] is [n] factorial. *)
 let rec fact n =
   if n = 0 then 1 else n * fact (n - 1)
 ```

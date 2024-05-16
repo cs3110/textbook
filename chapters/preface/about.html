@@ -659,12 +659,16 @@ analyses. Now many languages can run in Jupyter notebooks, including OCaml.
 Code and text are written in <em>cells</em> in a Jupyter notebook. Look at the “Cell”
 menu in it for commands to run cells. Note that Shift-Enter is usually a
 hotkey for running the cell that has focus.</p></li>
-<li><p><em>Live code</em> will actually do about the same thing, except that instead of
+<li><p><em>Live Code</em> will actually do about the same thing, except that instead of
 leaving the current textbook page and taking you off to Binder, it will modify
 the code cells on the page to be editable. It takes some time for the
 connection to be made behind the scenes, during which you will see “Waiting
 for kernel”. After the connection has been made, you can edit all the code
-cells on the page and re-run them.</p></li>
+cells on the page and re-run them. If the connection fails, then first launch
+the Binder site; this can take a long time. After it succeeds and loads the
+textbook page as a Jupyter notebook, you can close Binder, reload the textbook
+page, and launch Live Code again. It should now be successful at connecting
+relatively quickly.</p></li>
 </ul>
 <p>Try interacting with the cell above now to make it print a string of your choice.
 How about: <code class="docutils literal notranslate"><span class="pre">&quot;Camels</span> <span class="pre">are</span> <span class="pre">bae.&quot;</span></code></p>

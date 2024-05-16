@@ -15,7 +15,7 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-(** A signature for Lwt-style promises, with better names *)
+(** A signature for Lwt-style promises, with better names. *)
 module type PROMISE = sig
   type 'a state =
     | Pending
@@ -33,7 +33,7 @@ module type PROMISE = sig
       [x]. *)
   val return : 'a -> 'a promise
 
-  (** [state p] is the state of the promise *)
+  (** [state p] is the state of the promise. *)
   val state : 'a promise -> 'a state
 
   (** [fulfill r x] resolves the promise [p] associated with [r] with
@@ -50,13 +50,13 @@ module type PROMISE = sig
       When the promise is fulfilled, the callback will be run
       on the promises's contents.  If the promise is never
       fulfilled, the callback will never run. *)
-  val (>>=) : 'a promise -> ('a -> 'b promise) -> 'b promise
+  val ( >>= ) : 'a promise -> ('a -> 'b promise) -> 'b promise
 end
 
 module Promise : PROMISE = struct
   type 'a state = Pending | Fulfilled of 'a | Rejected of exn
 
-  (** RI: the input may not be [Pending] *)
+  (** RI: the input may not be [Pending]. *)
   type 'a handler = 'a state -> unit
 
   (** RI: if [state <> Pending] then [handlers = []]. *)
@@ -90,7 +90,7 @@ module Promise : PROMISE = struct
 
   let state p = p.state
 
-  (** requires: [st] may not be [Pending] *)
+  (** Requires: [st] may not be [Pending]. *)
   let fulfill_or_reject (r : 'a resolver) (st : 'a state) =
     assert (st <> Pending);
     let handlers = r.handlers in
@@ -99,16 +99,16 @@ module Promise : PROMISE = struct
     List.iter (fun f -> f st) handlers
 
   let reject r x =
-    fulfill_or_reject r (Rejected x)
+    resolve r (Rejected x)
 
   let fulfill r x =
-    fulfill_or_reject r (Fulfilled x)
+    resolve r (Fulfilled x)
 
   let handler (resolver : 'a resolver) : 'a handler
     = function
       | Pending -> failwith "handler RI violated"
       | Rejected exc -> reject resolver exc
-      | Fulfilled x -> resolve resolver x
+      | Fulfilled x -> fulfill resolver x
 
   let handler_of_callback
       (callback : 'a -> 'b promise)
@@ -119,11 +119,11 @@ module Promise : PROMISE = struct
       | Fulfilled x ->
         let promise = callback x in
         match promise.state with
-        | Fulfilled y -> resolve resolver y
+        | Fulfilled y -> fulfill resolver y
         | Rejected exc -> reject resolver exc
         | Pending -> enqueue (handler resolver) promise
 
-  let (>>=)
+  let ( >>= )
       (input_promise : 'a promise)
       (callback : 'a -> 'b promise) : 'b promise
     =

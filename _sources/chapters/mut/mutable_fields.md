@@ -163,15 +163,15 @@ module type MutableStack = sig
   (** Raised if [peek] or [pop] encounter the empty stack. *)
   exception Empty
 
-  (** [empty ()] is the empty stack *)
+  (** [empty ()] is the empty stack. *)
   val empty : unit -> 'a t
 
   (** [push x s] modifies [s] to make [x] its top element.
       The rest of the elements are unchanged. *)
   val push : 'a -> 'a t -> unit
 
-  (**[peek s] is the top element of [s].
-     Raises: [Empty] if [s] is empty. *)
+  (** [peek s] is the top element of [s].
+      Raises: [Empty] if [s] is empty. *)
   val peek : 'a t -> 'a
 
   (** [pop s] removes the top element of [s].

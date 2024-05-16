@@ -765,7 +765,7 @@ used primarily by the client.</p>
 to make the interface clearer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** A signature for Lwt-style promises, with better names *)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** A signature for Lwt-style promises, with better names. *)</span>
 <span class="k">module</span> <span class="k">type</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">sig</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
     <span class="o">|</span> <span class="nc">Pending</span>
@@ -783,7 +783,7 @@ to make the interface clearer.</p>
 <span class="c">      [x]. *)</span>
   <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  <span class="c">(** [state p] is the state of the promise *)</span>
+  <span class="c">(** [state p] is the state of the promise. *)</span>
   <span class="k">val</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span>
 
   <span class="c">(** [fulfill r x] fulfills the promise [p] associated with [r] with</span>
@@ -1516,7 +1516,7 @@ off just like before:</p>
 mutable fields. The first field is the state of the promise, and it corresponds
 to the <code class="docutils literal notranslate"><span class="pre">ref</span></code> we used before. The second field is more interesting and is
 discussed below.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** RI: the input may not be [Pending] *)</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** RI: the input may not be [Pending]. *)</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
   <span class="c">(** RI: if [state &lt;&gt; Pending] then [handlers = []]. *)</span>
@@ -1570,8 +1570,8 @@ we have to update a few of the functions in trivial ways:</p>
 promise, the first thing we need to do is to call <code class="docutils literal notranslate"><span class="pre">write_once</span></code> on it, as we did
 before. Now we also need to process the handlers. Before doing so, we mutate the
 handlers list to be empty to ensure that the RI holds.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** requires: [st] may not be [Pending] *)</span>
-  <span class="k">let</span> <span class="n">resolve</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** Requires: [st] may not be [Pending]. *)</span>
+  <span class="k">let</span> <span class="n">fulfill_or_reject</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
     <span class="k">assert</span> <span class="o">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="nc">Pending</span><span class="o">);</span>
     <span class="k">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="k">in</span>
     <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="bp">[]</span><span class="o">;</span>
@@ -1666,7 +1666,7 @@ it’s the OS that provides the concurrency.</p>
 <p>Here’s all of that code in one executable block:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** A signature for Lwt-style promises, with better names *)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** A signature for Lwt-style promises, with better names. *)</span>
 <span class="k">module</span> <span class="k">type</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">sig</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
     <span class="o">|</span> <span class="nc">Pending</span>
@@ -1684,7 +1684,7 @@ it’s the OS that provides the concurrency.</p>
 <span class="c">      [x]. *)</span>
   <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  <span class="c">(** [state p] is the state of the promise *)</span>
+  <span class="c">(** [state p] is the state of the promise. *)</span>
   <span class="k">val</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span>
 
   <span class="c">(** [fulfill r x] resolves the promise [p] associated with [r] with</span>
@@ -1707,7 +1707,7 @@ it’s the OS that provides the concurrency.</p>
 <span class="k">module</span> <span class="nc">Promise</span> <span class="o">:</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
-  <span class="c">(** RI: the input may not be [Pending] *)</span>
+  <span class="c">(** RI: the input may not be [Pending]. *)</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
   <span class="c">(** RI: if [state &lt;&gt; Pending] then [handlers = []]. *)</span>
@@ -1741,8 +1741,8 @@ it’s the OS that provides the concurrency.</p>
 
   <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span>
 
-  <span class="c">(** requires: [st] may not be [Pending] *)</span>
-  <span class="k">let</span> <span class="n">resolve</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
+  <span class="c">(** Requires: [st] may not be [Pending]. *)</span>
+  <span class="k">let</span> <span class="n">fulfill_or_reject</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
     <span class="k">assert</span> <span class="o">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="nc">Pending</span><span class="o">);</span>
     <span class="k">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="k">in</span>
     <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="bp">[]</span><span class="o">;</span>
@@ -1750,10 +1750,10 @@ it’s the OS that provides the concurrency.</p>
     <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">st</span><span class="o">)</span> <span class="n">handlers</span>
 
   <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
+    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
 
   <span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
+    <span class="n">fulfill_or_reject</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
 
   <span class="k">let</span> <span class="n">handler</span> <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span>
     <span class="o">=</span> <span class="k">function</span>

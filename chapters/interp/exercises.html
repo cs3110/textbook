@@ -922,8 +922,8 @@ evaluation is instead rather <em>tree-like</em>: evaluations have a nested, recu
 structure. Here’s an example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;{}, (3 + 5) * 2&gt; ==&gt; 16          (op rule)
     because &lt;{}, (3 + 5)&gt; ==&gt; 8   (op rule)
-        because &lt;{},3&gt; ==&gt; 3      (int const rule)
-        and     &lt;{},5&gt; ==&gt; 5      (int const rule)
+        because &lt;{}, 3&gt; ==&gt; 3     (int const rule)
+        and     &lt;{}, 5&gt; ==&gt; 5     (int const rule)
         and 3+5 is 8
     and &lt;{}, 2&gt; ==&gt; 2             (int const rule)
     and 8*2 is 16

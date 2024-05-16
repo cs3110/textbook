@@ -632,13 +632,13 @@ items of type <code class="docutils literal notranslate"><span class="pre">'a</s
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** A set is an unordered collection in which multiplicity is ignored. *)</span>
 <span class="k">module</span> <span class="k">type</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">sig</span>
 
-  <span class="c">(** [&#39;a t] represents a set whose elements are of type [&#39;a] *)</span>
+  <span class="c">(** [&#39;a t] represents a set whose elements are of type [&#39;a]. *)</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
-  <span class="c">(** [empty] is the set containing no elements *)</span>
+  <span class="c">(** [empty] is the set containing no elements. *)</span>
   <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
-  <span class="c">(** [mem x s] is whether [x] is a member of set [s] *)</span>
+  <span class="c">(** [mem x s] is whether [x] is a member of set [s]. *)</span>
   <span class="k">val</span> <span class="n">mem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
 
   <span class="c">(** [add x s] is the set containing all the elements of [s]</span>
@@ -649,7 +649,7 @@ items of type <code class="docutils literal notranslate"><span class="pre">'a</s
 <span class="c">      minus [x]. *)</span>
   <span class="k">val</span> <span class="n">rem</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
-  <span class="c">(** [size s] is the cardinality of [s] *)</span>
+  <span class="c">(** [size s] is the cardinality of [s]. *)</span>
   <span class="k">val</span> <span class="n">size</span><span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
 
   <span class="c">(** [union s1 s2] is the set containing all the elements that</span>
@@ -692,7 +692,7 @@ implement this abstraction.</p>
 <p>As we’ve seen before, one easy way is as a list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Implementation of sets as lists with duplicates *)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Implementation of sets as lists with duplicates. *)</span>
 <span class="k">module</span> <span class="nc">ListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
   <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
@@ -728,7 +728,7 @@ type, yet some important aspects of the implementation (<code class="docutils li
 <code class="docutils literal notranslate"><span class="pre">union</span></code>) are quite different.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Implementation of sets as lists without duplicates *)</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Implementation of sets as lists without duplicates. *)</span>
 <span class="k">module</span> <span class="nc">UniqListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
   <span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="bp">[]</span>
@@ -983,7 +983,7 @@ the rep invariant is being broken.</p>
 <span class="k">module</span> <span class="nc">UniqListSet</span> <span class="o">:</span> <span class="nc">Set</span> <span class="o">=</span> <span class="k">struct</span>
 
   <span class="c">(** Abstraction function: The list [[a1; ...; an]] represents the</span>
-<span class="c">      set {a1, ..., an}. The empty list [[]] represents the empty set [{}].</span>
+<span class="c">      set [{a1, ..., an}]. The empty list [[]] represents the empty set [{}].</span>
 <span class="c">      Representation invariant: the list contains no duplicates. *)</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
 

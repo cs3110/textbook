@@ -619,7 +619,7 @@ left or right in a tree to find a particular key.</p>
 <p><strong>Exercise: fraction [★★★]</strong></p>
 <p>Write a module that implements the <code class="docutils literal notranslate"><span class="pre">Fraction</span></code> module type below:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Fraction</span> <span class="o">=</span> <span class="k">sig</span>
-  <span class="c">(* A fraction is a rational number p/q, where q != 0.*)</span>
+  <span class="c">(* A fraction is a rational number p/q, where q != 0. *)</span>
   <span class="k">type</span> <span class="n">t</span>
 
   <span class="c">(** [make n d] is n/d. Requires d != 0. *)</span>
@@ -877,7 +877,7 @@ response from one phrase will change in a helpful way. Explain why.</p>
 <hr class="docutils" />
 <p><strong>Exercise: refactor arith [★★★★]</strong></p>
 <p>Download this file: <a href="../../code/algebra.ml">algebra.ml</a>. It
-contains two signatures and four structures:</p>
+contains these signatures and structures:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Ring</span></code> is signature that describes the algebraic structure called a <em><a class="reference external" href="https://en.wikipedia.org/wiki/Ring_(mathematics)">ring</a></em>,
 which is an abstraction of the addition and multiplication operators.</p></li>
@@ -916,7 +916,7 @@ elsewhere. By “directly defined” we mean a definition of the form
 <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">name</span> <span class="pre">=</span> <span class="pre">...</span></code>. An indirect definition would be one that results from an
 <code class="docutils literal notranslate"><span class="pre">include</span></code> or a functor application.</p></li>
 <li><p>The rational structures can both be produced by a single functor that is
-applied once to <code class="docutils literal notranslate"><span class="pre">IntField</span></code> and once to <code class="docutils literal notranslate"><span class="pre">FloatField</span></code>.</p></li>
+applied once to <code class="docutils literal notranslate"><span class="pre">IntRing</span></code> and once to <code class="docutils literal notranslate"><span class="pre">FloatRing</span></code>.</p></li>
 <li><p>It’s possible to eliminate all duplication of <code class="docutils literal notranslate"><span class="pre">of_int</span></code>, such that it is
 directly defined exactly once, and all structures reuse that definition; and
 such that it is directly declared in only one signature. This will require the

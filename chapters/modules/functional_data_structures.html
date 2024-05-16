@@ -888,6 +888,7 @@ our stack module:</p>
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">sig</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="k">exception</span> <span class="nc">Empty</span>
   <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
   <span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
   <span class="k">val</span> <span class="n">push</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
@@ -924,6 +925,7 @@ our stack module:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Stack =
   sig
     type &#39;a t
+    exception Empty
     val empty : &#39;a t
     val is_empty : &#39;a t -&gt; bool
     val push : &#39;a -&gt; &#39;a t -&gt; &#39;a t
@@ -1323,7 +1325,7 @@ structure might be expected to support, but these will suffice for now.</p>
   <span class="c">(** [&#39;a t] is the type of sets whose elements are of type [&#39;a]. *)</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
-  <span class="c">(** [empty] is the empty set *)</span>
+  <span class="c">(** [empty] is the empty set. *)</span>
   <span class="k">val</span> <span class="n">empty</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
   <span class="c">(** [mem x s] is whether [x] is an element of [s]. *)</span>
@@ -1333,8 +1335,8 @@ structure might be expected to support, but these will suffice for now.</p>
   <span class="k">val</span> <span class="n">add</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
   <span class="c">(** [elements s] is a list containing the elements of [s].  No guarantee</span>
-<span class="c">      is made about the ordering of that list, but each is guaranteed to</span>
-<span class="c">      be unique. *)</span>
+<span class="c">      is made about the ordering of that list, but each element is guaranteed</span>
+<span class="c">      to be unique. *)</span>
   <span class="k">val</span> <span class="n">elements</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
 <span class="k">end</span>
 </pre></div>

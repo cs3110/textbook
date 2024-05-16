@@ -148,7 +148,7 @@ depending on whether the constructor name `C` is non-constant or constant.
 
 **Dynamic semantics.**
 
-* If `e==>v` then `C e ==> C v`, assuming `C` is non-constant.
+* If `e ==> v` then `C e ==> C v`, assuming `C` is non-constant.
 * `C` is already a value, assuming `C` is constant.
 
 **Static semantics.**
@@ -226,10 +226,10 @@ here is a variant type that could be used to represent something similar to
 ```{code-cell} ocaml
 type intlist = Nil | Cons of int * intlist
 
-let lst3 = Cons (3, Nil)  (* similar to 3 :: [] or [3]*)
+let lst3 = Cons (3, Nil)  (* similar to 3 :: [] or [3] *)
 let lst123 = Cons(1, Cons(2, lst3)) (* similar to [1; 2; 3] *)
 
-let rec sum (l : intlist) : int=
+let rec sum (l : intlist) : int =
   match l with
   | Nil -> 0
   | Cons (h, t) -> h + sum t

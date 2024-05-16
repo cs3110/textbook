@@ -190,34 +190,32 @@ patterns. As we know, `List.hd []` will raise an exception containing the value
 `Failure "hd"`. The *exception pattern* `exception (Failure s)` matches that
 value. So the above code will evaluate to `"hd"`.
 
-In general, exception patterns are a kind of syntactic sugar. Consider this
-code:
+Exception patterns are a kind of syntactic sugar. Consider this code for example:
 ```ocaml
 match e with
   | p1 -> e1
-  | ...
-  | pn -> en
+  | exception p2 -> e2
+  | p3 -> e3
+  | exception p4 -> e4
 ```
-Some of the patterns `p1..pn` could be exception patterns of the form
-`exception q`. Let `q1..qn` be that subsequence of patterns (without the
-`exception` keyword), and let `r1..rm` be the subsequence of non-exception
-patterns. Then we can rewrite the code as:
+
+We can rewrite the code to eliminate the exception pattern:
 ```ocaml
-try
+try 
   match e with
-    | r1 -> e1
-    | ...
-    | rn -> en
+    | p1 -> e1
+    | p3 -> e3
 with
-  | q1 -> e1
-  | ...
-  | qm -> em
-```
-Which is to say: try evaluating `e`. If it produces an exception packet, use the
-exception patterns from the original match expression to handle that packet. If
-it doesn't produce an exception packet but instead produces a non-exception
-value, use the non-exception patterns from the original match expression to
-match that value.
+  | p2 -> e2
+  | p4 -> e4
+``` 
+
+In general if there are both exception and non-exception patterns, evaluation 
+proceeds as follows: try evaluating `e`. If it produces an exception packet,
+use the exception patterns from the original match expression to handle that
+packet. If it doesn't produce an exception packet but instead produces a 
+non-exception value, use the non-exception patterns from the original match 
+expression to match that value.
 
 ## Exceptions and OUnit
 
@@ -233,8 +231,8 @@ let tests = "suite" >::: [
 
 let _ = run_test_tt_main tests
 ```
-The expression `assert_raises exc (fun () -> e)` checks to see whether
-expression `e` raises exception `exc`. If so, the OUnit test case succeeds,
+The expression `assert_raises exn (fun () -> e)` checks to see whether
+expression `e` raises exception `exn`. If so, the OUnit test case succeeds,
 otherwise it fails.
 
 Note that the second argument of `assert_raises` is a *function* of type `unit

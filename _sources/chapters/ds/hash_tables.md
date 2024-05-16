@@ -150,9 +150,9 @@ module ListMap : Map = struct
   let keys m = m |> List.map fst |> List.sort_uniq Stdlib.compare
 
   (** [binding m k] is [(k, v)], where [v] is the value that [k]
-       binds in [m].
-       Requires: [k] is a key in [m].
-       Efficiency: O(n). *)
+      binds in [m].
+      Requires: [k] is a key in [m].
+      Efficiency: O(n). *)
   let binding m k = (k, List.assoc k m)
 
   (** Efficiency: O(n log n) + O(n) * O(n), which is O(n^2). *)
@@ -245,19 +245,19 @@ module ArrayMap : DirectAddressMap = struct
       RI: None. *)
   type 'v t = 'v option array
 
-  (** Efficiency: O(1) *)
+  (** Efficiency: O(1). *)
   let insert k v a = a.(k) <- Some v
 
-  (** Efficiency: O(1) *)
+  (** Efficiency: O(1). *)
   let find k a = a.(k)
 
-  (** Efficiency: O(1) *)
+  (** Efficiency: O(1). *)
   let remove k a = a.(k) <- None
 
-  (** Efficiency: O(c) *)
+  (** Efficiency: O(c). *)
   let create c = Array.make c None
 
-  (** Efficiency: O(c) *)
+  (** Efficiency: O(c). *)
   let of_list c lst =
     (* O(c) *)
     let a = create c in
@@ -265,7 +265,7 @@ module ArrayMap : DirectAddressMap = struct
     List.iter (fun (k, v) -> insert k v a) lst;
     a
 
-  (** Efficiency: O(c) *)
+  (** Efficiency: O(c). *)
   let bindings a =
     let bs = ref [] in
     (* O(1) *)
@@ -410,11 +410,11 @@ Here are the AF and RI:
       that represents the map
         {k11:v11, k12:v12, ...,
          k21:v21, k22:v22, ...,  ...}.
-      RI: No key appears more than once in array (so, no
+      RI: No key appears more than once in the array (so, no
         duplicate keys in association lists).  All keys are
         in the right buckets: if [k] is in [buckets] at index
         [b] then [hash(k) = b]. The output of [hash] must always
-        be non-negative. [hash] must run in constant time.*)
+        be non-negative. [hash] must run in constant time. *)
 ```
 
 What would the efficiency of `insert`, `find`, and `remove` be for this rep
@@ -502,7 +502,7 @@ discussed above.
 :tags: ["hide-output"]
 module HashMap : TableMap = struct
 
-  (** AF and RI: above *)
+  (** AF and RI: above. *)
   type ('k, 'v) t = {
     hash : 'k -> int;
     mutable size : int;
@@ -510,7 +510,7 @@ module HashMap : TableMap = struct
   }
 
   (** [capacity tab] is the number of buckets in [tab].
-      Efficiency: O(1) *)
+      Efficiency: O(1). *)
   let capacity {buckets} =
     Array.length buckets
 
@@ -519,20 +519,20 @@ module HashMap : TableMap = struct
   let load_factor tab =
     float_of_int tab.size /. float_of_int (capacity tab)
 
-  (** Efficiency: O(n) *)
+  (** Efficiency: O(n). *)
   let create hash n =
     {hash; size = 0; buckets = Array.make n []}
 
   (** [index k tab] is the index at which key [k] should be stored in the
       buckets of [tab].
-      Efficiency: O(1) *)
+      Efficiency: O(1). *)
   let index k tab =
     (tab.hash k) mod (capacity tab)
 
   (** [insert_no_resize k v tab] inserts a binding from [k] to [v] in [tab]
       and does not resize the table, regardless of what happens to the
       load factor.
-      Efficiency: expected O(L) *)
+      Efficiency: expected O(L). *)
   let insert_no_resize k v tab =
     let b = index k tab in (* O(1) *)
     let old_bucket = tab.buckets.(b) in
@@ -572,18 +572,18 @@ module HashMap : TableMap = struct
       rehash tab (capacity tab / 2)
     else ()
 
-  (** Efficiency: O(n) *)
+  (** Efficiency: O(n). *)
   let insert k v tab =
     insert_no_resize k v tab; (* O(L) *)
     resize_if_needed tab (* O(n) *)
 
-  (** Efficiency: expected O(L) *)
+  (** Efficiency: expected O(L). *)
   let find k tab =
     List.assoc_opt k tab.buckets.(index k tab)
 
   (** [remove_no_resize k tab] removes [k] from [tab] and does not trigger
       a resize, regardless of what happens to the load factor.
-      Efficiency: expected O(L) *)
+      Efficiency: expected O(L). *)
   let remove_no_resize k tab =
     let b = index k tab in
     let old_bucket = tab.buckets.(b) in
@@ -592,12 +592,12 @@ module HashMap : TableMap = struct
       tab.size <- tab.size - 1;
     ()
 
-  (** Efficiency: O(n) *)
+  (** Efficiency: O(n). *)
   let remove k tab =
     remove_no_resize k tab; (* O(L) *)
     resize_if_needed tab (* O(n) *)
 
-  (** Efficiency: O(n) *)
+  (** Efficiency: O(n). *)
   let bindings tab =
     Array.fold_left
       (fun acc bucket ->
@@ -607,7 +607,7 @@ module HashMap : TableMap = struct
            acc bucket)
       [] tab.buckets
 
-  (** Efficiency: O(n^2) *)
+  (** Efficiency: O(n^2). *)
   let of_list hash lst =
     let m = create hash (List.length lst) in  (* O(n) *)
     List.iter (fun (k, v) -> insert k v m) lst; (* n * O(n) is O(n^2) *)

@@ -193,7 +193,7 @@ Here is an interface for our own Lwt-style promises. The names have been changed
 to make the interface clearer.
 
 ```{code-cell} ocaml
-(** A signature for Lwt-style promises, with better names *)
+(** A signature for Lwt-style promises, with better names. *)
 module type PROMISE = sig
   type 'a state =
     | Pending
@@ -211,7 +211,7 @@ module type PROMISE = sig
       [x]. *)
   val return : 'a -> 'a promise
 
-  (** [state p] is the state of the promise *)
+  (** [state p] is the state of the promise. *)
   val state : 'a promise -> 'a state
 
   (** [fulfill r x] fulfills the promise [p] associated with [r] with
@@ -885,7 +885,7 @@ to the `ref` we used before. The second field is more interesting and is
 discussed below.
 
 ```ocaml
-  (** RI: the input may not be [Pending] *)
+  (** RI: the input may not be [Pending]. *)
   type 'a handler = 'a state -> unit
 
   (** RI: if [state <> Pending] then [handlers = []]. *)
@@ -948,8 +948,8 @@ before. Now we also need to process the handlers. Before doing so, we mutate the
 handlers list to be empty to ensure that the RI holds.
 
 ```ocaml
-  (** requires: [st] may not be [Pending] *)
-  let resolve (r : 'a resolver) (st : 'a state) =
+  (** Requires: [st] may not be [Pending]. *)
+  let fulfill_or_reject (r : 'a resolver) (st : 'a state) =
     assert (st <> Pending);
     let handlers = r.handlers in
     r.handlers <- [];
@@ -1059,7 +1059,7 @@ it's the OS that provides the concurrency.
 Here's all of that code in one executable block:
 
 ```{code-cell} ocaml
-(** A signature for Lwt-style promises, with better names *)
+(** A signature for Lwt-style promises, with better names. *)
 module type PROMISE = sig
   type 'a state =
     | Pending
@@ -1077,7 +1077,7 @@ module type PROMISE = sig
       [x]. *)
   val return : 'a -> 'a promise
 
-  (** [state p] is the state of the promise *)
+  (** [state p] is the state of the promise. *)
   val state : 'a promise -> 'a state
 
   (** [fulfill r x] resolves the promise [p] associated with [r] with
@@ -1100,7 +1100,7 @@ end
 module Promise : PROMISE = struct
   type 'a state = Pending | Fulfilled of 'a | Rejected of exn
 
-  (** RI: the input may not be [Pending] *)
+  (** RI: the input may not be [Pending]. *)
   type 'a handler = 'a state -> unit
 
   (** RI: if [state <> Pending] then [handlers = []]. *)
@@ -1134,8 +1134,8 @@ module Promise : PROMISE = struct
 
   let state p = p.state
 
-  (** requires: [st] may not be [Pending] *)
-  let resolve (r : 'a resolver) (st : 'a state) =
+  (** Requires: [st] may not be [Pending]. *)
+  let fulfill_or_reject (r : 'a resolver) (st : 'a state) =
     assert (st <> Pending);
     let handlers = r.handlers in
     r.handlers <- [];
@@ -1143,10 +1143,10 @@ module Promise : PROMISE = struct
     List.iter (fun f -> f st) handlers
 
   let reject r x =
-    resolve r (Rejected x)
+    fulfill_or_reject r (Rejected x)
 
   let fulfill r x =
-    resolve r (Fulfilled x)
+    fulfill_or_reject r (Fulfilled x)
 
   let handler (resolver : 'a resolver) : 'a handler
     = function

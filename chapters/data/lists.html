@@ -982,17 +982,16 @@ exact length the list must be.</p></li>
 <p>Now we can say how to evaluate <code class="docutils literal notranslate"><span class="pre">match</span> <span class="pre">e</span> <span class="pre">with</span> <span class="pre">p1</span> <span class="pre">-&gt;</span> <span class="pre">e1</span> <span class="pre">|</span> <span class="pre">...</span> <span class="pre">|</span> <span class="pre">pn</span> <span class="pre">-&gt;</span> <span class="pre">en</span></code>:</p>
 <ul class="simple">
 <li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">e</span></code> to a value <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
-<li><p>Match <code class="docutils literal notranslate"><span class="pre">v</span></code> against <code class="docutils literal notranslate"><span class="pre">p1</span></code>, then against <code class="docutils literal notranslate"><span class="pre">p2</span></code>, and so on, in the order they appear
-in the match expression.</p></li>
+<li><p>Attempt to match <code class="docutils literal notranslate"><span class="pre">v</span></code> against <code class="docutils literal notranslate"><span class="pre">p1</span></code>, then against <code class="docutils literal notranslate"><span class="pre">p2</span></code>, and so on, in the order
+they appear in the match expression.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">v</span></code> does not match against any of the patterns, then evaluation of the
 match expression raises a <code class="docutils literal notranslate"><span class="pre">Match_failure</span></code> exception. We haven’t yet discussed
 exceptions in OCaml, but you’re surely familiar with them from other
 languages. We’ll come back to exceptions near the end of this chapter, after
 we’ve covered some of the other built-in data structures in OCaml.</p></li>
-<li><p>Otherwise, stop trying to match at the first time a match succeeds against a
-pattern. Let <code class="docutils literal notranslate"><span class="pre">pi</span></code> be that pattern and let <span class="math notranslate nohighlight">\(b\)</span> be the variable bindings
-produced by matching <code class="docutils literal notranslate"><span class="pre">v</span></code> against <code class="docutils literal notranslate"><span class="pre">pi</span></code>.</p></li>
-<li><p>Substitute those bindings inside <code class="docutils literal notranslate"><span class="pre">ei</span></code>, producing a new expression <code class="docutils literal notranslate"><span class="pre">e'</span></code>.</p></li>
+<li><p>Otherwise, let <code class="docutils literal notranslate"><span class="pre">pi</span></code> be the first pattern that matches, and let <span class="math notranslate nohighlight">\(b\)</span> be the
+variable bindings produced by matching <code class="docutils literal notranslate"><span class="pre">v</span></code> against <code class="docutils literal notranslate"><span class="pre">pi</span></code>.</p></li>
+<li><p>Substitute those bindings <span class="math notranslate nohighlight">\(b\)</span> inside <code class="docutils literal notranslate"><span class="pre">ei</span></code>, producing a new expression <code class="docutils literal notranslate"><span class="pre">e'</span></code>.</p></li>
 <li><p>Evaluate <code class="docutils literal notranslate"><span class="pre">e'</span></code> to a value <code class="docutils literal notranslate"><span class="pre">v'</span></code>.</p></li>
 <li><p>The result of the entire match expression is <code class="docutils literal notranslate"><span class="pre">v'</span></code>.</p></li>
 </ul>

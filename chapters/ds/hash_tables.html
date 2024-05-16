@@ -752,9 +752,9 @@ is an implementation of <code class="docutils literal notranslate"><span class="
   <span class="k">let</span> <span class="n">keys</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">fst</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">sort_uniq</span> <span class="nn">Stdlib</span><span class="p">.</span><span class="n">compare</span>
 
   <span class="c">(** [binding m k] is [(k, v)], where [v] is the value that [k]</span>
-<span class="c">       binds in [m].</span>
-<span class="c">       Requires: [k] is a key in [m].</span>
-<span class="c">       Efficiency: O(n). *)</span>
+<span class="c">      binds in [m].</span>
+<span class="c">      Requires: [k] is a key in [m].</span>
+<span class="c">      Efficiency: O(n). *)</span>
   <span class="k">let</span> <span class="n">binding</span> <span class="n">m</span> <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="nn">List</span><span class="p">.</span><span class="n">assoc</span> <span class="n">k</span> <span class="n">m</span><span class="o">)</span>
 
   <span class="c">(** Efficiency: O(n log n) + O(n) * O(n), which is O(n^2). *)</span>
@@ -889,19 +889,19 @@ empty table is created. That leads to the following interface:</p>
 <span class="c">      RI: None. *)</span>
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">v</span> <span class="n">option</span> <span class="kt">array</span>
 
-  <span class="c">(** Efficiency: O(1) *)</span>
+  <span class="c">(** Efficiency: O(1). *)</span>
   <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.(</span><span class="n">k</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="nc">Some</span> <span class="n">v</span>
 
-  <span class="c">(** Efficiency: O(1) *)</span>
+  <span class="c">(** Efficiency: O(1). *)</span>
   <span class="k">let</span> <span class="n">find</span> <span class="n">k</span> <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.(</span><span class="n">k</span><span class="o">)</span>
 
-  <span class="c">(** Efficiency: O(1) *)</span>
+  <span class="c">(** Efficiency: O(1). *)</span>
   <span class="k">let</span> <span class="n">remove</span> <span class="n">k</span> <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.(</span><span class="n">k</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="nc">None</span>
 
-  <span class="c">(** Efficiency: O(c) *)</span>
+  <span class="c">(** Efficiency: O(c). *)</span>
   <span class="k">let</span> <span class="n">create</span> <span class="n">c</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">make</span> <span class="n">c</span> <span class="nc">None</span>
 
-  <span class="c">(** Efficiency: O(c) *)</span>
+  <span class="c">(** Efficiency: O(c). *)</span>
   <span class="k">let</span> <span class="n">of_list</span> <span class="n">c</span> <span class="n">lst</span> <span class="o">=</span>
     <span class="c">(* O(c) *)</span>
     <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="n">create</span> <span class="n">c</span> <span class="k">in</span>
@@ -909,7 +909,7 @@ empty table is created. That leads to the following interface:</p>
     <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">a</span><span class="o">)</span> <span class="n">lst</span><span class="o">;</span>
     <span class="n">a</span>
 
-  <span class="c">(** Efficiency: O(c) *)</span>
+  <span class="c">(** Efficiency: O(c). *)</span>
   <span class="k">let</span> <span class="n">bindings</span> <span class="n">a</span> <span class="o">=</span>
     <span class="k">let</span> <span class="n">bs</span> <span class="o">=</span> <span class="n">ref</span> <span class="bp">[]</span> <span class="k">in</span>
     <span class="c">(* O(1) *)</span>
@@ -1067,11 +1067,11 @@ table, since that would be expensive to compute by iterating over <code class="d
       <span class="n">that</span> <span class="n">represents</span> <span class="n">the</span> <span class="nb">map</span>
         <span class="p">{</span><span class="n">k11</span><span class="p">:</span><span class="n">v11</span><span class="p">,</span> <span class="n">k12</span><span class="p">:</span><span class="n">v12</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>
          <span class="n">k21</span><span class="p">:</span><span class="n">v21</span><span class="p">,</span> <span class="n">k22</span><span class="p">:</span><span class="n">v22</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>  <span class="o">...</span><span class="p">}</span><span class="o">.</span>
-      <span class="n">RI</span><span class="p">:</span> <span class="n">No</span> <span class="n">key</span> <span class="n">appears</span> <span class="n">more</span> <span class="n">than</span> <span class="n">once</span> <span class="ow">in</span> <span class="n">array</span> <span class="p">(</span><span class="n">so</span><span class="p">,</span> <span class="n">no</span>
+      <span class="n">RI</span><span class="p">:</span> <span class="n">No</span> <span class="n">key</span> <span class="n">appears</span> <span class="n">more</span> <span class="n">than</span> <span class="n">once</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">array</span> <span class="p">(</span><span class="n">so</span><span class="p">,</span> <span class="n">no</span>
         <span class="n">duplicate</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">association</span> <span class="n">lists</span><span class="p">)</span><span class="o">.</span>  <span class="n">All</span> <span class="n">keys</span> <span class="n">are</span>
         <span class="ow">in</span> <span class="n">the</span> <span class="n">right</span> <span class="n">buckets</span><span class="p">:</span> <span class="k">if</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">in</span> <span class="p">[</span><span class="n">buckets</span><span class="p">]</span> <span class="n">at</span> <span class="n">index</span>
         <span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="n">then</span> <span class="p">[</span><span class="nb">hash</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="n">b</span><span class="p">]</span><span class="o">.</span> <span class="n">The</span> <span class="n">output</span> <span class="n">of</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="n">must</span> <span class="n">always</span>
-        <span class="n">be</span> <span class="n">non</span><span class="o">-</span><span class="n">negative</span><span class="o">.</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="n">must</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">constant</span> <span class="n">time</span><span class="o">.*</span><span class="p">)</span>
+        <span class="n">be</span> <span class="n">non</span><span class="o">-</span><span class="n">negative</span><span class="o">.</span> <span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="n">must</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">constant</span> <span class="n">time</span><span class="o">.</span> <span class="o">*</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>What would the efficiency of <code class="docutils literal notranslate"><span class="pre">insert</span></code>, <code class="docutils literal notranslate"><span class="pre">find</span></code>, and <code class="docutils literal notranslate"><span class="pre">remove</span></code> be for this rep
@@ -1148,7 +1148,7 @@ discussed above.</p>
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">HashMap</span> <span class="o">:</span> <span class="nc">TableMap</span> <span class="o">=</span> <span class="k">struct</span>
 
-  <span class="c">(** AF and RI: above *)</span>
+  <span class="c">(** AF and RI: above. *)</span>
   <span class="k">type</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">k</span><span class="o">,</span> <span class="k">&#39;</span><span class="n">v</span><span class="o">)</span> <span class="n">t</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">hash</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">;</span>
     <span class="k">mutable</span> <span class="n">size</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span>
@@ -1156,7 +1156,7 @@ discussed above.</p>
   <span class="o">}</span>
 
   <span class="c">(** [capacity tab] is the number of buckets in [tab].</span>
-<span class="c">      Efficiency: O(1) *)</span>
+<span class="c">      Efficiency: O(1). *)</span>
   <span class="k">let</span> <span class="n">capacity</span> <span class="o">{</span><span class="n">buckets</span><span class="o">}</span> <span class="o">=</span>
     <span class="nn">Array</span><span class="p">.</span><span class="n">length</span> <span class="n">buckets</span>
 
@@ -1165,20 +1165,20 @@ discussed above.</p>
   <span class="k">let</span> <span class="n">load_factor</span> <span class="n">tab</span> <span class="o">=</span>
     <span class="n">float_of_int</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">/.</span> <span class="n">float_of_int</span> <span class="o">(</span><span class="n">capacity</span> <span class="n">tab</span><span class="o">)</span>
 
-  <span class="c">(** Efficiency: O(n) *)</span>
+  <span class="c">(** Efficiency: O(n). *)</span>
   <span class="k">let</span> <span class="n">create</span> <span class="n">hash</span> <span class="n">n</span> <span class="o">=</span>
     <span class="o">{</span><span class="n">hash</span><span class="o">;</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">buckets</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">make</span> <span class="n">n</span> <span class="bp">[]</span><span class="o">}</span>
 
   <span class="c">(** [index k tab] is the index at which key [k] should be stored in the</span>
 <span class="c">      buckets of [tab].</span>
-<span class="c">      Efficiency: O(1) *)</span>
+<span class="c">      Efficiency: O(1). *)</span>
   <span class="k">let</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
     <span class="o">(</span><span class="n">tab</span><span class="o">.</span><span class="n">hash</span> <span class="n">k</span><span class="o">)</span> <span class="ow">mod</span> <span class="o">(</span><span class="n">capacity</span> <span class="n">tab</span><span class="o">)</span>
 
   <span class="c">(** [insert_no_resize k v tab] inserts a binding from [k] to [v] in [tab]</span>
 <span class="c">      and does not resize the table, regardless of what happens to the</span>
 <span class="c">      load factor.</span>
-<span class="c">      Efficiency: expected O(L) *)</span>
+<span class="c">      Efficiency: expected O(L). *)</span>
   <span class="k">let</span> <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span> <span class="o">=</span>
     <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="k">in</span> <span class="c">(* O(1) *)</span>
     <span class="k">let</span> <span class="n">old_bucket</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.(</span><span class="n">b</span><span class="o">)</span> <span class="k">in</span>
@@ -1218,18 +1218,18 @@ discussed above.</p>
       <span class="n">rehash</span> <span class="n">tab</span> <span class="o">(</span><span class="n">capacity</span> <span class="n">tab</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span>
     <span class="k">else</span> <span class="bp">()</span>
 
-  <span class="c">(** Efficiency: O(n) *)</span>
+  <span class="c">(** Efficiency: O(n). *)</span>
   <span class="k">let</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span> <span class="o">=</span>
     <span class="n">insert_no_resize</span> <span class="n">k</span> <span class="n">v</span> <span class="n">tab</span><span class="o">;</span> <span class="c">(* O(L) *)</span>
     <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="c">(* O(n) *)</span>
 
-  <span class="c">(** Efficiency: expected O(L) *)</span>
+  <span class="c">(** Efficiency: expected O(L). *)</span>
   <span class="k">let</span> <span class="n">find</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
     <span class="nn">List</span><span class="p">.</span><span class="n">assoc_opt</span> <span class="n">k</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.(</span><span class="n">index</span> <span class="n">k</span> <span class="n">tab</span><span class="o">)</span>
 
   <span class="c">(** [remove_no_resize k tab] removes [k] from [tab] and does not trigger</span>
 <span class="c">      a resize, regardless of what happens to the load factor.</span>
-<span class="c">      Efficiency: expected O(L) *)</span>
+<span class="c">      Efficiency: expected O(L). *)</span>
   <span class="k">let</span> <span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
     <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">index</span> <span class="n">k</span> <span class="n">tab</span> <span class="k">in</span>
     <span class="k">let</span> <span class="n">old_bucket</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span><span class="o">.(</span><span class="n">b</span><span class="o">)</span> <span class="k">in</span>
@@ -1238,12 +1238,12 @@ discussed above.</p>
       <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;-</span> <span class="n">tab</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
     <span class="bp">()</span>
 
-  <span class="c">(** Efficiency: O(n) *)</span>
+  <span class="c">(** Efficiency: O(n). *)</span>
   <span class="k">let</span> <span class="n">remove</span> <span class="n">k</span> <span class="n">tab</span> <span class="o">=</span>
     <span class="n">remove_no_resize</span> <span class="n">k</span> <span class="n">tab</span><span class="o">;</span> <span class="c">(* O(L) *)</span>
     <span class="n">resize_if_needed</span> <span class="n">tab</span> <span class="c">(* O(n) *)</span>
 
-  <span class="c">(** Efficiency: O(n) *)</span>
+  <span class="c">(** Efficiency: O(n). *)</span>
   <span class="k">let</span> <span class="n">bindings</span> <span class="n">tab</span> <span class="o">=</span>
     <span class="nn">Array</span><span class="p">.</span><span class="n">fold_left</span>
       <span class="o">(</span><span class="k">fun</span> <span class="n">acc</span> <span class="n">bucket</span> <span class="o">-&gt;</span>
@@ -1253,7 +1253,7 @@ discussed above.</p>
            <span class="n">acc</span> <span class="n">bucket</span><span class="o">)</span>
       <span class="bp">[]</span> <span class="n">tab</span><span class="o">.</span><span class="n">buckets</span>
 
-  <span class="c">(** Efficiency: O(n^2) *)</span>
+  <span class="c">(** Efficiency: O(n^2). *)</span>
   <span class="k">let</span> <span class="n">of_list</span> <span class="n">hash</span> <span class="n">lst</span> <span class="o">=</span>
     <span class="k">let</span> <span class="n">m</span> <span class="o">=</span> <span class="n">create</span> <span class="n">hash</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">length</span> <span class="n">lst</span><span class="o">)</span> <span class="k">in</span>  <span class="c">(* O(n) *)</span>
     <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">insert</span> <span class="n">k</span> <span class="n">v</span> <span class="n">m</span><span class="o">)</span> <span class="n">lst</span><span class="o">;</span> <span class="c">(* n * O(n) is O(n^2) *)</span>

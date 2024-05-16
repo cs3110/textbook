@@ -886,34 +886,30 @@ expression. It matches the value of <code class="docutils literal notranslate"><
 patterns. As we know, <code class="docutils literal notranslate"><span class="pre">List.hd</span> <span class="pre">[]</span></code> will raise an exception containing the value
 <code class="docutils literal notranslate"><span class="pre">Failure</span> <span class="pre">&quot;hd&quot;</span></code>. The <em>exception pattern</em> <code class="docutils literal notranslate"><span class="pre">exception</span> <span class="pre">(Failure</span> <span class="pre">s)</span></code> matches that
 value. So the above code will evaluate to <code class="docutils literal notranslate"><span class="pre">&quot;hd&quot;</span></code>.</p>
-<p>In general, exception patterns are a kind of syntactic sugar. Consider this
-code:</p>
+<p>Exception patterns are a kind of syntactic sugar. Consider this code for example:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">e</span> <span class="k">with</span>
   <span class="o">|</span> <span class="n">p1</span> <span class="o">-&gt;</span> <span class="n">e1</span>
-  <span class="o">|</span> <span class="o">...</span>
-  <span class="o">|</span> <span class="n">pn</span> <span class="o">-&gt;</span> <span class="n">en</span>
+  <span class="o">|</span> <span class="k">exception</span> <span class="n">p2</span> <span class="o">-&gt;</span> <span class="n">e2</span>
+  <span class="o">|</span> <span class="n">p3</span> <span class="o">-&gt;</span> <span class="n">e3</span>
+  <span class="o">|</span> <span class="k">exception</span> <span class="n">p4</span> <span class="o">-&gt;</span> <span class="n">e4</span>
 </pre></div>
 </div>
-<p>Some of the patterns <code class="docutils literal notranslate"><span class="pre">p1..pn</span></code> could be exception patterns of the form
-<code class="docutils literal notranslate"><span class="pre">exception</span> <span class="pre">q</span></code>. Let <code class="docutils literal notranslate"><span class="pre">q1..qn</span></code> be that subsequence of patterns (without the
-<code class="docutils literal notranslate"><span class="pre">exception</span></code> keyword), and let <code class="docutils literal notranslate"><span class="pre">r1..rm</span></code> be the subsequence of non-exception
-patterns. Then we can rewrite the code as:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
+<p>We can rewrite the code to eliminate the exception pattern:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">try</span> 
   <span class="k">match</span> <span class="n">e</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="n">r1</span> <span class="o">-&gt;</span> <span class="n">e1</span>
-    <span class="o">|</span> <span class="o">...</span>
-    <span class="o">|</span> <span class="n">rn</span> <span class="o">-&gt;</span> <span class="n">en</span>
+    <span class="o">|</span> <span class="n">p1</span> <span class="o">-&gt;</span> <span class="n">e1</span>
+    <span class="o">|</span> <span class="n">p3</span> <span class="o">-&gt;</span> <span class="n">e3</span>
 <span class="k">with</span>
-  <span class="o">|</span> <span class="n">q1</span> <span class="o">-&gt;</span> <span class="n">e1</span>
-  <span class="o">|</span> <span class="o">...</span>
-  <span class="o">|</span> <span class="n">qm</span> <span class="o">-&gt;</span> <span class="n">em</span>
+  <span class="o">|</span> <span class="n">p2</span> <span class="o">-&gt;</span> <span class="n">e2</span>
+  <span class="o">|</span> <span class="n">p4</span> <span class="o">-&gt;</span> <span class="n">e4</span>
 </pre></div>
 </div>
-<p>Which is to say: try evaluating <code class="docutils literal notranslate"><span class="pre">e</span></code>. If it produces an exception packet, use the
-exception patterns from the original match expression to handle that packet. If
-it doesn’t produce an exception packet but instead produces a non-exception
-value, use the non-exception patterns from the original match expression to
-match that value.</p>
+<p>In general if there are both exception and non-exception patterns, evaluation
+proceeds as follows: try evaluating <code class="docutils literal notranslate"><span class="pre">e</span></code>. If it produces an exception packet,
+use the exception patterns from the original match expression to handle that
+packet. If it doesn’t produce an exception packet but instead produces a
+non-exception value, use the non-exception patterns from the original match
+expression to match that value.</p>
 </section>
 <section id="exceptions-and-ounit">
 <h2><span class="section-number">3.10.4. </span>Exceptions and OUnit<a class="headerlink" href="#exceptions-and-ounit" title="Permalink to this heading">#</a></h2>
@@ -929,8 +925,8 @@ so. Here’s how to do that:</p>
 <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">run_test_tt_main</span> <span class="n">tests</span>
 </pre></div>
 </div>
-<p>The expression <code class="docutils literal notranslate"><span class="pre">assert_raises</span> <span class="pre">exc</span> <span class="pre">(fun</span> <span class="pre">()</span> <span class="pre">-&gt;</span> <span class="pre">e)</span></code> checks to see whether
-expression <code class="docutils literal notranslate"><span class="pre">e</span></code> raises exception <code class="docutils literal notranslate"><span class="pre">exc</span></code>. If so, the OUnit test case succeeds,
+<p>The expression <code class="docutils literal notranslate"><span class="pre">assert_raises</span> <span class="pre">exn</span> <span class="pre">(fun</span> <span class="pre">()</span> <span class="pre">-&gt;</span> <span class="pre">e)</span></code> checks to see whether
+expression <code class="docutils literal notranslate"><span class="pre">e</span></code> raises exception <code class="docutils literal notranslate"><span class="pre">exn</span></code>. If so, the OUnit test case succeeds,
 otherwise it fails.</p>
 <p>Note that the second argument of <code class="docutils literal notranslate"><span class="pre">assert_raises</span></code> is a <em>function</em> of type <code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>, sometimes called a “thunk”. It may seem strange to write a function with
 this type—the only possible input is <code class="docutils literal notranslate"><span class="pre">()</span></code>—but this is a common pattern in

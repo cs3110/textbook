@@ -325,7 +325,7 @@ some path in the tree has too few black nodes, breaking the Global Invariant.
 Germane and Might invented an elegant algorithm to handle that rebalancing Their
 solution is to create "doubly-black" nodes that count twice in determining the
 black height. For more, read their paper: [*Deletion: The Curse of the Red-Black
-Tree* *Journal of Functional Programming*], volume 24, issue 4, July 2014.
+Tree* *Journal of Functional Programming*][gm], volume 24, issue 4, July 2014.
 
 [gm]: https://doi.org/10.1017/S0956796814000227
 

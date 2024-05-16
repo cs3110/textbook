@@ -622,7 +622,7 @@ its result. We will call this description the <em>returns clause</em> because it
 part of the specification that describes the result of a function call. It is
 also known as a <em>postcondition</em>: it describes a condition that holds after the
 function is called. Here is an example of a returns clause:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** returns: [sqr x] is the square root of [x]. *)</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Returns: [sqr x] is the square root of [x]. *)</span>
 </pre></div>
 </div>
 <p>But we would typically leave out the <code class="docutils literal notranslate"><span class="pre">returns:</span></code>, and simply write the returns
@@ -664,7 +664,7 @@ legitimately used on some inputs. The specification rules out bad inputs with a
 also called a <em>precondition</em> because it describes a condition that must hold
 before the function is called. Here is a requires clause for <code class="docutils literal notranslate"><span class="pre">sqr</span></code>:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [sqr x] is the square root of [x]. Its relative accuracy is no worse</span>
-<span class="c">    than [1.0e-6].  Requires: [x &gt;= 0] *)</span>
+<span class="c">    than [1.0e-6].  Requires: [x &gt;= 0]. *)</span>
 </pre></div>
 </div>
 <p>This specification doesn’t say what happens when <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>, nor does it have to.
@@ -688,7 +688,7 @@ always defined; it has no precondition. However, it pushes work onto the
 implementer and may lead to a slower implementation.</p>
 <p>How can we convert <code class="docutils literal notranslate"><span class="pre">sqr</span></code> into a total function? One approach that is (too) often
 followed is to define some value that is returned in the cases that the requires
-clause would have ruled; for example:</p>
+clause would have ruled out; for example:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [sqr x] is the square root of [x] if [x &gt;= 0],</span>
 <span class="c">    with relative accuracy no worse than 1.0e-6.</span>
 <span class="c">    Otherwise, a negative number is returned. *)</span>
@@ -736,7 +736,7 @@ useful to clients.</p>
 <p>When evaluating specifications, it can be useful to imagine that a game is being
 played between two people: a <em>specifier</em> and a <em>devious programmer.</em></p>
 <p>Suppose that the specifier writes the following specification:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** returns a list *)</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** Returns a list. *)</span>
 <span class="k">val</span> <span class="n">reverse</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
 </pre></div>
 </div>
@@ -747,11 +747,11 @@ the spec with an implementation that gives the following output:</p>
 </pre></div>
 </div>
 <p>The specifier, upon realizing this, refines the spec as follows:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [reverse lst] returns a list that is the same length as [lst] *)</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [reverse lst] returns a list that is the same length as [lst]. *)</span>
 <span class="k">val</span> <span class="n">reverse</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
 </pre></div>
 </div>
-<p>But the specifier discovers that the spec still allows broken
+<p>But the devious programmer discovers that the spec still allows broken
 implementations:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">#</span> <span class="n">reverse</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">];;</span>
 <span class="o">-</span> <span class="o">:</span> <span class="kt">int</span> <span class="kt">list</span> <span class="o">=</span> <span class="o">[</span><span class="mi">0</span><span class="o">;</span> <span class="mi">0</span><span class="o">;</span> <span class="mi">0</span><span class="o">]</span>
@@ -759,10 +759,10 @@ implementations:</p>
 </div>
 <p>Finally, the specifier settles on a third spec:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** [reverse lst] returns a list [m] satisfying the following conditions:</span>
-<span class="c">    - [length lst = length m]</span>
+<span class="c">    - [length lst = length m],</span>
 <span class="c">    - for all [i], [nth m i = nth lst (n - i - 1)],</span>
 <span class="c">      where [n] is the length of [lst].</span>
-<span class="c">    For example, [reverse [1; 2; 3]] is [3; 2; 1], and [reverse []] is []. *)</span>
+<span class="c">    For example, [reverse [1; 2; 3]] is [[3; 2; 1]], and [reverse []] is [[]]. *)</span>
 <span class="k">val</span> <span class="n">reverse</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
 </pre></div>
 </div>

@@ -335,8 +335,8 @@ Now we can say how to evaluate `match e with p1 -> e1 | ... | pn -> en`:
 
 * Evaluate `e` to a value `v`.
 
-* Match `v` against `p1`, then against `p2`, and so on, in the order they appear
-  in the match expression.
+* Attempt to match `v` against `p1`, then against `p2`, and so on, in the order 
+  they appear in the match expression.
 
 * If `v` does not match against any of the patterns, then evaluation of the
   match expression raises a `Match_failure` exception. We haven't yet discussed
@@ -344,11 +344,10 @@ Now we can say how to evaluate `match e with p1 -> e1 | ... | pn -> en`:
   languages. We'll come back to exceptions near the end of this chapter, after
   we've covered some of the other built-in data structures in OCaml.
 
-* Otherwise, stop trying to match at the first time a match succeeds against a
-  pattern. Let `pi` be that pattern and let $b$ be the variable bindings
-  produced by matching `v` against `pi`.
+* Otherwise, let `pi` be the first pattern that matches, and let $b$ be the 
+  variable bindings produced by matching `v` against `pi`.
 
-* Substitute those bindings inside `ei`, producing a new expression `e'`.
+* Substitute those bindings $b$ inside `ei`, producing a new expression `e'`.
 
 * Evaluate `e'` to a value `v'`.
 
