@@ -98,8 +98,8 @@ with the code:
   for kernel". After the connection has been made, you can edit all the code
   cells on the page and re-run them. If the connection fails, then first launch
   the Binder site; this can take a long time. After it succeeds and loads the
-  textbook page as Jupyter notebook, you can close Binder, reload the textbook
-  page, launch Live Code again. It should now be successful at connecting
+  textbook page as a Jupyter notebook, you can close Binder, reload the textbook
+  page, and launch Live Code again. It should now be successful at connecting
   relatively quickly.
 
 
