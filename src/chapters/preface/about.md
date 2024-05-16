@@ -91,12 +91,17 @@ with the code:
   menu in it for commands to run cells. Note that Shift-Enter is usually a
   hotkey for running the cell that has focus.
 
-- *Live code* will actually do about the same thing, except that instead of
+- *Live Code* will actually do about the same thing, except that instead of
   leaving the current textbook page and taking you off to Binder, it will modify
   the code cells on the page to be editable. It takes some time for the
   connection to be made behind the scenes, during which you will see "Waiting
   for kernel". After the connection has been made, you can edit all the code
-  cells on the page and re-run them.
+  cells on the page and re-run them. If the connection fails, then first launch
+  the Binder site; this can take a long time. After it succeeds and loads the
+  textbook page as Jupyter notebook, you can close Binder, reload the textbook
+  page, launch Live Code again. It should now be successful at connecting
+  relatively quickly.
+
 
 Try interacting with the cell above now to make it print a string of your choice.
 How about: `"Camels are bae."`
