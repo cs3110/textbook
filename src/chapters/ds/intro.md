@@ -14,10 +14,4 @@ red-black trees.
 
 [fds]: ../modules/functional_data_structures
 
-We'll also take a look at some cool functional data structures that appear less
-often in imperative languages: *sequences*, which are infinite lists implemented
-with functions called *thunks*; *lazy lists*, which are implemented with a
-language feature (aptly called "laziness") that suspends evaluation; *promises*,
-which are a way of organizing concurrent computations that has recently become
-popular in imperative web programming; and *monads*, which are a way of
-organizing any kind of computation that has (side) effects.
+We'll also take a look at some cool functional data structures that appear less often in imperative languages: *sequences*, which are infinite lists implemented with functions called *thunks*; *lazy lists*, which are implemented with a language feature (aptly called "laziness") that suspends evaluation; *persistent arrays*, which offer performance that can often be constant time while being persistent; *promises*, which are a way of organizing concurrent computations that has recently become popular in imperative web programming; and *monads*, which are a way of organizing any kind of computation that has (side) effects.
