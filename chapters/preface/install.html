@@ -275,10 +275,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">8.3. Red-Black Trees</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">8.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">8.5. Memoization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/promises.html">8.6. Promises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/monads.html">8.7. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">8.8. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">8.9. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">8.6. Persistent Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/promises.html">8.7. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/monads.html">8.8. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">8.9. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">8.10. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -720,7 +721,6 @@ in the guide just linked.</p>
 </section>
 <section id="install-opam">
 <span id="id1"></span><h2>Install OPAM<a class="headerlink" href="#install-opam" title="Permalink to this heading">#</a></h2>
-<p><strong>Linux.</strong> Follow the <a class="reference external" href="https://opam.ocaml.org/doc/Install.html">instructions for your distribution</a>.</p>
 <p><strong>Mac.</strong> If you’re using Homebrew, run this command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">brew install opam</span>
 </pre></div>
@@ -733,6 +733,7 @@ in the guide just linked.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt install opam</span>
 </pre></div>
 </div>
+<p><strong>Linux.</strong> Follow the <a class="reference external" href="https://opam.ocaml.org/doc/Install.html">instructions for your distribution</a>.</p>
 </section>
 <section id="initialize-opam">
 <h2>Initialize OPAM<a class="headerlink" href="#initialize-opam" title="Permalink to this heading">#</a></h2>
@@ -745,8 +746,11 @@ installation.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam init --bare -a -y</span>
 </pre></div>
 </div>
-<p>(Don’t worry if you get a note about making sure <code class="docutils literal notranslate"><span class="pre">.profile</span></code> is “well-sourced” in
-<code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>. You don’t need to do anything about that.)</p>
+<p>Don’t worry if you get a note about making sure <code class="docutils literal notranslate"><span class="pre">.profile</span></code> is “well-sourced” in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>. You don’t need to do anything about that.</p>
+<p>If you get a warning that OPAM is out of date, update it by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam update</span>
+</pre></div>
+</div>
 <p><strong>WSL1.</strong> Hopefully you are running WSL2, not WSL1. But on WSL1, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam init --bare -a -y --disable-sandboxing</span>
 </pre></div>
@@ -760,12 +764,12 @@ WSL1</a>.</p>
 and set of packages. You can have many switches and, well, switch between them
 —whence the name. Create a switch for this semester’s CS 3110 by running
 this command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam switch create cs3110-2024sp ocaml-base-compiler.5.1.1</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">opam switch create cs3110-2024fa ocaml-base-compiler.5.2.0</span>
 </pre></div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If that command fails saying that the 5.1.1 compiler can’t be found, you
+<p>If that command fails saying that the 5.2.0 compiler can’t be found, you
 probably installed OPAM sometime back in the past and now need to update it. Do
 so with <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">update</span></code>.</p>
 </div>
@@ -781,19 +785,18 @@ and run this command:</p>
 </pre></div>
 </div>
 <p>You should get output like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#  switch         compiler                    description
-→  cs3110-2024sp  ocaml-base-compiler.5.1.1   cs3110-2024sp
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#  switch         compiler
+→  cs3110-2024fa  ocaml-base-compiler.5.2.0
 </pre></div>
 </div>
-<p>There might be other lines if you happen to have done OCaml development before.
-Here’s what to check for:</p>
+<p>There might be other lines if you happen to have done OCaml development before. There will be another column named “description” whose contents are not shown here. Double check the following:</p>
 <ul class="simple">
 <li><p>You <strong>must not</strong> get a warning that “The environment is not in sync with the
 current switch. You should run <code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">$(opam</span> <span class="pre">env)</span></code>”. If either of the two
 issues below also occur, you need to resolve this issue first.</p></li>
-<li><p>There must be a right arrow in the first column next to the <code class="docutils literal notranslate"><span class="pre">cs3110-2024sp</span></code>
+<li><p>There must be a right arrow in the first column next to the current semester’s
 switch.</p></li>
-<li><p>That switch must have the right name and the right compiler version, 5.1.1.</p></li>
+<li><p>That switch must have the right name and the right compiler version.</p></li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -817,7 +820,7 @@ as the editor in these instructions, so let’s ignore it.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You should see a message “Welcome to utop version … (using OCaml version
-5.1.1)!” If the OCaml version is incorrect, then you probably have an
+5.2.0)!” If the OCaml version is incorrect, then you probably have an
 environment issue. See the tip above about the <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">env</span></code> command.</p>
 </div>
 <p>Enter 3110 followed by two semicolons. Press return. The # is the utop prompt;
@@ -854,9 +857,9 @@ OPAM environment; you shouldn’t have to manually activate the environment with
 the <code class="docutils literal notranslate"><span class="pre">eval</span></code> command. Probably something went wrong earlier when you ran the
 <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">init</span></code> command. To fix it, follow the “redo” instructions below.</p></li>
 <li><p><strong>Is your switch listed?</strong> Run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">list</span></code> and make sure a switch named
-<code class="docutils literal notranslate"><span class="pre">cs3110-2024sp</span></code> is listed, that it has the 5.1.1 compiler, and that it is the
+<code class="docutils literal notranslate"><span class="pre">cs3110-2024fa</span></code> is listed, that it has the 5.2.0 compiler, and that it is the
 active switch (which is indicated with an arrow beside it). If that switch is
-present but not active, run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">cs3110-2024sp</span></code> then see whether utop
+present but not active, run <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">switch</span> <span class="pre">cs3110-2024fa</span></code> then see whether utop
 works. If that switch is not present, follow the “redo” instructions below.</p></li>
 </ul>
 <p><strong>Redo Instructions:</strong> Remove the OPAM directory by running <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">~/.opam</span></code>.
@@ -874,8 +877,12 @@ without having to type any additional commands.</p>
 <h2>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this heading">#</a></h2>
 <p>Visual Studio Code is a great choice as a code editor for OCaml. (Though if you
 are already a power user of Emacs or Vim those are great, too.)</p>
-<p>First, download and install <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> (henceforth, VS Code).
-Launch VS Code. Open the extensions pane, either by going to View →
+<p>First, download and install Visual Studio Code (henceforth, VS Code) following Microsoft’s instructions for your OS: <a class="reference external" href="https://code.visualstudio.com/docs/setup/mac">Mac instructions</a>, <a class="reference external" href="https://code.visualstudio.com/docs/setup/windows">Windows instructions</a>, <a class="reference external" href="https://code.visualstudio.com/docs/setup/linux">Linux instructions</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On Mac you must follow Microsoft’s instructions to install VS Code in your Applications folder. Skipping those instructions will result in issues that do not become apparent until later. Make sure you get it right now.</p>
+</div>
+<p>Launch VS Code. Open the extensions pane, either by going to View →
 Extensions, or by clicking on the icon for it in the column of icons on the left
 — it looks like four little squares, the top-right of which is separated from
 the other three.</p>
@@ -950,13 +957,8 @@ installation. Here’s how to proceed:</p>
 can successfully complete the double-check instructions for your OPAM switch:
 Can you run utop? Is the right switch active? If not, that’s the problem you
 need to solve first. Then return to the VS Code issue. It might be fixed now.</p></li>
-<li><p>If you’re on WSL and VS Code does add syntax highlighting but does not add
-squiggles as described above, and/or you get an error about “Sandbox
-initialization failed”, then double-check that you see a “WSL” indicator in
-the bottom left of the VS Code window. If you do not, make sure you installed
-the “WSL” extension as described above, and that you are launching VS Code
-from Ubuntu rather than PowerShell or from the Windows GUI. If you do, make
-sure that the “OCaml Platform” extension is installed.</p></li>
+<li><p>Make sure that you are on the most current version of VS Code. Run the VS Code palette command “Code: Check for Updates”. If you cannot get VS Code to update and you are on Mac, make sure that you followed Microsoft’s instructions to install VS Code in your Application folder.</p></li>
+<li><p>If you’re on WSL and VS Code does add syntax highlighting but does not add squiggles as described above, and/or you get an error about “Sandbox initialization failed”, then double-check that you see a “WSL” indicator in the bottom left of the VS Code window. If you do, make sure that the “OCaml Platform” extension is installed. If you do not, make sure you installed the “WSL” extension as described above, and that you are launching VS Code from Ubuntu rather than PowerShell or from the Windows GUI.</p></li>
 </ul>
 <p><strong>If you’re still stuck with an issue,</strong> try uninstalling VS Code, rebooting,
 and re-doing all the installation instructions above from scratch. Pay close
@@ -974,24 +976,37 @@ with the OCaml double-check instructions above.</p>
 <h2>VS Code Settings<a class="headerlink" href="#vs-code-settings" title="Permalink to this heading">#</a></h2>
 <p>We recommend tweaking a few editor settings. Open the user settings JSON file by
 (i) going to View → Command Palette, (ii) typing “user settings json”, and (iii)
-selecting Open User Settings (JSON). Copy and paste these settings into the
-window:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="p">}</span>
+selecting Open User Settings (JSON). You will see a JSON file that might already have some settings in it. If so, it will look like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+  (your pre-existing settings here)
+}
+</pre></div>
+</div>
+<p>Add these new settings into that outermost set of braces:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+  &quot;[ocaml]&quot;: {
+    &quot;editor.tabSize&quot;: 2,
+    &quot;editor.rulers&quot;: [ 80 ],
+    &quot;editor.formatOnSave&quot;: true
+  },
+   &quot;[ocaml.interface]&quot;: {
+    &quot;editor.tabSize&quot;: 2,
+    &quot;editor.rulers&quot;: [ 80 ],
+    &quot;editor.formatOnSave&quot;: true
+  },
+  (your pre-existing settings here)
+}
 </pre></div>
 </div>
 <p>Save the file and close the tab.</p>
 </section>
 <section id="using-vs-code-collaboratively">
 <h2>Using VS Code Collaboratively<a class="headerlink" href="#using-vs-code-collaboratively" title="Permalink to this heading">#</a></h2>
-<p>VS Code’s <a class="reference external" href="https://code.visualstudio.com/learn/collaboration/live-share">Live Share</a> extension makes it easy and fun to collaborate
+<p>VS Code’s Live Share extension makes it easy and fun to collaborate
 on code with other humans. You can edit code together like collaborating inside
 a Google Doc. It even supports a shared voice channel, so there’s no need to
 spin up a separate Zoom call. To install and use Live Share, follow
-<a class="reference external" href="https://code.visualstudio.com/learn/collaboration/live-share">Microsoft’s tutorial</a>.</p>
+<a class="reference external" href="https://learn.microsoft.com/en-us/visualstudio/liveshare/">Microsoft’s tutorial</a>.</p>
 <p>If you are a Cornell student, log in with your Microsoft account, not GitHub.
 Enter your Cornell NetID email, e.g., <code class="docutils literal notranslate"><span class="pre">your_netid&#64;cornell.edu</span></code>. That will take
 you to Cornell’s login site. Use the password associated with your NetID.</p>

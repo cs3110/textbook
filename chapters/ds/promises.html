@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>8.6. Promises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>8.7. Promises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/op.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="8.7. Monads" href="monads.html" />
-    <link rel="prev" title="8.5. Memoization" href="memoization.html" />
+    <link rel="next" title="8.8. Monads" href="monads.html" />
+    <link rel="prev" title="8.6. Persistent Arrays" href="parrays.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -275,10 +275,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="rb.html">8.3. Red-Black Trees</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sequence.html">8.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="memoization.html">8.5. Memoization</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.6. Promises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="monads.html">8.7. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">8.8. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">8.9. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parrays.html">8.6. Persistent Arrays</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.7. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monads.html">8.8. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">8.9. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">8.10. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -582,16 +583,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency">8.6.1. Concurrency</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">8.6.2. Threads</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.6.3. Promises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-our-own-promises">8.6.4. Making Our Own Promises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lwt-promises">8.6.5. Lwt Promises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-i-o">8.6.6. Asynchronous I/O</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#promises-and-asynchronous-i-o">8.6.7. Promises and Asynchronous I/O</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">8.6.8. Callbacks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-callbacks">8.6.9. Implementing Callbacks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-full-implementation">8.6.10. The Full Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency">8.7.1. Concurrency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">8.7.2. Threads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.7.3. Promises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-our-own-promises">8.7.4. Making Our Own Promises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lwt-promises">8.7.5. Lwt Promises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-i-o">8.7.6. Asynchronous I/O</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#promises-and-asynchronous-i-o">8.7.7. Promises and Asynchronous I/O</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">8.7.8. Callbacks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-callbacks">8.7.9. Implementing Callbacks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-full-implementation">8.7.10. The Full Implementation</a></li>
 </ul>
             </nav>
         </div>
@@ -604,14 +605,14 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="promises">
-<h1><span class="section-number">8.6. </span>Promises<a class="headerlink" href="#promises" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">8.7. </span>Promises<a class="headerlink" href="#promises" title="Permalink to this heading">#</a></h1>
 <p>So far we have only considered <em>sequential</em> programs. Execution of a sequential
 program proceeds one step at a time, with no choice about which step to take
 next. Sequential programs are limited in that they are not very good at dealing
 with multiple sources of simultaneous input, and they can only execute on a
 single processor. Many modern applications are instead <em>concurrent</em>.</p>
 <section id="concurrency">
-<h2><span class="section-number">8.6.1. </span>Concurrency<a class="headerlink" href="#concurrency" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.1. </span>Concurrency<a class="headerlink" href="#concurrency" title="Permalink to this heading">#</a></h2>
 <p>Concurrent programs enable computations to overlap in duration, instead of being
 forced to happen sequentially.</p>
 <ul class="simple">
@@ -674,7 +675,7 @@ example, the expressions <code class="docutils literal notranslate"><span class=
 give different results depending on which executes first.</p>
 </section>
 <section id="threads">
-<h2><span class="section-number">8.6.2. </span>Threads<a class="headerlink" href="#threads" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.2. </span>Threads<a class="headerlink" href="#threads" title="Permalink to this heading">#</a></h2>
 <p>To make concurrent programming easier, computer scientists have invented many
 abstractions. One of the best known is <em>threads</em>. Abstractly, a thread is a
 single sequential computation. There can be many threads running at a time,
@@ -694,7 +695,7 @@ the scheduler gets to run.  CS 3410 and 4410 cover those concepts in
 detail.</p>
 </section>
 <section id="id1">
-<h2><span class="section-number">8.6.3. </span>Promises<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.3. </span>Promises<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>In the functional programming paradigm, one of the best known abstractions for
 concurrency is <em>promises</em>. Other names for this idea include <em>futures</em>,
 <em>deferreds</em>, and <em>delayeds</em>. All those names refer to the idea of a computation
@@ -760,7 +761,7 @@ primarily by the library and the promise as being a “public and read-only” v
 used primarily by the client.</p>
 </section>
 <section id="making-our-own-promises">
-<h2><span class="section-number">8.6.4. </span>Making Our Own Promises<a class="headerlink" href="#making-our-own-promises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.4. </span>Making Our Own Promises<a class="headerlink" href="#making-our-own-promises" title="Permalink to this heading">#</a></h2>
 <p>Here is an interface for our own Lwt-style promises. The names have been changed
 to make the interface clearer.</p>
 <div class="cell docutils container">
@@ -933,7 +934,7 @@ Putting it altogether in a module, we have:</p>
 </div>
 </section>
 <section id="lwt-promises">
-<h2><span class="section-number">8.6.5. </span>Lwt Promises<a class="headerlink" href="#lwt-promises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.5. </span>Lwt Promises<a class="headerlink" href="#lwt-promises" title="Permalink to this heading">#</a></h2>
 <p>The types and names used in Lwt are a bit more obscure than those we used above.
 Lwt uses analogical terminology that comes from threads—but since Lwt does
 not actually implement threads, that terminology is not necessarily helpful. (We
@@ -1111,7 +1112,7 @@ just a data structure that can be written at most once, and that provides
 a means to control who can write to it (through the resolver).</p>
 </section>
 <section id="asynchronous-i-o">
-<h2><span class="section-number">8.6.6. </span>Asynchronous I/O<a class="headerlink" href="#asynchronous-i-o" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.6. </span>Asynchronous I/O<a class="headerlink" href="#asynchronous-i-o" title="Permalink to this heading">#</a></h2>
 <p>Now that we understand promises as a data abstraction, let’s turn to how they
 can be used for concurrency. The typical way they’re used with Lwt is for
 concurrent input and output (I/O).</p>
@@ -1183,7 +1184,7 @@ which is what provides the underlying asynchronous I/O infrastructure. Lwt is
 just exposing that infrastructure to you through a library.</p>
 </section>
 <section id="promises-and-asynchronous-i-o">
-<h2><span class="section-number">8.6.7. </span>Promises and Asynchronous I/O<a class="headerlink" href="#promises-and-asynchronous-i-o" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.7. </span>Promises and Asynchronous I/O<a class="headerlink" href="#promises-and-asynchronous-i-o" title="Permalink to this heading">#</a></h2>
 <p>The output type of <code class="docutils literal notranslate"><span class="pre">Lwt_io.read_line</span></code> is <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Lwt.t</span></code>, meaning that the
 function returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> promise. Let’s investigate how the state of that
 promise evolves.</p>
@@ -1251,7 +1252,7 @@ is disabled. A good way to make that happen is to put the following line in your
 </div>
 </section>
 <section id="callbacks">
-<h2><span class="section-number">8.6.8. </span>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.8. </span>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this heading">#</a></h2>
 <p>For a program to benefit from the concurrency provided by asynchronous
 I/O and promises, there needs to be a way for the program to make use of
 resolved promises.  For example, if a web server is asynchronously
@@ -1468,7 +1469,7 @@ just one of a set of promises to be finished, but doesn’t care which one.</p><
 </ul>
 </section>
 <section id="implementing-callbacks">
-<h2><span class="section-number">8.6.9. </span>Implementing Callbacks<a class="headerlink" href="#implementing-callbacks" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.9. </span>Implementing Callbacks<a class="headerlink" href="#implementing-callbacks" title="Permalink to this heading">#</a></h2>
 <p>When a callback is registered with <code class="docutils literal notranslate"><span class="pre">bind</span></code> or one of the other syntaxes, it is
 added to a list of callbacks that is stored with the promise. Eventually, when
 the promise has been fulfilled, the Lwt <em>resolution loop</em> runs the callbacks
@@ -1662,7 +1663,7 @@ just implemented. Note that there is no concurrency in <code class="docutils lit
 it’s the OS that provides the concurrency.</p>
 </section>
 <section id="the-full-implementation">
-<h2><span class="section-number">8.6.10. </span>The Full Implementation<a class="headerlink" href="#the-full-implementation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.10. </span>The Full Implementation<a class="headerlink" href="#the-full-implementation" title="Permalink to this heading">#</a></h2>
 <p>Here’s all of that code in one executable block:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1843,12 +1844,12 @@ it’s the OS that provides the concurrency.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="memoization.html"
+       href="parrays.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8.5. </span>Memoization</p>
+        <p class="prev-next-title"><span class="section-number">8.6. </span>Persistent Arrays</p>
       </div>
     </a>
     <a class="right-next"
@@ -1856,7 +1857,7 @@ it’s the OS that provides the concurrency.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8.7. </span>Monads</p>
+        <p class="prev-next-title"><span class="section-number">8.8. </span>Monads</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1876,16 +1877,16 @@ it’s the OS that provides the concurrency.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency">8.6.1. Concurrency</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">8.6.2. Threads</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.6.3. Promises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-our-own-promises">8.6.4. Making Our Own Promises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lwt-promises">8.6.5. Lwt Promises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-i-o">8.6.6. Asynchronous I/O</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#promises-and-asynchronous-i-o">8.6.7. Promises and Asynchronous I/O</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">8.6.8. Callbacks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-callbacks">8.6.9. Implementing Callbacks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-full-implementation">8.6.10. The Full Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrency">8.7.1. Concurrency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">8.7.2. Threads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.7.3. Promises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-our-own-promises">8.7.4. Making Our Own Promises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lwt-promises">8.7.5. Lwt Promises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-i-o">8.7.6. Asynchronous I/O</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#promises-and-asynchronous-i-o">8.7.7. Promises and Asynchronous I/O</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">8.7.8. Callbacks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-callbacks">8.7.9. Implementing Callbacks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-full-implementation">8.7.10. The Full Implementation</a></li>
 </ul>
   </nav></div>
 

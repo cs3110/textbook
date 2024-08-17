@@ -212,8 +212,6 @@ in the guide just linked.
 (install-opam)=
 ## Install OPAM
 
-**Linux.** Follow the [instructions for your distribution][opam-install].
-
 **Mac.** If you're using Homebrew, run this command:
 
 ```console
@@ -234,6 +232,8 @@ sudo port install opam
 sudo apt install opam
 ```
 
+**Linux.** Follow the [instructions for your distribution][opam-install].
+
 ## Initialize OPAM
 
 ```{warning}
@@ -247,8 +247,13 @@ installation.
 opam init --bare -a -y
 ```
 
-(Don't worry if you get a note about making sure `.profile` is "well-sourced" in
-`.bashrc`. You don't need to do anything about that.)
+Don't worry if you get a note about making sure `.profile` is "well-sourced" in `.bashrc`. You don't need to do anything about that.
+
+If you get a warning that OPAM is out of date, update it by running:
+
+```console
+opam update
+```
 
 **WSL1.** Hopefully you are running WSL2, not WSL1. But on WSL1, run:
 
@@ -269,11 +274,11 @@ and set of packages. You can have many switches and, well, switch between them
 this command:
 
 ```console
-opam switch create cs3110-2024sp ocaml-base-compiler.5.1.1
+opam switch create cs3110-2024fa ocaml-base-compiler.5.2.0
 ```
 
 ```{tip}
-If that command fails saying that the 5.1.1 compiler can't be found, you
+If that command fails saying that the 5.2.0 compiler can't be found, you
 probably installed OPAM sometime back in the past and now need to update it. Do
 so with `opam update`.
 ```
@@ -296,21 +301,20 @@ opam switch list
 You should get output like this:
 
 ```
-#  switch         compiler                    description
-→  cs3110-2024sp  ocaml-base-compiler.5.1.1   cs3110-2024sp
+#  switch         compiler
+→  cs3110-2024fa  ocaml-base-compiler.5.2.0
 ```
 
-There might be other lines if you happen to have done OCaml development before.
-Here's what to check for:
+There might be other lines if you happen to have done OCaml development before. There will be another column named "description" whose contents are not shown here. Double check the following:
 
 - You **must not** get a warning that "The environment is not in sync with the
   current switch. You should run `eval $(opam env)`". If either of the two
   issues below also occur, you need to resolve this issue first.
 
-- There must be a right arrow in the first column next to the `cs3110-2024sp`
+- There must be a right arrow in the first column next to the current semester's
   switch.
 
-- That switch must have the right name and the right compiler version, 5.1.1.
+- That switch must have the right name and the right compiler version.
 
 ```{warning}
 If you do get that warning about `opam env`, something is wrong. Your shell is
@@ -338,7 +342,7 @@ utop
 
 ```{tip}
 You should see a message "Welcome to utop version ... (using OCaml version
-5.1.1)!" If the OCaml version is incorrect, then you probably have an
+5.2.0)!" If the OCaml version is incorrect, then you probably have an
 environment issue. See the tip above about the `opam env` command.
 ```
 
@@ -384,9 +388,9 @@ issues:
   `opam init` command. To fix it, follow the "redo" instructions below.
 
 - **Is your switch listed?** Run `opam switch list` and make sure a switch named
-  `cs3110-2024sp` is listed, that it has the 5.1.1 compiler, and that it is the
+  `cs3110-2024fa` is listed, that it has the 5.2.0 compiler, and that it is the
   active switch (which is indicated with an arrow beside it). If that switch is
-  present but not active, run `opam switch cs3110-2024sp` then see whether utop
+  present but not active, run `opam switch cs3110-2024fa` then see whether utop
   works. If that switch is not present, follow the "redo" instructions below.
 
 **Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`.
@@ -405,7 +409,12 @@ without having to type any additional commands.
 Visual Studio Code is a great choice as a code editor for OCaml. (Though if you
 are already a power user of Emacs or Vim those are great, too.)
 
-First, download and install [Visual Studio Code][vscode] (henceforth, VS Code).
+First, download and install Visual Studio Code (henceforth, VS Code) following Microsoft's instructions for your OS: [Mac instructions][vscode-mac], [Windows instructions][vscode-win], [Linux instructions][vscode-nix].
+
+```{warning}
+On Mac you must follow Microsoft's instructions to install VS Code in your Applications folder. Skipping those instructions will result in issues that do not become apparent until later. Make sure you get it right now.
+```
+
 Launch VS Code. Open the extensions pane, either by going to View &rarr;
 Extensions, or by clicking on the icon for it in the column of icons on the left
 — it looks like four little squares, the top-right of which is separated from
@@ -446,6 +455,9 @@ ones. They are both old and no longer maintained by their developers.
 ```
 
 [vscode]: https://code.visualstudio.com/
+[vscode-mac]: https://code.visualstudio.com/docs/setup/mac
+[vscode-win]: https://code.visualstudio.com/docs/setup/windows
+[vscode-nix]: https://code.visualstudio.com/docs/setup/linux
 
 ## Double-Check VS Code
 
@@ -490,13 +502,9 @@ installation. Here's how to proceed:
   Can you run utop? Is the right switch active? If not, that's the problem you
   need to solve first. Then return to the VS Code issue. It might be fixed now.
 
-- If you're on WSL and VS Code does add syntax highlighting but does not add
-  squiggles as described above, and/or you get an error about "Sandbox
-  initialization failed", then double-check that you see a "WSL" indicator in
-  the bottom left of the VS Code window. If you do not, make sure you installed
-  the "WSL" extension as described above, and that you are launching VS Code
-  from Ubuntu rather than PowerShell or from the Windows GUI. If you do, make
-  sure that the "OCaml Platform" extension is installed.
+- Make sure that you are on the most current version of VS Code. Run the VS Code palette command "Code: Check for Updates". If you cannot get VS Code to update and you are on Mac, make sure that you followed Microsoft's instructions to install VS Code in your Application folder.
+
+- If you're on WSL and VS Code does add syntax highlighting but does not add squiggles as described above, and/or you get an error about "Sandbox initialization failed", then double-check that you see a "WSL" indicator in the bottom left of the VS Code window. If you do, make sure that the "OCaml Platform" extension is installed. If you do not, make sure you installed the "WSL" extension as described above, and that you are launching VS Code from Ubuntu rather than PowerShell or from the Windows GUI. 
 
 **If you're still stuck with an issue,** try uninstalling VS Code, rebooting,
 and re-doing all the installation instructions above from scratch. Pay close
@@ -514,14 +522,29 @@ with the OCaml double-check instructions above.
 
 We recommend tweaking a few editor settings. Open the user settings JSON file by
 (i) going to View → Command Palette, (ii) typing "user settings json", and (iii)
-selecting Open User Settings (JSON). Copy and paste these settings into the
-window:
+selecting Open User Settings (JSON). You will see a JSON file that might already have some settings in it. If so, it will look like this:
 
 ```json
 {
+  (your pre-existing settings here)
+}
+```
+
+Add these new settings into that outermost set of braces:
+
+```json
+{
+  "[ocaml]": {
     "editor.tabSize": 2,
     "editor.rulers": [ 80 ],
     "editor.formatOnSave": true
+  },
+   "[ocaml.interface]": {
+    "editor.tabSize": 2,
+    "editor.rulers": [ 80 ],
+    "editor.formatOnSave": true
+  },
+  (your pre-existing settings here)
 }
 ```
 
@@ -529,7 +552,7 @@ Save the file and close the tab.
 
 ## Using VS Code Collaboratively
 
-VS Code's [Live Share][liveshare] extension makes it easy and fun to collaborate
+VS Code's Live Share extension makes it easy and fun to collaborate
 on code with other humans. You can edit code together like collaborating inside
 a Google Doc. It even supports a shared voice channel, so there's no need to
 spin up a separate Zoom call. To install and use Live Share, follow
@@ -539,4 +562,4 @@ If you are a Cornell student, log in with your Microsoft account, not GitHub.
 Enter your Cornell NetID email, e.g., `your_netid@cornell.edu`. That will take
 you to Cornell's login site. Use the password associated with your NetID.
 
-[liveshare]: https://code.visualstudio.com/learn/collaboration/live-share
+[liveshare]: https://learn.microsoft.com/en-us/visualstudio/liveshare/
