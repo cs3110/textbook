@@ -5,7 +5,7 @@ inside another machine. With virtual machines, there are two operating systems
 involved: the *host* operating system (OS) and the *guest* OS. The host is your
 own native OS (maybe Windows). The guest is the OS that runs inside the host.
 
-The virtual machine (VM) we provide here has OCaml pre-installed in an Ubuntu
+The virtual machines (VM) we provide here have OCaml pre-installed in an Ubuntu
 guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
 "[humanity to others][ubuntu]". The process we use to create the VM is
 [documented here][vmrepo].
@@ -13,119 +13,45 @@ guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
 [ubuntu]: https://ubuntu.com/about
 [vmrepo]: https://github.com/cs3110/vm
 
-## Installing the VM
+## Starting the Installation on Windows
 
-- Download and install Oracle's free [VirtualBox][virtualbox] for your host OS.
-  Or, if you already had it installed, make sure you update to the latest
-  version of VirtualBox before proceeding. Unfortunately, VirtualBox does not
-  yet officially support Apple Silicon.
+- Download and install [VMware Workstation Pro][vmware]. It is currently free for personal use, though you will have to create an account with Broadcom.
 
-- Download [our VM][3110vm]. Don’t worry about the “We’re sorry, the preview
-  didn’t load” message you see. Just click the Download button and save the
-  `.ova` file wherever you like. It’s about a 9GB file, so the download might
-  take a while.
+- Download our [AMD64-based VM][3110vm-amd64] (that link is currently broken but will become usable soon). Don’t worry about the "We’re sorry, the preview didn’t load" message you see. Just click the Download button and save the ".ova" file wherever you like.
 
-- Launch VirtualBox, select File → Import Appliance, and choose the `.ova` file
-  you just downloaded. Click Next, then Import.
+- Launch VMware Workstation, select File → Open, and select the ".ova" file you just downloaded into the window. Click Open. Choose your own name for the VM (perhaps "CS 3110") and click Import. Click "Power on this virtual machine". It can take about 2 minutes for all the jobs to launch and the GUI to appear.
 
-[virtualbox]: https://www.virtualbox.org/wiki/Downloads
-[3110vm]: https://cornell.box.com/v/cs3110vm-2024sp
+- Skip down to "Finishing the Installation" below.
 
+## Starting the Installation on Mac
 
-## Starting the VM
+- Download and install [VMware Fusion Pro][vmware]. It is currently free for personal use, though you will have to create an account with Broadcom.
 
-- Select the CS 3110 VM from the list of machines in VirtualBox. Click Start. At
-  this point various errors can occur that depend on your hardware, hence are
-  hard to predict.
+- If you have an Apple Silicon (M1, M2, or M3) Mac, download our [ARM-based VM][3110vm-arm] (that link is currently broken but will become usable soon). If you have an Intel Mac, download our [AMD64-based VM][3110vm-amd64] (that link is currently broken but will become usable soon). Don’t worry about the "We’re sorry, the preview didn’t load" message you see. Just click the Download button and save the ".ova" file wherever you like.
 
-  - If you get an error about “VT-x/AMD-V hardware acceleration”, you most
-    likely need to access your computer’s BIOS settings and enable
-    virtualization. The details of that will vary depending on the model and
-    manufacturer of your computer. Try googling "enable virtualization
-    [manufacturer] [model]", substituting for the manufacturer and model of your
-    machine. This [Red Hat Linux][rh-virt] page might also help.
+- Launch VMware Fusion, select File → New, and drag the ".ova" file you just downloaded into the window. Click Continue. Choose your own name for the VM (perhaps "CS 3110") and click Save. When the import is done, click Customize Settings → System Settings → OS → Linux → Ubuntu 64-bit ARM. Close the settings. Click the play icon in the middle of the black window. It can take about 2 minutes for all the jobs to launch and the GUI to appear.
 
-  - If you get an error about "kernel panic" and "attempted to kill the idle
-    task", then you might need to increase the number of processors provided to
-    it by your host OS. Select the VM in Virtual Box, click Settings, and look
-    at the System → Processor settings. Increase the number of processors from 1
-    to 2. If the sliders are greyed out and won't permit adjustment, it means
-    the VM is still running: you can't change the amount of memory while the
-    guest OS is active; so, shut down the VM (see below) and try again.
+- Continue with "Finishing the Installation" below.
 
-  - If the machine just freezes or blacks out or aborts, you might need to
-    adjust the memory provided to it by your host OS. Select the VM in Virtual
-    Box, click Settings, and look at the System and Display settings. You might
-    need to adjust the Base Memory (under System → Motherboard) or the Video
-    Memory (under Display → Screen). Those sliders have color coding underneath
-    them to indicate what good amounts might be on your computer. Make sure
-    nothing is in the red zone, and try some lower or higher settings to see if
-    they help. If the sliders are greyed out and won't permit adjustment, it
-    means the VM is still running: you can't change the amount of memory while
-    the guest OS is active; so, shut down the VM (see below) and try again.
+## Finishing the Installation
 
-  - If you have a monitor with high pixel density (e.g., an Apple Retina
-    display), the VM window might be incredibly tiny. In VirtualBox go to
-    Settings → Display → Scale Factor and increase it as needed, perhaps to 200%.
+The VM will log you in automatically. The username is `camel` and the password is `camel`. There are icons provided for the Terminal, VS Code, and the Firefox web browser. They are in the left-hand launcher bar.
 
-- The VM will log you in automatically. The username is `camel` and the password
-  is `camel`. To change your password, run `passwd` from the terminal and follow
-  the prompts. If you’d rather have your own username, you are welcome to go to
-  Settings → Users to create a new account. Just be aware that OPAM and VS Code
-  won’t be installed for that user. You'll need to follow the
-  [install instructions](../preface/install.md) to add them.
+- Open Terminal and update Ubuntu and OPAM:
 
-## Stopping the VM
+  ```console
+  $ sudo apt update
+  $ sudo apt upgrade
+  $ sudo opam update
+  $ sudo opam upgrade
+  ```
 
-You can use Ubuntu's own menus to safely shutdown or reboot the VM. But more
-often you will likely use VirtualBox to close the VM by clicking the VM window’s
-"X" icon in the host OS. Then you will be presented with three options that
-VirtualBox doesn't explain very well:
+- If you are a student in CS 3110, create an OPAM switch for the current semester as described in the [install instructions](../preface/install.md). Otherwise there is already a default OPAM switch you can use.
 
-- *Save the machine state.* This option is what you normally want. It’s like
-  closing the lid on your laptop: it puts it to sleep, and it can quickly wake.
+- Launch VS Code and update it to the most recent version. OCaml Platform is already installed for you.
 
-- *Send the shutdown signal.* This option is like shutting down a machine you
-  don’t intend to use for a long time, or before unplugging a desktop machine
-  from the wall. When you start the machine again later, it will have to boot
-  from scratch, which takes longer.
+Optionally, if you want to change your password, run `passwd` from the terminal and follow the prompts. And if you’d rather have your own username, you are welcome to go to Settings → Users to create a new account. Just be aware that OPAM and VS Code won’t be installed for that user. You'll need to follow the [install instructions](../preface/install.md) to add them.
 
-- *Power off the machine.* **This option is dangerous.** It is the equivalent of
-  pulling the power cord of a desktop machine from the wall while the machine is
-  still running: it causes the operating system to suddenly quit without doing
-  any cleanup. Doing this even just a handful of times could cause the file
-  system to become corrupted, which will cause you to lose all your work and
-  have to reinstall the VM from scratch. You will be very unhappy. So, avoid
-  this option.
-
-## Using the VM
-
-- There are **icons** provided for the terminal, VS Code, and the Firefox web
-  browser. They are in the left-hand launcher bar.
-
-- It can be helpful to set up a **shared folder** between the host and guest OS,
-  so that you can easily copy files between them. With the VM shutdown (i.e.,
-  select “send the shutdown signal”), click Settings, then click Shared Folders.
-  Click the little icon on the right that looks like a folder with a plus sign.
-  In the dialog box for Folder Path, select Other, then navigate to the folder
-  on your host OS that you want to share with the guest OS. Let’s assume you
-  created a new folder named `vmshared` inside your Documents folder, or
-  wherever you like to keep files. The Folder Name in the dialog box will
-  automatically be filled with `vmshared`. This is the name by which the guest
-  OS will know the folder. You can change it if you like. Check Auto-mount; do
-  not check Read-only. Make the Mount Point `/home/camel/vmshared`. Click OK,
-  then click OK again. Start the VM again. You should now have a subdirectory
-  named `vmshared` in your guest OS home directory that is shared between the
-  host OS and the guest OS.
-
-- You might be able to improve the **performance** of your VM by increasing the
-  amount of memory or CPUs allocated to it, though it depends on how much your
-  actual machine has available and what else you have running at the same time.
-  With the VM shut down, try going in Virtual Box to Settings → System, and
-  tinkering with the Base Memory slider on the Motherboard tab, and the
-  Processors slider on the Processor tab. Then bring up the VM again and see how
-  it does. You might have to play around to find a sweet spot. Later, after you
-  are satisfied the VM is working properly hence you won't have to re-import it,
-  you can safely delete the `.ova` file you downloaded to free up some space.
-
-[rh-virt]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios
+[vmware]: https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion
+[3110vm-arm]: https://cornell.box.com/v/cs3110vm-24.04-arm
+[3110vm-amd64]: https://cornell.box.com/v/cs3110vm-24.04-amd64

@@ -516,10 +516,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-the-vm">Installing the VM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-vm">Starting the VM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopping-the-vm">Stopping the VM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-vm">Using the VM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-installation-on-windows">Starting the Installation on Windows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-installation-on-mac">Starting the Installation on Mac</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finishing-the-installation">Finishing the Installation</a></li>
 </ul>
             </nav>
         </div>
@@ -537,119 +536,44 @@ document.write(`
 inside another machine. With virtual machines, there are two operating systems
 involved: the <em>host</em> operating system (OS) and the <em>guest</em> OS. The host is your
 own native OS (maybe Windows). The guest is the OS that runs inside the host.</p>
-<p>The virtual machine (VM) we provide here has OCaml pre-installed in an Ubuntu
+<p>The virtual machines (VM) we provide here have OCaml pre-installed in an Ubuntu
 guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
 “<a class="reference external" href="https://ubuntu.com/about">humanity to others</a>”. The process we use to create the VM is
 <a class="reference external" href="https://github.com/cs3110/vm">documented here</a>.</p>
-<section id="installing-the-vm">
-<h2>Installing the VM<a class="headerlink" href="#installing-the-vm" title="Permalink to this heading">#</a></h2>
+<section id="starting-the-installation-on-windows">
+<h2>Starting the Installation on Windows<a class="headerlink" href="#starting-the-installation-on-windows" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Download and install Oracle’s free <a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> for your host OS.
-Or, if you already had it installed, make sure you update to the latest
-version of VirtualBox before proceeding. Unfortunately, VirtualBox does not
-yet officially support Apple Silicon.</p></li>
-<li><p>Download <a class="reference external" href="https://cornell.box.com/v/cs3110vm-2024sp">our VM</a>. Don’t worry about the “We’re sorry, the preview
-didn’t load” message you see. Just click the Download button and save the
-<code class="docutils literal notranslate"><span class="pre">.ova</span></code> file wherever you like. It’s about a 9GB file, so the download might
-take a while.</p></li>
-<li><p>Launch VirtualBox, select File → Import Appliance, and choose the <code class="docutils literal notranslate"><span class="pre">.ova</span></code> file
-you just downloaded. Click Next, then Import.</p></li>
+<li><p>Download and install <a class="reference external" href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Workstation Pro</a>. It is currently free for personal use, though you will have to create an account with Broadcom.</p></li>
+<li><p>Download our <a class="reference external" href="https://cornell.box.com/v/cs3110vm-24.04-amd64">AMD64-based VM</a> (that link is currently broken but will become usable soon). Don’t worry about the “We’re sorry, the preview didn’t load” message you see. Just click the Download button and save the “.ova” file wherever you like.</p></li>
+<li><p>Launch VMware Workstation, select File → Open, and select the “.ova” file you just downloaded into the window. Click Open. Choose your own name for the VM (perhaps “CS 3110”) and click Import. Click “Power on this virtual machine”. It can take about 2 minutes for all the jobs to launch and the GUI to appear.</p></li>
+<li><p>Skip down to “Finishing the Installation” below.</p></li>
 </ul>
 </section>
-<section id="starting-the-vm">
-<h2>Starting the VM<a class="headerlink" href="#starting-the-vm" title="Permalink to this heading">#</a></h2>
+<section id="starting-the-installation-on-mac">
+<h2>Starting the Installation on Mac<a class="headerlink" href="#starting-the-installation-on-mac" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Select the CS 3110 VM from the list of machines in VirtualBox. Click Start. At
-this point various errors can occur that depend on your hardware, hence are
-hard to predict.</p>
+<li><p>Download and install <a class="reference external" href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMware Fusion Pro</a>. It is currently free for personal use, though you will have to create an account with Broadcom.</p></li>
+<li><p>If you have an Apple Silicon (M1, M2, or M3) Mac, download our <a class="reference external" href="https://cornell.box.com/v/cs3110vm-24.04-arm">ARM-based VM</a> (that link is currently broken but will become usable soon). If you have an Intel Mac, download our <a class="reference external" href="https://cornell.box.com/v/cs3110vm-24.04-amd64">AMD64-based VM</a> (that link is currently broken but will become usable soon). Don’t worry about the “We’re sorry, the preview didn’t load” message you see. Just click the Download button and save the “.ova” file wherever you like.</p></li>
+<li><p>Launch VMware Fusion, select File → New, and drag the “.ova” file you just downloaded into the window. Click Continue. Choose your own name for the VM (perhaps “CS 3110”) and click Save. When the import is done, click Customize Settings → System Settings → OS → Linux → Ubuntu 64-bit ARM. Close the settings. Click the play icon in the middle of the black window. It can take about 2 minutes for all the jobs to launch and the GUI to appear.</p></li>
+<li><p>Continue with “Finishing the Installation” below.</p></li>
+</ul>
+</section>
+<section id="finishing-the-installation">
+<h2>Finishing the Installation<a class="headerlink" href="#finishing-the-installation" title="Permalink to this heading">#</a></h2>
+<p>The VM will log you in automatically. The username is <code class="docutils literal notranslate"><span class="pre">camel</span></code> and the password is <code class="docutils literal notranslate"><span class="pre">camel</span></code>. There are icons provided for the Terminal, VS Code, and the Firefox web browser. They are in the left-hand launcher bar.</p>
 <ul>
-<li><p>If you get an error about “VT-x/AMD-V hardware acceleration”, you most
-likely need to access your computer’s BIOS settings and enable
-virtualization. The details of that will vary depending on the model and
-manufacturer of your computer. Try googling “enable virtualization
-[manufacturer] [model]”, substituting for the manufacturer and model of your
-machine. This <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/virtualization_administration_guide/sect-virtualization-troubleshooting-enabling_intel_vt_and_amd_v_virtualization_hardware_extensions_in_bios">Red Hat Linux</a> page might also help.</p></li>
-<li><p>If you get an error about “kernel panic” and “attempted to kill the idle
-task”, then you might need to increase the number of processors provided to
-it by your host OS. Select the VM in Virtual Box, click Settings, and look
-at the System → Processor settings. Increase the number of processors from 1
-to 2. If the sliders are greyed out and won’t permit adjustment, it means
-the VM is still running: you can’t change the amount of memory while the
-guest OS is active; so, shut down the VM (see below) and try again.</p></li>
-<li><p>If the machine just freezes or blacks out or aborts, you might need to
-adjust the memory provided to it by your host OS. Select the VM in Virtual
-Box, click Settings, and look at the System and Display settings. You might
-need to adjust the Base Memory (under System → Motherboard) or the Video
-Memory (under Display → Screen). Those sliders have color coding underneath
-them to indicate what good amounts might be on your computer. Make sure
-nothing is in the red zone, and try some lower or higher settings to see if
-they help. If the sliders are greyed out and won’t permit adjustment, it
-means the VM is still running: you can’t change the amount of memory while
-the guest OS is active; so, shut down the VM (see below) and try again.</p></li>
-<li><p>If you have a monitor with high pixel density (e.g., an Apple Retina
-display), the VM window might be incredibly tiny. In VirtualBox go to
-Settings → Display → Scale Factor and increase it as needed, perhaps to 200%.</p></li>
-</ul>
+<li><p>Open Terminal and update Ubuntu and OPAM:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
+<span class="gp">$ </span>sudo<span class="w"> </span>opam<span class="w"> </span>update
+<span class="gp">$ </span>sudo<span class="w"> </span>opam<span class="w"> </span>upgrade
+</pre></div>
+</div>
 </li>
-<li><p>The VM will log you in automatically. The username is <code class="docutils literal notranslate"><span class="pre">camel</span></code> and the password
-is <code class="docutils literal notranslate"><span class="pre">camel</span></code>. To change your password, run <code class="docutils literal notranslate"><span class="pre">passwd</span></code> from the terminal and follow
-the prompts. If you’d rather have your own username, you are welcome to go to
-Settings → Users to create a new account. Just be aware that OPAM and VS Code
-won’t be installed for that user. You’ll need to follow the
-<a class="reference internal" href="../preface/install.html"><span class="doc std std-doc">install instructions</span></a> to add them.</p></li>
+<li><p>If you are a student in CS 3110, create an OPAM switch for the current semester as described in the <a class="reference internal" href="../preface/install.html"><span class="doc std std-doc">install instructions</span></a>. Otherwise there is already a default OPAM switch you can use.</p></li>
+<li><p>Launch VS Code and update it to the most recent version. OCaml Platform is already installed for you.</p></li>
 </ul>
-</section>
-<section id="stopping-the-vm">
-<h2>Stopping the VM<a class="headerlink" href="#stopping-the-vm" title="Permalink to this heading">#</a></h2>
-<p>You can use Ubuntu’s own menus to safely shutdown or reboot the VM. But more
-often you will likely use VirtualBox to close the VM by clicking the VM window’s
-“X” icon in the host OS. Then you will be presented with three options that
-VirtualBox doesn’t explain very well:</p>
-<ul class="simple">
-<li><p><em>Save the machine state.</em> This option is what you normally want. It’s like
-closing the lid on your laptop: it puts it to sleep, and it can quickly wake.</p></li>
-<li><p><em>Send the shutdown signal.</em> This option is like shutting down a machine you
-don’t intend to use for a long time, or before unplugging a desktop machine
-from the wall. When you start the machine again later, it will have to boot
-from scratch, which takes longer.</p></li>
-<li><p><em>Power off the machine.</em> <strong>This option is dangerous.</strong> It is the equivalent of
-pulling the power cord of a desktop machine from the wall while the machine is
-still running: it causes the operating system to suddenly quit without doing
-any cleanup. Doing this even just a handful of times could cause the file
-system to become corrupted, which will cause you to lose all your work and
-have to reinstall the VM from scratch. You will be very unhappy. So, avoid
-this option.</p></li>
-</ul>
-</section>
-<section id="using-the-vm">
-<h2>Using the VM<a class="headerlink" href="#using-the-vm" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>There are <strong>icons</strong> provided for the terminal, VS Code, and the Firefox web
-browser. They are in the left-hand launcher bar.</p></li>
-<li><p>It can be helpful to set up a <strong>shared folder</strong> between the host and guest OS,
-so that you can easily copy files between them. With the VM shutdown (i.e.,
-select “send the shutdown signal”), click Settings, then click Shared Folders.
-Click the little icon on the right that looks like a folder with a plus sign.
-In the dialog box for Folder Path, select Other, then navigate to the folder
-on your host OS that you want to share with the guest OS. Let’s assume you
-created a new folder named <code class="docutils literal notranslate"><span class="pre">vmshared</span></code> inside your Documents folder, or
-wherever you like to keep files. The Folder Name in the dialog box will
-automatically be filled with <code class="docutils literal notranslate"><span class="pre">vmshared</span></code>. This is the name by which the guest
-OS will know the folder. You can change it if you like. Check Auto-mount; do
-not check Read-only. Make the Mount Point <code class="docutils literal notranslate"><span class="pre">/home/camel/vmshared</span></code>. Click OK,
-then click OK again. Start the VM again. You should now have a subdirectory
-named <code class="docutils literal notranslate"><span class="pre">vmshared</span></code> in your guest OS home directory that is shared between the
-host OS and the guest OS.</p></li>
-<li><p>You might be able to improve the <strong>performance</strong> of your VM by increasing the
-amount of memory or CPUs allocated to it, though it depends on how much your
-actual machine has available and what else you have running at the same time.
-With the VM shut down, try going in Virtual Box to Settings → System, and
-tinkering with the Base Memory slider on the Motherboard tab, and the
-Processors slider on the Processor tab. Then bring up the VM again and see how
-it does. You might have to play around to find a sweet spot. Later, after you
-are satisfied the VM is working properly hence you won’t have to re-import it,
-you can safely delete the <code class="docutils literal notranslate"><span class="pre">.ova</span></code> file you downloaded to free up some space.</p></li>
-</ul>
+<p>Optionally, if you want to change your password, run <code class="docutils literal notranslate"><span class="pre">passwd</span></code> from the terminal and follow the prompts. And if you’d rather have your own username, you are welcome to go to Settings → Users to create a new account. Just be aware that OPAM and VS Code won’t be installed for that user. You’ll need to follow the <a class="reference internal" href="../preface/install.html"><span class="doc std std-doc">install instructions</span></a> to add them.</p>
 </section>
 </section>
 
@@ -708,10 +632,9 @@ you can safely delete the <code class="docutils literal notranslate"><span class
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-the-vm">Installing the VM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-vm">Starting the VM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopping-the-vm">Stopping the VM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-vm">Using the VM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-installation-on-windows">Starting the Installation on Windows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-installation-on-mac">Starting the Installation on Mac</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finishing-the-installation">Finishing the Installation</a></li>
 </ul>
   </nav></div>
 
