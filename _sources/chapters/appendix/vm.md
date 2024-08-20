@@ -17,7 +17,7 @@ guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
 
 - Download and install [VMware Workstation Pro][vmware]. It is currently free for personal use, though you will have to create an account with Broadcom.
 
-- Download our [AMD64-based VM][3110vm-amd64] (that link is currently broken but will become usable soon). Don’t worry about the "We’re sorry, the preview didn’t load" message you see. Just click the Download button and save the ".ova" file wherever you like.
+- Download our [AMD64-based VM][3110vms]. Save the ".ova" file wherever you like.
 
 - Launch VMware Workstation, select File → Open, and select the ".ova" file you just downloaded into the window. Click Open. Choose your own name for the VM (perhaps "CS 3110") and click Import. Click "Power on this virtual machine". It can take about 2 minutes for all the jobs to launch and the GUI to appear.
 
@@ -27,7 +27,7 @@ guest OS. Ubuntu is a free Linux OS, and is an ancient African word meaning
 
 - Download and install [VMware Fusion Pro][vmware]. It is currently free for personal use, though you will have to create an account with Broadcom.
 
-- If you have an Apple Silicon (M1, M2, or M3) Mac, download our [ARM-based VM][3110vm-arm] (that link is currently broken but will become usable soon). If you have an Intel Mac, download our [AMD64-based VM][3110vm-amd64] (that link is currently broken but will become usable soon). Don’t worry about the "We’re sorry, the preview didn’t load" message you see. Just click the Download button and save the ".ova" file wherever you like.
+- If you have an Apple Silicon (M1, M2, or M3) Mac, download our [ARM-based VM][3110vms]. If you have an Intel Mac, download our [AMD64-based VM][3110vms]. Save the ".ova" file wherever you like.
 
 - Launch VMware Fusion, select File → New, and drag the ".ova" file you just downloaded into the window. Click Continue. Choose your own name for the VM (perhaps "CS 3110") and click Save. When the import is done, click Customize Settings → System Settings → OS → Linux → Ubuntu 64-bit ARM. Close the settings. Click the play icon in the middle of the black window. It can take about 2 minutes for all the jobs to launch and the GUI to appear.
 
@@ -53,5 +53,4 @@ The VM will log you in automatically. The username is `camel` and the password i
 Optionally, if you want to change your password, run `passwd` from the terminal and follow the prompts. And if you’d rather have your own username, you are welcome to go to Settings → Users to create a new account. Just be aware that OPAM and VS Code won’t be installed for that user. You'll need to follow the [install instructions](../preface/install.md) to add them.
 
 [vmware]: https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion
-[3110vm-arm]: https://cornell.box.com/v/cs3110vm-24.04-arm
-[3110vm-amd64]: https://cornell.box.com/v/cs3110vm-24.04-amd64
+[3110vms]: https://cornell.box.com/v/cs3110-virtual-machines
