@@ -10,7 +10,7 @@ maturity programmers come to realize that both are essential to writing correct
 code.  Both get at the *truth* of what code really does.
 
 **Documentation** is the ground truth of what a programmer intended, as opposed
-to what they actually wrote. It communicates to other humans the ideas the
+to what they actually implemented. It communicates to other humans the ideas the
 author had in their head. No small amount of the time (even in this book!), we
 fail at communicating ideas as we intended. Maybe the failure occurs in the
 code, or maybe in the documentation. But writing documentation forces us to
@@ -48,6 +48,8 @@ Even more importantly, testing is *repeatable* science. The ability to replicate
 experiments is crucial to the truth they establish. By capturing tests as
 automatically repeatable experiments as unit test suites, we can demonstrate to
 ourselves and other, now and in the future, that our code is correct.
+Furthermore, it ensures the code remains correct over time, even as changes are
+made — whether by others or by ourselves.
 
 **The challenge** of documentation and testing is discipline. It's so tempting,
 so easy, to care only about writing the code. "That's the fun part", right? But
