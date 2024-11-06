@@ -44,7 +44,7 @@ forced to happen sequentially.
 server needs to respond to many requests from clients, and clients would prefer
 not to wait. If an assignment is released in CMS, for example, you would prefer
 to be able to view that assignment at the same time as everyone else in the
-class, rather than having to "take a number" a wait for your number to be
+class, rather than having to "take a number" and wait for your number to be
 called&mdash;as at the Department of Motor Vehicles, or at an old-fashioned
 deli, etc.
 
