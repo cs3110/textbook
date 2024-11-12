@@ -64,6 +64,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/ds/parrays';</script>
     <link rel="shortcut icon" href="../../_static/op.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -560,7 +562,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -576,6 +580,17 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-on-set-arrays">8.6.1. Copy-On-Set Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-tree-arrays">8.6.2. Version-Tree Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rebasing-version-tree-arrays">8.6.3. Rebasing Version-Tree Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">8.6.4. Citations</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -587,7 +602,355 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="persistent-arrays">
 <h1><span class="section-number">8.6. </span>Persistent Arrays<a class="headerlink" href="#persistent-arrays" title="Permalink to this heading">#</a></h1>
-<p>This section will be released midway through the semester.</p>
+<p>OCaml’s built-in <code class="docutils literal notranslate"><span class="pre">array</span></code> type offers constant-time get and set operations. But it is an ephemeral data structure. That leads to the question: could we have persistent arrays, and if so, how good of performance could we get?</p>
+<p>Here is the interface we would like to implement:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">PersistentArray</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="c">(** The type of persistent arrays whose elements have type [&#39;a]. The</span>
+<span class="c">      array indexing is zero based, meaning that the first element is at</span>
+<span class="c">      index [0], and the last element is at index [n - 1], where [n] is </span>
+<span class="c">      the length of the array. Any index less than [0] or greater</span>
+<span class="c">      than [n - 1] is out of bounds. *)</span>
+
+  <span class="k">val</span> <span class="n">make</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="c">(** [make n x] is a persistent array of length [n], with each element</span>
+<span class="c">      initialized to [x]. Raises [Invalid_argument] if [n] is negative</span>
+<span class="c">      or too large for the system. *)</span>
+
+  <span class="k">val</span> <span class="n">length</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+  <span class="c">(** [length a] is the number of elements in [a]. *)</span>
+
+  <span class="k">val</span> <span class="n">get</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="c">(** [get a i] is the element at index [i] in [a]. Raises [Invalid_argument]</span>
+<span class="c">      if [i] is out of bounds. *)</span>
+
+  <span class="k">val</span> <span class="n">set</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+  <span class="c">(** [set a i x] is an array that stores [x] at index [i] and otherwise is</span>
+<span class="c">      the same as [a]. Raises: [Invalid_argument] if [i] is out of bounds. *)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type PersistentArray =
+  sig
+    type &#39;a t
+    val make : int -&gt; &#39;a -&gt; &#39;a t
+    val length : &#39;a t -&gt; int
+    val get : &#39;a t -&gt; int -&gt; &#39;a
+    val set : &#39;a t -&gt; int -&gt; &#39;a -&gt; &#39;a t
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<p>That interface essentially the same as OCaml’s <code class="docutils literal notranslate"><span class="pre">Array</span></code> module, but reduced to just four essential functions.</p>
+<p>We’ll next see three implementations of that interface. Each will achieve progressively better performance. Our final implementation is based on Conchon and Filliâtre (2007); see the end of this section for citations.</p>
+<section id="copy-on-set-arrays">
+<h2><span class="section-number">8.6.1. </span>Copy-On-Set Arrays<a class="headerlink" href="#copy-on-set-arrays" title="Permalink to this heading">#</a></h2>
+<p>The easiest implementation of persistent arrays is to just make a copy of the entire array on each <code class="docutils literal notranslate"><span class="pre">set</span></code> operation. That way, old copies of the array persist—they are not changed by later <code class="docutils literal notranslate"><span class="pre">set</span></code> operations. Here is the implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">CopyOnSetArray</span> <span class="o">:</span> <span class="nc">PersistentArray</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">array</span>
+
+  <span class="c">(** Efficiency: O(n). *)</span>
+  <span class="k">let</span> <span class="n">make</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">make</span>
+
+  <span class="c">(** Efficiency: O(1). *)</span>
+  <span class="k">let</span> <span class="n">length</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">length</span>
+
+  <span class="c">(** Efficiency: O(1). *)</span>
+  <span class="k">let</span> <span class="n">get</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">get</span>
+  
+  <span class="c">(** Efficiency: O(n). *)</span>
+  <span class="k">let</span> <span class="n">set</span> <span class="n">a</span> <span class="n">i</span> <span class="n">x</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">a&#39;</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">copy</span> <span class="n">a</span> <span class="k">in</span> <span class="c">(* copy the array *)</span>
+    <span class="n">a&#39;</span><span class="o">.(</span><span class="n">i</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">;</span> <span class="c">(* mutate one element *)</span>
+    <span class="n">a&#39;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module CopyOnSetArray : PersistentArray
+</pre></div>
+</div>
+</div>
+</div>
+<p>We pay a large price for <code class="docutils literal notranslate"><span class="pre">set</span></code> in this implementation: instead of <span class="math notranslate nohighlight">\(O(1)\)</span> like <code class="docutils literal notranslate"><span class="pre">array</span></code>, it is <span class="math notranslate nohighlight">\(O(n)\)</span>. We’ll improve on that in our next implementation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before moving on, let’s pause and consider one aspect of <code class="docutils literal notranslate"><span class="pre">CopyOnSetArray</span></code> that is different than any data structure we’ve seen before. The interface it satisfies is written in the functional style, but the implementation uses imperative features. Note that the <code class="docutils literal notranslate"><span class="pre">set</span></code> operation does not return <code class="docutils literal notranslate"><span class="pre">unit</span></code>; instead, it produces a new array out of an old array. Underneath the hood, it achieves that persistence despite using an ephemeral data structure, the <code class="docutils literal notranslate"><span class="pre">array</span></code>. A lesson we can learn is that it is possible to build persistent data structures in imperative languages using the features they provide.</p>
+</div>
+</section>
+<section id="version-tree-arrays">
+<h2><span class="section-number">8.6.2. </span>Version-Tree Arrays<a class="headerlink" href="#version-tree-arrays" title="Permalink to this heading">#</a></h2>
+<p>The expensive <code class="docutils literal notranslate"><span class="pre">set</span></code> operation in copy-on-set is doing way too much work. Even though only one array element is being changed, all of the array elements are copied. To achieve better performance, we could eliminate the copying and instead keep a little log of all the <code class="docutils literal notranslate"><span class="pre">set</span></code> operations that have occurred. Each entry in the log would need to record just one change that has been made. For example, suppose we had the following sequence of operations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">a0</span> <span class="o">=</span> <span class="n">make</span> <span class="mi">3</span> <span class="mi">0</span>
+<span class="n">let</span> <span class="n">a1</span> <span class="o">=</span> <span class="nb">set</span> <span class="n">a0</span> <span class="mi">1</span> <span class="mi">7</span>
+<span class="n">let</span> <span class="n">a2</span> <span class="o">=</span> <span class="nb">set</span> <span class="n">a1</span> <span class="mi">2</span> <span class="mi">8</span>
+<span class="n">let</span> <span class="n">a3</span> <span class="o">=</span> <span class="nb">set</span> <span class="n">a1</span> <span class="mi">2</span> <span class="mi">9</span>
+</pre></div>
+</div>
+<p>Our log would say:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">a0</span></code> is <code class="docutils literal notranslate"><span class="pre">[|0;</span> <span class="pre">0;</span> <span class="pre">0|]</span></code>. That takes linear space to store.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a1</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">a0</span></code> except that index <code class="docutils literal notranslate"><span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">7</span></code>. That takes only constant space to store.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a2</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">a1</span></code> except that index <code class="docutils literal notranslate"><span class="pre">2</span></code> is <code class="docutils literal notranslate"><span class="pre">8</span></code>. Again, constant space.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a3</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">a1</span></code> except that index <code class="docutils literal notranslate"><span class="pre">2</span></code> is <code class="docutils literal notranslate"><span class="pre">9</span></code>. Again, constant space.</p></li>
+</ul>
+<p>Note how both <code class="docutils literal notranslate"><span class="pre">a2</span></code> and <code class="docutils literal notranslate"><span class="pre">a3</span></code> share the same base array <code class="docutils literal notranslate"><span class="pre">a1</span></code>, but diverge in different ways by setting index <code class="docutils literal notranslate"><span class="pre">2</span></code> to either <code class="docutils literal notranslate"><span class="pre">8</span></code> or <code class="docutils literal notranslate"><span class="pre">9</span></code>. So the structure of this log is best represented not as a list, but as a tree:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>       (entry for a0)
+             |
+       (entry for a1)
+       /            \
+(entry for a2)     (entry for a3)
+</pre></div>
+</div>
+<p>Each of the nodes in that tree tell us what different <em>versions</em> of the array should be. That idea leads us to introduce the following tree type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">version_tree</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">Base</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">array</span>
+  <span class="o">|</span> <span class="nc">Diff</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">version_tree</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a version_tree = Base of &#39;a array | Diff of int * &#39;a * &#39;a version_tree
+</pre></div>
+</div>
+</div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">Base</span></code> node contains the base version of the array; in our example above, that would be <code class="docutils literal notranslate"><span class="pre">a0</span></code>. A <code class="docutils literal notranslate"><span class="pre">Diff</span></code> node records a difference that is created by a <code class="docutils literal notranslate"><span class="pre">set</span></code> operation. The version tree for our example above would look like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>              (Base [|0; 0; 0|])      &lt;---- a0
+                      |
+                  (Diff 1 7)          &lt;---- a1
+                 /          \
+a2 ----&gt; (Diff 2 8)        (Diff 2 9) &lt;---- a3
+</pre></div>
+</div>
+<p>The tree itself is shown in the middle of that diagram. The pointers for <code class="docutils literal notranslate"><span class="pre">a0</span></code> through <code class="docutils literal notranslate"><span class="pre">a3</span></code> are to individual nodes of that tree and capture each of the persistent versions of the array.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In understanding this version tree type, there is a possibly helpful analogy to association lists. Each of the <code class="docutils literal notranslate"><span class="pre">Diff</span></code> nodes is like a cons cell in an association list: both contain a pair of a key (the array index) and a value (the element at that index). Moreover each cons cell then continues onto another cons cell until eventually reaching the the base case of nil, just like a version tree eventually reaches the base case of a <code class="docutils literal notranslate"><span class="pre">Base</span></code> node. The <code class="docutils literal notranslate"><span class="pre">Base</span></code> node is a little more interesting than the empty list though, because it contains an entire array.</p>
+</div>
+<p><strong>Set.</strong> To implement <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">a</span> <span class="pre">i</span> <span class="pre">x</span></code>, all we have to do is create a new <code class="docutils literal notranslate"><span class="pre">Diff</span></code> node:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">set</span> <span class="n">a</span> <span class="n">i</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Diff</span> <span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val set : &#39;a version_tree -&gt; int -&gt; &#39;a -&gt; &#39;a version_tree = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The efficiency of that is merely <span class="math notranslate nohighlight">\(O(1)\)</span>, which is a great improvement over copy-on-set arrays.</p>
+<p><strong>Get.</strong> To implement <code class="docutils literal notranslate"><span class="pre">get</span> <span class="pre">a</span> <span class="pre">i</span></code>, we just have to walk a path in the tree starting at <code class="docutils literal notranslate"><span class="pre">a</span></code> to find the first <code class="docutils literal notranslate"><span class="pre">Diff</span></code> that records a change in index <code class="docutils literal notranslate"><span class="pre">i</span></code>. If there never is such a change found, we can return the value at that index in the <code class="docutils literal notranslate"><span class="pre">Base</span></code> node:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">get</span> <span class="n">a</span> <span class="n">i</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">a</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Base</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="o">.(</span><span class="n">i</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Diff</span> <span class="o">(</span><span class="n">j</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">a&#39;</span><span class="o">)</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="k">then</span> <span class="n">v</span> <span class="k">else</span> <span class="n">get</span> <span class="n">a&#39;</span> <span class="n">i</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val get : &#39;a version_tree -&gt; int -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The efficiency of that implementation is <span class="math notranslate nohighlight">\(O(k)\)</span>, where <span class="math notranslate nohighlight">\(k\)</span> is the number of <code class="docutils literal notranslate"><span class="pre">set</span></code> operations that have been performed on the persistent array. In the worst case, all of those <code class="docutils literal notranslate"><span class="pre">set</span></code> operations were performed on a different index than we want to <code class="docutils literal notranslate"><span class="pre">get</span></code>, and they were all performed without creating any branches in the tree — for example, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">2</span> <span class="pre">0</span> <span class="pre">|&gt;</span> <span class="pre">set</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">|&gt;</span> <span class="pre">set</span> <span class="pre">0</span> <span class="pre">2</span> <span class="pre">|&gt;</span> <span class="pre">...</span> <span class="pre">|&gt;</span> <span class="pre">set</span> <span class="pre">0</span> <span class="pre">k</span> <span class="pre">|&gt;</span> <span class="pre">get</span> <span class="pre">1</span></code>. Then the tree degenerates to a linked list, and <code class="docutils literal notranslate"><span class="pre">get</span></code> is forced to walk down the entire list to the <code class="docutils literal notranslate"><span class="pre">Base</span></code> node to find the original value.</p>
+<p>Note that <span class="math notranslate nohighlight">\(k\)</span> might be much bigger or much smaller than <span class="math notranslate nohighlight">\(n\)</span>, the size of the array. So in improving the performance of <code class="docutils literal notranslate"><span class="pre">set</span></code>, we potentially worsened the performance of <code class="docutils literal notranslate"><span class="pre">get</span></code>. In our next implementation, we’ll return to this issue and improve the performance of <code class="docutils literal notranslate"><span class="pre">get</span></code>.</p>
+<p><strong>Version-tree implementation.</strong> Pulling it all together, here is an implementation of persistent arrays using version trees:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">VersionTreeArray</span> <span class="o">:</span> <span class="nc">PersistentArray</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="c">(** AF: A rep such as [Diff (i, x, Diff (j, y, Base a))] represents the </span>
+<span class="c">      array [a] except element [j] is [y] and element [i] is [x]. If there </span>
+<span class="c">      are multiple diffs for an index, the outermost wins. E.g.,</span>
+<span class="c">      [Diff (i, x, Diff (i, y, Base a))] represents an array whose </span>
+<span class="c">      element [i] is [x], not [y]. *)</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span>
+    <span class="o">|</span> <span class="nc">Base</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">array</span>
+    <span class="o">|</span> <span class="nc">Diff</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
+
+  <span class="c">(** Efficiency: O(n). *)</span>
+  <span class="k">let</span> <span class="n">make</span> <span class="n">n</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Base</span> <span class="o">(</span><span class="nn">Array</span><span class="p">.</span><span class="n">make</span> <span class="n">n</span> <span class="n">x</span><span class="o">)</span>
+
+  <span class="c">(** Efficiency: O(k), where k is the number of [set] operations that have</span>
+<span class="c">      been performed on the array. *)</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">length</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="nc">Base</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="nn">Array</span><span class="p">.</span><span class="n">length</span> <span class="n">b</span>
+    <span class="o">|</span> <span class="nc">Diff</span> <span class="o">(_,</span> <span class="o">_,</span> <span class="n">a</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">length</span> <span class="n">a</span>
+
+  <span class="c">(** Efficiency: O(k). *)</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">get</span> <span class="n">a</span> <span class="n">i</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">a</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Base</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="o">.(</span><span class="n">i</span><span class="o">)</span>
+    <span class="o">|</span> <span class="nc">Diff</span> <span class="o">(</span><span class="n">j</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">a&#39;</span><span class="o">)</span> <span class="o">-&gt;</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="k">then</span> <span class="n">x</span> <span class="k">else</span> <span class="n">get</span> <span class="n">a&#39;</span> <span class="n">i</span>
+
+  <span class="c">(** Efficiency: O(1). *)</span>
+  <span class="k">let</span> <span class="n">set</span> <span class="n">a</span> <span class="n">i</span> <span class="n">x</span> <span class="o">=</span> <span class="nc">Diff</span> <span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span><span class="o">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module VersionTreeArray : PersistentArray
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rebasing-version-tree-arrays">
+<h2><span class="section-number">8.6.3. </span>Rebasing Version-Tree Arrays<a class="headerlink" href="#rebasing-version-tree-arrays" title="Permalink to this heading">#</a></h2>
+<p>With version trees, we achieved constant-time <code class="docutils literal notranslate"><span class="pre">set</span></code> operations for a persistent array, but <code class="docutils literal notranslate"><span class="pre">get</span></code> operations were no longer constant time — they were <span class="math notranslate nohighlight">\(O(k)\)</span> where <span class="math notranslate nohighlight">\(k\)</span> was the number of <code class="docutils literal notranslate"><span class="pre">set</span></code> operations that had been perfromed. Is there a way to make both operations constant time while still being persistent? The answer is: almost!</p>
+<p>Right now, the original version of the array as stored in the <code class="docutils literal notranslate"><span class="pre">Base</span></code> node is <em>primary</em> and always has constant-time access with <code class="docutils literal notranslate"><span class="pre">get</span></code>. We are going to introduce a new <em>rebasing</em> operation that can make any other version of the array become primary. Then that version will have constant-time access with <code class="docutils literal notranslate"><span class="pre">get</span></code>, even though other versions will still be <span class="math notranslate nohighlight">\(O(k)\)</span>. When a version <span class="math notranslate nohighlight">\(v\)</span> of an array is accessed (either with <code class="docutils literal notranslate"><span class="pre">length</span></code> or <code class="docutils literal notranslate"><span class="pre">set</span></code>), we will mutate the version tree to make <span class="math notranslate nohighlight">\(v\)</span> primary. That means changing the <code class="docutils literal notranslate"><span class="pre">Base</span></code> node to store the contents according to <span class="math notranslate nohighlight">\(v\)</span>, and adjusting <code class="docutils literal notranslate"><span class="pre">Diff</span></code> nodes as needed to compensate for that change in the base.</p>
+<p>Since we will now be mutating trees, the representation type needs to change to add a level of indirection:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">rebasing_tree</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">ref</span>
+<span class="k">and</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">Base</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">array</span>
+  <span class="o">|</span> <span class="nc">Diff</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">rebasing_tree</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type &#39;a rebasing_tree = &#39;a node ref
+and &#39;a node = Base of &#39;a array | Diff of int * &#39;a * &#39;a rebasing_tree
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Make and set.</strong> The <code class="docutils literal notranslate"><span class="pre">make</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> operations require just the insertion of a call to <code class="docutils literal notranslate"><span class="pre">ref</span></code> to adapt to the new representation type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">make</span> <span class="n">n</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ref</span> <span class="o">(</span><span class="nc">Base</span> <span class="o">(</span><span class="nn">Array</span><span class="p">.</span><span class="n">make</span> <span class="n">n</span> <span class="n">x</span><span class="o">))</span>
+<span class="k">let</span> <span class="n">set</span> <span class="n">a</span> <span class="n">i</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ref</span> <span class="o">(</span><span class="nc">Diff</span> <span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span><span class="o">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val make : int -&gt; &#39;a -&gt; &#39;a node ref = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val set : &#39;a rebasing_tree -&gt; int -&gt; &#39;a -&gt; &#39;a node ref = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Their efficiency is unchanged: <span class="math notranslate nohighlight">\(O(n)\)</span> for <code class="docutils literal notranslate"><span class="pre">make</span></code>, and <span class="math notranslate nohighlight">\(O(1)\)</span> for <code class="docutils literal notranslate"><span class="pre">set</span></code>.</p>
+<p><strong>Rebase.</strong> To rebase a tree we introduce a new recursive helper function <code class="docutils literal notranslate"><span class="pre">rebase</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">rebasing_tree</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">rebasing</span> <span class="pre">tree</span></code> such that <code class="docutils literal notranslate"><span class="pre">rebase</span> <span class="pre">t</span></code> mutates tree <code class="docutils literal notranslate"><span class="pre">t</span></code> to make the version of the array represented by <code class="docutils literal notranslate"><span class="pre">t</span></code> be primary. Therefore, when <code class="docutils literal notranslate"><span class="pre">rebase</span></code> returns <code class="docutils literal notranslate"><span class="pre">t</span></code> is guaranteed to be a ref to a <code class="docutils literal notranslate"><span class="pre">Base</span></code> node.</p>
+<p>There are two cases to consider. First, if <code class="docutils literal notranslate"><span class="pre">t</span></code> is a ref to a <code class="docutils literal notranslate"><span class="pre">Base</span></code> node, then our work is already done. That version is already primary.</p>
+<p>Second, if <code class="docutils literal notranslate"><span class="pre">t</span></code> is a ref to a <code class="docutils literal notranslate"><span class="pre">Diff</span></code> node, then we have work to do. That node has the form <code class="docutils literal notranslate"><span class="pre">Diff(i,</span> <span class="pre">x,</span> <span class="pre">t')</span></code> where <code class="docutils literal notranslate"><span class="pre">t'</span></code> represents another version of the array. We call <code class="docutils literal notranslate"><span class="pre">rebase</span></code> on <code class="docutils literal notranslate"><span class="pre">t'</span></code> to make it primary; after that, <code class="docutils literal notranslate"><span class="pre">t'</span></code> must be a ref to a <code class="docutils literal notranslate"><span class="pre">Base</span></code> node. That means we have the following situation, where <code class="docutils literal notranslate"><span class="pre">a</span></code> is an array:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t  ---&gt; Diff (i, x, t&#39;)
+t&#39; ---&gt; Base a
+</pre></div>
+</div>
+<p>To make <code class="docutils literal notranslate"><span class="pre">t</span></code> primary, we just need to swap those nodes around, as well as swap the values found at index <code class="docutils literal notranslate"><span class="pre">i</span></code>. Suppose that in the <code class="docutils literal notranslate"><span class="pre">Base</span></code> node <code class="docutils literal notranslate"><span class="pre">a.(i)</span></code> is <code class="docutils literal notranslate"><span class="pre">y</span></code>. We mutate <code class="docutils literal notranslate"><span class="pre">a.(i)</span></code> to be <code class="docutils literal notranslate"><span class="pre">x</span></code>; let’s call that array <code class="docutils literal notranslate"><span class="pre">a'</span></code>. And we create a new <code class="docutils literal notranslate"><span class="pre">Diff</span></code> node with <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t  ---&gt; Base a&#39;
+t&#39; ---&gt; Diff (i, y, t)
+</pre></div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">t</span></code> is primary and represents the same version of the array as it did before the rebase.</p>
+<p>Here is the code that implements rebasing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">rebase</span> <span class="n">a</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="o">!</span><span class="n">a</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Base</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">b</span>
+  <span class="o">|</span> <span class="nc">Diff</span> <span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">a&#39;</span><span class="o">)</span> <span class="o">-&gt;</span>
+      <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rebase</span> <span class="n">a&#39;</span> <span class="k">in</span>
+      <span class="k">let</span> <span class="n">old_x</span> <span class="o">=</span> <span class="n">b</span><span class="o">.(</span><span class="n">i</span><span class="o">)</span> <span class="k">in</span>
+      <span class="n">b</span><span class="o">.(</span><span class="n">i</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">;</span>
+      <span class="n">a</span> <span class="o">:=</span> <span class="nc">Base</span> <span class="n">b</span><span class="o">;</span>
+      <span class="n">a&#39;</span> <span class="o">:=</span> <span class="nc">Diff</span> <span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">old_x</span><span class="o">,</span> <span class="n">a</span><span class="o">);</span>
+      <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val rebase : &#39;a rebasing_tree -&gt; &#39;a array = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The efficiency of <code class="docutils literal notranslate"><span class="pre">rebase</span></code> is <span class="math notranslate nohighlight">\(O(k)\)</span>, because there could be up to <span class="math notranslate nohighlight">\(k\)</span> <code class="docutils literal notranslate"><span class="pre">Diff</span></code> nodes between <code class="docutils literal notranslate"><span class="pre">t</span></code> and its original <code class="docutils literal notranslate"><span class="pre">Base</span></code>. Immediately after calling <code class="docutils literal notranslate"><span class="pre">rebase</span> <span class="pre">t</span></code>, any further calls to <code class="docutils literal notranslate"><span class="pre">rebase</span> <span class="pre">t</span></code> will be only <span class="math notranslate nohighlight">\(O(1)\)</span>, because <code class="docutils literal notranslate"><span class="pre">t</span></code> is now primary.</p>
+<p><strong>Get and length.</strong> Now that we have <code class="docutils literal notranslate"><span class="pre">rebase</span></code>, there is only a small modification needed to <code class="docutils literal notranslate"><span class="pre">length</span></code> and <code class="docutils literal notranslate"><span class="pre">get</span></code> to call <code class="docutils literal notranslate"><span class="pre">rebase</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">length</span> <span class="n">a</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">length</span> <span class="o">(</span><span class="n">rebase</span> <span class="n">a</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">get</span> <span class="n">a</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="n">rebase</span> <span class="n">a</span><span class="o">).(</span><span class="n">i</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val length : &#39;a rebasing_tree -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val get : &#39;a rebasing_tree -&gt; int -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The efficiency of these is the same as <code class="docutils literal notranslate"><span class="pre">rebase</span></code>: <span class="math notranslate nohighlight">\(O(k)\)</span> on the first call, then <span class="math notranslate nohighlight">\(O(1)\)</span> on future calls as long as no other version of the array has been accessed in the mean time.</p>
+<p><strong>Rebasing version-tree implementation:</strong> Pulling it all together, here is an implementation of persistent arrays using rebasing version trees:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module RebasingVersionTreeArray : PersistentArray = struct
+  type &#39;a t = &#39;a node ref
+  (** See [VersionTreeArray]. *)
+
+  and &#39;a node =
+    | Base of &#39;a array
+    | Diff of int * &#39;a * &#39;a t
+
+  (** Efficiency: O(n). *)
+  let make n x = ref (Base (Array.make n x))
+
+  (** Efficiency: O(k), where k is the number of diffs between this version
+      of the array and its base. At most, that is the number of [set] 
+      operations performed on all versions of the array. If there aren&#39;t 
+      any diffs, O(1). After a [rebase], remains O(1) until a different 
+      version of the array is accessed. Not tail recursive. *)
+  let rec rebase a =
+    match !a with
+    | Base b -&gt; b
+    | Diff (i, x, a&#39;) -&gt;
+        let b = rebase a&#39; in
+        let old_x = b.(i) in
+        b.(i) &lt;- x;
+        a := Base b;
+        a&#39; := Diff (i, old_x, a);
+        b
+
+  (** Efficiency: Same as [rebase]. *)
+  let length a = Array.length (rebase a)
+
+  (** Efficiency: Same as [rebase]. *)
+  let get a i = (rebase a).(i)
+
+  (** Efficiency: O(1). *)
+  let set a i v = ref (Diff (i, v, a))
+end
+</pre></div>
+</div>
+<p>With rebasing we now have <span class="math notranslate nohighlight">\(O(1)\)</span> <code class="docutils literal notranslate"><span class="pre">get</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> operations on the primary (most recently accessed version) of the array. We pay an <span class="math notranslate nohighlight">\(O(k)\)</span> price to change to a new primary version, but after that, access to it remains <span class="math notranslate nohighlight">\(O(1)\)</span> until another rebase occurs.</p>
+</section>
+<section id="citations">
+<h2><span class="section-number">8.6.4. </span>Citations<a class="headerlink" href="#citations" title="Permalink to this heading">#</a></h2>
+<p>Our final implementation is most similar to that of Sylvain Conchon and Jean-Christophe Filliâtre (<em>A persistent union-find data structure</em>, ACM Workshop on ML, 2007). They credit Henry Baker for the idea of version trees (Shallow binding in LISP 1.5, <em>CACM</em> 21:7, 1978) and rebasing (Shallow binding makes functional arrays fast, <em>SIGPLAN Not.</em>, 26(8):145-147, 1991).</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -645,7 +1008,23 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-on-set-arrays">8.6.1. Copy-On-Set Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-tree-arrays">8.6.2. Version-Tree Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rebasing-version-tree-arrays">8.6.3. Rebasing Version-Tree Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">8.6.4. Citations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
