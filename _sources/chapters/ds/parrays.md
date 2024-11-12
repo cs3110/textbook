@@ -261,7 +261,7 @@ The efficiency of these is the same as `rebase`: $O(k)$ on the first call, then 
 
 **Rebasing version-tree implementation:** Pulling it all together, here is an implementation of persistent arrays using rebasing version trees:
 
-```
+```{code-cell} ocaml
 module RebasingVersionTreeArray : PersistentArray = struct
   type 'a t = 'a node ref
   (** See [VersionTreeArray]. *)

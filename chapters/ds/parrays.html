@@ -907,43 +907,52 @@ t&#39; ---&gt; Diff (i, y, t)
 </div>
 <p>The efficiency of these is the same as <code class="docutils literal notranslate"><span class="pre">rebase</span></code>: <span class="math notranslate nohighlight">\(O(k)\)</span> on the first call, then <span class="math notranslate nohighlight">\(O(1)\)</span> on future calls as long as no other version of the array has been accessed in the mean time.</p>
 <p><strong>Rebasing version-tree implementation:</strong> Pulling it all together, here is an implementation of persistent arrays using rebasing version trees:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module RebasingVersionTreeArray : PersistentArray = struct
-  type &#39;a t = &#39;a node ref
-  (** See [VersionTreeArray]. *)
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">RebasingVersionTreeArray</span> <span class="o">:</span> <span class="nc">PersistentArray</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="n">ref</span>
+  <span class="c">(** See [VersionTreeArray]. *)</span>
 
-  and &#39;a node =
-    | Base of &#39;a array
-    | Diff of int * &#39;a * &#39;a t
+  <span class="k">and</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">node</span> <span class="o">=</span>
+    <span class="o">|</span> <span class="nc">Base</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">array</span>
+    <span class="o">|</span> <span class="nc">Diff</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>
 
-  (** Efficiency: O(n). *)
-  let make n x = ref (Base (Array.make n x))
+  <span class="c">(** Efficiency: O(n). *)</span>
+  <span class="k">let</span> <span class="n">make</span> <span class="n">n</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ref</span> <span class="o">(</span><span class="nc">Base</span> <span class="o">(</span><span class="nn">Array</span><span class="p">.</span><span class="n">make</span> <span class="n">n</span> <span class="n">x</span><span class="o">))</span>
 
-  (** Efficiency: O(k), where k is the number of diffs between this version
-      of the array and its base. At most, that is the number of [set] 
-      operations performed on all versions of the array. If there aren&#39;t 
-      any diffs, O(1). After a [rebase], remains O(1) until a different 
-      version of the array is accessed. Not tail recursive. *)
-  let rec rebase a =
-    match !a with
-    | Base b -&gt; b
-    | Diff (i, x, a&#39;) -&gt;
-        let b = rebase a&#39; in
-        let old_x = b.(i) in
-        b.(i) &lt;- x;
-        a := Base b;
-        a&#39; := Diff (i, old_x, a);
-        b
+  <span class="c">(** Efficiency: O(k), where k is the number of diffs between this version</span>
+<span class="c">      of the array and its base. At most, that is the number of [set] </span>
+<span class="c">      operations performed on all versions of the array. If there aren&#39;t </span>
+<span class="c">      any diffs, O(1). After a [rebase], remains O(1) until a different </span>
+<span class="c">      version of the array is accessed. Not tail recursive. *)</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">rebase</span> <span class="n">a</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="o">!</span><span class="n">a</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Base</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">b</span>
+    <span class="o">|</span> <span class="nc">Diff</span> <span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">a&#39;</span><span class="o">)</span> <span class="o">-&gt;</span>
+        <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rebase</span> <span class="n">a&#39;</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="n">old_x</span> <span class="o">=</span> <span class="n">b</span><span class="o">.(</span><span class="n">i</span><span class="o">)</span> <span class="k">in</span>
+        <span class="n">b</span><span class="o">.(</span><span class="n">i</span><span class="o">)</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">;</span>
+        <span class="n">a</span> <span class="o">:=</span> <span class="nc">Base</span> <span class="n">b</span><span class="o">;</span>
+        <span class="n">a&#39;</span> <span class="o">:=</span> <span class="nc">Diff</span> <span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">old_x</span><span class="o">,</span> <span class="n">a</span><span class="o">);</span>
+        <span class="n">b</span>
 
-  (** Efficiency: Same as [rebase]. *)
-  let length a = Array.length (rebase a)
+  <span class="c">(** Efficiency: Same as [rebase]. *)</span>
+  <span class="k">let</span> <span class="n">length</span> <span class="n">a</span> <span class="o">=</span> <span class="nn">Array</span><span class="p">.</span><span class="n">length</span> <span class="o">(</span><span class="n">rebase</span> <span class="n">a</span><span class="o">)</span>
 
-  (** Efficiency: Same as [rebase]. *)
-  let get a i = (rebase a).(i)
+  <span class="c">(** Efficiency: Same as [rebase]. *)</span>
+  <span class="k">let</span> <span class="n">get</span> <span class="n">a</span> <span class="n">i</span> <span class="o">=</span> <span class="o">(</span><span class="n">rebase</span> <span class="n">a</span><span class="o">).(</span><span class="n">i</span><span class="o">)</span>
 
-  (** Efficiency: O(1). *)
-  let set a i v = ref (Diff (i, v, a))
-end
+  <span class="c">(** Efficiency: O(1). *)</span>
+  <span class="k">let</span> <span class="n">set</span> <span class="n">a</span> <span class="n">i</span> <span class="n">v</span> <span class="o">=</span> <span class="n">ref</span> <span class="o">(</span><span class="nc">Diff</span> <span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">a</span><span class="o">))</span>
+<span class="k">end</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module RebasingVersionTreeArray : PersistentArray
+</pre></div>
+</div>
+</div>
 </div>
 <p>With rebasing we now have <span class="math notranslate nohighlight">\(O(1)\)</span> <code class="docutils literal notranslate"><span class="pre">get</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> operations on the primary (most recently accessed version) of the array. We pay an <span class="math notranslate nohighlight">\(O(k)\)</span> price to change to a new primary version, but after that, access to it remains <span class="math notranslate nohighlight">\(O(1)\)</span> until another rebase occurs.</p>
 </section>
