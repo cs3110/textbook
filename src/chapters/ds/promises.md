@@ -957,10 +957,10 @@ handlers list to be empty to ensure that the RI holds.
     List.iter (fun f -> f st) handlers
 
   let reject r x =
-    resolve r (Rejected x)
+    fulfill_or_reject r (Rejected x)
 
   let fulfill r x =
-    resolve r (Fulfilled x)
+    fulfill_or_reject r (Fulfilled x)
 ```
 
 Finally, the implementation of `>>=` is the trickiest part. First, if the
