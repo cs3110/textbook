@@ -13,7 +13,7 @@ kernelspec:
   name: ocaml-jupyter
 ---
 
-# Algebraic Specification
+# Equational Specification
 
 Next let's tackle a bigger challenge: proving the correctness of a data
 structure, such as a stack, queue, or set.
@@ -484,13 +484,13 @@ equal:
 
 ```text
   AF((List.rev (h' :: t'), [x]))
-=   { apply AF } 
+=   { apply AF }
   List.rev (h' :: t') @ List.rev [x]
 =   { rev distributes over @, an exercise in the previous lecture }
   List.rev ([x] @ (h' :: t'))
 =   { eval @ }
   List.rev (x :: h' :: t')
-  
+
   AF((List.rev (x :: h' :: t'), []))
 =   { apply AF }
   List.rev (x :: h' :: t') @ List.rev []
@@ -509,7 +509,7 @@ Now we are unstuck:
 ```
 
 There is one more case analysis remaining to finish the proof:
-  
+
 ```text
 Case analysis:  t = h' :: t'
 
@@ -543,7 +543,7 @@ e = e'   if  AF(e) = AF(e')
 and that we made use of the RI during the proof. The AF and RI really are
 important!
 
-## Designing Algebraic Specifications
+## Designing Equational Specifications
 
 {{ video_embed | replace("%%VID%%", "8uJmKmsiF2I")}}
 
