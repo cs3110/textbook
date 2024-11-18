@@ -256,7 +256,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="randomized.html">6.6. Randomized Testing with QCheck</a></li>
 <li class="toctree-l2"><a class="reference internal" href="proving_correctness.html">6.7. Proving Correctness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="structural_induction.html">6.8. Structural Induction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alg_spec.html">6.9. Algebraic Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eq_spec.html">6.9. Equational Specification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="summary.html">6.10. Summary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exercises.html">6.11. Exercises</a></li>
 </ul>
@@ -529,7 +529,7 @@ or testing was a boring, tedious, and altogether postponable task. But with
 maturity programmers come to realize that both are essential to writing correct
 code.  Both get at the <em>truth</em> of what code really does.</p>
 <p><strong>Documentation</strong> is the ground truth of what a programmer intended, as opposed
-to what they actually wrote. It communicates to other humans the ideas the
+to what they actually implemented. It communicates to other humans the ideas the
 author had in their head. No small amount of the time (even in this book!), we
 fail at communicating ideas as we intended. Maybe the failure occurs in the
 code, or maybe in the documentation. But writing documentation forces us to
@@ -562,7 +562,9 @@ That’s science: new ideas come along to challenge the old.</p>
 <p>Even more importantly, testing is <em>repeatable</em> science. The ability to replicate
 experiments is crucial to the truth they establish. By capturing tests as
 automatically repeatable experiments as unit test suites, we can demonstrate to
-ourselves and other, now and in the future, that our code is correct.</p>
+ourselves and other, now and in the future, that our code is correct.
+Furthermore, it ensures the code remains correct over time, even as changes are
+made — whether by others or by ourselves.</p>
 <p><strong>The challenge</strong> of documentation and testing is discipline. It’s so tempting,
 so easy, to care only about writing the code. “That’s the fun part”, right? But
 it’s like leaving out a third of the letter we intended to write. One part of

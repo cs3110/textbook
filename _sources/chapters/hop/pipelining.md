@@ -63,7 +63,7 @@ pipelined through `sum`, which adds all the elements together.
 
 The other alternatives that you might consider are somewhat uglier:
 ```{code-cell} ocaml
-(* Maybe worse: a lot of extra [let..in] syntax and unnecessary names to
+(* Maybe worse: a lot of extra [let..in] syntax and unnecessary names
    for intermediate values we don't care about. *)
 let sum_sq n =
   let l = 0 -- n in

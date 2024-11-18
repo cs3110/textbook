@@ -885,7 +885,7 @@ let rec fact_aux n acc = ...
 Second, we write a new "main" function that calls the helper with the original
 base case as the accumulator:
 ```ocaml
-let rec fact_tr n = fact_aux n 1
+let fact_tr n = fact_aux n 1
 ```
 
 Third, we change the helper function to return the accumulator in the base case:

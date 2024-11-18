@@ -111,7 +111,9 @@ module type Fraction = sig
   (* A fraction is a rational number p/q, where q != 0. *)
   type t
 
-  (** [make n d] is n/d. Requires d != 0. *)
+  (** [make n d] represents n/d, a fraction with 
+      numerator [n] and denominator [d].
+      Requires d <> 0. *)
   val make : int -> int -> t
 
   val numerator : t -> int

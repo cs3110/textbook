@@ -44,6 +44,9 @@ that comes from an operator in Lisp that <u>cons</u>tructs objects in memory.
 The first element of a list is usually called its *head* and the rest of the
 elements (if any) are called its *tail*.
 
+The cons operator `::` is right associative, meaning that `e1 :: e2 :: e3` is
+understood as `e1 :: (e2 :: e3)`, not as `(e1 :: e2) :: e3`.
+
 The square bracket syntax is convenient but unnecessary. Any list
 `[e1; e2; ...; en]` could instead be written with the more primitive nil and
 cons syntax: `e1 :: e2 :: ... :: en :: []`. When a pleasant syntax can be

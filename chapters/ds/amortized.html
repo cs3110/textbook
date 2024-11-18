@@ -258,7 +258,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">6.6. Randomized Testing with QCheck</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">6.7. Proving Correctness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">6.8. Structural Induction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/alg_spec.html">6.9. Algebraic Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">6.9. Equational Specification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">6.10. Summary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">6.11. Exercises</a></li>
 </ul>
@@ -605,13 +605,14 @@ but resize-on-reaching will simplify our analysis a little.)</p>
 The first 7 are (expected) constant-time, but the 8th insert is linear time: it
 increases the load factor to 2, causing a resize, thus causing rehashing of all
 16 bindings into a new table. The total cost over that series of operations is
-therefore the cost of 8+16 inserts. For simplicity of calculation, we could
-grossly round that up to 16+16 = 32 inserts. So the average cost of each
-operation in the sequence is 32/8 = 4 inserts.</p>
-<p>In other words, if we just pretended each insert cost four times its normal
+therefore: the cost of 8 inserts into the old table, plus the cost of allocating
+a new 16-element table, plus the cost of 16 inserts into the new table.
+That is, a total cost of 40.
+So the average cost of each operation in the sequence is 40/8 = 5 inserts.</p>
+<p>In other words, if we just pretended each insert cost five times its normal
 price, the final operation in the sequence would have been “pre-paid” by the
 extra price we paid for earlier inserts. And all of them would be constant-time,
-since four times a constant is still a constant.</p>
+since five times a constant is still a constant.</p>
 <p>Generalizing from the example above, let’s suppose that the number of buckets
 currently in a hash table is <span class="math notranslate nohighlight">\(2^n\)</span>, and that the load factor is currently 1.
 Therefore, there are currently <span class="math notranslate nohighlight">\(2^n\)</span> bindings in the table. Next:</p>
@@ -621,16 +622,18 @@ in the table.</p></li>
 <li><p>One more insert occurs. That brings the number of bindings up to <span class="math notranslate nohighlight">\(2^n + 2^n\)</span>,
 which is <span class="math notranslate nohighlight">\(2^{n+1}\)</span>. But the number of buckets is <span class="math notranslate nohighlight">\(2^n\)</span>, so the load factor
 just reached 2. A resize is necessary.</p></li>
-<li><p>The resize occurs. That doubles the number of buckets. All <span class="math notranslate nohighlight">\(2^{n+1}\)</span> bindings
+<li><p>The resize occurs. It costs <span class="math notranslate nohighlight">\(2^{n+1}\)</span> to allocate memory for the new table.
+That doubles the number of buckets. All <span class="math notranslate nohighlight">\(2^{n+1}\)</span> bindings
 have to be reinserted into the new table, which is of size <span class="math notranslate nohighlight">\(2^{n+1}\)</span>. The load
 factor is back down to 1.</p></li>
 </ul>
 <p>So in total we did <span class="math notranslate nohighlight">\(2^n + 2^{n+1}\)</span> inserts, which included <span class="math notranslate nohighlight">\(2^n\)</span> inserts of
-bindings and <span class="math notranslate nohighlight">\(2^{n+1}\)</span> re-insertions after the resize. We could grossly round
-that quantity up to <span class="math notranslate nohighlight">\(2^{n+2}\)</span>. Over a series of <span class="math notranslate nohighlight">\(2^n\)</span> insert operations, that’s
-an average cost of <span class="math notranslate nohighlight">\(\frac{2^{n+2}}{2^n}\)</span>, which equals 4. So if we just pretend
-each insert costs four times its normal price, every operation in the sequence
-is amortized (and expected) constant time.</p>
+bindings and <span class="math notranslate nohighlight">\(2^{n+1}\)</span> re-insertions after the resize. We also incurred the
+cost of allocating a new table of size <span class="math notranslate nohighlight">\(2^{n+1}\)</span> in memory, and that cost is <span class="math notranslate nohighlight">\(2^{n+1}\)</span>.</p>
+<p>Over a series of <span class="math notranslate nohighlight">\(2^n\)</span> insert operations, that’s
+an average cost of <span class="math notranslate nohighlight">\(\frac{2^n + 2^{n+1} + 2^{n+1}}{2^n}\)</span>, which equals 5.
+So if we just pretend each insert costs five times its normal price,
+every operation in the sequence is amortized (and expected) constant time.</p>
 <p><strong>Doubling vs. Constant-size Increasing.</strong> Notice that it is crucial that the
 array size grows by doubling (or at least geometrically). A bad mistake would be
 to instead grow the array by a fixed increment—for example, 100 buckets at

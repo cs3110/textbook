@@ -258,7 +258,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">6.6. Randomized Testing with QCheck</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">6.7. Proving Correctness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">6.8. Structural Induction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/alg_spec.html">6.9. Algebraic Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">6.9. Equational Specification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">6.10. Summary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">6.11. Exercises</a></li>
 </ul>
@@ -632,6 +632,8 @@ that comes from an operator in Lisp that <u>cons</u>tructs objects in memory.
 “Cons” can also be used as a verb, as in “I will cons an element onto the list.”
 The first element of a list is usually called its <em>head</em> and the rest of the
 elements (if any) are called its <em>tail</em>.</p>
+<p>The cons operator <code class="docutils literal notranslate"><span class="pre">::</span></code> is right associative, meaning that <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">::</span> <span class="pre">e2</span> <span class="pre">::</span> <span class="pre">e3</span></code> is
+understood as <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">::</span> <span class="pre">(e2</span> <span class="pre">::</span> <span class="pre">e3)</span></code>, not as <code class="docutils literal notranslate"><span class="pre">(e1</span> <span class="pre">::</span> <span class="pre">e2)</span> <span class="pre">::</span> <span class="pre">e3</span></code>.</p>
 <p>The square bracket syntax is convenient but unnecessary. Any list
 <code class="docutils literal notranslate"><span class="pre">[e1;</span> <span class="pre">e2;</span> <span class="pre">...;</span> <span class="pre">en]</span></code> could instead be written with the more primitive nil and
 cons syntax: <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">::</span> <span class="pre">e2</span> <span class="pre">::</span> <span class="pre">...</span> <span class="pre">::</span> <span class="pre">en</span> <span class="pre">::</span> <span class="pre">[]</span></code>. When a pleasant syntax can be
