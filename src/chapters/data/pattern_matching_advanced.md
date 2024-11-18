@@ -102,7 +102,7 @@ form; the changes to the other forms follow from those below:
 
 * Let `x1..xn` be the pattern variables appearing in `p`. If by assuming that
   `x1 : t1` and `x2 : t2` and ... and `xn : tn`, we can conclude that `p : t`
-  and ` e :u`, then `fun p -> e : t -> u`.
+  and ` e : u`, then `fun p -> e : t -> u`.
 
 * The type checking rule for application is unchanged.
 
