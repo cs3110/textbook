@@ -82,14 +82,15 @@ Suppose the table has 8 bindings and 8 buckets. Then 8 more inserts are made.
 The first 7 are (expected) constant-time, but the 8th insert is linear time: it
 increases the load factor to 2, causing a resize, thus causing rehashing of all
 16 bindings into a new table. The total cost over that series of operations is
-therefore the cost of 8+16 inserts. For simplicity of calculation, we could
-grossly round that up to 16+16 = 32 inserts. So the average cost of each
-operation in the sequence is 32/8 = 4 inserts.
+therefore: the cost of 8 inserts into the old table, plus the cost of allocating 
+a new 16-element table, plus the cost of 16 inserts into the new table.
+That is, a total cost of 40.
+So the average cost of each operation in the sequence is 40/8 = 5 inserts.
 
-In other words, if we just pretended each insert cost four times its normal
+In other words, if we just pretended each insert cost five times its normal
 price, the final operation in the sequence would have been "pre-paid" by the
 extra price we paid for earlier inserts. And all of them would be constant-time,
-since four times a constant is still a constant.
+since five times a constant is still a constant.
 
 Generalizing from the example above, let's suppose that the number of buckets
 currently in a hash table is $2^n$, and that the load factor is currently 1.
@@ -102,16 +103,19 @@ Therefore, there are currently $2^n$ bindings in the table. Next:
   which is $2^{n+1}$. But the number of buckets is $2^n$, so the load factor
   just reached 2. A resize is necessary.
 
-- The resize occurs. That doubles the number of buckets. All $2^{n+1}$ bindings
+- The resize occurs. It costs $2^{n+1}$ to allocate memory for the new table.
+  That doubles the number of buckets. All $2^{n+1}$ bindings
   have to be reinserted into the new table, which is of size $2^{n+1}$. The load
   factor is back down to 1.
 
 So in total we did $2^n + 2^{n+1}$ inserts, which included $2^n$ inserts of
-bindings and $2^{n+1}$ re-insertions after the resize. We could grossly round
-that quantity up to $2^{n+2}$. Over a series of $2^n$ insert operations, that's
-an average cost of $\frac{2^{n+2}}{2^n}$, which equals 4. So if we just pretend
-each insert costs four times its normal price, every operation in the sequence
-is amortized (and expected) constant time.
+bindings and $2^{n+1}$ re-insertions after the resize. We also incurred the 
+cost of allocating a new table of size $2^{n+1}$ in memory, and that cost is $2^{n+1}$.
+
+Over a series of $2^n$ insert operations, that's
+an average cost of $\frac{2^n + 2^{n+1} + 2^{n+1}}{2^n}$, which equals 5. 
+So if we just pretend each insert costs five times its normal price, 
+every operation in the sequence is amortized (and expected) constant time.
 
 **Doubling vs. Constant-size Increasing.** Notice that it is crucial that the
 array size grows by doubling (or at least geometrically). A bad mistake would be
