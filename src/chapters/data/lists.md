@@ -44,6 +44,9 @@ that comes from an operator in Lisp that <u>cons</u>tructs objects in memory.
 The first element of a list is usually called its *head* and the rest of the
 elements (if any) are called its *tail*.
 
+The cons operator `::` is right associative, meaning that `e1 :: e2 :: e3` is
+understood as `e1 :: (e2 :: e3)`, not as `(e1 :: e2) :: e3`.
+
 The square bracket syntax is convenient but unnecessary. Any list
 `[e1; e2; ...; en]` could instead be written with the more primitive nil and
 cons syntax: `e1 :: e2 :: ... :: en :: []`. When a pleasant syntax can be
@@ -91,10 +94,6 @@ The type-checking rules:
 * `[] : 'a list`
 * If `e1 : t` and `e2 : t list` then `e1 :: e2 : t list`. In case the colons
   and their precedence is confusing, the latter means `(e1 :: e2) : t list`.
-
-The order of operations for several `::` operators are from the right to the left.
-Meaning that for the expression `e1 :: .. el :: em :: en`, we first apply (em :: en),
-then (el :: (em :: en) ), etc.
 
 In the rule for `[]`, recall that `'a` is a type variable: it stands for an
 unknown type. So the empty list is a list whose elements have an unknown type.
