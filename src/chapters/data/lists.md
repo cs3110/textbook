@@ -92,6 +92,10 @@ The type-checking rules:
 * If `e1 : t` and `e2 : t list` then `e1 :: e2 : t list`. In case the colons
   and their precedence is confusing, the latter means `(e1 :: e2) : t list`.
 
+The order of operations for several `::` operators are from the right to the left.
+Meaning that for the expression `e1 :: .. el :: em :: en`, we first apply (em :: en),
+then (el :: (em :: en) ), etc.
+
 In the rule for `[]`, recall that `'a` is a type variable: it stands for an
 unknown type. So the empty list is a list whose elements have an unknown type.
 If we cons an `int` onto it, say `2 :: []`, then the compiler infers that for
