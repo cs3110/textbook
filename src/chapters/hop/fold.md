@@ -269,41 +269,20 @@ Let's review the differences between `fold_right` and `fold_left`:
 - Function `fold_left` is tail recursive whereas `fold_right` is
   not.
 
-- The types of the functions are different.
+- The types of the functions are different. In `fold_X` the accumulator argument goes to the `X` of the list argument. That is a choice made by the standard library rather than a necessary implementation difference.
 
-Regarding that final point, it can be hard to remember what those types are!
-Luckily we can always ask the toplevel:
-
-```{code-cell} ocaml
-List.fold_left;;
-List.fold_right;;
-```
-
-To understand those types, look for the list argument in each one of them. That
-tells you the type of the values in the list. Then look for the type of the
-return value; that tells you the type of the accumulator. From there you can
-work out everything else.
-
-```{tip}
-Note that the argument orders are different between the two `fold` functions:
-in `fold_X` the accumulator argument goes to the `X` of the list argument.
-That is not a necessary implementation difference, and some other libraries choose to standardize the argument order.
-```
-
-If you find it hard to keep track of all these argument orders, the
+If you find it hard to keep track of the argument orders, the
 [`ListLabels` module][listlabels] in the standard library can help. It uses
 labeled arguments to give names to the combining operator (which it calls `f`)
 and the initial accumulator value (which it calls `init`). Internally, the
 implementation is actually identical to the `List` module.
 
 ```{code-cell} ocaml
-ListLabels.fold_left;;
-ListLabels.fold_left ~f:(fun x y -> x - y) ~init:0 [1;2;3];;
+ListLabels.fold_left ~f:(fun x y -> x - y) ~init:0 [1; 2; 3];;
 ```
 
 ```{code-cell} ocaml
-ListLabels.fold_right;;
-ListLabels.fold_right ~f:(fun y x -> x - y) ~init:0 [1;2;3];;
+ListLabels.fold_right ~f:(fun y x -> x - y) ~init:0 [1; 2; 3];;
 ```
 
 Notice how in the two applications of fold above, we are able to write the
