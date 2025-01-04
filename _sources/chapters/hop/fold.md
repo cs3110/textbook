@@ -134,10 +134,11 @@ longer get to take advantage of the `function` keyword, nor of partial
 application in defining `sum` and `concat`. But there's no algorithmic change.
 
 What we now have is the actual implementation of the standard library function
-`List.fold_right`. All we have left to do is change the function name:
+`List.fold_right`. All we have left to do is change the function name
+and add a manual type annotation:
 
 ```{code-cell} ocaml
-let rec fold_right f lst acc = match lst with
+let rec fold_right f lst (acc : 'acc) = match lst with
   | [] -> acc
   | h :: t -> f h (fold_right f t acc)
 ```
@@ -147,6 +148,13 @@ is to "fold in" elements of the list from the right to the left, combining each
 new element using the operator. For example, `fold_right ( + ) [a; b; c] 0`
 results in evaluation of the expression `a + (b + (c + 0))`. The parentheses
 associate from the right-most subexpression to the left.
+
+```{tip}
+The manual type annotation is not necessary for a correct implementation of the function.
+Its purpose is to provide a nicer type.
+Without the annotation, the inferred type of `fold_right` would be `('a -> 'b -> 'b) -> 'a list -> 'b -> 'b`, in which the compiler chooses `'b` as the type of the accumulator.
+By manually annotating that argument with a self-descriptive name, we get the more readable type `('a -> 'acc -> 'acc) -> 'a list -> 'acc -> 'acc`.
+```
 
 ## Tail Recursion and Combine
 
@@ -240,7 +248,7 @@ Our `combine_tr` function is also in the standard library under the name
 `List.fold_left`:
 
 ```{code-cell} ocaml
-let rec fold_left f acc = function
+let rec fold_left f (acc : 'acc) = function
   | [] -> acc
   | h :: t -> fold_left f (f acc h) t
 
@@ -261,60 +269,20 @@ Let's review the differences between `fold_right` and `fold_left`:
 - Function `fold_left` is tail recursive whereas `fold_right` is
   not.
 
-- The types of the functions are different.
+- The types of the functions are different. In `fold_X` the accumulator argument goes to the `X` of the list argument. That is a choice made by the standard library rather than a necessary implementation difference.
 
-Regarding that final point, it can be hard to remember what those types are!
-Luckily we can always ask the toplevel:
-
-```{code-cell} ocaml
-List.fold_left;;
-List.fold_right;;
-```
-
-To understand those types, look for the list argument in each one of them. That
-tells you the type of the values in the list. Then look for the type of the
-return value; that tells you the type of the accumulator. From there you can
-work out everything else.
-
-* In `fold_left`, the list argument is of type `'b list`, so the list contains
-  values of type `'b`. The return type is `'a`, so the accumulator has type
-  `'a`. Knowing that, we can figure out that the second argument is the initial
-  value of the accumulator (because it has type `'a`). And we can figure out
-  that the first argument, the combining operator, takes as its own first
-  argument an accumulator value (because it has type `'a`), as its own second
-  argument a list element (because it has type `'b`), and returns a new
-  accumulator value.
-
-* In `fold_right`, the list argument is of type `'a list`, so the list contains
-  values of type `'a`. The return type is `'b`, so the accumulator has type
-  `'b`. Knowing that, we can figure out that the third argument is the initial
-  value of the accumulator (because it has type `'b`). And we can figure out
-  that the first argument, the combining operator, takes as its own second
-  argument an accumulator value (because it has type `'b`), as its own first
-  argument a list element (because it has type `'a`), and returns a new
-  accumulator value.
-
-```{tip}
-You might wonder why the argument orders are different between the two `fold`
-functions. Good question. Other libraries do in fact use different argument
-orders. One way to remember it for OCaml is that in `fold_X` the accumulator
-argument goes to the `X` of the list argument.
-```
-
-If you find it hard to keep track of all these argument orders, the
+If you find it hard to keep track of the argument orders, the
 [`ListLabels` module][listlabels] in the standard library can help. It uses
 labeled arguments to give names to the combining operator (which it calls `f`)
 and the initial accumulator value (which it calls `init`). Internally, the
 implementation is actually identical to the `List` module.
 
 ```{code-cell} ocaml
-ListLabels.fold_left;;
-ListLabels.fold_left ~f:(fun x y -> x - y) ~init:0 [1;2;3];;
+ListLabels.fold_left ~f:(fun x y -> x - y) ~init:0 [1; 2; 3];;
 ```
 
 ```{code-cell} ocaml
-ListLabels.fold_right;;
-ListLabels.fold_right ~f:(fun y x -> x - y) ~init:0 [1;2;3];;
+ListLabels.fold_right ~f:(fun y x -> x - y) ~init:0 [1; 2; 3];;
 ```
 
 Notice how in the two applications of fold above, we are able to write the
