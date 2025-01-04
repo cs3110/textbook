@@ -22,12 +22,9 @@ Manual option:
 
 # How to Create the OCaml Jupyter Kernel
 
-- Create an OPAM switch for the textbook.  This should be a switch with
-  minimal packages installed, and the compiler version should match
-  the installation instructions in the textbook. E.g.,
-  `opam switch create textbook ocaml-base-compiler.4.14.0`
+- Create an OPAM switch for the textbook, e.g., `opam switch create textbook ocaml-base-compiler.4.14.0`. Ideally the compiler version for the switch should be the same as the compiler version specified in the preface's student-facing install instructions. However, Ocaml-Jupyter (which we need to install next) does not yet work with OCaml 5 and hasn't since [2023](https://github.com/akabe/ocaml-jupyter/pull/199).
 - Install Ocaml-Jupyter with `opam install jupyter`.
-- Also install the packages needed by the textbook:
+- Install the minimal set of packages needed by the textbook:
   `opam install ounit2 qcheck menhir zarith`.
 - For ease of editing OCaml code in VS Code while in the textbook switch, also
   install these packages:
@@ -49,7 +46,7 @@ Manual option:
   ```
   The assignment statements will reduce the amount of output you see when
   building the textbook. But if your `~/.ocamlinit` does not already
-  `#use "topfind"`, there's no need to add it or the statements.
+  `#use "topfind"`, or if you don't have such a file, there's no need to add it or the statements.
 
 # How to Build the Textbook
 
