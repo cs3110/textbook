@@ -534,12 +534,7 @@ Add these new settings into that outermost set of braces:
 
 ```json
 {
-  "[ocaml]": {
-    "editor.tabSize": 2,
-    "editor.rulers": [ 80 ],
-    "editor.formatOnSave": true
-  },
-   "[ocaml.interface]": {
+  "[ocaml][ocaml.interface]": {
     "editor.tabSize": 2,
     "editor.rulers": [ 80 ],
     "editor.formatOnSave": true
