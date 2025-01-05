@@ -302,7 +302,7 @@ You should get output like this:
 
 ```
 #  switch         compiler
-→  cs3110-2024fa  ocaml-base-compiler.5.2.0
+→  cs3110-2024fa  ocaml-base-compiler.5.2.0,ocaml-options-vanilla.1
 ```
 
 There might be other lines if you happen to have done OCaml development before. There will be another column named "description" whose contents are not shown here. Double check the following:
