@@ -325,8 +325,6 @@ val compare : t -> t -> order
 ```
 Alas, historically many languages have used comparison functions with similar
 specifications, such as the C standard library's [`strcmp` function][strcmp].
-When comparing two integers, it does make the comparison easy: just perform a
-subtraction. It's not necessarily so easy for other data types.
 
 [strcmp]: http://www.gnu.org/software/libc/manual/html_node/String_002fArray-Comparison.html
 ````
