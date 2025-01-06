@@ -78,70 +78,89 @@ long branch&mdash;imagine adding the numbers 1,2,3,4,5,6,7 in order into the
 tree. So the worst-case running time of `mem` is still $O(n)$, where $n$ is the
 number of nodes in the tree.
 
-What is a good shape for a tree that would allow for fast lookup? A *perfect
-binary tree* has the largest number of nodes $n$ for a given height $h$, which
-is $n = 2^{h+1} - 1$. Therefore $h = \log(n+1) - 1$, which is $O(\log n)$.
+What is a good shape for a tree that would allow for fast lookup?
+A *perfect binary tree*, in which every leaf is at the bottom level, has the smallest possible height for the number of nodes in it.
+Consider this perfect tree:
+```ocaml
+Node (2, Node (1, Leaf, Leaf), Node (3, Leaf, Leaf))
+```
+We can draw it like this, where `.` indicates a `Leaf`, and where we depict the height of each level of the tree:
+```
+                     Height
+        2              2
+       / \
+     1     3           1
+    / \   / \
+   .   . .   .         0
+```
 
-If a tree with $n$ nodes is kept balanced, its height is $O(\log n)$, which
-leads to a lookup operation running in time $O(\log n)$.
+The number of nodes $n$ in a perfect binary tree is exponential in the tree's height $h$.
+(Note that by "node" here we specifically mean `Node` not `Leaf`.)
+In particular, $n = 2^h - 1$ (which is a fact that we could prove by induction).
+Therefore $h = \log_2(n+1)$, which is $O(\log n)$.
+Lookup operations on a perfect binary search tree would therefore run in logarithmic time.
 
 {{ video_embed | replace("%%VID%%", "BGkipOJdH3U")}}
 
-How can we keep a tree balanced? It can become unbalanced during element
-insertion or deletion. Most balanced tree schemes involve adding or deleting an
-element just like in a normal binary search tree, followed by some kind of *tree
-surgery* to rebalance the tree. Some examples of balanced binary search tree
-data structures include:
+Of course, not every tree is perfect.
+But if we could keep all paths in the tree close to logarithmic in length, then we could still get good performance.
+A *balanced* tree data structure does that: when an element is added or removed, the tree shape may be changed to ensure that the path lengths do not grow too long.
+Some examples of balanced binary search tree data structures, in order from strongest to weakest constraints on path lengths, include:
 
-- AVL trees (1962)
-- 2-3 trees (1970s)
-- Red-black trees (1970s)
+- 2-3 trees (Hopcroft, 1970): all paths have the same length.
+- AVL trees (Adelson-Velsky and Landis, 1962): the length of the shortest and longest path differ by at most one.
+- Red-black trees (Guibas and Sedgewick, 1978): the length of the shortest and longest path differ by at most a factor of two.
 
-Each of these ensures $O(\log n)$ running time by enforcing a stronger invariant
-on the data structure than just the binary search tree invariant.
+Each of those data structures ensures $O(\log n)$ running time.
+Next we will study red-black trees, which have a particularly nice implementation based on algebraic data types and pattern matching.
 
 ## Red-Black Trees
 
 {{ video_embed | replace("%%VID%%", "JzhG0jDxGqg")}}
 
-Red-black trees are relatively simple balanced binary tree data structure. The
-idea is to strengthen the representation invariant so that a tree has height
-logarithmic in the number of nodes $n$. To help enforce the invariant, we color
-each node of the tree either *red* or *black*. Where it matters, we consider the
-color of an empty tree to be black.
+Red-black trees are relatively simple balanced binary tree data structure.
+We color each node of the tree either *red* or *black*.
 
 ```{code-cell} ocaml
 type color = Red | Black
 type 'a rbtree = Leaf | Node of color * 'a * 'a rbtree * 'a rbtree
 ```
 
-Here are the new conditions we add to the binary search tree representation
-invariant:
+Note that when we write "node" in this discussion we mean the `Node` constructor; **a `Leaf` is not a node.**
+We require the root node of a non-empty tree to be colored black.
+
+In addition to the binary search tree representation invariant, red-black trees must also satisfy these invariants:
 
 1. **Local Invariant:** There are no two adjacent red nodes along any path.
 
-2. **Global Invariant:** Every path from the root to a leaf has the same number
-   of black nodes. This number is called the *black height* (BH) of the tree.
+2. **Global Invariant:** Every *full path* (a path from the root to a leaf) has the same number of black nodes. This number is called the *black height* of the tree.
 
-If a tree satisfies these two conditions, it must also be the case that every
-subtree of the tree also satisfies the conditions. If a subtree violated either
-of the conditions, the whole tree would also.
+If a tree satisfies these two conditions, it must also be the case that every subtree of the tree also satisfies the conditions.
+If a subtree violated either of the conditions, the whole tree would also.
 
-Additionally, by convention the root of the tree is colored black. This does not
-violate the invariants, but it also is not required by them.
+### Balance
 
-With these invariants, the longest possible path from the root to an empty node
-would alternately contain red and black nodes; therefore it is at most twice as
-long as the shortest possible path, which only contains black nodes. The longest
-path cannot have a length greater than twice the length of the paths in a
-perfect binary tree, which is $O(\log n)$. Therefore, the tree has height
-$O(\log n)$ and the operations are all asymptotically logarithmic in the number
-of nodes.
+The red-black tree invariants ensure that the tree stays balanced.
+The balance is not necessarily perfect — some full paths can be longer than other full paths — but as the following theorem states, the imbalance cannot be too bad.
+
+**Theorem.** The length of the longest full path in a red-black tree is at most twice the length of the shortest full path.
+
+*Proof.*
+By the Global Invariant, both the longest and shortest full paths must have the same number of black nodes, $b$, which is the black height of the tree.
+(If there are ties for the longest full path or the shortest full path, it doesn't matter. Consider any path among those that are tied.)
+If the shortest has no red nodes, then its length is just $b$.
+By the Local Invariant, the longest could at most double that length by adding $b$ red nodes.
+For example, suppose the shortest full path is B-B-B-B-Leaf, where "B" indicates a black node.
+That has length four.
+What is the longest full path the tree could potentially have given its black height?
+It would be a path that adds one red node after each black node — that is, B-R-B-R-B-R-B-R-Leaf, where "R" indicates a red node.
+The length of that is eight, which is double the length of the shortest. &#x25A1;
+
+### Membership
 
 {{ video_embed | replace("%%VID%%", "gDTCRj2-bCU")}}
 
-How do we check for membership in red-black trees? Exactly the same way as for
-general binary trees.
+We check for membership in red-black trees exactly the same way as for binary search trees:
 
 ```{code-cell} ocaml
 let rec mem x = function
@@ -152,7 +171,45 @@ let rec mem x = function
     else true
 ```
 
-**Okasaki's Algorithm.** More interesting is the `insert` operation. As with
+What is the efficiency of `mem`?
+In the worst case it recurses down to the lowest leaf in the tree and does not find the element `x` — that is, the running time is determined by the height of the tree.
+The height of a red-black tree is logarithmic in the number of nodes, as the following theorem establishes.
+
+**Theorem.** A red-black tree with $n$ nodes has height $h$ that is at most $O(\log n)$.
+
+*Proof.*
+Let $b$ be the black height of the tree — that is, the number of black nodes on every full path.
+We will use $b$ to establish a relationship between $h$ and $n$ in the following two lemmas.
+
+Lemma 1: $h \leq 2b$. 
+Consider any full path of nodes of length $h$.
+There must be $b$ black nodes on the path.
+If there are some red nodes, then as we argued above in the proof about balance, there can be at most $b$ of them.
+The path therefore has length at most $2b$.
+Thus, $h \leq 2b$.
+
+Lemma 2: $n \geq 2^b - 1$.
+Consider the black nodes in the tree.
+Since every full path must have $b$ black nodes, we could form a perfect tree of height $b$ out of those nodes.
+(Start at the root, which is black. Keep it. Recurse to each child. If the child is black, keep it. If it is red and has no children, throw it away. If it is red and has children those children must be black; arbitrarily pick one to replace the red node and throw away the other black child.)
+That perfect tree would have at least $2^b - 1$ nodes, as discussed above.
+Thus, $n \geq 2^b - 1$.
+
+Finally: We can rewrite Lemma 2 as follows: 
+
+$$
+& n \geq 2^b - 1 \\
+& \equiv 2^b \leq n + 1 \\
+& \equiv b \leq \log_2(n + 1) \\
+& \equiv 2b \leq 2 \log_2(n + 1)
+$$
+
+Then with Lemma 1 we can relax the lower bound of $2b$ on the left-hand side of that inequality to $h$, thus obtaining $h \leq 2 \log_2(n + 1)$.
+Therefore $h$ is at most $O(\log n)$. &#x25A1;
+
+### Insertion: Okasaki's Algorithm
+
+More interesting is the `insert` operation. As with
 standard binary trees, we add a node by replacing the leaf found by the search
 procedure. But what can we color that node?
 
@@ -312,7 +369,9 @@ work.
 
 {{ video_embed | replace("%%VID%%", "giSzhfuTMMA")}}
 
-**The remove operation.** Removing an element from a red-black tree works
+### Removal
+
+Removing an element from a red-black tree works
 analogously. We start with a BST element removal and then do rebalancing. When
 an interior (nonleaf) node is removed, we simply splice it out if it has fewer
 than two nonleaf children; if it has two nonleaf children, we find the next
