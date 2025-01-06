@@ -586,7 +586,13 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-search-trees">8.3.1. Binary Search Trees</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.3.2. Red-Black Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.3.2. Red-Black Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balance">8.3.2.1. Balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membership">8.3.2.2. Membership</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-okasaki-s-algorithm">8.3.2.3. Insertion: Okasaki’s Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal">8.3.2.4. Removal</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps-and-sets-from-bsts">8.3.3. Maps and Sets from BSTs</a></li>
 </ul>
             </nav>
@@ -669,33 +675,44 @@ worst-case height of a tree? It occurs with a tree of <span class="math notransl
 long branch—imagine adding the numbers 1,2,3,4,5,6,7 in order into the
 tree. So the worst-case running time of <code class="docutils literal notranslate"><span class="pre">mem</span></code> is still <span class="math notranslate nohighlight">\(O(n)\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the
 number of nodes in the tree.</p>
-<p>What is a good shape for a tree that would allow for fast lookup? A <em>perfect
-binary tree</em> has the largest number of nodes <span class="math notranslate nohighlight">\(n\)</span> for a given height <span class="math notranslate nohighlight">\(h\)</span>, which
-is <span class="math notranslate nohighlight">\(n = 2^{h+1} - 1\)</span>. Therefore <span class="math notranslate nohighlight">\(h = \log(n+1) - 1\)</span>, which is <span class="math notranslate nohighlight">\(O(\log n)\)</span>.</p>
-<p>If a tree with <span class="math notranslate nohighlight">\(n\)</span> nodes is kept balanced, its height is <span class="math notranslate nohighlight">\(O(\log n)\)</span>, which
-leads to a lookup operation running in time <span class="math notranslate nohighlight">\(O(\log n)\)</span>.</p>
+<p>What is a good shape for a tree that would allow for fast lookup?
+A <em>perfect binary tree</em>, in which every leaf is at the bottom level, has the smallest possible height for the number of nodes in it.
+Consider this perfect tree:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="nc">Node</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">Node</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">),</span> <span class="nc">Node</span> <span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">))</span>
+</pre></div>
+</div>
+<p>We can draw it like this, where <code class="docutils literal notranslate"><span class="pre">.</span></code> indicates a <code class="docutils literal notranslate"><span class="pre">Leaf</span></code>, and where we depict the height of each level of the tree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                     <span class="n">Height</span>
+        <span class="mi">2</span>              <span class="mi">2</span>
+       <span class="o">/</span> \
+     <span class="mi">1</span>     <span class="mi">3</span>           <span class="mi">1</span>
+    <span class="o">/</span> \   <span class="o">/</span> \
+   <span class="o">.</span>   <span class="o">.</span> <span class="o">.</span>   <span class="o">.</span>         <span class="mi">0</span>
+</pre></div>
+</div>
+<p>The number of nodes <span class="math notranslate nohighlight">\(n\)</span> in a perfect binary tree is exponential in the tree’s height <span class="math notranslate nohighlight">\(h\)</span>.
+(Note that by “node” here we specifically mean <code class="docutils literal notranslate"><span class="pre">Node</span></code> not <code class="docutils literal notranslate"><span class="pre">Leaf</span></code>.)
+In particular, <span class="math notranslate nohighlight">\(n = 2^h - 1\)</span> (which is a fact that we could prove by induction).
+Therefore <span class="math notranslate nohighlight">\(h = \log_2(n+1)\)</span>, which is <span class="math notranslate nohighlight">\(O(\log n)\)</span>.
+Lookup operations on a perfect binary search tree would therefore run in logarithmic time.</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/BGkipOJdH3U" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<p>How can we keep a tree balanced? It can become unbalanced during element
-insertion or deletion. Most balanced tree schemes involve adding or deleting an
-element just like in a normal binary search tree, followed by some kind of <em>tree
-surgery</em> to rebalance the tree. Some examples of balanced binary search tree
-data structures include:</p>
+<p>Of course, not every tree is perfect.
+But if we could keep all paths in the tree close to logarithmic in length, then we could still get good performance.
+A <em>balanced</em> tree data structure does that: when an element is added or removed, the tree shape may be changed to ensure that the path lengths do not grow too long.
+Some examples of balanced binary search tree data structures, in order from strongest to weakest constraints on path lengths, include:</p>
 <ul class="simple">
-<li><p>AVL trees (1962)</p></li>
-<li><p>2-3 trees (1970s)</p></li>
-<li><p>Red-black trees (1970s)</p></li>
+<li><p>2-3 trees (Hopcroft, 1970): all paths have the same length.</p></li>
+<li><p>AVL trees (Adelson-Velsky and Landis, 1962): the length of the shortest and longest path differ by at most one.</p></li>
+<li><p>Red-black trees (Guibas and Sedgewick, 1978): the length of the shortest and longest path differ by at most a factor of two.</p></li>
 </ul>
-<p>Each of these ensures <span class="math notranslate nohighlight">\(O(\log n)\)</span> running time by enforcing a stronger invariant
-on the data structure than just the binary search tree invariant.</p>
+<p>Each of those data structures ensures <span class="math notranslate nohighlight">\(O(\log n)\)</span> running time.
+Next we will study red-black trees, which have a particularly nice implementation based on algebraic data types and pattern matching.</p>
 </section>
 <section id="id1">
 <h2><span class="section-number">8.3.2. </span>Red-Black Trees<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/JzhG0jDxGqg" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<p>Red-black trees are relatively simple balanced binary tree data structure. The
-idea is to strengthen the representation invariant so that a tree has height
-logarithmic in the number of nodes <span class="math notranslate nohighlight">\(n\)</span>. To help enforce the invariant, we color
-each node of the tree either <em>red</em> or <em>black</em>. Where it matters, we consider the
-color of an empty tree to be black.</p>
+<p>Red-black trees are relatively simple balanced binary tree data structure.
+We color each node of the tree either <em>red</em> or <em>black</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="n">color</span> <span class="o">=</span> <span class="nc">Red</span> <span class="o">|</span> <span class="nc">Black</span>
@@ -712,28 +729,35 @@ color of an empty tree to be black.</p>
 </div>
 </div>
 </div>
-<p>Here are the new conditions we add to the binary search tree representation
-invariant:</p>
+<p>Note that when we write “node” in this discussion we mean the <code class="docutils literal notranslate"><span class="pre">Node</span></code> constructor; <strong>a <code class="docutils literal notranslate"><span class="pre">Leaf</span></code> is not a node.</strong>
+We require the root node of a non-empty tree to be colored black.</p>
+<p>In addition to the binary search tree representation invariant, red-black trees must also satisfy these invariants:</p>
 <ol class="arabic simple">
 <li><p><strong>Local Invariant:</strong> There are no two adjacent red nodes along any path.</p></li>
-<li><p><strong>Global Invariant:</strong> Every path from the root to a leaf has the same number
-of black nodes. This number is called the <em>black height</em> (BH) of the tree.</p></li>
+<li><p><strong>Global Invariant:</strong> Every <em>full path</em> (a path from the root to a leaf) has the same number of black nodes. This number is called the <em>black height</em> of the tree.</p></li>
 </ol>
-<p>If a tree satisfies these two conditions, it must also be the case that every
-subtree of the tree also satisfies the conditions. If a subtree violated either
-of the conditions, the whole tree would also.</p>
-<p>Additionally, by convention the root of the tree is colored black. This does not
-violate the invariants, but it also is not required by them.</p>
-<p>With these invariants, the longest possible path from the root to an empty node
-would alternately contain red and black nodes; therefore it is at most twice as
-long as the shortest possible path, which only contains black nodes. The longest
-path cannot have a length greater than twice the length of the paths in a
-perfect binary tree, which is <span class="math notranslate nohighlight">\(O(\log n)\)</span>. Therefore, the tree has height
-<span class="math notranslate nohighlight">\(O(\log n)\)</span> and the operations are all asymptotically logarithmic in the number
-of nodes.</p>
+<p>If a tree satisfies these two conditions, it must also be the case that every subtree of the tree also satisfies the conditions.
+If a subtree violated either of the conditions, the whole tree would also.</p>
+<section id="balance">
+<h3><span class="section-number">8.3.2.1. </span>Balance<a class="headerlink" href="#balance" title="Permalink to this heading">#</a></h3>
+<p>The red-black tree invariants ensure that the tree stays balanced.
+The balance is not necessarily perfect — some full paths can be longer than other full paths — but as the following theorem states, the imbalance cannot be too bad.</p>
+<p><strong>Theorem.</strong> The length of the longest full path in a red-black tree is at most twice the length of the shortest full path.</p>
+<p><em>Proof.</em>
+By the Global Invariant, both the longest and shortest full paths must have the same number of black nodes, <span class="math notranslate nohighlight">\(b\)</span>, which is the black height of the tree.
+(If there are ties for the longest full path or the shortest full path, it doesn’t matter. Consider any path among those that are tied.)
+If the shortest has no red nodes, then its length is just <span class="math notranslate nohighlight">\(b\)</span>.
+By the Local Invariant, the longest could at most double that length by adding <span class="math notranslate nohighlight">\(b\)</span> red nodes.
+For example, suppose the shortest full path is B-B-B-B-Leaf, where “B” indicates a black node.
+That has length four.
+What is the longest full path the tree could potentially have given its black height?
+It would be a path that adds one red node after each black node — that is, B-R-B-R-B-R-B-R-Leaf, where “R” indicates a red node.
+The length of that is eight, which is double the length of the shortest. □</p>
+</section>
+<section id="membership">
+<h3><span class="section-number">8.3.2.2. </span>Membership<a class="headerlink" href="#membership" title="Permalink to this heading">#</a></h3>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/gDTCRj2-bCU" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<p>How do we check for membership in red-black trees? Exactly the same way as for
-general binary trees.</p>
+<p>We check for membership in red-black trees exactly the same way as for binary search trees:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">mem</span> <span class="n">x</span> <span class="o">=</span> <span class="k">function</span>
@@ -751,7 +775,39 @@ general binary trees.</p>
 </div>
 </div>
 </div>
-<p><strong>Okasaki’s Algorithm.</strong> More interesting is the <code class="docutils literal notranslate"><span class="pre">insert</span></code> operation. As with
+<p>What is the efficiency of <code class="docutils literal notranslate"><span class="pre">mem</span></code>?
+In the worst case it recurses down to the lowest leaf in the tree and does not find the element <code class="docutils literal notranslate"><span class="pre">x</span></code> — that is, the running time is determined by the height of the tree.
+The height of a red-black tree is logarithmic in the number of nodes, as the following theorem establishes.</p>
+<p><strong>Theorem.</strong> A red-black tree with <span class="math notranslate nohighlight">\(n\)</span> nodes has height <span class="math notranslate nohighlight">\(h\)</span> that is at most <span class="math notranslate nohighlight">\(O(\log n)\)</span>.</p>
+<p><em>Proof.</em>
+Let <span class="math notranslate nohighlight">\(b\)</span> be the black height of the tree — that is, the number of black nodes on every full path.
+We will use <span class="math notranslate nohighlight">\(b\)</span> to establish a relationship between <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(n\)</span> in the following two lemmas.</p>
+<p>Lemma 1: <span class="math notranslate nohighlight">\(h \leq 2b\)</span>.
+Consider any full path of nodes of length <span class="math notranslate nohighlight">\(h\)</span>.
+There must be <span class="math notranslate nohighlight">\(b\)</span> black nodes on the path.
+If there are some red nodes, then as we argued above in the proof about balance, there can be at most <span class="math notranslate nohighlight">\(b\)</span> of them.
+The path therefore has length at most <span class="math notranslate nohighlight">\(2b\)</span>.
+Thus, <span class="math notranslate nohighlight">\(h \leq 2b\)</span>.</p>
+<p>Lemma 2: <span class="math notranslate nohighlight">\(n \geq 2^b - 1\)</span>.
+Consider the black nodes in the tree.
+Since every full path must have <span class="math notranslate nohighlight">\(b\)</span> black nodes, we could form a perfect tree of height <span class="math notranslate nohighlight">\(b\)</span> out of those nodes.
+(Start at the root, which is black. Keep it. Recurse to each child. If the child is black, keep it. If it is red and has no children, throw it away. If it is red and has children those children must be black; arbitrarily pick one to replace the red node and throw away the other black child.)
+That perfect tree would have at least <span class="math notranslate nohighlight">\(2^b - 1\)</span> nodes, as discussed above.
+Thus, <span class="math notranslate nohighlight">\(n \geq 2^b - 1\)</span>.</p>
+<p>Finally: We can rewrite Lemma 2 as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+&amp; n \geq 2^b - 1 \\
+&amp; \equiv 2^b \leq n + 1 \\
+&amp; \equiv b \leq \log_2(n + 1) \\
+&amp; \equiv 2b \leq 2 \log_2(n + 1)
+\end{split}\]</div>
+<p>Then with Lemma 1 we can relax the lower bound of <span class="math notranslate nohighlight">\(2b\)</span> on the left-hand side of that inequality to <span class="math notranslate nohighlight">\(h\)</span>, thus obtaining <span class="math notranslate nohighlight">\(h \leq 2 \log_2(n + 1)\)</span>.
+Therefore <span class="math notranslate nohighlight">\(h\)</span> is at most <span class="math notranslate nohighlight">\(O(\log n)\)</span>. □</p>
+</section>
+<section id="insertion-okasaki-s-algorithm">
+<h3><span class="section-number">8.3.2.3. </span>Insertion: Okasaki’s Algorithm<a class="headerlink" href="#insertion-okasaki-s-algorithm" title="Permalink to this heading">#</a></h3>
+<p>More interesting is the <code class="docutils literal notranslate"><span class="pre">insert</span></code> operation. As with
 standard binary trees, we add a node by replacing the leaf found by the search
 procedure. But what can we color that node?</p>
 <ul class="simple">
@@ -907,7 +963,10 @@ each step on the way back up. The path to the leaf has length <span class="math 
 because the tree was already balanced. And, each call to <code class="docutils literal notranslate"><span class="pre">balance</span></code> is <span class="math notranslate nohighlight">\(O(1)\)</span>
 work.</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/giSzhfuTMMA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<p><strong>The remove operation.</strong> Removing an element from a red-black tree works
+</section>
+<section id="removal">
+<h3><span class="section-number">8.3.2.4. </span>Removal<a class="headerlink" href="#removal" title="Permalink to this heading">#</a></h3>
+<p>Removing an element from a red-black tree works
 analogously. We start with a BST element removal and then do rebalancing. When
 an interior (nonleaf) node is removed, we simply splice it out if it has fewer
 than two nonleaf children; if it has two nonleaf children, we find the next
@@ -919,6 +978,7 @@ some path in the tree has too few black nodes, breaking the Global Invariant.</p
 solution is to create “doubly-black” nodes that count twice in determining the
 black height. For more, read their paper: <a class="reference external" href="https://doi.org/10.1017/S0956796814000227"><em>Deletion: The Curse of the Red-Black
 Tree</em> <em>Journal of Functional Programming</em></a>, volume 24, issue 4, July 2014.</p>
+</section>
 </section>
 <section id="maps-and-sets-from-bsts">
 <h2><span class="section-number">8.3.3. </span>Maps and Sets from BSTs<a class="headerlink" href="#maps-and-sets-from-bsts" title="Permalink to this heading">#</a></h2>
@@ -1022,7 +1082,13 @@ is violated. So the convenience is a double-edged sword.</p></li>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-search-trees">8.3.1. Binary Search Trees</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.3.2. Red-Black Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.3.2. Red-Black Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balance">8.3.2.1. Balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membership">8.3.2.2. Membership</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-okasaki-s-algorithm">8.3.2.3. Insertion: Okasaki’s Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal">8.3.2.4. Removal</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps-and-sets-from-bsts">8.3.3. Maps and Sets from BSTs</a></li>
 </ul>
   </nav></div>
