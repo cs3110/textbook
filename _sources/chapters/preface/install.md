@@ -274,7 +274,7 @@ and set of packages. You can have many switches and, well, switch between them
 this command:
 
 ```console
-opam switch create cs3110-2024fa ocaml-base-compiler.5.2.0
+opam switch create cs3110-2025sp ocaml-base-compiler.5.2.0
 ```
 
 ```{tip}
@@ -302,7 +302,7 @@ You should get output like this:
 
 ```
 #  switch         compiler
-→  cs3110-2024fa  ocaml-base-compiler.5.2.0,ocaml-options-vanilla.1
+→  cs3110-2025sp  ocaml-base-compiler.5.2.0,ocaml-options-vanilla.1
 ```
 
 There might be other lines if you happen to have done OCaml development before. There will be another column named "description" whose contents are not shown here. Double check the following:
@@ -388,9 +388,9 @@ issues:
   `opam init` command. To fix it, follow the "redo" instructions below.
 
 - **Is your switch listed?** Run `opam switch list` and make sure a switch named
-  `cs3110-2024fa` is listed, that it has the 5.2.0 compiler, and that it is the
+  `cs3110-2025sp` is listed, that it has the 5.2.0 compiler, and that it is the
   active switch (which is indicated with an arrow beside it). If that switch is
-  present but not active, run `opam switch cs3110-2024fa` then see whether utop
+  present but not active, run `opam switch cs3110-2025sp` then see whether utop
   works. If that switch is not present, follow the "redo" instructions below.
 
 **Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`.
