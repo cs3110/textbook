@@ -437,7 +437,7 @@ reboot — to let the new path settings take effect, so that you will later be
 able to launch VS Code from the terminal.
 
 Fourth, on **Windows only**, open the Command Palette and run the command "WSL:
-Connect to WSL". (If you on Mac, skip ahead to the next step.) The first time
+Connect to WSL". (If you're on Mac, skip ahead to the next step.) The first time
 you do this, it will install some additional software. After that completes, you
 will see a "WSL: Ubuntu" indicator in the bottom-left of the VS Code window.
 **Make sure that you see "WSL: Ubuntu" there before proceeding with the next
