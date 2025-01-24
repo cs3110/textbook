@@ -451,7 +451,7 @@ let x = 5 in
   ((let x = 6 in x) + x)
 ```
 But this is darn confusing, and for that reason, it is strongly discouraged
-style&mdash;much like ambiguous pronouns are discouraged in natural language.
+style.
 Nonetheless, let's consider what that code means.
 
 To what value does that code evaluate? The answer comes down to how `x` is
