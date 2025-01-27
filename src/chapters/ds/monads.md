@@ -88,20 +88,8 @@ another. Continuing the running example of printing, sequencing would mean first
 printing one string, then another, and `bind` would be making sure that the
 printing happens in the correct order.
 
-The usual notation for `bind` is as an infix operator written `>>=` and still
-pronounced "bind". So let's revise our signature for monads:
-
-```{code-cell} ocaml
-:tags: ["hide-output"]
-module type Monad = sig
-  type 'a t
-  val return : 'a -> 'a t
-  val ( >>= ) : 'a t -> ('a -> 'b t) -> 'b t
-end
-```
-
 All of the above is likely to feel very abstract upon first reading. It will
-help to see some concrete examples of monads. Once you understand several `>>=`
+help to see some concrete examples of monads. Once you understand several `bind`
 and `return` operations, the design pattern itself should make more sense.
 
 So the next few sections look at several different examples of code in which
@@ -285,8 +273,6 @@ let bind (x : int option) (op : int -> int option) : int option =
   match x with
   | None -> None
   | Some a -> op a
-
-let ( >>= ) = bind
 ```
 
 The `bind` function can be understood as doing the core work of upgrading `op`
@@ -296,40 +282,62 @@ upgrading for us using `bind`:
 
 ```{code-cell} ocaml
 let upgrade : (int -> int option) -> (int option -> int option) =
-  fun (op : int -> int option) (x : int option) -> (x >>= op)
+  fun (op : int -> int option) (x : int option) -> (bind x op)
 ```
 
 All those type annotations are intended to help the reader understand
 the function.  Of course, it could be written much more simply as:
 
 ```{code-cell} ocaml
-let upgrade op x = x >>= op
+let upgrade op x = bind x op
 ```
 
-Using just the `return` and `>>=` functions, we could re-implement the
+Using just the `return` and `bind` functions, we could re-implement the
 arithmetic operations from above:
 
 ```{code-cell} ocaml
 let ( + ) (x : int option) (y : int option) : int option =
-  x >>= fun a ->
-  y >>= fun b ->
-  return (Stdlib.( + ) a b)
+  bind x (fun a ->
+  bind y (fun b ->
+  return (Stdlib.( + ) a b)))
 
 let ( - ) (x : int option) (y : int option) : int option =
-  x >>= fun a ->
-  y >>= fun b ->
-  return (Stdlib.( - ) a b)
+  bind x (fun a ->
+  bind y (fun b ->
+  return (Stdlib.( - ) a b)))
 
 let ( * ) (x : int option) (y : int option) : int option =
-  x >>= fun a ->
-  y >>= fun b ->
-  return (Stdlib.( * ) a b)
+  bind x (fun a ->
+  bind y (fun b ->
+  return (Stdlib.( * ) a b)))
 
 let ( / ) (x : int option) (y : int option) : int option =
-  x >>= fun a ->
-  y >>= fun b ->
-  if b = 0 then None else return (Stdlib.( / ) a b)
+  bind x (fun a ->
+  bind y (fun b ->
+  if y = 0 then None else return (Stdlib.( / ) a b)))
 ```
+
+<!-- ```{code-cell} ocaml -->
+<!-- let ( + ) (x : int option) (y : int option) : int option = -->
+<!--   x >>= fun a -> -->
+<!--   y >>= fun b -> -->
+<!--   return (Stdlib.( + ) a b) -->
+
+<!-- let ( - ) (x : int option) (y : int option) : int option = -->
+<!--   x >>= fun a -> -->
+<!--   y >>= fun b -> -->
+<!--   return (Stdlib.( - ) a b) -->
+
+<!-- let ( * ) (x : int option) (y : int option) : int option = -->
+<!--   x >>= fun a -> -->
+<!--   y >>= fun b -> -->
+<!--   return (Stdlib.( * ) a b) -->
+
+<!-- let ( / ) (x : int option) (y : int option) : int option = -->
+<!--   x >>= fun a -> -->
+<!--   y >>= fun b -> -->
+<!--   if b = 0 then None else return (Stdlib.( / ) a b) -->
+<!-- ``` -->
 
 Recall, from our discussion of the bind operator in Lwt, that the syntax above
 should be parsed by your eye as
@@ -343,9 +351,9 @@ de-duplicate by using the same techniques as we did before:
 
 ```{code-cell} ocaml
 let upgrade_binary op x y =
-  x >>= fun a ->
-  y >>= fun b ->
-  op a b
+  bind x (fun a ->
+  bind y (fun b ->
+  op a b))
 
 let return_binary op x y = return (op x y)
 
@@ -370,22 +378,22 @@ module Maybe : Monad = struct
 
   let return x = Some x
 
-  let (>>=) m f =
+  let bind m f =
     match m with
     | None -> None
     | Some x -> f x
 end
 ```
 
-These are the same implementations of `return` and `>>=` as we invented above,
+These are the same implementations of `return` and `bind` as we invented above,
 but without the type annotations to force them to work only on integers. Indeed,
 we never needed those annotations; they just helped make the code above a little
 clearer.
 
 In practice the `return` function here is quite trivial and not really
-necessary. But the `>>=` operator can be used to replace a lot of boilerplate
+necessary. But the `bind` operator can be used to replace a lot of boilerplate
 pattern matching, as we saw in the final implementation of the arithmetic
-operators above. There's just a single pattern match, which is inside of `>>=`.
+operators above. There's just a single pattern match, which is inside of `bind`.
 Compare that to the original implementations of `plus_opt`, etc., which had many
 pattern matches.
 
@@ -557,20 +565,20 @@ The second idea was factoring out code to handle pattern matching against pairs
 and string concatenation. Here's that idea expressed as its own function:
 
 ```{code-cell} ocaml
-let ( >>= ) (m : int * string) (f : int -> int * string) : int * string =
+let bind (m : int * string) (f : int -> int * string) : int * string =
   let (x, s1) = m in
   let (y, s2) = f x in
   (y, s1 ^ s2)
 ```
 
-Using `>>=`, we can re-implement `loggable`, such that no pairs
+Using `bind`, we can re-implement `loggable`, such that no pairs
 or pattern matching are ever used in its body:
 
 ```{code-cell} ocaml
 let loggable (name : string) (f : int -> int) : int * string -> int * string =
   fun m ->
-    m >>= fun x ->
-    log name f x
+    bind m (fun x ->
+    log name f x)
 ```
 
 **The Writer Monad.** The monad we just discovered is usually called the *writer
@@ -583,7 +591,7 @@ module Writer : Monad = struct
 
   let return x = (x, "")
 
-  let ( >>= ) m f =
+  let bind m f =
     let (x, s1) = m in
     let (y, s2) = f x in
     (y, s1 ^ s2)
@@ -591,18 +599,147 @@ end
 ```
 
 As we saw with the maybe monad, these are the same implementations of `return`
-and `>>=` as we invented above, but without the type annotations to force them
+and `bind` as we invented above, but without the type annotations to force them
 to work only on integers. Indeed, we never needed those annotations; they just
 helped make the code above a little clearer.
 
 It's debatable which version of `loggable` is easier to read. Certainly you need
 to be comfortable with the monadic style of programming to appreciate the
-version of it that uses `>>=`. But if you were developing a much larger code
+version of it that uses `bind`. But if you were developing a much larger code
 base (i.e., with more functions involving paired strings than just `loggable`),
-using the `>>=` operator is likely to be a good choice: it means the code you
+using the `bind` operator is likely to be a good choice: it means the code you
 write can concentrate on the `'a` in the type `'a Writer.t` instead of on the
 strings. In other words, the writer monad will take care of the strings for you,
-as long as you use `return` and `>>=`.
+as long as you use `return` and `bind`.
+
+## OCaml's dedicated monad syntax
+
+In the past two case studies we have focused on using higher-order
+functions to extract common functionality from code. Now that we have
+considered some examples it will be convenient to introduce some
+concise syntax associated to monads.
+
+In Chapter 2.4, we pointed out that "anywhere `let x = e1 in e2` appears
+in a program, we could replace it with `(fun x -> e2) e1`. They are
+syntactically different but semantically equivalent. In essence, `let`
+expressions are just syntactic sugar for anonymous function
+application." Another way to think about this is that `let ... in`
+is closely related to a certain higher-order function, the `apply` function:
+```{code-cell} ocaml
+:tags: ["hide-output"]
+let apply x f = f x
+```
+Then `let x = e1 in e2` is semantically equivalent to `apply e1 (fun x -> e2)`.
+
+We have also seen the apply function written using infix syntax throughout this book, i.e.,
+```{code-cell} ocaml
+:tags: ["hide-output"]
+let (|>) x f = f x
+```
+and when `e2 : 'a -> 'b` is a function expression which is not a lambda, `e1 |> e2`
+is sometimes more concise than `let x = e1 in e2 x`.
+
+Building on this insight, we would like some similar syntactic sugar
+to express `bind e1 (fun x -> e2)`. OCaml allows the programmer to
+introduce custom *binding operators* which behave similarly to `let`.
+Just as `let` gives a convenient way of formulating `apply`, binding
+operators give concise and sometimes more readable syntax for
+higher-order functions like `bind` which are similar to `apply`.
+
+A definition of a binding operator looks like this:
+```{code-cell} ocaml
+:tags: ["hide-output"]
+let (let*) o f =
+  match o with
+  | None -> None
+  | Some x -> f x
+```
+
+You can see that a definition of a binding operator is just a definition of a
+higher-order function, except that the name of the function is required to be `let<op>`,
+where `<op>` is a stand-in for an "operator" symbol such as `*`, `+`, `*$`, or `@!`. The
+higher-order function should accept two arguments, the first of which can be arbitrary, and
+the second of which should be a function.
+A usage of the binding operator, in defining an expression, looks like this:
+```{code-cell} ocaml
+let* x = Some 3 in Some (x + 4)
+```
+Just as `let x = e1 in e2` is semantically equivalent to `apply e1 (fun x -> e2)`,
+`let* x = e1 in e2` is syntactic sugar for `(let*) e1 (fun x -> e2)`.
+
+Using this syntax, we can rewrite `loggable` as follows:
+```{code-cell} ocaml
+let loggable (name : string) (f : int -> int) : int * string -> int * string =
+  fun m -> let* x = m in log name f x
+```
+
+OCaml also offers the abbreviation `let* x in e2` for `let* x = x in e2`. This code may look
+redundant at first, but the `x` to the right of the equals sign is the original value of `x` in the box `'a t`, and
+the `x` to the left of the equals sign is the value in `'a` after being "extracted" from the box. So
+`let* x in e2` can be read as "extract `x` from the monad, and evaluate `e2`".
+
+Just as `let x = e1 in e2` has the more general form `let x = e1 and y = e2 in e3`, where the bindings `x = e1` and
+`y = e2` are evaluated independently and in parallel, we also can define a binding operator `and*` to let us
+bind multiple values with `let*` simultaneously.
+```{code-cell} ocaml
+:tags: ["hide-output"]
+let (and*) (x : 'a option) (y : 'b option) : ('a * 'b) option = 
+  match x with
+  | None -> None
+  | Some x' -> (match y with
+      | None -> None
+	  | Some y' -> Some (x', y')
+	)
+```
+
+Then the expression 
+```{code-cell} ocaml
+:tags: ["hide-output"]
+let* x = Some 3 and* y = Some 4 in Some(x + y)
+```
+desugars into
+```{code-cell} ocaml
+:tags: ["hide-output"]
+bind ((and*) (Some 3) (Some 4)) (fun (x, y) -> Some (x + y))
+```
+
+So, in OCaml convention, the full signature for a monad is written as:
+```{code-cell} ocaml
+:tags: ["hide-output"]
+module type Monad = sig
+  type 'a t
+  val return : 'a -> 'a t
+  val (let*) : 'a t -> ('a -> 'b t) -> 'b t
+  val (and*) : 'a t -> 'b t -> ('a * 'b) t
+end
+```
+(The function `(and*)` is not, strictly speaking, necessary, as it is
+ always possible to define it in terms of the others, but including it
+ will let you take advantage of the syntax sugar.)
+ 
+Let's re-examine the arithmetic examples from before to illustrate this new syntax.
+
+```{code-cell} ocaml
+module Let_syntax = struct
+let ( + ) (x : int option) (y : int option) : int option =
+  let* x and* y in return (Stdlib.( + ) x y)
+
+let ( - ) (x : int option) (y : int option) : int option =
+  let* x and* y in return (Stdlib.( - ) x y)
+
+let ( * ) (x : int option) (y : int option) : int option =
+  let* x and* y in return (Stdlib.( * ) x y)
+
+let ( / ) (x : int option) (y : int option) : int option =
+  let* x and* y in if y = 0 then None else return (Stdlib.( / ) x y)
+end
+```
+
+We can write `upgrade_binary` this way as well:
+```{code-cell} ocaml
+let upgrade_binary op x y =
+  let* x and* y in op x y
+```
 
 ## Example: The Lwt Monad
 
