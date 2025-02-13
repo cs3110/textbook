@@ -19,12 +19,7 @@ let rec sum lst = ...
   be rendered in HTML as `typewriter font` rather than the regular font.
 
 Also like Javadoc, OCamldoc supports *documentation tags*, such as `@author`,
-`@deprecated`, `@param`, `@return`, etc. For example, in the first line of most
-programming assignments, we ask you to complete a comment like this:
-
-```ocaml
-(** @author Your Name (your netid) *)
-```
+`@deprecated`, `@param`, `@return`, etc. 
 
 For the full range of possible markup inside a OCamldoc comment, see
 [the OCamldoc manual](https://ocaml.org/manual/ocamldoc.html).
