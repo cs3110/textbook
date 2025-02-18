@@ -531,7 +531,7 @@ use the following syntax:
 let f ?name:(arg1=8) arg2 = arg1 + arg2
 ```
 
-You can then call a function with or without the argument:
+You can then apply the function with or without the argument:
 
 ```{code-cell} ocaml
 f ~name:2 7
