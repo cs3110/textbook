@@ -517,7 +517,7 @@ end
 let a : int = M.x
 ```
 
-Note how we're able to use `M.x` at its type of `int`.  That works because
+Note how we're able to use `M.x` as `M.x` is of type `int`.  That works because
 the equality of types `t` and `int` has been exposed in the module type.
 But if we kept `t` abstract, the same usage would fail:
 
