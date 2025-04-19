@@ -274,6 +274,13 @@ let rec size = function
   | Leaf -> 0
   | Node (l, v, r) -> 1 + size l + size r
 ```
+and
+
+```ocaml
+let rec reflect = function
+  | Leaf -> Leaf
+  | Node (l, v, r) -> Node (reflect r, v, reflect l) 
+```
 
 <!--------------------------------------------------------------------------->
 {{ ex4 | replace("%%NAME%%", "fold theorem 2")}}
