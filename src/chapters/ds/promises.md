@@ -1028,7 +1028,7 @@ promise returned by bind to also be rejected.
 ```
 
 But if the state is fulfiled, then the callback provided by the user to bind
-can&mdash;at last!&mdash;be run on the contents of the fulfilled promise. If the callback executes successfully, it produces a new promise. For a brief moment let us consider just the case where the callback executes successfully. The promise thus produced might already be rejected or fulfilled,
+can&mdash;at last!&mdash;be run on the contents of the fulfilled promise. If the callback executes successfully it produces a new promise, but the callback may itself raise an exception. For a brief moment, let us consider just the optimistic case where the callback executes successfully and produces a promise. That promise might already be rejected or fulfilled,
 in which case that state again propagates.
 
 ```ocaml
@@ -1058,7 +1058,7 @@ to do that propagation:
       | Fulfilled x -> resolve resolver x
 ```
 
-Recall that we set aside the case where the callback function itself raises some exception `exc`. In that case, we need to reject the promise with that exception. We can do this by wrapping the execution of the callback in a `try` block:
+Recall that we set aside the case where the callback function itself raises some exception `exc`. In that case, we need to reject the promise with that exception. We do this by wrapping the execution of the callback in a `try` block:
 
 ```ocaml
       | Fulfilled x ->
