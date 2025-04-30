@@ -142,7 +142,7 @@ library for promises.
 
 [lwt-github]: https://github.com/ocsigen/lwt
 
-In Lwt, a *promise* is a 
+In Lwt, a *promise* is a
 reference: a value that is permitted to
 mutate at most once. When created, it is like an empty box that contains
 nothing. We say that the promise is *pending*. Eventually the promise can be
@@ -815,6 +815,15 @@ sequentially compose callbacks: first one callback is run, then another, then
 another, and so forth. There are other functions in the library for composition
 of many callbacks as a set. For example,
 
+* `Lwt.map : 'a Lwt.t -> ('a -> 'b) -> 'b Lwt.t` is a lot like `Lwt.bind`,
+  but its callback function immediately returns a *value* of type `'b`, not the
+  *promise* of a value of type `'b`. `Lwt.map p f` returns a promise that is
+  pending until `p` is resolved. If `p` is resolved via rejection, the callback is
+  never called and the pending promise is rejected with the same exception. If
+  `p` is resolved via fulfilment (say with value `v`), then the pending promise
+  is resolved with `f v`. Note that `f` may itself raise an exception, in which
+  case the pending promise is rejected with that exception.
+
 * `Lwt.join : unit Lwt.t list -> unit Lwt.t` enables waiting upon multiple
   promises. `Lwt.join ps` returns a promise that is pending until all the
   promises in `ps` become resolved. You might register a callback on the return
@@ -983,7 +992,7 @@ that is rejected with the same exception:
     | Rejected exc -> {state = Rejected exc; handlers = []}
 ```
 
-Third, if the promise is pending, we need to do more work. 
+Third, if the promise is pending, we need to do more work.
 The `bind` function needs to return a new promise. That promise will become
 fulfilled when (or if) the callback completes running, sometime in the future.
 Its contents will be whatever contents are contained within the promise that the
