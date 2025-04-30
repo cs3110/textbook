@@ -334,7 +334,7 @@ compute that involves a function that computes $f(k) = \frac{x^k}{k!}$.
 
 Define a function `total : float sequence -> float sequence`, such that
 `total <a; b; c; ...>` is a running total of the input elements, i.e.,
-`<a; a+.b; a+.b+.c; ...>`. 
+`<a; a+.b; a+.b+.c; ...>`.
 
 By using `e_terms` and `total` together, you will be able to compute successive
 approximations of $e^x$ that correspond to finite prefixes of the infinite
@@ -354,7 +354,7 @@ positive. For example,
 Finally, define a function `e : float -> float -> float` such that `e x eps` is
 $e^x$ computed using a finite prefix of the infinite summation above. The
 computation should halt when the absolute difference between successive
-approximations is below `eps`, which must be strictly positive. For 
+approximations is below `eps`, which must be strictly positive. For
 example, `e 1. 0.01` would be `2.71666666666666634`.
 
 <!--------------------------------------------------------------------------->
@@ -412,6 +412,16 @@ should force `lb2` and return its value.
 
 Implement `map` and `filter` for the `'a lazysequence` type provided in the
 section on laziness.
+
+<!--------------------------------------------------------------------------->
+{{ ex1 | replace("%%NAME%%", "map via return")}}
+
+Use the finished version of the `Promise` module we developed to also implement the `map` operator. Review the text for a description of the behavior of `map p f`. You may call `bind` in your implementation of `map`. Hint: use `return`.
+
+<!--------------------------------------------------------------------------->
+{{ ex2 | replace("%%NAME%%", "map anew")}}
+
+Use the finished version of the `Promise` module we developed to also implement the `map` operator. Review the text for a description of the behavior of `map p f`. You may use the code we developed for `bind` as a template, but you may not call `bind` in your implementation of `map`.
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "promise and resolve")}}
