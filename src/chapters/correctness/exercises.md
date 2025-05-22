@@ -273,13 +273,10 @@ Prove that `forall t, size (reflect t) = size t` by induction on `t`, where:
 let rec size = function
   | Leaf -> 0
   | Node (l, v, r) -> 1 + size l + size r
-```
-and
 
-```ocaml
 let rec reflect = function
   | Leaf -> Leaf
-  | Node (l, v, r) -> Node (reflect r, v, reflect l) 
+  | Node (l, v, r) -> Node (reflect r, v, reflect l)
 ```
 
 <!--------------------------------------------------------------------------->
