@@ -13,7 +13,7 @@ this [YouTube playlist][videos].
 
 **Authors.** This book is based on courses taught by Michael R. Clarkson, Robert
 L. Constable, Nate Foster, Michael D. George, Dan Grossman, Justin Hsu, Daniel
-P. Huttenlocher, Dexter Kozen, Greg Morrisett, Andrew C. Myers, Radu Rugina, and
+P. Huttenlocher, Dexter Kozen, Anshuman Mohan, Greg Morrisett, Andrew C. Myers, Radu Rugina, and
 Ramin Zabih. Together they have created over 20 years worth of course notes and
 intellectual contributions. Teasing out who contributed what is, by now, not an
 easy task. The primary compiler and author of this work in its form as a unified
