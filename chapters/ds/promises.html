@@ -1633,8 +1633,8 @@ promise returned by bind to also be rejected.</p>
 </pre></div>
 </div>
 <p>But if the state is fulfiled, then the callback provided by the user to bind
-can—at last!—be run on the contents of the fulfilled promise. Running
-the callback produces a new promise. It might already be rejected or fulfilled,
+can—at last!—be run on the contents of the fulfilled promise. If the callback executes successfully it produces a new promise, but the callback may itself raise an exception.</p>
+<p>First, consider the optimistic case in which the callback executes successfully and produces a promise. That promise might already be rejected or fulfilled,
 in which case that state again propagates.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span>
         <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
@@ -1656,6 +1656,17 @@ to do that propagation:</p>
       <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
       <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
       <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Second, consider the case in which the callback function itself raises some exception <code class="docutils literal notranslate"><span class="pre">exc</span></code>. In that case, we need to reject the promise with that exception. We do this by wrapping the execution of the callback in a <code class="docutils literal notranslate"><span class="pre">try</span></code> block:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span>
+        <span class="k">try</span>
+          <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
+          <span class="k">match</span> <span class="n">promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
+          <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">y</span>
+          <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
+          <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">handler</span> <span class="n">resolver</span><span class="o">)</span> <span class="n">promise</span>
+        <span class="k">with</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
 </pre></div>
 </div>
 <p>The Lwt implementation of <code class="docutils literal notranslate"><span class="pre">bind</span></code> follows essentially the same algorithm as we
@@ -1769,11 +1780,13 @@ it’s the OS that provides the concurrency.</p>
       <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
       <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
       <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span>
-        <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
-        <span class="k">match</span> <span class="n">promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-        <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">fulfill</span> <span class="n">resolver</span> <span class="n">y</span>
-        <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-        <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">handler</span> <span class="n">resolver</span><span class="o">)</span> <span class="n">promise</span>
+        <span class="k">try</span>
+          <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
+          <span class="k">match</span> <span class="n">promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
+          <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">fulfill</span> <span class="n">resolver</span> <span class="n">y</span>
+          <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
+          <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">handler</span> <span class="n">resolver</span><span class="o">)</span> <span class="n">promise</span>
+        <span class="k">with</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
 
   <span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span>
       <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>

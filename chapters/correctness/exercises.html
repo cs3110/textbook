@@ -754,6 +754,10 @@ the previous exercise as a lemma.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">size</span> <span class="o">=</span> <span class="k">function</span>
   <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="mi">0</span>
   <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">l</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">size</span> <span class="n">l</span> <span class="o">+</span> <span class="n">size</span> <span class="n">r</span>
+
+<span class="k">let</span> <span class="k">rec</span> <span class="n">reflect</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="nc">Leaf</span>
+  <span class="o">|</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">l</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">Node</span> <span class="o">(</span><span class="n">reflect</span> <span class="n">r</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">reflect</span> <span class="n">l</span><span class="o">)</span>
 </pre></div>
 </div>
 <!--------------------------------------------------------------------------->

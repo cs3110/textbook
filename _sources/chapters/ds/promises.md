@@ -142,7 +142,7 @@ library for promises.
 
 [lwt-github]: https://github.com/ocsigen/lwt
 
-In Lwt, a *promise* is a 
+In Lwt, a *promise* is a
 reference: a value that is permitted to
 mutate at most once. When created, it is like an empty box that contains
 nothing. We say that the promise is *pending*. Eventually the promise can be
@@ -983,7 +983,7 @@ that is rejected with the same exception:
     | Rejected exc -> {state = Rejected exc; handlers = []}
 ```
 
-Third, if the promise is pending, we need to do more work. 
+Third, if the promise is pending, we need to do more work.
 The `bind` function needs to return a new promise. That promise will become
 fulfilled when (or if) the callback completes running, sometime in the future.
 Its contents will be whatever contents are contained within the promise that the
@@ -1019,8 +1019,9 @@ promise returned by bind to also be rejected.
 ```
 
 But if the state is fulfiled, then the callback provided by the user to bind
-can&mdash;at last!&mdash;be run on the contents of the fulfilled promise. Running
-the callback produces a new promise. It might already be rejected or fulfilled,
+can&mdash;at last!&mdash;be run on the contents of the fulfilled promise. If the callback executes successfully it produces a new promise, but the callback may itself raise an exception.
+
+First, consider the optimistic case in which the callback executes successfully and produces a promise. That promise might already be rejected or fulfilled,
 in which case that state again propagates.
 
 ```ocaml
@@ -1048,6 +1049,19 @@ to do that propagation:
       | Pending -> failwith "handler RI violated"
       | Rejected exc -> reject resolver exc
       | Fulfilled x -> resolve resolver x
+```
+
+Second, consider the case in which the callback function itself raises some exception `exc`. In that case, we need to reject the promise with that exception. We do this by wrapping the execution of the callback in a `try` block:
+
+```ocaml
+      | Fulfilled x ->
+        try
+          let promise = callback x in
+          match promise.state with
+          | Fulfilled y -> resolve resolver y
+          | Rejected exc -> reject resolver exc
+          | Pending -> enqueue (handler resolver) promise
+        with exc -> reject resolver exc
 ```
 
 The Lwt implementation of `bind` follows essentially the same algorithm as we
@@ -1161,11 +1175,13 @@ module Promise : PROMISE = struct
       | Pending -> failwith "handler RI violated"
       | Rejected exc -> reject resolver exc
       | Fulfilled x ->
-        let promise = callback x in
-        match promise.state with
-        | Fulfilled y -> fulfill resolver y
-        | Rejected exc -> reject resolver exc
-        | Pending -> enqueue (handler resolver) promise
+        try
+          let promise = callback x in
+          match promise.state with
+          | Fulfilled y -> fulfill resolver y
+          | Rejected exc -> reject resolver exc
+          | Pending -> enqueue (handler resolver) promise
+        with exc -> reject resolver exc
 
   let ( >>= )
       (input_promise : 'a promise)
