@@ -414,7 +414,7 @@ Implement `map` and `filter` for the `'a lazysequence` type provided in the
 section on laziness.
 
 <!--------------------------------------------------------------------------->
-{{ ex1 | replace("%%NAME%%", "map via return")}}
+{{ ex1 | replace("%%NAME%%", "map via bind")}}
 
 Use the finished version of the `Promise` module we developed to also implement the `map` operator. Review the text for a description of the behavior of `map p f`. You may call `bind` in your implementation of `map`. Hint: use `return`.
 
