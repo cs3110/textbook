@@ -834,6 +834,14 @@ sequentially compose callbacks: first one callback is run, then another, then
 another, and so forth. There are other functions in the library for composition
 of many callbacks as a set. For example,</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Lwt.map</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">Lwt.t</span> <span class="pre">-&gt;</span> <span class="pre">('a</span> <span class="pre">-&gt;</span> <span class="pre">'b)</span> <span class="pre">-&gt;</span> <span class="pre">'b</span> <span class="pre">Lwt.t</span></code> is a lot like <code class="docutils literal notranslate"><span class="pre">Lwt.bind</span></code>,
+but its callback function immediately returns a <em>value</em> of type <code class="docutils literal notranslate"><span class="pre">'b</span></code>, not the
+<em>promise</em> of a value of type <code class="docutils literal notranslate"><span class="pre">'b</span></code>. <code class="docutils literal notranslate"><span class="pre">Lwt.map</span> <span class="pre">p</span> <span class="pre">f</span></code> returns a promise that is
+pending until <code class="docutils literal notranslate"><span class="pre">p</span></code> is resolved. If <code class="docutils literal notranslate"><span class="pre">p</span></code> is resolved via rejection, the callback is
+never called and the pending promise is rejected with the same exception. If
+<code class="docutils literal notranslate"><span class="pre">p</span></code> is resolved via fulfilment (say with value <code class="docutils literal notranslate"><span class="pre">v</span></code>), then the pending promise
+is resolved with <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">v</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">f</span></code> may itself raise an exception, in which
+case the pending promise is rejected with that exception.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Lwt.join</span> <span class="pre">:</span> <span class="pre">unit</span> <span class="pre">Lwt.t</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">unit</span> <span class="pre">Lwt.t</span></code> enables waiting upon multiple
 promises. <code class="docutils literal notranslate"><span class="pre">Lwt.join</span> <span class="pre">ps</span></code> returns a promise that is pending until all the
 promises in <code class="docutils literal notranslate"><span class="pre">ps</span></code> become resolved. You might register a callback on the return

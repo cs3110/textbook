@@ -728,7 +728,7 @@ bindings.</p></li>
 <span class="k">let</span> <span class="n">get_hp</span> <span class="n">m</span> <span class="o">=</span> <span class="k">match</span> <span class="n">m</span> <span class="k">with</span> <span class="o">{</span> <span class="n">name</span><span class="o">;</span> <span class="n">hp</span><span class="o">;</span> <span class="n">ptype</span> <span class="o">}</span> <span class="o">-&gt;</span> <span class="n">hp</span>
 
 <span class="c">(* better *)</span>
-<span class="k">let</span> <span class="n">get_hp</span> <span class="n">m</span> <span class="o">=</span> <span class="k">match</span> <span class="n">m</span> <span class="k">with</span> <span class="o">{</span> <span class="n">hp</span> <span class="o">}</span> <span class="o">-&gt;</span> <span class="n">hp</span>
+<span class="k">let</span> <span class="n">get_hp</span> <span class="n">m</span> <span class="o">=</span> <span class="k">match</span> <span class="n">m</span> <span class="k">with</span> <span class="o">{</span> <span class="n">hp</span><span class="o">;</span> <span class="o">_</span> <span class="o">}</span> <span class="o">-&gt;</span> <span class="n">hp</span>
 
 <span class="c">(* best *)</span>
 <span class="k">let</span> <span class="n">get_hp</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">hp</span>

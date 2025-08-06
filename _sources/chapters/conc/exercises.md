@@ -17,6 +17,16 @@ Repeat the above exercise, but use the Lwt library instead of our own Promise
 library. Make sure to use Lwt's I/O functions (e.g., `Lwt_io.printf`).
 
 <!--------------------------------------------------------------------------->
+{{ ex1 | replace("%%NAME%%", "map via bind")}}
+
+Use the finished version of the `Promise` module we developed to also implement the `map` operator. Review the text for a description of the behavior of `map p f`. You may call `bind` in your implementation of `map`. Hint: use `return`.
+
+<!--------------------------------------------------------------------------->
+{{ ex2 | replace("%%NAME%%", "map anew")}}
+
+Use the finished version of the `Promise` module we developed to also implement the `map` operator. Review the text for a description of the behavior of `map p f`. You may use the code we developed for `bind` as a template, but you may not call `bind` in your implementation of `map`.
+
+<!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "timing challenge 1")}}
 
 Here is a function that produces a time delay.  We can use it
