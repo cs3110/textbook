@@ -15,5 +15,5 @@ with mutable values, that's no longer true. "Change is hard," as they say.
 
 In this short chapter we'll cover the few mutable features of OCaml we've
 omitted so far, and we'll use them for some simple data structures. The real
-win, though, will come in the next chapter, where we put the features to more
-complicated uses.
+win, though, will come in later chapters, where we put the features to more
+advanced uses.

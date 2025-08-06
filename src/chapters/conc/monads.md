@@ -634,12 +634,9 @@ asynchronously, rather than immediately.
 
 Every data structure has not just a signature, but some expected behavior. For
 example, a stack has a push and a pop operation, and we expect those operations
-to satisfy certain algebraic laws.  We saw those for stacks when we studied
-equational specification:
-
-* `peek (push x s) = x`
-* `pop (push x s) = s`
-* etc.
+to behave in particular ways. For example, if we push an element onto a stack then
+peek at the element on the top of the stack, we expect the to see the element that
+we had just pushed.
 
 A monad, though, is not just a single data structure. It's a design pattern for
 data structures. So it's impossible to write specifications of `return` and
