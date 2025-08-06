@@ -145,7 +145,7 @@ let get_hp m = match m with { name = _; hp = h; ptype = _ } -> h
 let get_hp m = match m with { name; hp; ptype } -> hp
 
 (* better *)
-let get_hp m = match m with { hp } -> hp
+let get_hp m = match m with { hp; _ } -> hp
 
 (* best *)
 let get_hp m = m.hp
