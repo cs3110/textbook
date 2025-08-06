@@ -265,6 +265,15 @@ sequentially compose callbacks: first one callback is run, then another, then
 another, and so forth. There are other functions in the library for composition
 of many callbacks as a set. For example,
 
+* `Lwt.map : 'a Lwt.t -> ('a -> 'b) -> 'b Lwt.t` is a lot like `Lwt.bind`,
+  but its callback function immediately returns a *value* of type `'b`, not the
+  *promise* of a value of type `'b`. `Lwt.map p f` returns a promise that is
+  pending until `p` is resolved. If `p` is resolved via rejection, the callback is
+  never called and the pending promise is rejected with the same exception. If
+  `p` is resolved via fulfilment (say with value `v`), then the pending promise
+  is resolved with `f v`. Note that `f` may itself raise an exception, in which
+  case the pending promise is rejected with that exception.
+
 * `Lwt.join : unit Lwt.t list -> unit Lwt.t` enables waiting upon multiple
   promises. `Lwt.join ps` returns a promise that is pending until all the
   promises in `ps` become resolved. You might register a callback on the return
