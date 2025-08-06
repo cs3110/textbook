@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>8.6. Persistent Arrays &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>9.6. Persistent Arrays &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
   
   
   
@@ -70,8 +70,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/op.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="8.7. Promises" href="promises.html" />
-    <link rel="prev" title="8.5. Memoization" href="memoization.html" />
+    <link rel="next" title="9.7. Summary" href="summary.html" />
+    <link rel="prev" title="9.5. Memoization" href="memoization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,6 +126,12 @@ const thebe_selector_output = ".output, .cell_output"
   </div>
 
   <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">Using this book as part of a course? Please <a style="color:white" href="https://docs.google.com/forms/d/e/1FAIpQLSfEW65AJPBnk732zZZM9CFpWMobWUkym6Nf-pgslRqqwoWYIA/viewform?usp=preview">let us know</a>!</div>
+  </div>
+
   
     <div class="bd-header navbar navbar-expand-lg bd-navbar">
     </div>
@@ -246,56 +252,66 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../modules/exercises.html">5.11. Exercises</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">6. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">6.1. Refs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">6.2. Mutable Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">6.3. Arrays and Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">6.4. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">6.5. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../conc/intro.html">7. Concurrency</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conc/concurrency.html">7.1. Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/promises.html">7.2. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/impl_promises.html">7.3. Implementing Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/io_promises.html">7.4. Asynchronous Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/callbacks.html">7.5. Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/full_promises_impl.html">7.6. The Full Promises Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/monads.html">7.7. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/summary.html">7.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/exercises.html">7.9. Exercises</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Correctness and Efficiency</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">6. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">6.1. Specifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">6.2. Function Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">6.3. Module Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">6.4. Testing and Debugging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">6.5. Black-box and Glass-box Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">6.6. Randomized Testing with QCheck</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">6.7. Proving Correctness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">6.8. Structural Induction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">6.9. Equational Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">6.10. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">6.11. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">8. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">8.1. Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">8.2. Function Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">8.3. Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">8.4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">8.5. Black-box and Glass-box Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">8.6. Randomized Testing with QCheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">8.7. Proving Correctness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">8.8. Structural Induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">8.9. Equational Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">8.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">8.11. Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">7. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">7.1. Refs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">7.2. Mutable Fields</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">7.3. Arrays and Loops</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">7.4. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">7.5. Exercises</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">8. Data Structures</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="hash_tables.html">8.1. Hash Tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amortized.html">8.2. Amortized Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rb.html">8.3. Red-Black Trees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sequence.html">8.4. Sequences</a></li>
-<li class="toctree-l2"><a class="reference internal" href="memoization.html">8.5. Memoization</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="promises.html">8.7. Promises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="monads.html">8.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">8.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">8.10. Exercises</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">9. Data Structures</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hash_tables.html">9.1. Hash Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amortized.html">9.2. Amortized Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rb.html">9.3. Red-Black Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sequence.html">9.4. Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memoization.html">9.5. Memoization</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">9.6. Persistent Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">9.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">9.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Language Implementation</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../interp/intro.html">9. Interpreters</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../interp/calculator.html">9.1. Example: Calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/parsing.html">9.2. Parsing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/substitution.html">9.3. Substitution Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/environment.html">9.4. Environment Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/typecheck.html">9.5. Type Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/inference.html">9.6. Type Inference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interp/intro.html">10. Interpreters</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interp/calculator.html">10.1. Example: Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/parsing.html">10.2. Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/substitution.html">10.3. Substitution Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/environment.html">10.4. Environment Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/typecheck.html">10.5. Type Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/inference.html">10.6. Type Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/summary.html">10.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/exercises.html">10.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -585,10 +601,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-on-set-arrays">8.6.1. Copy-On-Set Arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-tree-arrays">8.6.2. Version-Tree Arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rebasing-version-tree-arrays">8.6.3. Rebasing Version-Tree Arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">8.6.4. Citations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-on-set-arrays">9.6.1. Copy-On-Set Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-tree-arrays">9.6.2. Version-Tree Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rebasing-version-tree-arrays">9.6.3. Rebasing Version-Tree Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">9.6.4. Citations</a></li>
 </ul>
             </nav>
         </div>
@@ -601,7 +617,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="persistent-arrays">
-<h1><span class="section-number">8.6. </span>Persistent Arrays<a class="headerlink" href="#persistent-arrays" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">9.6. </span>Persistent Arrays<a class="headerlink" href="#persistent-arrays" title="Permalink to this heading">#</a></h1>
 <p>OCaml’s built-in <code class="docutils literal notranslate"><span class="pre">array</span></code> type offers constant-time get and set operations. But it is an ephemeral data structure. That leads to the question: could we have persistent arrays, and if so, how good of performance could we get?</p>
 <p>Here is the interface we would like to implement:</p>
 <div class="cell docutils container">
@@ -649,7 +665,7 @@ document.write(`
 <p>That interface essentially the same as OCaml’s <code class="docutils literal notranslate"><span class="pre">Array</span></code> module, but reduced to just four essential functions.</p>
 <p>We’ll next see three implementations of that interface. Each will achieve progressively better performance. Our final implementation is based on Conchon and Filliâtre (2007); see the end of this section for citations.</p>
 <section id="copy-on-set-arrays">
-<h2><span class="section-number">8.6.1. </span>Copy-On-Set Arrays<a class="headerlink" href="#copy-on-set-arrays" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.6.1. </span>Copy-On-Set Arrays<a class="headerlink" href="#copy-on-set-arrays" title="Permalink to this heading">#</a></h2>
 <p>The easiest implementation of persistent arrays is to just make a copy of the entire array on each <code class="docutils literal notranslate"><span class="pre">set</span></code> operation. That way, old copies of the array persist—they are not changed by later <code class="docutils literal notranslate"><span class="pre">set</span></code> operations. Here is the implementation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -687,7 +703,7 @@ document.write(`
 </div>
 </section>
 <section id="version-tree-arrays">
-<h2><span class="section-number">8.6.2. </span>Version-Tree Arrays<a class="headerlink" href="#version-tree-arrays" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.6.2. </span>Version-Tree Arrays<a class="headerlink" href="#version-tree-arrays" title="Permalink to this heading">#</a></h2>
 <p>The expensive <code class="docutils literal notranslate"><span class="pre">set</span></code> operation in copy-on-set is doing way too much work. Even though only one array element is being changed, all of the array elements are copied. To achieve better performance, we could eliminate the copying and instead keep a little log of all the <code class="docutils literal notranslate"><span class="pre">set</span></code> operations that have occurred. Each entry in the log would need to record just one change that has been made. For example, suppose we had the following sequence of operations:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">a0</span> <span class="o">=</span> <span class="n">make</span> <span class="mi">3</span> <span class="mi">0</span>
 <span class="n">let</span> <span class="n">a1</span> <span class="o">=</span> <span class="nb">set</span> <span class="n">a0</span> <span class="mi">1</span> <span class="mi">7</span>
@@ -814,7 +830,7 @@ a2 ----&gt; (Diff 2 8)        (Diff 2 9) &lt;---- a3
 </div>
 </section>
 <section id="rebasing-version-tree-arrays">
-<h2><span class="section-number">8.6.3. </span>Rebasing Version-Tree Arrays<a class="headerlink" href="#rebasing-version-tree-arrays" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.6.3. </span>Rebasing Version-Tree Arrays<a class="headerlink" href="#rebasing-version-tree-arrays" title="Permalink to this heading">#</a></h2>
 <p>With version trees, we achieved constant-time <code class="docutils literal notranslate"><span class="pre">set</span></code> operations for a persistent array, but <code class="docutils literal notranslate"><span class="pre">get</span></code> operations were no longer constant time — they were <span class="math notranslate nohighlight">\(O(k)\)</span> where <span class="math notranslate nohighlight">\(k\)</span> was the number of <code class="docutils literal notranslate"><span class="pre">set</span></code> operations that had been perfromed. Is there a way to make both operations constant time while still being persistent? The answer is: almost!</p>
 <p>Right now, the original version of the array as stored in the <code class="docutils literal notranslate"><span class="pre">Base</span></code> node is <em>primary</em> and always has constant-time access with <code class="docutils literal notranslate"><span class="pre">get</span></code>. We are going to introduce a new <em>rebasing</em> operation that can make any other version of the array become primary. Then that version will have constant-time access with <code class="docutils literal notranslate"><span class="pre">get</span></code>, even though other versions will still be <span class="math notranslate nohighlight">\(O(k)\)</span>. When a version <span class="math notranslate nohighlight">\(v\)</span> of an array is accessed (either with <code class="docutils literal notranslate"><span class="pre">length</span></code> or <code class="docutils literal notranslate"><span class="pre">set</span></code>), we will mutate the version tree to make <span class="math notranslate nohighlight">\(v\)</span> primary. That means changing the <code class="docutils literal notranslate"><span class="pre">Base</span></code> node to store the contents according to <span class="math notranslate nohighlight">\(v\)</span>, and adjusting <code class="docutils literal notranslate"><span class="pre">Diff</span></code> nodes as needed to compensate for that change in the base.</p>
 <p>Since we will now be mutating trees, the representation type needs to change to add a level of indirection:</p>
@@ -957,7 +973,7 @@ t&#39; ---&gt; Diff (i, y, t)
 <p>With rebasing we now have <span class="math notranslate nohighlight">\(O(1)\)</span> <code class="docutils literal notranslate"><span class="pre">get</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> operations on the primary (most recently accessed version) of the array. We pay an <span class="math notranslate nohighlight">\(O(k)\)</span> price to change to a new primary version, but after that, access to it remains <span class="math notranslate nohighlight">\(O(1)\)</span> until another rebase occurs.</p>
 </section>
 <section id="citations">
-<h2><span class="section-number">8.6.4. </span>Citations<a class="headerlink" href="#citations" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.6.4. </span>Citations<a class="headerlink" href="#citations" title="Permalink to this heading">#</a></h2>
 <p>Our final implementation is most similar to that of Sylvain Conchon and Jean-Christophe Filliâtre (<em>A persistent union-find data structure</em>, ACM Workshop on ML, 2007). They credit Henry Baker for the idea of version trees (Shallow binding in LISP 1.5, <em>CACM</em> 21:7, 1978) and rebasing (Shallow binding makes functional arrays fast, <em>SIGPLAN Not.</em>, 26(8):145-147, 1991).</p>
 </section>
 </section>
@@ -998,15 +1014,15 @@ t&#39; ---&gt; Diff (i, y, t)
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8.5. </span>Memoization</p>
+        <p class="prev-next-title"><span class="section-number">9.5. </span>Memoization</p>
       </div>
     </a>
     <a class="right-next"
-       href="promises.html"
+       href="summary.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8.7. </span>Promises</p>
+        <p class="prev-next-title"><span class="section-number">9.7. </span>Summary</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1026,10 +1042,10 @@ t&#39; ---&gt; Diff (i, y, t)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-on-set-arrays">8.6.1. Copy-On-Set Arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-tree-arrays">8.6.2. Version-Tree Arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rebasing-version-tree-arrays">8.6.3. Rebasing Version-Tree Arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">8.6.4. Citations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-on-set-arrays">9.6.1. Copy-On-Set Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-tree-arrays">9.6.2. Version-Tree Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rebasing-version-tree-arrays">9.6.3. Rebasing Version-Tree Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">9.6.4. Citations</a></li>
 </ul>
   </nav></div>
 

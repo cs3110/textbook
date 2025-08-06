@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>9.4. Environment Model &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>10.4. Environment Model &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
   
   
   
@@ -70,8 +70,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/op.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9.5. Type Checking" href="typecheck.html" />
-    <link rel="prev" title="9.3. Substitution Model" href="substitution.html" />
+    <link rel="next" title="10.5. Type Checking" href="typecheck.html" />
+    <link rel="prev" title="10.3. Substitution Model" href="substitution.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,6 +126,12 @@ const thebe_selector_output = ".output, .cell_output"
   </div>
 
   <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">Using this book as part of a course? Please <a style="color:white" href="https://docs.google.com/forms/d/e/1FAIpQLSfEW65AJPBnk732zZZM9CFpWMobWUkym6Nf-pgslRqqwoWYIA/viewform?usp=preview">let us know</a>!</div>
+  </div>
+
   
     <div class="bd-header navbar navbar-expand-lg bd-navbar">
     </div>
@@ -246,56 +252,66 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../modules/exercises.html">5.11. Exercises</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">6. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">6.1. Refs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">6.2. Mutable Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">6.3. Arrays and Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">6.4. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">6.5. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../conc/intro.html">7. Concurrency</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conc/concurrency.html">7.1. Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/promises.html">7.2. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/impl_promises.html">7.3. Implementing Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/io_promises.html">7.4. Asynchronous Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/callbacks.html">7.5. Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/full_promises_impl.html">7.6. The Full Promises Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/monads.html">7.7. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/summary.html">7.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/exercises.html">7.9. Exercises</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Correctness and Efficiency</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">6. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">6.1. Specifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">6.2. Function Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">6.3. Module Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">6.4. Testing and Debugging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">6.5. Black-box and Glass-box Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">6.6. Randomized Testing with QCheck</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">6.7. Proving Correctness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">6.8. Structural Induction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">6.9. Equational Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">6.10. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">6.11. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">8. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">8.1. Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">8.2. Function Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">8.3. Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">8.4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">8.5. Black-box and Glass-box Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">8.6. Randomized Testing with QCheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">8.7. Proving Correctness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">8.8. Structural Induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">8.9. Equational Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">8.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">8.11. Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">7. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">7.1. Refs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">7.2. Mutable Fields</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">7.3. Arrays and Loops</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">7.4. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">7.5. Exercises</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">8. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">8.1. Hash Tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">8.2. Amortized Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">8.3. Red-Black Trees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">8.4. Sequences</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">8.5. Memoization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">8.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/promises.html">8.7. Promises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/monads.html">8.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">8.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">8.10. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">9. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">9.1. Hash Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">9.2. Amortized Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">9.3. Red-Black Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Language Implementation</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">9. Interpreters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="calculator.html">9.1. Example: Calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parsing.html">9.2. Parsing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="substitution.html">9.3. Substitution Model</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">9.4. Environment Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="typecheck.html">9.5. Type Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="inference.html">9.6. Type Inference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">10. Interpreters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="calculator.html">10.1. Example: Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsing.html">10.2. Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="substitution.html">10.3. Substitution Model</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">10.4. Environment Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="typecheck.html">10.5. Type Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inference.html">10.6. Type Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">10.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">10.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -519,11 +535,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-lambda-calculus-in-the-environment-model">9.4.1. Evaluating the Lambda Calculus in the Environment Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lexical-vs-dynamic-scope">9.4.2. Lexical vs. Dynamic Scope</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">9.4.3. A Second Attempt at Evaluating the Lambda Calculus in the Environment Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-implementation-of-the-lambda-calculus-in-the-environment-model">9.4.4. An Implementation of the Lambda Calculus in the Environment Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-environment-model">9.4.5. Evaluating Core OCaml in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-lambda-calculus-in-the-environment-model">10.4.1. Evaluating the Lambda Calculus in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lexical-vs-dynamic-scope">10.4.2. Lexical vs. Dynamic Scope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">10.4.3. A Second Attempt at Evaluating the Lambda Calculus in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-implementation-of-the-lambda-calculus-in-the-environment-model">10.4.4. An Implementation of the Lambda Calculus in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-environment-model">10.4.5. Evaluating Core OCaml in the Environment Model</a></li>
 </ul>
             </nav>
         </div>
@@ -536,7 +552,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="environment-model">
-<h1><span class="section-number">9.4. </span>Environment Model<a class="headerlink" href="#environment-model" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">10.4. </span>Environment Model<a class="headerlink" href="#environment-model" title="Permalink to this heading">#</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/cYnSVZIczJE" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>So far we’ve been using the substitution model to evaluate programs. It’s a
 great mental model for evaluation, and it’s commonly used in programming
@@ -581,7 +597,7 @@ version, too.</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/93CN7gV_G2w" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/YZO-vQohBYA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <section id="evaluating-the-lambda-calculus-in-the-environment-model">
-<h2><span class="section-number">9.4.1. </span>Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.4.1. </span>Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/l0Db3KW5X_U" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Recall that the lambda calculus is the fragment of a functional language
 involving functions and application:</p>
@@ -666,7 +682,7 @@ the binding of <code class="docutils literal notranslate"><span class="pre">x</s
 <p>What went wrong??  It has to do with scope.</p>
 </section>
 <section id="lexical-vs-dynamic-scope">
-<h2><span class="section-number">9.4.2. </span>Lexical vs. Dynamic Scope<a class="headerlink" href="#lexical-vs-dynamic-scope" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.4.2. </span>Lexical vs. Dynamic Scope<a class="headerlink" href="#lexical-vs-dynamic-scope" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/s9kiXx0cSb4" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>There are two different ways to understand the scope of a variable: variables
 can be <em>dynamically</em> scoped or <em>lexically</em> scoped. It all comes down to the
@@ -715,7 +731,7 @@ exception handler, just like how dynamic scope uses the “most recent” bindin
 variable.</p>
 </section>
 <section id="a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">
-<h2><span class="section-number">9.4.3. </span>A Second Attempt at Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.4.3. </span>A Second Attempt at Evaluating the Lambda Calculus in the Environment Model<a class="headerlink" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/Y0V_92x5J-Q" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The question then becomes, how do we implement lexical scope? It seems to
 require time travel, because function bodies need to be evaluated in old dynamic
@@ -762,14 +778,14 @@ suggest the “defining environment”) to evaluate the function body <code clas
 current environment <code class="docutils literal notranslate"><span class="pre">env</span></code> when the let expression is being evaluated.</p>
 </section>
 <section id="an-implementation-of-the-lambda-calculus-in-the-environment-model">
-<h2><span class="section-number">9.4.4. </span>An Implementation of the Lambda Calculus in the Environment Model<a class="headerlink" href="#an-implementation-of-the-lambda-calculus-in-the-environment-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.4.4. </span>An Implementation of the Lambda Calculus in the Environment Model<a class="headerlink" href="#an-implementation-of-the-lambda-calculus-in-the-environment-model" title="Permalink to this heading">#</a></h2>
 <p>You can download a complete implementation of the above two lambda calculus semantics:
 <a href="../../code/lambda-env.zip">lambda-env.zip</a>. In <code class="docutils literal notranslate"><span class="pre">main.ml</span></code>, there is a
 definition named <code class="docutils literal notranslate"><span class="pre">scope</span></code> that you can use to switch between lexical and dynamic
 scope.</p>
 </section>
 <section id="evaluating-core-ocaml-in-the-environment-model">
-<h2><span class="section-number">9.4.5. </span>Evaluating Core OCaml in the Environment Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-environment-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.4.5. </span>Evaluating Core OCaml in the Environment Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-environment-model" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/z2ktAgYTCRw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>There isn’t anything new in the (big step) environment model semantics of Core
 OCaml, now that we know about closures, but for sake of completeness let’s state
@@ -890,7 +906,7 @@ and let expression) extends the environment with a new binding:</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">9.3. </span>Substitution Model</p>
+        <p class="prev-next-title"><span class="section-number">10.3. </span>Substitution Model</p>
       </div>
     </a>
     <a class="right-next"
@@ -898,7 +914,7 @@ and let expression) extends the environment with a new binding:</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9.5. </span>Type Checking</p>
+        <p class="prev-next-title"><span class="section-number">10.5. </span>Type Checking</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -918,11 +934,11 @@ and let expression) extends the environment with a new binding:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-lambda-calculus-in-the-environment-model">9.4.1. Evaluating the Lambda Calculus in the Environment Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lexical-vs-dynamic-scope">9.4.2. Lexical vs. Dynamic Scope</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">9.4.3. A Second Attempt at Evaluating the Lambda Calculus in the Environment Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-implementation-of-the-lambda-calculus-in-the-environment-model">9.4.4. An Implementation of the Lambda Calculus in the Environment Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-environment-model">9.4.5. Evaluating Core OCaml in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-lambda-calculus-in-the-environment-model">10.4.1. Evaluating the Lambda Calculus in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lexical-vs-dynamic-scope">10.4.2. Lexical vs. Dynamic Scope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-second-attempt-at-evaluating-the-lambda-calculus-in-the-environment-model">10.4.3. A Second Attempt at Evaluating the Lambda Calculus in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-implementation-of-the-lambda-calculus-in-the-environment-model">10.4.4. An Implementation of the Lambda Calculus in the Environment Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-environment-model">10.4.5. Evaluating Core OCaml in the Environment Model</a></li>
 </ul>
   </nav></div>
 

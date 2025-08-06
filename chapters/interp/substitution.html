@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>9.3. Substitution Model &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>10.3. Substitution Model &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/op.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9.4. Environment Model" href="environment.html" />
-    <link rel="prev" title="9.2. Parsing" href="parsing.html" />
+    <link rel="next" title="10.4. Environment Model" href="environment.html" />
+    <link rel="prev" title="10.2. Parsing" href="parsing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +124,12 @@ const thebe_selector_output = ".output, .cell_output"
   </div>
 
   <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">Using this book as part of a course? Please <a style="color:white" href="https://docs.google.com/forms/d/e/1FAIpQLSfEW65AJPBnk732zZZM9CFpWMobWUkym6Nf-pgslRqqwoWYIA/viewform?usp=preview">let us know</a>!</div>
+  </div>
+
   
     <div class="bd-header navbar navbar-expand-lg bd-navbar">
     </div>
@@ -244,56 +250,66 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../modules/exercises.html">5.11. Exercises</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">6. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">6.1. Refs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">6.2. Mutable Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">6.3. Arrays and Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">6.4. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">6.5. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../conc/intro.html">7. Concurrency</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conc/concurrency.html">7.1. Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/promises.html">7.2. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/impl_promises.html">7.3. Implementing Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/io_promises.html">7.4. Asynchronous Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/callbacks.html">7.5. Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/full_promises_impl.html">7.6. The Full Promises Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/monads.html">7.7. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/summary.html">7.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/exercises.html">7.9. Exercises</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Correctness and Efficiency</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">6. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">6.1. Specifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">6.2. Function Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">6.3. Module Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">6.4. Testing and Debugging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">6.5. Black-box and Glass-box Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">6.6. Randomized Testing with QCheck</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">6.7. Proving Correctness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">6.8. Structural Induction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">6.9. Equational Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">6.10. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">6.11. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">8. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">8.1. Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">8.2. Function Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">8.3. Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">8.4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">8.5. Black-box and Glass-box Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">8.6. Randomized Testing with QCheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">8.7. Proving Correctness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">8.8. Structural Induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">8.9. Equational Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">8.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">8.11. Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">7. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">7.1. Refs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">7.2. Mutable Fields</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">7.3. Arrays and Loops</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">7.4. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">7.5. Exercises</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">8. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">8.1. Hash Tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">8.2. Amortized Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">8.3. Red-Black Trees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">8.4. Sequences</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">8.5. Memoization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">8.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/promises.html">8.7. Promises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/monads.html">8.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">8.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">8.10. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">9. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">9.1. Hash Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">9.2. Amortized Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">9.3. Red-Black Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Language Implementation</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">9. Interpreters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="calculator.html">9.1. Example: Calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parsing.html">9.2. Parsing</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">9.3. Substitution Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="environment.html">9.4. Environment Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="typecheck.html">9.5. Type Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="inference.html">9.6. Type Inference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">10. Interpreters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="calculator.html">10.1. Example: Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsing.html">10.2. Parsing</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">10.3. Substitution Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">10.4. Environment Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="typecheck.html">10.5. Type Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inference.html">10.6. Type Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">10.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">10.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -517,18 +533,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-simpl-in-the-substitution-model">9.3.1. Evaluating SimPL in the Substitution Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-single-step-relation">9.3.2. Implementing the Single-Step Relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multistep-relation">9.3.3. The Multistep Relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-big-step-relation">9.3.4. Defining the Big-Step Relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-big-step-relation">9.3.5. Implementing the Big-Step Relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution-in-simpl">9.3.6. Substitution in SimPL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-substitution">9.3.7. Implementing Substitution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simpl-interpreter-is-done">9.3.8. The SimPL Interpreter is Done!</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-avoiding-substitution">9.3.9. Capture-Avoiding Substitution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-ocaml">9.3.10. Core OCaml</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-substitution-model">9.3.11. Evaluating Core OCaml in the Substitution Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#big-step-relation">9.3.12. Big-Step Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-simpl-in-the-substitution-model">10.3.1. Evaluating SimPL in the Substitution Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-single-step-relation">10.3.2. Implementing the Single-Step Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multistep-relation">10.3.3. The Multistep Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-big-step-relation">10.3.4. Defining the Big-Step Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-big-step-relation">10.3.5. Implementing the Big-Step Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution-in-simpl">10.3.6. Substitution in SimPL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-substitution">10.3.7. Implementing Substitution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simpl-interpreter-is-done">10.3.8. The SimPL Interpreter is Done!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-avoiding-substitution">10.3.9. Capture-Avoiding Substitution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-ocaml">10.3.10. Core OCaml</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-substitution-model">10.3.11. Evaluating Core OCaml in the Substitution Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#big-step-relation">10.3.12. Big-Step Relation</a></li>
 </ul>
             </nav>
         </div>
@@ -541,7 +557,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="substitution-model">
-<h1><span class="section-number">9.3. </span>Substitution Model<a class="headerlink" href="#substitution-model" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">10.3. </span>Substitution Model<a class="headerlink" href="#substitution-model" title="Permalink to this heading">#</a></h1>
 <p>After lexing and parsing, the next phase is type checking (and other semantic
 analysis). We will skip that phase for now and return to it at the end of this
 chapter.</p>
@@ -626,7 +642,7 @@ tends to be more similar to how an interpreter is implemented.</p>
 <p>Some examples will help to make sense of all this. Let’s look, next, at how to
 define the relations for SimPL.</p>
 <section id="evaluating-simpl-in-the-substitution-model">
-<h2><span class="section-number">9.3.1. </span>Evaluating SimPL in the Substitution Model<a class="headerlink" href="#evaluating-simpl-in-the-substitution-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.1. </span>Evaluating SimPL in the Substitution Model<a class="headerlink" href="#evaluating-simpl-in-the-substitution-model" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/J-DkHQ37kaM" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s begin by defining a small-step substitution-model semantics for SimPL.
 That is, we’re going to define a relation <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> that represents how an
@@ -788,7 +804,7 @@ point of attempting to step a variable name.</p>
 for clarity, we could state that <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-/-&gt;</span></code>.</p>
 </section>
 <section id="implementing-the-single-step-relation">
-<h2><span class="section-number">9.3.2. </span>Implementing the Single-Step Relation<a class="headerlink" href="#implementing-the-single-step-relation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.2. </span>Implementing the Single-Step Relation<a class="headerlink" href="#implementing-the-single-step-relation" title="Permalink to this heading">#</a></h2>
 <p>It’s easy to turn the above definitions of <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> into an OCaml function that
 pattern matches against AST nodes. In the code below, recall that we have not
 yet finished defining substitution (i.e., <code class="docutils literal notranslate"><span class="pre">subst</span></code>); we’ll return to that in the
@@ -839,7 +855,7 @@ ill-typed binary operator applications to be evaluated, this exception would
 help us discover what was going wrong.</p>
 </section>
 <section id="the-multistep-relation">
-<h2><span class="section-number">9.3.3. </span>The Multistep Relation<a class="headerlink" href="#the-multistep-relation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.3. </span>The Multistep Relation<a class="headerlink" href="#the-multistep-relation" title="Permalink to this heading">#</a></h2>
 <p>Now that we’ve defined <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>, there’s really nothing left to do to define
 <code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code>. It’s just the reflexive transitive closure of <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code>. In other words, it
 can be defined with just these two rules:</p>
@@ -862,7 +878,7 @@ just an expression, but a value. That’s easy to implement:</p>
 </div>
 </section>
 <section id="defining-the-big-step-relation">
-<h2><span class="section-number">9.3.4. </span>Defining the Big-Step Relation<a class="headerlink" href="#defining-the-big-step-relation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.4. </span>Defining the Big-Step Relation<a class="headerlink" href="#defining-the-big-step-relation" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/P456qGgeoYs" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Recall that our goal in defining the big-step relation <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code> is to make sure it
 agrees with the multistep relation <code class="docutils literal notranslate"><span class="pre">--&gt;*</span></code>.</p>
@@ -906,7 +922,7 @@ evaluate a variable name:</p>
 </div>
 </section>
 <section id="implementing-the-big-step-relation">
-<h2><span class="section-number">9.3.5. </span>Implementing the Big-Step Relation<a class="headerlink" href="#implementing-the-big-step-relation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.5. </span>Implementing the Big-Step Relation<a class="headerlink" href="#implementing-the-big-step-relation" title="Permalink to this heading">#</a></h2>
 <p>The big-step evaluation relation is, if anything, even easier to implement than
 the small-step relation. It just recurses over the tree, evaluating
 subexpressions as required by the definition of <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code>:</p>
@@ -937,7 +953,7 @@ syntax, as we did above, unless the implementation can fit on just a single line
 in the main pattern match inside <code class="docutils literal notranslate"><span class="pre">eval_big</span></code>.</p>
 </section>
 <section id="substitution-in-simpl">
-<h2><span class="section-number">9.3.6. </span>Substitution in SimPL<a class="headerlink" href="#substitution-in-simpl" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.6. </span>Substitution in SimPL<a class="headerlink" href="#substitution-in-simpl" title="Permalink to this heading">#</a></h2>
 <p>In the previous section, we posited a new notation <code class="docutils literal notranslate"><span class="pre">e'{e/x}</span></code>, meaning
 “the expression <code class="docutils literal notranslate"><span class="pre">e'</span></code> with <code class="docutils literal notranslate"><span class="pre">e</span></code> substituted for <code class="docutils literal notranslate"><span class="pre">x</span></code>.” The intuition is
 that anywhere <code class="docutils literal notranslate"><span class="pre">x</span></code> appears in <code class="docutils literal notranslate"><span class="pre">e'</span></code>, we should replace <code class="docutils literal notranslate"><span class="pre">x</span></code> with <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p>
@@ -1050,7 +1066,7 @@ going inside the body, we’d get a different result:</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/lBqdzVTSdCc" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </section>
 <section id="implementing-substitution">
-<h2><span class="section-number">9.3.7. </span>Implementing Substitution<a class="headerlink" href="#implementing-substitution" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.7. </span>Implementing Substitution<a class="headerlink" href="#implementing-substitution" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/gttjeAd5IS0" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The definitions above are easy to turn into OCaml code. Note that, although we
 write <code class="docutils literal notranslate"><span class="pre">v</span></code> below, the function is actually able to substitute any expression for
@@ -1074,7 +1090,7 @@ on a value, though.</p>
 </div>
 </section>
 <section id="the-simpl-interpreter-is-done">
-<h2><span class="section-number">9.3.8. </span>The SimPL Interpreter is Done!<a class="headerlink" href="#the-simpl-interpreter-is-done" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.8. </span>The SimPL Interpreter is Done!<a class="headerlink" href="#the-simpl-interpreter-is-done" title="Permalink to this heading">#</a></h2>
 <p>We’ve completed developing our SimPL interpreter. Recall that the finished
 interpreter can be downloaded here: <a href="../../code/simpl.zip">simpl.zip</a>. It includes some rudimentary test cases, as well as makefile
 targets that you will find helpful.</p>
@@ -1082,7 +1098,7 @@ targets that you will find helpful.</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/Y2hiUqlfW8U" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </section>
 <section id="capture-avoiding-substitution">
-<h2><span class="section-number">9.3.9. </span>Capture-Avoiding Substitution<a class="headerlink" href="#capture-avoiding-substitution" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.9. </span>Capture-Avoiding Substitution<a class="headerlink" href="#capture-avoiding-substitution" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/WrHrKnbRc1w" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The definition of substitution for SimPL was a little tricky but not too
 complicated. It turns out, though, that in general, the definition gets
@@ -1231,7 +1247,7 @@ above to generate fresh names. There is a definition named <code class="docutils
 <code class="docutils literal notranslate"><span class="pre">main.ml</span></code> that you can use to switch between call-by-value and call-by-name.</p>
 </section>
 <section id="core-ocaml">
-<h2><span class="section-number">9.3.10. </span>Core OCaml<a class="headerlink" href="#core-ocaml" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.10. </span>Core OCaml<a class="headerlink" href="#core-ocaml" title="Permalink to this heading">#</a></h2>
 <p>Let’s now upgrade from SimPL and the lambda calculus to a larger language that
 we call <em>Core OCaml</em>. Here is its syntax in BNF:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | e1 e2 | fun x -&gt; e
@@ -1272,7 +1288,7 @@ also missing; Core OCaml does not have any type checking. Nonetheless, there is
 enough in this core language to keep us entertained.</p>
 </section>
 <section id="evaluating-core-ocaml-in-the-substitution-model">
-<h2><span class="section-number">9.3.11. </span>Evaluating Core OCaml in the Substitution Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-substitution-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.11. </span>Evaluating Core OCaml in the Substitution Model<a class="headerlink" href="#evaluating-core-ocaml-in-the-substitution-model" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/ozocssmPMFY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Let’s define the small and big step relations for Core OCaml. To be honest,
 there won’t be much that’s surprising at this point; we’ve seen just about
@@ -1439,7 +1455,7 @@ languages, it can be necessary to evaluate open expressions. In these cases,
 we’d need all the extra conditions about free variables that we gave above.</p>
 </section>
 <section id="big-step-relation">
-<h2><span class="section-number">9.3.12. </span>Big-Step Relation<a class="headerlink" href="#big-step-relation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3.12. </span>Big-Step Relation<a class="headerlink" href="#big-step-relation" title="Permalink to this heading">#</a></h2>
 <p>At this point there aren’t any new concepts remaining to introduce.
 We can just give the rules:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e1</span> <span class="n">e2</span> <span class="o">==&gt;</span> <span class="n">v</span>
@@ -1534,7 +1550,7 @@ We can just give the rules:</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">9.2. </span>Parsing</p>
+        <p class="prev-next-title"><span class="section-number">10.2. </span>Parsing</p>
       </div>
     </a>
     <a class="right-next"
@@ -1542,7 +1558,7 @@ We can just give the rules:</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9.4. </span>Environment Model</p>
+        <p class="prev-next-title"><span class="section-number">10.4. </span>Environment Model</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1562,18 +1578,18 @@ We can just give the rules:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-simpl-in-the-substitution-model">9.3.1. Evaluating SimPL in the Substitution Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-single-step-relation">9.3.2. Implementing the Single-Step Relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multistep-relation">9.3.3. The Multistep Relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-big-step-relation">9.3.4. Defining the Big-Step Relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-big-step-relation">9.3.5. Implementing the Big-Step Relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution-in-simpl">9.3.6. Substitution in SimPL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-substitution">9.3.7. Implementing Substitution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simpl-interpreter-is-done">9.3.8. The SimPL Interpreter is Done!</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-avoiding-substitution">9.3.9. Capture-Avoiding Substitution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-ocaml">9.3.10. Core OCaml</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-substitution-model">9.3.11. Evaluating Core OCaml in the Substitution Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#big-step-relation">9.3.12. Big-Step Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-simpl-in-the-substitution-model">10.3.1. Evaluating SimPL in the Substitution Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-single-step-relation">10.3.2. Implementing the Single-Step Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multistep-relation">10.3.3. The Multistep Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-big-step-relation">10.3.4. Defining the Big-Step Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-big-step-relation">10.3.5. Implementing the Big-Step Relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution-in-simpl">10.3.6. Substitution in SimPL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-substitution">10.3.7. Implementing Substitution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simpl-interpreter-is-done">10.3.8. The SimPL Interpreter is Done!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-avoiding-substitution">10.3.9. Capture-Avoiding Substitution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-ocaml">10.3.10. Core OCaml</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-core-ocaml-in-the-substitution-model">10.3.11. Evaluating Core OCaml in the Substitution Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#big-step-relation">10.3.12. Big-Step Relation</a></li>
 </ul>
   </nav></div>
 

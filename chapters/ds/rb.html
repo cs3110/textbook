@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>8.3. Red-Black Trees &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>9.3. Red-Black Trees &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
   
   
   
@@ -70,8 +70,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/op.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="8.4. Sequences" href="sequence.html" />
-    <link rel="prev" title="8.2. Amortized Analysis" href="amortized.html" />
+    <link rel="next" title="9.4. Sequences" href="sequence.html" />
+    <link rel="prev" title="9.2. Amortized Analysis" href="amortized.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,6 +126,12 @@ const thebe_selector_output = ".output, .cell_output"
   </div>
 
   <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">Using this book as part of a course? Please <a style="color:white" href="https://docs.google.com/forms/d/e/1FAIpQLSfEW65AJPBnk732zZZM9CFpWMobWUkym6Nf-pgslRqqwoWYIA/viewform?usp=preview">let us know</a>!</div>
+  </div>
+
   
     <div class="bd-header navbar navbar-expand-lg bd-navbar">
     </div>
@@ -246,56 +252,66 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../modules/exercises.html">5.11. Exercises</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">6. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">6.1. Refs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">6.2. Mutable Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">6.3. Arrays and Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">6.4. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">6.5. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../conc/intro.html">7. Concurrency</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conc/concurrency.html">7.1. Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/promises.html">7.2. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/impl_promises.html">7.3. Implementing Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/io_promises.html">7.4. Asynchronous Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/callbacks.html">7.5. Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/full_promises_impl.html">7.6. The Full Promises Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/monads.html">7.7. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/summary.html">7.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/exercises.html">7.9. Exercises</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Correctness and Efficiency</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">6. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">6.1. Specifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">6.2. Function Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">6.3. Module Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">6.4. Testing and Debugging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">6.5. Black-box and Glass-box Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">6.6. Randomized Testing with QCheck</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">6.7. Proving Correctness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">6.8. Structural Induction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">6.9. Equational Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">6.10. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">6.11. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">8. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">8.1. Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">8.2. Function Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">8.3. Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">8.4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">8.5. Black-box and Glass-box Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">8.6. Randomized Testing with QCheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">8.7. Proving Correctness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">8.8. Structural Induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">8.9. Equational Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">8.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">8.11. Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">7. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">7.1. Refs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">7.2. Mutable Fields</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">7.3. Arrays and Loops</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">7.4. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">7.5. Exercises</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">8. Data Structures</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="hash_tables.html">8.1. Hash Tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amortized.html">8.2. Amortized Analysis</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.3. Red-Black Trees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sequence.html">8.4. Sequences</a></li>
-<li class="toctree-l2"><a class="reference internal" href="memoization.html">8.5. Memoization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parrays.html">8.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="promises.html">8.7. Promises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="monads.html">8.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">8.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">8.10. Exercises</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">9. Data Structures</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hash_tables.html">9.1. Hash Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amortized.html">9.2. Amortized Analysis</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">9.3. Red-Black Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sequence.html">9.4. Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memoization.html">9.5. Memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parrays.html">9.6. Persistent Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">9.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">9.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Language Implementation</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../interp/intro.html">9. Interpreters</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../interp/calculator.html">9.1. Example: Calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/parsing.html">9.2. Parsing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/substitution.html">9.3. Substitution Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/environment.html">9.4. Environment Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/typecheck.html">9.5. Type Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/inference.html">9.6. Type Inference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interp/intro.html">10. Interpreters</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interp/calculator.html">10.1. Example: Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/parsing.html">10.2. Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/substitution.html">10.3. Substitution Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/environment.html">10.4. Environment Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/typecheck.html">10.5. Type Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/inference.html">10.6. Type Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/summary.html">10.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/exercises.html">10.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -585,15 +601,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-search-trees">8.3.1. Binary Search Trees</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.3.2. Red-Black Trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balance">8.3.2.1. Balance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membership">8.3.2.2. Membership</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-okasaki-s-algorithm">8.3.2.3. Insertion: Okasaki’s Algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal">8.3.2.4. Removal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-search-trees">9.3.1. Binary Search Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.3.2. Red-Black Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balance">9.3.2.1. Balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membership">9.3.2.2. Membership</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-okasaki-s-algorithm">9.3.2.3. Insertion: Okasaki’s Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal">9.3.2.4. Removal</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps-and-sets-from-bsts">8.3.3. Maps and Sets from BSTs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps-and-sets-from-bsts">9.3.3. Maps and Sets from BSTs</a></li>
 </ul>
             </nav>
         </div>
@@ -606,7 +622,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="red-black-trees">
-<h1><span class="section-number">8.3. </span>Red-Black Trees<a class="headerlink" href="#red-black-trees" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">9.3. </span>Red-Black Trees<a class="headerlink" href="#red-black-trees" title="Permalink to this heading">#</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/uOKHuYloCsI" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>As we’ve now seen, hash tables are an efficient data structure for implementing
 a map ADT. They offer amortized, expected constant-time performance—which
@@ -621,7 +637,7 @@ on the other hand we don’t have to qualify the performance with words like
 “amortized” and “expected”. Logarithmic is actually still plenty efficient for
 even very large workloads. And, we get to avoid mutability!</p>
 <section id="binary-search-trees">
-<h2><span class="section-number">8.3.1. </span>Binary Search Trees<a class="headerlink" href="#binary-search-trees" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.3.1. </span>Binary Search Trees<a class="headerlink" href="#binary-search-trees" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/Xx9V5vrkjJA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>A <strong>binary search tree</strong> (BST) is a binary tree with the following
 representation invariant:</p>
@@ -709,7 +725,7 @@ Some examples of balanced binary search tree data structures, in order from stro
 Next we will study red-black trees, which have a particularly nice implementation based on algebraic data types and pattern matching.</p>
 </section>
 <section id="id1">
-<h2><span class="section-number">8.3.2. </span>Red-Black Trees<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.3.2. </span>Red-Black Trees<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/JzhG0jDxGqg" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Red-black trees are relatively simple balanced binary tree data structure.
 We color each node of the tree either <em>red</em> or <em>black</em>.</p>
@@ -739,7 +755,7 @@ We require the root node of a non-empty tree to be colored black.</p>
 <p>If a tree satisfies these two conditions, it must also be the case that every subtree of the tree also satisfies the conditions.
 If a subtree violated either of the conditions, the whole tree would also.</p>
 <section id="balance">
-<h3><span class="section-number">8.3.2.1. </span>Balance<a class="headerlink" href="#balance" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.3.2.1. </span>Balance<a class="headerlink" href="#balance" title="Permalink to this heading">#</a></h3>
 <p>The red-black tree invariants ensure that the tree stays balanced.
 The balance is not necessarily perfect — some full paths can be longer than other full paths — but as the following theorem states, the imbalance cannot be too bad.</p>
 <p><strong>Theorem.</strong> The length of the longest full path in a red-black tree is at most twice the length of the shortest full path.</p>
@@ -755,7 +771,7 @@ It would be a path that adds one red node after each black node — that is, B-R
 The length of that is eight, which is double the length of the shortest. □</p>
 </section>
 <section id="membership">
-<h3><span class="section-number">8.3.2.2. </span>Membership<a class="headerlink" href="#membership" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.3.2.2. </span>Membership<a class="headerlink" href="#membership" title="Permalink to this heading">#</a></h3>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/gDTCRj2-bCU" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>We check for membership in red-black trees exactly the same way as for binary search trees:</p>
 <div class="cell docutils container">
@@ -806,7 +822,7 @@ Thus, <span class="math notranslate nohighlight">\(n \geq 2^b - 1\)</span>.</p>
 Therefore <span class="math notranslate nohighlight">\(h\)</span> is at most <span class="math notranslate nohighlight">\(O(\log n)\)</span>. □</p>
 </section>
 <section id="insertion-okasaki-s-algorithm">
-<h3><span class="section-number">8.3.2.3. </span>Insertion: Okasaki’s Algorithm<a class="headerlink" href="#insertion-okasaki-s-algorithm" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.3.2.3. </span>Insertion: Okasaki’s Algorithm<a class="headerlink" href="#insertion-okasaki-s-algorithm" title="Permalink to this heading">#</a></h3>
 <p>More interesting is the <code class="docutils literal notranslate"><span class="pre">insert</span></code> operation. As with
 standard binary trees, we add a node by replacing the leaf found by the search
 procedure. But what can we color that node?</p>
@@ -965,7 +981,7 @@ work.</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/giSzhfuTMMA" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </section>
 <section id="removal">
-<h3><span class="section-number">8.3.2.4. </span>Removal<a class="headerlink" href="#removal" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">9.3.2.4. </span>Removal<a class="headerlink" href="#removal" title="Permalink to this heading">#</a></h3>
 <p>Removing an element from a red-black tree works
 analogously. We start with a BST element removal and then do rebalancing. When
 an interior (nonleaf) node is removed, we simply splice it out if it has fewer
@@ -981,7 +997,7 @@ Tree</em> <em>Journal of Functional Programming</em></a>, volume 24, issue 4, Ju
 </section>
 </section>
 <section id="maps-and-sets-from-bsts">
-<h2><span class="section-number">8.3.3. </span>Maps and Sets from BSTs<a class="headerlink" href="#maps-and-sets-from-bsts" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">9.3.3. </span>Maps and Sets from BSTs<a class="headerlink" href="#maps-and-sets-from-bsts" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/B_e8Qr4nl4A" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>It’s easy to use a BST to implement either a map or a set ADT:</p>
 <ul class="simple">
@@ -1053,7 +1069,7 @@ is violated. So the convenience is a double-edged sword.</p></li>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8.2. </span>Amortized Analysis</p>
+        <p class="prev-next-title"><span class="section-number">9.2. </span>Amortized Analysis</p>
       </div>
     </a>
     <a class="right-next"
@@ -1061,7 +1077,7 @@ is violated. So the convenience is a double-edged sword.</p></li>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8.4. </span>Sequences</p>
+        <p class="prev-next-title"><span class="section-number">9.4. </span>Sequences</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1081,15 +1097,15 @@ is violated. So the convenience is a double-edged sword.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-search-trees">8.3.1. Binary Search Trees</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.3.2. Red-Black Trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balance">8.3.2.1. Balance</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membership">8.3.2.2. Membership</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-okasaki-s-algorithm">8.3.2.3. Insertion: Okasaki’s Algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal">8.3.2.4. Removal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-search-trees">9.3.1. Binary Search Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.3.2. Red-Black Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balance">9.3.2.1. Balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membership">9.3.2.2. Membership</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insertion-okasaki-s-algorithm">9.3.2.3. Insertion: Okasaki’s Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal">9.3.2.4. Removal</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps-and-sets-from-bsts">8.3.3. Maps and Sets from BSTs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps-and-sets-from-bsts">9.3.3. Maps and Sets from BSTs</a></li>
 </ul>
   </nav></div>
 

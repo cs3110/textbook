@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>9.6. Type Inference &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>10.6. Type Inference &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
   
   
   
@@ -70,8 +70,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/op.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9.7. Summary" href="summary.html" />
-    <link rel="prev" title="9.5. Type Checking" href="typecheck.html" />
+    <link rel="next" title="10.7. Summary" href="summary.html" />
+    <link rel="prev" title="10.5. Type Checking" href="typecheck.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,6 +126,12 @@ const thebe_selector_output = ".output, .cell_output"
   </div>
 
   <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">Using this book as part of a course? Please <a style="color:white" href="https://docs.google.com/forms/d/e/1FAIpQLSfEW65AJPBnk732zZZM9CFpWMobWUkym6Nf-pgslRqqwoWYIA/viewform?usp=preview">let us know</a>!</div>
+  </div>
+
   
     <div class="bd-header navbar navbar-expand-lg bd-navbar">
     </div>
@@ -246,56 +252,66 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../modules/exercises.html">5.11. Exercises</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">6. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">6.1. Refs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">6.2. Mutable Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">6.3. Arrays and Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">6.4. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">6.5. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../conc/intro.html">7. Concurrency</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conc/concurrency.html">7.1. Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/promises.html">7.2. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/impl_promises.html">7.3. Implementing Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/io_promises.html">7.4. Asynchronous Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/callbacks.html">7.5. Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/full_promises_impl.html">7.6. The Full Promises Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/monads.html">7.7. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/summary.html">7.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/exercises.html">7.9. Exercises</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Correctness and Efficiency</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">6. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">6.1. Specifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">6.2. Function Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">6.3. Module Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">6.4. Testing and Debugging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">6.5. Black-box and Glass-box Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">6.6. Randomized Testing with QCheck</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">6.7. Proving Correctness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">6.8. Structural Induction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">6.9. Equational Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">6.10. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">6.11. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">8. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">8.1. Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">8.2. Function Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">8.3. Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">8.4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">8.5. Black-box and Glass-box Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">8.6. Randomized Testing with QCheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">8.7. Proving Correctness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">8.8. Structural Induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">8.9. Equational Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">8.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">8.11. Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">7. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">7.1. Refs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">7.2. Mutable Fields</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">7.3. Arrays and Loops</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">7.4. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">7.5. Exercises</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">8. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">8.1. Hash Tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">8.2. Amortized Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">8.3. Red-Black Trees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">8.4. Sequences</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">8.5. Memoization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">8.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/promises.html">8.7. Promises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/monads.html">8.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">8.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">8.10. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">9. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">9.1. Hash Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">9.2. Amortized Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">9.3. Red-Black Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Language Implementation</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">9. Interpreters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="calculator.html">9.1. Example: Calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parsing.html">9.2. Parsing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="substitution.html">9.3. Substitution Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="environment.html">9.4. Environment Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="typecheck.html">9.5. Type Checking</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">9.6. Type Inference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">10. Interpreters</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="calculator.html">10.1. Example: Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsing.html">10.2. Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="substitution.html">10.3. Substitution Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">10.4. Environment Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="typecheck.html">10.5. Type Checking</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">10.6. Type Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">10.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">10.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -519,12 +535,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ocaml-type-reconstruction">9.6.1. OCaml Type Reconstruction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-based-inference">9.6.2. Constraint-Based Inference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-constraints">9.6.3. Solving Constraints</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finishing-type-inference">9.6.4. Finishing Type Inference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-polymorphism">9.6.5. Let Polymorphism</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphism-and-mutability">9.6.6. Polymorphism and Mutability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ocaml-type-reconstruction">10.6.1. OCaml Type Reconstruction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-based-inference">10.6.2. Constraint-Based Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-constraints">10.6.3. Solving Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finishing-type-inference">10.6.4. Finishing Type Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-polymorphism">10.6.5. Let Polymorphism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphism-and-mutability">10.6.6. Polymorphism and Mutability</a></li>
 </ul>
             </nav>
         </div>
@@ -537,7 +553,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="type-inference">
-<h1><span class="section-number">9.6. </span>Type Inference<a class="headerlink" href="#type-inference" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">10.6. </span>Type Inference<a class="headerlink" href="#type-inference" title="Permalink to this heading">#</a></h1>
 <p>OCaml and Java are <em>statically typed</em> languages, meaning every binding has a
 type that is determined at <em>compile time</em>—that is, before any part of the
 program is executed. The type-checker is a compile-time procedure that either
@@ -558,7 +574,7 @@ types then the checker could determine whether the program is well-typed), but
 in practice they are often merged into a single procedure called <em>type
 reconstruction</em>.</p>
 <section id="ocaml-type-reconstruction">
-<h2><span class="section-number">9.6.1. </span>OCaml Type Reconstruction<a class="headerlink" href="#ocaml-type-reconstruction" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.6.1. </span>OCaml Type Reconstruction<a class="headerlink" href="#ocaml-type-reconstruction" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/_yDo9Q9EOHY" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>At a very high level, OCaml’s type reconstruction algorithm works as follows:</p>
 <ul class="simple">
@@ -611,7 +627,7 @@ exponential time.) For fun, try typing the following code in utop:</p>
 repetitions or so) type inference will cause a significant delay.</p>
 </section>
 <section id="constraint-based-inference">
-<h2><span class="section-number">9.6.2. </span>Constraint-Based Inference<a class="headerlink" href="#constraint-based-inference" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.6.2. </span>Constraint-Based Inference<a class="headerlink" href="#constraint-based-inference" title="Permalink to this heading">#</a></h2>
 <p>Let’s build up to the HM type inference algorithm by starting with this little
 language:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
@@ -815,7 +831,7 @@ we are left with</p>
 <p>Hence, the type of <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">+</span> <span class="pre">)</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.</p>
 </section>
 <section id="solving-constraints">
-<h2><span class="section-number">9.6.3. </span>Solving Constraints<a class="headerlink" href="#solving-constraints" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.6.3. </span>Solving Constraints<a class="headerlink" href="#solving-constraints" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/o1wT8FC9hpE" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>What does it mean to solve a set of constraints? Since constraints are equations
 on types, it’s much like solving a system of equations in algebra. We want to
@@ -942,7 +958,7 @@ that <code class="docutils literal notranslate"><span class="pre">S'</span> <spa
 the additional substitutions of <code class="docutils literal notranslate"><span class="pre">S''</span></code>.</p>
 </section>
 <section id="finishing-type-inference">
-<h2><span class="section-number">9.6.4. </span>Finishing Type Inference<a class="headerlink" href="#finishing-type-inference" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.6.4. </span>Finishing Type Inference<a class="headerlink" href="#finishing-type-inference" title="Permalink to this heading">#</a></h2>
 <p>Let’s review what we’ve done so far. We started with this language:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= n | i | b
     | if e1 then e2 else e3
@@ -1223,7 +1239,7 @@ of it, is an area of ongoing research.</p>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/1jjGyPA9o1g" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </section>
 <section id="let-polymorphism">
-<h2><span class="section-number">9.6.5. </span>Let Polymorphism<a class="headerlink" href="#let-polymorphism" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.6.5. </span>Let Polymorphism<a class="headerlink" href="#let-polymorphism" title="Permalink to this heading">#</a></h2>
 <p>Now we’ll add <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions to our little language:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>e ::= x | i | b | e1 bop e2
     | if e1 then e2 else e3
@@ -1448,7 +1464,7 @@ discovers no new equalities from the environment, so <code class="docutils liter
 <code class="docutils literal notranslate"><span class="pre">id</span></code>.</p>
 </section>
 <section id="polymorphism-and-mutability">
-<h2><span class="section-number">9.6.6. </span>Polymorphism and Mutability<a class="headerlink" href="#polymorphism-and-mutability" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.6.6. </span>Polymorphism and Mutability<a class="headerlink" href="#polymorphism-and-mutability" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/6tj9WrRqPeU" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>There is yet one more complication to type inference for <code class="docutils literal notranslate"><span class="pre">let</span></code> expressions. It
 appears when we add mutable references to the language. Consider this example
@@ -1580,7 +1596,7 @@ programs to type check).</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">9.5. </span>Type Checking</p>
+        <p class="prev-next-title"><span class="section-number">10.5. </span>Type Checking</p>
       </div>
     </a>
     <a class="right-next"
@@ -1588,7 +1604,7 @@ programs to type check).</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9.7. </span>Summary</p>
+        <p class="prev-next-title"><span class="section-number">10.7. </span>Summary</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1608,12 +1624,12 @@ programs to type check).</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ocaml-type-reconstruction">9.6.1. OCaml Type Reconstruction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-based-inference">9.6.2. Constraint-Based Inference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-constraints">9.6.3. Solving Constraints</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finishing-type-inference">9.6.4. Finishing Type Inference</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-polymorphism">9.6.5. Let Polymorphism</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphism-and-mutability">9.6.6. Polymorphism and Mutability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ocaml-type-reconstruction">10.6.1. OCaml Type Reconstruction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-based-inference">10.6.2. Constraint-Based Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-constraints">10.6.3. Solving Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finishing-type-inference">10.6.4. Finishing Type Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-polymorphism">10.6.5. Let Polymorphism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphism-and-mutability">10.6.6. Polymorphism and Mutability</a></li>
 </ul>
   </nav></div>
 

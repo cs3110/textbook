@@ -1,0 +1,974 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>7.5. Callbacks &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/conc/callbacks';</script>
+    <link rel="shortcut icon" href="../../_static/op.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.6. The Full Promises Implementation" href="full_promises_impl.html" />
+    <link rel="prev" title="7.4. Asynchronous Input and Output" href="io_promises.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">Using this book as part of a course? Please <a style="color:white" href="https://docs.google.com/forms/d/e/1FAIpQLSfEW65AJPBnk732zZZM9CFpWMobWUkym6Nf-pgslRqqwoWYIA/viewform?usp=preview">let us know</a>!</div>
+  </div>
+
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../cover.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/op_title.png" class="logo__image only-light" alt="OCaml Programming: Correct + Efficient + Beautiful - Home"/>
+    <script>document.write(`<img src="../../_static/op_title.png" class="logo__image only-dark" alt="OCaml Programming: Correct + Efficient + Beautiful - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preface</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../preface/about.html">About This Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preface/install.html">Installing OCaml</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro/intro.html">1. Better Programming Through OCaml</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro/past.html">1.1. The Past of OCaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/present.html">1.2. The Present of OCaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/future.html">1.3. Look to Your Future</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/3110.html">1.4. A Brief History of CS 3110</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/summary.html">1.5. Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/intro.html">2. The Basics of OCaml</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/toplevel.html">2.1. The OCaml Toplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/compiling.html">2.2. Compiling OCaml Programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/expressions.html">2.3. Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/functions.html">2.4. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/documentation.html">2.5. Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/printing.html">2.6. Printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/debugging.html">2.7. Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/summary.html">2.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/exercises.html">2.9. Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">OCaml Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data/intro.html">3. Data and Types</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data/lists.html">3.1. Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/variants.html">3.2. Variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/ounit.html">3.3. Unit Testing with OUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/records_tuples.html">3.4. Records and Tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/pattern_matching_advanced.html">3.5. Advanced Pattern Matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/type_synonym.html">3.6. Type Synonyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/options.html">3.7. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/assoc_list.html">3.8. Association Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/algebraic_data_types.html">3.9. Algebraic Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/exceptions.html">3.10. Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/trees.html">3.11. Example: Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/nats.html">3.12. Example: Natural Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/summary.html">3.13. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/exercises.html">3.14. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../hop/intro.html">4. Higher-Order Programming</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hop/higher_order.html">4.1. Higher-Order Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/map.html">4.2. Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/filter.html">4.3. Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/fold.html">4.4. Fold</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/beyond_lists.html">4.5. Beyond Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/pipelining.html">4.6. Pipelining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/currying.html">4.7. Currying</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/summary.html">4.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/exercises.html">4.9. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../modules/intro.html">5. Modular Programming</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/module_systems.html">5.1. Module Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/modules.html">5.2. Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/toplevel.html">5.3. Modules and the Toplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/encapsulation.html">5.4. Encapsulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/compilation_units.html">5.5. Compilation Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/functional_data_structures.html">5.6. Functional Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/module_type_constraints.html">5.7. Module Type Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/includes.html">5.8. Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/functors.html">5.9. Functors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/summary.html">5.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/exercises.html">5.11. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">6. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">6.1. Refs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">6.2. Mutable Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">6.3. Arrays and Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">6.4. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">6.5. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">7. Concurrency</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="concurrency.html">7.1. Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="promises.html">7.2. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="impl_promises.html">7.3. Implementing Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io_promises.html">7.4. Asynchronous Input and Output</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.5. Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.6. The Full Promises Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monads.html">7.7. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.9. Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correctness and Efficiency</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">8. Correctness</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">8.1. Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">8.2. Function Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">8.3. Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">8.4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">8.5. Black-box and Glass-box Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">8.6. Randomized Testing with QCheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">8.7. Proving Correctness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">8.8. Structural Induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">8.9. Equational Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">8.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">8.11. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">9. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">9.1. Hash Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">9.2. Amortized Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">9.3. Red-Black Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Language Implementation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interp/intro.html">10. Interpreters</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interp/calculator.html">10.1. Example: Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/parsing.html">10.2. Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/substitution.html">10.3. Substitution Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/environment.html">10.4. Environment Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/typecheck.html">10.5. Type Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/inference.html">10.6. Type Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/summary.html">10.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/exercises.html">10.8. Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lagniappe</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../adv/curry-howard.html">The Curry-Howard Correspondence</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../appendix/bigoh.html">Big-Oh Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/vm.html">Virtual Machine</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/cs3110/textbook/main?urlpath=tree/src/chapters/conc/callbacks.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cs3110/textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cs3110/textbook/edit/main/src/chapters/conc/callbacks.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/conc/callbacks.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/chapters/conc/callbacks.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="../../_sources/chapters/conc/callbacks.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Callbacks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-a-callback">7.5.1. Registering a Callback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bind">7.5.2. Bind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bind-as-an-operator">7.5.3. Bind as an Operator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bind-as-let-syntax">7.5.4. Bind as Let Syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrent-composition">7.5.5. Concurrent Composition</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="callbacks">
+<h1><span class="section-number">7.5. </span>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this heading">#</a></h1>
+<p>For a program to benefit from the concurrency provided by asynchronous
+I/O and promises, there needs to be a way for the program to make use of
+resolved promises.  For example, if a web server is asynchronously
+reading and serving multiple files to multiple clients, the server needs
+a way to (i) become aware that a read has completed, and (ii) then do a
+new asynchronous write with the result of the read. In other words,
+programs need a mechanism for managing the dependencies among promises.</p>
+<p>The mechanism provided in Lwt is named <em>callbacks.</em>  A callback is a
+function that will be run sometime after a promise has been fulfilled,
+and it will receive as input the contents of the fulfilled promise.
+Think of it like asking your friend to do some work for you: they
+promise to do it, and to call you back on the phone with the result of
+the work sometime after they’ve finished.</p>
+<section id="registering-a-callback">
+<h2><span class="section-number">7.5.1. </span>Registering a Callback<a class="headerlink" href="#registering-a-callback" title="Permalink to this heading">#</a></h2>
+<p>Here is a function that prints a string using Lwt’s
+version of the <code class="docutils literal notranslate"><span class="pre">printf</span></code> function:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">print_the_string</span> <span class="n">str</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;The string is: %S</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="n">str</span>
+</pre></div>
+</div>
+<p>And here, repeated from the previous section, is our code that returns a promise
+for a string read from standard input:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span>
+</pre></div>
+</div>
+<p>To register the printing function as a callback for that promise, we use the
+function <code class="docutils literal notranslate"><span class="pre">Lwt.bind</span></code>, which <em>binds</em> the callback to the promise:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">bind</span> <span class="n">p</span> <span class="n">print_the_string</span>
+</pre></div>
+</div>
+<p>Sometime after <code class="docutils literal notranslate"><span class="pre">p</span></code> is fulfilled, hence contains a string, the callback function
+will be run with that string as its input. That causes the string to be printed.</p>
+<p>Here’s a complete utop transcript as an example of that:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># let print_the_string str = Lwt_io.printf &quot;The string is: %S\n&quot; str;;
+val print_the_string : string -&gt; unit Lwt.t = &lt;fun&gt;
+# let p = read_line stdin in Lwt.bind p print_the_string;;
+- : unit Lwt.t = &lt;abstr&gt;
+  &lt;type Camels are bae followed by Enter&gt;
+# The string is: &quot;Camels are bae&quot;
+</pre></div>
+</div>
+</section>
+<section id="bind">
+<h2><span class="section-number">7.5.2. </span>Bind<a class="headerlink" href="#bind" title="Permalink to this heading">#</a></h2>
+<p>The type of <code class="docutils literal notranslate"><span class="pre">Lwt.bind</span></code> is important to understand:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">&#39;</span><span class="n">a</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">bind</span></code> function takes a promise as its first argument. It doesn’t matter
+whether that promise has been resolved yet or not. As its second argument,
+<code class="docutils literal notranslate"><span class="pre">bind</span></code> takes a callback function. That callback takes an input which is the same
+type <code class="docutils literal notranslate"><span class="pre">'a</span></code> as the contents of the promise. It’s not an accident that they have
+the same type: the whole idea is to eventually run the callback on the fulfilled
+promise, so the type the promise contains needs to be the same as the type the
+callback expects as input.</p>
+<p>After being invoked on a promise and callback, e.g., <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">p</span> <span class="pre">c</span></code>, the <code class="docutils literal notranslate"><span class="pre">bind</span></code>
+function does one of three things, depending on the state of <code class="docutils literal notranslate"><span class="pre">p</span></code>:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> is already fulfilled, then <code class="docutils literal notranslate"><span class="pre">c</span></code> is run immediately on the contents of
+<code class="docutils literal notranslate"><span class="pre">p</span></code>. The promise that is returned might or might not be pending, depending on
+what <code class="docutils literal notranslate"><span class="pre">c</span></code> does.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> is already rejected, then <code class="docutils literal notranslate"><span class="pre">c</span></code> does not run. The promise that is
+returned is also rejected, with the same exception as <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> is pending, then <code class="docutils literal notranslate"><span class="pre">bind</span></code> does not wait for <code class="docutils literal notranslate"><span class="pre">p</span></code> to be resolved, nor for
+<code class="docutils literal notranslate"><span class="pre">c</span></code> to be run. Rather, <code class="docutils literal notranslate"><span class="pre">bind</span></code> just registers the callback to eventually be run
+when (or if) the promise is fulfilled. Therefore, the <code class="docutils literal notranslate"><span class="pre">bind</span></code> function returns a
+new promise. That promise will become fulfilled when (or if) the callback
+completes running, sometime in the future. Its contents will be whatever
+contents are contained within the promise that the callback itself returns.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the first case above: The Lwt source code claims that this behavior might
+change: under high load, <code class="docutils literal notranslate"><span class="pre">c</span></code> might be registered to run
+later. But as of <a class="reference external" href="https://github.com/ocsigen/lwt/blob/73f1a0f0acd5540f25e58bc410e1f63271189c6c/src/core/lwt.ml#L1820">v5.5.0</a> that behavior has not yet been activated. So, don’t
+worry about it—this paragraph is just here to future-proof this
+discussion.</p>
+</div>
+<p>Let’s consider that final case in more detail. We have one promise of type
+<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">Lwt.t</span></code> and two promises of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>:</p>
+<ul class="simple">
+<li><p>The promise of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">Lwt.t</span></code>, call it promise X, is an input to <code class="docutils literal notranslate"><span class="pre">bind</span></code>. It
+was pending when <code class="docutils literal notranslate"><span class="pre">bind</span></code> was called, and when <code class="docutils literal notranslate"><span class="pre">bind</span></code> returns.</p></li>
+<li><p>The first promise of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>, call it promise Y, is created by <code class="docutils literal notranslate"><span class="pre">bind</span></code>
+and returned to the user. It is pending at that point.</p></li>
+<li><p>The second promise of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>, call it promise Z, has not yet been
+created. It will be created later, when promise X has been fulfilled, and the
+callback has been run on the contents of X. The callback then returns promise
+Z. There is no guarantee about the state of Z; it might well still be pending
+when returned by the callback.</p></li>
+<li><p>When Z is finally fulfilled, the contents of Y are updated to be the same as
+the contents of Z.</p></li>
+</ul>
+<p>The reason why <code class="docutils literal notranslate"><span class="pre">bind</span></code> is designed with this type is so that programmers can set
+up a <em>sequential chain</em> of callbacks. For example, the following code
+asynchronously reads one string; then when that string has been read, proceeds
+to asynchronously read a second string; then prints the concatenation of both
+strings:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Lwt</span><span class="p">.</span><span class="n">bind</span> <span class="o">(</span><span class="n">read_line</span> <span class="n">stdin</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="n">s1</span> <span class="o">-&gt;</span>
+  <span class="nn">Lwt</span><span class="p">.</span><span class="n">bind</span> <span class="o">(</span><span class="n">read_line</span> <span class="n">stdin</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="n">s2</span> <span class="o">-&gt;</span>
+    <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span><span class="o">^</span><span class="n">s2</span><span class="o">)));;</span>
+</pre></div>
+</div>
+<p>If you run that in utop, something slightly confusing will happen again: after
+you press Enter at the end of the first string, Lwt will allow utop to read one
+character. The problem is that we’re mixing Lwt input operations with utop input
+operations. It would be better to just create a program and run it from the
+command line.</p>
+<p>To do that, put the following code in a file called <code class="docutils literal notranslate"><span class="pre">read2.ml</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Lwt_io</span>
+
+<span class="k">let</span> <span class="n">p</span> <span class="o">=</span>
+  <span class="nn">Lwt</span><span class="p">.</span><span class="n">bind</span> <span class="o">(</span><span class="n">read_line</span> <span class="n">stdin</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="n">s1</span> <span class="o">-&gt;</span>
+    <span class="nn">Lwt</span><span class="p">.</span><span class="n">bind</span> <span class="o">(</span><span class="n">read_line</span> <span class="n">stdin</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="n">s2</span> <span class="o">-&gt;</span>
+      <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span><span class="o">^</span><span class="n">s2</span><span class="o">)))</span>
+
+<span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="n">p</span>
+</pre></div>
+</div>
+<p>We’ve added one new function: <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">Lwt.t</span> <span class="pre">-&gt;</span> <span class="pre">'a</span></code>. It waits for its
+input promise to be fulfilled, then returns the contents. This function
+is called only once in an entire program, near the end of the main file; and the
+input to it is typically a promise whose resolution indicates that all execution
+is finished.</p>
+<p>Create a dune file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(executable
+ (name read2)
+ (libraries lwt.unix))
+</pre></div>
+</div>
+<p>And run the program, entering a couple strings:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">dune exec ./read2.exe</span>
+<span class="go">My first string</span>
+<span class="go">My second string</span>
+<span class="go">My first stringMy second string</span>
+</pre></div>
+</div>
+<p>Now try removing the last line of <code class="docutils literal notranslate"><span class="pre">read2.ml</span></code>.  You’ll see that the program
+exits immediately, without waiting for you to type.</p>
+</section>
+<section id="bind-as-an-operator">
+<h2><span class="section-number">7.5.3. </span>Bind as an Operator<a class="headerlink" href="#bind-as-an-operator" title="Permalink to this heading">#</a></h2>
+<p>There is another syntax for bind that is used far more
+frequently than what we have seen so far. The <code class="docutils literal notranslate"><span class="pre">Lwt.Infix</span></code> module defines an
+infix operator written <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> that is the same as <code class="docutils literal notranslate"><span class="pre">bind</span></code>. That is, instead of
+writing <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">p</span> <span class="pre">c</span></code> you write <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&gt;&gt;=</span> <span class="pre">c</span></code>. This operator makes it much easier to
+write code without all the extra parentheses and indentations that our previous
+example had:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Lwt_io</span>
+<span class="k">open</span> <span class="nn">Lwt</span><span class="p">.</span><span class="nc">Infix</span>
+
+<span class="k">let</span> <span class="n">p</span> <span class="o">=</span>
+  <span class="n">read_line</span> <span class="n">stdin</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">s1</span> <span class="o">-&gt;</span>
+  <span class="n">read_line</span> <span class="n">stdin</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">s2</span> <span class="o">-&gt;</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span><span class="o">^</span><span class="n">s2</span><span class="o">)</span>
+
+<span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="n">p</span>
+</pre></div>
+</div>
+<p>The way to visually parse the definition of <code class="docutils literal notranslate"><span class="pre">p</span></code> is to look at each line as
+computing some promised value. The first line, <code class="docutils literal notranslate"><span class="pre">read_line</span> <span class="pre">stdin</span> <span class="pre">&gt;&gt;=</span> <span class="pre">fun</span> <span class="pre">s1</span> <span class="pre">-&gt;</span></code>
+means that a promise is created, fulfilled, and its contents extracted under the
+name <code class="docutils literal notranslate"><span class="pre">s1</span></code>. The second line means the same, except that its contents are named
+<code class="docutils literal notranslate"><span class="pre">s2</span></code>. The third line creates a final promise whose contents are eventually
+extracted by <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span></code>, at which point the program may terminate.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> operator is perhaps most famous from the functional language Haskell,
+which uses it extensively for monads. We’ll cover monads in a later section.</p>
+</section>
+<section id="bind-as-let-syntax">
+<h2><span class="section-number">7.5.4. </span>Bind as Let Syntax<a class="headerlink" href="#bind-as-let-syntax" title="Permalink to this heading">#</a></h2>
+<p>There is a <em>syntax extension</em> for OCaml that makes using
+bind even simpler than the infix operator <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code>. To install the syntax
+extension, run the following command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">opam</span> <span class="pre">install</span> <span class="pre">lwt_ppx</span></code></p>
+<p>(You might need to <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">update</span></code> followed by <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">upgrade</span></code> first.)</p>
+<p>With that extension, you can use a specialized <code class="docutils literal notranslate"><span class="pre">let</span></code> expression written
+<code class="docutils literal notranslate"><span class="pre">let%lwt</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">e1</span> <span class="pre">in</span> <span class="pre">e2</span></code>, which is equivalent to <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">e1</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e2)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">&gt;&gt;=</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e2</span></code>. We can rewrite our running example as follows:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* to compile, add lwt_ppx to the libraries in the dune file *)</span>
+<span class="k">open</span> <span class="nc">Lwt_io</span>
+
+<span class="k">let</span> <span class="n">p</span> <span class="o">=</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span> <span class="k">in</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span><span class="o">^</span><span class="n">s2</span><span class="o">)</span>
+
+<span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="n">p</span>
+</pre></div>
+</div>
+<p>Now the code looks pretty much exactly like what its equivalent synchronous
+version would be. But don’t be fooled: all the asynchronous I/O, the promises,
+and the callbacks are still there. Thus, the evaluation of <code class="docutils literal notranslate"><span class="pre">p</span></code> first registers a
+callback with a promise, then moves on to the evaluation of <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span></code>
+without waiting for the first string to finish being read. To prove that to
+yourself, run the following code:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Lwt_io</span>
+
+<span class="k">let</span> <span class="n">p</span> <span class="o">=</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span> <span class="k">in</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span><span class="o">^</span><span class="n">s2</span><span class="o">)</span>
+
+<span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;Got here first</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+<span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="n">p</span>
+</pre></div>
+</div>
+<p>You’ll see that “Got here first” prints before you get a chance to enter any
+input.</p>
+</section>
+<section id="concurrent-composition">
+<h2><span class="section-number">7.5.5. </span>Concurrent Composition<a class="headerlink" href="#concurrent-composition" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Lwt.bind</span></code> function provides a way to
+sequentially compose callbacks: first one callback is run, then another, then
+another, and so forth. There are other functions in the library for composition
+of many callbacks as a set. For example,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Lwt.join</span> <span class="pre">:</span> <span class="pre">unit</span> <span class="pre">Lwt.t</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">unit</span> <span class="pre">Lwt.t</span></code> enables waiting upon multiple
+promises. <code class="docutils literal notranslate"><span class="pre">Lwt.join</span> <span class="pre">ps</span></code> returns a promise that is pending until all the
+promises in <code class="docutils literal notranslate"><span class="pre">ps</span></code> become resolved. You might register a callback on the return
+promise from the <code class="docutils literal notranslate"><span class="pre">join</span></code> to take care of some computation that needs <strong>all</strong> of
+a set of promises to be finished.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Lwt.pick</span> <span class="pre">:</span> <span class="pre">'a</span> <span class="pre">Lwt.t</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">'a</span> <span class="pre">Lwt.t</span></code> also enables waiting upon multiple
+promises, but <code class="docutils literal notranslate"><span class="pre">Lwt.pick</span> <span class="pre">ps</span></code> returns a promise that is pending until at least
+one promise in <code class="docutils literal notranslate"><span class="pre">ps</span></code> becomes resolved. You might register a callback on the
+return promise from the <code class="docutils literal notranslate"><span class="pre">pick</span></code> to take care of some computation that needs
+just one of a set of promises to be finished, but doesn’t care which one.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            name: "ocaml-jupyter",
+            path: "./chapters/conc"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="io_promises.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7.4. </span>Asynchronous Input and Output</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="full_promises_impl.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7.6. </span>The Full Promises Implementation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-a-callback">7.5.1. Registering a Callback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bind">7.5.2. Bind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bind-as-an-operator">7.5.3. Bind as an Operator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bind-as-let-syntax">7.5.4. Bind as Let Syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrent-composition">7.5.5. Concurrent Composition</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael R. Clarkson et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

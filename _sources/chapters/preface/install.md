@@ -274,11 +274,11 @@ and set of packages. You can have many switches and, well, switch between them
 this command:
 
 ```console
-opam switch create cs3110-2025sp ocaml-base-compiler.5.2.0
+opam switch create cs3110-2025fa ocaml-base-compiler.5.3.0
 ```
 
 ```{tip}
-If that command fails saying that the 5.2.0 compiler can't be found, you
+If that command fails saying that the 5.3.0 compiler can't be found, you
 probably installed OPAM sometime back in the past and now need to update it. Do
 so with `opam update`.
 ```
@@ -302,7 +302,7 @@ You should get output like this:
 
 ```
 #  switch         compiler
-→  cs3110-2025sp  ocaml-base-compiler.5.2.0,ocaml-options-vanilla.1
+→  cs3110-2025fa  ocaml-base-compiler.5.3.0,ocaml-options-vanilla.1
 ```
 
 There might be other lines if you happen to have done OCaml development before. There will be another column named "description" whose contents are not shown here. Double check the following:
@@ -342,7 +342,7 @@ utop
 
 ```{tip}
 You should see a message "Welcome to utop version ... (using OCaml version
-5.2.0)!" If the OCaml version is incorrect, then you probably have an
+5.3.0)!" If the OCaml version is incorrect, then you probably have an
 environment issue. See the tip above about the `opam env` command.
 ```
 
@@ -388,9 +388,9 @@ issues:
   `opam init` command. To fix it, follow the "redo" instructions below.
 
 - **Is your switch listed?** Run `opam switch list` and make sure a switch named
-  `cs3110-2025sp` is listed, that it has the 5.2.0 compiler, and that it is the
+  `cs3110-2025fa` is listed, that it has the 5.3.0 compiler, and that it is the
   active switch (which is indicated with an arrow beside it). If that switch is
-  present but not active, run `opam switch cs3110-2025sp` then see whether utop
+  present but not active, run `opam switch cs3110-2025fa` then see whether utop
   works. If that switch is not present, follow the "redo" instructions below.
 
 **Redo Instructions:** Remove the OPAM directory by running `rm -r ~/.opam`.
@@ -504,7 +504,7 @@ installation. Here's how to proceed:
 
 - Make sure that you are on the most current version of VS Code. Run the VS Code palette command "Code: Check for Updates". If you cannot get VS Code to update and you are on Mac, make sure that you followed Microsoft's instructions to install VS Code in your Application folder.
 
-- If you're on WSL and VS Code does add syntax highlighting but does not add squiggles as described above, and/or you get an error about "Sandbox initialization failed", then double-check that you see a "WSL" indicator in the bottom left of the VS Code window. If you do, make sure that the "OCaml Platform" extension is installed. If you do not, make sure you installed the "WSL" extension as described above, and that you are launching VS Code from Ubuntu rather than PowerShell or from the Windows GUI. 
+- If you're on WSL and VS Code does add syntax highlighting but does not add squiggles as described above, and/or you get an error about "Sandbox initialization failed", then double-check that you see a "WSL" indicator in the bottom left of the VS Code window. If you do, make sure that the "OCaml Platform" extension is installed. If you do not, make sure you installed the "WSL" extension as described above, and that you are launching VS Code from Ubuntu rather than PowerShell or from the Windows GUI.
 
 **If you're still stuck with an issue,** try uninstalling VS Code, rebooting,
 and re-doing all the installation instructions above from scratch. Pay close

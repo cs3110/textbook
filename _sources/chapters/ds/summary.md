@@ -14,30 +14,20 @@ efficient, beautiful code. Did we succeed? You can be the judge.
 * asynchronous
 * banker's method
 * big oh
-* bind
 * binding
-* blocking
 * brute force
 * bucket
 * caching
-* callback
 * chaining
-* channel
 * collision
 * complexity
-* computations
-* concurrent
-* concurrent composition
-* cooperative
 * credits
 * cycle
 * delayed evaluation
-* deterministic
 * dictionary
 * diffusion
 * direct address table
 * eager
-* effects
 * efficiency
 * execution steps
 * exponential time
@@ -46,52 +36,25 @@ efficient, beautiful code. Did we succeed? You can be the judge.
 * infinite data structure
 * injective
 * input size
-* interleaving
 * key
-* latency hiding
 * lazy
-* left identity
 * load factor
-* Lwt monad
 * map
-* maybe monad
 * memoization
-* monads
-* monads laws
 * mutable map
-* non-blocking
-* nondeterministic
-* parallelism
-* pending
 * persistent
 * physicist's method
 * polynomial time
 * potential energy
-* preemptive
 * probing
-* promises
-* race conditions
 * recursive values
 * red-black map
-* rejected
 * resizing
-* resolution loop
-* resolved
-* resolver
-* right identity
-* sequential
-* sequential composition
 * serialization
 * set
-* standard input
-* standard output
 * stream
-* strict
-* synchronous
-* threads
 * thunk
 * worst case performance
-* writer monad
 
 ## Further Reading
 

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>6.7. Proving Correctness &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>8.7. Proving Correctness &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/op.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6.8. Structural Induction" href="structural_induction.html" />
-    <link rel="prev" title="6.6. Randomized Testing with QCheck" href="randomized.html" />
+    <link rel="next" title="8.8. Structural Induction" href="structural_induction.html" />
+    <link rel="prev" title="8.6. Randomized Testing with QCheck" href="randomized.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +124,12 @@ const thebe_selector_output = ".output, .cell_output"
   </div>
 
   <header>
+
+
+  <div class="bd-header-announcement container-fluid bd-header-announcement">
+    <div class="bd-header-announcement__content">Using this book as part of a course? Please <a style="color:white" href="https://docs.google.com/forms/d/e/1FAIpQLSfEW65AJPBnk732zZZM9CFpWMobWUkym6Nf-pgslRqqwoWYIA/viewform?usp=preview">let us know</a>!</div>
+  </div>
+
   
     <div class="bd-header navbar navbar-expand-lg bd-navbar">
     </div>
@@ -244,56 +250,66 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../modules/exercises.html">5.11. Exercises</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">6. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">6.1. Refs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">6.2. Mutable Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">6.3. Arrays and Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">6.4. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">6.5. Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../conc/intro.html">7. Concurrency</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conc/concurrency.html">7.1. Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/promises.html">7.2. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/impl_promises.html">7.3. Implementing Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/io_promises.html">7.4. Asynchronous Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/callbacks.html">7.5. Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/full_promises_impl.html">7.6. The Full Promises Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/monads.html">7.7. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/summary.html">7.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/exercises.html">7.9. Exercises</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Correctness and Efficiency</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">6. Correctness</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="specifications.html">6.1. Specifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="function_docs.html">6.2. Function Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs.html">6.3. Module Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test_debug.html">6.4. Testing and Debugging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="black_glass_box.html">6.5. Black-box and Glass-box Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="randomized.html">6.6. Randomized Testing with QCheck</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">6.7. Proving Correctness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="structural_induction.html">6.8. Structural Induction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eq_spec.html">6.9. Equational Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">6.10. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">6.11. Exercises</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">8. Correctness</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="specifications.html">8.1. Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function_docs.html">8.2. Function Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs.html">8.3. Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_debug.html">8.4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="black_glass_box.html">8.5. Black-box and Glass-box Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="randomized.html">8.6. Randomized Testing with QCheck</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.7. Proving Correctness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structural_induction.html">8.8. Structural Induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eq_spec.html">8.9. Equational Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">8.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">8.11. Exercises</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">7. Mutability</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">7.1. Refs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">7.2. Mutable Fields</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">7.3. Arrays and Loops</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">7.4. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">7.5. Exercises</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">8. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">8.1. Hash Tables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">8.2. Amortized Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">8.3. Red-Black Trees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">8.4. Sequences</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">8.5. Memoization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">8.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/promises.html">8.7. Promises</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/monads.html">8.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">8.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">8.10. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">9. Data Structures</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">9.1. Hash Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">9.2. Amortized Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">9.3. Red-Black Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Language Implementation</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../interp/intro.html">9. Interpreters</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../interp/calculator.html">9.1. Example: Calculator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/parsing.html">9.2. Parsing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/substitution.html">9.3. Substitution Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/environment.html">9.4. Environment Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/typecheck.html">9.5. Type Checking</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/inference.html">9.6. Type Inference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../interp/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interp/intro.html">10. Interpreters</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interp/calculator.html">10.1. Example: Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/parsing.html">10.2. Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/substitution.html">10.3. Substitution Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/environment.html">10.4. Environment Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/typecheck.html">10.5. Type Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/inference.html">10.6. Type Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/summary.html">10.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/exercises.html">10.8. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -583,12 +599,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equality">6.7.1. Equality</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equational-reasoning">6.7.2. Equational Reasoning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#induction-on-natural-numbers">6.7.3. Induction on Natural Numbers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programs-as-specifications">6.7.4. Programs as Specifications</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-vs-iteration">6.7.5. Recursion vs. Iteration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination">6.7.6. Termination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equality">8.7.1. Equality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equational-reasoning">8.7.2. Equational Reasoning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#induction-on-natural-numbers">8.7.3. Induction on Natural Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programs-as-specifications">8.7.4. Programs as Specifications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-vs-iteration">8.7.5. Recursion vs. Iteration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination">8.7.6. Termination</a></li>
 </ul>
             </nav>
         </div>
@@ -601,7 +617,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="proving-correctness">
-<h1><span class="section-number">6.7. </span>Proving Correctness<a class="headerlink" href="#proving-correctness" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">8.7. </span>Proving Correctness<a class="headerlink" href="#proving-correctness" title="Permalink to this heading">#</a></h1>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/48GBq4koKPs" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Testing provides evidence of correctness, but not full assurance. Even after
 extensive black-box and glass-box testing, maybe there’s still some test case
@@ -641,7 +657,7 @@ straightforwardly about whether two expressions are equal. It’s difficult to d
 that in an imperative language, because those expressions might have side
 effects that change the state.</p>
 <section id="equality">
-<h2><span class="section-number">6.7.1. </span>Equality<a class="headerlink" href="#equality" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.1. </span>Equality<a class="headerlink" href="#equality" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/zjDUrMdVC5U" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>When are two expressions equal?  Two possible answers are:</p>
 <ul class="simple">
@@ -673,7 +689,7 @@ an exception and refuse to compare functions.</p>
 exceptions or infinite loops).</p>
 </section>
 <section id="equational-reasoning">
-<h2><span class="section-number">6.7.2. </span>Equational Reasoning<a class="headerlink" href="#equational-reasoning" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.2. </span>Equational Reasoning<a class="headerlink" href="#equational-reasoning" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/MjpZJA1jIqU" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Consider these functions:</p>
 <div class="cell docutils container">
@@ -747,7 +763,7 @@ and
 </div>
 </section>
 <section id="induction-on-natural-numbers">
-<h2><span class="section-number">6.7.3. </span>Induction on Natural Numbers<a class="headerlink" href="#induction-on-natural-numbers" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.3. </span>Induction on Natural Numbers<a class="headerlink" href="#induction-on-natural-numbers" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/By4VSmpzuHw" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>The following function sums the non-negative integers up to <code class="docutils literal notranslate"><span class="pre">n</span></code>:</p>
 <div class="cell docutils container">
@@ -833,7 +849,7 @@ all our examples henceforth will be for naturals, not integers per se, we will
 elide stating any preconditions or restrictions regarding natural numbers.</p>
 </section>
 <section id="programs-as-specifications">
-<h2><span class="section-number">6.7.4. </span>Programs as Specifications<a class="headerlink" href="#programs-as-specifications" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.4. </span>Programs as Specifications<a class="headerlink" href="#programs-as-specifications" title="Permalink to this heading">#</a></h2>
 <p>We have just proved the correctness of an efficient implementation relative to
 an inefficient implementation. The inefficient implementation, <code class="docutils literal notranslate"><span class="pre">sumto</span></code>, serves
 as a specification for the efficient implementation, <code class="docutils literal notranslate"><span class="pre">sumto_closed</span></code>.</p>
@@ -995,7 +1011,7 @@ equivalent to the simple, recursive function <code class="docutils literal notra
 the correctness of <code class="docutils literal notranslate"><span class="pre">fact_tr</span></code> using <code class="docutils literal notranslate"><span class="pre">fact</span></code> as its specification.</p>
 </section>
 <section id="recursion-vs-iteration">
-<h2><span class="section-number">6.7.5. </span>Recursion vs. Iteration<a class="headerlink" href="#recursion-vs-iteration" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.5. </span>Recursion vs. Iteration<a class="headerlink" href="#recursion-vs-iteration" title="Permalink to this heading">#</a></h2>
 <p>We added an accumulator as an extra argument to make the factorial function be
 tail recursive. That’s a trick we’ve seen before. Let’s abstract and see how to
 do it in general.</p>
@@ -1147,7 +1163,7 @@ it to produce the tail-recursive version without even having to think about it:<
 <p>We already know that <code class="docutils literal notranslate"><span class="pre">sumto_tr</span></code> is correct, thanks to our theorem.</p>
 </section>
 <section id="termination">
-<h2><span class="section-number">6.7.6. </span>Termination<a class="headerlink" href="#termination" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7.6. </span>Termination<a class="headerlink" href="#termination" title="Permalink to this heading">#</a></h2>
 <div class="container16x9"><iframe src="https://www.youtube.com/embed/Xy7GTfEfIK4" class="responsive-iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <p>Sometimes correctness of programs is further divided into:</p>
 <ul class="simple">
@@ -1279,7 +1295,7 @@ definition of <code class="docutils literal notranslate"><span class="pre">&lt;<
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6.6. </span>Randomized Testing with QCheck</p>
+        <p class="prev-next-title"><span class="section-number">8.6. </span>Randomized Testing with QCheck</p>
       </div>
     </a>
     <a class="right-next"
@@ -1287,7 +1303,7 @@ definition of <code class="docutils literal notranslate"><span class="pre">&lt;<
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6.8. </span>Structural Induction</p>
+        <p class="prev-next-title"><span class="section-number">8.8. </span>Structural Induction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1307,12 +1323,12 @@ definition of <code class="docutils literal notranslate"><span class="pre">&lt;<
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equality">6.7.1. Equality</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equational-reasoning">6.7.2. Equational Reasoning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#induction-on-natural-numbers">6.7.3. Induction on Natural Numbers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programs-as-specifications">6.7.4. Programs as Specifications</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-vs-iteration">6.7.5. Recursion vs. Iteration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination">6.7.6. Termination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equality">8.7.1. Equality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equational-reasoning">8.7.2. Equational Reasoning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#induction-on-natural-numbers">8.7.3. Induction on Natural Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programs-as-specifications">8.7.4. Programs as Specifications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-vs-iteration">8.7.5. Recursion vs. Iteration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination">8.7.6. Termination</a></li>
 </ul>
   </nav></div>
 
