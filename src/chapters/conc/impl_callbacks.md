@@ -15,10 +15,10 @@ kernelspec:
 
 # Implementing Callbacks
 
-When a callback is registered with `bind` or one of the other syntaxes, it is
-added to a list of callbacks that is stored with the promise. Eventually, when
-the promise has been fulfilled, the Lwt *resolution loop* runs the callbacks
-registered for the promise. There is no guarantee about the execution order of
+When a callback is registered with a promise using `bind` or one of the other syntaxes, it is
+added to a list of callbacks that is stored with the promise. Eventually, if
+the promise is fulfilled, the Lwt *resolution loop* runs all the callbacks
+registered with the promise. There is no guarantee about the execution order of
 callbacks for a promise. In other words, the execution order is
 nondeterministic. If the order matters, the programmer needs to use the
 composition operators (such as `bind` and `join`) to enforce an ordering. If the
@@ -36,9 +36,9 @@ from: the OS. There might be many asynchronous I/O operations occurring at the
 OS level. But at the OCaml level, the resolution loop is sequential, meaning
 that only one callback can ever be running at a time.
 
-Finally, the resolution loop never attempts to interrupt a callback. So if the
+Finally, the resolution loop never attempts to interrupt a callback. So if one
 callback goes into an infinite loop, no other callback will ever get to run.
-That makes Lwt a cooperative concurrency mechanism, rather than preemptive.
+That makes Lwt a cooperative concurrency mechanism, rather than a preemptive one.
 
 To better understand callback resolution, let's implement it ourselves. We'll
 use the `Promise` data structure we developed earlier. To start, we add a bind
@@ -81,13 +81,18 @@ discussed below.
   }
 ```
 
-A *handler* is a new abstraction: a function that takes a non-pending state. It
-will be used to fulfill and reject promises when their state is
-ready to switch away from pending. The primary use for a handler will be to run
-callbacks. As a representation invariant, we require that only pending promises
-may have handlers waiting in their list. Once the state becomes non-pending,
-i.e., either fulfilled or rejected, the handlers will all be processed and
+A *handler* is a new abstraction: a function that takes a state.
+The primary use for a handler will be to run callbacks.
+It will be used to fulfill and reject promises when their state is
+ready to switch away from pending. This is why we ask, via a representation
+invariant, that the input state to a handler may not be pending.
+
+We require that only pending promises may have handlers waiting in their list.
+Once the state becomes non-pending, i.e., either fulfilled or rejected,
+the handlers associated with the promise will all be processed and
 removed from the list.
+This is why we say, as a representation invariant, that if the state is not pending,
+then the handlers list must be empty.
 
 This helper function that enqueues a handler on a promise's handler list will be
 helpful later:
@@ -120,7 +125,7 @@ we have to update a few of the functions in trivial ways:
 
   let make () =
     let p = {state = Pending; handlers = []} in
-    p, p
+    (p, p)
 
   let return x =
     {state = Fulfilled x; handlers = []}
@@ -128,30 +133,41 @@ we have to update a few of the functions in trivial ways:
   let state p = p.state
 ```
 
-Now we get to the trickier parts of the implementation. To fulfill or reject a
-promise, the first thing we need to do is to call `write_once` on it, as we did
-before. Now we also need to process the handlers. Before doing so, we mutate the
-handlers list to be empty to ensure that the RI holds.
+Now we get to the trickier parts of the implementation.
+
+The steps needed to reject a promise (with an exception) or fulfill a promise
+(with a value) are quite similar, so we implement a helper function `resolve`.
+This helper takes a resolver and a state, and it changes the state of the associated promise to
+the given state.
+We require that the state `st` that we are moving over to may not be the pending state.
+We mutate the handlers list to be empty to ensure that the RI holds,
+but we save the handlers in a local variable.
+Then we call `write_once` on the resolver to change its state.
+Finally, we process all the handlers that were waiting on
+this promise. Each of those handlers requires a state for an input, and
+we pass them the new state that the promise has just been set to.
 
 ```ocaml
   (** Requires: [st] may not be [Pending]. *)
-  let fulfill_or_reject (r : 'a resolver) (st : 'a state) =
+  let resolve (r : 'a resolver) (st : 'a state) =
     assert (st <> Pending);
     let handlers = r.handlers in
     r.handlers <- [];
     write_once r st;
     List.iter (fun f -> f st) handlers
 
-  let reject r x =
-    fulfill_or_reject r (Rejected x)
+  let reject r e =
+    resolve r (Rejected e)
 
-  let fulfill r x =
-    fulfill_or_reject r (Fulfilled x)
+  let fulfill r v =
+    resolve r (Fulfilled v)
 ```
 
-Finally, the implementation of `>>=` is the trickiest part. First, if the
-promise is already fulfilled, let's go ahead and immediately run the callback on
-it:
+Finally, the implementation of `>>=` is the trickiest part.
+Recall that the `bind` function needs to immediately return a new promise.
+First, if the input promise is already fulfilled, let's go ahead and immediately
+run the callback on it. The callback will yield a new promise, which we immediately
+return:
 
 ```ocaml
   let ( >>= )
@@ -162,16 +178,18 @@ it:
     | Fulfilled x -> callback x
 ```
 
-Second, if the promise is already rejected, then we return a promise
-that is rejected with the same exception:
-
+Second, if the promise is already rejected, then we quickly craft a new promise
+that is also rejected with the same exception as has no handlers waiting on it.
+We return that new promise to the user immediately:
 ```ocaml
     | Rejected exc -> {state = Rejected exc; handlers = []}
 ```
 
-Third, if the promise is pending, we need to do more work.
-The `bind` function needs to return a new promise. That promise will become
-fulfilled when (or if) the callback completes running, sometime in the future.
+Third, if the input promise is pending, we need to do more work.
+Our task is delicate: we need to immediately return a new promise
+(which we will call the output promise) to the user, but we also need that
+output promise to become fulfilled when (or if) the input promise becomes
+fulfilled and the callback completes running, sometime in the future.
 Its contents will be whatever contents are contained within the promise that the
 callback itself returns.
 
@@ -189,8 +207,20 @@ later becomes resolved:
       output_promise
 ```
 
-All that's left is to implement that helper function to create handlers from
-callbacks. The first two cases, below, are simple. It would violate the RI to
+All that's left is to implement that helper function to create handlers out of
+callbacks. Recall that a handler's type is itself a *function type*,
+`'a state -> unit`. This is why our helper function's output is actally an
+anonymous function. That anonymous function takes a state as its input:
+
+```ocaml
+  let handler_of_callback
+      (callback : 'a -> 'b promise)
+      (resolver : 'b resolver) : 'a handler =
+      fun (state : 'a state) ->
+```
+
+We proceed by taking cases on that input state.
+The first two cases, below, are simple. It would violate the RI to
 call a handler on a pending state. And if the state is rejected, then the
 handler should propagate that rejection to the resolver, which causes the
 promise returned by bind to also be rejected.
@@ -198,14 +228,16 @@ promise returned by bind to also be rejected.
 ```ocaml
   let handler_of_callback
       (callback : 'a -> 'b promise)
-      (resolver : 'b resolver) : 'a handler
-    = function
+      (resolver : 'b resolver) : 'a handler =
+      fun (state : 'a state) ->
+      match state with
       | Pending -> failwith "handler RI violated"
       | Rejected exc -> reject resolver exc
 ```
 
-But if the state is fulfiled, then the callback provided by the user to bind
-can&mdash;at last!&mdash;be run on the contents of the fulfilled promise. If the callback executes successfully it produces a new promise, but the callback may itself raise an exception.
+But if the state is fulfiled, then the callback registered with the promise
+can&mdash;at last!&mdash;be run on the contents of the fulfilled promise. If the callback executes successfully it produces a new promise, but recall that the callback
+may itself raise an exception.
 
 First, consider the optimistic case in which the callback executes successfully and produces a promise. That promise might already be rejected or fulfilled,
 in which case that state again propagates.
@@ -223,14 +255,14 @@ a new handler whose purpose is to do the propagation once the result is
 available:
 
 ```ocaml
-        | Pending -> enqueue (handler resolver) promise
+        | Pending -> enqueue (copying_handler resolver) promise
 ```
 
-where `handler` is a new helper function that creates a very simple handler
+where `copying_handler` is a new helper function that creates a very simple handler
 to do that propagation:
 
 ```ocaml
-  let handler (resolver : 'a resolver) : 'a handler
+  let copying_handler (resolver : 'a resolver) : 'a handler
     = function
       | Pending -> failwith "handler RI violated"
       | Rejected exc -> reject resolver exc
@@ -246,7 +278,7 @@ Second, consider the case in which the callback function itself raises some exce
           match promise.state with
           | Fulfilled y -> resolve resolver y
           | Rejected exc -> reject resolver exc
-          | Pending -> enqueue (handler resolver) promise
+          | Pending -> enqueue (copying_handler resolver) promise
         with exc -> reject resolver exc
 ```
 
