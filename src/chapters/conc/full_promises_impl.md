@@ -115,18 +115,19 @@ module Promise : PROMISE = struct
 
   let handler_of_callback
       (callback : 'a -> 'b promise)
-      (resolver : 'b resolver) : 'a handler
-    = function
-      | Pending -> failwith "handler RI violated"
-      | Rejected exc -> reject resolver exc
-      | Fulfilled x ->
-        try
-          let promise = callback x in
-          match promise.state with
-          | Fulfilled y -> fulfill resolver y
-          | Rejected exc -> reject resolver exc
-          | Pending -> enqueue (copying_handler resolver) promise
-        with exc -> reject resolver exc
+      (resolver : 'b resolver) : 'a handler =
+      fun (state : 'a state) ->
+      match state with
+        | Pending -> failwith "handler RI violated"
+        | Rejected exc -> reject resolver exc
+        | Fulfilled x ->
+          try
+            let promise = callback x in
+            match promise.state with
+            | Fulfilled y -> fulfill resolver y
+            | Rejected exc -> reject resolver exc
+            | Pending -> enqueue (copying_handler resolver) promise
+          with exc -> reject resolver exc
 
   let ( >>= )
       (input_promise : 'a promise)
