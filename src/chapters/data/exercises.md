@@ -335,7 +335,7 @@ where the expression being matched is a pair of trees.*
 {{ ex2 | replace("%%NAME%%", "list max exn")}}
 
 Write a function `list_max : int list -> int` that returns the maximum integer
-in a list, or raises `Failure "list_max"` if the list is empty.
+in a list, or raises `Failure "empty"` if the list is empty.
 
 <!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "list max exn string")}}
