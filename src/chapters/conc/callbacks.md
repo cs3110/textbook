@@ -23,12 +23,13 @@ a way to (i) become aware that a read has completed, and (ii) then do a
 new asynchronous write with the result of the read. In other words,
 programs need a mechanism for managing the dependencies among promises.
 
-The mechanism provided in Lwt is named *callbacks.*  A callback is a
-function that will be run sometime after a promise has been fulfilled,
-and it will receive as input the contents of the fulfilled promise.
-Think of it like asking your friend to do some work for you: they
-promise to do it, and to call you back on the phone with the result of
-the work sometime after they've finished.
+The mechanism provided in Lwt is named *callbacks.*
+A callback is a function that, when "registered" with a promise, will be
+run sometime after that promise has been fulfilled.
+The callback will receive as input the contents of the fulfilled promise.
+Think of it like asking your friend to do some math for you: they
+promise to do it, and to call you back on the phone with the answer sometime after they've finished.
+You can do other things while you wait for them to call you back, and when they do, you can use the answer they give you.
 
 ## Registering a Callback
 
@@ -44,15 +45,15 @@ for a string read from standard input:
 let p = read_line stdin
 ```
 
-To register the printing function as a callback for that promise, we use the
+To register the printing function as a callback for the promise `p`, we use the
 function `Lwt.bind`, which *binds* the callback to the promise:
 
 ```ocaml
 Lwt.bind p print_the_string
 ```
 
-Sometime after `p` is fulfilled, hence contains a string, the callback function
-will be run with that string as its input. That causes the string to be printed.
+Sometime after `p` is fulfilled, hence contains a string, the callback
+will be run with that string as its input. That will cause the string to be printed.
 
 Here's a complete utop transcript as an example of that:
 ```text
@@ -72,11 +73,11 @@ The type of `Lwt.bind` is important to understand:
 ```
 
 The `bind` function takes a promise as its first argument. It doesn't matter
-whether that promise has been resolved yet or not. As its second argument,
-`bind` takes a callback function. That callback takes an input which is the same
+whether that promise has been resolved yet. As its second argument,
+`bind` takes a callback. Recall that a callback is a function: indeed, this callback takes an input which is the same
 type `'a` as the contents of the promise. It's not an accident that they have
 the same type: the whole idea is to eventually run the callback on the fulfilled
-promise, so the type the promise contains needs to be the same as the type the
+promise, so the type that the promise contains needs to be the same as the type that the
 callback expects as input.
 
 After being invoked on a promise and callback, e.g., `bind p c`, the `bind`
@@ -92,7 +93,7 @@ function does one of three things, depending on the state of `p`:
 * If `p` is pending, then `bind` does not wait for `p` to be resolved, nor for
   `c` to be run. Rather, `bind` just registers the callback to eventually be run
   when (or if) the promise is fulfilled. Therefore, the `bind` function returns a
-  new promise. That promise will become fulfilled when (or if) the callback
+  new promise. That promise may become resolved when (or if) the callback
   completes running, sometime in the future. Its contents will be whatever
   contents are contained within the promise that the callback itself returns.
 
@@ -113,16 +114,20 @@ Let's consider that final case in more detail. We have one promise of type
   was pending when `bind` was called, and when `bind` returns.
 
 * The first promise of type `'b Lwt.t`, call it promise Y, is created by `bind`
-  and returned to the user. It is pending at that point.
+  and immediately returned to the user. It is pending at that point.
 
 * The second promise of type `'b Lwt.t`, call it promise Z, has not yet been
-  created. It will be created later, when promise X has been fulfilled, and the
-  callback has been run on the contents of X. The callback then returns promise
+  created. It may be created later: if promise X is fulfilled, the
+  callback will run on the contents of X, and the callback will return promise
   Z. There is no guarantee about the state of Z; it might well still be pending
   when returned by the callback.
 
-* When Z is finally fulfilled, the contents of Y are updated to be the same as
-  the contents of Z.
+* If Z is finally fulfilled, the contents of Y are updated to be the same as
+  the contents of Z. If Z is rejected, then Y is also rejected with the same
+  exception. If Z remains pending, then Y remains pending as well.
+  Recall that Y has already been returned to the user.
+  "Relaying" the contents of Z to Y ensures that the user can eventually benefit
+  from the chain of operations that started with promise X.
 
 The reason why `bind` is designed with this type is so that programmers can set
 up a *sequential chain* of callbacks. For example, the following code
@@ -266,7 +271,7 @@ another, and so forth. There are other functions in the library for composition
 of many callbacks as a set. For example,
 
 * `Lwt.map : 'a Lwt.t -> ('a -> 'b) -> 'b Lwt.t` is a lot like `Lwt.bind`,
-  but its callback function immediately returns a *value* of type `'b`, not the
+  but its callback immediately returns a *value* of type `'b`, not the
   *promise* of a value of type `'b`. `Lwt.map p f` returns a promise that is
   pending until `p` is resolved. If `p` is resolved via rejection, the callback is
   never called and the pending promise is rejected with the same exception. If

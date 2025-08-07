@@ -69,7 +69,7 @@ It will simply be the same as a promise.
 type 'a resolver = 'a promise
 ```
 
-So internally, the two types are exactly the same. But externally no client of
+So internally, the two types are exactly the same. But externally, no client of
 the `Promise` module will be able to distinguish them. In other words, we're
 using the type system to control whether it's possible to apply certain
 functions (e.g., `state` vs `fulfill`) to a promise.
@@ -95,7 +95,7 @@ Using that helper, we can implement the `make` function:
 ```{code-cell} ocaml
 let make () =
   let p = ref Pending in
-  p, p
+  (p, p)
 ```
 
 The remaining functions in the interface are trivial to implement.
