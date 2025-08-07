@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>7.7. Monads &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>7.8. Monads &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/op.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="7.8. Summary" href="summary.html" />
-    <link rel="prev" title="7.6. The Full Promises Implementation" href="full_promises_impl.html" />
+    <link rel="next" title="7.9. Summary" href="summary.html" />
+    <link rel="prev" title="7.7. The Full Promises Implementation" href="full_promises_impl.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -264,10 +264,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="impl_promises.html">7.3. Implementing Promises</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io_promises.html">7.4. Asynchronous Input and Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="callbacks.html">7.5. Callbacks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.6. The Full Promises Implementation</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.7. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">7.8. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.9. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="impl_callbacks.html">7.6. Implementing Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.7. The Full Promises Implementation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.8. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.9. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.10. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -599,12 +600,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-monad-signature">7.7.1. The Monad Signature</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-maybe-monad">7.7.2. The Maybe Monad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-writer-monad">7.7.3. Example: The Writer Monad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-lwt-monad">7.7.4. Example: The Lwt Monad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monad-laws">7.7.5. Monad Laws</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-and-monad-laws">7.7.6. Composition and Monad Laws</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-monad-signature">7.8.1. The Monad Signature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-maybe-monad">7.8.2. The Maybe Monad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-writer-monad">7.8.3. Example: The Writer Monad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-lwt-monad">7.8.4. Example: The Lwt Monad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monad-laws">7.8.5. Monad Laws</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-and-monad-laws">7.8.6. Composition and Monad Laws</a></li>
 </ul>
             </nav>
         </div>
@@ -617,7 +618,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="monads">
-<h1><span class="section-number">7.7. </span>Monads<a class="headerlink" href="#monads" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">7.8. </span>Monads<a class="headerlink" href="#monads" title="Permalink to this heading">#</a></h1>
 <p>A <em>monad</em> is more of a design pattern than a data structure. That is, there are
 many data structures that, if you look at them in the right way, turn out to be
 monads.</p>
@@ -641,7 +642,7 @@ computed. For example, the effect might involve printing to the screen. Monads
 provide an abstraction of effects, and help to make sure that effects happen in
 a controlled order.</p>
 <section id="the-monad-signature">
-<h2><span class="section-number">7.7.1. </span>The Monad Signature<a class="headerlink" href="#the-monad-signature" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.8.1. </span>The Monad Signature<a class="headerlink" href="#the-monad-signature" title="Permalink to this heading">#</a></h2>
 <p>For our purposes, a monad is a structure that satisfies two properties. First,
 it must match the following signature:</p>
 <div class="cell tag_hide-output docutils container">
@@ -735,7 +736,7 @@ always obvious; it can take some study to tease out where the monad operations
 are being used.</p>
 </section>
 <section id="the-maybe-monad">
-<h2><span class="section-number">7.7.2. </span>The Maybe Monad<a class="headerlink" href="#the-maybe-monad" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.8.2. </span>The Maybe Monad<a class="headerlink" href="#the-maybe-monad" title="Permalink to this heading">#</a></h2>
 <p>As we’ve seen before, sometimes functions are partial: there is no good output
 they can produce for some inputs. For example, the function
 <code class="docutils literal notranslate"><span class="pre">max_list</span> <span class="pre">:</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code> doesn’t necessarily have a good output value to
@@ -1232,7 +1233,7 @@ their original meaning for the rest of this file:</p>
 </div>
 </section>
 <section id="example-the-writer-monad">
-<h2><span class="section-number">7.7.3. </span>Example: The Writer Monad<a class="headerlink" href="#example-the-writer-monad" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.8.3. </span>Example: The Writer Monad<a class="headerlink" href="#example-the-writer-monad" title="Permalink to this heading">#</a></h2>
 <p>When trying to diagnose faults in a system, it’s often the case that a <em>log</em> of
 what functions have been called, as well as what their inputs and outputs were,
 would be helpful.</p>
@@ -1571,7 +1572,7 @@ strings. In other words, the writer monad will take care of the strings for you,
 as long as you use <code class="docutils literal notranslate"><span class="pre">return</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code>.</p>
 </section>
 <section id="example-the-lwt-monad">
-<h2><span class="section-number">7.7.4. </span>Example: The Lwt Monad<a class="headerlink" href="#example-the-lwt-monad" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.8.4. </span>Example: The Lwt Monad<a class="headerlink" href="#example-the-lwt-monad" title="Permalink to this heading">#</a></h2>
 <p>By now, it’s probably obvious that the Lwt promises library that we discussed is
 also a monad. The type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">Lwt.t</span></code> of promises has a <code class="docutils literal notranslate"><span class="pre">return</span></code> and <code class="docutils literal notranslate"><span class="pre">bind</span></code>
 operation of the right types to be a monad:</p>
@@ -1593,7 +1594,7 @@ out empty but eventually will be filled with a value of type <code class="docuti
 asynchronously, rather than immediately.</p>
 </section>
 <section id="monad-laws">
-<h2><span class="section-number">7.7.5. </span>Monad Laws<a class="headerlink" href="#monad-laws" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.8.5. </span>Monad Laws<a class="headerlink" href="#monad-laws" title="Permalink to this heading">#</a></h2>
 <p>Every data structure has not just a signature, but some expected behavior. For
 example, a stack has a push and a pop operation, and we expect those operations
 to behave in particular ways. For example, if we push an element onto a stack then
@@ -1711,7 +1712,7 @@ type to be on the right-hand side of <code class="docutils literal notranslate">
 anonymous function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">...</span></code> to make the types correct.</p>
 </section>
 <section id="composition-and-monad-laws">
-<h2><span class="section-number">7.7.6. </span>Composition and Monad Laws<a class="headerlink" href="#composition-and-monad-laws" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.8.6. </span>Composition and Monad Laws<a class="headerlink" href="#composition-and-monad-laws" title="Permalink to this heading">#</a></h2>
 <p>There is another monad operator called <code class="docutils literal notranslate"><span class="pre">compose</span></code> that can be used to compose
 monadic functions. For example, suppose you have a monad with type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">t</span></code>, and
 two functions:</p>
@@ -1845,7 +1846,7 @@ right identity, and that composition is associative.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7.6. </span>The Full Promises Implementation</p>
+        <p class="prev-next-title"><span class="section-number">7.7. </span>The Full Promises Implementation</p>
       </div>
     </a>
     <a class="right-next"
@@ -1853,7 +1854,7 @@ right identity, and that composition is associative.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7.8. </span>Summary</p>
+        <p class="prev-next-title"><span class="section-number">7.9. </span>Summary</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1873,12 +1874,12 @@ right identity, and that composition is associative.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-monad-signature">7.7.1. The Monad Signature</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-maybe-monad">7.7.2. The Maybe Monad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-writer-monad">7.7.3. Example: The Writer Monad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-lwt-monad">7.7.4. Example: The Lwt Monad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monad-laws">7.7.5. Monad Laws</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-and-monad-laws">7.7.6. Composition and Monad Laws</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-monad-signature">7.8.1. The Monad Signature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-maybe-monad">7.8.2. The Maybe Monad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-writer-monad">7.8.3. Example: The Writer Monad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-lwt-monad">7.8.4. Example: The Lwt Monad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monad-laws">7.8.5. Monad Laws</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-and-monad-laws">7.8.6. Composition and Monad Laws</a></li>
 </ul>
   </nav></div>
 

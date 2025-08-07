@@ -264,10 +264,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">7.3. Implementing Promises</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io_promises.html">7.4. Asynchronous Input and Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="callbacks.html">7.5. Callbacks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.6. The Full Promises Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="monads.html">7.7. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">7.8. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.9. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="impl_callbacks.html">7.6. Implementing Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.7. The Full Promises Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monads.html">7.8. Monads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.9. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.10. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -700,7 +701,7 @@ It will simply be the same as a promise.</p>
 </div>
 </div>
 </div>
-<p>So internally, the two types are exactly the same. But externally no client of
+<p>So internally, the two types are exactly the same. But externally, no client of
 the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> module will be able to distinguish them. In other words, we’re
 using the type system to control whether it’s possible to apply certain
 functions (e.g., <code class="docutils literal notranslate"><span class="pre">state</span></code> vs <code class="docutils literal notranslate"><span class="pre">fulfill</span></code>) to a promise.</p>
@@ -732,7 +733,7 @@ changed again. That is, it enforces the “write once” invariant.</p>
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">make</span> <span class="bp">()</span> <span class="o">=</span>
   <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">ref</span> <span class="nc">Pending</span> <span class="k">in</span>
-  <span class="n">p</span><span class="o">,</span> <span class="n">p</span>
+  <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span>
 </pre></div>
 </div>
 </div>

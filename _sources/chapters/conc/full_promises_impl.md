@@ -94,7 +94,7 @@ module Promise : PROMISE = struct
   let state p = p.state
 
   (** Requires: [st] may not be [Pending]. *)
-  let fulfill_or_reject (r : 'a resolver) (st : 'a state) =
+  let resolve (r : 'a resolver) (st : 'a state) =
     assert (st <> Pending);
     let handlers = r.handlers in
     r.handlers <- [];
@@ -102,12 +102,12 @@ module Promise : PROMISE = struct
     List.iter (fun f -> f st) handlers
 
   let reject r x =
-    fulfill_or_reject r (Rejected x)
+    resolve r (Rejected x)
 
   let fulfill r x =
-    fulfill_or_reject r (Fulfilled x)
+    resolve r (Fulfilled x)
 
-  let handler (resolver : 'a resolver) : 'a handler
+  let copying_handler (resolver : 'a resolver) : 'a handler
     = function
       | Pending -> failwith "handler RI violated"
       | Rejected exc -> reject resolver exc
@@ -115,18 +115,19 @@ module Promise : PROMISE = struct
 
   let handler_of_callback
       (callback : 'a -> 'b promise)
-      (resolver : 'b resolver) : 'a handler
-    = function
-      | Pending -> failwith "handler RI violated"
-      | Rejected exc -> reject resolver exc
-      | Fulfilled x ->
-        try
-          let promise = callback x in
-          match promise.state with
-          | Fulfilled y -> fulfill resolver y
-          | Rejected exc -> reject resolver exc
-          | Pending -> enqueue (handler resolver) promise
-        with exc -> reject resolver exc
+      (resolver : 'b resolver) : 'a handler =
+      fun (state : 'a state) ->
+      match state with
+        | Pending -> failwith "handler RI violated"
+        | Rejected exc -> reject resolver exc
+        | Fulfilled x ->
+          try
+            let promise = callback x in
+            match promise.state with
+            | Fulfilled y -> fulfill resolver y
+            | Rejected exc -> reject resolver exc
+            | Pending -> enqueue (copying_handler resolver) promise
+          with exc -> reject resolver exc
 
   let ( >>= )
       (input_promise : 'a promise)
