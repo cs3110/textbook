@@ -745,8 +745,8 @@ return:</p>
     <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">callback</span> <span class="n">x</span>
 </pre></div>
 </div>
-<p>Second, if the promise is already rejected, then we quickly craft a new promise
-that is also rejected with the same exception as has no handlers waiting on it.
+<p>Second, if the promise is already rejected with some exception, we craft a trivial new promise
+that is also rejected with the same exception.
 We return that new promise to the user immediately:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>    <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Rejected</span> <span class="n">exc</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
 </pre></div>
