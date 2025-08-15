@@ -178,8 +178,8 @@ return:
     | Fulfilled x -> callback x
 ```
 
-Second, if the promise is already rejected, then we quickly craft a new promise
-that is also rejected with the same exception as has no handlers waiting on it.
+Second, if the promise is already rejected with some exception, we craft a trivial new promise
+that is also rejected with the same exception.
 We return that new promise to the user immediately:
 ```ocaml
     | Rejected exc -> {state = Rejected exc; handlers = []}
