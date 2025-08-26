@@ -97,7 +97,7 @@ LISP called *s-expressions*, in which parentheses are used to show nested data
 that form a tree, much like HTML tags do. The syntax of Dune files is documented
 in the [Dune manual][dune-man].
 
-[dune-man]: https://dune.readthedocs.io/en/stable/dune-files.html
+[dune-man]: https://dune.readthedocs.io/en/stable/reference/dune/index.html
 
 ### Creating a Dune Project Manually
 
