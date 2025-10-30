@@ -42,7 +42,8 @@ That makes Lwt a cooperative concurrency mechanism, rather than a preemptive one
 
 To better understand callback resolution, let's implement it ourselves. We'll
 use the `Promise` data structure we developed earlier. To start, we add a bind
-operator to the `Promise` signature:
+operator to the `Promise` signature.
+We define it as an infix operator `>>=` for convenience, but we pronounce it `bind` and use both names interchangeably.
 
 ```ocaml
 module type PROMISE = sig
@@ -164,25 +165,41 @@ we pass them the new state that the promise has just been set to.
 ```
 
 Finally, the implementation of `>>=` is the trickiest part.
-Recall that the `bind` function needs to immediately return a new promise.
-If the input promise is already fulfilled, we need to *immediately*
-run the callback on it:
-we cannot enqueue a handler on the input promise, because that would violate the representation invariant by adding a handler to a non-pending promise.
-Running the callback immediately will either yield a new promise, which we immediately
-return; or the callback will raise an exception, in which case we create a new rejected promise
-containing the same exception and return that promise:
+Recall that this function function needs to immediately return a new promise.
+First, consider the case where the input promise is already fulfilled with some value `x`.
+We need to *immediately*
+run the callback on `x`:
+we cannot enqueue a handler on the input promise, because the representation invariant states that a non-pending promise (such as our input promise) *must* have an empty list of handlers.
+Running the callback will yield a new promise, which we immediately return:
 
 ```ocaml
   let ( >>= )
       (input_promise : 'a promise)
       (callback : 'a -> 'b promise) : 'b promise
     =
-    let fail exc = {state = Rejected exc; handlers = []} in
+    match input_promise.state with
+    | Fulfilled x -> callback x
+```
+
+However, this code has an issue.
+Recall that the callback itself may raise an exception.
+If that happens, we must craft a trivial new promise
+that is already rejected with the same exception.
+We employ a simple helper function `fail` to craft such already-rejected promises.
+The correct code for this first case is thus:
+
+```ocaml
+  let fail exc = {state = Rejected exc; handlers = []}
+
+  let ( >>= )
+      (input_promise : 'a promise)
+      (callback : 'a -> 'b promise) : 'b promise
+    =
     match input_promise.state with
     | Fulfilled x -> (try callback x with exc -> fail exc)
 ```
 
-Second, if the promise is already rejected with some exception, we craft a trivial new promise
+Second, if the promise is already rejected with some exception, we again craft a trivial new promise
 that is also rejected with the same exception.
 We return that new promise to the user immediately:
 ```ocaml
@@ -192,7 +209,7 @@ We return that new promise to the user immediately:
 Third, if the input promise is pending, we need to do more work.
 Our task is delicate: we need to immediately return a new promise
 (which we will call the output promise) to the user, but we also need that
-output promise to become fulfilled when (or if) the input promise becomes
+output promise to become fulfilled when (or, more precisely, if) the input promise becomes
 fulfilled and the callback completes running, sometime in the future.
 Its contents will be whatever contents are contained within the promise that the
 callback itself returns.
