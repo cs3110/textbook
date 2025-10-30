@@ -133,9 +133,10 @@ module Promise : PROMISE = struct
       (input_promise : 'a promise)
       (callback : 'a -> 'b promise) : 'b promise
     =
+    let fail exc = {state = Rejected exc; handlers = []} in
     match input_promise.state with
-    | Fulfilled x -> callback x
-    | Rejected exc -> {state = Rejected exc; handlers = []}
+    | Fulfilled x -> (try callback x with exc -> fail exc)
+    | Rejected exc -> fail exc
     | Pending ->
       let output_promise, output_resolver = make () in
       enqueue (handler_of_callback callback output_resolver) input_promise;
