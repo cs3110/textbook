@@ -291,7 +291,7 @@ just implemented. Note that there is no concurrency in `bind`: as we said above,
 it's the OS that provides the concurrency.
 
 ```{warning}
-Lwt makes a different choice than we did here when the input promise is already fulfilled and the callback raises an exception. In that case, Lwt has `bind` raise the exception itself, instead of returning a rejected promise that contains the exception. This is [known][lwt-bind-bug] to violate the specification of `bind` but it not going to be fixed for backward compatibility reasons.
+Lwt makes a different choice than we did here when the input promise is already fulfilled and the callback raises an exception. In that case, Lwt has `bind` raise the exception itself, instead of returning a rejected promise that contains the exception. This is [known][lwt-bind-bug] to violate the specification of `bind` but is not going to be fixed for backward compatibility reasons.
 ```
 
 [lwt-bind-bug]: https://discuss.ocaml.org/t/lwt-3-2-0-released-we-plan-to-change-lwt-bind/1337/13
