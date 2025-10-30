@@ -165,24 +165,28 @@ we pass them the new state that the promise has just been set to.
 
 Finally, the implementation of `>>=` is the trickiest part.
 Recall that the `bind` function needs to immediately return a new promise.
-First, if the input promise is already fulfilled, let's go ahead and immediately
-run the callback on it. The callback will yield a new promise, which we immediately
-return:
+If the input promise is already fulfilled, we need to *immediately*
+run the callback on it:
+we cannot enqueue a handler on the input promise, because that would violate the representation invariant by adding a handler to a non-pending promise.
+Running the callback immediately will either yield a new promise, which we immediately
+return; or the callback will raise an exception, in which case we create a new rejected promise
+containing the same exception and return that promise:
 
 ```ocaml
   let ( >>= )
       (input_promise : 'a promise)
       (callback : 'a -> 'b promise) : 'b promise
     =
+    let fail exc = {state = Rejected exc; handlers = []} in
     match input_promise.state with
-    | Fulfilled x -> callback x
+    | Fulfilled x -> (try callback x with exc -> fail exc)
 ```
 
 Second, if the promise is already rejected with some exception, we craft a trivial new promise
 that is also rejected with the same exception.
 We return that new promise to the user immediately:
 ```ocaml
-    | Rejected exc -> {state = Rejected exc; handlers = []}
+    | Rejected exc -> fail exc
 ```
 
 Third, if the input promise is pending, we need to do more work.
@@ -285,3 +289,9 @@ Second, consider the case in which the callback function itself raises some exce
 The Lwt implementation of `bind` follows essentially the same algorithm as we
 just implemented. Note that there is no concurrency in `bind`: as we said above,
 it's the OS that provides the concurrency.
+
+```{warning}
+Lwt makes a different choice than we did here when the input promise is already fulfilled and the callback raises an exception. In that case, Lwt has `bind` raise the exception itself, instead of returning a rejected promise that contains the exception. This is [known][lwt-bind-bug] to violate the specification of `bind` but is not going to be fixed for backward compatibility reasons.
+```
+
+[lwt-bind-bug]: https://discuss.ocaml.org/t/lwt-3-2-0-released-we-plan-to-change-lwt-bind/1337/13

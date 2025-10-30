@@ -1,23 +1,20 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: OCaml
-  language: OCaml
-  name: ocaml-jupyter
----
-
-# The Full Promises Implementation
-
-For convenience, here is the entire promises implementation in one executable block:
-
-```{code-cell} ocaml
+Traceback (most recent call last):
+  File "/Users/clarkson/opt/miniconda3/envs/textbook/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/clarkson/opt/miniconda3/envs/textbook/lib/python3.9/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/clarkson/opt/miniconda3/envs/textbook/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/clarkson/opt/miniconda3/envs/textbook/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Users/clarkson/opt/miniconda3/envs/textbook/lib/python3.9/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/clarkson/opt/miniconda3/envs/textbook/lib/python3.9/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/clarkson/opt/miniconda3/envs/textbook/lib/python3.9/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
 (** A signature for Lwt-style promises, with better names. *)
 module type PROMISE = sig
   type 'a state =
@@ -135,11 +132,15 @@ module Promise : PROMISE = struct
     =
     let fail exc = {state = Rejected exc; handlers = []} in
     match input_promise.state with
-    | Fulfilled x -> (try callback x with exc -> fail exc)
+    | Fulfilled x -> try callback x with exc -> fail exc
     | Rejected exc -> fail exc
     | Pending ->
       let output_promise, output_resolver = make () in
       enqueue (handler_of_callback callback output_resolver) input_promise;
       output_promise
 end
-```
+------------------
+
+
+
+

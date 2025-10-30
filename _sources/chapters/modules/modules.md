@@ -302,11 +302,11 @@ Of course, mutual recursion can be used if desired:
 ```{code-cell} ocaml
 module M = struct
   (* Requires: input is non-negative. *)
-  let rec even = function 
-    | 0 -> true 
+  let rec even = function
+    | 0 -> true
     | n -> odd (n - 1)
-  and odd = function 
-    | 0 -> false 
+  and odd = function
+    | 0 -> false
     | n -> even (n - 1)
 end
 ```
@@ -709,7 +709,7 @@ There are two properties the compiler guarantees:
   1. *Signature matching:* every name declared in `T` is defined in `M` at the
       same or a more general type.
 
-  2. *Opacity:* any name defined in `M` that does not appear in `T` is not
+  2. *Encapsulation* aka *opacity:* any name defined in `M` that does not appear in `T` is not
      visible to code outside of `M`.
 
 But a more complete answer turns out to involve *subtyping*, which is a concept
