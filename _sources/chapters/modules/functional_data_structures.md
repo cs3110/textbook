@@ -22,7 +22,7 @@ It's possible to build functional data structures both in functional languages
 and in imperative languages. For example, you could build
 a Java equivalent to OCaml's `list` type by creating a `Node`
 class whose fields are immutable by virtue of using
-the `const` keyword.
+the `final` keyword.
 
 Functional data structures have the property of being *persistent*: updating the
 data structure with one of its operations does not change the existing version
