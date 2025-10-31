@@ -165,7 +165,7 @@ we pass them the new state that the promise has just been set to.
 ```
 
 Finally, the implementation of `>>=` is the trickiest part.
-Recall that this function function needs to immediately return a new promise.
+Recall that this function needs to immediately return a new promise.
 First, consider the case where the input promise is already fulfilled with some value `x`.
 We need to *immediately*
 run the callback on `x`:
