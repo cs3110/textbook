@@ -50,11 +50,16 @@ prediction, then run the code to find out.
 ```ocaml
 open Lwt.Infix
 
+let delay n = Lwt_unix.sleep n
+
 let timing2 () =
   let _t1 = delay 1. >>= fun () -> Lwt_io.printl "1" in
   let _t2 = delay 10. >>= fun () -> Lwt_io.printl "2" in
   let _t3 = delay 20. >>= fun () -> Lwt_io.printl "3" in
-  Lwt_io.printl "all done"
+  Lwt_io.printl "all done" >>= fun () -> Lwt.wakeup r ()
+
+let _ = timing2 ()
+let _ = Lwt_main.run (delay 35.)
 ```
 
 <!--------------------------------------------------------------------------->
@@ -66,6 +71,8 @@ prediction, then run the code to find out.
 ```ocaml
 open Lwt.Infix
 
+let delay n = Lwt_unix.sleep n
+
 let timing3 () =
   delay 1. >>= fun () ->
   Lwt_io.printl "1" >>= fun () ->
@@ -74,6 +81,9 @@ let timing3 () =
   delay 20. >>= fun () ->
   Lwt_io.printl "3" >>= fun () ->
   Lwt_io.printl "all done"
+
+let _ = timing3 ()
+let _ = Lwt_main.run (delay 35.)
 ```
 
 <!--------------------------------------------------------------------------->
@@ -85,12 +95,17 @@ prediction, then run the code to find out.
 ```ocaml
 open Lwt.Infix
 
+let delay n = Lwt_unix.sleep n
+
 let timing4 () =
   let t1 = delay 1. >>= fun () -> Lwt_io.printl "1" in
   let t2 = delay 10. >>= fun () -> Lwt_io.printl "2" in
   let t3 = delay 20. >>= fun () -> Lwt_io.printl "3" in
   Lwt.join [t1; t2; t3] >>= fun () ->
   Lwt_io.printl "all done"
+
+let _ = timing4 ()
+let _ = Lwt_main.run (delay 35.)
 ```
 
 <!--------------------------------------------------------------------------->
