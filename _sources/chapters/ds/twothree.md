@@ -17,6 +17,7 @@ kernelspec:
 
 A *two-three tree*, or *2-3 tree*, is another balanced tree data structure that can be used to implement sets and maps.
 Like red-black trees, the 2-3 tree achieves logarithmic time performance while avoiding mutability.
+John Hopcroft is credited with the invention of 2-3 trees by Cormen et al. in *Introduction to Algorithms*, 1990, p. 280.
 
 ## Representation Type
 
@@ -89,7 +90,7 @@ If the element is already in the tree, no change is made.
 If the element is not already in the tree, the search ends at a leaf.
 But how can we insert the new element at that leaf while maintaining the balance invariant?
 The following algorithm for accomplishing that task may be folklore; if any readers know a solid citation for it, please let us know.
-But for now, since Michael Clarkson learned it from Andrew Appel, we will call it Appel's algorithm.
+But for now, since Michael Clarkson learned it from Andrew Appel, we will for now call it Appel's algorithm.
 
 With Appel's algorithm, we transform the leaf at which the search ends into a new 2-node with no children that contains the inserted value.
 That maintains the ordering invariant, but in general violates the balance invariant, because the new 2-node causes the length of the search path to grow by one.
@@ -166,10 +167,12 @@ That means we've finished designing the algorithm.
 
 We can implement insertion as shown below.
 Each helper function returns a pair of a tree and a boolean, where the boolean indicates whether the tree has grown or not &mdash; that is, whether the root of the returned tree is tall.
+(Another way to implement that would be to introduce a custom variant type to track whether the tree grows.)
 
 The code is considerably longer than red-black tree insertion.
 In part that's because of all the comments we've added to explain it.
-But also, having two different node shapes (2-node vs. 3-node) inherently makes the code more complicated.
+But also, having two different node shapes (2-node vs. 3-node) inherently makes the code more complicated, and using records instead of tuples for the data carried by the nodes makes the code more verbose.
+Considerably more succinct implementations would be possible.
 
 ```{code-cell} ocaml
 let impossible () = failwith "impossible: grow returns Two"

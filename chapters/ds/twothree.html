@@ -623,7 +623,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="two-three-trees">
 <h1><span class="section-number">9.7. </span>Two-Three Trees<a class="headerlink" href="#two-three-trees" title="Permalink to this heading">#</a></h1>
 <p>A <em>two-three tree</em>, or <em>2-3 tree</em>, is another balanced tree data structure that can be used to implement sets and maps.
-Like red-black trees, the 2-3 tree achieves logarithmic time performance while avoiding mutability.</p>
+Like red-black trees, the 2-3 tree achieves logarithmic time performance while avoiding mutability.
+John Hopcroft is credited with the invention of 2-3 trees by Cormen et al. in <em>Introduction to Algorithms</em>, 1990, p. 280.</p>
 <section id="representation-type">
 <h2><span class="section-number">9.7.1. </span>Representation Type<a class="headerlink" href="#representation-type" title="Permalink to this heading">#</a></h2>
 <p>The 2-3 tree generalizes the binary tree, in that every node in a 2-3 tree either has two children or three children.
@@ -713,7 +714,7 @@ If the element is already in the tree, no change is made.
 If the element is not already in the tree, the search ends at a leaf.
 But how can we insert the new element at that leaf while maintaining the balance invariant?
 The following algorithm for accomplishing that task may be folklore; if any readers know a solid citation for it, please let us know.
-But for now, since Michael Clarkson learned it from Andrew Appel, we will call it Appel’s algorithm.</p>
+But for now, since Michael Clarkson learned it from Andrew Appel, we will for now call it Appel’s algorithm.</p>
 <p>With Appel’s algorithm, we transform the leaf at which the search ends into a new 2-node with no children that contains the inserted value.
 That maintains the ordering invariant, but in general violates the balance invariant, because the new 2-node causes the length of the search path to grow by one.
 Another way to put that is: the height of the tree grows by one.</p>
@@ -779,10 +780,12 @@ Note that we have never produced a tall 3-node as a result of any of these inser
 Therefore, we do not have to consider any cases for merging or splitting with a tall 3-node.
 That means we’ve finished designing the algorithm.</p>
 <p>We can implement insertion as shown below.
-Each helper function returns a pair of a tree and a boolean, where the boolean indicates whether the tree has grown or not — that is, whether the root of the returned tree is tall.</p>
+Each helper function returns a pair of a tree and a boolean, where the boolean indicates whether the tree has grown or not — that is, whether the root of the returned tree is tall.
+(Another way to implement that would be to introduce a custom variant type to track whether the tree grows.)</p>
 <p>The code is considerably longer than red-black tree insertion.
 In part that’s because of all the comments we’ve added to explain it.
-But also, having two different node shapes (2-node vs. 3-node) inherently makes the code more complicated.</p>
+But also, having two different node shapes (2-node vs. 3-node) inherently makes the code more complicated, and using records instead of tuples for the data carried by the nodes makes the code more verbose.
+Considerably more succinct implementations would be possible.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">impossible</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">failwith</span> <span class="s2">&quot;impossible: grow returns Two&quot;</span>
