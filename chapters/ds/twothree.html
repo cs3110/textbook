@@ -632,19 +632,21 @@ A 2-node contains one value, and a 3-node contains two values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span>
-    <span class="o">|</span> <span class="nc">Leaf</span>
-    <span class="o">|</span> <span class="nc">Two</span> <span class="k">of</span> <span class="o">{</span>
-        <span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">;</span> <span class="c">(* left subtree *)</span>
-        <span class="n">v</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span>    <span class="c">(* value *)</span>
-        <span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>  <span class="c">(* right subtree *)</span>
-      <span class="o">}</span>
-    <span class="o">|</span> <span class="nc">Three</span> <span class="k">of</span> <span class="o">{</span>
-        <span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">;</span> <span class="c">(* left subtree *)</span>
-        <span class="n">vl</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span>   <span class="c">(* left value *)</span>
-        <span class="n">mt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">;</span> <span class="c">(* middle subtree *)</span>
-        <span class="n">vr</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span>   <span class="c">(* right value *)</span>
-        <span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>  <span class="c">(* right subtree *)</span>
-      <span class="o">}</span>
+  <span class="o">|</span> <span class="nc">Leaf</span>
+  <span class="o">|</span> <span class="nc">Two</span> <span class="k">of</span> <span class="o">{</span>
+      <span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">;</span> <span class="c">(* left subtree *)</span>
+      <span class="n">v</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span>    <span class="c">(* value *)</span>
+      <span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>  <span class="c">(* right subtree *)</span>
+    <span class="o">}</span>
+  <span class="o">|</span> <span class="nc">Three</span> <span class="k">of</span> <span class="o">{</span>
+      <span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">;</span> <span class="c">(* left subtree *)</span>
+      <span class="n">vl</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span>   <span class="c">(* left value *)</span>
+      <span class="n">mt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">;</span> <span class="c">(* middle subtree *)</span>
+      <span class="n">vr</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">;</span>   <span class="c">(* right value *)</span>
+      <span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span>  <span class="c">(* right subtree *)</span>
+    <span class="o">}</span>
+
+<span class="k">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="nc">Leaf</span>
 </pre></div>
 </div>
 </div>
@@ -653,6 +655,9 @@ A 2-node contains one value, and a 3-node contains two values:</p>
     Leaf
   | Two of { lt : &#39;a t; v : &#39;a; rt : &#39;a t; }
   | Three of { lt : &#39;a t; vl : &#39;a; mt : &#39;a t; vr : &#39;a; rt : &#39;a t; }
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val empty : &#39;a t = Leaf
 </pre></div>
 </div>
 </div>
@@ -682,15 +687,15 @@ Thus, 2-3 trees are more strict about balance than red-black trees.</p>
 The ordering invariant tells us, at each branch, which direction to go to look for an element.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="k">rec</span> <span class="n">mem</span> <span class="n">x</span> <span class="o">=</span> <span class="k">function</span>
-    <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-    <span class="o">|</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">}</span> <span class="o">-&gt;</span>
-        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">v</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">lt</span> <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">v</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">rt</span> <span class="k">else</span> <span class="bp">true</span>
-    <span class="o">|</span> <span class="nc">Three</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">vl</span><span class="o">;</span> <span class="n">mt</span><span class="o">;</span> <span class="n">vr</span><span class="o">;</span> <span class="n">rt</span> <span class="o">}</span> <span class="o">-&gt;</span>
-        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">vl</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">lt</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">vr</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">rt</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">vl</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">vr</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">mt</span>
-        <span class="k">else</span> <span class="bp">true</span>
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">mem</span> <span class="n">x</span> <span class="o">=</span> <span class="k">function</span>
+ <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+ <span class="o">|</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">}</span> <span class="o">-&gt;</span>
+     <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">v</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">lt</span> <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">v</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">rt</span> <span class="k">else</span> <span class="bp">true</span>
+ <span class="o">|</span> <span class="nc">Three</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">vl</span><span class="o">;</span> <span class="n">mt</span><span class="o">;</span> <span class="n">vr</span><span class="o">;</span> <span class="n">rt</span> <span class="o">}</span> <span class="o">-&gt;</span>
+     <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">vl</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">lt</span>
+     <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">vr</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">rt</span>
+     <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">vl</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">vr</span> <span class="k">then</span> <span class="n">mem</span> <span class="n">x</span> <span class="n">mt</span>
+     <span class="k">else</span> <span class="bp">true</span>
 </pre></div>
 </div>
 </div>
@@ -716,18 +721,309 @@ Another way to put that is: the height of the tree grows by one.</p>
 The goal is to find a place to <em>absorb</em> the change in height, if possible.
 Since we just created a new 2-node, as we recurse up, there are two cases to consider:
 the parent of the new node is a 2-node, in which case we perform a <em>merge</em> operation; or it is a 3-node, in which case we perform a <em>split</em> operation.
-Those operations work as follows.</p>
+Those operations work as described below.</p>
 <section id="merge">
 <h3><span class="section-number">9.7.3.1. </span>Merge<a class="headerlink" href="#merge" title="Permalink to this heading">#</a></h3>
-<p>Coming soon!</p>
+<p>The problem we’re trying to solve, again, is that a 2-node may have become too tall — its height might be one greater than its siblings.
+Let’s call such a 2-node a <em>tall</em> node.
+If a tall 2-node has a 2-node parent, then the parent can absorb the change in height, as shown in the diagram below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    y              x,y              x
+   / \           /  |  \           / \
+ *x*  c   ==&gt;   a   b   c  &lt;==    a  *y*
+ / \                                 / \
+a   b                               b   c
+</pre></div>
+</div>
+<p>In that diagram, <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> represent subtrees.
+There are two cases: merging a tall node <code class="docutils literal notranslate"><span class="pre">*x*</span></code> from the left, and merging a tall node <code class="docutils literal notranslate"><span class="pre">*y*</span></code> from the right.
+In either case, the tall node’s value is merged into its parent, which transforms the parent from a 2-node into a 3-node.
+The extra height is absorbed, thus restoring the balance invariant.</p>
+<p>After a merge occurs, we’re done with the insertion operation and can recurse all the way back up to the root without making further changes.</p>
 </section>
 <section id="split">
 <h3><span class="section-number">9.7.3.2. </span>Split<a class="headerlink" href="#split" title="Permalink to this heading">#</a></h3>
-<p>Coming soon!</p>
+<p>What if a tall 2-node has a 3-node parent?
+Then we can’t merge, because that would create a 4-node.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are such things as <em>2-3-4 trees</em>, and perhaps surprisingly they are closely related to red-black trees.
+But here we will stick with 2-3 trees.</p>
+</div>
+<p>Instead, we <em>split</em> the 3-node parent into two 2-nodes.
+Together with the already existing tall 2-node, that changes a tree with two 2-nodes and one 3-node into a tree with three 2-nodes, as shown below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    y,z             *y*              x,y
+   / | \           /   \            / | \
+ *x* c  d  ==&gt;    x     z    &lt;==   a  b *z*
+ / \             / \   / \              / \
+a   b           a   b c   d            c   d
+
+                     ⇑
+
+                    x,z
+                   / | \
+                  a *y* d
+                    / \
+                   b   c
+</pre></div>
+</div>
+<p>There are three cases to consider: splitting to accomodate a tall node from the left (<code class="docutils literal notranslate"><span class="pre">*x*</span></code>), the middle (<code class="docutils literal notranslate"><span class="pre">*y*</span></code>), or the right (<code class="docutils literal notranslate"><span class="pre">*z*</span></code>).
+After the split, the new root <code class="docutils literal notranslate"><span class="pre">*y*</span></code> has become tall, but its children all have the same height.
+So balance has been restored within the subtree rooted at <code class="docutils literal notranslate"><span class="pre">*y*</span></code>.
+Unless that is actually the root of the entire tree, we need to continue recursing back up to the ultimate root to continue restoring balance.</p>
 </section>
 <section id="finishing-insertion">
 <h3><span class="section-number">9.7.3.3. </span>Finishing Insertion<a class="headerlink" href="#finishing-insertion" title="Permalink to this heading">#</a></h3>
-<p>Coming soon!</p>
+<p>To review, we decided to create a tall 2-node any time we inserted a new value.
+We saw that a tall 2-node could be merged into a 2-node parent, thus restoring balance; or, a 3-node parent could be split, thus creating a new tall 2-node whose height we continue to try to absorb higher in the tree.
+Note that we have never produced a tall 3-node as a result of any of these insert, merge, or split operations.
+Therefore, we do not have to consider any cases for merging or splitting with a tall 3-node.
+That means we’ve finished designing the algorithm.</p>
+<p>We can implement insertion as shown below.
+Each helper function returns a pair of a tree and a boolean, where the boolean indicates whether the tree has grown or not — that is, whether the root of the returned tree is tall.</p>
+<p>The code is considerably longer than red-black tree insertion.
+In part that’s because of all the comments we’ve added to explain it.
+But also, having two different node shapes (2-node vs. 3-node) inherently makes the code more complicated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">impossible</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">failwith</span> <span class="s2">&quot;impossible: grow returns Two&quot;</span>
+
+<span class="c">(** [ins x t] inserts [x] into [t] using Appel&#39;s algorithm. Returns:</span>
+<span class="c">    [new_t, grew], where [new_t] is the new tree (including [x]) and [grew] is</span>
+<span class="c">    whether the tree height grew. *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">ins</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="kt">bool</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Leaf</span> <span class="o">-&gt;</span>
+      <span class="c">(* Insertion into a leaf creates a new 2-node, which grows the</span>
+<span class="c">          height. *)</span>
+      <span class="o">(</span><span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="nc">Leaf</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="nc">Leaf</span> <span class="o">},</span> <span class="bp">true</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">}</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="n">x</span> <span class="o">=</span> <span class="n">v</span> <span class="k">then</span>
+        <span class="c">(* If [x] is already in the tree, no change is needed. *)</span>
+        <span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="bp">false</span><span class="o">)</span>
+      <span class="k">else</span>
+        <span class="c">(* Otherwise, insert [x] into the left or right subtree, and</span>
+<span class="c">            incorporate the current 2-node into the result *)</span>
+        <span class="n">ins_sub2</span> <span class="n">x</span> <span class="n">lt</span> <span class="n">v</span> <span class="n">rt</span>
+  <span class="o">|</span> <span class="nc">Three</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">vl</span><span class="o">;</span> <span class="n">mt</span><span class="o">;</span> <span class="n">vr</span><span class="o">;</span> <span class="n">rt</span> <span class="o">}</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="n">x</span> <span class="o">=</span> <span class="n">vl</span> <span class="o">||</span> <span class="n">x</span> <span class="o">=</span> <span class="n">vr</span> <span class="k">then</span>
+        <span class="c">(* If [x] is already in the tree, no change is needed. *)</span>
+        <span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="bp">false</span><span class="o">)</span>
+      <span class="k">else</span>
+        <span class="c">(* Otherwise, insert [x] into the left, middle, or right subtree, and</span>
+<span class="c">            incorporate the current 3-node into the result*)</span>
+        <span class="n">ins_sub3</span> <span class="n">x</span> <span class="n">lt</span> <span class="n">vl</span> <span class="n">mt</span> <span class="n">vr</span> <span class="n">rt</span>
+
+<span class="c">(** [ins_sub2 x lt v rt] inserts [x] into one of the subtrees of a 2-node,</span>
+<span class="c">    where that two-node is [Two {lt; v; rt}]. Returns [new_t, grew], where</span>
+<span class="c">    [new_t] is the new tree (including [lt], [v], and [rt]) and [grew] is</span>
+<span class="c">    whether the tree height grew as a result of the insert. Requires:</span>
+<span class="c">    [x &lt;&gt; v]. *)</span>
+<span class="k">and</span> <span class="n">ins_sub2</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="kt">bool</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">v</span> <span class="k">then</span>
+    <span class="c">(* [x] belongs in [lt]. *)</span>
+    <span class="n">ins_sub2_left</span> <span class="n">x</span> <span class="n">lt</span> <span class="n">v</span> <span class="n">rt</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">v</span> <span class="k">then</span> <span class="c">(* [x] belongs in [rt]. *)</span>
+    <span class="n">ins_sub2_right</span> <span class="n">x</span> <span class="n">lt</span> <span class="n">v</span> <span class="n">rt</span>
+  <span class="k">else</span>
+    <span class="c">(* [x] belongs in neither [lt] nor [rt], but then we should never have</span>
+<span class="c">        called [ins_sub2] on it. *)</span>
+    <span class="n">failwith</span> <span class="s2">&quot;precondition violated&quot;</span>
+
+<span class="c">(** [ins_sub2_left x lt v rt] inserts [x] into the left subtree of a 2-node,</span>
+<span class="c">    where that two-node is [Two {lt; v; rt}]. Returns [new_t, grew], where</span>
+<span class="c">    [new_t] is the new tree (including [lt], [v], and [rt]) and [grew] is</span>
+<span class="c">    whether the tree height grew as a result of the insert. *)</span>
+<span class="k">and</span> <span class="n">ins_sub2_left</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="kt">bool</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">ins</span> <span class="n">x</span> <span class="n">lt</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">new_lt</span><span class="o">,</span> <span class="bp">false</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [lt] without growing the height, so we can</span>
+<span class="c">          safely reattach the resulting subtree without doing any more work to</span>
+<span class="c">          rebalance. *)</span>
+      <span class="o">(</span><span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">new_lt</span><span class="o">;</span> <span class="n">v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">},</span> <span class="bp">false</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">child_lt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">child_rt</span> <span class="o">},</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [lt], and that caused [lt] to grow in height</span>
+<span class="c">          and have a 2-node at its root. We can merge that 2-node into the</span>
+<span class="c">          current 2-node to form a 3-node, which absorbs the change in</span>
+<span class="c">          height. *)</span>
+      <span class="o">(</span><span class="nc">Three</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">child_lt</span><span class="o">;</span> <span class="n">vl</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span> <span class="n">mt</span> <span class="o">=</span> <span class="n">child_rt</span><span class="o">;</span> <span class="n">vr</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">},</span> <span class="bp">false</span><span class="o">)</span>
+  <span class="o">|</span> <span class="o">_,</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+      <span class="c">(* Growth must produce a 2-node at the root, which would have been</span>
+<span class="c">          handled by the previous branch. *)</span>
+      <span class="n">impossible</span> <span class="bp">()</span>
+
+<span class="c">(** [ins_sub2_right x lt v rt] inserts [x] into the right subtree of a 2-node,</span>
+<span class="c">    where that two-node is [Two {lt; v; rt}]. Returns [new_t, grew], where</span>
+<span class="c">    [new_t] is the new tree (including [lt], [v], and [rt]) and [grew] is</span>
+<span class="c">    whether the tree height grew as a result of the insert. *)</span>
+<span class="k">and</span> <span class="n">ins_sub2_right</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="kt">bool</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">ins</span> <span class="n">x</span> <span class="n">rt</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">new_rt</span><span class="o">,</span> <span class="bp">false</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [rt] without growing the height, so we can</span>
+<span class="c">          safely reattach the resulting subtree without doing any more work to</span>
+<span class="c">          rebalance. *)</span>
+      <span class="o">(</span><span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">new_rt</span> <span class="o">},</span> <span class="bp">false</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">child_lt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">child_rt</span> <span class="o">},</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [rt], and that caused [rt] to grow in height</span>
+<span class="c">          and have a 2-node at its root. We can merge that 2-node into the</span>
+<span class="c">          current 2-node to form a 3-node, which absorbs the change in</span>
+<span class="c">          height. *)</span>
+      <span class="o">(</span><span class="nc">Three</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">vl</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span> <span class="n">mt</span> <span class="o">=</span> <span class="n">child_lt</span><span class="o">;</span> <span class="n">vr</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">child_rt</span> <span class="o">},</span> <span class="bp">false</span><span class="o">)</span>
+  <span class="o">|</span> <span class="o">_,</span> <span class="bp">true</span> <span class="o">-&gt;</span> <span class="n">impossible</span> <span class="bp">()</span>
+
+<span class="c">(** [ins_sub3 x lt vl mt vr rt] inserts [x] into one of the subtrees of a</span>
+<span class="c">    3-node, where that 3-node is [Three {lt; vl; mt; vr; rt}]. Returns</span>
+<span class="c">    [new_t, grew], where [new_t] is the new tree (including [lt], [vl], [mt],</span>
+<span class="c">    [vr], and [rt]) and [grew] is whether the tree height grew as a result of</span>
+<span class="c">    the insert. Requires: [x &lt;&gt; vl &amp;&amp; x &lt;&gt; vr]. *)</span>
+<span class="k">and</span> <span class="n">ins_sub3</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">vl</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">mt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">vr</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span>
+    <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="kt">bool</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">vl</span> <span class="k">then</span>
+    <span class="c">(* [x] belongs in [lt]. *)</span>
+    <span class="n">ins_sub3_left</span> <span class="n">x</span> <span class="n">lt</span> <span class="n">vl</span> <span class="n">mt</span> <span class="n">vr</span> <span class="n">rt</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">vr</span> <span class="k">then</span>
+    <span class="c">(* [x] belongs in [rt]. *)</span>
+    <span class="n">ins_sub3_right</span> <span class="n">x</span> <span class="n">lt</span> <span class="n">vl</span> <span class="n">mt</span> <span class="n">vr</span> <span class="n">rt</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">vl</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">vr</span> <span class="k">then</span>
+    <span class="c">(* [x] belongs in [mt]. *)</span>
+    <span class="n">ins_sub3_middle</span> <span class="n">x</span> <span class="n">lt</span> <span class="n">vl</span> <span class="n">mt</span> <span class="n">vr</span> <span class="n">rt</span>
+  <span class="k">else</span>
+    <span class="c">(* [x] belongs in neither [lt] nor [mt] nor [rt], but then we should never</span>
+<span class="c">        have called [ins_sub3] on it. *)</span>
+    <span class="n">failwith</span> <span class="s2">&quot;precondition violated&quot;</span>
+
+<span class="c">(** [ins_sub3_left x lt vl mt vr rt] inserts [x] into the left subtree of a</span>
+<span class="c">    3-node, where that 3-node is [Three {lt; vl; mt; vr; rt}]. Returns</span>
+<span class="c">    [new_t, grew], where [new_t] is the new tree (including [lt], [vl], [mt],</span>
+<span class="c">    [vr], and [rt]) and [grew] is whether the tree height grew as a result of</span>
+<span class="c">    the insert. *)</span>
+<span class="k">and</span> <span class="n">ins_sub3_left</span>
+    <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">vl</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">mt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">vr</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="kt">bool</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">ins</span> <span class="n">x</span> <span class="n">lt</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">new_lt</span><span class="o">,</span> <span class="bp">false</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [lt] without growing the height, so we can</span>
+<span class="c">          safely reattach the resulting subtree without doing any more work to</span>
+<span class="c">          rebalance. *)</span>
+      <span class="o">(</span><span class="nc">Three</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">new_lt</span><span class="o">;</span> <span class="n">vl</span><span class="o">;</span> <span class="n">mt</span><span class="o">;</span> <span class="n">vr</span><span class="o">;</span> <span class="n">rt</span> <span class="o">},</span> <span class="bp">false</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">child_lt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">child_rt</span> <span class="o">},</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [lt], and that caused [lt] to grow in height</span>
+<span class="c">          and have a 2-node at its root. We cannot merge that 2-node into the</span>
+<span class="c">          current 3-node. Instead, we split the 3-node into 2-nodes, which</span>
+<span class="c">          causes the growth to continue upward in the tree. *)</span>
+      <span class="o">(</span> <span class="nc">Two</span>
+          <span class="o">{</span>
+            <span class="n">lt</span> <span class="o">=</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">child_lt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">child_rt</span> <span class="o">};</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">vl</span><span class="o">;</span>
+            <span class="n">rt</span> <span class="o">=</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">mt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">vr</span><span class="o">;</span> <span class="n">rt</span> <span class="o">};</span>
+          <span class="o">},</span>
+        <span class="bp">true</span> <span class="o">)</span>
+  <span class="o">|</span> <span class="o">_,</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+      <span class="c">(* Growth must produce a 2-node at the root, which would have been</span>
+<span class="c">          handled by the previous branch. *)</span>
+      <span class="n">impossible</span> <span class="bp">()</span>
+
+<span class="c">(** [ins_sub3_right x lt vl mt vr rt] inserts [x] into the right subtree of a</span>
+<span class="c">    3-node, where that 3-node is [Three {lt; vl; mt; vr; rt}]. Returns</span>
+<span class="c">    [new_t, grew], where [new_t] is the new tree (including [lt], [vl], [mt],</span>
+<span class="c">    [vr], and [rt]) and [grew] is whether the tree height grew as a result of</span>
+<span class="c">    the insert. *)</span>
+<span class="k">and</span> <span class="n">ins_sub3_right</span>
+    <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">vl</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">mt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">vr</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="kt">bool</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">ins</span> <span class="n">x</span> <span class="n">rt</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">new_rt</span><span class="o">,</span> <span class="bp">false</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [rt] without growing the height, so we can</span>
+<span class="c">          safely reattach the resulting subtree without doing any more work to</span>
+<span class="c">          rebalance. *)</span>
+      <span class="o">(</span><span class="nc">Three</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">vl</span><span class="o">;</span> <span class="n">mt</span><span class="o">;</span> <span class="n">vr</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">new_rt</span> <span class="o">},</span> <span class="bp">false</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">child_lt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">child_rt</span> <span class="o">},</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [rt], and that caused [rt] to grow in height</span>
+<span class="c">          and have a 2-node at its root. We cannot merge that 2-node into the</span>
+<span class="c">          current 3-node. Instead, we split the 3-node into 2-nodes, which</span>
+<span class="c">          causes the growth to continue upward in the tree. *)</span>
+      <span class="o">(</span> <span class="nc">Two</span>
+          <span class="o">{</span>
+            <span class="n">lt</span> <span class="o">=</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">vl</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">mt</span> <span class="o">};</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">vr</span><span class="o">;</span>
+            <span class="n">rt</span> <span class="o">=</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">child_lt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">child_rt</span> <span class="o">};</span>
+          <span class="o">},</span>
+        <span class="bp">true</span> <span class="o">)</span>
+  <span class="o">|</span> <span class="o">_,</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+      <span class="c">(* Growth must produce a 2-node at the root, which would have been</span>
+<span class="c">          handled by the previous branch. *)</span>
+      <span class="n">impossible</span> <span class="bp">()</span>
+
+<span class="c">(** [ins_sub3_middle x lt vl mt vr rt] inserts [x] into the middle subtree of</span>
+<span class="c">    a 3-node, where that 3-node is [Three {lt; vl; mt; vr; rt}]. Returns</span>
+<span class="c">    [new_t, grew], where [new_t] is the new tree (including [lt], [vl], [mt],</span>
+<span class="c">    [vr], and [rt]) and [grew] is whether the tree height grew as a result of</span>
+<span class="c">    the insert. *)</span>
+<span class="k">and</span> <span class="n">ins_sub3_middle</span>
+    <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">vl</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">mt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">vr</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">rt</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">*</span> <span class="kt">bool</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">ins</span> <span class="n">x</span> <span class="n">mt</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">new_mt</span><span class="o">,</span> <span class="bp">false</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [mt] without growing the height, so we can</span>
+<span class="c">          safely reattach the resulting subtree without doing any more work to</span>
+<span class="c">          rebalance. *)</span>
+      <span class="o">(</span><span class="nc">Three</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">vl</span><span class="o">;</span> <span class="n">mt</span> <span class="o">=</span> <span class="n">new_mt</span><span class="o">;</span> <span class="n">vr</span><span class="o">;</span> <span class="n">rt</span> <span class="o">},</span> <span class="bp">false</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">child_lt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">child_rt</span> <span class="o">},</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+      <span class="c">(* [x] was inserted into [mt], and that caused [mt] to grow in height</span>
+<span class="c">          and have a 2-node at its root. We cannot merge that 2-node into the</span>
+<span class="c">          current 3-node. Instead, we split the 3-node into 2-nodes, which</span>
+<span class="c">          causes the growth to continue upward in the tree. *)</span>
+      <span class="o">(</span> <span class="nc">Two</span>
+          <span class="o">{</span>
+            <span class="n">lt</span> <span class="o">=</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">vl</span><span class="o">;</span> <span class="n">rt</span> <span class="o">=</span> <span class="n">child_lt</span> <span class="o">};</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">child_v</span><span class="o">;</span>
+            <span class="n">rt</span> <span class="o">=</span> <span class="nc">Two</span> <span class="o">{</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">child_rt</span><span class="o">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">vr</span><span class="o">;</span> <span class="n">rt</span> <span class="o">};</span>
+          <span class="o">},</span>
+        <span class="bp">true</span> <span class="o">)</span>
+  <span class="o">|</span> <span class="o">_,</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+      <span class="c">(* Growth must produce a 2-node at the root, which would have been</span>
+<span class="c">          handled by the previous branch. *)</span>
+      <span class="n">impossible</span> <span class="bp">()</span>
+
+<span class="k">let</span> <span class="n">insert</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">new_tree</span><span class="o">,</span> <span class="o">_</span><span class="n">grew</span> <span class="o">=</span> <span class="n">ins</span> <span class="n">x</span> <span class="n">s</span> <span class="k">in</span>
+  <span class="n">new_tree</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val impossible : unit -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ins : &#39;a -&gt; &#39;a t -&gt; &#39;a t * bool = &lt;fun&gt;
+val ins_sub2 : &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a t * bool = &lt;fun&gt;
+val ins_sub2_left : &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a t * bool = &lt;fun&gt;
+val ins_sub2_right : &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a t * bool = &lt;fun&gt;
+val ins_sub3 : &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a t * bool = &lt;fun&gt;
+val ins_sub3_left : &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a t * bool =
+  &lt;fun&gt;
+val ins_sub3_right : &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a t * bool =
+  &lt;fun&gt;
+val ins_sub3_middle : &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a t * bool =
+  &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val insert : &#39;a -&gt; &#39;a t -&gt; &#39;a t = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>

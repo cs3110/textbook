@@ -15,10 +15,223 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-type 'a tree =
-    | Leaf
-    | Two of { lt : 'a t; v : 'a; rt : 'a t }
-    | Three of { lt : 'a t; vl : 'a; mt : 'a t; vr : 'a; rt : 'a t }
+module TwoThreeSet : Set = struct
+
+  let impossible () = failwith "impossible: grow returns Two"
+
+  (** [ins x t] inserts [x] into [t] using Appel's algorithm. Returns:
+      [new_t, grew], where [new_t] is the new tree (including [x]) and [grew] is
+      whether the tree height grew. *)
+  let rec ins (x : 'a) (t : 'a t) : 'a t * bool =
+    match t with
+    | Leaf ->
+        (* Insertion into a leaf creates a new 2-node, which grows the
+           height. *)
+        (Two { lt = Leaf; v = x; rt = Leaf }, true)
+    | Two { lt; v; rt } ->
+        if x = v then
+          (* If [x] is already in the tree, no change is needed. *)
+          (t, false)
+        else
+          (* Otherwise, insert [x] into the left or right subtree, and
+             incorporate the current 2-node into the result *)
+          ins_sub2 x lt v rt
+    | Three { lt; vl; mt; vr; rt } ->
+        if x = vl || x = vr then
+          (* If [x] is already in the tree, no change is needed. *)
+          (t, false)
+        else
+          (* Otherwise, insert [x] into the left, middle, or right subtree, and
+             incorporate the current 3-node into the result*)
+          ins_sub3 x lt vl mt vr rt
+
+  (** [ins_sub2 x lt v rt] inserts [x] into one of the subtrees of a 2-node,
+      where that two-node is [Two {lt; v; rt}]. Returns [new_t, grew], where
+      [new_t] is the new tree (including [lt], [v], and [rt]) and [grew] is
+      whether the tree height grew as a result of the insert. Requires:
+      [x <> v]. *)
+  and ins_sub2 (x : 'a) (lt : 'a t) (v : 'a) (rt : 'a t) : 'a t * bool =
+    if x < v then
+      (* [x] belongs in [lt]. *)
+      ins_sub2_left x lt v rt
+    else if x > v then (* [x] belongs in [rt]. *)
+      ins_sub2_right x lt v rt
+    else
+      (* [x] belongs in neither [lt] nor [rt], but then we should never have
+         called [ins_sub2] on it. *)
+      failwith "precondition violated"
+
+  (** [ins_sub2_left x lt v rt] inserts [x] into the left subtree of a 2-node,
+      where that two-node is [Two {lt; v; rt}]. Returns [new_t, grew], where
+      [new_t] is the new tree (including [lt], [v], and [rt]) and [grew] is
+      whether the tree height grew as a result of the insert. *)
+  and ins_sub2_left (x : 'a) (lt : 'a t) (v : 'a) (rt : 'a t) : 'a t * bool =
+    match ins x lt with
+    | new_lt, false ->
+        (* [x] was inserted into [lt] without growing the height, so we can
+           safely reattach the resulting subtree without doing any more work to
+           rebalance. *)
+        (Two { lt = new_lt; v; rt }, false)
+    | Two { lt = child_lt; v = child_v; rt = child_rt }, true ->
+        (* [x] was inserted into [lt], and that caused [lt] to grow in height
+           and have a 2-node at its root. We can merge that 2-node into the
+           current 2-node to form a 3-node, which absorbs the change in
+           height. *)
+        (Three { lt = child_lt; vl = child_v; mt = child_rt; vr = v; rt }, false)
+    | _, true ->
+        (* Growth must produce a 2-node at the root, which would have been
+           handled by the previous branch. *)
+        impossible ()
+
+  (** [ins_sub2_right x lt v rt] inserts [x] into the right subtree of a 2-node,
+      where that two-node is [Two {lt; v; rt}]. Returns [new_t, grew], where
+      [new_t] is the new tree (including [lt], [v], and [rt]) and [grew] is
+      whether the tree height grew as a result of the insert. *)
+  and ins_sub2_right (x : 'a) (lt : 'a t) (v : 'a) (rt : 'a t) : 'a t * bool =
+    match ins x rt with
+    | new_rt, false ->
+        (* [x] was inserted into [rt] without growing the height, so we can
+           safely reattach the resulting subtree without doing any more work to
+           rebalance. *)
+        (Two { lt; v; rt = new_rt }, false)
+    | Two { lt = child_lt; v = child_v; rt = child_rt }, true ->
+        (* [x] was inserted into [rt], and that caused [rt] to grow in height
+           and have a 2-node at its root. We can merge that 2-node into the
+           current 2-node to form a 3-node, which absorbs the change in
+           height. *)
+        (Three { lt; vl = v; mt = child_lt; vr = child_v; rt = child_rt }, false)
+    | _, true -> impossible ()
+
+  (** [ins_sub3 x lt vl mt vr rt] inserts [x] into one of the subtrees of a
+      3-node, where that 3-node is [Three {lt; vl; mt; vr; rt}]. Returns
+      [new_t, grew], where [new_t] is the new tree (including [lt], [vl], [mt],
+      [vr], and [rt]) and [grew] is whether the tree height grew as a result of
+      the insert. Requires: [x <> vl && x <> vr]. *)
+  and ins_sub3 (x : 'a) (lt : 'a t) (vl : 'a) (mt : 'a t) (vr : 'a) (rt : 'a t)
+      : 'a t * bool =
+    if x < vl then
+      (* [x] belongs in [lt]. *)
+      ins_sub3_left x lt vl mt vr rt
+    else if x > vr then
+      (* [x] belongs in [rt]. *)
+      ins_sub3_right x lt vl mt vr rt
+    else if x > vl && x < vr then
+      (* [x] belongs in [mt]. *)
+      ins_sub3_middle x lt vl mt vr rt
+    else
+      (* [x] belongs in neither [lt] nor [mt] nor [rt], but then we should never
+         have called [ins_sub3] on it. *)
+      failwith "precondition violated"
+
+  (** [ins_sub3_left x lt vl mt vr rt] inserts [x] into the left subtree of a
+      3-node, where that 3-node is [Three {lt; vl; mt; vr; rt}]. Returns
+      [new_t, grew], where [new_t] is the new tree (including [lt], [vl], [mt],
+      [vr], and [rt]) and [grew] is whether the tree height grew as a result of
+      the insert. *)
+  and ins_sub3_left
+      (x : 'a)
+      (lt : 'a t)
+      (vl : 'a)
+      (mt : 'a t)
+      (vr : 'a)
+      (rt : 'a t) : 'a t * bool =
+    match ins x lt with
+    | new_lt, false ->
+        (* [x] was inserted into [lt] without growing the height, so we can
+           safely reattach the resulting subtree without doing any more work to
+           rebalance. *)
+        (Three { lt = new_lt; vl; mt; vr; rt }, false)
+    | Two { lt = child_lt; v = child_v; rt = child_rt }, true ->
+        (* [x] was inserted into [lt], and that caused [lt] to grow in height
+           and have a 2-node at its root. We cannot merge that 2-node into the
+           current 3-node. Instead, we split the 3-node into 2-nodes, which
+           causes the growth to continue upward in the tree. *)
+        ( Two
+            {
+              lt = Two { lt = child_lt; v = child_v; rt = child_rt };
+              v = vl;
+              rt = Two { lt = mt; v = vr; rt };
+            },
+          true )
+    | _, true ->
+        (* Growth must produce a 2-node at the root, which would have been
+           handled by the previous branch. *)
+        impossible ()
+
+  (** [ins_sub3_right x lt vl mt vr rt] inserts [x] into the right subtree of a
+      3-node, where that 3-node is [Three {lt; vl; mt; vr; rt}]. Returns
+      [new_t, grew], where [new_t] is the new tree (including [lt], [vl], [mt],
+      [vr], and [rt]) and [grew] is whether the tree height grew as a result of
+      the insert. *)
+  and ins_sub3_right
+      (x : 'a)
+      (lt : 'a t)
+      (vl : 'a)
+      (mt : 'a t)
+      (vr : 'a)
+      (rt : 'a t) : 'a t * bool =
+    match ins x rt with
+    | new_rt, false ->
+        (* [x] was inserted into [rt] without growing the height, so we can
+           safely reattach the resulting subtree without doing any more work to
+           rebalance. *)
+        (Three { lt; vl; mt; vr; rt = new_rt }, false)
+    | Two { lt = child_lt; v = child_v; rt = child_rt }, true ->
+        (* [x] was inserted into [rt], and that caused [rt] to grow in height
+           and have a 2-node at its root. We cannot merge that 2-node into the
+           current 3-node. Instead, we split the 3-node into 2-nodes, which
+           causes the growth to continue upward in the tree. *)
+        ( Two
+            {
+              lt = Two { lt; v = vl; rt = mt };
+              v = vr;
+              rt = Two { lt = child_lt; v = child_v; rt = child_rt };
+            },
+          true )
+    | _, true ->
+        (* Growth must produce a 2-node at the root, which would have been
+           handled by the previous branch. *)
+        impossible ()
+
+  (** [ins_sub3_middle x lt vl mt vr rt] inserts [x] into the middle subtree of
+      a 3-node, where that 3-node is [Three {lt; vl; mt; vr; rt}]. Returns
+      [new_t, grew], where [new_t] is the new tree (including [lt], [vl], [mt],
+      [vr], and [rt]) and [grew] is whether the tree height grew as a result of
+      the insert. *)
+  and ins_sub3_middle
+      (x : 'a)
+      (lt : 'a t)
+      (vl : 'a)
+      (mt : 'a t)
+      (vr : 'a)
+      (rt : 'a t) : 'a t * bool =
+    match ins x mt with
+    | new_mt, false ->
+        (* [x] was inserted into [mt] without growing the height, so we can
+           safely reattach the resulting subtree without doing any more work to
+           rebalance. *)
+        (Three { lt; vl; mt = new_mt; vr; rt }, false)
+    | Two { lt = child_lt; v = child_v; rt = child_rt }, true ->
+        (* [x] was inserted into [mt], and that caused [mt] to grow in height
+           and have a 2-node at its root. We cannot merge that 2-node into the
+           current 3-node. Instead, we split the 3-node into 2-nodes, which
+           causes the growth to continue upward in the tree. *)
+        ( Two
+            {
+              lt = Two { lt; v = vl; rt = child_lt };
+              v = child_v;
+              rt = Two { lt = child_rt; v = vr; rt };
+            },
+          true )
+    | _, true ->
+        (* Growth must produce a 2-node at the root, which would have been
+           handled by the previous branch. *)
+        impossible ()
+
+  let insert x s =
+    let new_tree, _grew = ins x s in
+    new_tree
+end
 ------------------
 
 
