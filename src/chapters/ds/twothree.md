@@ -90,7 +90,7 @@ If the element is already in the tree, no change is made.
 If the element is not already in the tree, the search ends at a leaf.
 But how can we insert the new element at that leaf while maintaining the balance invariant?
 The following algorithm for accomplishing that task may be folklore; if any readers know a solid citation for it, please let us know.
-But for now, since Michael Clarkson learned it from Andrew Appel, we will for now call it Appel's algorithm.
+But for now, since Michael Clarkson learned it from Andrew Appel, we will call it Appel's algorithm.
 
 With Appel's algorithm, we transform the leaf at which the search ends into a new 2-node with no children that contains the inserted value.
 That maintains the ordering invariant, but in general violates the balance invariant, because the new 2-node causes the length of the search path to grow by one.
@@ -104,9 +104,11 @@ Those operations work as described below.
 
 ### Merge
 
-The problem we're trying to solve, again, is that a 2-node may have become too tall &mdash; its height might be one greater than its siblings.
+Recall that the problem we're trying to solve is that a 2-node may have become too tall &mdash; its height might be *one greater* than that of its siblings.
 Let's call such a 2-node a *tall* node.
-If a tall 2-node has a 2-node parent, then the parent can absorb the change in height, as shown in the diagram below:
+Below, the nodes marked with asterisks are tall nodes.
+If a tall 2-node has a 2-node parent, then the parent can absorb the change in height by *itself becoming a 3-node*.
+This is shown in the diagram below:
 
 ```text
     y              x,y              x
@@ -118,6 +120,8 @@ a   b                               b   c
 
 In that diagram, `a`, `b`, and `c` represent subtrees.
 There are two cases: merging a tall node `*x*` from the left, and merging a tall node `*y*` from the right.
+It may be helpful to first study the case where the tall node `*x*` is merged, and observe that the invariants have been restored.
+One can then study the other case, where the tall node `*y*` is merged, and appreciate the symmetry between the two cases. 
 In either case, the tall node's value is merged into its parent, which transforms the parent from a 2-node into a 3-node.
 The extra height is absorbed, thus restoring the balance invariant.
 
@@ -153,9 +157,17 @@ a   b           a   b c   d            c   d
 ```
 
 There are three cases to consider: splitting to accomodate a tall node from the left (`*x*`), the middle (`*y*`), or the right (`*z*`).
-After the split, the new root `*y*` has become tall, but its children all have the same height.
-So balance has been restored within the subtree rooted at `*y*`.
-Unless that is actually the root of the entire tree, we need to continue recursing back up to the ultimate root to continue restoring balance.
+Again it may be helpful to choose one case, study it in some detail, and then observe the similarity between that case and the other two.
+After the split, the new node `*y*` has become *tall*, which is an issue we will discuss next.
+However, we have made progress: all of the children of the tree rooted at `*y*` now have the same height, so balance has been restored within the subtree rooted at `*y*`.
+
+Above, when we performed a *merge* to absorb a difference in height, our insertion routine was complete. 
+This is not necessarily the case with a split, precisely because the node `*y*` has become tall. 
+Is that a problem?
+
+- If `*y*` is the root of the entire tree, then we do not have a problem. Take a moment to observe that all the invariants still hold.
+
+- If `*y*` is not the root, then `*y*` has some sibling node, and `*y*` has become taller than that sibling. We need to fix this. Specifically, we need to recurse upwards. Either `*y*`'s parent node will perform a merge and absorb the difference in height there and then, or the parent will perform a split, *itself become tall*, and propagate the difference in height further upwards.
 
 ### Finishing Insertion
 
@@ -172,7 +184,7 @@ Each helper function returns a pair of a tree and a boolean, where the boolean i
 The code is considerably longer than red-black tree insertion.
 In part that's because of all the comments we've added to explain it.
 But also, having two different node shapes (2-node vs. 3-node) inherently makes the code more complicated, and using records instead of tuples for the data carried by the nodes makes the code more verbose.
-Considerably more succinct implementations would be possible.
+Considerably more succinct implementations are possible.
 
 ```{code-cell} ocaml
 let impossible () = failwith "impossible: grow returns Two"
