@@ -120,8 +120,6 @@ a   b                               b   c
 
 In that diagram, `a`, `b`, and `c` represent subtrees.
 There are two cases: merging a tall node `*x*` from the left, and merging a tall node `*y*` from the right.
-It may be helpful to first study the case where the tall node `*x*` is merged, and observe that the invariants have been restored.
-One can then study the other case, where the tall node `*y*` is merged, and appreciate the symmetry between the two cases.
 In either case, the tall node's value is merged into its parent, which transforms the parent from a 2-node into a 3-node.
 The extra height is absorbed, thus restoring the balance invariant.
 
