@@ -25,6 +25,12 @@ linkcheck:
 view:
 	open ${HTML}/index.html
 
+localserver:
+	python -m http.server --directory src/_build/html 8080
+
+viewlocalserver:
+	open http://localhost:8080
+
 pdf:
 	jupyter-book build src --builder pdflatex
 

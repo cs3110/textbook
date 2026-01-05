@@ -5,7 +5,7 @@
 - Run `conda update -n base -c defaults conda` to upgrade that base install to
   latest versions.
 - Run `conda env create -f environment.yml` to create the `textbook`
-  environment.  
+  environment.
 - Proceed with one of the next two options.
 
 Automatic option (recommended for quality of life):
@@ -22,7 +22,7 @@ Manual option:
 
 # How to Create the OCaml Jupyter Kernel
 
-- Create an OPAM switch for the textbook, e.g., `opam switch create textbook ocaml-base-compiler.4.14.0`. Ideally the compiler version for the switch should be the same as the compiler version specified in the preface's student-facing install instructions. However, Ocaml-Jupyter (which we need to install next) does not yet work with OCaml 5 and hasn't since [2023](https://github.com/akabe/ocaml-jupyter/pull/199).
+- Create an OPAM switch for the textbook, e.g., `opam switch create textbook ocaml-base-compiler.5.3.0`. Ideally the compiler version for the switch should be the same as the compiler version specified in the preface's student-facing install instructions.
 - Install Ocaml-Jupyter with `opam install jupyter`.
 - Install the minimal set of packages needed by the textbook:
   `opam install ounit2 qcheck menhir zarith`.
@@ -52,7 +52,12 @@ Manual option:
 
 - Run `make html` or just `make` to build the HTML version.
 - Run `make view` (currently supported on Mac only) to conveniently open the
-  generated HTML in your browser.
+  generated HTML in your browser. That works for most proof reading, though
+  not all features will work correctly because the book is not being served
+  through a web server.
+- Run `make localserver` to start a local Python web server to serve the
+  textbook locally, and in a separate terminal tab run `make viewlocalserver`
+  to open a browser (again Mac only) to view the served textbook.
 - Run `make deploy` to deploy the textbook to GitHub Pages. Before doing that,
   you need to have a git remote set up. You can do so with
   `git remote add public git@github.com:cs3110/textbook.git`. The name of the
