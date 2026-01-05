@@ -48,14 +48,15 @@ What happens when `timing2 ()` is run? How long does it take to run? Make a
 prediction, then run the code to find out.
 
 ```ocaml
-open Lwt.Infix
-
 let delay n = Lwt_unix.sleep n
 
 let timing2 () =
-  let _t1 = delay 1. >>= fun () -> Lwt_io.printl "1" in
-  let _t2 = delay 10. >>= fun () -> Lwt_io.printl "2" in
-  let _t3 = delay 20. >>= fun () -> Lwt_io.printl "3" in
+  let%lwt () = delay 1. in
+  let%lwt () = Lwt_io.printl "1" in
+  let%lwt () = delay 10. in
+  let%lwt () = Lwt_io.printl "2" in
+  let%lwt () = delay 20. in
+  let%lwt () = Lwt_io.printl "3" in
   Lwt_io.printl "all done"
 
 let _ = timing2 ()
@@ -74,12 +75,9 @@ open Lwt.Infix
 let delay n = Lwt_unix.sleep n
 
 let timing3 () =
-  delay 1. >>= fun () ->
-  Lwt_io.printl "1" >>= fun () ->
-  delay 10. >>= fun () ->
-  Lwt_io.printl "2" >>= fun () ->
-  delay 20. >>= fun () ->
-  Lwt_io.printl "3" >>= fun () ->
+  let _t1 = let%lwt () = delay 1. in Lwt_io.printl "1" in
+  let _t2 = let%lwt () = delay 10. in Lwt_io.printl "2" in
+  let _t3 = let%lwt () = delay 20. in Lwt_io.printl "3" in
   Lwt_io.printl "all done"
 
 let _ = timing3 ()
@@ -98,10 +96,10 @@ open Lwt.Infix
 let delay n = Lwt_unix.sleep n
 
 let timing4 () =
-  let t1 = delay 1. >>= fun () -> Lwt_io.printl "1" in
-  let t2 = delay 10. >>= fun () -> Lwt_io.printl "2" in
-  let t3 = delay 20. >>= fun () -> Lwt_io.printl "3" in
-  Lwt.join [t1; t2; t3] >>= fun () ->
+  let t1 = let%lwt () = delay 1. in Lwt_io.printl "1" in
+  let t2 = let%lwt () = delay 10. in Lwt_io.printl "2" in
+  let t3 = let%lwt () = delay 20. in Lwt_io.printl "3" in
+  let%lwt () = Lwt.join [t1; t2; t3] in
   Lwt_io.printl "all done"
 
 let _ = timing4 ()
@@ -120,14 +118,13 @@ any exceptions.
 Here is starter code:
 
 ```ocaml
-open Lwt.Infix
 open Lwt_io
 open Lwt_unix
 
 (** [log ()] is a promise for an [input_channel] that reads from
     the file named "log". *)
 let log () : input_channel Lwt.t =
-  openfile "log" [O_RDONLY] 0 >>= fun fd ->
+  let%lwt fd = openfile "log" [O_RDONLY] 0 in
   Lwt.return (of_fd ~mode:input fd)
 
 (** [loop ic] reads one line from [ic], prints it to stdout,
@@ -138,7 +135,7 @@ let rec loop (ic : input_channel) =
 
 (** [monitor ()] monitors the file named "log". *)
 let monitor () : unit Lwt.t =
-  log () >>= loop
+  Lwt.bind (log ()) loop
 
 (** [handler] is a helper function for [main]. If its input is
     [End_of_file], it handles cleanly exiting the program by

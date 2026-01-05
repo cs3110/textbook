@@ -226,7 +226,6 @@ With that extension, you can use a specialized `let` expression written
 `e1 >>= fun x -> e2`. We can rewrite our running example as follows:
 
 ```ocaml
-(* to compile, add lwt_ppx to the libraries in the dune file *)
 open Lwt_io
 
 let p =
@@ -236,6 +235,18 @@ let p =
 
 let _ = Lwt_main.run p
 ```
+
+````{note}
+To compile that code as part of a Dune project, use a `dune` file like this:
+```
+(executable
+ (public_name ...)
+ (name ...)
+ (libraries lwt.unix ...)
+ (preprocess (pps lwt_ppx)))
+```
+The `libraries` stanza loads `lwt.unix` so that we can use `Lwt_io`, and the `preprocess` stanza makes `let%lwt` available through `lwt_ppx`.
+````
 
 Now the code looks pretty much exactly like what its equivalent synchronous
 version would be. But don't be fooled: all the asynchronous I/O, the promises,
