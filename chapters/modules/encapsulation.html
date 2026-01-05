@@ -295,8 +295,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/twothree.html">9.7. Two-Three Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.9. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -1149,21 +1150,21 @@ the module type:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[17]&quot;, lines 1-10, characters 32-3:
- 1 | ................................struct
- 2 |   (* type &#39;a stack = &#39;a list *)
- 3 |   exception Empty
- 4 |   let empty = []
- 5 |   let is_empty = function [] -&gt; true | _ -&gt; false
- 6 |   let push x s = x :: s
- 7 |   let peek = function [] -&gt; raise Empty | x :: _ -&gt; x
- 8 |   let pop = function [] -&gt; raise Empty | _ :: s -&gt; s
- 9 |   let size = List.length
-10 | end
-Error: Signature mismatch:
-       ...
-       The type `stack&#39; is required but not provided
-       File &quot;[14]&quot;, line 2, characters 2-15: Expected declaration
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[17]&quot;</span><span class="p">,</span> <span class="n">lines</span> <span class="mi">1</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">32</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span>
+<span class="g g-Whitespace"> </span><span class="mi">1</span> <span class="o">|</span> <span class="o">................................</span><span class="n">struct</span>
+<span class="g g-Whitespace"> </span><span class="mi">2</span> <span class="o">|</span>   <span class="p">(</span><span class="o">*</span> <span class="nb">type</span> <span class="s1">&#39;a stack = &#39;</span><span class="n">a</span> <span class="nb">list</span> <span class="o">*</span><span class="p">)</span>
+<span class="g g-Whitespace"> </span><span class="mi">3</span> <span class="o">|</span>   <span class="n">exception</span> <span class="n">Empty</span>
+<span class="g g-Whitespace"> </span><span class="mi">4</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace"> </span><span class="mi">5</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+<span class="g g-Whitespace"> </span><span class="mi">6</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">push</span> <span class="n">x</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="p">::</span> <span class="n">s</span>
+<span class="g g-Whitespace"> </span><span class="mi">7</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">peek</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+<span class="g g-Whitespace"> </span><span class="mi">8</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">pop</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="k">raise</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">_</span> <span class="p">::</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span>
+<span class="g g-Whitespace"> </span><span class="mi">9</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">size</span> <span class="o">=</span> <span class="n">List</span><span class="o">.</span><span class="n">length</span>
+<span class="mi">10</span> <span class="o">|</span> <span class="n">end</span>
+<span class="ne">Error</span>: Signature mismatch:
+       <span class="o">...</span>
+       <span class="n">The</span> <span class="nb">type</span> <span class="n">stack</span> <span class="ow">is</span> <span class="n">required</span> <span class="n">but</span> <span class="ow">not</span> <span class="n">provided</span>
+       <span class="n">File</span> <span class="s2">&quot;[14]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">2</span><span class="o">-</span><span class="mi">15</span><span class="p">:</span> <span class="n">Expected</span> <span class="n">declaration</span>
 </pre></div>
 </div>
 </div>
@@ -1419,8 +1420,7 @@ But if we kept <code class="docutils literal notranslate"><span class="pre">t</s
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[24]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">11</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">14</span><span class="o">-</span><span class="mi">17</span><span class="p">:</span>
 <span class="mi">11</span> <span class="o">|</span> <span class="n">let</span> <span class="n">a</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">x</span>
                    <span class="o">^^^</span>
-<span class="ne">Error</span>: This expression has type M.t but an expression was expected of type
-         <span class="nb">int</span>
+<span class="ne">Error</span>: The value M.x has type M.t but an expression was expected of type int
 </pre></div>
 </div>
 </div>

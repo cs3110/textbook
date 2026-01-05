@@ -295,8 +295,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">9.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="memoization.html">9.5. Memoization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parrays.html">9.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twothree.html">9.7. Two-Three Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">9.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">9.9. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -712,7 +713,7 @@ infinite loop.</p>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[4]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">15</span><span class="o">-</span><span class="mi">50</span><span class="p">:</span>
 <span class="mi">1</span> <span class="o">|</span> <span class="n">let</span> <span class="n">rec</span> <span class="n">nats</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">::</span> <span class="n">List</span><span class="o">.</span><span class="n">map</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">nats</span>
                    <span class="o">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
-<span class="ne">Error</span>: This kind of expression is not allowed as right-hand side of `let rec&#39;
+<span class="ne">Error</span>: This kind of expression is not allowed as right-hand side of let rec
 </pre></div>
 </div>
 </div>
@@ -788,11 +789,10 @@ we already know how to do that!</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Failure &quot;oops&quot;.
+
 <span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">failwith</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;stdlib.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">29</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">17</span><span class="o">-</span><span class="mi">33</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">unknown</span> <span class="n">location</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">f1</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;[8]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">9</span><span class="o">-</span><span class="mi">24</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">93</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">14</span>
 </pre></div>
 </div>
 </div>
@@ -817,10 +817,10 @@ we already know how to do that!</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Failure &quot;oops&quot;.
+
 <span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">failwith</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;stdlib.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">29</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">17</span><span class="o">-</span><span class="mi">33</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;[10]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">5</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">93</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">14</span>
 </pre></div>
 </div>
 </div>

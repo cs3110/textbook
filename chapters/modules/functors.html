@@ -295,8 +295,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/twothree.html">9.7. Two-Three Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.9. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -662,7 +663,7 @@ values to values. But conceptually, functors really are just functions.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type X = sig val x : int end
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IncX : functor (M : X) -&gt; sig val x : int end
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module IncX : (M : X) -&gt; sig val x : int end
 </pre></div>
 </div>
 </div>
@@ -766,7 +767,7 @@ likes, perhaps something very different than its input structure:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module AddX : functor (M : X) -&gt; sig val add : int -&gt; int end
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module AddX : (M : X) -&gt; sig val add : int -&gt; int end
 </pre></div>
 </div>
 </div>
@@ -912,7 +913,7 @@ functor that pairs up a value from one module with another value:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type T = sig type t val x : t end
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Pair1 : functor (M : T) -&gt; sig val p : M.t * int end
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Pair1 : (M : T) -&gt; sig val p : M.t * int end
 </pre></div>
 </div>
 </div>
@@ -933,7 +934,7 @@ functor that pairs up a value from one module with another value:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type P1 = functor (M : T) -&gt; sig val p : M.t * int end
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type P1 = (M : T) -&gt; sig val p : M.t * int end
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Pair1 : P1
@@ -994,7 +995,7 @@ example, it’s fine to apply <code class="docutils literal notranslate"><span c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module F : functor (M : sig val x : int end) -&gt; sig val y : int end
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module F : (M : sig val x : int end) -&gt; sig val y : int end
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module X : sig val x : int end
@@ -1097,24 +1098,14 @@ restricted to any particular type of value.</p>
     type key = Int.t
     type &#39;a t = &#39;a Map.Make(Int).t
     val empty : &#39;a t
-    val is_empty : &#39;a t -&gt; bool
-    val mem : key -&gt; &#39;a t -&gt; bool
     val add : key -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val add_to_list : key -&gt; &#39;a -&gt; &#39;a list t -&gt; &#39;a list t
     val update : key -&gt; (&#39;a option -&gt; &#39;a option) -&gt; &#39;a t -&gt; &#39;a t
     val singleton : key -&gt; &#39;a -&gt; &#39;a t
     val remove : key -&gt; &#39;a t -&gt; &#39;a t
     val merge :
       (key -&gt; &#39;a option -&gt; &#39;b option -&gt; &#39;c option) -&gt; &#39;a t -&gt; &#39;b t -&gt; &#39;c t
     val union : (key -&gt; &#39;a -&gt; &#39;a -&gt; &#39;a option) -&gt; &#39;a t -&gt; &#39;a t -&gt; &#39;a t
-    val compare : (&#39;a -&gt; &#39;a -&gt; int) -&gt; &#39;a t -&gt; &#39;a t -&gt; int
-    val equal : (&#39;a -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t -&gt; bool
-    val iter : (key -&gt; &#39;a -&gt; unit) -&gt; &#39;a t -&gt; unit
-    val fold : (key -&gt; &#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b -&gt; &#39;b
-    val for_all : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; bool
-    val exists : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; bool
-    val filter : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t
-    val filter_map : (key -&gt; &#39;a -&gt; &#39;b option) -&gt; &#39;a t -&gt; &#39;b t
-    val partition : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t * &#39;a t
     val cardinal : &#39;a t -&gt; int
     val bindings : &#39;a t -&gt; (key * &#39;a) list
     val min_binding : &#39;a t -&gt; key * &#39;a
@@ -1123,15 +1114,28 @@ restricted to any particular type of value.</p>
     val max_binding_opt : &#39;a t -&gt; (key * &#39;a) option
     val choose : &#39;a t -&gt; key * &#39;a
     val choose_opt : &#39;a t -&gt; (key * &#39;a) option
-    val split : key -&gt; &#39;a t -&gt; &#39;a t * &#39;a option * &#39;a t
     val find : key -&gt; &#39;a t -&gt; &#39;a
     val find_opt : key -&gt; &#39;a t -&gt; &#39;a option
     val find_first : (key -&gt; bool) -&gt; &#39;a t -&gt; key * &#39;a
     val find_first_opt : (key -&gt; bool) -&gt; &#39;a t -&gt; (key * &#39;a) option
     val find_last : (key -&gt; bool) -&gt; &#39;a t -&gt; key * &#39;a
     val find_last_opt : (key -&gt; bool) -&gt; &#39;a t -&gt; (key * &#39;a) option
+    val iter : (key -&gt; &#39;a -&gt; unit) -&gt; &#39;a t -&gt; unit
+    val fold : (key -&gt; &#39;a -&gt; &#39;acc -&gt; &#39;acc) -&gt; &#39;a t -&gt; &#39;acc -&gt; &#39;acc
     val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b t
     val mapi : (key -&gt; &#39;a -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b t
+    val filter : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t
+    val filter_map : (key -&gt; &#39;a -&gt; &#39;b option) -&gt; &#39;a t -&gt; &#39;b t
+    val partition : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t * &#39;a t
+    val split : key -&gt; &#39;a t -&gt; &#39;a t * &#39;a option * &#39;a t
+    val is_empty : &#39;a t -&gt; bool
+    val mem : key -&gt; &#39;a t -&gt; bool
+    val equal : (&#39;a -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t -&gt; bool
+    val compare : (&#39;a -&gt; &#39;a -&gt; int) -&gt; &#39;a t -&gt; &#39;a t -&gt; int
+    val for_all : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; bool
+    val exists : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; bool
+    val to_list : &#39;a t -&gt; (key * &#39;a) list
+    val of_list : (key * &#39;a) list -&gt; &#39;a t
     val to_seq : &#39;a t -&gt; (key * &#39;a) Seq.t
     val to_rev_seq : &#39;a t -&gt; (key * &#39;a) Seq.t
     val to_seq_from : key -&gt; &#39;a t -&gt; (key * &#39;a) Seq.t
@@ -1195,10 +1199,10 @@ type as a key.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Not_found.
-<span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib__Map</span><span class="o">.</span><span class="n">Make</span><span class="o">.</span><span class="n">find</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;map.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">137</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">10</span><span class="o">-</span><span class="mi">25</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+
+<span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib__Map</span><span class="o">.</span><span class="n">Make</span><span class="o">.</span><span class="n">find</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;map.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">141</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">10</span><span class="o">-</span><span class="mi">25</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;[22]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">10</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">93</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">14</span>
 </pre></div>
 </div>
 </div>
@@ -1251,8 +1255,8 @@ type as a key.</p>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[26]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">13</span><span class="o">-</span><span class="mi">17</span><span class="p">:</span>
 <span class="mi">1</span> <span class="o">|</span> <span class="n">let</span> <span class="n">m3</span> <span class="o">=</span> <span class="n">add</span> <span class="n">true</span> <span class="s2">&quot;one&quot;</span> <span class="n">empty</span>
                  <span class="o">^^^^</span>
-<span class="ne">Error</span>: This expression has type bool but an expression was expected of type
-         <span class="n">IntMap</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="nb">int</span>
+<span class="ne">Error</span>: The constructor true has type bool
+       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="n">IntMap</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="nb">int</span>
 </pre></div>
 </div>
 </div>
@@ -1353,24 +1357,14 @@ compare records that way:</p>
     type key = Name.t
     type &#39;a t = &#39;a Map.Make(Name).t
     val empty : &#39;a t
-    val is_empty : &#39;a t -&gt; bool
-    val mem : key -&gt; &#39;a t -&gt; bool
     val add : key -&gt; &#39;a -&gt; &#39;a t -&gt; &#39;a t
+    val add_to_list : key -&gt; &#39;a -&gt; &#39;a list t -&gt; &#39;a list t
     val update : key -&gt; (&#39;a option -&gt; &#39;a option) -&gt; &#39;a t -&gt; &#39;a t
     val singleton : key -&gt; &#39;a -&gt; &#39;a t
     val remove : key -&gt; &#39;a t -&gt; &#39;a t
     val merge :
       (key -&gt; &#39;a option -&gt; &#39;b option -&gt; &#39;c option) -&gt; &#39;a t -&gt; &#39;b t -&gt; &#39;c t
     val union : (key -&gt; &#39;a -&gt; &#39;a -&gt; &#39;a option) -&gt; &#39;a t -&gt; &#39;a t -&gt; &#39;a t
-    val compare : (&#39;a -&gt; &#39;a -&gt; int) -&gt; &#39;a t -&gt; &#39;a t -&gt; int
-    val equal : (&#39;a -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t -&gt; bool
-    val iter : (key -&gt; &#39;a -&gt; unit) -&gt; &#39;a t -&gt; unit
-    val fold : (key -&gt; &#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b -&gt; &#39;b
-    val for_all : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; bool
-    val exists : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; bool
-    val filter : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t
-    val filter_map : (key -&gt; &#39;a -&gt; &#39;b option) -&gt; &#39;a t -&gt; &#39;b t
-    val partition : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t * &#39;a t
     val cardinal : &#39;a t -&gt; int
     val bindings : &#39;a t -&gt; (key * &#39;a) list
     val min_binding : &#39;a t -&gt; key * &#39;a
@@ -1379,15 +1373,28 @@ compare records that way:</p>
     val max_binding_opt : &#39;a t -&gt; (key * &#39;a) option
     val choose : &#39;a t -&gt; key * &#39;a
     val choose_opt : &#39;a t -&gt; (key * &#39;a) option
-    val split : key -&gt; &#39;a t -&gt; &#39;a t * &#39;a option * &#39;a t
     val find : key -&gt; &#39;a t -&gt; &#39;a
     val find_opt : key -&gt; &#39;a t -&gt; &#39;a option
     val find_first : (key -&gt; bool) -&gt; &#39;a t -&gt; key * &#39;a
     val find_first_opt : (key -&gt; bool) -&gt; &#39;a t -&gt; (key * &#39;a) option
     val find_last : (key -&gt; bool) -&gt; &#39;a t -&gt; key * &#39;a
     val find_last_opt : (key -&gt; bool) -&gt; &#39;a t -&gt; (key * &#39;a) option
+    val iter : (key -&gt; &#39;a -&gt; unit) -&gt; &#39;a t -&gt; unit
+    val fold : (key -&gt; &#39;a -&gt; &#39;acc -&gt; &#39;acc) -&gt; &#39;a t -&gt; &#39;acc -&gt; &#39;acc
     val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b t
     val mapi : (key -&gt; &#39;a -&gt; &#39;b) -&gt; &#39;a t -&gt; &#39;b t
+    val filter : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t
+    val filter_map : (key -&gt; &#39;a -&gt; &#39;b option) -&gt; &#39;a t -&gt; &#39;b t
+    val partition : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t * &#39;a t
+    val split : key -&gt; &#39;a t -&gt; &#39;a t * &#39;a option * &#39;a t
+    val is_empty : &#39;a t -&gt; bool
+    val mem : key -&gt; &#39;a t -&gt; bool
+    val equal : (&#39;a -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; &#39;a t -&gt; bool
+    val compare : (&#39;a -&gt; &#39;a -&gt; int) -&gt; &#39;a t -&gt; &#39;a t -&gt; int
+    val for_all : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; bool
+    val exists : (key -&gt; &#39;a -&gt; bool) -&gt; &#39;a t -&gt; bool
+    val to_list : &#39;a t -&gt; (key * &#39;a) list
+    val of_list : (key * &#39;a) list -&gt; &#39;a t
     val to_seq : &#39;a t -&gt; (key * &#39;a) Seq.t
     val to_rev_seq : &#39;a t -&gt; (key * &#39;a) Seq.t
     val to_seq_from : key -&gt; &#39;a t -&gt; (key * &#39;a) Seq.t
@@ -1491,7 +1498,7 @@ resealing the module at that type without exposing the equality:</p>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[31]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">34</span><span class="o">-</span><span class="mi">35</span><span class="p">:</span>
 <span class="mi">1</span> <span class="o">|</span> <span class="n">let</span> <span class="n">m</span> <span class="o">=</span> <span class="n">UnusableMap</span><span class="o">.</span><span class="p">(</span><span class="n">empty</span> <span class="o">|&gt;</span> <span class="n">add</span> <span class="mi">0</span> <span class="s2">&quot;zero&quot;</span><span class="p">)</span>
                                       <span class="o">^</span>
-<span class="ne">Error</span>: This expression has type int but an expression was expected of type
+<span class="ne">Error</span>: The constant 0 has type int but an expression was expected of type
          <span class="n">UnusableMap</span><span class="o">.</span><span class="n">key</span>
 </pre></div>
 </div>
@@ -1737,7 +1744,7 @@ get that by combining includes with functors:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module SetWithOfList :
-  functor (S : Set) -&gt;
+  (S : Set) -&gt;
     sig
       type &#39;a t = &#39;a S.t
       val empty : &#39;a t

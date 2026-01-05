@@ -297,8 +297,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/twothree.html">9.7. Two-Three Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.9. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -676,13 +677,13 @@ get the same numbers as those below:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 44
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 54
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 85
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 62
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 82
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 10
 </pre></div>
 </div>
 </div>
@@ -733,13 +734,13 @@ than the values below:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 13
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 94
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 96
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 46
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 51
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : int = 38
 </pre></div>
 </div>
 </div>
@@ -901,7 +902,7 @@ generate at least one odd integer.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-random seed: 65051295
+random seed: 128719970
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -987,7 +988,7 @@ can see that in the definition of <code class="docutils literal notranslate"><sp
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  gen : &#39;a QCheck.Gen.t;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  print : (&#39;a -&gt; string) option;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  print : &#39;a QCheck.Print.t option;
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  small : (&#39;a -&gt; int) option;
@@ -1047,13 +1048,13 @@ to the generators found in <code class="docutils literal notranslate"><span clas
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test my_test failed (77 shrink steps):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test my_test failed (87 shrink steps):
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
@@ -1161,6 +1162,21 @@ and biased toward being smaller numbers in that range.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val is_sorted : &#39;a list -&gt; bool = &lt;fun&gt;
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File &quot;[14]&quot;, line 2, characters 44-53:
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 | let t = QCheck.(Test.make ~count:1000 (list small_nat) is_sorted);;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                ^^^^^^^^^
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alert deprecated: QCheck.small_nat
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Use [nat_small] instead
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val t : QCheck.Test.t = QCheck2.Test.Test &lt;abstr&gt;
 </pre></div>
 </div>
@@ -1173,7 +1189,7 @@ and biased toward being smaller numbers in that range.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_4 failed (13 shrink steps):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test anon_test_4 failed (26 shrink steps):
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>

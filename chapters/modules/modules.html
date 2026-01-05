@@ -297,8 +297,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/twothree.html">9.7. Two-Three Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.9. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -1141,9 +1142,9 @@ to get rid of the <code class="docutils literal notranslate"><span class="pre">S
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[21]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">6</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">26</span><span class="o">-</span><span class="mi">41</span><span class="p">:</span>
 <span class="mi">6</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">uppercase_all</span> <span class="o">=</span> <span class="nb">map</span> <span class="n">uppercase_ascii</span>
                               <span class="o">^^^^^^^^^^^^^^^</span>
-<span class="ne">Error</span>: This expression has type string -&gt; string
+<span class="ne">Error</span>: The value uppercase_ascii has type string -&gt; string
        <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="n">char</span> <span class="o">-&gt;</span> <span class="n">char</span>
-       <span class="n">Type</span> <span class="n">string</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">compatible</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">char</span> 
+       <span class="n">Type</span> <span class="n">string</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">compatible</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">char</span>
 </pre></div>
 </div>
 </div>
@@ -1394,21 +1395,21 @@ omitted some item, the type annotation would have been rejected:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[28]&quot;, lines 1-15, characters 32-3:
- 1 | ................................struct
- 2 |   let empty = []
- 3 | 
- 4 |   let is_empty = function [] -&gt; true | _ -&gt; false
- 5 | 
-...
-12 |     | x :: _ -&gt; x
-13 | 
-14 |   (* [pop] is missing *)
-15 | end
-Error: Signature mismatch:
-       ...
-       The value `pop&#39; is required but not provided
-       File &quot;[26]&quot;, line 21, characters 2-30: Expected declaration
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[28]&quot;</span><span class="p">,</span> <span class="n">lines</span> <span class="mi">1</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">32</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span>
+<span class="g g-Whitespace"> </span><span class="mi">1</span> <span class="o">|</span> <span class="o">................................</span><span class="n">struct</span>
+<span class="g g-Whitespace"> </span><span class="mi">2</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace"> </span><span class="mi">3</span> <span class="o">|</span> 
+<span class="g g-Whitespace"> </span><span class="mi">4</span> <span class="o">|</span>   <span class="n">let</span> <span class="n">is_empty</span> <span class="o">=</span> <span class="n">function</span> <span class="p">[]</span> <span class="o">-&gt;</span> <span class="n">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">false</span>
+<span class="g g-Whitespace"> </span><span class="mi">5</span> <span class="o">|</span> 
+<span class="o">...</span>
+<span class="mi">12</span> <span class="o">|</span>     <span class="o">|</span> <span class="n">x</span> <span class="p">::</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">x</span>
+<span class="mi">13</span> <span class="o">|</span> 
+<span class="mi">14</span> <span class="o">|</span>   <span class="p">(</span><span class="o">*</span> <span class="p">[</span><span class="n">pop</span><span class="p">]</span> <span class="ow">is</span> <span class="n">missing</span> <span class="o">*</span><span class="p">)</span>
+<span class="mi">15</span> <span class="o">|</span> <span class="n">end</span>
+<span class="ne">Error</span>: Signature mismatch:
+       <span class="o">...</span>
+       <span class="n">The</span> <span class="n">value</span> <span class="n">pop</span> <span class="ow">is</span> <span class="n">required</span> <span class="n">but</span> <span class="ow">not</span> <span class="n">provided</span>
+       <span class="n">File</span> <span class="s2">&quot;[26]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">21</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">2</span><span class="o">-</span><span class="mi">30</span><span class="p">:</span> <span class="n">Expected</span> <span class="n">declaration</span>
 </pre></div>
 </div>
 </div>
@@ -1706,16 +1707,16 @@ for <code class="docutils literal notranslate"><span class="pre">z</span></code>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module type Y = sig val y : int end
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[35]&quot;, line 5, characters 13-14:
-5 | module MY = (M : Y)
-                 ^
-Error: Signature mismatch:
-       Modules do not match:
-         sig val x : int val z : int end
-       is not included in
-         Y
-       The value `y&#39; is required but not provided
-       File &quot;[35]&quot;, line 2, characters 2-13: Expected declaration
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[35]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">5</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">13</span><span class="o">-</span><span class="mi">14</span><span class="p">:</span>
+<span class="mi">5</span> <span class="o">|</span> <span class="n">module</span> <span class="n">MY</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="p">:</span> <span class="n">Y</span><span class="p">)</span>
+                 <span class="o">^</span>
+<span class="ne">Error</span>: Signature mismatch:
+       <span class="n">Modules</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+         <span class="n">sig</span> <span class="n">val</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">val</span> <span class="n">z</span> <span class="p">:</span> <span class="nb">int</span> <span class="n">end</span>
+       <span class="ow">is</span> <span class="ow">not</span> <span class="n">included</span> <span class="ow">in</span>
+         <span class="n">Y</span>
+       <span class="n">The</span> <span class="n">value</span> <span class="n">y</span> <span class="ow">is</span> <span class="n">required</span> <span class="n">but</span> <span class="ow">not</span> <span class="n">provided</span>
+       <span class="n">File</span> <span class="s2">&quot;[35]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">2</span><span class="o">-</span><span class="mi">13</span><span class="p">:</span> <span class="n">Expected</span> <span class="n">declaration</span>
 </pre></div>
 </div>
 </div>
@@ -1813,13 +1814,13 @@ an example that might be surprising:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>File &quot;[38]&quot;, line 1, characters 15-22:
-1 | module MXZ&#39; = ((M : X) : Z)
-                   ^^^^^^^
-Error: Signature mismatch:
-       Modules do not match: X is not included in Z
-       The value `z&#39; is required but not provided
-       File &quot;[33]&quot;, line 2, characters 2-13: Expected declaration
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[38]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">15</span><span class="o">-</span><span class="mi">22</span><span class="p">:</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="n">module</span> <span class="n">MXZ</span><span class="s1">&#39; = ((M : X) : Z)</span>
+                   <span class="o">^^^^^^^</span>
+<span class="ne">Error</span>: Signature mismatch:
+       <span class="n">Modules</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span> <span class="n">X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">included</span> <span class="ow">in</span> <span class="n">Z</span>
+       <span class="n">The</span> <span class="n">value</span> <span class="n">z</span> <span class="ow">is</span> <span class="n">required</span> <span class="n">but</span> <span class="ow">not</span> <span class="n">provided</span>
+       <span class="n">File</span> <span class="s2">&quot;[33]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">2</span><span class="o">-</span><span class="mi">13</span><span class="p">:</span> <span class="n">Expected</span> <span class="n">declaration</span>
 </pre></div>
 </div>
 </div>

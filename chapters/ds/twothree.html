@@ -714,7 +714,7 @@ If the element is already in the tree, no change is made.
 If the element is not already in the tree, the search ends at a leaf.
 But how can we insert the new element at that leaf while maintaining the balance invariant?
 The following algorithm for accomplishing that task may be folklore; if any readers know a solid citation for it, please let us know.
-But for now, since Michael Clarkson learned it from Andrew Appel, we will for now call it Appel’s algorithm.</p>
+But for now, since Michael Clarkson learned it from Andrew Appel, we will call it Appel’s algorithm.</p>
 <p>With Appel’s algorithm, we transform the leaf at which the search ends into a new 2-node with no children that contains the inserted value.
 That maintains the ordering invariant, but in general violates the balance invariant, because the new 2-node causes the length of the search path to grow by one.
 Another way to put that is: the height of the tree grows by one.</p>
@@ -725,9 +725,11 @@ the parent of the new node is a 2-node, in which case we perform a <em>merge</em
 Those operations work as described below.</p>
 <section id="merge">
 <h3><span class="section-number">9.7.3.1. </span>Merge<a class="headerlink" href="#merge" title="Permalink to this heading">#</a></h3>
-<p>The problem we’re trying to solve, again, is that a 2-node may have become too tall — its height might be one greater than its siblings.
+<p>Recall that the problem we’re trying to solve is that a 2-node may have become too tall — its height might be one greater than that of its siblings.
 Let’s call such a 2-node a <em>tall</em> node.
-If a tall 2-node has a 2-node parent, then the parent can absorb the change in height, as shown in the diagram below:</p>
+Below, the nodes marked with asterisks are tall nodes.
+If a tall 2-node has a 2-node parent, then the parent can absorb the change in height by itself becoming a 3-node.
+This is shown in the diagram below:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    y              x,y              x
    / \           /  |  \           / \
  *x*  c   ==&gt;   a   b   c  &lt;==    a  *y*
@@ -768,9 +770,13 @@ a   b           a   b c   d            c   d
 </pre></div>
 </div>
 <p>There are three cases to consider: splitting to accomodate a tall node from the left (<code class="docutils literal notranslate"><span class="pre">*x*</span></code>), the middle (<code class="docutils literal notranslate"><span class="pre">*y*</span></code>), or the right (<code class="docutils literal notranslate"><span class="pre">*z*</span></code>).
-After the split, the new root <code class="docutils literal notranslate"><span class="pre">*y*</span></code> has become tall, but its children all have the same height.
-So balance has been restored within the subtree rooted at <code class="docutils literal notranslate"><span class="pre">*y*</span></code>.
-Unless that is actually the root of the entire tree, we need to continue recursing back up to the ultimate root to continue restoring balance.</p>
+In all cases, after the split, we have made progress.
+All of the children of the tree rooted at <code class="docutils literal notranslate"><span class="pre">*y*</span></code> now have the same height, so balance has been restored within the subtree rooted at <code class="docutils literal notranslate"><span class="pre">*y*</span></code>.
+However, node <code class="docutils literal notranslate"><span class="pre">*y*</span></code> has become <em>tall</em>.
+If <code class="docutils literal notranslate"><span class="pre">*y*</span></code> is the root of the entire tree, that is not a problem: the invariants still hold.
+But if <code class="docutils literal notranslate"><span class="pre">*y*</span></code> is not the root, then <code class="docutils literal notranslate"><span class="pre">*y*</span></code> has some sibling node, and <code class="docutils literal notranslate"><span class="pre">*y*</span></code> has become taller than that sibling.
+To fix that, we need to recurse upwards.
+Either <code class="docutils literal notranslate"><span class="pre">*y*</span></code>’s parent node will perform a merge and absorb the difference in height; or, the parent will perform a split, itself become tall, and propagate the difference in height further upwards.</p>
 </section>
 <section id="finishing-insertion">
 <h3><span class="section-number">9.7.3.3. </span>Finishing Insertion<a class="headerlink" href="#finishing-insertion" title="Permalink to this heading">#</a></h3>
@@ -785,7 +791,7 @@ Each helper function returns a pair of a tree and a boolean, where the boolean i
 <p>The code is considerably longer than red-black tree insertion.
 In part that’s because of all the comments we’ve added to explain it.
 But also, having two different node shapes (2-node vs. 3-node) inherently makes the code more complicated, and using records instead of tuples for the data carried by the nodes makes the code more verbose.
-Considerably more succinct implementations would be possible.</p>
+Considerably more succinct implementations are possible.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">impossible</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">failwith</span> <span class="s2">&quot;impossible: grow returns Two&quot;</span>

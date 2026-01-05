@@ -297,8 +297,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/twothree.html">9.7. Two-Three Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.9. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -1014,8 +1015,9 @@ that the recursion “goes through”.  For example, the following is not allowe
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[12]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span>
 <span class="mi">1</span> <span class="o">|</span> <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">u</span> <span class="ow">and</span> <span class="n">u</span> <span class="o">=</span> <span class="n">t</span>
     <span class="o">^^^^^^^^^^</span>
-<span class="ne">Error</span>: The definition of t contains a cycle:
-       <span class="n">u</span>
+<span class="ne">Error</span>: The type abbreviation t is cyclic:
+         <span class="n">t</span> <span class="o">=</span> <span class="n">u</span><span class="p">,</span>
+         <span class="n">u</span> <span class="o">=</span> <span class="n">t</span>
 </pre></div>
 </div>
 </div>
@@ -1058,7 +1060,9 @@ and u = T of t
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[15]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">0</span><span class="o">-</span><span class="mi">14</span><span class="p">:</span>
 <span class="mi">1</span> <span class="o">|</span> <span class="nb">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span>
     <span class="o">^^^^^^^^^^^^^^</span>
-<span class="ne">Error</span>: The type abbreviation t is cyclic
+<span class="ne">Error</span>: The type abbreviation t is cyclic:
+         <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span><span class="p">,</span>
+         <span class="n">t</span> <span class="o">*</span> <span class="n">t</span> <span class="n">contains</span> <span class="n">t</span>
 </pre></div>
 </div>
 </div>

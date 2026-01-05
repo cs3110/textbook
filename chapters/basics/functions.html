@@ -297,8 +297,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/twothree.html">9.7. Two-Three Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.9. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -1075,8 +1076,8 @@ Because of those, we cannot apply <code class="docutils literal notranslate"><sp
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[14]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">7</span><span class="o">-</span><span class="mi">11</span><span class="p">:</span>
 <span class="mi">1</span> <span class="o">|</span> <span class="n">id_int</span> <span class="n">true</span>
            <span class="o">^^^^</span>
-<span class="ne">Error</span>: This expression has type bool but an expression was expected of type
-         <span class="nb">int</span>
+<span class="ne">Error</span>: The constructor true has type bool
+       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span>
 </pre></div>
 </div>
 </div>
@@ -1138,8 +1139,8 @@ applying <code class="docutils literal notranslate"><span class="pre">id'</span>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[17]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span>
 <span class="mi">1</span> <span class="o">|</span> <span class="nb">id</span><span class="s1">&#39; true</span>
         <span class="o">^^^^</span>
-<span class="ne">Error</span>: This expression has type bool but an expression was expected of type
-         <span class="nb">int</span>
+<span class="ne">Error</span>: The constructor true has type bool
+       <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span>
 </pre></div>
 </div>
 </div>
@@ -1195,9 +1196,9 @@ and instantiate it at type <code class="docutils literal notranslate"><span clas
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;[19]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">38</span><span class="o">-</span><span class="mi">43</span><span class="p">:</span>
 <span class="mi">3</span> <span class="o">|</span> <span class="n">let</span> <span class="n">bad_first</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;b -&gt; string = first;;</span>
                                           <span class="o">^^^^^</span>
-<span class="ne">Error</span>: This expression has type int -&gt; &#39;b -&gt; int
+<span class="ne">Error</span>: The value first has type int -&gt; &#39;b -&gt; int
        <span class="n">but</span> <span class="n">an</span> <span class="n">expression</span> <span class="n">was</span> <span class="n">expected</span> <span class="n">of</span> <span class="nb">type</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="s1">&#39;b -&gt; string</span>
-       <span class="n">Type</span> <span class="nb">int</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">compatible</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">string</span> 
+       <span class="n">Type</span> <span class="nb">int</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">compatible</span> <span class="k">with</span> <span class="nb">type</span> <span class="n">string</span>
 </pre></div>
 </div>
 </div>

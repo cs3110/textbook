@@ -295,8 +295,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.7. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.8. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/twothree.html">9.7. Two-Three Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.9. Exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -729,9 +730,8 @@ following code raises <code class="docutils literal notranslate"><span class="pr
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: A.
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+<span class="n">Raised</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;[3]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">93</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">14</span>
 </pre></div>
 </div>
 </div>
@@ -765,6 +765,9 @@ argument:</p>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning 20 [ignored-extra-argument]: this argument will not be used by the function.
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File &quot;[4]&quot;, line 1, characters 10-19:
 </pre></div>
 </div>
@@ -778,9 +781,9 @@ argument:</p>
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: A.
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+
+<span class="n">Raised</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;[4]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">10</span><span class="o">-</span><span class="mi">19</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">93</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">14</span>
 </pre></div>
 </div>
 </div>
@@ -802,9 +805,9 @@ given that we know <code class="docutils literal notranslate"><span class="pre">
 </summary>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: B.
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+
+<span class="n">Raised</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;[5]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">10</span><span class="o">-</span><span class="mi">17</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">93</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">14</span>
 </pre></div>
 </div>
 </div>
@@ -827,9 +830,9 @@ need to use let expressions:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: A.
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+
+<span class="n">Raised</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;[6]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">93</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">14</span>
 </pre></div>
 </div>
 </div>
@@ -853,9 +856,9 @@ a subexpression that raises:</p>
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: D &quot;oops&quot;.
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+
+<span class="n">Raised</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;[7]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">9</span><span class="o">-</span><span class="mi">27</span>
+<span class="n">Called</span> <span class="kn">from</span> <span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">93</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">14</span>
 </pre></div>
 </div>
 </div>
