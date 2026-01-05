@@ -185,8 +185,7 @@ exits immediately, without waiting for you to type.
 
 ## Bind as an Operator
 
-There is another syntax for bind that is used far more
-frequently than what we have seen so far. The `Lwt.Infix` module defines an
+The `Lwt.Infix` module defines an
 infix operator written `>>=` that is the same as `bind`. That is, instead of
 writing `bind p c` you write `p >>= c`. This operator makes it much easier to
 write code without all the extra parentheses and indentations that our previous
@@ -222,8 +221,6 @@ extension, run the following command:
 
 `$ opam install lwt_ppx`
 
-(You might need to `opam update` followed by `opam upgrade` first.)
-
 With that extension, you can use a specialized `let` expression written
 `let%lwt x = e1 in e2`, which is equivalent to `bind e1 (fun x -> e2)` or
 `e1 >>= fun x -> e2`. We can rewrite our running example as follows:
@@ -253,7 +250,7 @@ open Lwt_io
 let p =
   let%lwt s1 = read_line stdin in
   let%lwt s2 = read_line stdin in
-  Lwt_io.printf "%s\n" (s1^s2)
+  Lwt_io.printf "%s\n" (s1 ^ s2)
 
 let _ = Lwt_io.printf "Got here first\n"
 
@@ -262,6 +259,22 @@ let _ = Lwt_main.run p
 
 You'll see that "Got here first" prints before you get a chance to enter any
 input.
+
+**Another `let` syntax.**
+Instead of loading the additional library `lwt_ppx` to make `let%lwt` available, we can use a similar `let*` syntax provided by `Lwt.Syntax`:
+
+```ocaml
+open Lwt_io
+open Lwt.Syntax
+
+let p =
+  let* s1 = read_line stdin in
+  let* s2 = read_line stdin in
+  Lwt_io.printf "%s\n" (s1 ^ s2)
+```
+
+But we generally prefer to use `lwt_ppx`, because it also makes some other useful syntax available.
+For example, `lwt_ppx` also makes `try%lwt` available, and that is useful for exception handling that involves promises.
 
 ## Concurrent Composition
 

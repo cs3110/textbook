@@ -43,17 +43,16 @@ That makes Lwt a cooperative concurrency mechanism, rather than a preemptive one
 To better understand callback resolution, let's implement it ourselves. We'll
 use the `Promise` data structure we developed earlier. To start, we add a bind
 operator to the `Promise` signature.
-We define it as an infix operator `>>=` for convenience, but we pronounce it `bind` and use both names interchangeably.
 
 ```ocaml
 module type PROMISE = sig
   ...
 
-  (** [p >>= c] registers callback [c] with promise [p].
+  (** [bind p c] registers callback [c] with promise [p].
       When the promise is fulfilled, the callback will be run
       on the promises's contents.  If the promise is never
       fulfilled, the callback will never run. *)
-  val ( >>= ) : 'a promise -> ('a -> 'b promise) -> 'b promise
+  val bind : 'a promise -> ('a -> 'b promise) -> 'b promise
 end
 ```
 
@@ -164,7 +163,7 @@ we pass them the new state that the promise has just been set to.
     resolve r (Fulfilled v)
 ```
 
-Finally, the implementation of `>>=` is the trickiest part.
+Finally, the implementation of `bind` is the trickiest part.
 Recall that this function needs to immediately return a new promise.
 First, consider the case where the input promise is already fulfilled with some value `x`.
 We need to *immediately*
@@ -173,7 +172,7 @@ we cannot enqueue a handler on the input promise, because the representation inv
 Running the callback will yield a new promise, which we immediately return:
 
 ```ocaml
-  let ( >>= )
+  let bind
       (input_promise : 'a promise)
       (callback : 'a -> 'b promise) : 'b promise
     =
@@ -191,7 +190,7 @@ The correct code for this first case is thus:
 ```ocaml
   let fail exc = {state = Rejected exc; handlers = []}
 
-  let ( >>= )
+  let bind
       (input_promise : 'a promise)
       (callback : 'a -> 'b promise) : 'b promise
     =

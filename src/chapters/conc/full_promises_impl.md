@@ -49,11 +49,11 @@ module type PROMISE = sig
       Requires: [p] is pending. *)
   val reject : 'a resolver -> exn -> unit
 
-  (** [p >>= c] registers callback [c] with promise [p].
+  (** [bind p c] registers callback [c] with promise [p].
       When the promise is fulfilled, the callback will be run
       on the promises's contents.  If the promise is never
       fulfilled, the callback will never run. *)
-  val ( >>= ) : 'a promise -> ('a -> 'b promise) -> 'b promise
+  val bind : 'a promise -> ('a -> 'b promise) -> 'b promise
 end
 
 module Promise : PROMISE = struct
@@ -129,7 +129,7 @@ module Promise : PROMISE = struct
             | Pending -> enqueue (copying_handler resolver) promise
           with exc -> reject resolver exc
 
-  let ( >>= )
+  let bind
       (input_promise : 'a promise)
       (callback : 'a -> 'b promise) : 'b promise
     =
