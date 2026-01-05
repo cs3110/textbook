@@ -578,14 +578,15 @@ seconds then prints <code class="docutils literal notranslate"><span class="pre"
 <p><strong>Exercise: timing challenge 2 [★★★]</strong></p>
 <p>What happens when <code class="docutils literal notranslate"><span class="pre">timing2</span> <span class="pre">()</span></code> is run? How long does it take to run? Make a
 prediction, then run the code to find out.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nn">Lwt</span><span class="p">.</span><span class="nc">Infix</span>
-
-<span class="k">let</span> <span class="n">delay</span> <span class="n">n</span> <span class="o">=</span> <span class="nn">Lwt_unix</span><span class="p">.</span><span class="n">sleep</span> <span class="n">n</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">delay</span> <span class="n">n</span> <span class="o">=</span> <span class="nn">Lwt_unix</span><span class="p">.</span><span class="n">sleep</span> <span class="n">n</span>
 
 <span class="k">let</span> <span class="n">timing2</span> <span class="bp">()</span> <span class="o">=</span>
-  <span class="k">let</span> <span class="o">_</span><span class="n">t1</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">1</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;1&quot;</span> <span class="k">in</span>
-  <span class="k">let</span> <span class="o">_</span><span class="n">t2</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">10</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;2&quot;</span> <span class="k">in</span>
-  <span class="k">let</span> <span class="o">_</span><span class="n">t3</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">20</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;3&quot;</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">1</span><span class="o">.</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;1&quot;</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">10</span><span class="o">.</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;2&quot;</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">20</span><span class="o">.</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;3&quot;</span> <span class="k">in</span>
   <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;all done&quot;</span>
 
 <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">timing2</span> <span class="bp">()</span>
@@ -602,12 +603,9 @@ prediction, then run the code to find out.</p>
 <span class="k">let</span> <span class="n">delay</span> <span class="n">n</span> <span class="o">=</span> <span class="nn">Lwt_unix</span><span class="p">.</span><span class="n">sleep</span> <span class="n">n</span>
 
 <span class="k">let</span> <span class="n">timing3</span> <span class="bp">()</span> <span class="o">=</span>
-  <span class="n">delay</span> <span class="mi">1</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;1&quot;</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-  <span class="n">delay</span> <span class="mi">10</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;2&quot;</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-  <span class="n">delay</span> <span class="mi">20</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
-  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;3&quot;</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+  <span class="k">let</span> <span class="o">_</span><span class="n">t1</span> <span class="o">=</span> <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">1</span><span class="o">.</span> <span class="k">in</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;1&quot;</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="o">_</span><span class="n">t2</span> <span class="o">=</span> <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">10</span><span class="o">.</span> <span class="k">in</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;2&quot;</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="o">_</span><span class="n">t3</span> <span class="o">=</span> <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">20</span><span class="o">.</span> <span class="k">in</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;3&quot;</span> <span class="k">in</span>
   <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;all done&quot;</span>
 
 <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">timing3</span> <span class="bp">()</span>
@@ -624,10 +622,10 @@ prediction, then run the code to find out.</p>
 <span class="k">let</span> <span class="n">delay</span> <span class="n">n</span> <span class="o">=</span> <span class="nn">Lwt_unix</span><span class="p">.</span><span class="n">sleep</span> <span class="n">n</span>
 
 <span class="k">let</span> <span class="n">timing4</span> <span class="bp">()</span> <span class="o">=</span>
-  <span class="k">let</span> <span class="n">t1</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">1</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;1&quot;</span> <span class="k">in</span>
-  <span class="k">let</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">10</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;2&quot;</span> <span class="k">in</span>
-  <span class="k">let</span> <span class="n">t3</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">20</span><span class="o">.</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;3&quot;</span> <span class="k">in</span>
-  <span class="nn">Lwt</span><span class="p">.</span><span class="n">join</span> <span class="o">[</span><span class="n">t1</span><span class="o">;</span> <span class="n">t2</span><span class="o">;</span> <span class="n">t3</span><span class="o">]</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+  <span class="k">let</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">1</span><span class="o">.</span> <span class="k">in</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;1&quot;</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">10</span><span class="o">.</span> <span class="k">in</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;2&quot;</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">t3</span> <span class="o">=</span> <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">delay</span> <span class="mi">20</span><span class="o">.</span> <span class="k">in</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;3&quot;</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">join</span> <span class="o">[</span><span class="n">t1</span><span class="o">;</span> <span class="n">t2</span><span class="o">;</span> <span class="n">t3</span><span class="o">]</span> <span class="k">in</span>
   <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;all done&quot;</span>
 
 <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">timing4</span> <span class="bp">()</span>
@@ -643,14 +641,13 @@ the file, and as each line becomes available, print the line to stdout. When you
 reach the end of the file (EOF), your program should terminate cleanly without
 any exceptions.</p>
 <p>Here is starter code:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nn">Lwt</span><span class="p">.</span><span class="nc">Infix</span>
-<span class="k">open</span> <span class="nc">Lwt_io</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Lwt_io</span>
 <span class="k">open</span> <span class="nc">Lwt_unix</span>
 
 <span class="c">(** [log ()] is a promise for an [input_channel] that reads from</span>
 <span class="c">    the file named &quot;log&quot;. *)</span>
 <span class="k">let</span> <span class="n">log</span> <span class="bp">()</span> <span class="o">:</span> <span class="n">input_channel</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span>
-  <span class="n">openfile</span> <span class="s2">&quot;log&quot;</span> <span class="o">[</span><span class="nc">O_RDONLY</span><span class="o">]</span> <span class="mi">0</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">fd</span> <span class="o">-&gt;</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">openfile</span> <span class="s2">&quot;log&quot;</span> <span class="o">[</span><span class="nc">O_RDONLY</span><span class="o">]</span> <span class="mi">0</span> <span class="k">in</span>
   <span class="nn">Lwt</span><span class="p">.</span><span class="n">return</span> <span class="o">(</span><span class="n">of_fd</span> <span class="o">~</span><span class="n">mode</span><span class="o">:</span><span class="n">input</span> <span class="n">fd</span><span class="o">)</span>
 
 <span class="c">(** [loop ic] reads one line from [ic], prints it to stdout,</span>
@@ -661,7 +658,7 @@ any exceptions.</p>
 
 <span class="c">(** [monitor ()] monitors the file named &quot;log&quot;. *)</span>
 <span class="k">let</span> <span class="n">monitor</span> <span class="bp">()</span> <span class="o">:</span> <span class="kt">unit</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span>
-  <span class="n">log</span> <span class="bp">()</span> <span class="o">&gt;&gt;=</span> <span class="n">loop</span>
+  <span class="nn">Lwt</span><span class="p">.</span><span class="n">bind</span> <span class="o">(</span><span class="n">log</span> <span class="bp">()</span><span class="o">)</span> <span class="n">loop</span>
 
 <span class="c">(** [handler] is a helper function for [main]. If its input is</span>
 <span class="c">    [End_of_file], it handles cleanly exiting the program by</span>

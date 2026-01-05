@@ -524,7 +524,7 @@ We recommend tweaking a few editor settings. Open the user settings JSON file by
 (i) going to View → Command Palette, (ii) typing "user settings json", and (iii)
 selecting Open User Settings (JSON). You will see a JSON file that might already have some settings in it. If so, it will look like this:
 
-```json
+```
 {
   (your pre-existing settings here)
 }
@@ -532,7 +532,7 @@ selecting Open User Settings (JSON). You will see a JSON file that might already
 
 Add these new settings into that outermost set of braces:
 
-```json
+```
 {
   "[ocaml][ocaml.interface]": {
     "editor.tabSize": 2,

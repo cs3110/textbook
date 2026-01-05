@@ -639,11 +639,11 @@ document.write(`
 <span class="c">      Requires: [p] is pending. *)</span>
   <span class="k">val</span> <span class="n">reject</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="n">exn</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
 
-  <span class="c">(** [p &gt;&gt;= c] registers callback [c] with promise [p].</span>
+  <span class="c">(** [bind p c] registers callback [c] with promise [p].</span>
 <span class="c">      When the promise is fulfilled, the callback will be run</span>
 <span class="c">      on the promises&#39;s contents.  If the promise is never</span>
 <span class="c">      fulfilled, the callback will never run. *)</span>
-  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
+  <span class="k">val</span> <span class="n">bind</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
 <span class="k">end</span>
 
 <span class="k">module</span> <span class="nc">Promise</span> <span class="o">:</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">struct</span>
@@ -719,7 +719,7 @@ document.write(`
             <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">copying_handler</span> <span class="n">resolver</span><span class="o">)</span> <span class="n">promise</span>
           <span class="k">with</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
 
-  <span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="n">bind</span>
       <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>
       <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
     <span class="o">=</span>
@@ -746,7 +746,7 @@ document.write(`
     val state : &#39;a promise -&gt; &#39;a state
     val fulfill : &#39;a resolver -&gt; &#39;a -&gt; unit
     val reject : &#39;a resolver -&gt; exn -&gt; unit
-    val ( &gt;&gt;= ) : &#39;a promise -&gt; (&#39;a -&gt; &#39;b promise) -&gt; &#39;b promise
+    val bind : &#39;a promise -&gt; (&#39;a -&gt; &#39;b promise) -&gt; &#39;b promise
   end
 </pre></div>
 </div>

@@ -629,16 +629,15 @@ callback goes into an infinite loop, no other callback will ever get to run.
 That makes Lwt a cooperative concurrency mechanism, rather than a preemptive one.</p>
 <p>To better understand callback resolution, let’s implement it ourselves. We’ll
 use the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> data structure we developed earlier. To start, we add a bind
-operator to the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> signature.
-We define it as an infix operator <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> for convenience, but we pronounce it <code class="docutils literal notranslate"><span class="pre">bind</span></code> and use both names interchangeably.</p>
+operator to the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> signature.</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">sig</span>
   <span class="o">...</span>
 
-  <span class="c">(** [p &gt;&gt;= c] registers callback [c] with promise [p].</span>
+  <span class="c">(** [bind p c] registers callback [c] with promise [p].</span>
 <span class="c">      When the promise is fulfilled, the callback will be run</span>
 <span class="c">      on the promises&#39;s contents.  If the promise is never</span>
 <span class="c">      fulfilled, the callback will never run. *)</span>
-  <span class="k">val</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
+  <span class="k">val</span> <span class="n">bind</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -734,14 +733,14 @@ we pass them the new state that the promise has just been set to.</p>
     <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">v</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>Finally, the implementation of <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> is the trickiest part.
+<p>Finally, the implementation of <code class="docutils literal notranslate"><span class="pre">bind</span></code> is the trickiest part.
 Recall that this function needs to immediately return a new promise.
 First, consider the case where the input promise is already fulfilled with some value <code class="docutils literal notranslate"><span class="pre">x</span></code>.
 We need to <em>immediately</em>
 run the callback on <code class="docutils literal notranslate"><span class="pre">x</span></code>:
 we cannot enqueue a handler on the input promise, because the representation invariant states that a non-pending promise (such as our input promise) <em>must</em> have an empty list of handlers.
 Running the callback will yield a new promise, which we immediately return:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">bind</span>
       <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>
       <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
     <span class="o">=</span>
@@ -757,7 +756,7 @@ We employ a simple helper function <code class="docutils literal notranslate"><s
 The correct code for this first case is thus:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">fail</span> <span class="n">exc</span> <span class="o">=</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Rejected</span> <span class="n">exc</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
 
-  <span class="k">let</span> <span class="o">(</span> <span class="o">&gt;&gt;=</span> <span class="o">)</span>
+  <span class="k">let</span> <span class="n">bind</span>
       <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>
       <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
     <span class="o">=</span>

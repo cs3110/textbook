@@ -766,8 +766,7 @@ exits immediately, without waiting for you to type.</p>
 </section>
 <section id="bind-as-an-operator">
 <h2><span class="section-number">7.5.3. </span>Bind as an Operator<a class="headerlink" href="#bind-as-an-operator" title="Permalink to this heading">#</a></h2>
-<p>There is another syntax for bind that is used far more
-frequently than what we have seen so far. The <code class="docutils literal notranslate"><span class="pre">Lwt.Infix</span></code> module defines an
+<p>The <code class="docutils literal notranslate"><span class="pre">Lwt.Infix</span></code> module defines an
 infix operator written <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code> that is the same as <code class="docutils literal notranslate"><span class="pre">bind</span></code>. That is, instead of
 writing <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">p</span> <span class="pre">c</span></code> you write <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&gt;&gt;=</span> <span class="pre">c</span></code>. This operator makes it much easier to
 write code without all the extra parentheses and indentations that our previous
@@ -798,12 +797,10 @@ which uses it extensively for monads. We’ll cover monads in a later section.</
 bind even simpler than the infix operator <code class="docutils literal notranslate"><span class="pre">&gt;&gt;=</span></code>. To install the syntax
 extension, run the following command:</p>
 <p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">opam</span> <span class="pre">install</span> <span class="pre">lwt_ppx</span></code></p>
-<p>(You might need to <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">update</span></code> followed by <code class="docutils literal notranslate"><span class="pre">opam</span> <span class="pre">upgrade</span></code> first.)</p>
 <p>With that extension, you can use a specialized <code class="docutils literal notranslate"><span class="pre">let</span></code> expression written
 <code class="docutils literal notranslate"><span class="pre">let%lwt</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">e1</span> <span class="pre">in</span> <span class="pre">e2</span></code>, which is equivalent to <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">e1</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e2)</span></code> or
 <code class="docutils literal notranslate"><span class="pre">e1</span> <span class="pre">&gt;&gt;=</span> <span class="pre">fun</span> <span class="pre">x</span> <span class="pre">-&gt;</span> <span class="pre">e2</span></code>. We can rewrite our running example as follows:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* to compile, add lwt_ppx to the libraries in the dune file *)</span>
-<span class="k">open</span> <span class="nc">Lwt_io</span>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Lwt_io</span>
 
 <span class="k">let</span> <span class="n">p</span> <span class="o">=</span>
   <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span> <span class="k">in</span>
@@ -812,6 +809,18 @@ extension, run the following command:</p>
 
 <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="n">p</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To compile that code as part of a Dune project, use a <code class="docutils literal notranslate"><span class="pre">dune</span></code> file like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">executable</span>
+ <span class="p">(</span><span class="n">public_name</span> <span class="o">...</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">name</span> <span class="o">...</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">libraries</span> <span class="n">lwt</span><span class="o">.</span><span class="n">unix</span> <span class="o">...</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">preprocess</span> <span class="p">(</span><span class="n">pps</span> <span class="n">lwt_ppx</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">libraries</span></code> stanza loads <code class="docutils literal notranslate"><span class="pre">lwt.unix</span></code> so that we can use <code class="docutils literal notranslate"><span class="pre">Lwt_io</span></code>, and the <code class="docutils literal notranslate"><span class="pre">preprocess</span></code> stanza makes <code class="docutils literal notranslate"><span class="pre">let%lwt</span></code> available through <code class="docutils literal notranslate"><span class="pre">lwt_ppx</span></code>.</p>
 </div>
 <p>Now the code looks pretty much exactly like what its equivalent synchronous
 version would be. But don’t be fooled: all the asynchronous I/O, the promises,
@@ -824,7 +833,7 @@ yourself, run the following code:</p>
 <span class="k">let</span> <span class="n">p</span> <span class="o">=</span>
   <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span> <span class="k">in</span>
   <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span> <span class="k">in</span>
-  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span><span class="o">^</span><span class="n">s2</span><span class="o">)</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span> <span class="o">^</span> <span class="n">s2</span><span class="o">)</span>
 
 <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;Got here first</span><span class="se">\n</span><span class="s2">&quot;</span>
 
@@ -833,6 +842,19 @@ yourself, run the following code:</p>
 </div>
 <p>You’ll see that “Got here first” prints before you get a chance to enter any
 input.</p>
+<p><strong>Another <code class="docutils literal notranslate"><span class="pre">let</span></code> syntax.</strong>
+Instead of loading the additional library <code class="docutils literal notranslate"><span class="pre">lwt_ppx</span></code> to make <code class="docutils literal notranslate"><span class="pre">let%lwt</span></code> available, we can use a similar <code class="docutils literal notranslate"><span class="pre">let*</span></code> syntax provided by <code class="docutils literal notranslate"><span class="pre">Lwt.Syntax</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">open</span> <span class="nc">Lwt_io</span>
+<span class="k">open</span> <span class="nn">Lwt</span><span class="p">.</span><span class="nc">Syntax</span>
+
+<span class="k">let</span> <span class="n">p</span> <span class="o">=</span>
+  <span class="k">let</span><span class="o">*</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">*</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">read_line</span> <span class="n">stdin</span> <span class="k">in</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printf</span> <span class="s2">&quot;%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">(</span><span class="n">s1</span> <span class="o">^</span> <span class="n">s2</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>But we generally prefer to use <code class="docutils literal notranslate"><span class="pre">lwt_ppx</span></code>, because it also makes some other useful syntax available.
+For example, <code class="docutils literal notranslate"><span class="pre">lwt_ppx</span></code> also makes <code class="docutils literal notranslate"><span class="pre">try%lwt</span></code> available, and that is useful for exception handling that involves promises.</p>
 </section>
 <section id="concurrent-composition">
 <h2><span class="section-number">7.5.5. </span>Concurrent Composition<a class="headerlink" href="#concurrent-composition" title="Permalink to this heading">#</a></h2>
