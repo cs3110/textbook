@@ -191,7 +191,7 @@ end
 
 ## Rebasing Version-Tree Arrays
 
-With version trees, we achieved constant-time `set` operations for a persistent array, but `get` operations were no longer constant time — they were $O(k)$ where $k$ was the number of `set` operations that had been perfromed. Is there a way to make both operations constant time while still being persistent? The answer is: almost! 
+With version trees, we achieved constant-time `set` operations for a persistent array, but `get` operations were no longer constant time — they were $O(k)$ where $k$ was the number of `set` operations that had been performed. Is there a way to make both operations constant time while still being persistent? The answer is: almost! 
 
 Right now, the original version of the array as stored in the `Base` node is _primary_ and always has constant-time access with `get`. We are going to introduce a new _rebasing_ operation that can make any other version of the array become primary. Then that version will have constant-time access with `get`, even though other versions will still be $O(k)$. When a version $v$ of an array is accessed (either with `length` or `set`), we will mutate the version tree to make $v$ primary. That means changing the `Base` node to store the contents according to $v$, and adjusting `Diff` nodes as needed to compensate for that change in the base.
 

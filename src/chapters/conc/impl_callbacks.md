@@ -229,7 +229,7 @@ later becomes resolved:
 
 All that's left is to implement that helper function to create handlers out of
 callbacks. Recall that a handler's type is itself a *function type*,
-`'a state -> unit`. This is why our helper function's output is actally an
+`'a state -> unit`. This is why our helper function's output is actually an
 anonymous function. That anonymous function takes a state as its input:
 
 ```ocaml
@@ -255,7 +255,7 @@ promise returned by bind to also be rejected.
       | Rejected exc -> reject resolver exc
 ```
 
-But if the state is fulfiled, then the callback registered with the promise
+But if the state is fulfilled, then the callback registered with the promise
 can&mdash;at last!&mdash;be run on the contents of the fulfilled promise. If the callback executes successfully it produces a new promise, but recall that the callback
 may itself raise an exception.
 

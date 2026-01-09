@@ -94,7 +94,7 @@ is a `float`; if you write it as `3`, it is instead an `int`:
 3
 ```
 
-OCaml deliberately does not support operator overloading, Arithmetic operations
+OCaml deliberately does not support operator overloading. Arithmetic operations
 on floats are written with a dot after them. For example, floating-point
 multiplication is written `*.` not `*`:
 
