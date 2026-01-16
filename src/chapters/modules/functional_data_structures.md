@@ -268,7 +268,7 @@ module type Queue = sig
   val front : 'a t -> 'a
 
   (** [dequeue q] is the queue containing all the elements of [q] except the
-      front of [q]. Raises [Empty] is [q] is empty. *)
+      front of [q]. Raises [Empty] if [q] is empty. *)
   val dequeue : 'a t -> 'a t
 
   (** [size q] is the number of elements in [q]. *)
