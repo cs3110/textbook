@@ -115,10 +115,10 @@ is `hello.ml`.
 Also create a file named `dune-project` and put the following in it:
 
 ```text
-(lang dune 3.4)
+(lang dune 3.21)
 ```
 
-That tells Dune that this project uses Dune version 3.4, which was current at
+That tells Dune that this project uses Dune version 3.21, which was current at
 the time this version of the textbook was released. This *project* file is
 needed in the root directory of every source tree that you want to compile with
 Dune. In general, you'll have a `dune` file in every subdirectory of the source

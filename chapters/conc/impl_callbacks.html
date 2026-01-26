@@ -791,7 +791,7 @@ later becomes resolved:</p>
 </div>
 <p>All that’s left is to implement that helper function to create handlers out of
 callbacks. Recall that a handler’s type is itself a <em>function type</em>,
-<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">state</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code>. This is why our helper function’s output is actally an
+<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">state</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code>. This is why our helper function’s output is actually an
 anonymous function. That anonymous function takes a state as its input:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">handler_of_callback</span>
       <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span>
@@ -813,7 +813,7 @@ promise returned by bind to also be rejected.</p>
       <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
 </pre></div>
 </div>
-<p>But if the state is fulfiled, then the callback registered with the promise
+<p>But if the state is fulfilled, then the callback registered with the promise
 can—at last!—be run on the contents of the fulfilled promise. If the callback executes successfully it produces a new promise, but recall that the callback
 may itself raise an exception.</p>
 <p>First, consider the optimistic case in which the callback executes successfully and produces a promise. That promise might already be rejected or fulfilled,
