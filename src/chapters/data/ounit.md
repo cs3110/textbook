@@ -70,7 +70,7 @@ file and put this in it:
 And create a `dune-project` file as usual:
 
 ```text
-(lang dune 3.4)
+(lang dune 3.21)
 ```
 
 Now build the test suite:
