@@ -471,7 +471,7 @@ let x = 5 in
   ((let x = 6 in 6) + 6)
 ```
 The first one is what nearly any reasonable language would do. And most likely
-it's what you would guess But, **why?**
+it's what you would guess. But, **why?**
 
 The answer is something we'll call the *Principle of Name Irrelevance*: the name
 of a variable shouldn't intrinsically matter. You're used to this from math. For
