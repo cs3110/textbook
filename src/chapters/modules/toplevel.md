@@ -177,7 +177,7 @@ be with the following directive:
 #require "ounit2";;
 ```
 
-Now you can successfully load your own module without getting an error.
+Now you can successfully open the module without getting an error:
 
 ```ocaml
 open OUnit2;;
