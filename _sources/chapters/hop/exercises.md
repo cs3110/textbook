@@ -208,3 +208,24 @@ test the function. *Hint: define functions for matrix transposition and row
 vector dot product.*
 
 [matmult]: http://mathworld.wolfram.com/MatrixMultiplication.html
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "pipeline fusion")}}
+
+Use `<<`, `&&&`, `guard`, and `foldr` as defined in the section on algebraic
+laws.
+
+```ocaml
+let square x = x * x
+let even x = x mod 2 = 0
+let large x = x > 10
+
+let score =
+  foldr ( + ) 0
+  << filter large
+  << map square
+  << filter even
+```
+
+Define `score_fused` in the form `foldr (guard p f) 0`, where `p` uses `&&&`
+and `<<`, and `f` uses `<<`. Explain which fusion laws justify your definition.

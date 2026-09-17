@@ -1,0 +1,1420 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4.8. Algebraic Laws for Higher-Order Functions &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../../_static/op.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.9. Summary" href="summary.html" />
+    <link rel="prev" title="4.7. Currying" href="currying.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint">Using this book as part of a course? Please <a style="color:white" href="https://docs.google.com/forms/d/e/1FAIpQLSfEW65AJPBnk732zZZM9CFpWMobWUkym6Nf-pgslRqqwoWYIA/viewform?usp=preview">let us know</a>!</div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/op_title.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OCaml Programming: Correct + Efficient + Beautiful</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/about.html">
+   About This Book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface/install.html">
+   Installing OCaml
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../intro/intro.html">
+   1. Better Programming Through OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/past.html">
+     1.1. The Past of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/present.html">
+     1.2. The Present of OCaml
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/future.html">
+     1.3. Look to Your Future
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/3110.html">
+     1.4. A Brief History of CS 3110
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro/summary.html">
+     1.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/intro.html">
+   2. The Basics of OCaml
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/toplevel.html">
+     2.1. The OCaml Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/compiling.html">
+     2.2. Compiling OCaml Programs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/expressions.html">
+     2.3. Expressions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/functions.html">
+     2.4. Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/documentation.html">
+     2.5. Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/printing.html">
+     2.6. Printing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/debugging.html">
+     2.7. Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/summary.html">
+     2.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/exercises.html">
+     2.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  OCaml Programming
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../data/intro.html">
+   3. Data and Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/lists.html">
+     3.1. Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/variants.html">
+     3.2. Variants
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/ounit.html">
+     3.3. Unit Testing with OUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/records_tuples.html">
+     3.4. Records and Tuples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/pattern_matching_advanced.html">
+     3.5. Advanced Pattern Matching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/type_synonym.html">
+     3.6. Type Synonyms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/options.html">
+     3.7. Options
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/assoc_list.html">
+     3.8. Association Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/algebraic_data_types.html">
+     3.9. Algebraic Data Types
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exceptions.html">
+     3.10. Exceptions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/trees.html">
+     3.11. Example: Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/nats.html">
+     3.12. Example: Natural Numbers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/summary.html">
+     3.13. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../data/exercises.html">
+     3.14. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   4. Higher-Order Programming
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="higher_order.html">
+     4.1. Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="map.html">
+     4.2. Map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="filter.html">
+     4.3. Filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="fold.html">
+     4.4. Fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="beyond_lists.html">
+     4.5. Beyond Lists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pipelining.html">
+     4.6. Pipelining
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="currying.html">
+     4.7. Currying
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.8. Algebraic Laws for Higher-Order Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="summary.html">
+     4.9. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="exercises.html">
+     4.10. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../modules/intro.html">
+   5. Modular Programming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_systems.html">
+     5.1. Module Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/modules.html">
+     5.2. Modules
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/toplevel.html">
+     5.3. Modules and the Toplevel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/encapsulation.html">
+     5.4. Encapsulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/compilation_units.html">
+     5.5. Compilation Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functional_data_structures.html">
+     5.6. Functional Data Structures
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/module_type_constraints.html">
+     5.7. Module Type Constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/includes.html">
+     5.8. Includes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/functors.html">
+     5.9. Functors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/summary.html">
+     5.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../modules/exercises.html">
+     5.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../mut/intro.html">
+   6. Mutability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/refs.html">
+     6.1. Refs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/mutable_fields.html">
+     6.2. Mutable Fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/arrays.html">
+     6.3. Arrays and Loops
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/summary.html">
+     6.4. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../mut/exercises.html">
+     6.5. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../conc/intro.html">
+   7. Concurrency
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/concurrency.html">
+     7.1. Concurrency
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/promises.html">
+     7.2. Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/impl_promises.html">
+     7.3. Implementing Promises
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/io_promises.html">
+     7.4. Asynchronous Input and Output
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/callbacks.html">
+     7.5. Callbacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/impl_callbacks.html">
+     7.6. Implementing Callbacks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/full_promises_impl.html">
+     7.7. The Full Promises Implementation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/monads.html">
+     7.8. Monads
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/summary.html">
+     7.9. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../conc/exercises.html">
+     7.10. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Correctness and Efficiency
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../correctness/intro.html">
+   8. Correctness
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/specifications.html">
+     8.1. Specifications
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/function_docs.html">
+     8.2. Function Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/module_docs.html">
+     8.3. Module Documentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/test_debug.html">
+     8.4. Testing and Debugging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/black_glass_box.html">
+     8.5. Black-box and Glass-box Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/randomized.html">
+     8.6. Randomized Testing with QCheck
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/proving_correctness.html">
+     8.7. Proving Correctness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/structural_induction.html">
+     8.8. Structural Induction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/eq_spec.html">
+     8.9. Equational Specification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/summary.html">
+     8.10. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../correctness/exercises.html">
+     8.11. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ds/intro.html">
+   9. Data Structures
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/hash_tables.html">
+     9.1. Hash Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/amortized.html">
+     9.2. Amortized Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/rb.html">
+     9.3. Red-Black Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/sequence.html">
+     9.4. Sequences
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/memoization.html">
+     9.5. Memoization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/parrays.html">
+     9.6. Persistent Arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/twothree.html">
+     9.7. Two-Three Trees
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/summary.html">
+     9.8. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ds/exercises.html">
+     9.9. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Language Implementation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../interp/intro.html">
+   10. Interpreters
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/calculator.html">
+     10.1. Example: Calculator
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/parsing.html">
+     10.2. Parsing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/substitution.html">
+     10.3. Substitution Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/environment.html">
+     10.4. Environment Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/typecheck.html">
+     10.5. Type Checking
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/inference.html">
+     10.6. Type Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/summary.html">
+     10.7. Summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../interp/exercises.html">
+     10.8. Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lagniappe
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../adv/curry-howard.html">
+   The Curry-Howard Correspondence
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/bigoh.html">
+   Big-Oh Notation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/vm.html">
+   Virtual Machine
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/cs3110/textbook/main?urlpath=tree/src/chapters/hop/laws.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/cs3110/textbook"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/hop/laws.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/cs3110/textbook/edit/main/src/chapters/hop/laws.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/chapters/hop/laws.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../../_sources/chapters/hop/laws.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#three-small-functionals">
+   4.8.1. Three Small Functionals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fusing-maps-and-filters">
+   4.8.2. Fusing Maps and Filters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fusing-map-or-filter-into-a-right-fold">
+   4.8.3. Fusing Map or Filter into a Right Fold
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fusing-an-entire-pipeline">
+   4.8.4. Fusing an Entire Pipeline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-related-law-for-left-folds">
+   4.8.5. A Related Law for Left Folds
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-the-need-for-pure-functions">
+   4.8.6. On the Need for Pure Functions
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Algebraic Laws for Higher-Order Functions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#three-small-functionals">
+   4.8.1. Three Small Functionals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fusing-maps-and-filters">
+   4.8.2. Fusing Maps and Filters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fusing-map-or-filter-into-a-right-fold">
+   4.8.3. Fusing Map or Filter into a Right Fold
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fusing-an-entire-pipeline">
+   4.8.4. Fusing an Entire Pipeline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-related-law-for-left-folds">
+   4.8.5. A Related Law for Left Folds
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-the-need-for-pure-functions">
+   4.8.6. On the Need for Pure Functions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="algebraic-laws-for-higher-order-functions">
+<h1><span class="section-number">4.8. </span>Algebraic Laws for Higher-Order Functions<a class="headerlink" href="#algebraic-laws-for-higher-order-functions" title="Permalink to this headline">#</a></h1>
+<p>We have used <code class="docutils literal notranslate"><span class="pre">map</span></code>, <code class="docutils literal notranslate"><span class="pre">filter</span></code>, and <code class="docutils literal notranslate"><span class="pre">fold</span></code> to describe computations over lists.
+These functions also obey <em>algebraic laws</em>: equations that let us replace one
+expression with another that computes the same result. In particular, the laws
+can combine several traversals into one, a transformation called <em>fusion</em>.</p>
+<p>As an important technical restriction, we must assume that the functions and
+predicates involved in this section are pure and terminating. We will return to
+why that assumption matters at the end.</p>
+<section id="three-small-functionals">
+<h2><span class="section-number">4.8.1. </span>Three Small Functionals<a class="headerlink" href="#three-small-functionals" title="Permalink to this headline">#</a></h2>
+<p>As a preliminary step, let’s define some functions we’ll use in the laws. The
+operator <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> composes two functions: <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&lt;&lt;</span> <span class="pre">g</span></code> applies <code class="docutils literal notranslate"><span class="pre">g</span></code> first, then <code class="docutils literal notranslate"><span class="pre">f</span></code>.
+That is, it combines function from the right to the left. The operator <code class="docutils literal notranslate"><span class="pre">&amp;&amp;&amp;</span></code>
+combines two predicates. Finally, <code class="docutils literal notranslate"><span class="pre">guard</span> <span class="pre">p</span> <span class="pre">f</span></code> applies <code class="docutils literal notranslate"><span class="pre">f</span></code> only when <code class="docutils literal notranslate"><span class="pre">p</span></code> holds:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span> <span class="o">&lt;&lt;</span> <span class="o">)</span> <span class="n">f</span> <span class="n">g</span> <span class="n">x</span> <span class="o">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">let</span> <span class="o">(</span> <span class="o">&amp;&amp;&amp;</span> <span class="o">)</span> <span class="n">p</span> <span class="n">q</span> <span class="n">x</span> <span class="o">=</span> <span class="n">p</span> <span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">q</span> <span class="n">x</span>
+
+<span class="k">let</span> <span class="n">id</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+<span class="k">let</span> <span class="n">guard</span> <span class="n">p</span> <span class="n">f</span> <span class="n">x</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">p</span> <span class="n">x</span> <span class="k">then</span> <span class="n">f</span> <span class="n">x</span> <span class="k">else</span> <span class="n">id</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &lt;&lt; ) : (&#39;a -&gt; &#39;b) -&gt; (&#39;c -&gt; &#39;a) -&gt; &#39;c -&gt; &#39;b = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val ( &amp;&amp;&amp; ) : (&#39;a -&gt; bool) -&gt; (&#39;a -&gt; bool) -&gt; &#39;a -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val id : &#39;a -&gt; &#39;a = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val guard : (&#39;a -&gt; bool) -&gt; (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;a -&gt; &#39;b -&gt; &#39;b = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll also use these shorthand names for the standard library functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">map</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span>
+<span class="k">let</span> <span class="n">filter</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span>
+<span class="k">let</span> <span class="n">foldr</span> <span class="n">f</span> <span class="n">z</span> <span class="n">lst</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_right</span> <span class="n">f</span> <span class="n">lst</span> <span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val map : (&#39;a -&gt; &#39;b) -&gt; &#39;a list -&gt; &#39;b list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val filter : (&#39;a -&gt; bool) -&gt; &#39;a list -&gt; &#39;a list = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val foldr : (&#39;a -&gt; &#39;b -&gt; &#39;b) -&gt; &#39;b -&gt; &#39;a list -&gt; &#39;b = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We changed the parameter order for <code class="docutils literal notranslate"><span class="pre">foldr</span></code> to make the list be the last
+argument, so that we can compose it with <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">filter</span></code> in the laws below.</p>
+</section>
+<section id="fusing-maps-and-filters">
+<h2><span class="section-number">4.8.2. </span>Fusing Maps and Filters<a class="headerlink" href="#fusing-maps-and-filters" title="Permalink to this headline">#</a></h2>
+<p>Mapping the identity function leaves a list’s elements unchanged. Mapping two
+functions in succession is equivalent to mapping their composition:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">map</span> <span class="n">id</span> <span class="o">=</span> <span class="n">id</span>
+<span class="n">map</span> <span class="o">(</span><span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="n">g</span><span class="o">)</span> <span class="o">=</span> <span class="n">map</span> <span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="n">map</span> <span class="n">g</span>
+</pre></div>
+</div>
+<p>For example, these two expressions both produce <code class="docutils literal notranslate"><span class="pre">[4;</span> <span class="pre">9;</span> <span class="pre">16]</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">add_one</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">let</span> <span class="n">square</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="k">let</span> <span class="n">mapped</span> <span class="o">=</span> <span class="o">(</span><span class="n">map</span> <span class="n">square</span> <span class="o">&lt;&lt;</span> <span class="n">map</span> <span class="n">add_one</span><span class="o">)</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">]</span>
+<span class="k">let</span> <span class="n">mapped_fused</span> <span class="o">=</span> <span class="n">map</span> <span class="o">(</span><span class="n">square</span> <span class="o">&lt;&lt;</span> <span class="n">add_one</span><span class="o">)</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val add_one : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val square : int -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val mapped : int list = [4; 9; 16]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val mapped_fused : int list = [4; 9; 16]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fused version avoids constructing the intermediate list <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">g</span> <span class="pre">lst</span></code>.</p>
+<p>Two filters can also be combined:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">filter</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">filter</span> <span class="n">q</span> <span class="o">=</span> <span class="n">filter</span> <span class="o">(</span><span class="n">p</span> <span class="o">&amp;&amp;&amp;</span> <span class="n">q</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Again, the fused version avoids an intermediate list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">positive</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="k">let</span> <span class="n">even</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="ow">mod</span> <span class="mi">2</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">let</span> <span class="n">selected</span> <span class="o">=</span> <span class="o">(</span><span class="n">filter</span> <span class="n">positive</span> <span class="o">&lt;&lt;</span> <span class="n">filter</span> <span class="n">even</span><span class="o">)</span> <span class="o">[-</span><span class="mi">2</span><span class="o">;</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="mi">0</span><span class="o">;</span> <span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">]</span>
+<span class="k">let</span> <span class="n">selected_fused</span> <span class="o">=</span> <span class="n">filter</span> <span class="o">(</span><span class="n">positive</span> <span class="o">&amp;&amp;&amp;</span> <span class="n">even</span><span class="o">)</span> <span class="o">[-</span><span class="mi">2</span><span class="o">;</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="mi">0</span><span class="o">;</span> <span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">4</span><span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val positive : int -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val even : int -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val selected : int list = [2; 4]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val selected_fused : int list = [2; 4]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both <code class="docutils literal notranslate"><span class="pre">selected</span></code> and <code class="docutils literal notranslate"><span class="pre">selected_fused</span></code> are <code class="docutils literal notranslate"><span class="pre">[2;</span> <span class="pre">4]</span></code>.</p>
+</section>
+<section id="fusing-map-or-filter-into-a-right-fold">
+<h2><span class="section-number">4.8.3. </span>Fusing Map or Filter into a Right Fold<a class="headerlink" href="#fusing-map-or-filter-into-a-right-fold" title="Permalink to this headline">#</a></h2>
+<p>The next two laws remove the list that a map or filter would create before a
+right fold:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">foldr</span> <span class="n">f</span> <span class="n">z</span> <span class="o">&lt;&lt;</span> <span class="n">map</span> <span class="n">g</span> <span class="o">=</span> <span class="n">foldr</span> <span class="o">(</span><span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="n">g</span><span class="o">)</span> <span class="n">z</span>
+<span class="n">foldr</span> <span class="n">f</span> <span class="n">z</span> <span class="o">&lt;&lt;</span> <span class="n">filter</span> <span class="n">p</span> <span class="o">=</span> <span class="n">foldr</span> <span class="o">(</span><span class="n">guard</span> <span class="n">p</span> <span class="n">f</span><span class="o">)</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>In the first law, <code class="docutils literal notranslate"><span class="pre">(f</span> <span class="pre">&lt;&lt;</span> <span class="pre">g)</span> <span class="pre">x</span> <span class="pre">acc</span></code> computes <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">(g</span> <span class="pre">x)</span> <span class="pre">acc</span></code>. In the second,
+<code class="docutils literal notranslate"><span class="pre">guard</span> <span class="pre">p</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">acc</span></code> either combines <code class="docutils literal notranslate"><span class="pre">x</span></code> with the accumulator or passes the
+accumulator through unchanged. Both laws keep the order in which the right
+fold combines the elements.</p>
+</section>
+<section id="fusing-an-entire-pipeline">
+<h2><span class="section-number">4.8.4. </span>Fusing an Entire Pipeline<a class="headerlink" href="#fusing-an-entire-pipeline" title="Permalink to this headline">#</a></h2>
+<p>We can apply those laws in succession. When a filter comes before a map, the
+fold step tests the original element and then transforms it:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">foldr</span> <span class="n">f</span> <span class="n">z</span> <span class="o">&lt;&lt;</span> <span class="n">map</span> <span class="n">g</span> <span class="o">&lt;&lt;</span> <span class="n">filter</span> <span class="n">p</span>
+<span class="o">=</span> <span class="n">foldr</span> <span class="o">(</span><span class="n">guard</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="n">g</span><span class="o">))</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>When a map comes before a filter, the predicate must test the transformed
+element. That accounts for the extra composition <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&lt;&lt;</span> <span class="pre">g</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">foldr</span> <span class="n">f</span> <span class="n">z</span> <span class="o">&lt;&lt;</span> <span class="n">filter</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">map</span> <span class="n">g</span>
+<span class="o">=</span> <span class="n">foldr</span> <span class="o">(</span><span class="n">guard</span> <span class="o">(</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="n">g</span><span class="o">))</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>Here are both orders in OCaml:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">sum_even_squares</span> <span class="o">=</span>
+  <span class="n">foldr</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="n">map</span> <span class="n">square</span> <span class="o">&lt;&lt;</span> <span class="n">filter</span> <span class="n">even</span>
+
+<span class="k">let</span> <span class="n">sum_even_squares_fused</span> <span class="o">=</span>
+  <span class="n">foldr</span> <span class="o">(</span><span class="n">guard</span> <span class="n">even</span> <span class="o">((</span> <span class="o">+</span> <span class="o">)</span> <span class="o">&lt;&lt;</span> <span class="n">square</span><span class="o">))</span> <span class="mi">0</span>
+
+<span class="k">let</span> <span class="n">large</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span>
+
+<span class="k">let</span> <span class="n">sum_large_squares</span> <span class="o">=</span>
+  <span class="n">foldr</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="n">filter</span> <span class="n">large</span> <span class="o">&lt;&lt;</span> <span class="n">map</span> <span class="n">square</span>
+
+<span class="k">let</span> <span class="n">sum_large_squares_fused</span> <span class="o">=</span>
+  <span class="n">foldr</span> <span class="o">(</span><span class="n">guard</span> <span class="o">(</span><span class="n">large</span> <span class="o">&lt;&lt;</span> <span class="n">square</span><span class="o">)</span> <span class="o">((</span> <span class="o">+</span> <span class="o">)</span> <span class="o">&lt;&lt;</span> <span class="n">square</span><span class="o">))</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_even_squares : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_even_squares_fused : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val large : int -&gt; bool = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_large_squares : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_large_squares_fused : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">3;</span> <span class="pre">4]</span></code>, the first pair returns <code class="docutils literal notranslate"><span class="pre">20</span></code>: it selects even inputs and
+then squares them. For <code class="docutils literal notranslate"><span class="pre">[1;</span> <span class="pre">2;</span> <span class="pre">4;</span> <span class="pre">5]</span></code>, the second pair returns <code class="docutils literal notranslate"><span class="pre">41</span></code>: it squares
+every input and then selects results greater than <code class="docutils literal notranslate"><span class="pre">10</span></code>. Each fused function
+traverses its input once without building an intermediate list.</p>
+</section>
+<section id="a-related-law-for-left-folds">
+<h2><span class="section-number">4.8.5. </span>A Related Law for Left Folds<a class="headerlink" href="#a-related-law-for-left-folds" title="Permalink to this headline">#</a></h2>
+<p>A map can be fused into <code class="docutils literal notranslate"><span class="pre">List.fold_left</span></code>, too:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="n">f</span> <span class="n">z</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">g</span> <span class="n">lst</span><span class="o">)</span>
+<span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">(</span><span class="k">fun</span> <span class="n">acc</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">acc</span> <span class="o">(</span><span class="n">g</span> <span class="n">x</span><span class="o">))</span> <span class="n">z</span> <span class="n">lst</span>
+</pre></div>
+</div>
+<p>Both sides start with <code class="docutils literal notranslate"><span class="pre">z</span></code> and update the accumulator with <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">acc</span> <span class="pre">(g</span> <span class="pre">x)</span></code> for
+each element, from left to right. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">sum_of_squares</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="n">lst</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">square</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">(</span> <span class="o">+</span> <span class="o">)</span> <span class="mi">0</span>
+
+<span class="k">let</span> <span class="n">sum_of_squares_fused</span> <span class="n">lst</span> <span class="o">=</span>
+  <span class="n">lst</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="o">(</span><span class="k">fun</span> <span class="n">acc</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">square</span> <span class="n">x</span><span class="o">)</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_of_squares : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>val sum_of_squares_fused : int list -&gt; int = &lt;fun&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="on-the-need-for-pure-functions">
+<h2><span class="section-number">4.8.6. </span>On the Need for Pure Functions<a class="headerlink" href="#on-the-need-for-pure-functions" title="Permalink to this headline">#</a></h2>
+<p>The equations above describe equality of results, not equality of every
+observable behavior. Separate maps perform every call to <code class="docutils literal notranslate"><span class="pre">g</span></code> before any call to
+<code class="docutils literal notranslate"><span class="pre">f</span></code>, whereas a fused map can interleave them. The filter law can also change
+the order of predicate calls. If a function prints, raises an exception, or
+changes mutable state, those differences matter.</p>
+<p>OCaml therefore does not generally apply these fusions automatically, though a
+compiler could do so if could prove that the functions are pure. The Haskell
+compiler GHC does perform some of these fusions automatically.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ocaml-jupyter"
+        },
+        kernelOptions: {
+            kernelName: "ocaml-jupyter",
+            path: "./chapters/hop"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ocaml-jupyter'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="currying.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.7. </span>Currying</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="summary.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.9. </span>Summary</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael R. Clarkson et al.<br/>
+  
+      &copy; Copyright 2026.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

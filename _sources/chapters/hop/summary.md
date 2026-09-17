@@ -15,9 +15,13 @@ factor out the *iteration* over a data structure from the *computation* done at
 each element. Languages such as Python, Ruby, and Java 8 now have support for
 this kind of iteration.
 
+Algebraic laws for these functionals let us reason about a pipeline and combine
+some of its steps, provided the functions involved are pure.
+
 ## Terms and Concepts
 
 * Abstraction Principle
+* algebraic law
 * accumulator
 * apply
 * associative
@@ -27,7 +31,9 @@ this kind of iteration.
 * first-order function
 * fold
 * functional
+* fusion
 * generalized fold operation
+* guard
 * higher-order function
 * map
 * pipeline
