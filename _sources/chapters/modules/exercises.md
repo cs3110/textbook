@@ -3,6 +3,75 @@
 {{ solutions }}
 
 <!--------------------------------------------------------------------------->
+{{ ex2 | replace("%%NAME%%", "stack option")}}
+
+Write a `Stack` module that represents a stack with a single list:
+
+```ocaml
+module Stack = struct
+  type 'a t = 'a list
+  (* Add your definitions here. *)
+end
+```
+
+Define:
+
+- `empty`
+- `is_empty stack`
+- `push item stack`, returning a new stack
+- `peek stack`, returning `None` if empty or `Some item` otherwise
+- `pop stack`, returning `None` if empty or `Some remaining_stack` otherwise
+
+<!--------------------------------------------------------------------------->
+{{ ex2 | replace("%%NAME%%", "queue option")}}
+
+Write a `Queue` module that represents a queue with a single list:
+
+```ocaml
+module Queue = struct
+  type 'a t = 'a list
+  (* Add your definitions here. *)
+end
+```
+
+Store the next item to be removed at the head of the list. Define:
+
+- `empty`
+- `is_empty queue`
+- `enqueue item queue`, returning a new queue
+- `peek queue`, returning `None` if empty or `Some item` otherwise
+- `dequeue queue`, returning `None` if empty or `Some remaining_queue` otherwise
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "browser")}}
+
+Use your `Stack` module from the **stack option** exercise. Write a `Browser` module that stores three things: a stack of previous pages, the current page, and a stack of pages available through *forward*. Represent a page simply as a `string` indicating its name.
+
+Define:
+
+- a type to represent the browser state
+- `start url`, which opens `url` as the current page and initializes the back and forward stacks to be empty
+- `current browser`, which returns the current page
+- `visit url browser`, which visits a new page, updates the back stack, and clears the forward stack
+- `go_back browser`, returning `None` when there is no previous page
+- `go_forward browser`, returning `None` when there is no forward page
+
+A successful back or forward operation should return `Some updated_browser` and should move the current page to the appropriate stack.
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "helpdesk")}}
+
+Use your `Stack` and `Queue` modules from the **stack option** and **queue option** exercises. Write a `HelpDesk` module that stores a queue of waiting students and a stack of students already helped.
+
+Define:
+
+- a type to represent the help desk state
+- `empty`, which creates an empty help desk
+- `arrive name desk`, which adds a student to the waiting queue
+- `serve desk`, returning `None` if nobody is waiting or `Some (name, updated_desk)` otherwise
+- `completed desk`, returning names in the order they were helped
+
+<!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "complex synonym")}}
 
 Here is a module type for complex numbers, which have a real and imaginary

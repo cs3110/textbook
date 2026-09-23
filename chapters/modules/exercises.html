@@ -965,6 +965,68 @@ title="Print to PDF"
 We are happy to add or correct solutions. Please make contributions through GitHub.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
+<p><strong>Exercise: stack option [★★]</strong></p>
+<p>Write a <code class="docutils literal notranslate"><span class="pre">Stack</span></code> module that represents a stack with a single list:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Stack</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="c">(* Add your definitions here. *)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Define:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">empty</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_empty</span> <span class="pre">stack</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">item</span> <span class="pre">stack</span></code>, returning a new stack</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">peek</span> <span class="pre">stack</span></code>, returning <code class="docutils literal notranslate"><span class="pre">None</span></code> if empty or <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">item</span></code> otherwise</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pop</span> <span class="pre">stack</span></code>, returning <code class="docutils literal notranslate"><span class="pre">None</span></code> if empty or <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">remaining_stack</span></code> otherwise</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: queue option [★★]</strong></p>
+<p>Write a <code class="docutils literal notranslate"><span class="pre">Queue</span></code> module that represents a queue with a single list:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Queue</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">t</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="kt">list</span>
+  <span class="c">(* Add your definitions here. *)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Store the next item to be removed at the head of the list. Define:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">empty</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_empty</span> <span class="pre">queue</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enqueue</span> <span class="pre">item</span> <span class="pre">queue</span></code>, returning a new queue</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">peek</span> <span class="pre">queue</span></code>, returning <code class="docutils literal notranslate"><span class="pre">None</span></code> if empty or <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">item</span></code> otherwise</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dequeue</span> <span class="pre">queue</span></code>, returning <code class="docutils literal notranslate"><span class="pre">None</span></code> if empty or <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">remaining_queue</span></code> otherwise</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: browser [★★★]</strong></p>
+<p>Use your <code class="docutils literal notranslate"><span class="pre">Stack</span></code> module from the <strong>stack option</strong> exercise. Write a <code class="docutils literal notranslate"><span class="pre">Browser</span></code> module that stores three things: a stack of previous pages, the current page, and a stack of pages available through <em>forward</em>. Represent a page simply as a <code class="docutils literal notranslate"><span class="pre">string</span></code> indicating its name.</p>
+<p>Define:</p>
+<ul class="simple">
+<li><p>a type to represent the browser state</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">url</span></code>, which opens <code class="docutils literal notranslate"><span class="pre">url</span></code> as the current page and initializes the back and forward stacks to be empty</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current</span> <span class="pre">browser</span></code>, which returns the current page</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">visit</span> <span class="pre">url</span> <span class="pre">browser</span></code>, which visits a new page, updates the back stack, and clears the forward stack</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">go_back</span> <span class="pre">browser</span></code>, returning <code class="docutils literal notranslate"><span class="pre">None</span></code> when there is no previous page</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">go_forward</span> <span class="pre">browser</span></code>, returning <code class="docutils literal notranslate"><span class="pre">None</span></code> when there is no forward page</p></li>
+</ul>
+<p>A successful back or forward operation should return <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">updated_browser</span></code> and should move the current page to the appropriate stack.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: helpdesk [★★★]</strong></p>
+<p>Use your <code class="docutils literal notranslate"><span class="pre">Stack</span></code> and <code class="docutils literal notranslate"><span class="pre">Queue</span></code> modules from the <strong>stack option</strong> and <strong>queue option</strong> exercises. Write a <code class="docutils literal notranslate"><span class="pre">HelpDesk</span></code> module that stores a queue of waiting students and a stack of students already helped.</p>
+<p>Define:</p>
+<ul class="simple">
+<li><p>a type to represent the help desk state</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">empty</span></code>, which creates an empty help desk</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arrive</span> <span class="pre">name</span> <span class="pre">desk</span></code>, which adds a student to the waiting queue</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serve</span> <span class="pre">desk</span></code>, returning <code class="docutils literal notranslate"><span class="pre">None</span></code> if nobody is waiting or <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">(name,</span> <span class="pre">updated_desk)</span></code> otherwise</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">completed</span> <span class="pre">desk</span></code>, returning names in the order they were helped</p></li>
+</ul>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
 <p><strong>Exercise: complex synonym [★]</strong></p>
 <p>Here is a module type for complex numbers, which have a real and imaginary
 component:</p>
