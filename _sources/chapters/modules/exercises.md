@@ -220,6 +220,67 @@ let rec gcd x y =
 [irreducible]: https://en.wikipedia.org/wiki/Irreducible_fraction
 
 <!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "cached list pair")}}
+
+Consider implementing the following module type with a representation that
+*caches* the length of the list, thus enabling a constant-time `length`
+operation.
+
+```ocaml
+module type CachedList = sig
+  type 'a t
+
+  val empty : 'a t
+  val cons : 'a -> 'a t -> 'a t
+  val tail : 'a t -> 'a t option
+  val append : 'a t -> 'a t -> 'a t
+  val length : 'a t -> int
+  val to_list : 'a t -> 'a list
+end
+```
+
+Do so by implementing `PairCachedList : CachedList` with this representation:
+
+```ocaml
+type 'a t = int * 'a list
+```
+
+The integer caches the length of the whole list. Document the abstraction
+function (AF) and representation invariant (RI) in comments. Implement every
+operation in `CachedList`, and explain in comments why each operation that
+constructs a list preserves the RI.
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "cached list nodes")}}
+
+Continuing the exercise above, implement `NodeCachedList : CachedList` with
+this representation:
+
+```ocaml
+type 'a t = Empty | Node of int * 'a * 'a t
+```
+
+Each node's integer caches the length of the list beginning at that node.
+Document the AF and a recursive RI. Implement every operation in `CachedList`.
+In a comment, give an example whose first node has the correct cached length
+but whose representation violates the RI deeper in the list.
+
+<!--------------------------------------------------------------------------->
+{{ ex2 | replace("%%NAME%%", "cached list tradeoffs")}}
+
+Compare your implementations of the previous two exercises. Let `m` be the
+length of the first argument to `append`, and let `n` be the length of a list
+being represented. Answer:
+
+1. What is the worst-case time complexity of each operation in `CachedList`?
+2. For one list of length `n`, how many cached integers does each
+   representation store?
+3. What does each implementation allocate when taking the tail of a nonempty
+   list?
+4. Does storing a size at every node improve the asymptotic running time of
+   any operation in this interface? Explain.
+
+<!--------------------------------------------------------------------------->
 {{ ex1 | replace("%%NAME%%", "make char map")}}
 
 To create a standard library map, we first have to use the `Map.Make` functor to
