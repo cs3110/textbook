@@ -633,6 +633,40 @@ independently), and explain why any errors arise:</p>
 </ul>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
+<p><strong>Exercise: first-class generators [★★★]</strong></p>
+<p>These modules generate sequences of integers. They use different types to keep track of where they are in the sequence.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Generator</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">type</span> <span class="n">state</span>
+  <span class="k">val</span> <span class="n">initial</span> <span class="o">:</span> <span class="n">state</span>
+  <span class="k">val</span> <span class="n">next</span> <span class="o">:</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">state</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">Counter</span> <span class="o">:</span> <span class="nc">Generator</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">state</span> <span class="o">=</span> <span class="kt">int</span>
+  <span class="k">let</span> <span class="n">initial</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">let</span> <span class="n">next</span> <span class="n">n</span> <span class="o">=</span> <span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">Fibonacci</span> <span class="o">:</span> <span class="nc">Generator</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">type</span> <span class="n">state</span> <span class="o">=</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">int</span>
+  <span class="k">let</span> <span class="n">initial</span> <span class="o">=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">next</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Write <code class="docutils literal notranslate"><span class="pre">take</span> <span class="pre">:</span> <span class="pre">(module</span> <span class="pre">Generator)</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">list</span></code>. It should return the first <code class="docutils literal notranslate"><span class="pre">n</span></code> values from the given generator, in order. You may assume <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>.</p></li>
+<li><p>Define <code class="docutils literal notranslate"><span class="pre">generators</span> <span class="pre">:</span> <span class="pre">(string</span> <span class="pre">*</span> <span class="pre">(module</span> <span class="pre">Generator))</span> <span class="pre">list</span></code> containing <code class="docutils literal notranslate"><span class="pre">Counter</span></code> under the name <code class="docutils literal notranslate"><span class="pre">&quot;counter&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">Fibonacci</span></code> under the name <code class="docutils literal notranslate"><span class="pre">&quot;fibonacci&quot;</span></code>.</p></li>
+<li><p>Write <code class="docutils literal notranslate"><span class="pre">sample</span> <span class="pre">:</span> <span class="pre">string</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span> <span class="pre">list</span> <span class="pre">option</span></code>. It should look up a generator by name and return <code class="docutils literal notranslate"><span class="pre">Some</span></code> of its first <code class="docutils literal notranslate"><span class="pre">n</span></code> values, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if the name is unknown.</p></li>
+</ol>
+<p>For example:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="s2">&quot;counter&quot;</span> <span class="mi">4</span> <span class="o">=</span> <span class="nc">Some</span> <span class="o">[</span><span class="mi">0</span><span class="o">;</span> <span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">]</span>
+<span class="n">sample</span> <span class="s2">&quot;fibonacci&quot;</span> <span class="mi">7</span> <span class="o">=</span> <span class="nc">Some</span> <span class="o">[</span><span class="mi">0</span><span class="o">;</span> <span class="mi">1</span><span class="o">;</span> <span class="mi">1</span><span class="o">;</span> <span class="mi">2</span><span class="o">;</span> <span class="mi">3</span><span class="o">;</span> <span class="mi">5</span><span class="o">;</span> <span class="mi">8</span><span class="o">]</span>
+<span class="n">sample</span> <span class="s2">&quot;unknown&quot;</span> <span class="mi">4</span> <span class="o">=</span> <span class="nc">None</span>
+</pre></div>
+</div>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
 <p><strong>Exercise: big list queue [★★]</strong></p>
 <p>Use the following code to create <code class="docutils literal notranslate"><span class="pre">ListQueue</span></code> of exponentially increasing length:
 10, 100, 1000, etc. How big of a queue can you create before there is a

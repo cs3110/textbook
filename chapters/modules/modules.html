@@ -1937,8 +1937,41 @@ method.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">(module</span> <span class="pre">M</span> <span class="pre">:</span> <span class="pre">T)</span></code> packages module <code class="docutils literal notranslate"><span class="pre">M</span></code> with module type <code class="docutils literal notranslate"><span class="pre">T</span></code> into a value.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">(val</span> <span class="pre">e</span> <span class="pre">:</span> <span class="pre">T)</span></code> un-packages <code class="docutils literal notranslate"><span class="pre">e</span></code> into a module with type <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
 </ul>
-<p>We won’t cover this much further, but if you’re curious you can have a look at
-<a class="reference external" href="https://ocaml.org/manual/firstclassmodules.html">the manual</a>.</p>
+<p>A great use case for first-class modules is to select a particular
+implementation at runtime. For example, suppose you were writing a renderer for
+Markdown that supports plaintext and HTML output. You could have an interface
+that supports rendering bold text, along with two implementations:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">Renderer</span> <span class="o">=</span> <span class="k">sig</span>
+  <span class="k">val</span> <span class="n">render_bold</span> <span class="o">:</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="kt">string</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">PlainTextRenderer</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">let</span> <span class="n">render_bold</span> <span class="n">s</span> <span class="o">=</span> <span class="nn">String</span><span class="p">.</span><span class="n">uppercase_ascii</span> <span class="n">s</span>
+<span class="k">end</span>
+
+<span class="k">module</span> <span class="nc">HtmlRenderer</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">let</span> <span class="n">render_bold</span> <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&lt;strong&gt;&quot;</span> <span class="o">^</span> <span class="n">s</span> <span class="o">^</span> <span class="s2">&quot;&lt;/strong&gt;&quot;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>You could then use first-class modules to select the appropriate implementation
+at runtime:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">renderers</span> <span class="o">=</span> <span class="o">[</span>
+  <span class="s2">&quot;plain&quot;</span><span class="o">,</span> <span class="o">(</span><span class="k">module</span> <span class="nc">PlainTextRenderer</span> <span class="o">:</span> <span class="nc">Renderer</span><span class="o">);</span>
+  <span class="s2">&quot;html&quot;</span><span class="o">,</span> <span class="o">(</span><span class="k">module</span> <span class="nc">HtmlRenderer</span> <span class="o">:</span> <span class="nc">Renderer</span><span class="o">)</span>
+<span class="o">]</span>
+
+<span class="k">let</span> <span class="n">get_renderer</span> <span class="n">name</span> <span class="o">=</span>
+  <span class="nn">List</span><span class="p">.</span><span class="n">assoc</span> <span class="n">name</span> <span class="n">renderers</span>
+
+<span class="k">let</span> <span class="n">render_bold</span> <span class="n">name</span> <span class="n">s</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">module</span> <span class="nc">R</span> <span class="o">=</span> <span class="o">(</span><span class="k">val</span> <span class="n">get_renderer</span> <span class="n">name</span><span class="o">)</span> <span class="k">in</span>
+  <span class="nn">R</span><span class="p">.</span><span class="n">render_bold</span> <span class="n">s</span>
+
+<span class="k">let</span> <span class="n">s_html</span> <span class="o">=</span> <span class="n">render_bold</span> <span class="s2">&quot;html&quot;</span> <span class="s2">&quot;Hello, World!&quot;</span>
+<span class="k">let</span> <span class="n">s_plain</span> <span class="o">=</span> <span class="n">render_bold</span> <span class="s2">&quot;plain&quot;</span> <span class="s2">&quot;Hello, World!&quot;</span>
+</pre></div>
+</div>
 </section>
 </section>
 

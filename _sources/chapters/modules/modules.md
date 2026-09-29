@@ -990,7 +990,41 @@ Modules are not as first-class in OCaml as functions. But it is possible to
 - `(module M : T)` packages module `M` with module type `T` into a value.
 - `(val e : T)` un-packages `e` into a module with type `T`.
 
-We won't cover this much further, but if you're curious you can have a look at
-[the manual][firstclassmodules].
+A great use case for first-class modules is to select a particular
+implementation at runtime. For example, suppose you were writing a renderer for
+Markdown that supports plaintext and HTML output. You could have an interface
+that supports rendering bold text, along with two implementations:
 
-[firstclassmodules]: https://ocaml.org/manual/firstclassmodules.html
+```ocaml
+module type Renderer = sig
+  val render_bold : string -> string
+end
+
+module PlainTextRenderer = struct
+  let render_bold s = String.uppercase_ascii s
+end
+
+module HtmlRenderer = struct
+  let render_bold s = "<strong>" ^ s ^ "</strong>"
+end
+```
+
+You could then use first-class modules to select the appropriate implementation
+at runtime:
+
+```ocaml
+let renderers = [
+  "plain", (module PlainTextRenderer : Renderer);
+  "html", (module HtmlRenderer : Renderer)
+]
+
+let get_renderer name =
+  List.assoc name renderers
+
+let render_bold name s =
+  let module R = (val get_renderer name) in
+  R.render_bold s
+
+let s_html = render_bold "html" "Hello, World!"
+let s_plain = render_bold "plain" "Hello, World!"
+```

@@ -108,6 +108,43 @@ independently), and explain why any errors arise:
 - change `zero` in the structure to `let zero = 0, 0`
 
 <!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "first-class generators")}}
+
+These modules generate sequences of integers. They use different types to keep track of where they are in the sequence.
+
+```ocaml
+module type Generator = sig
+  type state
+  val initial : state
+  val next : state -> int * state
+end
+
+module Counter : Generator = struct
+  type state = int
+  let initial = 0
+  let next n = (n, n + 1)
+end
+
+module Fibonacci : Generator = struct
+  type state = int * int
+  let initial = (0, 1)
+  let next (a, b) = (a, (b, a + b))
+end
+```
+
+1. Write `take : (module Generator) -> int -> int list`. It should return the first `n` values from the given generator, in order. You may assume `n >= 0`.
+2. Define `generators : (string * (module Generator)) list` containing `Counter` under the name `"counter"` and `Fibonacci` under the name `"fibonacci"`.
+3. Write `sample : string -> int -> int list option`. It should look up a generator by name and return `Some` of its first `n` values, or `None` if the name is unknown.
+
+For example:
+
+```ocaml
+sample "counter" 4 = Some [0; 1; 2; 3]
+sample "fibonacci" 7 = Some [0; 1; 1; 2; 3; 5; 8]
+sample "unknown" 4 = None
+```
+
+<!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "big list queue")}}
 
 Use the following code to create `ListQueue` of exponentially increasing length:
