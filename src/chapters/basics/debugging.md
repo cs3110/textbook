@@ -21,7 +21,7 @@ step back and think about everything that comes *before* debugging.
 ## Defenses against Bugs
 
 According to
-[Rob Miller](https://stellar.mit.edu/S/course/6/fa08/6.005/courseMaterial/topics/topic3/lectureNotes/Debugging/Debugging.pdf),
+[Rob Miller](https://ocw.mit.edu/courses/6-005-elements-of-software-construction-fall-2008/resources/mit6_005f08_lec12/),
 there are four defenses against bugs:
 
 1.  **The first defense against bugs is to make them impossible.**
