@@ -2,6 +2,9 @@
 
 Concurrent programming is challenging, which perhaps explains why there are so many different libraries and language features that support it.
 Promises are elegant and useful both in functional and imperative programming.
+Our implementation used handlers to remember work until a promise resolves,
+and proxy promises to share an outcome between the result of `bind` and the
+result of its callback.
 Our numbering server illustrated how promises let a program serve several
 clients concurrently, with sequential dependencies within each client's
 interaction. Capturing each client's number before yielding also showed how
@@ -26,6 +29,7 @@ You might find it interesting to read more about those in the OCaml manual.
 * DNS
 * domain name
 * effects
+* handler
 * interleaving
 * IP address
 * latency hiding
@@ -44,6 +48,7 @@ You might find it interesting to read more about those in the OCaml manual.
 * process
 * promises
 * protocol
+* proxy promise
 * race conditions
 * rejected
 * resolution loop
