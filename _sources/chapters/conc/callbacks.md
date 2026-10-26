@@ -110,24 +110,21 @@ discussion.
 Let's consider that final case in more detail. We have one promise of type
 `'a Lwt.t` and two promises of type `'b Lwt.t`:
 
-* The promise of type `'a Lwt.t`, call it promise X, is an input to `bind`. It
+* The promise of type `'a Lwt.t`, call it `p1`, is an input to `bind`. It
   was pending when `bind` was called, and when `bind` returns.
 
-* The first promise of type `'b Lwt.t`, call it promise Y, is created by `bind`
+* The first promise of type `'b Lwt.t`, call it `p3`, is created by `bind`
   and immediately returned to the user. It is pending at that point.
 
-* The second promise of type `'b Lwt.t`, call it promise Z, has not yet been
-  created. It may be created later: if promise X is fulfilled, the
-  callback will run on the contents of X, and the callback will return promise
-  Z. There is no guarantee about the state of Z; it might well still be pending
-  when returned by the callback.
+* The second promise of type `'b Lwt.t`, call it `p2`, is returned by the
+  callback if `p1` is fulfilled. The callback might create `p2`, or return a
+  promise that already exists. There is no guarantee about the state of `p2`;
+  it might well still be pending when returned by the callback.
 
-* If Z is finally fulfilled, the contents of Y are updated to be the same as
-  the contents of Z. If Z is rejected, then Y is also rejected with the same
-  exception. If Z remains pending, then Y remains pending as well.
-  Recall that Y has already been returned to the user.
-  "Relaying" the contents of Z to Y ensures that the user can eventually benefit
-  from the chain of operations that started with promise X.
+* `p3` shares the eventual outcome of `p2`: fulfillment with the same value,
+  rejection with the same exception, or remaining pending. Recall that `p3`
+  has already been returned to the user. If `p1` is rejected instead, the
+  callback does not run, and `p3` is rejected with that exception.
 
 The reason why `bind` is designed with this type is so that programmers can set
 up a *sequential chain* of callbacks. For example, the following code

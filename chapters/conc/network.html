@@ -1,0 +1,1311 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>7.9. Network Programming with Lwt &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/conc/network';</script>
+    <link rel="shortcut icon" href="../../_static/op.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.10. Summary" href="summary.html" />
+    <link rel="prev" title="7.8. Monads" href="monads.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Using this book as part of a course? Please <a style="color:white" href="https://docs.google.com/forms/d/e/1FAIpQLSfEW65AJPBnk732zZZM9CFpWMobWUkym6Nf-pgslRqqwoWYIA/viewform?usp=preview">let us know</a>!</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../cover.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/op_title.png" class="logo__image only-light" alt="OCaml Programming: Correct + Efficient + Beautiful - Home"/>
+    <script>document.write(`<img src="../../_static/op_title.png" class="logo__image only-dark" alt="OCaml Programming: Correct + Efficient + Beautiful - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preface</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../preface/about.html">About This Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preface/install.html">Installing OCaml</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro/intro.html">1. Better Programming Through OCaml</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro/past.html">1.1. The Past of OCaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/present.html">1.2. The Present of OCaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/future.html">1.3. Look to Your Future</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/3110.html">1.4. A Brief History of CS 3110</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/summary.html">1.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/intro.html">2. The Basics of OCaml</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/toplevel.html">2.1. The OCaml Toplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/compiling.html">2.2. Compiling OCaml Programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/expressions.html">2.3. Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/functions.html">2.4. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/documentation.html">2.5. Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/printing.html">2.6. Printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/debugging.html">2.7. Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/summary.html">2.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/exercises.html">2.9. Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">OCaml Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data/intro.html">3. Data and Types</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data/lists.html">3.1. Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/variants.html">3.2. Variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/ounit.html">3.3. Unit Testing with OUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/records_tuples.html">3.4. Records and Tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/pattern_matching_advanced.html">3.5. Advanced Pattern Matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/type_synonym.html">3.6. Type Synonyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/options.html">3.7. Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/assoc_list.html">3.8. Association Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/algebraic_data_types.html">3.9. Algebraic Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/exceptions.html">3.10. Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/trees.html">3.11. Example: Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/nats.html">3.12. Example: Natural Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/summary.html">3.13. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/exercises.html">3.14. Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../hop/intro.html">4. Higher-Order Programming</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hop/higher_order.html">4.1. Higher-Order Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/map.html">4.2. Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/filter.html">4.3. Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/fold.html">4.4. Fold</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/beyond_lists.html">4.5. Beyond Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/pipelining.html">4.6. Pipelining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/currying.html">4.7. Currying</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/laws.html">4.8. Algebraic Laws for Higher-Order Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/summary.html">4.9. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hop/exercises.html">4.10. Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../modules/intro.html">5. Modular Programming</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/module_systems.html">5.1. Module Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/modules.html">5.2. Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/toplevel.html">5.3. Modules and the Toplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/encapsulation.html">5.4. Encapsulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/compilation_units.html">5.5. Compilation Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/functional_data_structures.html">5.6. Functional Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/module_type_constraints.html">5.7. Module Type Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/includes.html">5.8. Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/functors.html">5.9. Functors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/summary.html">5.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/exercises.html">5.11. Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mut/intro.html">6. Mutability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mut/refs.html">6.1. Refs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/mutable_fields.html">6.2. Mutable Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/arrays.html">6.3. Arrays and Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/summary.html">6.4. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mut/exercises.html">6.5. Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">7. Concurrency</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="concurrency.html">7.1. Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="promises.html">7.2. Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="impl_promises.html">7.3. Implementing Promises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io_promises.html">7.4. Asynchronous Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html">7.5. Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="impl_callbacks.html">7.6. Implementing Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.7. The Full Promises Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monads.html">7.8. Monads</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.9. Network Programming with Lwt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.11. Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Correctness and Efficiency</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../correctness/intro.html">8. Correctness</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/specifications.html">8.1. Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/function_docs.html">8.2. Function Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/module_docs.html">8.3. Module Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/test_debug.html">8.4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/black_glass_box.html">8.5. Black-box and Glass-box Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/randomized.html">8.6. Randomized Testing with QCheck</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/proving_correctness.html">8.7. Proving Correctness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/structural_induction.html">8.8. Structural Induction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/eq_spec.html">8.9. Equational Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/summary.html">8.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../correctness/exercises.html">8.11. Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ds/intro.html">9. Data Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ds/hash_tables.html">9.1. Hash Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/amortized.html">9.2. Amortized Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/rb.html">9.3. Red-Black Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/sequence.html">9.4. Sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/memoization.html">9.5. Memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/parrays.html">9.6. Persistent Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/twothree.html">9.7. Two-Three Trees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/summary.html">9.8. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ds/exercises.html">9.9. Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Language Implementation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interp/intro.html">10. Interpreters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interp/calculator.html">10.1. Example: Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/parsing.html">10.2. Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/substitution.html">10.3. Substitution Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/environment.html">10.4. Environment Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/typecheck.html">10.5. Type Checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/inference.html">10.6. Type Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/summary.html">10.7. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interp/exercises.html">10.8. Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lagniappe</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../adv/curry-howard.html">The Curry-Howard Correspondence</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../appendix/bigoh.html">Big-Oh Notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/vm.html">Virtual Machine</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cs3110/textbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cs3110/textbook/edit/main/src/chapters/conc/network.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cs3110/textbook/issues/new?title=Issue%20on%20page%20%2Fchapters/conc/network.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/chapters/conc/network.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Network Programming with Lwt</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clients-and-servers">7.9.1. Clients and Servers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ip-addresses-and-domain-names">7.9.2. IP Addresses and Domain Names</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ports-and-socket-addresses">7.9.3. Ports and Socket Addresses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-conversation-with-netcat">7.9.4. A Conversation with Netcat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-and-channels">7.9.5. Connections and Channels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accepting-connections-with-lwt">7.9.6. Accepting Connections with Lwt</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keeping-the-server-running">7.9.7. Keeping the Server Running</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sending-a-number">7.9.8. Sending a Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#receiving-a-number">7.9.9. Receiving a Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-numbering-service">7.9.10. Running the Numbering Service</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-is-the-concurrency">7.9.11. Where Is the Concurrency?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-counter-is-safe">7.9.11.1. Why the Counter Is Safe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-communication-fails">7.9.11.2. When Communication Fails</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="network-programming-with-lwt">
+<h1><span class="section-number">7.9. </span>Network Programming with Lwt<a class="headerlink" href="#network-programming-with-lwt" title="Permalink to this heading">#</a></h1>
+<p>At the beginning of this chapter, we used servers as an example of why
+concurrency is useful. A server might communicate with many clients, each
+taking a different amount of time to send or receive data. While one client’s
+I/O is pending, the server can make progress on another client’s work. We now
+know enough about promises and callbacks to build a server of our own.</p>
+<p>Our example will be a numbering service: each client that connects receives a
+number, much like taking a ticket at a deli counter. The service is simple,
+but it gives us a chance to see how the ideas in this chapter fit together.
+Let’s start with how programs find each other and communicate over a network.</p>
+<section id="clients-and-servers">
+<h2><span class="section-number">7.9.1. </span>Clients and Servers<a class="headerlink" href="#clients-and-servers" title="Permalink to this heading">#</a></h2>
+<p>A running program is called a <em>process</em>. Running the same program in two
+terminal windows creates two processes. Each has its own memory, so a reference
+created by one process is not automatically accessible to the other. To
+communicate, the processes need some way to exchange data.</p>
+<p>In the <em>client-server model</em>, a <em>server</em> listens for incoming connections, and
+a <em>client</em> initiates a connection to it. Your web browser, for example, acts
+as a client when it connects to a web server to retrieve a page. After a
+connection is established, data can flow in both directions. The terms
+“client” and “server” describe their roles in establishing the connection;
+they do not mean that only the client can send data or that only the server
+can receive it.</p>
+<p>You don’t need two computers to experiment with clients and servers. We can
+run both processes on your own computer, in separate terminals. The client
+still needs to know where to find the server, though. We’ll give it two pieces
+of information: an IP address and a port.</p>
+</section>
+<section id="ip-addresses-and-domain-names">
+<h2><span class="section-number">7.9.2. </span>IP Addresses and Domain Names<a class="headerlink" href="#ip-addresses-and-domain-names" title="Permalink to this heading">#</a></h2>
+<p>An <em>Internet Protocol</em> (IP) address identifies a network interface, such as a
+computer’s WiFi connection. An <em>IPv4</em> address is a 32-bit number, commonly
+written as four numbers separated by dots. Each number is between 0 and 255;
+for example, <code class="docutils literal notranslate"><span class="pre">132.236.207.53</span></code>. A computer can have several addresses, and its
+addresses can change when it joins a different network. There is also a newer
+address format, IPv6, but we will use IPv4 in our examples.</p>
+<p>An address written that way is easier to read than a 32-bit binary number,
+but you probably wouldn’t want to memorize the addresses of all your favorite
+websites. Instead, we use names such as <code class="docutils literal notranslate"><span class="pre">www.ocaml.org</span></code>. The <em>Domain Name
+System</em> (DNS) translates these domain names into IP addresses. Think of it as
+a directory that translates a person’s name into a phone number. A name can
+have more than one address, and the answers can change over time.</p>
+<p>We can see that translation for ourselves with the command-line tool
+<code class="docutils literal notranslate"><span class="pre">nslookup</span></code>, which makes a DNS query:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>nslookup<span class="w"> </span>www.ocaml.org
+</pre></div>
+</div>
+<p>Among the output, you might see something like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Name:	www.ocaml.org
+Address: 51.159.83.169
+</pre></div>
+</div>
+<p>Near
+the beginning of the output, <code class="docutils literal notranslate"><span class="pre">nslookup</span></code> also reports the DNS server it
+consulted; that server’s address is distinct from the address being looked up.</p>
+<p>The special address <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> is a <em>loopback address</em>: it refers to the
+computer on which the program is running. Traffic to that address stays on
+that computer. Two processes on your computer can communicate using loopback
+even without a WiFi connection. But a process on someone else’s computer
+cannot use <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> to reach yours: on their computer, it refers to their
+own machine. The name <code class="docutils literal notranslate"><span class="pre">localhost</span></code> commonly resolves to a loopback address;
+we will use the numeric IPv4 address to be explicit.</p>
+</section>
+<section id="ports-and-socket-addresses">
+<h2><span class="section-number">7.9.3. </span>Ports and Socket Addresses<a class="headerlink" href="#ports-and-socket-addresses" title="Permalink to this heading">#</a></h2>
+<p>Now we know how to address a computer, but there could be many programs
+running on it. Imagine that your computer runs a web server, an email server,
+and our numbering server at the same time. We need a way to specify which
+service we want to reach. A <em>port</em> distinguishes network services at an
+address. Continuing the phone analogy, a port is like an extension number
+that reaches a particular
+department after you call a business.</p>
+<p>Port numbers are 16-bit numbers, ranging from 0 to 65535. Some have conventional
+uses: for example, HTTP web servers commonly use port 80, and HTTPS web servers
+use port 443. Binding to ports below 1024 can require special privileges,
+depending on the OS configuration. We will use port 5000. It has no special
+significance to our program, and another application might already be using
+it; in that case, choose another available port above 1023.</p>
+<p>An IP address together with a port is a <em>socket address</em>. For IPv4, we usually
+write it as <code class="docutils literal notranslate"><span class="pre">address:port</span></code>, such as <code class="docutils literal notranslate"><span class="pre">127.0.0.1:5000</span></code>. Both ends of a connection
+have a socket address. The server chooses a port on which to listen. When a
+client connects, the OS ordinarily assigns it an available temporary port,
+such as 49170. The client does not need to use the server’s port as its own.</p>
+<p>That distinction enables many clients to connect to the same server address.
+For example, connections from <code class="docutils literal notranslate"><span class="pre">127.0.0.1:49170</span></code> and <code class="docutils literal notranslate"><span class="pre">127.0.0.1:49171</span></code> can both
+reach <code class="docutils literal notranslate"><span class="pre">127.0.0.1:5000</span></code>. The OS keeps track of the endpoints so that data reaches
+the appropriate connection.</p>
+</section>
+<section id="a-conversation-with-netcat">
+<h2><span class="section-number">7.9.4. </span>A Conversation with Netcat<a class="headerlink" href="#a-conversation-with-netcat" title="Permalink to this heading">#</a></h2>
+<p>We have enough terminology now to make two processes talk to each other.
+Let’s do that at the command line before writing any OCaml. The <em>netcat</em>
+utility, whose command is <code class="docutils literal notranslate"><span class="pre">nc</span></code>, sends standard input across a network
+connection and prints received data on standard output. That lets us type
+messages in one terminal and receive them in another.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The commands here use the netcat supplied with macOS or the OpenBSD version
+available on Linux. On Ubuntu, including Ubuntu in Windows Subsystem for
+Linux (WSL), missing tools can be installed with:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>netcat-openbsd<span class="w"> </span>dnsutils<span class="w"> </span>lsof
+</pre></div>
+</div>
+<p>Run the commands inside the Ubuntu terminal if using WSL. Other netcat
+implementations can have different command-line options.</p>
+</div>
+<p>In one terminal, start a listener:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>nc<span class="w"> </span>-l<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">5000</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-l</span></code> means “listen.” This process is our server. It produces no output
+while waiting for a connection, and the shell prompt does not return. In a
+second terminal, connect a client:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>nc<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">5000</span>
+</pre></div>
+</div>
+<p>Now type <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">client</span></code> in the second terminal and press Enter. The
+line appears in the first terminal. Type <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">server</span></code> in the first
+terminal and press Enter; it appears in the second. The two terminals will
+look like this:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Server terminal</p></th>
+<th class="head"><p>Client terminal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">nc</span> <span class="pre">-l</span> <span class="pre">127.0.0.1</span> <span class="pre">5000</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">nc</span> <span class="pre">127.0.0.1</span> <span class="pre">5000</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">client</span></code> (received)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">client</span></code> (typed)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">server</span></code> (typed)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">from</span> <span class="pre">the</span> <span class="pre">server</span></code> (received)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The parenthesized annotations are explanatory, not part of the terminal output.
+Pressing Enter supplies a newline and, with the usual terminal settings,
+makes the typed line available to <code class="docutils literal notranslate"><span class="pre">nc</span></code>.</p>
+<p>We now have two processes talking to each other, without having written any
+networking code ourselves. Each process sends what we type and displays what
+it receives. Press Control-C in each terminal that is still running <code class="docutils literal notranslate"><span class="pre">nc</span></code> to
+finish.</p>
+<p>If starting the listener reports that the address is already in use, another
+process is probably listening on that port. This command helps identify it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>lsof<span class="w"> </span>-nP<span class="w"> </span>-iTCP:5000<span class="w"> </span>-sTCP:LISTEN
+</pre></div>
+</div>
+<p>The name <code class="docutils literal notranslate"><span class="pre">lsof</span></code> stands for “list open files”; in Unix, sockets are among the
+resources represented by file descriptors. Here we select TCP listeners on
+port 5000. The <code class="docutils literal notranslate"><span class="pre">-nP</span></code> options display numeric addresses and ports. The output
+includes the process’s command name and process ID (PID). Look for <code class="docutils literal notranslate"><span class="pre">nc</span></code> as the command name. Stop an earlier copy
+of your own server if one is still running, or choose a different port in
+both commands. A client connecting before a server is listening will typically
+get a “connection refused” error; <code class="docutils literal notranslate"><span class="pre">nc</span> <span class="pre">-v</span> <span class="pre">127.0.0.1</span> <span class="pre">5000</span></code> enables diagnostics.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To communicate between two computers on the same local network, the server
+must listen on its local network address, and the client must connect to that
+address. On macOS, <code class="docutils literal notranslate"><span class="pre">ifconfig</span></code> displays interface addresses; on Linux,
+<code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">-4</span> <span class="pre">addr</span></code> displays IPv4 addresses. A WiFi address might look like
+<code class="docutils literal notranslate"><span class="pre">192.168.1.23</span></code>. Replace <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> in both netcat commands with the server’s
+address. A loopback-only listener cannot accept these connections.</p>
+<p>Firewalls, WiFi client isolation, and WSL networking can prevent connections
+between machines even when the commands are correct. All the examples in
+this section work on one machine using loopback, so they do not require
+configuring a network to allow such connections.</p>
+</div>
+</section>
+<section id="connections-and-channels">
+<h2><span class="section-number">7.9.5. </span>Connections and Channels<a class="headerlink" href="#connections-and-channels" title="Permalink to this heading">#</a></h2>
+<p>Let’s connect what we just observed to the I/O operations we already know.
+By default, those netcat commands use the <em>Transmission Control Protocol</em>
+(TCP). TCP provides an ordered stream of bytes in each direction over a
+connection. A <em>socket</em> is an endpoint of communication; a socket address
+specifies where an endpoint is located.</p>
+<p>Lwt lets us use a connected socket through a pair of channels. An input
+channel receives data, and an output channel sends it. The names are relative
+to the process using them:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sending channel</p></th>
+<th class="head"><p>Receiving channel</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Client’s output channel</p></td>
+<td><p>Server’s input channel</p></td>
+</tr>
+<tr class="row-odd"><td><p>Server’s output channel</p></td>
+<td><p>Client’s input channel</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These channels work much like the channels for keyboard input and terminal
+output that we have already used. The difference is where the data comes
+from or goes to.</p>
+<p>There’s one detail we need to settle before writing our programs. TCP carries
+bytes, but it doesn’t tell us where one message ends and the next begins.
+Sending two strings does not guarantee that the receiver gets them in two
+separate reads. Our programs need a <em>protocol</em>: an agreement about how to
+interpret the bytes. For the numbering service, a single line will be enough:</p>
+<ol class="arabic simple">
+<li><p>The client connects to the server.</p></li>
+<li><p>The server assigns a number and sends a line such as
+<code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">are</span> <span class="pre">connection</span> <span class="pre">number</span> <span class="pre">1.</span></code>, terminated by a newline.</p></li>
+<li><p>The server closes the connection after sending the line. The client reads
+the line, displays it, and closes its end of the connection.</p></li>
+</ol>
+<p>The client does not need to send a request message: connecting is enough to
+request a number. The newline tells the client where the response ends.</p>
+</section>
+<section id="accepting-connections-with-lwt">
+<h2><span class="section-number">7.9.6. </span>Accepting Connections with Lwt<a class="headerlink" href="#accepting-connections-with-lwt" title="Permalink to this heading">#</a></h2>
+<p>We’re ready to write some OCaml. First, let’s give our server the same address
+we used with netcat:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">address</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">ADDR_INET</span> <span class="o">(</span><span class="nn">Unix</span><span class="p">.</span><span class="n">inet_addr_loopback</span><span class="o">,</span> <span class="mi">5000</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Its type is <code class="docutils literal notranslate"><span class="pre">Unix.sockaddr</span></code>. The <code class="docutils literal notranslate"><span class="pre">ADDR_INET</span></code> constructor takes an IP address
+and a port. The module also provides <code class="docutils literal notranslate"><span class="pre">inet_addr_of_string</span></code>, so we could write
+<code class="docutils literal notranslate"><span class="pre">Unix.inet_addr_of_string</span> <span class="pre">&quot;127.0.0.1&quot;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Unix.inet_addr_loopback</span></code>.
+Despite its name, the <code class="docutils literal notranslate"><span class="pre">Unix</span></code> module is available on Windows too.</p>
+<p>The function that starts a server is
+<code class="docutils literal notranslate"><span class="pre">Lwt_io.establish_server_with_client_address</span></code>. Omitting optional arguments,
+its type is:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Unix</span><span class="p">.</span><span class="n">sockaddr</span> <span class="o">-&gt;</span>
+<span class="o">(</span><span class="nn">Unix</span><span class="p">.</span><span class="n">sockaddr</span> <span class="o">-&gt;</span>
+ <span class="o">(</span><span class="nn">Lwt_io</span><span class="p">.</span><span class="n">input_channel</span> <span class="o">*</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">output_channel</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="kt">unit</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span><span class="o">)</span> <span class="o">-&gt;</span>
+<span class="nn">Lwt_io</span><span class="p">.</span><span class="n">server</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span>
+</pre></div>
+</div>
+<p>That’s a long name, and its type takes a little work to read. Let’s break it
+down. The first argument tells Lwt where to listen. The second tells Lwt what
+to do when a client connects. It’s a function called a <em>connection handler</em>,
+which receives the client’s address and the channels for communicating with
+it. Finally, the result is a promise for a server handle.</p>
+<p>To start, let’s have our handler print a message on the server’s terminal
+each time a client connects:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">string_of_address</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">ADDR_UNIX</span> <span class="n">path</span> <span class="o">-&gt;</span> <span class="n">path</span>
+  <span class="o">|</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">ADDR_INET</span> <span class="o">(</span><span class="n">ip</span><span class="o">,</span> <span class="n">port</span><span class="o">)</span> <span class="o">-&gt;</span>
+      <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;%s:%d&quot;</span> <span class="o">(</span><span class="nn">Unix</span><span class="p">.</span><span class="n">string_of_inet_addr</span> <span class="n">ip</span><span class="o">)</span> <span class="n">port</span>
+
+<span class="k">let</span> <span class="n">handle_client</span> <span class="n">client_address</span> <span class="o">(_</span><span class="n">client_in</span><span class="o">,</span> <span class="o">_</span><span class="n">client_out</span><span class="o">)</span> <span class="o">=</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printlf</span> <span class="s2">&quot;Connection from %s.&quot;</span> <span class="o">(</span><span class="n">string_of_address</span> <span class="n">client_address</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ADDR_UNIX</span></code> case makes the pattern match exhaustive; it describes a
+different kind of socket used for local communication, which we will not use
+here. <code class="docutils literal notranslate"><span class="pre">Printf.sprintf</span></code> constructs a string without performing I/O. The I/O is
+performed by <code class="docutils literal notranslate"><span class="pre">Lwt_io.printlf</span></code>: the <code class="docutils literal notranslate"><span class="pre">l</span></code> adds a newline, and the <code class="docutils literal notranslate"><span class="pre">f</span></code> indicates a
+format string. With no channel argument, it writes to standard output.</p>
+<p>The handler returns a <code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">Lwt.t</span></code>. Its promise describes the completion of
+this client’s interaction. With the default settings, Lwt closes the client’s
+channels when that promise resolves. Our logging handler therefore closes
+the connection after logging it, without sending anything to the client.</p>
+</section>
+<section id="keeping-the-server-running">
+<h2><span class="section-number">7.9.7. </span>Keeping the Server Running<a class="headerlink" href="#keeping-the-server-running" title="Permalink to this heading">#</a></h2>
+<p>We have an address and a handler. All that seems to be left is to start the
+server and run the resolution loop. Here is a first attempt:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">main</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="o">_</span><span class="n">server</span> <span class="o">=</span>
+    <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">establish_server_with_client_address</span> <span class="n">address</span> <span class="n">handle_client</span>
+  <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;Listening on 127.0.0.1:5000&quot;</span> <span class="k">in</span>
+  <span class="nn">Lwt</span><span class="p">.</span><span class="n">return</span> <span class="bp">()</span>
+
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="o">(</span><span class="n">main</span> <span class="bp">()</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Assuming the address is available, this program prints its startup message
+and then immediately exits. That seems surprising: we just started a server,
+and we even called <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span></code>!</p>
+<p>Recall, though, what <code class="docutils literal notranslate"><span class="pre">run</span></code> promises to do. It runs the resolution loop until
+<em>its input promise</em> resolves. The promise returned by
+<code class="docutils literal notranslate"><span class="pre">establish_server_with_client_address</span></code> is fulfilled as soon as the server
+starts listening. We then print a message and return a fulfilled promise for
+<code class="docutils literal notranslate"><span class="pre">()</span></code>. As far as <code class="docutils literal notranslate"><span class="pre">run</span></code> is concerned, the work is finished. It returns, and the
+program exits.</p>
+<p>We want the server to keep accepting connections until we stop it with
+Control-C. So the promise we pass to <code class="docutils literal notranslate"><span class="pre">run</span></code> needs to stay pending. We already
+know how to create such a promise: call <code class="docutils literal notranslate"><span class="pre">Lwt.wait</span></code>, then leave its resolver
+unused. Replace the final <code class="docutils literal notranslate"><span class="pre">Lwt.return</span> <span class="pre">()</span></code> in <code class="docutils literal notranslate"><span class="pre">main</span></code> with:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(</span><span class="n">forever</span> <span class="o">:</span> <span class="kt">unit</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span><span class="o">),</span> <span class="o">_</span><span class="n">resolver</span> <span class="o">=</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">wait</span> <span class="bp">()</span> <span class="k">in</span>
+<span class="n">forever</span>
+</pre></div>
+</div>
+<p>Now the server stays running. Whenever a client connects, Lwt calls our
+handler to log the connection, then closes the connection when the handler’s
+promise resolves. Meanwhile, the main promise stays pending, so the resolution
+loop keeps running. When there is no work ready to do, the loop can sleep
+until the OS reports an event.</p>
+<p>We have now encountered three promises, each with a different purpose:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Promise</p></th>
+<th class="head"><p>What fulfillment means</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Returned by <code class="docutils literal notranslate"><span class="pre">establish_server_with_client_address</span></code></p></td>
+<td><p>The server has started listening.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Returned by <code class="docutils literal notranslate"><span class="pre">handle_client</span></code></p></td>
+<td><p>One client’s interaction has finished.</p></td>
+</tr>
+<tr class="row-even"><td><p>Passed to <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span></code></p></td>
+<td><p>The program’s main computation has finished.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The server handle itself is the contents of the first promise. We name it
+<code class="docutils literal notranslate"><span class="pre">_server</span></code> because this program does not use it again, though it could be used
+later to stop the server from listening.</p>
+</section>
+<section id="sending-a-number">
+<h2><span class="section-number">7.9.8. </span>Sending a Number<a class="headerlink" href="#sending-a-number" title="Permalink to this heading">#</a></h2>
+<p>Our server can now accept connections, but it doesn’t yet send anything to
+its clients. Let’s give it a counter and have the handler send each client
+its number. Here is the complete <code class="docutils literal notranslate"><span class="pre">server.ml</span></code>, with the corrected <code class="docutils literal notranslate"><span class="pre">main</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* Listen on port 5000 on this computer. *)</span>
+<span class="k">let</span> <span class="n">address</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">ADDR_INET</span> <span class="o">(</span><span class="nn">Unix</span><span class="p">.</span><span class="n">inet_addr_loopback</span><span class="o">,</span> <span class="mi">5000</span><span class="o">)</span>
+
+<span class="c">(* Format a client&#39;s address for the server&#39;s log messages. *)</span>
+<span class="k">let</span> <span class="n">string_of_address</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">ADDR_UNIX</span> <span class="n">path</span> <span class="o">-&gt;</span> <span class="n">path</span>
+  <span class="o">|</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">ADDR_INET</span> <span class="o">(</span><span class="n">ip</span><span class="o">,</span> <span class="n">port</span><span class="o">)</span> <span class="o">-&gt;</span>
+      <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;%s:%d&quot;</span> <span class="o">(</span><span class="nn">Unix</span><span class="p">.</span><span class="n">string_of_inet_addr</span> <span class="n">ip</span><span class="o">)</span> <span class="n">port</span>
+
+<span class="c">(* All clients share this counter. *)</span>
+<span class="k">let</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">0</span>
+
+<span class="c">(* Lwt calls this for each connection and closes its channels when</span>
+<span class="c">   the returned promise resolves. We only send data, so input is unused. *)</span>
+<span class="k">let</span> <span class="n">handle_client</span> <span class="n">client_address</span> <span class="o">(_</span><span class="n">client_in</span><span class="o">,</span> <span class="n">client_out</span><span class="o">)</span> <span class="o">=</span>
+  <span class="c">(* Assign this client a number before any operation could yield. *)</span>
+  <span class="n">incr</span> <span class="n">counter</span><span class="o">;</span>
+  <span class="k">let</span> <span class="n">number</span> <span class="o">=</span> <span class="o">!</span><span class="n">counter</span> <span class="k">in</span>
+  <span class="c">(* Log the connection on the server&#39;s terminal. *)</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span>
+    <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printlf</span> <span class="s2">&quot;Connection %d from %s.&quot;</span>
+      <span class="n">number</span> <span class="o">(</span><span class="n">string_of_address</span> <span class="n">client_address</span><span class="o">)</span>
+  <span class="k">in</span>
+  <span class="c">(* Send the client its number as a line of text. *)</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span>
+    <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">fprintlf</span> <span class="n">client_out</span> <span class="s2">&quot;You are connection number %d.&quot;</span> <span class="n">number</span>
+  <span class="k">in</span>
+  <span class="c">(* Finish writing buffered output before the handler finishes. *)</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">flush</span> <span class="n">client_out</span>
+
+<span class="k">let</span> <span class="n">main</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="c">(* Start listening, using handle_client for each new connection. *)</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="o">_</span><span class="n">server</span> <span class="o">=</span>
+    <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">establish_server_with_client_address</span> <span class="n">address</span> <span class="n">handle_client</span>
+  <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printl</span> <span class="s2">&quot;Listening on 127.0.0.1:5000&quot;</span> <span class="k">in</span>
+  <span class="c">(* Keep the main promise pending so the server keeps running. *)</span>
+  <span class="k">let</span> <span class="o">(</span><span class="n">forever</span> <span class="o">:</span> <span class="kt">unit</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">t</span><span class="o">),</span> <span class="o">_</span><span class="n">resolver</span> <span class="o">=</span> <span class="nn">Lwt</span><span class="p">.</span><span class="n">wait</span> <span class="bp">()</span> <span class="k">in</span>
+  <span class="n">forever</span>
+
+<span class="c">(* Run the resolution loop until we stop the process with Control-C. *)</span>
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="o">(</span><span class="n">main</span> <span class="bp">()</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>The counter is initialized once when the server starts. Each invocation of
+the handler increments it and captures the result as <code class="docutils literal notranslate"><span class="pre">number</span></code>. That local
+binding preserves this client’s number even if another invocation later
+increments the counter. Restarting the server resets the counter to zero.</p>
+<p>There are two destinations for output. <code class="docutils literal notranslate"><span class="pre">printlf</span></code> logs a message on the
+server’s terminal. <code class="docutils literal notranslate"><span class="pre">fprintlf</span></code> takes an output channel as its first argument;
+here it sends the response toward the client. The handler never reads from
+the client, so <code class="docutils literal notranslate"><span class="pre">_client_in</span></code> is deliberately unused.</p>
+<p>The final call to <code class="docutils literal notranslate"><span class="pre">flush</span></code> needs a little explanation. Output channels are
+<em>buffered</em>: writing can initially copy bytes into a memory buffer instead of
+sending them immediately. We want to finish sending our response before the
+handler finishes and its channels are closed. The call to <code class="docutils literal notranslate"><span class="pre">flush</span></code> performs
+the pending writes, passing the buffered output onward to the OS. By returning
+its promise, we make those writes part of the handler’s work.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lwt also flushes output automatically when idle. We use an explicit flush to
+make the ordering clear. Finishing a flush means the buffered output has been
+passed onward to the OS; it does not establish that the client application
+has read the message.</p>
+</div>
+</section>
+<section id="receiving-a-number">
+<h2><span class="section-number">7.9.9. </span>Receiving a Number<a class="headerlink" href="#receiving-a-number" title="Permalink to this heading">#</a></h2>
+<p>Our server can now hand out numbers. Let’s write a client that connects,
+reads its number, and prints it. Here is the complete <code class="docutils literal notranslate"><span class="pre">client.ml</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="c">(* Connect to the address where our server is listening. *)</span>
+<span class="k">let</span> <span class="n">address</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">ADDR_INET</span> <span class="o">(</span><span class="nn">Unix</span><span class="p">.</span><span class="n">inet_addr_loopback</span><span class="o">,</span> <span class="mi">5000</span><span class="o">)</span>
+
+<span class="k">let</span> <span class="n">main</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="c">(* Connect, then use the channels in this callback. Lwt closes them</span>
+<span class="c">     when the callback&#39;s promise resolves. We only receive data. *)</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">with_connection</span> <span class="n">address</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">server_in</span><span class="o">,</span> <span class="o">_</span><span class="n">server_out</span><span class="o">)</span> <span class="o">-&gt;</span>
+      <span class="c">(* Continue once a complete response line is available. *)</span>
+      <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">line</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">read_line</span> <span class="n">server_in</span> <span class="k">in</span>
+      <span class="c">(* Display the response on the client&#39;s terminal. *)</span>
+      <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printlf</span> <span class="s2">&quot;The server says: %S&quot;</span> <span class="n">line</span><span class="o">)</span>
+
+<span class="c">(* Run until the response is displayed and the connection is closed. *)</span>
+<span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt_main</span><span class="p">.</span><span class="n">run</span> <span class="o">(</span><span class="n">main</span> <span class="bp">()</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">Lwt_io.with_connection</span></code> connects to the given address and passes
+the resulting channels to its callback. The callback reads one line and
+prints it. <code class="docutils literal notranslate"><span class="pre">read_line</span></code> removes the newline terminator; the <code class="docutils literal notranslate"><span class="pre">%S</span></code> format
+specifier displays the resulting string with quotes. The client has no data
+to send, so <code class="docutils literal notranslate"><span class="pre">_server_out</span></code> is unused.</p>
+<p>Once the callback’s promise resolves, <code class="docutils literal notranslate"><span class="pre">with_connection</span></code> closes the channels,
+including if the callback fails. It returns a promise representing the
+overall operation, including cleanup. So we can concentrate on what to do
+with the connection, and let <code class="docutils literal notranslate"><span class="pre">with_connection</span></code> take care of closing it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The lower-level <code class="docutils literal notranslate"><span class="pre">Lwt_io.open_connection</span></code> instead returns a promise for the
+pair of channels and leaves their cleanup to the caller. For this example,
+<code class="docutils literal notranslate"><span class="pre">with_connection</span></code> conveniently keeps the connection’s lifetime tied to the
+computation that uses it.</p>
+</div>
+<p>This time, we <em>want</em> the main promise to become fulfilled. The client has
+finished its job once it has displayed the response and cleaned up the
+connection. At that point, <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span></code> returns, and the process exits.</p>
+</section>
+<section id="running-the-numbering-service">
+<h2><span class="section-number">7.9.10. </span>Running the Numbering Service<a class="headerlink" href="#running-the-numbering-service" title="Permalink to this heading">#</a></h2>
+<p>Let’s put the two programs together and see the numbering service in action.
+Put <code class="docutils literal notranslate"><span class="pre">server.ml</span></code> and <code class="docutils literal notranslate"><span class="pre">client.ml</span></code> in a new directory. If you haven’t already
+installed the required packages, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>opam<span class="w"> </span>install<span class="w"> </span>dune<span class="w"> </span>lwt<span class="w"> </span>lwt_ppx
+</pre></div>
+</div>
+<p>In that directory, create <code class="docutils literal notranslate"><span class="pre">dune-project</span></code> containing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(lang dune 3.0)
+</pre></div>
+</div>
+<p>And create <code class="docutils literal notranslate"><span class="pre">dune</span></code> containing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(executables
+ (names server client)
+ (libraries lwt.unix)
+ (preprocess (pps lwt_ppx)))
+</pre></div>
+</div>
+<p>The library <code class="docutils literal notranslate"><span class="pre">lwt.unix</span></code> supplies the networking functions, and <code class="docutils literal notranslate"><span class="pre">lwt_ppx</span></code>
+supplies <code class="docutils literal notranslate"><span class="pre">let%lwt</span></code>. Build both programs and start the server:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span>build
+<span class="gp">$ </span>dune<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>./server.exe
+<span class="go">Listening on 127.0.0.1:5000</span>
+</pre></div>
+</div>
+<p>In another terminal, in the same directory, run the client twice:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>dune<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>./client.exe
+<span class="go">The server says: &quot;You are connection number 1.&quot;</span>
+<span class="gp">$ </span>dune<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>./client.exe
+<span class="go">The server says: &quot;You are connection number 2.&quot;</span>
+</pre></div>
+</div>
+<p>The server remains running and logs each connection. Its output might be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Listening on 127.0.0.1:5000
+Connection 1 from 127.0.0.1:49170.
+Connection 2 from 127.0.0.1:49171.
+</pre></div>
+</div>
+<p>Notice that both clients reached the same server, but each had its own port
+number. Those ports are chosen by the OS, so yours will differ. We can even
+use our old netcat client with the new OCaml server:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>nc<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">5000</span>
+<span class="go">You are connection number 3.</span>
+</pre></div>
+</div>
+<p>It works because netcat can receive and display the line our server sends.
+The client and server don’t have to be written in the same language; they
+just need to agree on how to communicate.</p>
+<p>Stop the server with Control-C when finished. If startup fails with
+<code class="docutils literal notranslate"><span class="pre">EADDRINUSE</span></code>, use the earlier <code class="docutils literal notranslate"><span class="pre">lsof</span></code> command to check for another listener,
+including the netcat listener. If you change the port, change it in both
+OCaml files and in the server’s startup message. A client reporting
+<code class="docutils literal notranslate"><span class="pre">ECONNREFUSED</span></code> usually means that no server is listening at the requested
+address and port.</p>
+</section>
+<section id="where-is-the-concurrency">
+<h2><span class="section-number">7.9.11. </span>Where Is the Concurrency?<a class="headerlink" href="#where-is-the-concurrency" title="Permalink to this heading">#</a></h2>
+<p>We’ve used <code class="docutils literal notranslate"><span class="pre">let%lwt</span></code> to sequence the operations in each handler, and we
+haven’t written a single call to <code class="docutils literal notranslate"><span class="pre">Lwt.join</span></code>. Yet this server can handle
+clients concurrently. The server-creation function does the work of accepting
+further connections while earlier handlers’ promises are still pending.
+Each handler describes a sequential chain of operations, and the server can
+have many such chains in progress.</p>
+<p>Our server responds so quickly that it’s hard to see the concurrency. Let’s
+slow it down. Here is a replacement for <code class="docutils literal notranslate"><span class="pre">handle_client</span></code> in <code class="docutils literal notranslate"><span class="pre">server.ml</span></code> that
+adds a three-second delay before sending the response:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">handle_client</span> <span class="n">client_address</span> <span class="o">(_</span><span class="n">client_in</span><span class="o">,</span> <span class="n">client_out</span><span class="o">)</span> <span class="o">=</span>
+  <span class="n">incr</span> <span class="n">counter</span><span class="o">;</span>
+  <span class="k">let</span> <span class="n">number</span> <span class="o">=</span> <span class="o">!</span><span class="n">counter</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span>
+    <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printlf</span> <span class="s2">&quot;Connection %d from %s.&quot;</span>
+      <span class="n">number</span> <span class="o">(</span><span class="n">string_of_address</span> <span class="n">client_address</span><span class="o">)</span>
+  <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span> <span class="nn">Lwt_unix</span><span class="p">.</span><span class="n">sleep</span> <span class="mi">3</span><span class="o">.</span><span class="mi">0</span> <span class="k">in</span>
+  <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="bp">()</span> <span class="o">=</span>
+    <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">fprintlf</span> <span class="n">client_out</span> <span class="s2">&quot;You are connection number %d.&quot;</span> <span class="n">number</span>
+  <span class="k">in</span>
+  <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">flush</span> <span class="n">client_out</span>
+</pre></div>
+</div>
+<p>The call to <code class="docutils literal notranslate"><span class="pre">Lwt_unix.sleep</span></code> immediately returns a promise that will be
+fulfilled after about three seconds. Binding on that promise postpones this
+handler’s response. It does not block the server process for three seconds.
+After rebuilding and restarting the server, two clients started about a
+second apart could produce this sequence:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Approximate time</p></th>
+<th class="head"><p>Event</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0 seconds</p></td>
+<td><p>A connects, is assigned number 1, and its handler begins the delay.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1 second</p></td>
+<td><p>B connects, is assigned number 2, and its handler begins the delay.</p></td>
+</tr>
+<tr class="row-even"><td><p>3 seconds</p></td>
+<td><p>A’s delay promise is fulfilled; its handler sends number 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4 seconds</p></td>
+<td><p>B’s delay promise is fulfilled; its handler sends number 2.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notice that each client waits about three seconds. B’s delay begins while
+A’s delay is still in progress. That’s the overlap we wanted to see. Pending
+network operations permit the same kind of overlap as these pending timers.</p>
+<p>Recall that Lwt uses cooperative scheduling. In this program, only one
+OCaml callback executes at a time. When a computation needs the result of
+a pending operation, it registers a callback and returns control so that
+other work can proceed. This is concurrency, but it is not parallel execution
+of the handlers on multiple cores. A long computation that never yields, or
+a blocking call such as <code class="docutils literal notranslate"><span class="pre">Unix.sleep</span></code>, would delay the other handlers too.</p>
+<section id="why-the-counter-is-safe">
+<h3><span class="section-number">7.9.11.1. </span>Why the Counter Is Safe<a class="headerlink" href="#why-the-counter-is-safe" title="Permalink to this heading">#</a></h3>
+<p>You might be concerned about that shared counter. Earlier in this chapter,
+we warned that shared mutable state can lead to race conditions. Now we have
+several handlers all reading and writing the same reference!</p>
+<p>The important detail is where those reads and writes occur. Our handler
+increments the counter and immediately saves its value:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="n">incr</span> <span class="n">counter</span><span class="o">;</span>
+<span class="k">let</span> <span class="n">number</span> <span class="o">=</span> <span class="o">!</span><span class="n">counter</span> <span class="k">in</span>
+</pre></div>
+</div>
+<p>Neither operation yields control, so another handler cannot run between
+them in this program. Afterward, <code class="docutils literal notranslate"><span class="pre">number</span></code> is an immutable local binding.
+Other handlers can change <code class="docutils literal notranslate"><span class="pre">counter</span></code> while this handler’s I/O or timer is
+pending, but they cannot change its captured <code class="docutils literal notranslate"><span class="pre">number</span></code>.</p>
+<p>Suppose instead that the delayed handler read <code class="docutils literal notranslate"><span class="pre">!counter</span></code> only when sending
+the response. In the trace above, both clients could receive number 2:
+B’s handler has incremented the shared counter before A’s delay ends. Saving
+the number before the delay is what lets each handler remember its own
+client’s number. Cooperative scheduling makes it easier to identify where
+such interleavings can occur, but we still have to reason about them.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">let%lwt</span></code> does not necessarily yield: its input promise might already be
+fulfilled. Our reasoning relies on the uninterrupted increment and capture,
+rather than on an assumption that every bind switches to another handler.</p>
+</div>
+</section>
+<section id="when-communication-fails">
+<h3><span class="section-number">7.9.11.2. </span>When Communication Fails<a class="headerlink" href="#when-communication-fails" title="Permalink to this heading">#</a></h3>
+<p>So far we’ve assumed that the server successfully sends a response. But a
+connection can fail, or the server could close it before sending anything.
+Promises give us a way to describe those outcomes too: the I/O promise is
+rejected. For example, if the server closes the connection without sending
+any response bytes, the client’s <code class="docutils literal notranslate"><span class="pre">read_line</span></code> promise is rejected with
+<code class="docutils literal notranslate"><span class="pre">End_of_file</span></code>. In our client that rejection propagates to <code class="docutils literal notranslate"><span class="pre">Lwt_main.run</span></code>,
+which raises the exception and ends the program.</p>
+<p>We can give the user a more helpful message by handling that rejection. A
+<code class="docutils literal notranslate"><span class="pre">try%lwt</span></code> expression handles both an exception raised while starting an
+operation and a later rejection of its promise. Here is an alternative
+client <code class="docutils literal notranslate"><span class="pre">main</span></code> that reports an early end of input:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">main</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">try</span><span class="o">%</span><span class="n">lwt</span>
+    <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">with_connection</span> <span class="n">address</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">server_in</span><span class="o">,</span> <span class="o">_</span><span class="n">server_out</span><span class="o">)</span> <span class="o">-&gt;</span>
+        <span class="k">let</span><span class="o">%</span><span class="n">lwt</span> <span class="n">line</span> <span class="o">=</span> <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">read_line</span> <span class="n">server_in</span> <span class="k">in</span>
+        <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">printlf</span> <span class="s2">&quot;The server says: %S&quot;</span> <span class="n">line</span><span class="o">)</span>
+  <span class="k">with</span> <span class="nc">End_of_file</span> <span class="o">-&gt;</span>
+    <span class="nn">Lwt_io</span><span class="p">.</span><span class="n">eprintlf</span> <span class="s2">&quot;The server closed the connection without a response.&quot;</span>
+</pre></div>
+</div>
+<p>An ordinary <code class="docutils literal notranslate"><span class="pre">try</span></code> around the same expression would only catch an exception
+raised while evaluating it, not a rejection that occurs later. The <code class="docutils literal notranslate"><span class="pre">e</span></code>
+prefix on <code class="docutils literal notranslate"><span class="pre">eprintlf</span></code> directs the message to standard error.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our small server leaves handler failures unhandled. Lwt forwards unhandled
+handler failures, and errors from automatic channel cleanup, to
+<code class="docutils literal notranslate"><span class="pre">Lwt.async_exception_hook</span></code>, whose default behavior terminates the process.
+A production service would handle these failures and cleanup deliberately.
+It would also arrange a controlled shutdown: <code class="docutils literal notranslate"><span class="pre">Lwt_io.shutdown_server</span></code> stops
+accepting new connections, but does not close connections already accepted.
+The <a class="reference external" href="https://ocsigen.org/lwt/latest/lwt/Lwt_io/index.html"><code class="docutils literal notranslate"><span class="pre">Lwt_io</span></code> documentation</a> describes those facilities in more detail.</p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cs3110/textbook",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters/conc"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="monads.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7.8. </span>Monads</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="summary.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7.10. </span>Summary</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clients-and-servers">7.9.1. Clients and Servers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ip-addresses-and-domain-names">7.9.2. IP Addresses and Domain Names</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ports-and-socket-addresses">7.9.3. Ports and Socket Addresses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-conversation-with-netcat">7.9.4. A Conversation with Netcat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-and-channels">7.9.5. Connections and Channels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accepting-connections-with-lwt">7.9.6. Accepting Connections with Lwt</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keeping-the-server-running">7.9.7. Keeping the Server Running</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sending-a-number">7.9.8. Sending a Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#receiving-a-number">7.9.9. Receiving a Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-numbering-service">7.9.10. Running the Numbering Service</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-is-the-concurrency">7.9.11. Where Is the Concurrency?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-counter-is-safe">7.9.11.1. Why the Counter Is Safe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-communication-fails">7.9.11.2. When Communication Fails</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael R. Clarkson et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

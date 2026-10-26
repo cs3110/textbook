@@ -262,8 +262,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="impl_callbacks.html">7.6. Implementing Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.7. The Full Promises Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monads.html">7.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">7.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.10. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">7.9. Network Programming with Lwt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.11. Exercises</a></li>
 </ul>
 </details></li>
 </ul>
@@ -696,21 +697,18 @@ discussion.</p>
 <p>Let’s consider that final case in more detail. We have one promise of type
 <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">Lwt.t</span></code> and two promises of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>:</p>
 <ul class="simple">
-<li><p>The promise of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">Lwt.t</span></code>, call it promise X, is an input to <code class="docutils literal notranslate"><span class="pre">bind</span></code>. It
+<li><p>The promise of type <code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">Lwt.t</span></code>, call it <code class="docutils literal notranslate"><span class="pre">p1</span></code>, is an input to <code class="docutils literal notranslate"><span class="pre">bind</span></code>. It
 was pending when <code class="docutils literal notranslate"><span class="pre">bind</span></code> was called, and when <code class="docutils literal notranslate"><span class="pre">bind</span></code> returns.</p></li>
-<li><p>The first promise of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>, call it promise Y, is created by <code class="docutils literal notranslate"><span class="pre">bind</span></code>
+<li><p>The first promise of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>, call it <code class="docutils literal notranslate"><span class="pre">p3</span></code>, is created by <code class="docutils literal notranslate"><span class="pre">bind</span></code>
 and immediately returned to the user. It is pending at that point.</p></li>
-<li><p>The second promise of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>, call it promise Z, has not yet been
-created. It may be created later: if promise X is fulfilled, the
-callback will run on the contents of X, and the callback will return promise
-Z. There is no guarantee about the state of Z; it might well still be pending
-when returned by the callback.</p></li>
-<li><p>If Z is finally fulfilled, the contents of Y are updated to be the same as
-the contents of Z. If Z is rejected, then Y is also rejected with the same
-exception. If Z remains pending, then Y remains pending as well.
-Recall that Y has already been returned to the user.
-“Relaying” the contents of Z to Y ensures that the user can eventually benefit
-from the chain of operations that started with promise X.</p></li>
+<li><p>The second promise of type <code class="docutils literal notranslate"><span class="pre">'b</span> <span class="pre">Lwt.t</span></code>, call it <code class="docutils literal notranslate"><span class="pre">p2</span></code>, is returned by the
+callback if <code class="docutils literal notranslate"><span class="pre">p1</span></code> is fulfilled. The callback might create <code class="docutils literal notranslate"><span class="pre">p2</span></code>, or return a
+promise that already exists. There is no guarantee about the state of <code class="docutils literal notranslate"><span class="pre">p2</span></code>;
+it might well still be pending when returned by the callback.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p3</span></code> shares the eventual outcome of <code class="docutils literal notranslate"><span class="pre">p2</span></code>: fulfillment with the same value,
+rejection with the same exception, or remaining pending. Recall that <code class="docutils literal notranslate"><span class="pre">p3</span></code>
+has already been returned to the user. If <code class="docutils literal notranslate"><span class="pre">p1</span></code> is rejected instead, the
+callback does not run, and <code class="docutils literal notranslate"><span class="pre">p3</span></code> is rejected with that exception.</p></li>
 </ul>
 <p>The reason why <code class="docutils literal notranslate"><span class="pre">bind</span></code> is designed with this type is so that programmers can set
 up a <em>sequential chain</em> of callbacks. For example, the following code

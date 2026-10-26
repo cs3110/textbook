@@ -69,8 +69,8 @@ It will simply be the same as a promise.
 type 'a resolver = 'a promise
 ```
 
-So internally, the two types are exactly the same. But externally, no client of
-the `Promise` module will be able to distinguish them. In other words, we're
+So internally, the two types are exactly the same. But externally, clients of
+the `Promise` module see two distinct abstract types. In other words, we're
 using the type system to control whether it's possible to apply certain
 functions (e.g., `state` vs `fulfill`) to a promise.
 
@@ -227,6 +227,6 @@ Lwt.state p;;
 ```
 
 Note that nothing we have implemented so far does anything concurrently.
-The promise abstraction by itself is not inherently concurrent.  It's
+The promise abstraction by itself is not inherently concurrent. So far, It's
 just a data structure that can be written at most once, and that provides
 a means to control who can write to it (through the resolver).

@@ -6,5 +6,6 @@ Sequential programs are limited in that they are not very good at dealing with m
 Many modern applications are instead *concurrent*.
 
 In this chapter, we will learn about *promises*, which are a way of organizing concurrent computations that has recently become popular in imperative web programming.
-We'll see an OCaml library called Lwt that implements promises.
+We'll see an OCaml library called Lwt that implements promises, and use it to
+build a network server that communicates with several clients concurrently.
 That library is based in part on the concept of *monads*, which are a way of organizing any kind of computation that has (side) effects, so we'll finish the chapter by examining monads.

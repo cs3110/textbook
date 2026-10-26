@@ -180,6 +180,35 @@ added to the file named `log`. That will enable you to interactively test your
 program.
 
 <!--------------------------------------------------------------------------->
+{{ ex2 | replace("%%NAME%%", "out-of-order tickets")}}
+
+Modify the delayed numbering server from
+[Network Programming with Lwt](network.md) so that odd-numbered connections
+wait three seconds before receiving their number, and even-numbered
+connections wait one second. Use `Lwt_unix.sleep` for both delays. Starting
+with a fresh server, connect two clients about half a second apart. Predict
+the order in which they receive their numbers, then check your prediction.
+Explain the distinction between assigning a number and delivering it. What
+could go wrong if the response used `!counter` instead of the captured local
+binding `number`?
+
+<!--------------------------------------------------------------------------->
+{{ ex3 | replace("%%NAME%%", "numbered echo")}}
+
+Adapt the numbering server into an echo server: each client can send multiple
+lines on one connection, and the server replies to each line with its text
+prefixed by a number. Number each client's replies starting at one. For
+example, a client sending `hello` then `world` should receive `1: hello` then
+`2: world`. A second client's first reply should also start with `1`, even if
+the first client is still connected.
+
+Use `Lwt_io.read_line_opt` to read each request: it returns `Some line` for
+a line and `None` at end of input. End the handler when input ends; otherwise,
+write and flush the reply, then continue. Use a recursive parameter rather
+than a shared reference to keep track of the next number. Test with two
+netcat clients, and explain why their counts are independent.
+
+<!--------------------------------------------------------------------------->
 {{ ex2 | replace("%%NAME%%", "add opt")}}
 
 Here are the definitions for the maybe monad:

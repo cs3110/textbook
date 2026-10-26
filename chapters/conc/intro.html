@@ -262,8 +262,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="impl_callbacks.html">7.6. Implementing Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.7. The Full Promises Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monads.html">7.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">7.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.10. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">7.9. Network Programming with Lwt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.11. Exercises</a></li>
 </ul>
 </details></li>
 </ul>
@@ -539,7 +540,8 @@ Execution of a sequential program proceeds one step at a time, with no choice ab
 Sequential programs are limited in that they are not very good at dealing with multiple sources of simultaneous input, and they can only execute on a single processor.
 Many modern applications are instead <em>concurrent</em>.</p>
 <p>In this chapter, we will learn about <em>promises</em>, which are a way of organizing concurrent computations that has recently become popular in imperative web programming.
-We’ll see an OCaml library called Lwt that implements promises.
+We’ll see an OCaml library called Lwt that implements promises, and use it to
+build a network server that communicates with several clients concurrently.
 That library is based in part on the concept of <em>monads</em>, which are a way of organizing any kind of computation that has (side) effects, so we’ll finish the chapter by examining monads.</p>
 <div class="toctree-wrapper compound">
 </div>

@@ -262,8 +262,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">7.6. Implementing Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.7. The Full Promises Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monads.html">7.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">7.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.10. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">7.9. Network Programming with Lwt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.11. Exercises</a></li>
 </ul>
 </details></li>
 </ul>
@@ -573,7 +574,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -589,6 +592,19 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remembering-work-with-handlers">7.6.1. Remembering Work with Handlers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bind-and-its-handler">7.6.2. Bind and Its Handler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-handlers">7.6.3. Running Handlers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharing-outcomes-with-proxies">7.6.4. Sharing Outcomes with Proxies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-promises">7.6.5. Linking Promises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-bind">7.6.6. Completing Bind</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -600,259 +616,306 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="implementing-callbacks">
 <h1><span class="section-number">7.6. </span>Implementing Callbacks<a class="headerlink" href="#implementing-callbacks" title="Permalink to this heading">#</a></h1>
-<p>When a callback is registered with a promise using <code class="docutils literal notranslate"><span class="pre">bind</span></code> or one of the other syntaxes, it is
-added to a list of callbacks that is stored with the promise. Eventually, if
-the promise is fulfilled, the Lwt <em>resolution loop</em> runs all the callbacks
-registered with the promise. There is no guarantee about the execution order of
-callbacks for a promise. In other words, the execution order is
-nondeterministic. If the order matters, the programmer needs to use the
-composition operators (such as <code class="docutils literal notranslate"><span class="pre">bind</span></code> and <code class="docutils literal notranslate"><span class="pre">join</span></code>) to enforce an ordering. If the
-promise never becomes fulfilled (or is rejected), none of its callbacks will ever
-be run.</p>
+<p>When a callback is registered with a pending promise using <code class="docutils literal notranslate"><span class="pre">bind</span></code>, the promise
+must remember what to do after it resolves. In Lwt, the <em>resolution loop</em> runs
+callbacks as promises are fulfilled. There is no guarantee about the execution
+order of independent callbacks on a promise. If the order matters, the programmer
+needs to use composition operators such as <code class="docutils literal notranslate"><span class="pre">bind</span></code> to express that dependency.
+If the promise is rejected, its <code class="docutils literal notranslate"><span class="pre">bind</span></code> callbacks do not run; instead, the
+rejection propagates to the promises returned by <code class="docutils literal notranslate"><span class="pre">bind</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Lwt also supports registering functions that are run after a promise is rejected.
 <code class="docutils literal notranslate"><span class="pre">Lwt.catch</span></code> and <code class="docutils literal notranslate"><span class="pre">try%lwt</span></code> are used for this purpose. They are counterparts
 to <code class="docutils literal notranslate"><span class="pre">Lwt.bind</span></code> and <code class="docutils literal notranslate"><span class="pre">let%lwt</span></code>.</p>
 </div>
-<p>Once again, it’s important to keep track of where the concurrency really comes
-from: the OS. There might be many asynchronous I/O operations occurring at the
-OS level. But at the OCaml level, the resolution loop is sequential, meaning
-that only one callback can ever be running at a time.</p>
-<p>Finally, the resolution loop never attempts to interrupt a callback. So if one
-callback goes into an infinite loop, no other callback will ever get to run.
-That makes Lwt a cooperative concurrency mechanism, rather than a preemptive one.</p>
-<p>To better understand callback resolution, let’s implement it ourselves. We’ll
-use the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> data structure we developed earlier. To start, we add a bind
-operator to the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> signature.</p>
+<p>Once again, it’s important to keep track of where the concurrency comes from:
+the OS can carry out asynchronous I/O while the OCaml program does other work.
+The callbacks themselves run sequentially. The resolution loop does not
+interrupt a running callback, so a callback that goes into an infinite loop
+prevents other callbacks from running. That makes Lwt a cooperative concurrency
+mechanism.</p>
+<p>To understand how callbacks work, let’s extend our <code class="docutils literal notranslate"><span class="pre">Promise</span></code> module with <code class="docutils literal notranslate"><span class="pre">bind</span></code>.
+We will use two new ideas:</p>
+<ul class="simple">
+<li><p>A <em>handler</em> remembers work to do when a promise resolves. It runs the callback
+or propagates a rejection.</p></li>
+<li><p>A <em>proxy</em> lets two promises share an outcome. It connects the promise returned
+by a callback to the promise already returned by <code class="docutils literal notranslate"><span class="pre">bind</span></code>.</p></li>
+</ul>
+<p>Our implementation runs handlers directly when a promise is resolved. It does
+not implement an I/O system or a main loop. As before, the promise data structure
+itself provides no concurrency.</p>
+<section id="remembering-work-with-handlers">
+<h2><span class="section-number">7.6.1. </span>Remembering Work with Handlers<a class="headerlink" href="#remembering-work-with-handlers" title="Permalink to this heading">#</a></h2>
+<p>The only new operation in our signature is <code class="docutils literal notranslate"><span class="pre">bind</span></code>:</p>
 <div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="k">type</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">sig</span>
   <span class="o">...</span>
 
-  <span class="c">(** [bind p c] registers callback [c] with promise [p].</span>
+  <span class="c">(** [bind p f] registers callback [f] with promise [p].</span>
 <span class="c">      When the promise is fulfilled, the callback will be run</span>
-<span class="c">      on the promises&#39;s contents.  If the promise is never</span>
+<span class="c">      on the promise&#39;s contents. If the promise is never</span>
 <span class="c">      fulfilled, the callback will never run. *)</span>
   <span class="k">val</span> <span class="n">bind</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>Next, let’s re-develop the entire <code class="docutils literal notranslate"><span class="pre">Promise</span></code> structure.  We start
-off just like before:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Promise</span> <span class="o">:</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
-  <span class="o">...</span>
+<p>The public state type stays the same:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 </pre></div>
 </div>
-<p>But now to implement the representation type of promises, we use a record with
-mutable fields. The first field is the state of the promise, and it corresponds
-to the <code class="docutils literal notranslate"><span class="pre">ref</span></code> we used before. The second field is more interesting and is
-discussed below.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** RI: the input may not be [Pending]. *)</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<p>A callback receives a fulfilled value and returns a promise. A handler has a
+different job: it receives a resolved <em>outcome</em> and performs the work needed to
+resolve or link another promise. We represent an outcome with the standard
+<code class="docutils literal notranslate"><span class="pre">result</span></code> type:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span><span class="o">,</span> <span class="n">exn</span><span class="o">)</span> <span class="n">result</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Ok</span> <span class="pre">v</span></code> means fulfillment with value <code class="docutils literal notranslate"><span class="pre">v</span></code>, and <code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">e</span></code> means rejection with
+exception <code class="docutils literal notranslate"><span class="pre">e</span></code>. There is no constructor for a pending outcome, so the type itself
+prevents us from passing one to a handler.</p>
+<p>To store handlers, we first replace our reference with a record whose mutable
+contents can hold a list:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">contents</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">Pending</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="kt">list</span>
+  <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
-  <span class="c">(** RI: if [state &lt;&gt; Pending] then [handlers = []]. *)</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">mutable</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">;</span>
-    <span class="k">mutable</span> <span class="n">handlers</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="kt">list</span>
-  <span class="o">}</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="o">{</span> <span class="k">mutable</span> <span class="n">contents</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">contents</span> <span class="o">}</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 </pre></div>
 </div>
-<p>A <em>handler</em> is a new abstraction: a function that takes a state.
-The primary use for a handler will be to run callbacks.
-It will be used to fulfill and reject promises when their state is
-ready to switch away from pending. This is why we ask, via a representation
-invariant, that the input state to a handler may not be pending.</p>
-<p>We require that only pending promises may have handlers waiting in their list.
-Once the state becomes non-pending, i.e., either fulfilled or rejected,
-the handlers associated with the promise will all be processed and
-removed from the list.
-This is why we say, as a representation invariant, that if the state is not pending,
-then the handlers list must be empty.</p>
-<p>This helper function that enqueues a handler on a promise’s handler list will be
-helpful later:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">enqueue</span>
-      <span class="o">(</span><span class="n">handler</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">unit</span><span class="o">)</span>
-      <span class="o">(</span><span class="n">promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="kt">unit</span>
-    <span class="o">=</span>
-    <span class="n">promise</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="n">handler</span> <span class="o">::</span> <span class="n">promise</span><span class="o">.</span><span class="n">handlers</span>
+<p>Only <code class="docutils literal notranslate"><span class="pre">Pending</span></code> has a handler list. Once the contents become <code class="docutils literal notranslate"><span class="pre">Fulfilled</span></code> or
+<code class="docutils literal notranslate"><span class="pre">Rejected</span></code>, there is no place to store waiting handlers. Again, the type enforces
+part of our representation invariant. Internally, a resolver is still the same
+record as its promise; the signature keeps those roles distinct for clients.</p>
+</section>
+<section id="bind-and-its-handler">
+<h2><span class="section-number">7.6.2. </span>Bind and Its Handler<a class="headerlink" href="#bind-and-its-handler" title="Permalink to this heading">#</a></h2>
+<p>There are three promises to keep track of in <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">p3</span> <span class="pre">=</span> <span class="pre">bind</span> <span class="pre">p1</span> <span class="pre">f</span></code>, assuming that <code class="docutils literal notranslate"><span class="pre">p1</span></code> is pending:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">p1</span></code> is the input promise. Its fulfilled value will be the argument to <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p2</span></code> is the promise that <code class="docutils literal notranslate"><span class="pre">f</span></code> eventually returns. It might already exist before
+<code class="docutils literal notranslate"><span class="pre">f</span></code> runs, and it might still be pending when <code class="docutils literal notranslate"><span class="pre">f</span></code> returns it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p3</span></code> is the new pending promise that <code class="docutils literal notranslate"><span class="pre">bind</span></code> returns immediately. Its eventual
+outcome must be the same as <code class="docutils literal notranslate"><span class="pre">p2</span></code>’s.</p></li>
+</ul>
+<p>The pending case of <code class="docutils literal notranslate"><span class="pre">bind</span></code> creates <code class="docutils literal notranslate"><span class="pre">p3</span></code> and its resolver, makes a handler that
+captures both <code class="docutils literal notranslate"><span class="pre">f</span></code> and that resolver, and stores the handler on <code class="docutils literal notranslate"><span class="pre">p1</span></code>:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span>
+    <span class="k">let</span> <span class="n">p3</span><span class="o">,</span> <span class="n">p3_resolver</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">h</span> <span class="o">=</span> <span class="n">make_handler</span> <span class="n">f</span> <span class="n">p3_resolver</span> <span class="k">in</span>
+    <span class="n">enqueue</span> <span class="n">h</span> <span class="n">p1</span><span class="o">;</span>
+    <span class="n">p3</span>
 </pre></div>
 </div>
-<p>We continue to pun resolvers and promises internally:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
+<p>The handler will run when <code class="docutils literal notranslate"><span class="pre">p1</span></code> resolves. It does not run merely because <code class="docutils literal notranslate"><span class="pre">bind</span></code>
+registered it, and <code class="docutils literal notranslate"><span class="pre">bind</span></code> does not wait for it before returning <code class="docutils literal notranslate"><span class="pre">p3</span></code>.</p>
+<p>Here is the helper that makes that handler. For now, assume that <code class="docutils literal notranslate"><span class="pre">link</span> <span class="pre">p2</span> <span class="pre">r</span></code>
+arranges for the promise associated with <code class="docutils literal notranslate"><span class="pre">r</span></code> to share <code class="docutils literal notranslate"><span class="pre">p2</span></code>’s outcome. We will
+implement <code class="docutils literal notranslate"><span class="pre">link</span></code> below.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">make_handler</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">resolver</span><span class="o">)</span>
+    <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Error</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">exc</span>
+  <span class="o">|</span> <span class="nc">Ok</span> <span class="n">v1</span> <span class="o">-&gt;</span>
+      <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">try</span> <span class="n">f</span> <span class="n">v1</span> <span class="k">with</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="n">e</span> <span class="k">in</span>
+      <span class="n">link</span> <span class="n">p2</span> <span class="n">r</span>
 </pre></div>
 </div>
-<p>Because we changed the representation type from a <code class="docutils literal notranslate"><span class="pre">ref</span></code> to a record,
-we have to update a few of the functions in trivial ways:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** [write_once p s] changes the state of [p] to be [s].  If [p] and [s]</span>
-<span class="c">      are both pending, that has no effect.</span>
-<span class="c">      Raises: [Invalid_arg] if the state of [p] is not pending. *)</span>
-  <span class="k">let</span> <span class="n">write_once</span> <span class="n">p</span> <span class="n">s</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span>
-    <span class="k">then</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span> <span class="o">&lt;-</span> <span class="n">s</span>
-    <span class="k">else</span> <span class="n">invalid_arg</span> <span class="s2">&quot;cannot write twice&quot;</span>
+<p>If <code class="docutils literal notranslate"><span class="pre">p1</span></code> was rejected, the handler rejects <code class="docutils literal notranslate"><span class="pre">p3</span></code> with the same exception without
+running <code class="docutils literal notranslate"><span class="pre">f</span></code>. If <code class="docutils literal notranslate"><span class="pre">p1</span></code> was fulfilled, the handler runs <code class="docutils literal notranslate"><span class="pre">f</span></code> on its value. If <code class="docutils literal notranslate"><span class="pre">f</span></code>
+raises an exception, <code class="docutils literal notranslate"><span class="pre">fail</span></code> creates an already-rejected promise, so linking
+propagates that rejection too:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">fail</span> <span class="n">exc</span> <span class="o">=</span> <span class="o">{</span> <span class="n">contents</span> <span class="o">=</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p>Notice the scope of the <code class="docutils literal notranslate"><span class="pre">try</span></code>: it covers only <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">v1</span></code>. The call to <code class="docutils literal notranslate"><span class="pre">link</span></code> is
+outside it. An exception raised by the callback becomes a rejected promise;
+an error in the promises implementation itself must not be mistaken for an
+exception from that callback.</p>
+</section>
+<section id="running-handlers">
+<h2><span class="section-number">7.6.3. </span>Running Handlers<a class="headerlink" href="#running-handlers" title="Permalink to this heading">#</a></h2>
+<p>To resolve a pending promise, we need to save its handlers, replace its contents
+with the resolved outcome, and then run the saved handlers with that outcome.
+Changing the contents first ensures that handlers observe a resolved promise,
+and also removes the stored list before any handler runs.</p>
+<p>Here is <code class="docutils literal notranslate"><span class="pre">resolve</span></code> in its final form. The helper <code class="docutils literal notranslate"><span class="pre">underlying</span></code>, defined below,
+follows any proxy links to the record that owns the contents. Until we introduce
+proxies, you can read <code class="docutils literal notranslate"><span class="pre">underlying</span> <span class="pre">r</span></code> as just <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">resolve</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">outcome</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span><span class="o">,</span> <span class="n">exn</span><span class="o">)</span> <span class="n">result</span><span class="o">)</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="n">underlying</span> <span class="n">r</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">contents</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">contents</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">outcome</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Ok</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="nc">Fulfilled</span> <span class="n">v</span>
+    <span class="o">|</span> <span class="nc">Error</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="nc">Rejected</span> <span class="n">e</span>
+  <span class="k">in</span>
+  <span class="k">match</span> <span class="n">r</span><span class="o">.</span><span class="n">contents</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Pending</span> <span class="n">hs</span> <span class="o">-&gt;</span>
+      <span class="n">r</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="n">contents</span><span class="o">;</span>
+      <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">h</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="n">outcome</span><span class="o">)</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="n">hs</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="o">_</span> <span class="o">-&gt;</span>
+      <span class="n">invalid_arg</span> <span class="s2">&quot;Already resolved&quot;</span>
+  <span class="o">|</span> <span class="nc">Proxy</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
 
-  <span class="k">let</span> <span class="n">make</span> <span class="bp">()</span> <span class="o">=</span>
-    <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span> <span class="k">in</span>
-    <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Error</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Ok</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="o">{</span> <span class="n">contents</span> <span class="o">=</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">resolve</span></code> takes over the job of the earlier <code class="docutils literal notranslate"><span class="pre">write_once</span></code> helper: it rejects a
+second attempt to resolve a promise. The final case is impossible because
+<code class="docutils literal notranslate"><span class="pre">underlying</span></code> never returns a proxy.</p>
+<p>We will prepend handlers when registering them, so reversing the list before
+running it preserves registration order within that list. Linking will combine
+lists from two promises. Our interface makes no guarantee about the relative
+order of handlers from those lists; programs must express required sequencing dependencies explicitly with <code class="docutils literal notranslate"><span class="pre">bind</span></code>.</p>
+</section>
+<section id="sharing-outcomes-with-proxies">
+<h2><span class="section-number">7.6.4. </span>Sharing Outcomes with Proxies<a class="headerlink" href="#sharing-outcomes-with-proxies" title="Permalink to this heading">#</a></h2>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">p1</span></code> is fulfilled and its handler calls <code class="docutils literal notranslate"><span class="pre">f</span></code>, which returns <code class="docutils literal notranslate"><span class="pre">p2</span></code>. We must
+now make <code class="docutils literal notranslate"><span class="pre">p3</span></code> share <code class="docutils literal notranslate"><span class="pre">p2</span></code>’s outcome. If <code class="docutils literal notranslate"><span class="pre">p2</span></code> is already resolved, we can immediately
+resolve <code class="docutils literal notranslate"><span class="pre">p3</span></code> with that outcome. But if <code class="docutils literal notranslate"><span class="pre">p2</span></code> is pending, we cannot yet do that.
+Moreover, clients might already have registered handlers on either promise, and
+the resolver for <code class="docutils literal notranslate"><span class="pre">p2</span></code> might already be held elsewhere in the program.</p>
+<p>We solve this by making <code class="docutils literal notranslate"><span class="pre">p2</span></code> a <em>proxy</em> for <code class="docutils literal notranslate"><span class="pre">p3</span></code>: operations on <code class="docutils literal notranslate"><span class="pre">p2</span></code> follow a
+reference to <code class="docutils literal notranslate"><span class="pre">p3</span></code>. We move <code class="docutils literal notranslate"><span class="pre">p2</span></code>’s handlers to <code class="docutils literal notranslate"><span class="pre">p3</span></code> so that a single underlying
+promise owns both the outcome and the waiting work. The direction matters:
+<code class="docutils literal notranslate"><span class="pre">p2</span></code> becomes the proxy, and <code class="docutils literal notranslate"><span class="pre">p3</span></code> becomes the owner.</p>
+<p>Here is the final representation:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="o">{</span> <span class="k">mutable</span> <span class="n">contents</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">contents</span> <span class="o">}</span>
 
-  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+<span class="k">and</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">contents</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">Pending</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="kt">list</span>
+  <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+  <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
+  <span class="o">|</span> <span class="nc">Proxy</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span>
+<span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 </pre></div>
 </div>
-<p>Now we get to the trickier parts of the implementation.</p>
-<p>The steps needed to reject a promise (with an exception) or fulfill a promise
-(with a value) are quite similar, so we implement a helper function <code class="docutils literal notranslate"><span class="pre">resolve</span></code>.
-This helper takes a resolver and a state, and it changes the state of the associated promise to
-the given state.
-We require that the state <code class="docutils literal notranslate"><span class="pre">st</span></code> that we are moving over to may not be the pending state.
-We mutate the handlers list to be empty to ensure that the RI holds,
-but we save the handlers in a local variable.
-Then we call <code class="docutils literal notranslate"><span class="pre">write_once</span></code> on the resolver to change its state.
-Finally, we process all the handlers that were waiting on
-this promise. Each of those handlers requires a state for an input, and
-we pass them the new state that the promise has just been set to.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="c">(** Requires: [st] may not be [Pending]. *)</span>
-  <span class="k">let</span> <span class="n">resolve</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
-    <span class="k">assert</span> <span class="o">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="nc">Pending</span><span class="o">);</span>
-    <span class="k">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="k">in</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="bp">[]</span><span class="o">;</span>
-    <span class="n">write_once</span> <span class="n">r</span> <span class="n">st</span><span class="o">;</span>
-    <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">st</span><span class="o">)</span> <span class="n">handlers</span>
+<p>The types are mutually recursive: a promise contains contents, and proxy contents
+refer to another promise. The abstraction function follows proxy links to find
+the observable state. A proxy and its target represent the same outcome. The
+representation invariant requires proxy links to be acyclic. Only pending
+promises can store handlers, which the type already guarantees.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Proxy</span></code> is an internal representation, not a fourth public state. Clients
+still see only <code class="docutils literal notranslate"><span class="pre">Pending</span></code>, <code class="docutils literal notranslate"><span class="pre">Fulfilled</span></code>, or <code class="docutils literal notranslate"><span class="pre">Rejected</span></code>.</p>
+<p>We find the owner by following links:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="k">rec</span> <span class="n">underlying</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">p</span><span class="o">.</span><span class="n">contents</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Proxy</span> <span class="n">p&#39;</span> <span class="o">-&gt;</span> <span class="n">underlying</span> <span class="n">p&#39;</span>
+  <span class="o">|</span> <span class="nc">Pending</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">p</span>
+</pre></div>
+</div>
+<p>For example, if <code class="docutils literal notranslate"><span class="pre">p</span></code> is a proxy for <code class="docutils literal notranslate"><span class="pre">q</span></code>, and <code class="docutils literal notranslate"><span class="pre">q</span></code> is a proxy for <code class="docutils literal notranslate"><span class="pre">r</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">underlying</span> <span class="pre">p</span></code> returns <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p>
+<p>Creating a promise still creates one record shared by the promise and resolver:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">make</span> <span class="bp">()</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="o">{</span> <span class="n">contents</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="bp">[]</span> <span class="o">}</span> <span class="k">in</span>
+  <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Observing a state and registering a handler both follow proxy links:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">state</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="o">(</span><span class="n">underlying</span> <span class="n">p</span><span class="o">).</span><span class="n">contents</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Pending</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="nc">Pending</span>
+  <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="nc">Fulfilled</span> <span class="n">v</span>
+  <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="nc">Rejected</span> <span class="n">e</span>
+  <span class="o">|</span> <span class="nc">Proxy</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
 
-  <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">e</span> <span class="o">=</span>
-    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">e</span><span class="o">)</span>
-
-  <span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">v</span> <span class="o">=</span>
-    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">v</span><span class="o">)</span>
+<span class="k">let</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">underlying</span> <span class="n">p</span> <span class="k">in</span>
+  <span class="k">match</span> <span class="n">p</span><span class="o">.</span><span class="n">contents</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Pending</span> <span class="n">hs</span> <span class="o">-&gt;</span> <span class="n">p</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="nc">Pending</span> <span class="o">(</span><span class="n">h</span> <span class="o">::</span> <span class="n">hs</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="o">_</span> <span class="o">-&gt;</span>
+      <span class="n">invalid_arg</span> <span class="s2">&quot;Cannot enqueue on a resolved promise&quot;</span>
+  <span class="o">|</span> <span class="nc">Proxy</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
 </pre></div>
 </div>
-<p>Finally, the implementation of <code class="docutils literal notranslate"><span class="pre">bind</span></code> is the trickiest part.
-Recall that this function needs to immediately return a new promise.
-First, consider the case where the input promise is already fulfilled with some value <code class="docutils literal notranslate"><span class="pre">x</span></code>.
-We need to <em>immediately</em>
-run the callback on <code class="docutils literal notranslate"><span class="pre">x</span></code>:
-we cannot enqueue a handler on the input promise, because the representation invariant states that a non-pending promise (such as our input promise) <em>must</em> have an empty list of handlers.
-Running the callback will yield a new promise, which we immediately return:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">bind</span>
-      <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>
-      <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
-    <span class="o">=</span>
-    <span class="k">match</span> <span class="n">input_promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">callback</span> <span class="n">x</span>
+<p>Recall that <code class="docutils literal notranslate"><span class="pre">resolve</span></code> also calls <code class="docutils literal notranslate"><span class="pre">underlying</span></code>. That is what makes a resolver
+created <em>before</em> it became a proxy continue to work. Resolving through one
+alias therefore changes the state observed through all aliases.</p>
+</section>
+<section id="linking-promises">
+<h2><span class="section-number">7.6.5. </span>Linking Promises<a class="headerlink" href="#linking-promises" title="Permalink to this heading">#</a></h2>
+<p>The operation <code class="docutils literal notranslate"><span class="pre">link</span> <span class="pre">p2</span> <span class="pre">p3</span></code> makes <code class="docutils literal notranslate"><span class="pre">p3</span></code> share <code class="docutils literal notranslate"><span class="pre">p2</span></code>’s outcome. It requires the
+underlying promise of <code class="docutils literal notranslate"><span class="pre">p3</span></code> to be pending. First, it follows links from both
+promises. If the two owners are already the same, it does nothing. Otherwise,
+it either merges two pending promises or propagates an already-resolved
+outcome:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">link</span> <span class="o">(</span><span class="n">p2</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">(</span><span class="n">p3</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">underlying</span> <span class="n">p2</span> <span class="k">in</span>
+  <span class="k">let</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">underlying</span> <span class="n">p3</span> <span class="k">in</span>
+  <span class="k">if</span> <span class="n">p2</span> <span class="o">==</span> <span class="n">p3</span> <span class="k">then</span> <span class="bp">()</span>
+  <span class="k">else</span>
+    <span class="k">match</span> <span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="n">contents</span><span class="o">,</span> <span class="n">p3</span><span class="o">.</span><span class="n">contents</span><span class="o">)</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Pending</span> <span class="n">hs2</span><span class="o">,</span> <span class="nc">Pending</span> <span class="n">hs3</span> <span class="o">-&gt;</span>
+        <span class="n">p3</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="nc">Pending</span> <span class="o">(</span><span class="n">hs2</span> <span class="o">@</span> <span class="n">hs3</span><span class="o">);</span>
+        <span class="n">p2</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="nc">Proxy</span> <span class="n">p3</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">v</span><span class="o">,</span> <span class="nc">Pending</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">fulfill</span> <span class="n">p3</span> <span class="n">v</span>
+    <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">e</span><span class="o">,</span> <span class="nc">Pending</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">p3</span> <span class="n">e</span>
+    <span class="o">|</span> <span class="o">_,</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="o">_)</span> <span class="o">-&gt;</span>
+        <span class="n">invalid_arg</span> <span class="s2">&quot;Cannot link into a resolved promise&quot;</span>
+    <span class="o">|</span> <span class="nc">Proxy</span> <span class="o">_,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nc">Proxy</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
 </pre></div>
 </div>
-<p>However, this code has an issue.
-Recall that the callback itself may raise an exception.
-If that happens, we must craft a trivial new promise
-that is already rejected with the same exception.
-We employ a simple helper function <code class="docutils literal notranslate"><span class="pre">fail</span></code> to craft such already-rejected promises.
-The correct code for this first case is thus:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">fail</span> <span class="n">exc</span> <span class="o">=</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Rejected</span> <span class="n">exc</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
-
-  <span class="k">let</span> <span class="n">bind</span>
-      <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>
-      <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
-    <span class="o">=</span>
-    <span class="k">match</span> <span class="n">input_promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">try</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">with</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="n">exc</span><span class="o">)</span>
+<p>The identity test uses physical equality, <code class="docutils literal notranslate"><span class="pre">==</span></code>, because we want to know whether
+these are the <em>same record</em>. Structural equality, <code class="docutils literal notranslate"><span class="pre">=</span></code>, would try to compare
+contents, which can include functions. Making an owner a proxy for itself would
+create a cycle; the identity test prevents that, including when distinct proxy
+records already lead to the same owner.</p>
+<p>When both promises are pending, we preserve both lists of handlers in <code class="docutils literal notranslate"><span class="pre">p3</span></code>
+before replacing <code class="docutils literal notranslate"><span class="pre">p2</span></code>’s contents with a proxy. The list concatenation preserves
+order within each original list. Because <code class="docutils literal notranslate"><span class="pre">resolve</span></code> reverses the combined list,
+this particular implementation runs the old <code class="docutils literal notranslate"><span class="pre">p3</span></code> handlers before the old <code class="docutils literal notranslate"><span class="pre">p2</span></code>
+handlers.</p>
+<p>Here is a trace using only the public interface:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">p1</span><span class="o">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span>
+<span class="k">let</span> <span class="n">p2</span><span class="o">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span>
+<span class="k">let</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">bind</span> <span class="n">p1</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">p2</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>Second, if the promise is already rejected with some exception, we again craft a trivial new promise
-that is also rejected with the same exception.
-We return that new promise to the user immediately:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>    <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="n">exc</span>
+<p>Initially, all three promises are pending, and <code class="docutils literal notranslate"><span class="pre">p1</span></code> stores the handler that
+captures the callback and <code class="docutils literal notranslate"><span class="pre">p3</span></code>’s resolver. Calling <code class="docutils literal notranslate"><span class="pre">fulfill</span> <span class="pre">r1</span> <span class="pre">()</span></code> runs that
+handler. The callback returns the still-pending <code class="docutils literal notranslate"><span class="pre">p2</span></code>, so <code class="docutils literal notranslate"><span class="pre">link</span></code> makes <code class="docutils literal notranslate"><span class="pre">p2</span></code> a
+proxy for <code class="docutils literal notranslate"><span class="pre">p3</span></code>. Both <code class="docutils literal notranslate"><span class="pre">state</span> <span class="pre">p2</span></code> and <code class="docutils literal notranslate"><span class="pre">state</span> <span class="pre">p3</span></code> still report <code class="docutils literal notranslate"><span class="pre">Pending</span></code>.</p>
+<p>Next, calling <code class="docutils literal notranslate"><span class="pre">fulfill</span> <span class="pre">r2</span> <span class="pre">42</span></code> follows the proxy from <code class="docutils literal notranslate"><span class="pre">p2</span></code> to <code class="docutils literal notranslate"><span class="pre">p3</span></code>, stores
+<code class="docutils literal notranslate"><span class="pre">Fulfilled</span> <span class="pre">42</span></code> there, and runs the handlers from both promises. Now both
+<code class="docutils literal notranslate"><span class="pre">state</span> <span class="pre">p2</span></code> and <code class="docutils literal notranslate"><span class="pre">state</span> <span class="pre">p3</span></code> report <code class="docutils literal notranslate"><span class="pre">Fulfilled</span> <span class="pre">42</span></code>. Calling <code class="docutils literal notranslate"><span class="pre">fulfill</span> <span class="pre">r2</span></code> again
+would raise <code class="docutils literal notranslate"><span class="pre">Invalid_argument</span></code>, because the underlying promise is already
+resolved. Rejection follows the same path, with an exception instead of a value.</p>
+</section>
+<section id="completing-bind">
+<h2><span class="section-number">7.6.6. </span>Completing Bind<a class="headerlink" href="#completing-bind" title="Permalink to this heading">#</a></h2>
+<p>Now we can put the three cases of <code class="docutils literal notranslate"><span class="pre">bind</span></code> together:</p>
+<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="n">bind</span> <span class="o">(</span><span class="n">p1</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">state</span> <span class="n">p1</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">v1</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">try</span> <span class="n">f</span> <span class="n">v1</span> <span class="k">with</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="n">exc</span><span class="o">)</span>
+  <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="n">exc</span>
+  <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span>
+      <span class="k">let</span> <span class="n">p3</span><span class="o">,</span> <span class="n">p3_resolver</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
+      <span class="k">let</span> <span class="n">h</span> <span class="o">=</span> <span class="n">make_handler</span> <span class="n">f</span> <span class="n">p3_resolver</span> <span class="k">in</span>
+      <span class="n">enqueue</span> <span class="n">h</span> <span class="n">p1</span><span class="o">;</span>
+      <span class="n">p3</span>
 </pre></div>
 </div>
-<p>Third, if the input promise is pending, we need to do more work.
-Our task is delicate: we need to immediately return a new promise
-(which we will call the output promise) to the user, but we also need that
-output promise to become fulfilled when (or, more precisely, if) the input promise becomes
-fulfilled and the callback completes running, sometime in the future.
-Its contents will be whatever contents are contained within the promise that the
-callback itself returns.</p>
-<p>So, we create a new promise and resolver
-called <code class="docutils literal notranslate"><span class="pre">output_promise</span></code> and <code class="docutils literal notranslate"><span class="pre">output_resolver</span></code>. That promise is what <code class="docutils literal notranslate"><span class="pre">bind</span></code>
-returns. Before returning it, we use a helper function <code class="docutils literal notranslate"><span class="pre">handler_of_callback</span></code>
-(described below) to transform the callback into a handler, and enqueue that
-handler on the promise. That ensures the handler will be run when the promise
-later becomes resolved:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>    <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span>
-      <span class="k">let</span> <span class="n">output_promise</span><span class="o">,</span> <span class="n">output_resolver</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
-      <span class="n">enqueue</span> <span class="o">(</span><span class="n">handler_of_callback</span> <span class="n">callback</span> <span class="n">output_resolver</span><span class="o">)</span> <span class="n">input_promise</span><span class="o">;</span>
-      <span class="n">output_promise</span>
-</pre></div>
-</div>
-<p>All that’s left is to implement that helper function to create handlers out of
-callbacks. Recall that a handler’s type is itself a <em>function type</em>,
-<code class="docutils literal notranslate"><span class="pre">'a</span> <span class="pre">state</span> <span class="pre">-&gt;</span> <span class="pre">unit</span></code>. This is why our helper function’s output is actually an
-anonymous function. That anonymous function takes a state as its input:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">handler_of_callback</span>
-      <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span>
-      <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span>
-      <span class="k">fun</span> <span class="o">(</span><span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">-&gt;</span>
-</pre></div>
-</div>
-<p>We proceed by taking cases on that input state.
-The first two cases, below, are simple. It would violate the RI to
-call a handler on a pending state. And if the state is rejected, then the
-handler should propagate that rejection to the resolver, which causes the
-promise returned by bind to also be rejected.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">handler_of_callback</span>
-      <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span>
-      <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span>
-      <span class="k">fun</span> <span class="o">(</span><span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">-&gt;</span>
-      <span class="k">match</span> <span class="n">state</span> <span class="k">with</span>
-      <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
-      <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-</pre></div>
-</div>
-<p>But if the state is fulfilled, then the callback registered with the promise
-can—at last!—be run on the contents of the fulfilled promise. If the callback executes successfully it produces a new promise, but recall that the callback
-may itself raise an exception.</p>
-<p>First, consider the optimistic case in which the callback executes successfully and produces a promise. That promise might already be rejected or fulfilled,
-in which case that state again propagates.</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span>
-        <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
-        <span class="k">match</span> <span class="n">promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-        <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">y</span>
-        <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-</pre></div>
-</div>
-<p>But the promise might still be pending.  In that case, we need to enqueue
-a new handler whose purpose is to do the propagation once the result is
-available:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>        <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">copying_handler</span> <span class="n">resolver</span><span class="o">)</span> <span class="n">promise</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">copying_handler</span></code> is a new helper function that creates a very simple handler
-to do that propagation:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>  <span class="k">let</span> <span class="n">copying_handler</span> <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span>
-    <span class="o">=</span> <span class="k">function</span>
-      <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
-      <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">x</span>
-</pre></div>
-</div>
-<p>Second, consider the case in which the callback function itself raises some exception <code class="docutils literal notranslate"><span class="pre">exc</span></code>. In that case, we need to reject the promise with that exception. We do this by wrapping the execution of the callback in a <code class="docutils literal notranslate"><span class="pre">try</span></code> block:</p>
-<div class="highlight-ocaml notranslate"><div class="highlight"><pre><span></span>      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span>
-        <span class="k">try</span>
-          <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
-          <span class="k">match</span> <span class="n">promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-          <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">resolve</span> <span class="n">resolver</span> <span class="n">y</span>
-          <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-          <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">copying_handler</span> <span class="n">resolver</span><span class="o">)</span> <span class="n">promise</span>
-        <span class="k">with</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-</pre></div>
-</div>
-<p>The Lwt implementation of <code class="docutils literal notranslate"><span class="pre">bind</span></code> follows essentially the same algorithm as we
-just implemented. Note that there is no concurrency in <code class="docutils literal notranslate"><span class="pre">bind</span></code>: as we said above,
-it’s the OS that provides the concurrency.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">state</span> <span class="pre">p1</span></code> ensures that <code class="docutils literal notranslate"><span class="pre">bind</span></code> also works when its input is a proxy. If the
+input is already fulfilled, <code class="docutils literal notranslate"><span class="pre">bind</span></code> runs <code class="docutils literal notranslate"><span class="pre">f</span></code> immediately and returns the promise
+that <code class="docutils literal notranslate"><span class="pre">f</span></code> returns. If <code class="docutils literal notranslate"><span class="pre">f</span></code> raises, <code class="docutils literal notranslate"><span class="pre">bind</span></code> returns a new rejected promise. If the
+input is already rejected, <code class="docutils literal notranslate"><span class="pre">bind</span></code> propagates that rejection without running <code class="docutils literal notranslate"><span class="pre">f</span></code>.
+Only the pending case needs a new pending promise and a stored handler.</p>
+<p>We have developed a small promise implementation with handlers to remember work
+and proxies to share outcomes. It illustrates the data structures behind
+callback sequencing, while leaving out the scheduler, cancellation, and other
+facilities of a production library. The next section collects the complete code
+and demonstrates both immediate callback results and pending results that need
+proxy linking.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Lwt makes a different choice than we did here when the input promise is already fulfilled and the callback raises an exception. In that case, Lwt has <code class="docutils literal notranslate"><span class="pre">bind</span></code> raise the exception itself, instead of returning a rejected promise that contains the exception. This is <a class="reference external" href="https://discuss.ocaml.org/t/lwt-3-2-0-released-we-plan-to-change-lwt-bind/1337/13">known</a> to violate the specification of <code class="docutils literal notranslate"><span class="pre">bind</span></code> but is not going to be fixed for backward compatibility reasons.</p>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -909,6 +972,26 @@ it’s the OS that provides the concurrency.</p>
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remembering-work-with-handlers">7.6.1. Remembering Work with Handlers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bind-and-its-handler">7.6.2. Bind and Its Handler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-handlers">7.6.3. Running Handlers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharing-outcomes-with-proxies">7.6.4. Sharing Outcomes with Proxies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-promises">7.6.5. Linking Promises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-bind">7.6.6. Completing Bind</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

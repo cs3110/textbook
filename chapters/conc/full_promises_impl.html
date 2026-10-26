@@ -262,8 +262,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="impl_callbacks.html">7.6. Implementing Callbacks</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">7.7. The Full Promises Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monads.html">7.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">7.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.10. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">7.9. Network Programming with Lwt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.11. Exercises</a></li>
 </ul>
 </details></li>
 </ul>
@@ -573,7 +574,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -589,6 +592,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-the-implementation">7.7.1. Trying the Implementation</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -600,7 +611,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-full-promises-implementation">
 <h1><span class="section-number">7.7. </span>The Full Promises Implementation<a class="headerlink" href="#the-full-promises-implementation" title="Permalink to this heading">#</a></h1>
-<p>For convenience, here is the entire promises implementation in one executable block:</p>
+<p>Here is the complete implementation from the previous section, with the
+helpers in dependency order. The public interface exposes three states, whereas
+proxy links and handler lists remain private to the module.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="c">(** A signature for Lwt-style promises, with better names. *)</span>
@@ -611,121 +624,214 @@ document.write(`
     <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
-
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span>
 
-  <span class="c">(** [make ()] is a new promise and resolver. The promise is pending. *)</span>
   <span class="k">val</span> <span class="n">make</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span>
+  <span class="c">(** [make ()] is a new promise and resolver. The promise</span>
+<span class="c">      is pending. *)</span>
 
-  <span class="c">(** [return x] is a new promise that is already fulfilled with value</span>
-<span class="c">      [x]. *)</span>
-  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
-
-  <span class="c">(** [state p] is the state of the promise. *)</span>
   <span class="k">val</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span>
+  <span class="c">(** [state p] is the state of the promise *)</span>
 
-  <span class="c">(** [fulfill r x] resolves the promise [p] associated with [r] with</span>
-<span class="c">      value [x], meaning that [state p] will become [Fulfilled x].</span>
-<span class="c">      Requires: [p] is pending. *)</span>
   <span class="k">val</span> <span class="n">fulfill</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+  <span class="c">(** [fulfill r x] resolves the promise [p] associated with</span>
+<span class="c">      [r] with value [x], meaning that [state p] will become</span>
+<span class="c">      [Fulfilled x]. Requires: [p] is pending. *)</span>
 
-  <span class="c">(** [reject r x] rejects the promise [p] associated with [r] with</span>
-<span class="c">      exception [x], meaning that [state p] will become [Rejected x].</span>
-<span class="c">      Requires: [p] is pending. *)</span>
   <span class="k">val</span> <span class="n">reject</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">-&gt;</span> <span class="n">exn</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+  <span class="c">(** [reject r x] rejects the promise [p] associated with</span>
+<span class="c">      [r] with exception [x], meaning that [state p] will</span>
+<span class="c">      become [Rejected x]. Requires: [p] is pending. *)</span>
 
-  <span class="c">(** [bind p c] registers callback [c] with promise [p].</span>
-<span class="c">      When the promise is fulfilled, the callback will be run</span>
-<span class="c">      on the promises&#39;s contents.  If the promise is never</span>
-<span class="c">      fulfilled, the callback will never run. *)</span>
+  <span class="k">val</span> <span class="n">return</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
+  <span class="c">(** [return x] is a new promise that is already fulfilled</span>
+<span class="c">      with value [x]. *)</span>
+
   <span class="k">val</span> <span class="n">bind</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
+  <span class="c">(** [bind p f] registers callback [f] with promise [p].</span>
+<span class="c">      When the promise is fulfilled, the callback will be</span>
+<span class="c">      run on the promise&#39;s contents. If the promise is never</span>
+<span class="c">      fulfilled, the callback will never run. *)</span>
 <span class="k">end</span>
 
 <span class="k">module</span> <span class="nc">Promise</span> <span class="o">:</span> <span class="nc">PROMISE</span> <span class="o">=</span> <span class="k">struct</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
+    <span class="o">|</span> <span class="nc">Pending</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+    <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
 
-  <span class="c">(** RI: the input may not be [Pending]. *)</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span><span class="o">,</span> <span class="n">exn</span><span class="o">)</span> <span class="n">result</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+  <span class="c">(** Handlers receive the resolved outcome: [Ok v] for</span>
+<span class="c">      fulfillment or [Error e] for rejection. The type</span>
+<span class="c">      excludes a pending state. *)</span>
 
-  <span class="c">(** RI: if [state &lt;&gt; Pending] then [handlers = []]. *)</span>
-  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">mutable</span> <span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">;</span>
-    <span class="k">mutable</span> <span class="n">handlers</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="kt">list</span>
-  <span class="o">}</span>
+  <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span> <span class="o">{</span> <span class="k">mutable</span> <span class="n">contents</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">contents</span> <span class="o">}</span>
+  <span class="c">(** AF: follow any [Proxy] links to find the promise&#39;s</span>
+<span class="c">      observable state. A proxy and its target represent the</span>
+<span class="c">      same outcome.</span>
 
-  <span class="k">let</span> <span class="n">enqueue</span>
-      <span class="o">(</span><span class="n">handler</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="kt">unit</span><span class="o">)</span>
-      <span class="o">(</span><span class="n">promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="kt">unit</span>
-    <span class="o">=</span>
-    <span class="n">promise</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="n">handler</span> <span class="o">::</span> <span class="n">promise</span><span class="o">.</span><span class="n">handlers</span>
+<span class="c">      RI: proxy links contain no cycles. Only pending</span>
+<span class="c">      promises can store handlers; the type enforces that. *)</span>
+
+  <span class="k">and</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">contents</span> <span class="o">=</span>
+    <span class="o">|</span> <span class="nc">Pending</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="kt">list</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span>
+    <span class="o">|</span> <span class="nc">Rejected</span> <span class="k">of</span> <span class="n">exn</span>
+    <span class="o">|</span> <span class="nc">Proxy</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
   <span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span> <span class="o">=</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span>
 
-  <span class="c">(** [write_once p s] changes the state of [p] to be [s].  If [p] and [s]</span>
-<span class="c">      are both pending, that has no effect.</span>
-<span class="c">      Raises: [Invalid_arg] if the state of [p] is not pending. *)</span>
-  <span class="k">let</span> <span class="n">write_once</span> <span class="n">p</span> <span class="n">s</span> <span class="o">=</span>
-    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span>
-    <span class="k">then</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span> <span class="o">&lt;-</span> <span class="n">s</span>
-    <span class="k">else</span> <span class="n">invalid_arg</span> <span class="s2">&quot;cannot write twice&quot;</span>
+  <span class="c">(** [underlying p] follows proxy links to the promise that</span>
+<span class="c">      owns the state. *)</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">underlying</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">p</span><span class="o">.</span><span class="n">contents</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Proxy</span> <span class="n">p&#39;</span> <span class="o">-&gt;</span> <span class="n">underlying</span> <span class="n">p&#39;</span>
+    <span class="o">|</span> <span class="nc">Pending</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">p</span>
+
+  <span class="c">(** Requires: the underlying promise is pending. *)</span>
+  <span class="k">let</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">underlying</span> <span class="n">p</span> <span class="k">in</span>
+    <span class="k">match</span> <span class="n">p</span><span class="o">.</span><span class="n">contents</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Pending</span> <span class="n">hs</span> <span class="o">-&gt;</span> <span class="n">p</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="nc">Pending</span> <span class="o">(</span><span class="n">h</span> <span class="o">::</span> <span class="n">hs</span><span class="o">)</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="o">_</span> <span class="o">-&gt;</span>
+        <span class="n">invalid_arg</span> <span class="s2">&quot;Cannot enqueue on a resolved promise&quot;</span>
+    <span class="o">|</span> <span class="nc">Proxy</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
 
   <span class="k">let</span> <span class="n">make</span> <span class="bp">()</span> <span class="o">=</span>
-    <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Pending</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span> <span class="k">in</span>
-    <span class="n">p</span><span class="o">,</span> <span class="n">p</span>
+    <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="o">{</span> <span class="n">contents</span> <span class="o">=</span> <span class="nc">Pending</span> <span class="bp">[]</span> <span class="o">}</span> <span class="k">in</span>
+    <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span>
 
-  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+  <span class="k">let</span> <span class="n">state</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="o">(</span><span class="n">underlying</span> <span class="n">p</span><span class="o">).</span><span class="n">contents</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Pending</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="nc">Pending</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="nc">Fulfilled</span> <span class="n">v</span>
+    <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="nc">Rejected</span> <span class="n">e</span>
+    <span class="o">|</span> <span class="nc">Proxy</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
 
-  <span class="k">let</span> <span class="n">state</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">state</span>
+  <span class="c">(** [resolve r outcome] resolves the underlying promise</span>
+<span class="c">      with [outcome], then passes that outcome to its</span>
+<span class="c">      handlers. Raises: [Invalid_arg] if the underlying</span>
+<span class="c">      promise is already resolved. *)</span>
+  <span class="k">let</span> <span class="n">resolve</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">outcome</span> <span class="o">:</span> <span class="o">(</span><span class="k">&#39;</span><span class="n">a</span><span class="o">,</span> <span class="n">exn</span><span class="o">)</span> <span class="n">result</span><span class="o">)</span>
+      <span class="o">=</span>
+    <span class="c">(* A resolver created before its promise became a proxy</span>
+<span class="c">       still works: it follows the link to the new owner. *)</span>
+    <span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="n">underlying</span> <span class="n">r</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">contents</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">contents</span> <span class="o">=</span>
+      <span class="k">match</span> <span class="n">outcome</span> <span class="k">with</span>
+      <span class="o">|</span> <span class="nc">Ok</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="nc">Fulfilled</span> <span class="n">v</span>
+      <span class="o">|</span> <span class="nc">Error</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="nc">Rejected</span> <span class="n">e</span>
+    <span class="k">in</span>
+    <span class="k">match</span> <span class="n">r</span><span class="o">.</span><span class="n">contents</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Pending</span> <span class="n">hs</span> <span class="o">-&gt;</span>
+        <span class="c">(* Replacing Pending also removes the stored</span>
+<span class="c">           handlers, so save them locally as [hs]. Set the</span>
+<span class="c">           state first so every handler sees the same</span>
+<span class="c">           resolved outcome through every proxy. *)</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="n">contents</span><span class="o">;</span>
+        <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">h</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="n">outcome</span><span class="o">)</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="n">hs</span><span class="o">)</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="o">_</span> <span class="o">-&gt;</span>
+        <span class="n">invalid_arg</span> <span class="s2">&quot;Already resolved&quot;</span>
+    <span class="o">|</span> <span class="nc">Proxy</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
 
-  <span class="c">(** Requires: [st] may not be [Pending]. *)</span>
-  <span class="k">let</span> <span class="n">resolve</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">=</span>
-    <span class="k">assert</span> <span class="o">(</span><span class="n">st</span> <span class="o">&lt;&gt;</span> <span class="nc">Pending</span><span class="o">);</span>
-    <span class="k">let</span> <span class="n">handlers</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="k">in</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">handlers</span> <span class="o">&lt;-</span> <span class="bp">[]</span><span class="o">;</span>
-    <span class="n">write_once</span> <span class="n">r</span> <span class="n">st</span><span class="o">;</span>
-    <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">st</span><span class="o">)</span> <span class="n">handlers</span>
+  <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Error</span> <span class="n">x</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span> <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Ok</span> <span class="n">x</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">return</span> <span class="n">x</span> <span class="o">=</span> <span class="o">{</span> <span class="n">contents</span> <span class="o">=</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">}</span>
 
-  <span class="k">let</span> <span class="n">reject</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Rejected</span> <span class="n">x</span><span class="o">)</span>
+  <span class="c">(** [fail exc] is a new promise already rejected with</span>
+<span class="c">      exception [exc]. *)</span>
+  <span class="k">let</span> <span class="n">fail</span> <span class="n">exc</span> <span class="o">=</span> <span class="o">{</span> <span class="n">contents</span> <span class="o">=</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">}</span>
 
-  <span class="k">let</span> <span class="n">fulfill</span> <span class="n">r</span> <span class="n">x</span> <span class="o">=</span>
-    <span class="n">resolve</span> <span class="n">r</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">)</span>
+  <span class="c">(** [link p2 p3] makes [p3] share [p2]&#39;s outcome.</span>
+<span class="c">      Requires: the underlying promise of [p3] is pending.</span>
+<span class="c">      If [p2] is pending too, make it a proxy for [p3].</span>
+<span class="c">      Otherwise, immediately resolve [p3]. *)</span>
+  <span class="k">let</span> <span class="n">link</span> <span class="o">(</span><span class="n">p2</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">(</span><span class="n">p3</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">underlying</span> <span class="n">p2</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">underlying</span> <span class="n">p3</span> <span class="k">in</span>
+    <span class="c">(* Compare record identity, not structural equality.</span>
+<span class="c">       Linking an underlying promise to itself would create</span>
+<span class="c">       a cycle. If they already share an owner, do</span>
+<span class="c">       nothing. *)</span>
+    <span class="k">if</span> <span class="n">p2</span> <span class="o">==</span> <span class="n">p3</span> <span class="k">then</span> <span class="bp">()</span>
+    <span class="k">else</span>
+      <span class="k">match</span> <span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="n">contents</span><span class="o">,</span> <span class="n">p3</span><span class="o">.</span><span class="n">contents</span><span class="o">)</span> <span class="k">with</span>
+      <span class="o">|</span> <span class="nc">Pending</span> <span class="n">hs2</span><span class="o">,</span> <span class="nc">Pending</span> <span class="n">hs3</span> <span class="o">-&gt;</span>
+          <span class="c">(* Preserve handlers registered on either promise.</span>
+<span class="c">             Each list retains its own registration order;</span>
+<span class="c">             the interface promises no order between lists.</span>
+<span class="c">             Replacing p2&#39;s contents removes its old</span>
+<span class="c">             list. *)</span>
+          <span class="n">p3</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="nc">Pending</span> <span class="o">(</span><span class="n">hs2</span> <span class="o">@</span> <span class="n">hs3</span><span class="o">);</span>
+          <span class="n">p2</span><span class="o">.</span><span class="n">contents</span> <span class="o">&lt;-</span> <span class="nc">Proxy</span> <span class="n">p3</span>
+      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">v</span><span class="o">,</span> <span class="nc">Pending</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">fulfill</span> <span class="n">p3</span> <span class="n">v</span>
+      <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">e</span><span class="o">,</span> <span class="nc">Pending</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">p3</span> <span class="n">e</span>
+      <span class="o">|</span> <span class="o">_,</span> <span class="o">(</span><span class="nc">Fulfilled</span> <span class="o">_</span> <span class="o">|</span> <span class="nc">Rejected</span> <span class="o">_)</span> <span class="o">-&gt;</span>
+          <span class="n">invalid_arg</span> <span class="s2">&quot;Cannot link into a resolved promise&quot;</span>
+      <span class="o">|</span> <span class="nc">Proxy</span> <span class="o">_,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nc">Proxy</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
 
-  <span class="k">let</span> <span class="n">copying_handler</span> <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span>
-    <span class="o">=</span> <span class="k">function</span>
-      <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
-      <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-      <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">fulfill</span> <span class="n">resolver</span> <span class="n">x</span>
+  <span class="c">(** [make_handler] creates a handler that helps to</span>
+<span class="c">      implement [bind]. Suppose that [bind p1 f] is called</span>
+<span class="c">      and returns [p3], and that [r] is the resolver</span>
+<span class="c">      associated with [p3]. Then [make_handler f r] is the</span>
+<span class="c">      handler that will be enqueued on [p1] and therefore</span>
+<span class="c">      will run after [p1] is resolved. That handler&#39;s job is</span>
+<span class="c">      to then resolve or link [p3] based on what happened</span>
+<span class="c">      with [p1]. *)</span>
+  <span class="k">let</span> <span class="n">make_handler</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">resolver</span><span class="o">)</span>
+      <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="nc">Error</span> <span class="n">exc</span> <span class="o">-&gt;</span>
+        <span class="c">(* If [p1] was rejected, then reject [p3] with the</span>
+<span class="c">           same exception.*)</span>
+        <span class="n">reject</span> <span class="n">r</span> <span class="n">exc</span>
+    <span class="o">|</span> <span class="nc">Ok</span> <span class="n">v1</span> <span class="o">-&gt;</span>
+        <span class="c">(* Catch exceptions from f itself, then link outside</span>
+<span class="c">           the try. A pending p2 becomes a proxy for p3. *)</span>
+        <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">try</span> <span class="n">f</span> <span class="n">v1</span> <span class="k">with</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="n">e</span> <span class="k">in</span>
+        <span class="n">link</span> <span class="n">p2</span> <span class="n">r</span>
 
-  <span class="k">let</span> <span class="n">handler_of_callback</span>
-      <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span>
-      <span class="o">(</span><span class="n">resolver</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">resolver</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">handler</span> <span class="o">=</span>
-      <span class="k">fun</span> <span class="o">(</span><span class="n">state</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">state</span><span class="o">)</span> <span class="o">-&gt;</span>
-      <span class="k">match</span> <span class="n">state</span> <span class="k">with</span>
-        <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">failwith</span> <span class="s2">&quot;handler RI violated&quot;</span>
-        <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-        <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span>
-          <span class="k">try</span>
-            <span class="k">let</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">in</span>
-            <span class="k">match</span> <span class="n">promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-            <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">fulfill</span> <span class="n">resolver</span> <span class="n">y</span>
-            <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-            <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span> <span class="n">enqueue</span> <span class="o">(</span><span class="n">copying_handler</span> <span class="n">resolver</span><span class="o">)</span> <span class="n">promise</span>
-          <span class="k">with</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">reject</span> <span class="n">resolver</span> <span class="n">exc</span>
-
-  <span class="k">let</span> <span class="n">bind</span>
-      <span class="o">(</span><span class="n">input_promise</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span>
-      <span class="o">(</span><span class="n">callback</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span>
-    <span class="o">=</span>
-    <span class="k">let</span> <span class="n">fail</span> <span class="n">exc</span> <span class="o">=</span> <span class="o">{</span><span class="n">state</span> <span class="o">=</span> <span class="nc">Rejected</span> <span class="n">exc</span><span class="o">;</span> <span class="n">handlers</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span> <span class="k">in</span>
-    <span class="k">match</span> <span class="n">input_promise</span><span class="o">.</span><span class="n">state</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="k">try</span> <span class="n">callback</span> <span class="n">x</span> <span class="k">with</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="n">exc</span><span class="o">)</span>
-    <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="n">exc</span>
+  <span class="k">let</span> <span class="n">bind</span> <span class="o">(</span><span class="n">p1</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">promise</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span><span class="o">)</span> <span class="o">:</span>
+      <span class="k">&#39;</span><span class="n">b</span> <span class="n">promise</span> <span class="o">=</span>
+    <span class="c">(* The public accessor follows proxy links. If p1 is</span>
+<span class="c">       already fulfilled, run f immediately. Otherwise,</span>
+<span class="c">       either propagate rejection or register a handler. *)</span>
+    <span class="k">match</span> <span class="n">state</span> <span class="n">p1</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">v1</span> <span class="o">-&gt;</span>
+        <span class="c">(* If [p1] is already fulfilled, immediately run the</span>
+<span class="c">           callback. *)</span>
+        <span class="k">begin</span> <span class="k">try</span>
+          <span class="c">(* If [f v1] returns a promise, then return the</span>
+<span class="c">             same promise from [bind]. *)</span>
+          <span class="n">f</span> <span class="n">v1</span>
+        <span class="k">with</span> <span class="n">exc</span> <span class="o">-&gt;</span>
+          <span class="c">(* But if [f v1] raised an exception, immediately</span>
+<span class="c">             return a new rejected promise with that</span>
+<span class="c">             exception. *)</span>
+          <span class="n">fail</span> <span class="n">exc</span>
+        <span class="k">end</span>
+    <span class="o">|</span> <span class="nc">Rejected</span> <span class="n">exc</span> <span class="o">-&gt;</span>
+        <span class="c">(* If [p1] is already rejected, immediately return a</span>
+<span class="c">           rejected promise with the same exception. *)</span>
+        <span class="n">fail</span> <span class="n">exc</span>
     <span class="o">|</span> <span class="nc">Pending</span> <span class="o">-&gt;</span>
-      <span class="k">let</span> <span class="n">output_promise</span><span class="o">,</span> <span class="n">output_resolver</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
-      <span class="n">enqueue</span> <span class="o">(</span><span class="n">handler_of_callback</span> <span class="n">callback</span> <span class="n">output_resolver</span><span class="o">)</span> <span class="n">input_promise</span><span class="o">;</span>
-      <span class="n">output_promise</span>
+        <span class="c">(* If [p1] is not resolved, then [bind] needs to</span>
+<span class="c">           immediately return a new promise [p3]. That is</span>
+<span class="c">           what we saw in the slides. Create that promise</span>
+<span class="c">           and its resolver. *)</span>
+        <span class="k">let</span> <span class="n">p3</span><span class="o">,</span> <span class="n">p3_resolver</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
+
+        <span class="c">(* Create a handler to run after [p1] is resolved.</span>
+<span class="c">           The handler will use callback [f] to determine</span>
+<span class="c">           how to resolve [p3]. *)</span>
+        <span class="k">let</span> <span class="n">h</span> <span class="o">=</span> <span class="n">make_handler</span> <span class="n">f</span> <span class="n">p3_resolver</span> <span class="k">in</span>
+
+        <span class="c">(* Enqueue the handler on [p1]. This is what the</span>
+<span class="c">           slides meant by &quot;schedule callback [f] to run on</span>
+<span class="c">           [p1] and put the result in [p3].&quot; *)</span>
+        <span class="n">enqueue</span> <span class="n">h</span> <span class="n">p1</span><span class="o">;</span>
+
+        <span class="c">(* Return pending promise [p3]. *)</span>
+        <span class="n">p3</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -737,10 +843,10 @@ document.write(`
     type &#39;a promise
     type &#39;a resolver
     val make : unit -&gt; &#39;a promise * &#39;a resolver
-    val return : &#39;a -&gt; &#39;a promise
     val state : &#39;a promise -&gt; &#39;a state
     val fulfill : &#39;a resolver -&gt; &#39;a -&gt; unit
     val reject : &#39;a resolver -&gt; exn -&gt; unit
+    val return : &#39;a -&gt; &#39;a promise
     val bind : &#39;a promise -&gt; (&#39;a -&gt; &#39;b promise) -&gt; &#39;b promise
   end
 </pre></div>
@@ -750,6 +856,143 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="trying-the-implementation">
+<h2><span class="section-number">7.7.1. </span>Trying the Implementation<a class="headerlink" href="#trying-the-implementation" title="Permalink to this heading">#</a></h2>
+<p>The first demo, below, registers a callback on a pending promise. Fulfilling
+that promise runs the callback before <code class="docutils literal notranslate"><span class="pre">fulfill</span></code> returns. The callback returns
+an already fulfilled promise, so the promise returned by <code class="docutils literal notranslate"><span class="pre">bind</span></code> is fulfilled
+immediately too.</p>
+<p>The second demo returns a <em>pending</em> promise from the callback. It registers
+handlers on both that promise and the promise returned by <code class="docutils literal notranslate"><span class="pre">bind</span></code>, then links
+them. Resolving through the original resolver runs both sets of handlers and
+makes both promises report the same value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="nc">Demo</span> <span class="o">=</span> <span class="k">struct</span>
+  <span class="k">open</span> <span class="nc">Promise</span>
+
+  <span class="k">let</span> <span class="n">printf</span> <span class="o">=</span> <span class="nn">Printf</span><span class="p">.</span><span class="n">printf</span>
+
+  <span class="k">let</span> <span class="n">demo</span> <span class="bp">()</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">p1</span><span class="o">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
+    <span class="n">printf</span> <span class="s2">&quot;p1 created</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">;</span>
+    <span class="k">let</span> <span class="n">p2</span> <span class="o">=</span>
+      <span class="n">bind</span> <span class="n">p1</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span>
+          <span class="n">printf</span> <span class="s2">&quot;Callback running with %d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="n">x</span><span class="o">;</span>
+          <span class="n">return</span> <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span>
+    <span class="k">in</span>
+    <span class="n">printf</span> <span class="s2">&quot;Callback on p1 was bound</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">;</span>
+    <span class="n">printf</span> <span class="s2">&quot;About to fulfill p1</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">;</span>
+    <span class="n">fulfill</span> <span class="n">r1</span> <span class="mi">42</span><span class="o">;</span>
+    <span class="n">printf</span> <span class="s2">&quot;p1 fulfilled</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">;</span>
+    <span class="k">match</span> <span class="n">state</span> <span class="n">p2</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="n">printf</span> <span class="s2">&quot;p2 fulfilled with %d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="n">v</span>
+    <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">printf</span> <span class="s2">&quot;p2 not fulfilled</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+  <span class="c">(** Unlike [demo], this example returns a pending promise</span>
+<span class="c">      from the callback, so it exercises proxy linking. *)</span>
+  <span class="k">let</span> <span class="n">proxy_demo</span> <span class="bp">()</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">p1</span><span class="o">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">p2</span><span class="o">,</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">make</span> <span class="bp">()</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">bind</span> <span class="n">p1</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="n">p2</span><span class="o">)</span> <span class="k">in</span>
+
+    <span class="c">(* Both promises can have handlers before linking. *)</span>
+    <span class="k">let</span> <span class="o">_</span> <span class="o">=</span>
+      <span class="n">bind</span> <span class="n">p2</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span>
+          <span class="n">printf</span> <span class="s2">&quot;Handler registered on p2 sees %d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="n">x</span><span class="o">;</span>
+          <span class="n">return</span> <span class="bp">()</span><span class="o">)</span>
+    <span class="k">in</span>
+    <span class="k">let</span> <span class="o">_</span> <span class="o">=</span>
+      <span class="n">bind</span> <span class="n">p3</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="o">-&gt;</span>
+          <span class="n">printf</span> <span class="s2">&quot;Handler registered on p3 sees %d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="n">x</span><span class="o">;</span>
+          <span class="n">return</span> <span class="bp">()</span><span class="o">)</span>
+    <span class="k">in</span>
+
+    <span class="c">(* Running p1&#39;s callback makes p2 a proxy for p3 and</span>
+<span class="c">       transfers p2&#39;s handlers to p3. Both remain</span>
+<span class="c">       pending. *)</span>
+    <span class="n">fulfill</span> <span class="n">r1</span> <span class="bp">()</span><span class="o">;</span>
+    <span class="n">printf</span> <span class="s2">&quot;p2 and p3 are linked and still pending</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">;</span>
+
+    <span class="c">(* The original resolver follows p2&#39;s proxy link. It</span>
+<span class="c">       resolves p3 and runs both sets of handlers. *)</span>
+    <span class="n">fulfill</span> <span class="n">r2</span> <span class="mi">42</span><span class="o">;</span>
+    <span class="k">match</span> <span class="o">(</span><span class="n">state</span> <span class="n">p2</span><span class="o">,</span> <span class="n">state</span> <span class="n">p3</span><span class="o">)</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nc">Fulfilled</span> <span class="n">x</span><span class="o">,</span> <span class="nc">Fulfilled</span> <span class="n">y</span> <span class="o">-&gt;</span>
+        <span class="n">printf</span> <span class="s2">&quot;p2 has %d; p3 has %d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="n">x</span> <span class="n">y</span>
+    <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module Demo :
+  sig
+    val printf : (&#39;a, out_channel, unit) format -&gt; &#39;a
+    val demo : unit -&gt; unit
+    val proxy_demo : unit -&gt; unit
+  end
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Demo</span><span class="p">.</span><span class="n">demo</span> <span class="bp">()</span><span class="o">;</span>
+<span class="n">flush</span> <span class="n">stdout</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p1 created
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Callback on p1 was bound
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>About to fulfill p1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Callback running with 42
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p1 fulfilled
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p2 fulfilled with 43
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-OCaml notranslate"><div class="highlight"><pre><span></span><span class="nn">Demo</span><span class="p">.</span><span class="n">proxy_demo</span> <span class="bp">()</span><span class="o">;</span>
+<span class="n">flush</span> <span class="n">stdout</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p2 and p3 are linked and still pending
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Handler registered on p3 sees 42
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Handler registered on p2 sees 42
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p2 has 42; p3 has 42
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- : unit = ()
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -806,6 +1049,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-the-implementation">7.7.1. Trying the Implementation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

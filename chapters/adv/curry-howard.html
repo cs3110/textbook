@@ -264,8 +264,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../conc/impl_callbacks.html">7.6. Implementing Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../conc/full_promises_impl.html">7.7. The Full Promises Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../conc/monads.html">7.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../conc/summary.html">7.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../conc/exercises.html">7.10. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/network.html">7.9. Network Programming with Lwt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/summary.html">7.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conc/exercises.html">7.11. Exercises</a></li>
 </ul>
 </details></li>
 </ul>
@@ -890,10 +891,8 @@ expression has that type.</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span>: Failure &quot;&quot;.
 <span class="n">Raised</span> <span class="n">at</span> <span class="n">Stdlib</span><span class="o">.</span><span class="n">failwith</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;stdlib.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">29</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">17</span><span class="o">-</span><span class="mi">33</span>
-<span class="n">Called</span> <span class="kn">from</span><span class="w"> </span><span class="nn">unknown</span> <span class="n">location</span>
-<span class="n">Called</span> <span class="kn">from</span><span class="w"> </span><span class="nn">Stdlib__Fun.protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">8</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">Re</span><span class="o">-</span><span class="n">raised</span> <span class="n">at</span> <span class="n">Stdlib__Fun</span><span class="o">.</span><span class="n">protect</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;fun.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">38</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">6</span><span class="o">-</span><span class="mi">52</span>
-<span class="n">Called</span> <span class="kn">from</span><span class="w"> </span><span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">150</span>
+<span class="n">Called</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;[5]&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">16</span><span class="o">-</span><span class="mi">27</span>
+<span class="n">Called</span> <span class="kn">from</span><span class="w"> </span><span class="nn">Topeval.load_lambda</span> <span class="ow">in</span> <span class="n">file</span> <span class="s2">&quot;toplevel/byte/topeval.ml&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">93</span><span class="p">,</span> <span class="n">characters</span> <span class="mi">4</span><span class="o">-</span><span class="mi">14</span>
 </pre></div>
 </div>
 </div>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>7.10. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
+    <title>7.11. Exercises &#8212; OCaml Programming: Correct + Efficient + Beautiful</title>
   
   
   
@@ -69,7 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="8. Correctness" href="../correctness/intro.html" />
-    <link rel="prev" title="7.9. Summary" href="summary.html" />
+    <link rel="prev" title="7.10. Summary" href="summary.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -262,8 +262,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="impl_callbacks.html">7.6. Implementing Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.7. The Full Promises Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monads.html">7.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">7.9. Summary</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.10. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">7.9. Network Programming with Lwt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.10. Summary</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.11. Exercises</a></li>
 </ul>
 </details></li>
 </ul>
@@ -533,7 +534,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="exercises">
-<h1><span class="section-number">7.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">7.11. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h1>
 <p>Solutions to most exercises are <a href="https://github.com/cs3110/textbook-solutions">available</a>.
 We are happy to add or correct solutions. Please make contributions through GitHub.</p>
 <!--------------------------------------------------------------------------->
@@ -690,6 +691,32 @@ window and enter the following commands:</p>
 <p>Now anything you type into the terminal window (after pressing return) will be
 added to the file named <code class="docutils literal notranslate"><span class="pre">log</span></code>. That will enable you to interactively test your
 program.</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: out-of-order tickets [★★]</strong></p>
+<p>Modify the delayed numbering server from
+<a class="reference internal" href="network.html"><span class="doc std std-doc">Network Programming with Lwt</span></a> so that odd-numbered connections
+wait three seconds before receiving their number, and even-numbered
+connections wait one second. Use <code class="docutils literal notranslate"><span class="pre">Lwt_unix.sleep</span></code> for both delays. Starting
+with a fresh server, connect two clients about half a second apart. Predict
+the order in which they receive their numbers, then check your prediction.
+Explain the distinction between assigning a number and delivering it. What
+could go wrong if the response used <code class="docutils literal notranslate"><span class="pre">!counter</span></code> instead of the captured local
+binding <code class="docutils literal notranslate"><span class="pre">number</span></code>?</p>
+<!--------------------------------------------------------------------------->
+<hr class="docutils" />
+<p><strong>Exercise: numbered echo [★★★]</strong></p>
+<p>Adapt the numbering server into an echo server: each client can send multiple
+lines on one connection, and the server replies to each line with its text
+prefixed by a number. Number each client’s replies starting at one. For
+example, a client sending <code class="docutils literal notranslate"><span class="pre">hello</span></code> then <code class="docutils literal notranslate"><span class="pre">world</span></code> should receive <code class="docutils literal notranslate"><span class="pre">1:</span> <span class="pre">hello</span></code> then
+<code class="docutils literal notranslate"><span class="pre">2:</span> <span class="pre">world</span></code>. A second client’s first reply should also start with <code class="docutils literal notranslate"><span class="pre">1</span></code>, even if
+the first client is still connected.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">Lwt_io.read_line_opt</span></code> to read each request: it returns <code class="docutils literal notranslate"><span class="pre">Some</span> <span class="pre">line</span></code> for
+a line and <code class="docutils literal notranslate"><span class="pre">None</span></code> at end of input. End the handler when input ends; otherwise,
+write and flush the reply, then continue. Use a recursive parameter rather
+than a shared reference to keep track of the next number. Test with two
+netcat clients, and explain why their counts are independent.</p>
 <!--------------------------------------------------------------------------->
 <hr class="docutils" />
 <p><strong>Exercise: add opt [★★]</strong></p>
@@ -874,7 +901,7 @@ for the trivial monad.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7.9. </span>Summary</p>
+        <p class="prev-next-title"><span class="section-number">7.10. </span>Summary</p>
       </div>
     </a>
     <a class="right-next"

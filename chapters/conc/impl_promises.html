@@ -262,8 +262,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="impl_callbacks.html">7.6. Implementing Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="full_promises_impl.html">7.7. The Full Promises Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monads.html">7.8. Monads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="summary.html">7.9. Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.10. Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">7.9. Network Programming with Lwt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="summary.html">7.10. Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">7.11. Exercises</a></li>
 </ul>
 </details></li>
 </ul>
@@ -697,8 +698,8 @@ It will simply be the same as a promise.</p>
 </div>
 </div>
 </div>
-<p>So internally, the two types are exactly the same. But externally, no client of
-the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> module will be able to distinguish them. In other words, we’re
+<p>So internally, the two types are exactly the same. But externally, clients of
+the <code class="docutils literal notranslate"><span class="pre">Promise</span></code> module see two distinct abstract types. In other words, we’re
 using the type system to control whether it’s possible to apply certain
 functions (e.g., <code class="docutils literal notranslate"><span class="pre">state</span></code> vs <code class="docutils literal notranslate"><span class="pre">fulfill</span></code>) to a promise.</p>
 <p>To help implement the rest of the functions, let’s start by writing a helper
@@ -953,7 +954,7 @@ val r : int Lwt.u = &lt;abstr&gt;
 </div>
 </div>
 <p>Note that nothing we have implemented so far does anything concurrently.
-The promise abstraction by itself is not inherently concurrent.  It’s
+The promise abstraction by itself is not inherently concurrent. So far, It’s
 just a data structure that can be written at most once, and that provides
 a means to control who can write to it (through the resolver).</p>
 </section>
