@@ -420,6 +420,44 @@ simple and correct implementation of a queue data structure. It's probably far
 less clear that `BatchedQueue` is a correct implementation. Just look at how
 many paragraphs of writing it took to explain it above!
 
+We can at least watch it run. On the empty queue, `front` and `dequeue` both
+raise `Empty`:
+
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+BatchedQueue.(empty |> front)
+```
+
+```{code-cell} ocaml
+:tags: ["raises-exception"]
+BatchedQueue.(empty |> dequeue)
+```
+
+Next, we enqueue `1`, `2`, and `3`. The first element goes straight into the
+outbox and the other two into the inbox, so internally `q` is
+`{o = [1]; i = [3; 2]}`. Dequeuing empties the outbox, which forces the inbox to
+be reversed, so `q'` is `{o = [2; 3]; i = []}`. Through the interface, both
+versions behave as queues, and `q` is unchanged:
+
+```{code-cell} ocaml
+let q = BatchedQueue.(empty |> enqueue 1 |> enqueue 2 |> enqueue 3);;
+let q' = BatchedQueue.dequeue q;;
+BatchedQueue.(to_list q, front q);;
+BatchedQueue.(to_list q', front q');;
+```
+
+Persistence also lets us build two different queues from the same one. Below,
+`q1` and `q2` both start from `q0`. The reversal that `q1` needs does not
+disturb `q0` or `q2`, and the inbox `[9; 8]` of `q2` shares its tail `[8]` with
+`q0`. The size of `q2` counts both lists:
+
+```{code-cell} ocaml
+let q0 = BatchedQueue.(empty |> enqueue 7 |> enqueue 8);;
+let q1 = BatchedQueue.dequeue q0;;
+let q2 = BatchedQueue.enqueue 9 q0;;
+BatchedQueue.(to_list q0, to_list q1, to_list q2, size q2);;
+```
+
 ## Maps
 
 Recall that a *map* (aka *dictionary*) binds keys to values. Here is a module
